@@ -1,11 +1,11 @@
 {
   "name": "Alternityd100",
   "title": "Alternity by d100",
-  "description": "This is a Very Draft implementation of the Alternity RPG Rules (c) 1998 TSR Inc. There are lots of features to Implement, such as Bioware and Psionics (FX).",
-  "version": "0.45",
+  "description": "This is a very draft implementation of the Alternity RPG Rules (c) 1998 TSR Inc. There are lots of features yey to implement, such as Bioware and Psionics (FX). ",
+  "version": "0.46",
   "compatibility": {
     "minimum": 11, 
-    "verified": "11.309", 
+    "verified": "11.311", 
     "maximum": 11 
   },
 

@@ -103,7 +103,7 @@ html.find('.rollable').click(this._onRoll.bind(this));
     html.find(".items .rollable2").on("click", this._onItemRoll.bind(this));
 
     // Add draggable for Macro creation
-    html.find(".attributes a.attribute-roll").each((i, a) => {
+    html.find(".attributes a.attribute-roll ").each((i, a) => {
       a.setAttribute("draggable", true);
       a.addEventListener("dragstart", ev => {
         let dragData = ev.currentTarget.dataset;

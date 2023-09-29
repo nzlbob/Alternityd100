@@ -751,9 +751,9 @@ return null
 
 rollSkill(
   skillId,
-  options = { steps:0, event: null, skipDialog: false, staticRoll: null, chatMessage: true, noSound: false, dice: "1d20",skillflavor:"",stepbonus:null }
+  options = { steps:0, event: null, skipDialog: false, staticRoll: null, chatMessage: true, noSound: false, dice: "1d20",skillflavor:"",stepbonus:0 }
 ) {
-  //console.log(skillId,options)
+  console.log(skillId,options)
   if (!this.isOwner) {
     const msg = game.i18n.localize("PF1.ErrorNoActorPermissionAlt");//.format(this.name);
     console.warn(msg);

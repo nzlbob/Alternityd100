@@ -463,7 +463,7 @@
 
 Source: How to Indent in HTML? (Simple Guide) - Dopinger (https://blog.dopinger.com/how-to-indent-in-html-simple-guide)-->
 
-            <div class="divTableCell" style="text-align:left;font-size: 100%;height:80%; " > <h4 style="text-align: center;"> STR-DEX-CON </h4>
+            <div class="divTableCell" style="text-align:left;font-size: 100%;height:80%; " > <h4 style="text-align: center;" data-tooltip="MACRO: actor.rollSkill('moderra')"   > STR-DEX-CON </h4>
 
                 <h4 style="text-align: center;"> STRENGTH </h4>
                 {{#each systemData.skills as |skill s|}}
@@ -472,7 +472,7 @@ Source: How to Indent in HTML? (Simple Guide) - Dopinger (https://blog.dopinger.
                 {{#if (or skill.show ../systemData.skillpoints.showAllSkills )}}
 
                 {{#if (eq skill.ability "str")}}
-                <div>
+                <div  data-tooltip="Skillname: {{s}}">
                     <input 
                     {{#if skill.type}} {{#if skill.untrained}} style="width:50% ;text-align:left;font-size: 70%;height:50%; text-indent: 10px "  {{else}}
                     style="width:50% ;text-align:left;font-size: 70%;height:50%;color: rgb(0, 95, 87);text-indent: 10px " {{/if}} {{else}}
@@ -484,7 +484,7 @@ Source: How to Indent in HTML? (Simple Guide) - Dopinger (https://blog.dopinger.
                         value="{{skill.ranks}}" />
 
                        
-                        <span  style=" font-size: 70%;" class="attributes rollable-skill" data-skillId = {{s}} data-step={{skill.step}} data-roll="1d20{{skill.stepdie}}" data-label="{{skill.label}}">[{{skill.base}},{{skill.good}},{{skill.amazing}}] {{skill.stepdie}}</span>
+                        <span  style=" font-size: 70%;" class="attributes rollable-skill " data-skillId = {{s}} data-step={{skill.step}} data-roll="1d20{{skill.stepdie}}" data-label="{{skill.label}}">[{{skill.base}},{{skill.good}},{{skill.amazing}}] {{skill.stepdie}}</span>
                        
                         {{#if ../systemData.skillpoints.showAllSkills }}
                         <input style="width:10px ;height:10px" class="squaredcheck"  type="checkbox" name="system.skills.{{s}}.show" {{checked skill.show}}/>
@@ -505,7 +505,7 @@ Source: How to Indent in HTML? (Simple Guide) - Dopinger (https://blog.dopinger.
         {{#if (or skill.show ../systemData.skillpoints.showAllSkills )}}
 
         {{#if (eq skill.ability "dex")}}
-        <div>
+        <div data-tooltip="Skillname: {{s}}">
             <input 
             {{#if skill.type}} {{#if skill.untrained}} style="width:50% ;text-align:left;font-size: 70%;height:50%; text-indent: 10px "  {{else}}
             style="width:50% ;text-align:left;font-size: 70%;height:50%;color: rgb(0, 95, 87);text-indent: 10px " {{/if}} {{else}}
@@ -536,7 +536,7 @@ Source: How to Indent in HTML? (Simple Guide) - Dopinger (https://blog.dopinger.
 
 {{#if (or skill.show ../systemData.skillpoints.showAllSkills )}}
 {{#if (eq skill.ability "con")}}
-<div>
+<div data-tooltip="Skillname: {{s}}">
     <input 
     {{#if skill.type}} {{#if skill.untrained}} style="width:50% ;text-align:left;font-size: 70%;height:50%; text-indent: 10px "  {{else}}
     style="width:50% ;text-align:left;font-size: 70%;height:50%;color: rgb(0, 95, 87);text-indent: 10px " {{/if}} {{else}}
@@ -579,7 +579,7 @@ Source: How to Indent in HTML? (Simple Guide) - Dopinger (https://blog.dopinger.
     {{#each systemData.skills as |skill s|}}
     {{#if (or skill.show ../systemData.skillpoints.showAllSkills )}}
     {{#if (eq skill.ability "int")}}
-    <div>
+    <div data-tooltip="Skillname: {{s}}">
         <input 
         {{#if skill.type}} {{#if skill.untrained}} style="width:50% ;text-align:left;font-size: 70%;height:50%; text-indent: 10px "  {{else}}
         style="width:50% ;text-align:left;font-size: 70%;height:50%;color: rgb(0, 95, 87);text-indent: 10px " {{/if}} {{else}}
@@ -625,7 +625,7 @@ Source: How to Indent in HTML? (Simple Guide) - Dopinger (https://blog.dopinger.
                     {{#each systemData.skills as |skill s|}}
                     {{#if (or skill.show ../systemData.skillpoints.showAllSkills )}}
                     {{#if (eq skill.ability "wil")}}
-                    <div>
+                    <div data-tooltip="Skillname: {{s}}">
                         <input 
                         {{#if skill.type}} {{#if skill.untrained}} style="width:50% ;text-align:left;font-size: 70%;height:50%; text-indent: 10px "  {{else}}
                         style="width:50% ;text-align:left;font-size: 70%;height:50%;color: rgb(0, 95, 87);text-indent: 10px " {{/if}} {{else}}
@@ -653,7 +653,7 @@ Source: How to Indent in HTML? (Simple Guide) - Dopinger (https://blog.dopinger.
             {{#each systemData.skills as |skill s|}}
             {{#if (or skill.show ../systemData.skillpoints.showAllSkills )}}
             {{#if (eq skill.ability "per")}}
-            <div>
+            <div data-tooltip="Skillname: {{s}}">
                 <input 
                 {{#if skill.type}} {{#if skill.untrained}} style="width:50% ;text-align:left;font-size: 70%;height:50%; text-indent: 10px "  {{else}}
                 style="width:50% ;text-align:left;font-size: 70%;height:50%;color: rgb(0, 95, 87);text-indent: 10px " {{/if}} {{else}}
