@@ -2155,122 +2155,122 @@ d100A.statusEffects =
       {
           "id": "dead",
           "label": "EFFECT.StatusDead",
-          "icon": "systems/Alternityd100/images/conditions/dead3.png",
+          "icon": "systems/Alternityd100/icons/conditions/dead3.png",
           modifiers: [],
           tooltip: "<strong>Dead</strong><br><br>This is the End"
       },
       {
          "id": "dying",
          "label": "EFFECT.StatusDying",
-         "icon": "systems/Alternityd100/images/conditions/dying3.png"
+         "icon": "systems/Alternityd100/icons/conditions/dying3.png"
      },
 
       {
           "id": "knockedout",
           "label": "EFFECT.StatusKnockedOut",
-          "icon": "systems/Alternityd100/images/conditions/ko.png"
+          "icon": "systems/Alternityd100/icons/conditions/ko.png"
       },
       {
          "id": "suppressed",
          "label": "EFFECT.StatusSuppressed",
-         "icon": "systems/Alternityd100/images/conditions/suppressed.png"
+         "icon": "systems/Alternityd100/icons/conditions/suppressed.png"
      },
       {
          "id": "run",
          "label": "EFFECT.StatusRunning",
-         "icon": "systems/Alternityd100/images/conditions/run2.png",
+         "icon": "systems/Alternityd100/icons/conditions/run2.png",
          modifiers: [],
          tooltip: "<strong>Running</strong><br><br>+2 Step Penalty"
      },
      {
          "id": "sprint",
          "label": "EFFECT.StatusSprinting",
-         "icon": "systems/Alternityd100/images/conditions/sprint.png"
+         "icon": "systems/Alternityd100/icons/conditions/sprint.png"
       },
       {
          "id": "charging",
          "label": "EFFECT.StatusCharging",
-         "icon": "systems/Alternityd100/images/conditions/sprint.png"
+         "icon": "systems/Alternityd100/icons/conditions/sprint.png"
       },
       {
          "id": "glyde",
          "label": "EFFECT.StatusGlyding",
-         "icon": "systems/Alternityd100/images/conditions/glyde.png"
+         "icon": "systems/Alternityd100/icons/conditions/glyde.png"
       },
       {
          "id": "flying",
          "label": "EFFECT.StatusFlying",
-         "icon": "systems/Alternityd100/images/conditions/flying2.png"
+         "icon": "systems/Alternityd100/icons/conditions/flying2.png"
       },
       {
          "id": "eswim",
          "label": "EFFECT.StatusEasySwim",
-         "icon": "systems/Alternityd100/images/conditions/eswim2.png"
+         "icon": "systems/Alternityd100/icons/conditions/eswim2.png"
       },
       {
          "id": "swim",
          "label": "EFFECT.StatusSwim",
-         "icon": "systems/Alternityd100/images/conditions/swim3.png"
+         "icon": "systems/Alternityd100/icons/conditions/swim3.png"
       },
       {
          "id": "aiming",
          "label": "EFFECT.Aiming",
-         "icon": "systems/Alternityd100/images/conditions/aiming.png"
+         "icon": "systems/Alternityd100/icons/conditions/aiming.png"
      },
       {
           "id": "prone",
           "label": "EFFECT.StatusProne",
-          "icon": "systems/Alternityd100/images/conditions/falling.png"
+          "icon": "systems/Alternityd100/icons/conditions/falling.png"
       },
       
       {
          "id": "unconscious",
          "label": "EFFECT.StatusUnconscious",
-         "icon": "systems/Alternityd100/images/conditions/unconscious.png"
+         "icon": "systems/Alternityd100/icons/conditions/unconscious.png"
      },
      {
          "id": "asleep",
          "label": "EFFECT.StatusAsleep",
-         "icon": "systems/Alternityd100/images/conditions/sleep.png"
+         "icon": "systems/Alternityd100/icons/conditions/sleep.png"
      }
   ]
 
 ;
 d100A.statusEffectIcons = [
-"systems/Alternityd100/images/conditions/dead3.png",
- "systems/Alternityd100/images/conditions/dying3.png",
-"systems/Alternityd100/images/conditions/ko.png",
-"systems/Alternityd100/images/conditions/suppressed.png",
-"systems/Alternityd100/images/conditions/run2.png",
- "systems/Alternityd100/images/conditions/sprint.png",
-"systems/Alternityd100/images/conditions/sprint.png",
-"systems/Alternityd100/images/conditions/glyde.png",
-"systems/Alternityd100/images/conditions/flying2.png",
-"systems/Alternityd100/images/conditions/eswim2.png",
-"systems/Alternityd100/images/conditions/swim3.png",
-"systems/Alternityd100/images/conditions/aiming.png",
-"systems/Alternityd100/images/conditions/falling.png",
-"systems/Alternityd100/images/conditions/unconscious.png",
-"systems/Alternityd100/images/conditions/sleep.png"
+"systems/Alternityd100/icons/conditions/dead3.png",
+ "systems/Alternityd100/icons/conditions/dying3.png",
+"systems/Alternityd100/icons/conditions/ko.png",
+"systems/Alternityd100/icons/conditions/suppressed.png",
+"systems/Alternityd100/icons/conditions/run2.png",
+ "systems/Alternityd100/icons/conditions/sprint.png",
+"systems/Alternityd100/icons/conditions/sprint.png",
+"systems/Alternityd100/icons/conditions/glyde.png",
+"systems/Alternityd100/icons/conditions/flying2.png",
+"systems/Alternityd100/icons/conditions/eswim2.png",
+"systems/Alternityd100/icons/conditions/swim3.png",
+"systems/Alternityd100/icons/conditions/aiming.png",
+"systems/Alternityd100/icons/conditions/falling.png",
+"systems/Alternityd100/icons/conditions/unconscious.png",
+"systems/Alternityd100/icons/conditions/sleep.png"
 ];
 
 d100A.statusEffectIconMapping = {
    
-   "dead": "systems/Alternityd100/images/conditions/dead3.png",
-   "dying": "systems/Alternityd100/images/conditions/dying3.png",
-   "knockedout": "systems/Alternityd100/images/conditions/ko.png",
-   "suppressed": "systems/Alternityd100/images/conditions/suppressed.png",
-   "run": "systems/Alternityd100/images/conditions/run2.png",
-   "sprint": "systems/Alternityd100/images/conditions/sprint.png",
-   "charging": "systems/Alternityd100/images/conditions/sprint.png",
-   "glyde": "systems/Alternityd100/images/conditions/glyde.png",
-   "flying": "systems/Alternityd100/images/conditions/flying2.png",
-   "eswim": "systems/Alternityd100/images/conditions/eswim2.png",
-   "swim": "systems/Alternityd100/images/conditions/swim3.png",
-   "aiming": "systems/Alternityd100/images/conditions/aiming.png",
-   "prone": "systems/Alternityd100/images/conditions/falling.png",
-   "unconscious": "systems/Alternityd100/images/conditions/unconscious.png",
-   "asleep": "systems/Alternityd100/images/conditions/sleep.png",
+   "dead": "systems/Alternityd100/icons/conditions/dead3.png",
+   "dying": "systems/Alternityd100/icons/conditions/dying3.png",
+   "knockedout": "systems/Alternityd100/icons/conditions/ko.png",
+   "suppressed": "systems/Alternityd100/icons/conditions/suppressed.png",
+   "run": "systems/Alternityd100/icons/conditions/run2.png",
+   "sprint": "systems/Alternityd100/icons/conditions/sprint.png",
+   "charging": "systems/Alternityd100/icons/conditions/sprint.png",
+   "glyde": "systems/Alternityd100/icons/conditions/glyde.png",
+   "flying": "systems/Alternityd100/icons/conditions/flying2.png",
+   "eswim": "systems/Alternityd100/icons/conditions/eswim2.png",
+   "swim": "systems/Alternityd100/icons/conditions/swim3.png",
+   "aiming": "systems/Alternityd100/icons/conditions/aiming.png",
+   "prone": "systems/Alternityd100/icons/conditions/falling.png",
+   "unconscious": "systems/Alternityd100/icons/conditions/unconscious.png",
+   "asleep": "systems/Alternityd100/icons/conditions/sleep.png",
 };
 d100A.conditionTypes = {
    "dead": "SFRPG.ConditionsDead",

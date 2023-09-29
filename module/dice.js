@@ -195,7 +195,7 @@ if (item? item.isAoE:false) {
     //type: getProperty(this.data, "data.measureTemplate.type"),
     type: "circle", 
     distance: dist
-    //texture: PIXI.Texture.from('systems/Alternityd100/images/conditions/asleep.png')
+    //texture: PIXI.Texture.from('systems/Alternityd100/icons/conditions/asleep.png')
   };
 
 
@@ -861,7 +861,7 @@ const templateOptions = {
   //type: getProperty(this.data, "data.measureTemplate.type"),
   type: "circle", 
   distance: dist
-  //texture: PIXI.Texture.from('systems/Alternityd100/images/conditions/asleep.png')
+  //texture: PIXI.Texture.from('systems/Alternityd100/icons/conditions/asleep.png')
 };
 
 

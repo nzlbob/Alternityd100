@@ -147,7 +147,7 @@ console.log(this.actor.system?.compartment)
                         "isBlank": false , 
                         "value": tempCellNo, 
                         "systems":  tempcompart.contents , //put all the systems in
-                        "image" : {"bad": "systems/Alternityd100/images/conditions/alt_bad2.png","good": "systems/Alternityd100/images/conditions/alt_good1.png" },
+                        "image" : {"bad": "systems/Alternityd100/icons/conditions/alt_bad2.png","good": "systems/Alternityd100/icons/conditions/alt_good1.png" },
                         "durability" : tempcompart.durability,
                         "location" : tempcompart.location,
                         "overload" :tempcompart.overload,

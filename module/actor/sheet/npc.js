@@ -111,7 +111,7 @@ console.log("HERE--",html)
        data3.status = {}
        data3.status = {"durability":{"stu":{"good":[],"bad":[]},"wou":{"good":[],"bad":[]},"mor":{"good":[],"bad":[]}}}
        data3.statusd = "fdgsdfg"
-       data3.status.image = {"bad": "systems/Alternityd100/images/conditions/alt_bad2.png","good": "systems/Alternityd100/images/conditions/alt_good1.png" }
+       data3.status.image = {"bad": "systems/Alternityd100/icons/conditions/alt_bad2.png","good": "systems/Alternityd100/icons/conditions/alt_good1.png" }
      // console.log(this)
        // load the main 
        for ( let [k, v] of Object.entries(data3.status.durability) ) {

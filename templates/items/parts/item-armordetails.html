@@ -34,6 +34,7 @@
            <label>{{ localize "d100A.Items.manufacturer" }}</label>
            <select name="system.manufacturer">
            {{#select itemData.manufacturer}}
+           <option value=""></option>
            {{#each d100Aconfig.manufacturers as |name type|}}
            <option value="{{type}}">{{name}}</option>
            {{/each}}
@@ -124,6 +125,7 @@
                <label>{{ localize "d100A.skill" }}</label>
                <select name="system.skill">
                {{#select itemData.skill}}
+               <option value=""></option>
                {{#each d100Aconfig.skills as |name type|}}
                <option value="{{type}}">{{name}}</option>
                {{/each}}
@@ -134,10 +136,11 @@
              {{!-- Action Penalty --}}
             
             <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.accTooltip" }}">
-                <label>{{ localize "d100A.Items.ActionPenalty" }}</label>
-                <div class="form-fields">
+                <label>{{ localize "d100A.Items.ActionPenalty" }} - Use Modifiers Tab</label>
+               <!-- <div class="form-fields">
                     <input type="text" style="text-align: center; size: 20 px; " name="system.armor.cp" value="{{itemData.armor.cp}}" data-dtype="Number" placeholder="0"/>
                  </div>
+                 -->
             </div>
             
                  

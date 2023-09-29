@@ -149,7 +149,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         data.status = {}
         data.status = {"durability":{"stu":{"good":[],"pend":[],"bad":[]},"wou":{"good":[],"pend":[],"bad":[]},"mor":{"good":[],"pend":[],"bad":[]},"cri":{"good":[],"pend":[],"bad":[]}}}
         data.statusd = "fdgsdfg"
-        data.status.image = {"bad": "systems/Alternityd100/images/conditions/alt_bad1.png","good": "systems/Alternityd100/images/conditions/alt_good1.png","pend": "systems/Alternityd100/images/conditions/alt_yell.png" }
+        data.status.image = {"bad": "systems/Alternityd100/icons/conditions/alt_bad1.png","good": "systems/Alternityd100/icons/conditions/alt_good1.png","pend": "systems/Alternityd100/icons/conditions/alt_yell.png" }
        
         // load the main 
         for ( let [k, v] of Object.entries(data.status.durability) ) {
