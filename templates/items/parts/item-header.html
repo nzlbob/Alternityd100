@@ -1,0 +1,147 @@
+<header class="sheet-header flexrow">
+    <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
+
+    <div class="header-details flexrow">
+        <div class="header-background flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.ItemNameTooltip" }}" placeholder="{{ localize "SFRPG.ItemSheet.Header.ItemName" }}"/>
+            </h1>
+            <div class="item-subtitle">
+                <h4 data-tippy-content="Item Type" class="item-type">{{itemType}}</h4>
+                <span data-tippy-content="Item Status" class="item-status">{{itemStatus}}</span>
+            </div>
+        </div>
+
+        {{!-- Item Summary --}}
+        <ul class="summary flexrow">
+            {{#if category.enabled}}
+            <li class="short" data-tippy-content="{{localize category.tooltip}}">
+                
+                <label>{{localize itemData.manufacturer}}</label>
+            </li>
+
+            
+
+                <li>
+                  fxgf  <input type="text" name="system.source" value="{{itemData.source}}" placeholder="Source" />
+                </li>
+          
+
+            {{/if}}
+            {{#if hasDamage}}
+            <li class="wide" data-tippy-content="{{ localize "Damage" }}">
+                <div class="attribute-value2">
+
+                    <label>{{itemData.damage.ord.dice}}({{itemData.damage.ord.type}}) /
+                        {{itemData.damage.goo.dice}}({{itemData.damage.goo.type}}) /
+                        {{itemData.damage.ama.dice}}({{itemData.damage.ama.type}})
+                    </label>
+
+            </div>
+            </li>
+            {{/if}}
+            
+            {{#if (eq item.type "starshipFrame")}}
+            <li class="wide" data-tippy-content="{{ localize "Damage" }}">
+                <div class="attribute-value2">
+
+                    <label>{{itemData.hullType}}</label>
+
+            </div>
+            </li>
+            {{/if}}
+        </ul>
+
+        {{!-- Header Attributes --}}
+        <ul class="attributes flexrow">
+            {{#if isPhysicalItem}}
+            <li class="attribute" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.HitpointsTooltip" }}">
+                <h4 class="attribute-name box-title">{{ localize "Accuracy" }}</h4>
+                <div class="attribute-value2">
+
+                        <label>{{itemData.accur}}</label>
+
+                </div>
+            </li>
+            <li class="attribute" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.HitpointsTooltip" }}">
+                <h4 class="attribute-name box-title">{{ localize "Actions" }}</h4>
+                <div class="attribute-value2">
+
+                        <label>{{itemData.actions}}</label>
+
+                </div>
+            </li>
+            <li class="attribute" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.ArmorClassTooltip" }}">
+                <h4 class="attribute-name box-title">{{ localize "Type" }}</h4>
+                <div class="attribute-value2">
+
+                    <label>{{itemData.damage.type}}/{{itemData.firepower}}</label>
+
+            </div>
+            </li>
+
+            <li class="attribute" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.HardnessTooltip" }}">
+                <h4 class="attribute-name box-title">{{ localize "Range" }}</h4>
+                <div class="attribute-value2">
+
+                    <label>{{itemData.range.short}}/{{itemData.range.medium}}/{{itemData.range.long}}</label>
+
+            </div>
+            </li>
+
+            <li class="attribute" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.SaveTooltip" formula=placeholders.savingThrow.formula}}">
+                <h4 class="attribute-name box-title">{{ localize "Skill" }}</h4>
+                <div class="attribute-value2">
+               
+                    <label> {{itemData.skill}} </label>
+
+            </div>
+            </li>
+            {{else}}
+            &nbsp;
+            {{/if}}
+
+
+            <!--StarshipHull -->
+            {{#if (eq item.type "starshipFrame")}}
+            <li class="attribute" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.HitpointsTooltip" }}">
+                <h4 class="attribute-name box-title">{{ localize "Hull Points" }}</h4>
+                <div class="attribute-value2">
+
+                        <label>{{itemData.hullPoints.base}}/{{itemData.hullPoints.total}}</label>
+
+                </div>
+            </li>
+            <li class="attribute" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.HitpointsTooltip" }}">
+                <h4 class="attribute-name box-title">{{ localize "Actions" }}</h4>
+                <div class="attribute-value2">
+
+                        <label>{{itemData.actions}}</label>
+
+                </div>
+            </li>
+            <li class="attribute" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.ArmorClassTooltip" }}">
+                <h4 class="attribute-name box-title">{{ localize "Type" }}</h4>
+                <div class="attribute-value2">
+
+                    
+
+            </div>
+            </li>
+
+            <li class="attribute" data-tippy-content="{{ localize "SFRPG.ItemSheet.Header.HardnessTooltip" }}">
+                <h4 class="attribute-name box-title">{{ localize "Durability" }}</h4>
+                <div class="attribute-value2">
+
+                    <label>{{itemData.attributes.stu.value}}/{{itemData.attributes.wou.value}}/{{itemData.attributes.mor.value}}/{{itemData.attributes.cri.value}}</label>
+
+            </div>
+            </li>
+
+            
+            {{else}}
+            &nbsp;
+            {{/if}}
+        </ul>
+    </div>
+</header>

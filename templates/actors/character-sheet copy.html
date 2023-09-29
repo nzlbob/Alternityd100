@@ -1,0 +1,765 @@
+<form class="flexcol {{cssClass}}" autocomplete="off">
+
+
+    {{!-- Sheet Header --}}
+    <header class="sheet-header" style="font-family: serpentine" >
+    <table class="hptable">
+        <thead>
+          <tr>
+            <td class="profile-img" style="width: 110px;" rowspan="2">
+                <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100" />    
+            </td>
+            <td class="header-fields">
+                <h1 class="charname">
+                    <input  name="name" type="text" value="{{actor.name}}" placeholder="Name" />
+                </h1>
+            </td>
+            <td >
+                {{testvalue.name}}
+         <!--       <input class=" rollable " style="font-family: serpentine" type="button" data-roll="d20" name="Actioncheck" value="Action Check"/> -->
+            </td>
+          </tr>
+          <tr>
+            <td  colspan="2">
+<!-- Stick in the HP table here-->
+
+
+
+<table style="width: 100%;" > 
+
+    <colgroup>
+        <col style="width: 18%">
+        <col style="width: 18%">
+        <col style="width: 18%">
+        <col style="width: 28%">
+        <col style="width: 18%">
+        </colgroup>
+
+    <tr>
+    <th class="resource-headx" title="{{ systemData.attributes.stu.label }}" >
+    Stun
+    </th>
+    <th class="resource-headx" title="{{ systemData.attributes.wou.tooltip }}">
+        Wound
+    </th>
+    <th class="resource-headx" title="{{ systemData.attributes.mor.tooltip }}">
+        Mortal
+    </th>
+    <th class="resource-heady" title="{{ systemData.attributes.actchk.tooltip }}">
+        Action Check
+    </th>
+    <th class="resource-headx"  >
+        Actions
+    </th>
+
+    
+</tr> 
+
+<tr>
+      
+    <td class="resourcex" title="{{ systemData.attributes.stu.tooltip }}">
+            <input type="number" name="system.attributes.stu.value" value="{{systemData.attributes.stu.value}}"/>
+            
+            <input disabled="true" title="{{ systemData.attributes.stu.tooltip }}" type="number" name="system.attributes.stu.base" value="{{systemData.attributes.stu.max}}"/>
+        
+    </td>
+    <td class="resourcex" title="{{ systemData.attributes.wou.tooltip }}">
+            <input type="number" name="system.attributes.wou.value" value="{{systemData.attributes.wou.value}}"/>
+            
+            <input disabled="true" title="{{ systemData.attributes.wou.tooltip }}" type="number" name="system.attributes.wou.base" value="{{systemData.attributes.wou.max}}"/>
+ 
+    </td>
+    <td class="resourcex" title="{{ systemData.attributes.mor.tooltip }}">
+            <input type="number" name="system.attributes.mor.value" value="{{systemData.attributes.mor.value}}"/>
+            
+            <input disabled="true" title="{{ systemData.attributes.mor.tooltip }}" type="number" name="system.attributes.mor.base" value="{{systemData.attributes.mor.max}}"/>
+
+    </td>
+    <td class="resourcey">
+            <input disabled="true" value="{{systemData.attributes.actchk.ordinary}}"/>
+            <input disabled="true" value=" {{systemData.attributes.actchk.good}} "/>
+            <input disabled="true" value=" {{systemData.attributes.actchk.amazing}}"/>
+    </td>
+
+<td class="resourcex">
+    <input disabled="true"  value="{{systemData.attributes.actchk.apr}}"/>
+</td>
+
+    </tr>
+
+
+</table>
+<!-- EO HP table here-->
+            </td>
+          </tr>
+        </thead>
+        </table>
+        
+
+
+
+
+
+   <!-- Garbage here-->     
+       
+
+        <!--
+        <div class="ability flexrow flex-group-center">
+            <label for="data.abilities.{{key}}.value" class="resource-label rollable flexlarge align-left" data-roll="d20+@abilities.{{key}}.mod" data-label="{{ability.label}}">{{ability.label}}</label>
+            <input type="text" name="system.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number"/>
+            <span class="ability-mod rollable" data-roll="d20+@abilities.{{key}}.mod" data-label="{{ability.label}}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
+          </div>
+
+-->
+
+
+        
+                
+
+      
+
+
+
+            
+            
+            
+            
+ 
+
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+    
+    <a class="item" data-tab="stats">Stats</a>
+	
+    <a class="item" data-tab="skills">Skills</a>
+    <a class="item" data-tab="features">{{ localize "SFRPG.Features" }}</a>
+
+    <a class="item" data-tab="inventory">Inventory</a>
+    <a class="item" data-tab="modifiers">{{localize "SFRPG.Modifiers"}}</a>
+    <a class="item" data-tab="spellbook">{{ localize "SFRPG.SpellBook.Spellbook" }}</a>
+	<a class="item" data-tab="history">History</a>
+   
+
+<!--
+    <a class="item" data-tab="combat">Combat</a>
+    <a class="item" data-tab="perks">Perks</a>
+	<a class="item" data-tab="items">Items</a>
+    <a class="item" data-tab="achievements">Achievements</a>
+     <a class="item" data-tab="attributes">Attributes</a>
+-->
+
+
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Stats Tab --}}
+        <div class="tab description" data-group="primary" data-tab="stats" style="width: 100%;">
+            
+<!-- Write your comments here -->   
+
+<div class="divTable blueTable" >
+    <div class="divTableBody">
+    <div class="divTableRow">
+ <!-- Ability Scores -->    
+            <div class="divTableCell">
+            <div class="divTable blueTable"style="width: 180px;">
+            <div class="divTableBody">
+            <div class="divTableRow">
+            <div class="divTableCell" style="text-align:center;font-family: serpentine-bold;">Cur / Base</div>
+            <div class="divTableCell" style="text-align:center;font-family: serpentine-bold;">Mod</div>
+            <div class="divTableCell" style="text-align:center;font-family: serpentine-bold;">Roll</div>
+            </div>
+            <div class="divTableRow">
+            <div class="divTableCell"style="text-align:right">STR<input disabled="true" type="number" name="system.abilities.str.value" value="{{systemData.abilities.str.value}}"/><input type="number" name="system.abilities.str.base" value="{{systemData.abilities.str.base}}"/></div>
+            <!--{{#each systemdata.abilities as |ability key|}}
+            <div class="divTableCell"style="text-align:right">
+              <label for="data.abilities.{{key}}.value" class="resource-label">{{key}}</label>
+              <input type="text" name="system.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number"/>
+              <span class="ability-mod">{{numberFormat ability.mod decimals=0 sign=true}}</span>
+            </div>
+            {{/each}}
+        
+                    <div class="ability flexrow flex-group-center">
+              <label for="data.abilities.{{key}}.value" class="resource-label rollable flexlarge align-left" data-roll="d20+@abilities.{{key}}.mod" data-label="{{ability.label}}">{{ability.label}}</label>
+              <input type="text" name="system.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number"/>
+              <span class="ability-mod rollable" data-roll="d20+@abilities.{{key}}.mod" data-label="{{ability.label}}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
+            </div>
+        
+        -->
+            <div class="divTableCell"><input disabled="true" type="number" name="system.abilities.str.mod" value="{{systemData.abilities.str.mod}}"/></div>
+            <div class="divTableCell"></div>
+
+
+
+
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell"style="text-align:right">DEX<input disabled="true" type="number" name="system.abilities.dex.value" value="{{systemData.abilities.dex.value}}"/><input type="number" name="system.abilities.dex.base" value="{{systemData.abilities.dex.base}}"/></div>
+                <div class="divTableCell"><input disabled="true" type="number" name="system.abilities.dex.mod" value="{{systemData.abilities.dex.mod}}"/></div>
+                <div class="divTableCell"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell"style="text-align:right">CON<input  disabled="true" type="number" name="system.abilities.con.value" value="{{systemData.abilities.con.value}}"/><input type="number" name="system.abilities.con.base" value="{{systemData.abilities.con.base}}"/></div>
+                <div class="divTableCell"><input disabled="true" type="number" name="system.abilities.con.mod" value="{{systemData.abilities.con.mod}}"/></div>
+                <div class="divTableCell"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell"style="text-align:right">INT<input  disabled="true" type="number" name="system.abilities.int.value" value="{{systemData.abilities.int.value}}"/><input type="number" name="system.abilities.int.base" value="{{systemData.abilities.int.base}}"/></div>
+                <div class="divTableCell"><input disabled="true" type="number" name="system.abilities.int.mod" value="{{systemData.abilities.int.mod}}"/></div>
+                <div class="divTableCell"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell"style="text-align:right">WIL<input disabled="true" type="number" name="system.abilities.wil.value" value="{{systemData.abilities.wil.value}}"/><input type="number" name="system.abilities.wil.base" value="{{systemData.abilities.wil.base}}"/></div>
+                <div class="divTableCell"><input disabled="true" type="number" name="system.abilities.wil.mod" value="{{systemData.abilities.wil.mod}}"/></div>
+                <div class="divTableCell"></div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell"style="text-align:right">PER<input disabled="true"type="number" name="system.abilities.per.value" value="{{systemData.abilities.per.value}}"/><input type="number" name="system.abilities.per.base" value="{{systemData.abilities.per.base}}"/></div>
+                <div class="divTableCell"><input disabled="true" type="number" name="system.abilities.per.mod" value="{{systemData.abilities.per.mod}}"/></div>
+                <div class="divTableCell"></div>
+            </div>
+            </div>
+            </div>  
+        </div> 
+<!-- End Ability Scores --> 
+
+
+    
+   <!-- Speed Scores -->  
+<div class="divTableCell">
+    <div class="divTable blueTable"style="width: 30%;">
+    <div class="divTableBody">
+    <div class="divTableRow">
+    <div class="divTableCell" style="text-align:center;font-family: serpentine-bold;">Combat Movement</div>
+    <div class="divTableCell" style="text-align:center"></div>
+    </div>
+    <div class="divTableRow">
+    <div class="divTableCell"style="text-align:right">Sprint</div>
+    <div class="divTableCell"><input style="width: 40px" disabled="true" type="number" name="system.attributes.speed.sprint.base" value="{{systemData.attributes.speed.sprint.base}}"/></div>
+    <!--<div class="divTableCell"></div>-->
+    </div>
+    <div class="divTableRow">
+        <div class="divTableCell"style="text-align:right">Run</div>
+        <div class="divTableCell"><input style="width: 40px" disabled="true" type="number" name="system.attributes.speed.run.base" value="{{systemData.attributes.speed.run.base}}"/></div>
+        <!--<div class="divTableCell"></div>-->
+    </div>
+    <div class="divTableRow">
+        <div class="divTableCell"style="text-align:right">Walk</div>
+        <div class="divTableCell"><input style="width: 40px" disabled="true" type="number" name="system.attributes.speed.walk.base" value="{{systemData.attributes.speed.walk.base}}"/></div>
+        <!--<div class="divTableCell"></div>-->
+    </div>
+    <div class="divTableRow">
+        <div class="divTableCell"style="text-align:right">Easy Swim</div>
+        <div class="divTableCell"><input style="width: 40px" disabled="true" type="number" name="system.attributes.speed.easyswim.base" value="{{systemData.attributes.speed.easyswim.base}}"/></div>
+        <!--<div class="divTableCell"></div>-->
+    </div>
+    <div class="divTableRow">
+        <div class="divTableCell"style="text-align:right">Swim</div>
+        <div class="divTableCell"><input style="width:40px " disabled="true" type="number" name="system.aattributes.speed.swim.base" value="{{systemData.attributes.speed.swim.base}}"/></div>
+        <!--<div class="divTableCell"></div>-->
+    </div>
+    <div class="divTableRow">
+        <div class="divTableCell"style="text-align:right">Glyde</div>
+        <div class="divTableCell"><input style="width: 40px" disabled="true" type="number" name="system.attributes.speed.glide.base" value="{{systemData.attributes.speed.glide.base}}"/></div>
+        <!--<div class="divTableCell"></div>-->
+    </div>
+    <div class="divTableRow">
+        <div class="divTableCell"style="text-align:right">Fly</div>
+        <div class="divTableCell"><input style="width: 40px" disabled="true" type="number" name="system.attributes.speed.fly.base" value="{{systemData.attributes.speed.fly.base}}"/></div>
+        <!--<div class="divTableCell"></div>-->
+    </div>
+    </div>
+    </div>  
+</div> 
+<!-- End Speed --> 
+
+   <!-- Speed Bio Data -->  
+   <div class="divTableCell">
+    <div class="divTable blueTable">
+    <div class="divTableBody">
+    <div class="divTableRow">
+    <div class="divTableCell" style="text-align:right;font-family: serpentine-bold;">Biodata</div>
+    <div class="divTableCell" style="text-align:right;width: fit-content;">-</div>
+    </div>
+    <!--<div class="divTableRow">
+        <div class="divTableCell"style="text-align:right">Species</div>
+        <div class="divTableCell"><input style="width: fit-content;text-align:left"  type="text" name="system.details.species" value="{{systemData.details.species}}"/></div>
+        <div class="divTableCell"></div>
+    </div>-->
+        <div class="divTableRow">
+            <div class="divTableCell"style="text-align:right">Species</div>
+            <select  class="selectrace"  name="system.details.species"  data-type="String">
+                {{#select systemData.details.species}}
+                {{#each systemData.charoptions.species as |race key|}}
+                <option  value="{{key}}">{{race.label}}</option> {{/each}} {{/select}}
+                </select>
+        </div>
+
+    
+    <div class="divTableRow">
+        <div class="divTableCell"style="text-align:right">Gender</div>
+        <!--<div class="divTableCell"><input style="width: fit-content;text-align:left" type="text" name="system.details.gender" value="{{systemData.details.gender}}"/></div>-->
+                    <select  class="selectrace"  name="system.details.gender"  data-type="String">
+                {{#select systemData.details.gender}}
+                {{#each systemData.charoptions.gender as |gender key|}}
+                <option  value="{{key}}">{{gender.label}}</option> {{/each}} {{/select}}
+                </select>
+        </div>
+
+    <div class="divTableRow">
+        <div class="divTableCell"style="text-align:right">Profession</div>
+        <!--<div class="divTableCell"><input style="width: fit-content;text-align:left" type="text" name="system.details.profession.primary" value="{{systemData.details.profession.primary}}"/></div>
+    -->
+    <select  class="selectrace"  name="system.details.profession.primary"  data-type="String">
+{{#select systemData.details.profession.primary}}
+{{#each systemData.charoptions.profession as |prof key|}}
+<option  value="{{key}}">{{prof.label}}</option> {{/each}} {{/select}}
+</select>
+</div>
+
+
+    <div class="divTableRow">
+        <div class="divTableCell"style="text-align:right">Secondary</div>
+    <!--    <div class="divTableCell"><input style="width: fit-content;text-align:left" type="text" name="system.details.profession.secondary" value="{{systemData.details.profession.secondary}}"/></div>
+    -->
+    <select  class="selectrace"  name="system.details.profession.secondary"  data-type="String">
+{{#select systemData.details.profession.secondary}}
+{{#each systemData.charoptions.profession as |prof key|}}
+<option  value="{{key}}">{{prof.label}}</option> {{/each}} {{/select}}
+</select>
+</div>
+
+
+    <div class="divTableRow">
+        <div class="divTableCell"style="text-align:right">Career</div>
+        <div class="divTableCell"><input style="width: fit-content;text-align:left"  type="text" name="system.details.career" value="{{systemData.details.career}}"/></div>
+        <!--<div class="divTableCell"></div>-->
+    </div>
+    <div class="divTableRow">
+        <div class="divTableCell"style="text-align:right">Attributes-</div>
+        <div class="divTableCell"><input style="width: fit-content;text-align:left"  type="text" name="system.details.socAttributes.Motivation" value="{{systemData.details.socAttributes.Motivation}}"/></div>
+        <!--<div class="divTableCell"></div>-->
+    </div>
+    <div class="divTableRow">
+        <div class="divTableCell"style="text-align:right">-</div>
+        <div class="divTableCell"><input style="width: fit-content;text-align:left"  type="text" name="system.details.socAttributes.Moral" value="{{systemData.details.socAttributes.Moral}}"/></div>
+        <!--<div class="divTableCell"></div>-->
+    </div>
+    <div class="divTableRow">
+        <div class="divTableCell"style="text-align:right">-</div>
+        <div class="divTableCell"><input style="width: fit-content;text-align:left"  type="text" name="system.details.socAttributes.Trait1" value="{{systemData.details.socAttributes.Trait1}}"/></div>
+        <!--<div class="divTableCell"></div>-->
+    </div>
+    <div class="divTableRow">
+        <div class="divTableCell"style="text-align:right">-</div>
+        <div class="divTableCell"><input style="width: fit-content;text-align:left"  type="text" name="system.details.socAttributes.Trait2" value="{{systemData.details.socAttributes.Trait2}}"/></div>
+        <!--<div class="divTableCell"></div>-->
+    </div>
+    <div class="divTableRow">
+        <div class="divTableCell"style="text-align:right">Setting</div>
+        <div class="divTableCell"><input style="width: fit-content;text-align:left"  type="text" name="system.details.setting" value="{{systemData.details.setting}}"/></div>
+        <!--<div class="divTableCell"></div>-->
+    </div>
+    <div class="divTableRow">
+        <div class="divTableCell"style="text-align:right">GM</div>
+        <div class="divTableCell"><input style="width: fit-content;text-align:left"  type="text" name="system.details.gm" value="{{systemData.details.gm}}"/></div>
+        <!--<div class="divTableCell"></div>-->
+    </div>
+    </div>
+    </div>  
+</div> 
+<!-- End Speed --> 
+
+
+
+    <div class="divTableCell">cell4_1</div></div>
+    <div class="divTableRow">
+    <div class="divTableCell">cell1_2</div><div class="divTableCell">cell2_2</div><div class="divTableCell">cell3_2</div><div class="divTableCell">cell4_2</div></div>
+    </div>
+    
+</div>
+
+<!-- Write your comments here -->
+
+        </div>   
+
+ 
+
+
+<!-- ****SKILLS TAB HERE**** -->
+
+
+        {{!-- Skills Tab --}}
+
+        
+        <div class="tab skills" data-group="primary" data-tab="skills">
+            <div class="divTable blueTable"style="width: 100%x;">
+                <div class="divTableBody">
+                    <div class="divTableRow">
+                        <div class="divTableCell" style="width: 30%; text-align: center;">
+                        
+                            Broad Skill Points: {{systemData.details.usedbroadskillpoints}} / {{systemData.details.broadskillpoints}} 
+                        </div>
+                        <div class="divTableCell" style="width: 30%;text-align: center;">
+                            Skill Points:{{systemData.details.usedskillpoints}} / {{systemData.details.skillpoints}} 
+                        </div>
+                        <div class="divTableCell" style="width: 30%;text-align: center;">
+                            Rule 2A & 2C Enabled 
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+<div class="divTable blueTable"style="width: 100%x;">
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableCell" style="width: 30%;">
+
+<!-- FIRST Column -->
+
+<!-- the skills should be in their own tables -->
+
+    <div class="divTable blueTable" style="width: 100%;">
+    <div class="divTableBody">
+
+        <div class="divTableRow">
+
+<!--“text-indent: 40px”>
+
+Source: How to Indent in HTML? (Simple Guide) - Dopinger (https://blog.dopinger.com/how-to-indent-in-html-simple-guide)-->
+
+            <div class="divTableCell" style="text-align:left;font-size: 100%;height:80%; " > <h4 style="text-align: center;"> STR-DEX-CON<p></p> </h4>
+
+                <h4 style="text-align: center;"> STRENGTH<p></p> </h4>
+                {{#each systemData.skills.str as |skill s|}}
+                    <input 
+                    {{#if skill.type}} {{#if skill.untrained}} style="width:50% ;text-align:left;font-size: 70%;height:50%; text-indent: 10px "  {{else}}
+                    style="width:50% ;text-align:left;font-size: 70%;height:50%;color: rgb(0, 95, 87);text-indent: 10px " {{/if}} {{else}}
+                     style="width:50% ;text-align:left;font-size: 75%;height:50%; font-family: serpentine-bold; "{{/if}}
+                
+                    {{#if skill.customname}} {{else}} disabled = "true" {{/if}} name="system.skills.str.{{s}}.label" value="{{skill.label}}" type="Text" />
+                    
+                    <input style="width:15px ;text-align:left;font-size: 70%;height:60%" {{#if skill.type}} {{else}} disabled = "true" {{/if}} type="number" class="skill-ranks" title="Skill Ranks" name="system.skills.str.{{s}}.ranks"
+                        value="{{skill.ranks}}" />
+
+                       
+                        <span style="font-size: 70%;" class=" rollable-skill" data-skillId = str.{{s}} data-step={{skill.step}} data-roll="1d20{{skill.stepdie}}" data-label="{{skill.label}}">[{{skill.base}},{{skill.good}},{{skill.amazing}}] {{skill.stepdie}}</span>
+    
+
+
+                {{/each}}
+
+                <p></p><h4 style="text-align: center;"> DEXTERITY</h4><p></p>
+
+        {{#each systemData.skills.dex as |skill s|}}
+        <!--<li class="skill flexrow {{#if skill.untrained}}proficient{{/if}}" data-tippy-content="<strong>{{skill.label}}</strong>{{#if (or skill.untrained skill.source)}}<br>(<em>{{#if skill.hasArmorCheckPenalty}}Armor Check Penalty{{/if}}{{#if (and skill.isTrainedOnly skill.hasArmorCheckPenalty)}}; {{/if}}{{#if skill.isTrainedOnly}}Trained Only{{/if}}</em>){{/if}}<br/>Modifier: @skills.{{s}}.mod<br/>Ranks: @skills.{{s}}.ranks<br/><br/>{{#each skill.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-skill="{{s}}">
+        -->
+        
+            <input  
+            {{#if skill.type}} {{#if skill.untrained}} style="width:50% ;text-align:left;font-size: 70%;height:50%; text-indent: 10px "  {{else}}
+            style="width:50% ;text-align:left;font-size: 70%;height:50%;color: rgb(0, 95, 87);text-indent: 10px " {{/if}} {{else}}
+             style="width:50% ;text-align:left;font-size: 75%;height:50%; font-family: serpentine-bold; "{{/if}}
+         
+             {{#if skill.customname}} {{else}} disabled = "true" {{/if}} name="system.skills.dex.{{s}}.label" value="{{skill.label}}" type="Text" />
+            <!--<a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
+            <h4 class="skill-name rollable"> 
+            </h4>-->
+            <input style="width:15px ;text-align:left;font-size: 70%;height:60%" {{#if skill.type}} {{else}} disabled = "true" {{/if}} type="number" class="skill-ranks" title="Skill Ranks" name="system.skills.dex.{{s}}.ranks"
+                value="{{skill.ranks}}" />
+
+               
+                <span style="font-size: 70%;" class=" rollable-skill" data-skillId = dex.{{s}} data-step={{skill.step}} data-roll="1d20{{skill.stepdie}}" data-label="{{skill.label}}">[{{skill.base}},{{skill.good}},{{skill.amazing}}] {{skill.stepdie}}</span>
+    
+
+           <!-- <span class="skill-mod">{{numberFormat skill.mod decimals=0 sign=true}}</span>
+        </li>  
+       {{#if skill.untrained}}<span >&dagger;</span>{{/if}}
+       {{#if skill.hasArmorCheckPenalty}}<span >*</span>{{/if}}-->
+
+        {{/each}}
+
+        <p></p><h4 style="text-align: center;"> CONSTITUTION </h4><p></p>
+{{#each systemData.skills.con as |skill s|}}
+
+<input  
+{{#if skill.type}} {{#if skill.untrained}} style="width:50% ;text-align:left;font-size: 70%;height:50%; text-indent: 10px "  {{else}}
+style="width:50% ;text-align:left;font-size: 70%;height:50%;color: rgb(0, 95, 87);text-indent: 10px " {{/if}} {{else}}
+ style="width:50% ;text-align:left;font-size: 75%;height:50%; font-family: serpentine-bold; "{{/if}}
+
+ {{#if skill.customname}} {{else}} disabled = "true" {{/if}} name="system.skills.con.{{s}}.label" value="{{skill.label}}" type="Text" />
+<input style="width:15px ;text-align:left;font-size: 70%;height:60%" {{#if skill.type}} {{else}} disabled = "true" {{/if}} type="number" class="skill-ranks" title="Skill Ranks" name="system.skills.con.{{s}}.ranks"
+    value="{{skill.ranks}}" />
+
+    
+    <span style="font-size: 70%;" class=" rollable-skill" data-skillId = con.{{s}} data-step={{skill.step}} data-roll="1d20{{skill.stepdie}}" data-label="{{skill.label}}">[{{skill.base}},{{skill.good}},{{skill.amazing}}] {{skill.stepdie}}</span>
+    
+
+{{/each}}
+
+            </div> 
+
+</div> 
+
+</div></div></div>
+
+<!-- Second Column -->
+<div class="divTableCell" style="width: 30%;">
+<div class="divTable blueTable"style="width: 100%;">
+    <div class="divTableBody">
+
+        <div class="divTableRow">
+
+<div class="divTableCell">
+
+    <h4 style="text-align: center;"> INTELLIGENCE </h4><p></p>
+    {{#each systemData.skills.int as |skill s|}}
+        <input 
+         
+        {{#if skill.type}} {{#if skill.untrained}} style="width:50% ;text-align:left;font-size: 70%;height:50%; text-indent: 10px "  {{else}}
+        style="width:50% ;text-align:left;font-size: 70%;height:50%;color: rgb(0, 95, 87);text-indent: 10px " {{/if}} {{else}}
+         style="width:50% ;text-align:left;font-size: 75%;height:50%; font-family: serpentine-bold; "{{/if}}
+     
+         {{#if skill.customname}} {{else}} disabled = "true" {{/if}} name="system.skills.int.{{s}}.label" value="{{skill.label}}" type="Text" />
+        <input style="width:15px ;text-align:left;font-size: 70%;height:60%" {{#if skill.type}} {{else}} disabled = "true" {{/if}} type="number" class="skill-ranks" title="Skill Ranks" name="system.skills.int.{{s}}.ranks"
+            value="{{skill.ranks}}" />
+
+            
+            <span style="font-size: 70%;" class=" rollable-skill" data-skillId = int.{{s}} data-step={{skill.step}} data-roll="1d20{{skill.stepdie}}" data-label="{{skill.label}}">[{{skill.base}},{{skill.good}},{{skill.amazing}}] {{skill.stepdie}}</span>
+    
+
+    {{/each}}
+
+
+
+
+</div>
+</div></div></div> 
+</div>
+
+<div class="divTableCell" style="width: 30%;">
+
+    <!-- FIRST Column -->
+    
+        <div class="divTable blueTable" style="width: 100%;">
+        <div class="divTableBody">
+    
+            <div class="divTableRow">
+    
+    
+    
+                <div class="divTableCell" style="text-align:left;font-size: 100%;height:70%"> <h4 style="text-align: center;"> WIL-PER </h4><p></p>
+                    <h4 style="text-align: center;"> WILL </h4><p></p>
+                    {{#each systemData.skills.wil as |skill s|}}
+                        <input  
+                        {{#if skill.type}} {{#if skill.untrained}} style="width:50% ;text-align:left;font-size: 70%;height:50%; text-indent: 10px "  {{else}}
+                        style="width:50% ;text-align:left;font-size: 70%;height:50%;color: rgb(0, 95, 87);text-indent: 10px " {{/if}} {{else}}
+                         style="width:50% ;text-align:left;font-size: 75%;height:50%; font-family: serpentine-bold; "{{/if}}
+                
+                         {{#if skill.customname}} {{else}} disabled = "true" {{/if}} name="system.skills.wil.{{s}}.label" value="{{skill.label}}" type="Text" />
+                        <input style="width:15px ;text-align:left;font-size: 70%;height:60%" {{#if skill.type}} {{else}} disabled = "true" {{/if}} type="number" class="skill-ranks" title="Skill Ranks" name="system.skills.wil.{{s}}.ranks"
+                            value="{{skill.ranks}}" />
+
+                            <span style="font-size: 70%;" class=" rollable-skill" data-skillId = wil.{{s}} data-step={{skill.step}} data-roll="1d20{{skill.stepdie}}" data-label="{{skill.label}}">[{{skill.base}},{{skill.good}},{{skill.amazing}}] {{skill.stepdie}}</span>
+    
+    
+                    {{/each}}
+    
+                    <p></p><h4 style="text-align: center;"> PERSONALITY</h4><p></p>
+    
+            {{#each systemData.skills.per as |skill s|}}
+                <input  
+                {{#if skill.type}} {{#if skill.untrained}} style="width:50% ;text-align:left;font-size: 70%;height:50%; text-indent: 10px "  {{else}}
+                style="width:50% ;text-align:left;font-size: 70%;height:50%;color: rgb(0, 95, 87);text-indent: 10px " {{/if}} {{else}}
+                 style="width:50% ;text-align:left;font-size: 75%;height:50%; font-family: serpentine-bold; "{{/if}}
+             
+                 {{#if skill.customname}} {{else}} disabled = "true" {{/if}} name="system.skills.per.{{s}}.label" value="{{skill.label}}" type="Text" />
+                <input style="width:15px ;text-align:left;font-size: 70%;height:60%" {{#if skill.type}} {{else}} disabled = "true" {{/if}} type="number" class="skill-ranks" title="Skill Ranks" name="system.skills.per.{{s}}.ranks"
+                    value="{{skill.ranks}}" />
+
+
+                    <span style="font-size: 70%;" class=" rollable-skill" data-skillId = per.{{s}} data-step={{skill.step}} data-roll="1d20{{skill.stepdie}}" data-label="{{skill.label}}">[{{skill.base}},{{skill.good}},{{skill.amazing}}] {{skill.stepdie}}</span>
+    
+
+    
+            {{/each}}
+    
+    
+    
+                </div> 
+    
+    </div> 
+    
+    </div></div></div>
+
+
+
+</div><!-- End Row -->
+</div><!-- End Body -->
+</div><!-- End Table-->
+</div>
+
+{{!-- Features Tab --}}
+<div class="tab features flexcol" data-group="primary" data-tab="features">
+    {{> "systems/Alternityd100/templates/actors/parts/actor-features.html" sections=features}}
+</div>
+
+
+
+<!--
+        <div class="divTableRow">
+            <div class="divTableCell"style="text-align:right">DEX<input type="number" name="system.abilities.dex.value" value="{{systemData.abilities.dex.value}}"/><input type="number" name="system.abilities.dex.base" value="{{systemData.abilities.dex.base}}"/></div>
+            <div class="divTableCell"><input disabled="true" type="number" name="system.abilities.dex.mod" value="{{systemData.abilities.dex.mod}}"/></div>
+            <div class="divTableCell"></div>
+        </div>-->
+
+       
+        {{!-- Inventory Tab --}}
+       
+        <div class="tab inventory flexcol" data-group="primary" data-tab="inventory">
+            {{> "systems/Alternityd100/templates/actors/parts/actor-inventory.html" sections=inventory}}
+
+           
+        </div>
+       
+        {{!-- Modifiers Tab --}}
+        <div class="tab modifers flexcol" data-group="primary" data-tab="modifiers">
+            {{> "systems/Alternityd100/templates/actors/parts/actor-modifiers.html" sections=modifiers}}
+        </div>
+       
+        {{!-- Spellbook Tab --}}
+        <div class="tab spellbook flexcol" data-group="primary" data-tab="spellbook">
+          <!--  {{> "systems/Alternityd100/templates/actors/parts/actor-spellbook.html"}}-->
+        </div>
+        
+        {{!-- History Tab --}}
+        <div class="tab description" data-group="primary" data-tab="history">
+             <input class=" rollable " style="font-family: serpentine" type="button" data-roll="d20" name="Actioncheck" value="Action Check"/> 
+            History
+            {{editor
+                enrichedBiography
+                target="system.details.biography.value"
+                button=true
+                editable=editable
+            }}
+        </div>
+
+
+
+<!--
+
+
+
+        {{!-- Attributes Tab --}}
+        <div class="tab attributes" data-group="primary" data-tab="attributes">
+            Attributes
+            <header class="attributes-header flexrow">
+                <span class="attributesute-key">{{localize "SIMPLE.AttributeKey"}}</span>
+                <span class="attributesute-value">{{localize "SIMPLE.AttributeValue"}}</span>
+                <span class="attributesute-label">{{localize "SIMPLE.AttributeLabel"}}</span>
+                <span class="attributesute-dtype">{{localize "SIMPLE.AttributeDtype"}}</span>
+                <a class="attributesute-control" data-action="create" data-group="{{group}}"><i class="fas fa-plus"></i></a>
+            </header>
+
+            {{!-- Render the attributesute list partial. --}}
+            {{> "systems/Alternityd100/templates/parts/sheet-attributes.html" attributes=systemData.ungroupedAttributes dtypes=dtypes}}
+
+            {{!-- Render the grouped attributes partial and control. --}}
+            <div class="groups">
+                {{> "systems/Alternityd100/templates/parts/sheet-groups.html" attributes=systemData.groupedAttributes groups=systemData.groups dtypes=dtypes}}
+
+                <div class="group-controls flexrow">
+                    <input class="group-prefix" type="text" value=""/>
+                    <a class="button group-control" data-action="create-group"><i class="fas fa-plus"></i>Add Attribute Group</a>
+                </div>
+            </div>
+        </div>
+
+
+        {{!-- Perks Tab --}}
+        <div class="tab perks" data-group="primary" data-tab="perks">
+            Perks
+        </div>
+
+
+        {{!-- Achievements Tab --}}
+        <div class="tab achievements" data-group="primary" data-tab="achievements">
+          Achievements
+        </div>
+
+
+
+ {{!-- Owned Items Tab --}}
+        <div class="tab items" data-group="primary" data-tab="items">
+            items
+            <ol class="item-list">
+                {{#each data.items as |item id|}}
+                <li class="item flexrow" data-item-id="{{item._id}}">
+                    <img src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
+                    <h4 class="item-name">{{item.name}}</h4>
+                    {{!-- Iterate through all attributes on the item and output buttons for any that are formula. --}}
+                    <div class="item-buttons">
+                        {{#each item.data.attributes as |itemAttr key|}}
+                        {{#if itemAttr.dtype}}
+                            {{#if itemAttr.isFormula}}
+                                {{!-- Use the items.name.key format for shorthand. --}}
+                                {{#if ../../shorthand}}
+                                <button class="item-button rollable" data-roll="@items.{{slugify item.name}}.{{key}}" data-label="{{ itemAttr.label }}"
+                                    title="{{itemAttr.value}}">{{itemAttr.label}}</button>
+                                {{!-- Use the items.name.attributes.key.value format otherwise. --}}
+                                {{else}}
+                                <button class="item-button rollable"
+                                    data-roll="@items.{{slugify item.name}}.attributes.{{key}}.value" data-label="{{ itemAttr.label }}"
+                                    title="{{itemAttr.value}}">{{itemAttr.label}}</button>
+                                {{/if}}
+                            {{/if}}
+                        {{else}}
+                            {{#each itemAttr as |itemGroupedAttr groupedKey|}}
+                                {{#if itemGroupedAttr.isFormula}}
+                                    {{!-- Use the items.name.key format for shorthand. --}}
+                                    {{#if ../../../shorthand}}
+                                    <button class="item-button rollable" data-roll="@items.{{slugify item.name}}.{{key}}.{{groupedKey}}" data-label="{{ itemGroupedAttr.label }}"
+                                        title="{{itemGroupedAttr.value}}">{{itemGroupedAttr.label}}</button>
+                                    {{!-- Use the items.name.attributes.key.value format otherwise. --}}
+                                    {{else}}
+                                    <button class="item-button rollable"
+                                        data-roll="@items.{{slugify item.name}}.attributes.{{key}}.{{groupedKey}}.value" data-label="{{ itemGroupedAttr.label }}"
+                                        title="{{itemGroupedAttr.value}}">{{itemGroupedAttr.label}}</button>
+                                    {{/if}}
+                                {{/if}}
+                            {{/each}}
+                        {{/if}}
+                        {{/each}}
+                    </div>
+                    <div class="item-controls">
+                        <a class="item-control" title="{{ localize "SIMPLE.ItemEdit" }}" data-action="edit"><i class="fas fa-edit"></i></a>
+                        <a class="item-control" title="{{ localize "SIMPLE.ItemDelete" }}" data-action="delete"><i class="fas fa-trash"></i></a>
+                    </div>
+                </li>
+                {{/each}}
+            </ol>
+            <p>
+                <a class="item-control" title="{{ localize "SIMPLE.ItemCreate" }}" data-action="create"><i class="fas fa-plus"></i> {{ localize "SIMPLE.ItemCreate" }}</a>
+            </p>
+        </div>
+
+
+       {{!-- Combat Tab --}}
+        <div class="tab combat" data-group="primary" data-tab="combat">
+            combat
+        </div>
+
+
+-->
+
+
+
+
+    </section>
+</form>

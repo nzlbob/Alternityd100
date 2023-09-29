@@ -1,0 +1,119 @@
+
+
+        {{#if target.degree}}
+  <span class="flavor-text">
+<hr>
+      Range: {{target.distance}} {{target.units}} ({{target.rangecat}})
+
+          <div class="degree-text" data-tooltip="{{target.flavor}}">
+            {{console "attack-roll-targets"}}
+            {{console target.degree}}
+          {{target.degree}}
+          </div>
+          {{/if}}
+
+
+          {{#if target.attroll.formula}}
+          <div class="dice-roll">
+          <div class="dice-result">
+             <h4 data-tooltip="{{target.flavor}}" class="dice-total{{#if isNat20}} natural-20{{/if}}{{#if isCrit}} critical-threat success{{/if}}{{#if isFumble}} failure{{/if}}">{{ target.attroll.total}}</h4>
+            {{{target.tooltip}}} 
+            
+            </div>
+            </div>
+            {{/if}}
+
+<h3 class="attack-targets"data-actor-id="{{actor._id}}" data-item-id="{{item._id}}" {{#if tokenUuid}}data-token-uuid="{{tokenUuid}}"{{/if}}>{{localize "d100A.Targetz"}}</h3>
+ {{#if flavor}}
+{{/if}}
+
+  {{#each targetData as |t count|}}
+  <span class="flavor-text">
+<hr>
+    {{console "ART-targetData"}} {{console t}} {{ t.token.name }}  Range: {{t.distance}} {{t.units}} ({{t.rangecat}})
+      
+        {{#if t.degree}}
+          <div class="degree-text" data-tooltip-direction="UP" data-tooltip="{{t.flavor}}">
+            {{console "attack-roll-targets"}}
+            {{console t.degree}}
+          {{t.degree}}
+          </div>
+          {{/if}}
+
+
+          {{#if t.attroll.formula}}
+          <div class="dice-roll">
+          <div class="dice-result">
+             <h4 data-tooltip="{{t.flavor}}" class="dice-total{{#if isNat20}} natural-20{{/if}}{{#if isCrit}} critical-threat success{{/if}}{{#if isFumble}} failure{{/if}}">{{ t.attroll.total}}</h4>
+            {{{t.tooltip}}} 
+            
+            </div>
+            </div>
+            {{/if}}
+      </span>
+      <div class="attack-targets">
+
+    <div class="target" data-uuid="{{t.token.uuid}}">
+       {{!-- Portrait --}}
+      <img class="target-image" src="{{t.token.texture.src}}"/>
+
+      {{!-- Saving Throws --}}
+      <div class="saving-throws" data-gm-sensitive-uuid="{{t.token.uuid}}">
+                <div class="normal" data-action="applyDamage"  data-type="Ordinary" data-value="01" title="{{localize "Ordinary"}}">
+          
+          <span class="value">{{localize "Ordinary"}}</span>
+        </div>
+                <div class="normal" data-action="applyDamage"  data-type="Good" data-value="02" title="{{localize "Good"}}">
+          
+          <span class="value">{{localize "Good"}}</span>
+        </div>
+                <div class="normal" data-action="applyDamage" data-type="Amazing" data-value="03" title="{{localize "Amazing"}}">
+          
+          <span class="value">{{localize "Amazing"}}</span>
+        </div>
+
+      </div>
+
+     
+      {{!-- AC --}}
+      <div class="ac" data-tooltip-direction="UP" data-gm-sensitive-uuid="{{t.token.uuid}}">
+
+{{console "Roll - Targets 54"}}
+{{console t}}
+        <button data-action="applyDamage" data-dmgtype="{{t.dmgtype.ord}}"   data-targetId="{{t._id}}" data-firepower="{{t.firepower}}" data-type="{{t.type}}" data-value="{{t.dmgresult.ord.damage.total}}" data-tooltip="{{t.dmgresult.ord.damage.formula}}"  >{{t.dmgresult.ord.damage.total}}</button>
+        <button data-action="applyDamage" data-dmgtype="{{t.dmgtype.goo}}" data-targetId="{{t._id}}" data-firepower="{{t.firepower}}" data-type="{{t.type}}" data-value="{{t.dmgresult.goo.damage.total}}" title="{{t.dmgresult.goo.damage.formula}}" >{{t.dmgresult.goo.damage.total}}</button>
+        <button data-action="applyDamage" data-dmgtype="{{t.dmgtype.ama}}" data-targetId="{{t._id}}" data-firepower="{{t.firepower}}" data-type="{{t.type}}" data-value="{{t.dmgresult.ama.damage.total}}" title="{{t.dmgresult.ama.damage.formula}}" >{{t.dmgresult.ama.damage.total}}</button>
+
+      </div>
+
+      {{!-- Saving Throws2 --}}
+      <div class="saving-throws2" data-gm-sensitive-uuid="{{t.token.uuid}}">
+                <div class="normal" data-action="applyDamage" data-firepowerN ="{{firepowerN}}" data-type="Ordinary" data-value="01" title="{{localize "Ordinary"}}">
+          
+          <span class="value">{{localize t.dmgtype.ord}} ({{t.type}})({{t.firepower}})</span>
+        </div>
+                <div class="normal" data-action="applyDamage" data-firepowerN ="{{firepowerN}}" data-type="Good" data-value="02" title="{{localize "Good"}}">
+          
+          <span class="value">{{localize t.dmgtype.goo}} ({{t.type}})({{t.firepower}})</span>
+        </div>
+                <div class="normal" data-action="applyDamage" data-firepowerN ="{{firepowerN}}" data-type="Amazing" data-value="03" title="{{localize "Amazing"}}">
+          
+          <span class="value"> {{localize  t.dmgtype.ama }} ({{t.type}})({{t.firepower}})</span>
+        </div>
+
+      </div>
+
+
+
+    </div>
+   
+    <div class="HitLoc" data-gm-sensitive-uuid="{{t.token.uuid}}">
+    <button data-action="rollHitLoc" data-aspect="{{t.aspect}}" data-atttokenid = "{{../atttokenid}}" data-targetid="{{t._id}}" data-firepower="{{t.firepower}}" data-type="{{t.type}}" data-value="{{t.dmgresult.ama.damage.total}}" data-tooltip-direction="UP" data-tooltip="<p>System damage is possible any time one of the following occurs:</p><p>• The target suffers mortal or critical damage.</p><p>• The target marks off its last stun or wound box.</p><p>• The attacker achieves an Amazing success with her attack and at least 1 point of primary damage penetrates the target's armor.</p>" > System Damage </button>
+</div>
+    </div>
+
+
+  {{/each}}
+
+ {{console this}}
+

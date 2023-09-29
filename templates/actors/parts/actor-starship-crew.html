@@ -1,0 +1,21 @@
+<div class="tab status" data-group="primary" data-tab="status">
+    <div class="sturtus flexcol">
+        <h3 class="form-header">{{ localize "SFRPG.Attributes"}}</h3>
+        <ul class="attributes flexrow">
+
+        </ul>
+    </div>
+</div> 
+
+Hello
+{{#each role.actors as |actor a|}}
+                    <li class="crew flexrow draggable" data-actor-id="{{actor.id}}">
+                        <div class="crew-name flexrow">
+                            <div class="crew-image" style="background-image: url({{actor.system.img}})"></div>
+                            <a class="crew-view"><h4>{{actor.name}}</h4></a>
+                        </div>
+                        <div class="crew-controls">
+                            <a class="crew-control crew-delete" title="Remove Crew Member"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </li>
+                    {{/each}}

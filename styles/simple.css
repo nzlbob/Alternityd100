@@ -1,0 +1,5721 @@
+@font-face {
+  font-family: serpentine ;
+  src: url(../fonts/Serpentine-Medium.otf);
+}
+@font-face {
+  font-family: serpentine-bold ;
+  src: url(../fonts/Serpentine-Bold.otf);
+}
+
+/*@font-face {
+  font-family: "serpentine";
+  src: url('fonts/Exo2-VariableFont_wght.ttf');
+}*/
+
+.Alternityd100 {
+  /* Sheet Tabs */
+  /* Items List */
+  /* Attributes */
+  /*@font-face {
+    font-family: Alternityfont ;
+    src: url(../fonts/alternity.ttf);
+  }
+  @font-face {
+  font-family: "serpentine";
+  src: url('fonts/Exo2-VariableFont_wght.ttf');
+  
+  @font-face {
+    font-family: serpentine ;
+    src: url(fonts/SerpentineBold.ttf);
+  }
+
+  @font-face {
+    font-family: "serpentine";
+    src: url('../fonts/Exo2-VariableFont_wght.ttf');
+  }*/
+  
+
+
+  
+}
+
+form .form-group label {
+  font-size: 13px;
+  font-family: serpentine ;
+  line-height: 15px
+}
+
+.combat-sidebar .combat-tracker-header h4
+{
+  font-size: 14px;
+  line-height:18px;
+
+}
+.combat-sidebar .combat-tracker-header .flexrow
+{
+  font-size: 15px;
+
+}
+
+.combat-sidebar #combat-controls a{
+  font-size: 18px;
+}
+
+.Alternityd100 .window-content {
+  height: 100%;
+  padding: 5px;
+  overflow-y: hidden;
+  font-family: serpentine;
+}
+
+.exo2 {
+  font-family: "serpentine", sans-serif;
+}
+
+.Alternityd100 form {
+  height: 100%;
+  background-color: #eef8f8;
+  font-family: serpentine ;
+
+}
+
+.rollable:hover, .rollable:focus {
+  color: #000;
+  text-shadow: 0 0 10px #0eaaaa;
+  cursor: pointer;
+}
+.rollable-skill:hover, .rollable-skill:focus {
+  color: #000;
+  text-shadow: 0 0 10px red;
+  cursor: pointer;
+}
+
+
+
+.Alternityd100 .sheet-header {
+  flex: 0 0 192px ;
+ 
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-bottom: 5px;
+  font-family: serpentine;
+}
+.Alternityd100 .sheet-header .profile-img {
+  flex: 0 0 100px;
+  height: 100px;
+  margin-right: 10px;
+}
+.Alternityd100 .sheet-header .header-fields {
+  flex: 1;
+  height: 30px;
+ 
+}
+.Alternityd100 .sheet-header h1.charname {
+  height: 25px;
+  padding: 0px;
+  margin: 1px 0;
+  border-bottom: 0;
+  font-family: serpentine-bold;
+  font-weight: lighter;
+  color: #bbb;
+}
+
+.Alternityd100 .clickonoff:hover{
+
+  cursor: pointer;
+}
+
+.Alternityd100 .sheet-header h1.charname input {
+  width: 80%;
+  height: 90%;
+  margin: 0;
+  border: 2px groove #f0f0e0;
+  border-radius: 3px;
+  font-size: 15px;
+  color: #fff;
+}
+.Alternityd100 .sheet-header h1.charname2 input {
+  width: 30%;
+  height: 35px;
+  margin: 0;
+  border: 2px groove #f0f0e0;
+  border-radius: 3px;
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+}
+.Alternityd100 .sheet-header .hptable {
+  
+width: 200px;
+border-width:2px;  
+background-color: rgb(97, 97, 97);
+}
+
+.Alternityd100 .sheet-header .hptable thead tr {
+ 
+  background-color: rgb(101, 110, 110);
+  padding: 0px;
+  margin: 0px;
+
+
+  }
+
+
+
+.Alternityd100 .resource-headx{
+  text-align: center;
+  border: 2px solid #13cccc;
+  border-radius: 3px;
+  font-family:"serpentine";
+  font-size:14px;
+  width: 0ch;
+}
+.Alternityd100 .resource-heady{
+  text-align: center;
+  border: 2px solid #13cccc;
+  border-radius: 3px;
+  font-family:"serpentine";
+  font-size:14px;
+}
+.Alternityd100 .resourcex {
+  text-align: center;
+  border: 2px solid #13cccc;
+  border-radius: 3px;
+  font-family:"serpentine";
+  font-size:14px;
+}
+.Alternityd100 .resourcey {
+  
+ 
+  text-align: center;
+  border: 2px solid #13cccc;
+  border-radius: 3px;
+  font-family:"serpentine";
+  font-size:14px;
+  height: 22px;
+}
+.Alternityd100 .resourcex input{
+  width:30px;
+  font-family: "serpentine";
+  text-align: center;
+  font-size:14px;
+  background-color: #d6d4d4;
+  height: 22px;
+}
+.Alternityd100 .resourcey input{
+  width:30px;
+  font-family: "serpentine";
+  text-align: center;
+  font-size:14px;
+  background-color: #d6d4d4;
+  height: 22px;
+}
+
+.Alternityd100 .resource {
+  
+  height: 34px;
+  margin-top: 2px;
+  
+  text-align: center;
+  border: 2px groove #f0f0e0;
+  border-radius: 3px;
+  
+}
+.Alternityd100 .resource2 {
+  width: 25%;
+  height: 34px;
+  margin-top: 2px;
+  float: left;
+  text-align: center;
+  border: 2px groove #f0f0e0;
+  border-radius: 3px;
+  
+  
+}
+.Alternityd100 .resource-head{
+  width: 12%;
+  height: 20px;
+  margin-top: 0px;
+  float: left;
+  text-align: center;
+  border: 2px groove #f0f0e0;
+  border-radius: 3px;
+  background-color: aqua;
+}
+
+.Alternityd100 .resource-head2{
+  width: 40%;
+  height: 20px;
+  margin-top: 0px;
+  float: left;
+  text-align: center;
+  border: 2px groove #f0f0e0;
+  border-radius: 3px;
+}
+.Alternityd100 .resource input {
+  width: 20px;
+  height: 28px;
+}
+.Alternityd100 .resource2 input {
+  width: 45%;
+  height: 28px;
+}
+.Alternityd100 .tabs {
+  flex: 0 0 20px;
+  border-top: 1px solid #AAA;
+  border-bottom: 1px solid #AAA;
+  font-size: large;
+}
+.Alternityd100 .tabs .item {
+  
+  font-family: "serpentine";
+  /*font-weight: bold;*/
+}
+.Alternityd100 .tabs .item.active {
+  text-decoration: underline;
+  text-shadow: none;
+}
+.Alternityd100 .sheet-body {
+  overflow: hidden;
+  
+}
+.Alternityd100 .sheet-body .tab {
+  height: 100%;
+  overflow-y: auto;
+}
+.Alternityd100 .editor,
+.Alternityd100 .editor-content {
+  height: 100%;
+}
+
+.Alternityd100 .stats {
+  flex: 0 0 ;
+  width:400pt;
+  overflow: auto;
+  display: flex;
+  flex-direction:row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+  text-align: left;
+  line-height: 25px;
+}
+
+.Alternityd100 .stats .abilitiesbox1 {width: 100px; text-align: right; height: 250px; border-width: 1px; border-right:darkgray;line-height: 25px;}
+.Alternityd100 .stats .abilitiesbox2 {width: 10%;text-align:center; height: 250px; border-right:darkgray;line-height: 25px;}
+.Alternityd100 .stats .abilitiesbox3 {width: 20%; text-align: center; height: 250px; border-right:darkgray;line-height: 25px;}
+.Alternityd100 .stats .abilitiesbox4 {width: 20%; text-align: center; height: 250px; border-right:darkgray;line-height: 25px;}
+.Alternityd100 .stats .abilitiesbox5 {width: 20%; text-align: center; height: 250px; border-right:darkgray;line-height: 25px;}
+.Alternityd100 .stats .abilitiesbox6 {width: 20%; text-align: center; height: 250px; border-right:darkgray;line-height: 25px;}
+
+.Alternityd100 .stats input {
+  width: 25px;
+  height: 25px;
+  text-align: center;
+}
+
+
+.Alternityd100 .item-list {
+  list-style: none;
+  margin: 7px 0;
+  padding: 0;
+  overflow-y: auto;
+}
+.Alternityd100 .item-list .item {
+  min-height: 15px;
+  line-height: 14px;
+  padding: 3px 0;
+  border-bottom: 1px solid #BBB;
+  align-items: stretch;
+}
+.Alternityd100 .item-list .item img {
+  flex: 0 0 24px;
+  margin-right: 5px;
+}
+.Alternityd100 .item-list .item-name {
+  margin: 0;
+}
+.Alternityd100 .item-list .item-controls {
+  flex: 0 0 36px;
+}
+.Alternityd100 .item-list .item-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  flex: 2;
+  justify-content: flex-start;
+  height: 15px;
+}
+.Alternityd100 .item-list .item-button {
+  line-height: 1;
+  font-size: 11px;
+  flex: none;
+  width: auto;
+  height: 15px;
+}
+.Alternityd100 .attributes {
+  position: relative;
+}
+.Alternityd100 .attributes .attribute-control,
+.Alternityd100 .attributes .group-control {
+  flex: 0 0 20px;
+  text-align: center;
+  line-height: 28px;
+  border: none;
+}
+.Alternityd100 .attributes .attribute-roll {
+  flex: 0 0 20px;
+  text-align: center;
+  border-bottom: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Alternityd100 .attributes .group-prefix {
+  height: 31px;
+  margin-right: 10px;
+}
+.Alternityd100 .attributes .button {
+  width: 100%;
+  flex: 1;
+  margin: 0;
+  background: rgba(0, 0, 0, 0.1);
+  border: 2px groove #f0f0e0;
+  border-radius: 3px;
+  font-size: 14px;
+  line-height: 28px;
+  display: block;
+}
+.Alternityd100 .attributes .attribute-key {
+  background: transparent;
+  border: none;
+}
+.Alternityd100 .attributes-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  align-items: center;
+  padding: 0 5px;
+  margin: 5px 0;
+  background: #cfcdc2;
+  border: 1px solid #AAA;
+  border-radius: 2px;
+  text-align: left;
+  font-family: serpentine-bold;
+}
+.Alternityd100 .attributes-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.Alternityd100 .attributes-list li > * {
+  margin: 0 3px;
+  height: 28px;
+  line-height: 24px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #AAA;
+}
+.Alternityd100 .attributes-list .attribute-col label {
+  font-size: 10px;
+  text-align: center;
+  line-height: 1;
+}
+.Alternityd100 .attributes-list .attribute-col input {
+  font-size: 11px;
+  text-align: center;
+  line-height: 1;
+  height: 50%;
+}
+.Alternityd100 .attribute input[type="text"]::placeholder,
+.Alternityd100 .group-header input[type="text"]::placeholder {
+  opacity: 0;
+  transition: opacity 0.25s ease-in-out;
+}
+.Alternityd100 .attribute input[type="text"]:focus::placeholder,
+.Alternityd100 .group-header input[type="text"]:focus::placeholder {
+  opacity: 1;
+}
+.Alternityd100 .group-controls {
+  margin: 5px;
+}
+.Alternityd100 .groups-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.Alternityd100 .group {
+  margin: 5px 0 0;
+  padding: 0;
+}
+.Alternityd100 .group-header {
+  align-items: center;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid #AAA;
+  border-radius: 2px;
+  padding: 2px 5px;
+}
+.Alternityd100 .group-key,
+.Alternityd100 .group-label {
+  font-family: serpentine-bold;
+  border: none;
+  border-bottom: 1px solid #AAA;
+  background: transparent;
+  border-radius: 0;
+  margin-right: 6px;
+}
+.Alternityd100 .group-key {
+  opacity: 0.75;
+}
+.Alternityd100 .group-label {
+  flex: 2;
+}
+.Alternityd100 .group-dtype {
+  height: 24px;
+  flex: 0 0 116px;
+  margin: 0 5px;
+}
+.Alternityd100.sheet.actor {
+  min-width: 560px;
+  min-height: 420px;
+}
+.Alternityd100.sheet.item {
+  min-width: 460px;
+  min-height: 400px;
+}
+
+
+table.AlternityTable {
+  border: 3px solid #0EAAAA   ;
+  background-color: #EEEEEE;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+table.AlternityTable td, table.AlternityTable th {
+  border: 3px solid #0EAAAA;
+  padding: 2px 2px;
+}
+table.AlternityTable tbody td {
+  font-size: 12px;
+}
+table.AlternityTable thead {
+  background: #0EAAAA;
+  background: -moz-linear-gradient(top, #4abfbf 0%, #26b2b2 66%, #0EAAAA 100%);
+  background: -webkit-linear-gradient(top, #4abfbf 0%, #26b2b2 66%, #0EAAAA 100%);
+  background: linear-gradient(to bottom, #4abfbf 0%, #26b2b2 66%, #0EAAAA 100%);
+  border-bottom: 2px solid #444444;
+}
+table.AlternityTable thead th {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+  border-left: 2px solid #D0E4F5;
+}
+table.AlternityTable thead th:first-child {
+  border-left: none;
+}
+
+table.AlternityTable tfoot td {
+  font-size: 14px;
+}
+table.AlternityTable tfoot .links {
+  text-align: right;
+}
+table.AlternityTable tfoot .links a{
+  display: inline-block;
+  background: #1C6EA4;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+
+
+
+
+div.blueTable {
+  border: 2px solid #0eaaaa;
+  border-radius: 10pt;
+  
+  background-color: #eef8f8;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+.divTable.blueTable .divTableCell, .divTable.blueTable .divTableHead {
+  padding: 3px 2px;
+}
+.divTable.blueTable .divTableBody .divTableCell {
+  font-size: 14px;
+}
+.divTable.blueTable .divTableBody .divTableCell input{
+  width: 25px;
+  height: 25px;
+  text-align: center;
+}
+.divTable.blueTable .divTableBody .divTableCell .squaredcheck {
+  width: 12px;
+  height: 12px;
+  text-align: center;
+}
+
+
+.divTable.blueTable .divTableBody .proficient .proficiency-toggle {
+  color: #4b4a44;
+}
+
+.divTable.blueTable .divTableBody .locked .proficiency-toggle {
+  color: #b5b3a4;
+  text-shadow: none;
+  cursor: default;
+}
+
+
+ /*.divTable.blueTable .divTableBody .divTableCell2 {
+  font-size: 14px;
+}
+.divTable.blueTable .divTableBody .divTableCell2 input{
+ width: 60%;
+  height: 25px;
+  text-align: left;
+}
+*/
+.blueTable .tableFootStyle {
+  font-size: 14px;
+}
+.blueTable .tableFootStyle .links {
+
+}
+.blueTable .tableFootStyle .links a{
+  display: inline-block;
+  background: #1C6EA4;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+.blueTable.outerTableFooter {
+  border-top: none;
+}
+.blueTable.outerTableFooter .tableFootStyle {
+  padding: 3px 5px; 
+}
+
+
+div.blueTable2 {
+  border: 1px solid #1C6EA4;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+.divTable.blueTable2 .divTableCell, .divTable.blueTable2 .divTableHead {
+  border: 4px solid #1C6EA4;
+  padding: 2px 2px;
+}
+.divTable.blueTable2 .divTableBody .divTableCell {
+  font-size: 13px;
+  width: 50%;
+}
+.divTable.blueTable2 .divTableBody .divTableCell input{
+  font-size: 12px;
+  width: 50%;
+  text-align: right;
+}
+.blueTable2 .tableFootStyle {
+  font-size: 14px;
+}
+.blueTable2 .tableFootStyle .links {
+	 text-align: right;
+}
+.blueTable2 .tableFootStyle .links a{
+  display: inline-block;
+  background: #1C6EA4;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+.blueTable2.outerTableFooter {
+  border-top: none;
+}
+.blueTable2.outerTableFooter .tableFootStyle {
+  padding: 2px 2px; 
+}
+
+
+div.crewTable {
+  border: 2px solid #0EAAAA;
+  background-color: #EEF8F8;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+.divTable.crewTable .divTableCell, .divTable.crewTable .divTableHead {
+  border: 2px solid #0EAAAA;
+  padding: 1px 1px;
+}
+.divTable.crewTable .divTableBody .divTableCell {
+  font-size: 13px;
+  padding: 2px 1px;
+}
+
+
+.divTable.crewTable .divTableBody .divTableCell img{
+  height: 15px;
+}
+.divTable.crewTable .divTableBody .divTableCell .crew-view:hover, 
+.divTable.crewTable .divTableBody .divTableCell .crew-score:hover{
+  color: #000;
+  text-shadow: 0 0 10px #0eaaaa;
+  cursor: pointer;
+}
+
+
+
+
+.divTable.crewTable .divTableHeading {
+  background: #EEF8F8;
+  background: -moz-linear-gradient(top, #f2fafa 0%, #eff8f8 66%, #EEF8F8 100%);
+  background: -webkit-linear-gradient(top, #f2fafa 0%, #eff8f8 66%, #EEF8F8 100%);
+  background: linear-gradient(to bottom, #f2fafa 0%, #eff8f8 66%, #EEF8F8 100%);
+  border-bottom: 2px solid #444444;
+}
+.divTable.crewTable .divTableHeading .divTableHead {
+  font-size: 15px;
+  font-weight: bold;
+  color: #333333;
+  text-align: center;
+  border-left: 2px solid #EEF8F8;
+}
+.divTable.crewTable .divTableHeading .divTableHead:first-child {
+  border-left: none;
+}
+
+.crewTable .tableFootStyle {
+  font-size: 14px;
+}
+.crewTable .tableFootStyle .links {
+	 text-align: right;
+}
+.crewTable .tableFootStyle .links a{
+  display: inline-block;
+  background: #0EAAAA;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+.crewTable.outerTableFooter {
+  border-top: none;
+}
+.crewTable.outerTableFooter .tableFootStyle {
+  padding: 3px 5px; 
+}
+/* DivTable.com */
+.divTable{ display: table; }
+.divTableRow { display: table-row; }
+.divTableHeading { display: table-header-group;}
+.divTableCell, .divTableHead { display: table-cell;}
+.divTableHeading { display: table-header-group;}
+.divTableFoot { display: table-footer-group;}
+.divTableBody { display: table-row-group;}
+
+
+table.statusTable_3 {
+  border: 3px solid #0EAAAA;
+  background-color: #eef8f8;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+
+}
+table.statusTable_3 td, table.statusTable_3 th {
+  border: 3px solid #0EAAAA;
+  padding: 3px 2px;
+  vertical-align:top
+}
+table.statusTable_3 tbody td {
+  font-size: 13px;
+  color: #008080;
+   width: 33%;
+
+}
+
+table.statusTable_3 tbody td img {
+  padding: 0px 0px;
+  border: 0px solid;
+  border-spacing: 0px;
+  margin: 0px 0;
+  
+  font-size: 0;
+}
+
+table.statusTable_3 tfoot td {
+  font-size: 14px;
+}
+table.statusTable_3 tfoot .links {
+  text-align: right;
+}
+table.statusTable_3 tfoot .links a{
+  display: inline-block;
+  background: #1C6EA4;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+
+
+
+
+div.statusTable {
+  border: 3px solid #0EAAAA;
+  background-color: #000000;
+  width: 100%;
+  text-align: center;
+  color: #bcd3d3;
+  font-size: 18px;
+}
+.divTable.statusTable .divTableCell, .divTable.statusTable .divTableHead {
+  border: 2px solid #0EAAAA;
+  padding: 1px 1px;
+}
+.divTable.statusTable .divTableBody .divTableCell {
+  font-size: 14px;
+  text-align: left;
+}
+
+.divTable.statusTable .divTableBody .divTableCell .squaredcheck {
+  width: 18px;
+  height: 16px;
+  position: relative;
+  margin: 5px auto;
+  background: #b6e040;
+  background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+}
+
+.divTable.statusTable .divTableBody .divTableCell .squaredcheck:checked{
+  color: red;
+}
+
+
+
+
+
+.statusTable .tableFootStyle {
+  font-size: 14px;
+}
+.statusTable .tableFootStyle .links {
+	 text-align: right;
+}
+.statusTable .tableFootStyle .links a{
+  display: inline-block;
+  background: #0EAAAA;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+.statusTable.outerTableFooter {
+  border-top: none;
+}
+.statusTable.outerTableFooter .tableFootStyle {
+  padding: 3px 5px; 
+}
+/* DivTable.com */
+.divTable{ display: table; }
+.divTableRow { display: table-row; }
+.divTableHeading { display: table-header-group;}
+.divTableCell, .divTableHead { display: table-cell;}
+.divTableHeading { display: table-header-group;}
+.divTableFoot { display: table-footer-group;}
+.divTableBody { display: table-row-group;}
+
+
+table.crewTable2 {
+  width: 100%;
+  text-align: left;
+}
+table.crewTable2 td, table.crewTable2 th {
+  padding: 1px 1px;
+}
+table.crewTable2 tbody tr {
+  height: 10px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+
+}
+table.crewTable2 tbody td {
+  height: 10px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  font-size: 13px;
+  width: fit-content;
+  text-shadow: 0 0 10px rgb(34, 190, 151);
+}
+
+table.crewTable tbody td .crew-score {
+  color: #000;
+  text-shadow: 0 0 10px rgb(34, 190, 149);
+  cursor: pointer;
+}
+
+table.crewTable2 tfoot td {
+  font-size: 14px;
+}
+table.crewTable2 tfoot .links {
+  text-align: right;
+}
+table.crewTable2 tfoot .links a{
+  display: inline-block;
+  background: #0EAAAA;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+
+
+/*.form-group {
+  height: 100%;
+  background-color: #eef8f8;
+  font-family: serpentine ;
+
+}
+*/
+.flavor-text {
+  font-family: serpentine ;
+
+
+}
+
+.degree-text {
+  font-family: serpentine ;
+width: 100%;
+background-color: rgba(67, 121, 121, 0.295);
+font-size: 12pt;
+text-align: center;
+
+}
+
+/* ----------------------------------------- */
+/*  Sheet Styles                             */
+/* ----------------------------------------- */
+/* ----------------------------------------- */
+/*  Flexbox                                  */
+/* ----------------------------------------- */
+.flexrow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.flexrow > * {
+  flex: 1;
+}
+.flexrow .flex1 {
+  flex: 1;
+}
+.flexrow .flex2 {
+  flex: 2;
+}
+.flexrow .flex3 {
+  flex: 3;
+}
+.flexrow .flex4 {
+  flex: 4;
+}
+.flexcol {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.flexcol > * {
+  flex: 1;
+}
+.flexcol .flex1 {
+  flex: 1;
+}
+.flexcol .flex2 {
+  flex: 2;
+}
+.flexcol .flex3 {
+  flex: 3;
+}
+.flexcol .flex4 {
+  flex: 4;
+}
+body {
+  font-family: "serpentine", sans-serif;
+}
+.window-app .window-header {
+  background: linear-gradient(25deg, #671818 0%, #c41e1e 40%, #c01c1c 60%, #8a0303 100%);
+  
+  background: linear-gradient(25deg, #096969 0%, #0eaaaa 40%, #0eaaaa 60%, #0b8181 100%);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom: none;
+}
+.Alternityd100.sheet .window-content {
+  border: 5px solid #235683;
+  border-top: none;
+  background: #f2f2f2 url("../images/hexellence.png") repeat;
+  padding: 0 0 5px 0;
+}
+.Alternityd100.sheet .sheet-lower {
+  padding: 5px;
+}
+button {
+  font-family: "serpentine", sans-serif;
+  font-size: 13px;
+}
+.window-app {
+  font-family: "serpentine", sans-serif;
+}
+.window-app .window-content {
+  background: #f2f2f2 url("../images/hexellence.png") repeat;
+}
+.subtabs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.subtabs .item {
+  text-align: center;
+}
+.subtabs > * {
+  flex: 1;
+}
+/* ----------------------------------------- */
+/*  All SFRPG Apps                           */
+/* ----------------------------------------- */
+.sfrpg {
+  /* ----------------------------------------- */
+  /*  Element Styles                           */
+  /* ----------------------------------------- */
+  /* Form Groups */
+  /* Tags */
+}
+.sfrpg .window-content {
+  font-size: 13px;
+  color: #191813;
+  font-family: "serpentine", sans-serif;
+}
+.sfrpg input[type="text"],
+.sfrpg select {
+  height: calc(100% - 2px);
+  border: 1px solid #7a7971;
+  background: rgba(0, 0, 0, 0.05);
+  color: #191813;
+}
+.sfrpg input[type="text"]:hover,
+.sfrpg input[type="text"]:focus {
+  border: 1px solid #111;
+  box-shadow: 0 0 8px #c41e1e;
+}
+.sfrpg input:disabled,
+.sfrpg select:disabled,
+.sfrpg textarea:disabled {
+  color: #4b4a44;
+}
+.sfrpg input:disabled:hover,
+.sfrpg select:disabled:hover,
+.sfrpg textarea:disabled:hover,
+.sfrpg input:disabled:focus,
+.sfrpg select:disabled:focus,
+.sfrpg textarea:disabled:focus {
+  box-shadow: none !important;
+}
+.sfrpg button {
+  background: rgba(0, 0, 0, 0.1);
+  border: 2px groove #eeede0;
+}
+.sfrpg label.checkbox {
+  flex: auto;
+  margin: 0;
+  line-height: 20px;
+  font-size: 11px;
+  text-align: right;
+}
+.sfrpg label.checkbox input[type="checkbox"] {
+  height: auto;
+  margin: 0 5px 0;
+  position: relative;
+  top: 3px;
+}
+.sfrpg .form-group label {
+  flex: 2;
+  color: #4b4a44;
+  font-weight: bold;
+}
+.sfrpg .form-group .form-fields {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.sfrpg .form-group .form-fields > * {
+  flex: 1;
+}
+.sfrpg .form-group .form-fields .flex1 {
+  flex: 1;
+}
+.sfrpg .form-group .form-fields .flex2 {
+  flex: 2;
+}
+.sfrpg .form-group .form-fields .flex3 {
+  flex: 3;
+}
+.sfrpg .form-group .form-fields .flex4 {
+  flex: 4;
+}
+.sfrpg .form-group .form-fields > * {
+  margin: 0 3px 0 0;
+}
+.sfrpg .form-group .form-fields > *:last-child {
+  margin-right: 0;
+}
+.sfrpg .form-group.stacked label {
+  flex: 0 0 100%;
+}
+.sfrpg .form-group.stacked label.checkbox {
+  flex: auto;
+  text-align: left;
+}
+.sfrpg .form-header {
+  margin: 0 0 0.25em 0;
+  padding: 0 2px;
+  font-family: "serpentine", sans-serif;
+  font-size: 24px;
+  font-weight: normal;
+  border-top: 2px groove #eeede0;
+  border-bottom: 2px groove #eeede0;
+}
+.sfrpg .form-rest {
+  margin-bottom: 7px;
+}
+.sfrpg .form-repair {
+  margin-bottom: 7px;
+}
+.sfrpg .tag {
+  display: inline-block;
+  margin: 0 2px 0 0;
+  padding: 0 3px;
+  font-size: 10px;
+  line-height: 10px;
+  border: 1px solid #999;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.05);
+}
+.Alternityd100.app .trait-list li input[type="text"] {
+  flex: 0 0 65%;
+  text-align: center;
+}
+.Alternityd100.app .trait-list .energy-resistance .checkbox {
+  flex: 0 0 33%;
+  text-align: left;
+}
+.combat-config-directory-footer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex: 0 0 32px;
+  margin: 6px 3px;
+}
+/* ----------------------------------------- */
+/*  Entity Sheets Specifically               */
+/* ----------------------------------------- */
+.Alternityd100.sheet {
+  /* ----------------------------------------- */
+  /*  Element Styles                           */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  TinyMCE                                  */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Sheet Navigation                         */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Sheet Body                               */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  List Filters                             */
+  /* ----------------------------------------- */
+}
+.Alternityd100.sheet .window-content {
+  overflow-y: hidden;
+  background: #f2f2f2 url("../images/hexellence.png") repeat;
+  font-size: 13px;
+  color: #191813;
+}
+.Alternityd100.sheet .window-content form {
+  height: 100%;
+  overflow: hidden;
+}
+.Alternityd100.sheet .window-content .tab {
+  height: 100%;
+  overflow-y: auto;
+  align-content: flex-start;
+}
+
+.Alternityd100.sheet .window-content .tab .sturtus {
+ 
+  font-size: 5px;
+  overflow-y: auto;
+  align-content: flex-start;
+}
+
+
+.Alternityd100.sheet input[type="text"] {
+  background: none;
+  border: 1px solid transparent;
+}
+.Alternityd100.sheet input[type="text"]:hover,
+.Alternityd100.sheet input[type="text"]:focus {
+  border: 1px solid #111;
+}
+.Alternityd100.sheet select {
+  flex: 1;
+  font-size: 12px;
+  height: 22px;
+  background: transparent;
+}
+.Alternityd100.sheet .editable .rollable:hover {
+  color: #000;
+  text-shadow: 0 0 10px red;
+  cursor: pointer;
+}
+.Alternityd100.sheet .editor {
+  height: 100%;
+}
+.Alternityd100.sheet .editor .tox-toolbar-overlord,
+.Alternityd100.sheet .editor .tox-toolbar__primary {
+  background: none;
+}
+.Alternityd100.sheet .editor-content h1 {
+  color: #143f90;
+  font-weight: bold;
+  font-size: 25px;
+}
+.Alternityd100.sheet .editor-content h2 {
+  color: #143f90;
+  font-size: 22px;
+}
+.Alternityd100.sheet .editor-content h3 {
+  color: #5867a9;
+  font-size: 19px;
+}
+.Alternityd100.sheet .editor-content h4 {
+  font-weight: bold;
+  font-size: 16px;
+}
+.Alternityd100.sheet .sheet-header {
+  flex: 0 0 fit;
+  border-bottom: 4px groove #19d6b7;
+  font-family: "serpentine", sans-serif;
+  font-size: 12px;
+  color: #444;
+
+  /* Character Name */
+  /* Profile Image */
+  /* Header Summary Details */
+}
+
+.Alternityd100.sheet .sheet-header .header-details .header-background {
+
+background: radial-gradient( #39879d ,#212c48  );
+  /* Character Name */
+  /* Profile Image */
+  /* Header Summary Details */
+}
+
+.Alternityd100.sheet .sheet-header h1 {
+  flex: 1;
+  border-bottom: none;
+  height: 25px;
+  margin: 0;
+  padding: 5px;
+}
+.Alternityd100.sheet .sheet-header h1 input {
+  height: 22px;
+  font-size: 15px;
+  margin: 0 2%;
+}
+.Alternityd100.sheet .sheet-header img {
+  margin-right: 0;
+}
+.Alternityd100.sheet .sheet-header img.profile {
+  flex: 0 0 140px;
+  height: 140px;
+  object-fit: contain;
+  border: none;
+  border-right: 4px groove #19d6b7;
+}
+.Alternityd100.sheet .sheet-header .summary {
+  flex: 0 0 100%;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 4px groove #19d6b7;
+  border-bottom: none;
+  font-size: 16px;
+}
+.Alternityd100.sheet .sheet-header .summary li {
+  width: 33.33%;
+  float: left;
+  height: 34px;
+  margin: 2px 0;
+  padding: 0 3px;
+  border-right: 4px groove #19d6b7;
+  line-height: 34px;
+  color: #4b4a44;
+  font-family: "serpentine", sans-serif;
+}
+.Alternityd100.sheet .sheet-header .summary li:last-child {
+  border-right: none;
+}
+.Alternityd100.sheet .sheet-navigation {
+  background: linear-gradient(130deg, #212c48 0%, #39879d 100%);
+  flex: 0 0 30px;
+  margin-bottom: 5px;
+  font-family: "serpentine", sans-serif;
+}
+.Alternityd100.sheet .sheet-navigation .item {
+  height: 20px;
+  line-height: 26px;
+  color: #ebec87;
+  font-size: 15px;
+}
+.Alternityd100.sheet .sheet-navigation .item.active {
+  background: #0eaaaa;
+}
+.Alternityd100.sheet .sheet-subnavigation {
+  flex: 0 0 30px;
+  margin-bottom: 5px;
+  font-family: "serpentine", sans-serif;
+}
+.Alternityd100.sheet .sheet-subnavigation .item {
+  height: 30px;
+  line-height: 32px;
+  margin: 0 5px;
+  font-size: 15px;
+  border-bottom: 3px solid #b5b3a4;
+}
+.Alternityd100.sheet .sheet-subnavigation .item:hover {
+  text-shadow: 0 0 4px #0eaaaa;
+  border-bottom: 3px solid #235683;
+}
+.Alternityd100.sheet .sheet-subnavigation .item.active {
+  border-bottom: 3px solid #0eaaaa;
+}
+.Alternityd100.sheet .sheet-subnavigation .item.highlight {
+  font-weight: 900;
+}
+.Alternityd100.sheet .sheet-body {
+  flex: 1;
+  overflow: hidden;
+}
+.Alternityd100.sheet .filter-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  line-height: 16px;
+}
+.Alternityd100.sheet .filter-list .filter-title {
+  flex: 3;
+}
+.Alternityd100.sheet .filter-list .filter-item {
+  text-align: center;
+  font-size: 12px;
+  margin: 0 6px;
+  border-bottom: 3px solid #b5b3a4;
+  white-space: nowrap;
+}
+.Alternityd100.sheet .filter-list .filter-item:hover {
+  text-shadow: 0 0 4px red;
+  border-bottom: 3px solid #7a7971;
+}
+.Alternityd100.sheet .filter-list .filter-item.active {
+  border-bottom: 3px solid #44191A;
+}
+.Alternityd100.dialog .toggle-skills label.checkbox {
+  flex: 0 0 180px;
+}
+.Alternityd100.dialog input.error {
+  color: #de0000;
+}
+/* ----------------------------------------- */
+/* Trait Selector
+/* ----------------------------------------- */
+#trait-selector .trait-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#trait-selector input[type="text"] {
+  height: 24px;
+  margin: 2px;
+}
+/* ------------------------------------------- */
+/* Actor Flags                                 */
+/* ------------------------------------------- */
+#actor-flags {
+  max-height: 600px;
+}
+/* ------------------------------------------- */
+/* Counter Classes Management                  */
+/* ------------------------------------------- */
+#combat-tracker .counter-image-relative {
+  height: 72px;
+  line-height: 24px;
+}
+#combat li.combatant .combatant-control-counter {
+  padding-left: 8px;
+}
+.counter-token > img {
+  display: inline-block;
+  width: 20px !important;
+  height: 20px !important;
+  margin: 0 !important;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.counter-token p {
+  display: inline-block;
+  height: 20px !important;
+  margin: 0 !important;
+  padding-left: 4px;
+  vertical-align: middle;
+  color: #EEE;
+}
+#counter-management-position ul {
+  width: 100%;
+  text-align: center;
+  padding-inline-start: 0px !important;
+  margin: 15px 0px;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  border-radius: 5px;
+}
+#counter-management-position ul li {
+  text-decoration: none;
+  display: inline-block;
+  width: 30%;
+  text-align: center;
+  padding: 15px;
+}
+#counter-management-position ul li:hover {
+  background-color: #999999;
+  border-radius: 5px;
+}
+#counter-management-position ul li.active {
+  background-color: #6c8aa5;
+  border-radius: 5px;
+}
+#counter-management-position ul li img {
+  border: none;
+}
+#counter-management-position h3 {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #8a0303;
+}
+#counter-management-position .counter-management-button button {
+  width: 20%;
+  margin: 10px;
+}
+#counter-management-position .counter-management-info label {
+  display: inline-block;
+  width: 120px;
+  font-weight: bold;
+}
+.Alternityd100.sheet.actor {
+  /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  General Styles                           */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Attributes                               */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Ability Scores                           */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Skills                                   */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Statuses                                 */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Traits                                   */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Inventory Lists                          */
+  /* ----------------------------------------- */
+  /* Inventory List Filters */
+  /* ----------------------------------------- */
+  /*  Spellbook                                */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  TinyMCE                                  */
+  /* ----------------------------------------- */
+}
+.Alternityd100.sheet.actor .sheet-header .header-background {
+  background: #235683;
+  background: linear-gradient(130deg, #0c2d4a 0%, #235683 40%, #235683 60%, #1d7dd1 100%);
+}
+
+
+
+.Alternityd100.sheet.actor .sheet-header .header-background .charname > input {
+  color: #fff;
+  margin: 0 2%;
+}
+.Alternityd100.sheet.actor .sheet-header .header-background .charlevel {
+  flex: 0 0 160px;
+  height: 30px;
+  margin: 0;
+  padding: 5px;
+  text-align: right;
+}
+.Alternityd100.sheet.actor .sheet-header .header-background .charlevel .level {
+  width: 100%;
+  height: 30px;
+  font-size: 20px;
+  line-height: 30px;
+}
+.Alternityd100.sheet.actor .sheet-header .header-background .charlevel .level label {
+  display: inline;
+  font-size: 24px;
+  text-align: right;
+  color: #fff;
+}
+.Alternityd100.sheet.actor .sheet-header .header-background .charlevel .level span {
+  color: #fff;
+  font-size: 20px;
+}
+.Alternityd100.sheet.actor .sheet-header .header-background .charlevel .level input {
+  width: 45px;
+  font-size: 20px;
+  text-align: center;
+  color: #fff;
+}
+.Alternityd100.sheet.actor .sheet-header .header-background .charlevel .level.noxp {
+  margin-top: 10px;
+}
+.Alternityd100.sheet.actor .sheet-header .header-background .charlevel .level.noxp > label {
+  font-size: 32px;
+}
+.Alternityd100.sheet.actor .sheet-header .header-background .charlevel .level.noxp > input {
+  font-size: 32px;
+  flex: 0 0 40px;
+  height: 44px;
+}
+.Alternityd100.sheet.actor .sheet-header .header-background .charlevel .experience {
+  font-family: "serpentine", sans-serif;
+  width: 100%;
+  height: 20px;
+  padding-right: 5px;
+  font-size: 12px;
+  color: #fff;
+}
+.Alternityd100.sheet.actor .sheet-header .header-background .charlevel .experience > input {
+  color: #fff;
+}
+.Alternityd100.sheet.actor .attributes input.temphp {
+  width: 48%;
+}
+.Alternityd100.sheet.actor .sheet-body .bio-properties {
+  height: 100%;
+  flex: 0 0 200px;
+  margin: 5px 5px 5px 5px;
+  padding-right: 5px;
+  border-right: 2px groove #eeede0;
+}
+.Alternityd100.sheet.actor .sheet-body .bio-properties .avatar {
+  flex: 0 0 250px;
+}
+.Alternityd100.sheet.actor .sheet-body .bio-properties .singleFlex {
+  flex: 0 0 20px;
+  height: 20px;
+  max-height: 20px;
+  line-height: 20px;
+}
+.Alternityd100.sheet.actor .sheet-body .bio-properties .doubleFlex {
+  flex: 0 0 40px;
+}
+.Alternityd100.sheet.actor .sheet-body .bio-properties .form-group {
+  margin: 0;
+}
+.Alternityd100.sheet.actor .sheet-body .bio-properties .form-group label {
+  line-height: 20px;
+}
+.Alternityd100.sheet.actor .sheet-body .bio-properties .form-group input {
+  text-align: right;
+}
+.Alternityd100.sheet.actor .sheet-body .bio-properties .form-group input.regular {
+  text-align: left;
+}
+.Alternityd100.sheet.actor .sheet-body .bio-properties .form-group .singleLine {
+  height: 20px;
+  line-height: 20px;
+  max-height: 20px;
+}
+.Alternityd100.sheet.actor .sheet-body .bio-properties .fill {
+  box-sizing: border-box;
+  /* fit parent width */
+  height: 100%;
+  margin-bottom: 5px;
+}
+.Alternityd100.sheet.actor .sheet-body .bio-properties .properties-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.Alternityd100.sheet.actor .sheet-body .bio-properties .properties-list li {
+  margin: 3px 0;
+  padding: 0 2px;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove #eeede0;
+  text-align: center;
+  font-size: 12px;
+  line-height: 18px;
+}
+.Alternityd100.sheet.actor h4.box-title {
+  line-height: 16px;
+  margin: 4px 8px 2px;
+  font-size: 16px;
+  border-bottom: 1px solid #b5b3a4;
+}
+.Alternityd100.sheet.actor ul.attributes {
+  list-style: none;
+  margin: 5px 0 0;
+  padding: 0;
+}
+.Alternityd100.sheet.actor ul.attributes li.attribute {
+  height: 70px;
+  margin: 0 5px;
+  border: 2px groove #eeede0;
+  border-radius: 4px;
+  font-family: "serpentine", sans-serif;
+  text-align: center;
+}
+.Alternityd100.sheet.actor ul.attributes li.attribute .attribute-name {
+  flex: 0 0 18px;
+}
+.Alternityd100.sheet.actor ul.attributes li.attribute .attribute-value {
+  height: 28px;
+  line-height: 28px;
+}
+.Alternityd100.sheet.actor ul.attributes li.attribute .attribute-value input,
+.Alternityd100.sheet.actor ul.attributes li.attribute .attribute-value div.attribute-value-max {
+  display: inline;
+  max-width: 80%;
+  margin: 0;
+  font-size: 16px;
+  padding: 0;
+}
+.Alternityd100.sheet.actor ul.attributes li.attribute .attribute-value div.attribute-value-max {
+  font-size: 20px;
+}
+.Alternityd100.sheet.actor ul.attributes li.attribute .attribute-value span.sep {
+  display: inline;
+  position: relative;
+  top: 2px;
+  font-size: 28px;
+  color: #7a7971;
+}
+.Alternityd100.sheet.actor ul.attributes li.attribute .attribute-value.multiple input {
+  max-width: 33%;
+}
+.Alternityd100.sheet.actor ul.attributes li.attribute .attribute-footer {
+  flex: 0 0 18px;
+  margin-top: -1px;
+  line-height: 18px;
+  font-family: "Signika", "Palatino Linotype", serif;
+  font-size: 12px;
+}
+.Alternityd100.sheet.actor ul.attributes li.save {
+  height: 75px;
+}
+.Alternityd100.sheet.actor ul.attributes.last {
+  border-bottom: 2px groove #eeede0;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+}
+.Alternityd100.sheet.actor .ability-scores {
+  flex: 0 0 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: "serpentine", sans-serif;
+}
+.Alternityd100.sheet.actor .ability-scores .ability {
+  height: 70px;
+  margin: 0 5px;
+  text-align: center;
+  border: 2px groove #eeede0;
+  border-radius: 3px;
+  /* Hide modifier box on hover */
+}
+.Alternityd100.sheet.actor .ability-scores .ability input.ability-score {
+  height: 30px;
+  width: 50px;
+  margin: 0 auto;
+  line-height: 32px;
+  font-size: 24px;
+}
+.Alternityd100.sheet.actor .ability-scores .ability .ability-modifiers {
+  height: 24px;
+  margin: -10px 0 0;
+}
+.Alternityd100.sheet.actor .ability-scores .ability .ability-modifiers span.ability-mod,
+.Alternityd100.sheet.actor .ability-scores .ability .ability-modifiers span.ability-save {
+  flex: 0 0 24px;
+  height: 24px;
+  border-top: 2px groove #eeede0;
+}
+.Alternityd100.sheet.actor .ability-scores .ability .ability-modifiers span.ability-mod {
+  border-right: 2px groove #eeede0;
+}
+.Alternityd100.sheet.actor .ability-scores .ability .ability-modifiers .ability-proficiency {
+  line-height: 30px;
+}
+.Alternityd100.sheet.actor .ability-scores .ability .ability-modifiers span.ability-save {
+  border-left: 2px groove #eeede0;
+}
+.Alternityd100.sheet.actor .ability-scores .ability input.ability-score:hover + .ability-modifiers {
+  visibility: hidden;
+}
+.Alternityd100.sheet.actor .proficiency-toggle {
+  color: #b5b3a4;
+  font-size: 12px;
+}
+.Alternityd100.sheet.actor .proficient .proficiency-toggle {
+  color: #4b4a44;
+}
+.Alternityd100.sheet.actor .locked .proficiency-toggle {
+  color: #b5b3a4;
+  text-shadow: none;
+  cursor: default;
+}
+.Alternityd100.sheet.actor ul.skills-list {
+  flex: 0 0 192px;
+  list-style: none;
+  margin: 5px 5px 0;
+  padding: 2px 2px 0;
+  border: 2px groove #eeede0;
+  border-radius: 3px;
+}
+.Alternityd100.sheet.actor ul.skills-list div.centered {
+  text-align: center;
+}
+.Alternityd100.sheet.actor ul.skills-list li.skill {
+  height: 22px;
+  padding: 3px 0;
+}
+.Alternityd100.sheet.actor ul.skills-list li.skill h4 {
+  flex: 1px;
+  margin: 0;
+  font-size: 11px;
+  line-height: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.Alternityd100.sheet.actor ul.skills-list li.skill .skill-proficiency {
+  flex: 0 0 16px;
+  line-height: 18px;
+}
+.Alternityd100.sheet.actor ul.skills-list li.skill .skill-ability {
+  flex: 0 0 26px;
+}
+.Alternityd100.sheet.actor ul.skills-list li.skill .skill-mod {
+  flex: 0 0 20px;
+}
+.Alternityd100.sheet.actor ul.skills-list li.skill .skill-ranks,
+.Alternityd100.sheet.actor ul.skills-list li.skill .skill-misc {
+  flex: 0 0 20px;
+  text-align: center;
+  height: 18px;
+}
+.Alternityd100.sheet.actor ul.skills-list li.skill .skill-passive {
+  flex: 0 0 26px;
+  text-align: center;
+  color: #7a7971;
+}
+.Alternityd100.sheet.actor ul.skills-list .skills-footer {
+  padding-top: 20px;
+}
+.Alternityd100.sheet.actor .counters {
+  flex: 0 0 100%;
+  border-bottom: 2px groove #eeede0;
+  margin-bottom: 5px;
+}
+.Alternityd100.sheet.actor .counters .counter {
+  padding: 0 6px;
+  line-height: 32px;
+}
+.Alternityd100.sheet.actor .counters .counter h4 {
+  flex: auto;
+  margin: 0;
+  font-family: "serpentine", sans-serif;
+  font-size: 14px;
+}
+.Alternityd100.sheet.actor .counters .counter .counter-value {
+  flex: 0 0 50px;
+  text-align: right;
+}
+.Alternityd100.sheet.actor .counters .counter .counter-value > * {
+  display: inline;
+}
+.Alternityd100.sheet.actor .counters .counter input[type="text"] {
+  height: 20px;
+  max-width: 20px;
+  margin: 0;
+  text-align: center;
+}
+.Alternityd100.sheet.actor .counters .counter input[type="checkbox"] {
+  position: relative;
+  margin: 0;
+  top: 6px;
+}
+.Alternityd100.sheet.actor .counters .counter.lair input[type="text"] {
+  width: 32px;
+  max-width: 32px;
+}
+.Alternityd100.sheet.actor .counters .counter span.sep {
+  margin: 0 -2px;
+  font-size: 12px;
+}
+.Alternityd100.sheet.actor .form-group.stacked.conditions {
+  flex: 0;
+}
+.Alternityd100.sheet.actor .traits {
+  margin: 0 5px;
+}
+.Alternityd100.sheet.actor .traits .form-group,
+.Alternityd100.sheet.actor .traits .form-group-stacked {
+  margin: 0 0 4px 0;
+  justify-content: space-between;
+}
+.Alternityd100.sheet.actor .traits .damage-reduction .sep {
+  flex: 0;
+}
+.Alternityd100.sheet.actor .traits .damage-reduction input[name="system.traits.damageReduction.negatedBy"] {
+  text-align: left;
+}
+.Alternityd100.sheet.actor .traits .damage-reduction input[name="system.traits.damageReduction.value"] {
+  flex: 0 0 50px;
+}
+.Alternityd100.sheet.actor .traits .trait-selector {
+  flex: 0 0 16px;
+  padding: 2px 0;
+  color: #999;
+  font-size: 10px;
+}
+.Alternityd100.sheet.actor .traits .configure-flags {
+  flex: 1;
+}
+.Alternityd100.sheet.actor .traits .traits-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+}
+.Alternityd100.sheet.actor .traits .actor-size,
+.Alternityd100.sheet.actor .traits .actor-keyability {
+  flex: 0 0 150px;
+}
+.Alternityd100.sheet.actor .traits label {
+  flex: 0 0 150px;
+  line-height: 20px;
+  font-weight: bold;
+  margin: 0;
+}
+.Alternityd100.sheet.actor .traits input {
+  text-align: right;
+}
+.Alternityd100.sheet.actor .traits i.fas {
+  float: right;
+  margin-right: 3px;
+  text-align: right;
+  color: #999;
+}
+.Alternityd100.sheet.actor .traits i.fas:hover {
+  color: #111;
+  text-shadow: 0 0 10px red;
+}
+.Alternityd100.sheet.actor .traits .inactive {
+  color: #7a7971;
+}
+.Alternityd100.sheet.actor .traits .value {
+  text-align: right;
+}
+.Alternityd100.sheet.actor .inventory-filters 
+.Alternityd100.sheet.actor .inventory-filters,
+ .inventory-filters
+{
+  margin: 0 8px;
+  flex: 0 0 20px;
+  
+}
+.Alternityd100.sheet.actor .inventory-filters h3,
+.Alternityd100.sheet.actor .inventory-filters .filter-title 
+.Alternityd100.sheet.actor .inventory-filters h3,
+.Alternityd100.sheet.actor .inventory-filters .filter-title,
+.Alternityd100.sheet .inventory-filters h3
+
+{
+  font-family: "serpentine", sans-serif;
+  color: #4b4a44;
+  font-size: 12px;
+  margin: 0;
+}
+.Alternityd100.sheet.actor .inventory-filters.spellbook-filters 
+.Alternityd100.sheet.actor .inventory-filters.spellbook-filters
+{
+  flex: 0 0 40px;
+}
+.Alternityd100.sheet.actor .inventory-filters .currency 
+.Alternityd100.sheet.actor .inventory-filters .currency 
+{
+  list-style: none;
+  margin: 4px 0 8px;
+  padding: 0;
+  font-size: 12px;
+}
+.Alternityd100.sheet.actor .inventory-filters .currency label, 
+.Alternityd100.sheet.actor .inventory-filters .currency label
+{
+  flex: 0;
+  margin-left: 8px;
+  text-align: right;
+  line-height: 20px;
+  color: #7a7971;
+}
+.Alternityd100.sheet.actor .inventory-filters .currency label.currency-value,
+.Alternityd100.sheet.actor .inventory-filters .currency label.currency-value
+{
+  color: black;
+}
+.Alternityd100.sheet.actor .inventory-filters .currency input[type="text"],
+.Alternityd100.sheet.actor .inventory-filters .currency input[type="text"]
+{
+  flex: 0 0 60px;
+  text-align: center;
+  margin-left: 8px;
+  border-bottom: 2px groove #eeede0;
+}
+.Alternityd100.sheet.actor .inventory-list,
+.Alternityd100.sheet.actor .crew-list,
+.Alternityd100.sheet.actor .vehicle-system-list,
+.Alternityd100.sheet.actor .inventory-list,
+.Alternityd100.sheet.actor .crew-list,
+.Alternityd100.sheet.actor .vehicle-system-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 5px;
+  
+  /*overflow-y: auto;*/
+
+ background-repeat: no-repeat;
+}
+.Alternityd100.sheet.actor .inventory-list.noPadding,
+.Alternityd100.sheet.actor .crew-list.noPadding,
+.Alternityd100.sheet.actor .vehicle-system-list.noPadding,
+
+.Alternityd100.sheet.actor .inventory-list.noPadding,
+.Alternityd100.sheet.actor .crew-list.noPadding,
+.Alternityd100.sheet.actor .vehicle-system-list.noPadding{
+  padding: 0;
+}
+.Alternityd100.sheet.actor .inventory-list .item,
+.Alternityd100.sheet.actor .crew-list .item,
+.Alternityd100.sheet.actor .vehicle-system-list .item,
+.Alternityd100.sheet.actor .inventory-list .crew,
+.Alternityd100.sheet.actor .crew-list .crew,
+.Alternityd100.sheet.actor .vehicle-system-list .crew, 
+
+.Alternityd100.sheet.actor .inventory-list .item,
+.Alternityd100.sheet.actor .crew-list .item,
+.Alternityd100.sheet.actor .vehicle-system-list .item,
+.Alternityd100.sheet.actor .inventory-list .crew,
+.Alternityd100.sheet.actor .crew-list .crew,
+.Alternityd100.sheet.actor .vehicle-system-list .crew
+{
+  
+  padding: 0 2px;
+  border-bottom: 1px solid #b5b3a4;
+}
+
+
+
+
+.Alternityd100.sheet.actor .inventory-list .item:last-child,
+.Alternityd100.sheet.actor .crew-list .item:last-child,
+.Alternityd100.sheet.actor .vehicle-system-list .item:last-child,
+.Alternityd100.sheet.actor .inventory-list .crew:last-child,
+.Alternityd100.sheet.actor .crew-list .crew:last-child,
+.Alternityd100.sheet.actor .vehicle-system-list .crew:last-child,
+
+.Alternityd100.sheet.actor .inventory-list .item:last-child,
+.Alternityd100.sheet.actor .crew-list .item:last-child,
+.Alternityd100.sheet.actor .vehicle-system-list .item:last-child,
+.Alternityd100.sheet.actor .inventory-list .crew:last-child,
+.Alternityd100.sheet.actor .crew-list .crew:last-child,
+.Alternityd100.sheet.actor .vehicle-system-list .crew:last-child
+{
+  border-bottom: none;
+}
+.Alternityd100.sheet.actor .inventory-list .item.small,
+.Alternityd100.sheet.actor .crew-list .item.small,
+.Alternityd100.sheet.actor .vehicle-system-list .item.small,
+.Alternityd100.sheet.actor .inventory-list .crew.small,
+.Alternityd100.sheet.actor .crew-list .crew.small,
+.Alternityd100.sheet.actor .vehicle-system-list .crew.small,
+
+.Alternityd100.sheet.actor .inventory-list .item.small,
+.Alternityd100.sheet.actor .crew-list .item.small,
+.Alternityd100.sheet.actor .vehicle-system-list .item.small,
+.Alternityd100.sheet.actor .inventory-list .crew.small,
+.Alternityd100.sheet.actor .crew-list .crew.small,
+.Alternityd100.sheet.actor .vehicle-system-list .crew.small
+{
+  line-height: 25px;
+}
+.Alternityd100.sheet.actor .inventory-list .item.container,
+.Alternityd100.sheet.actor .crew-list .item.container,
+.Alternityd100.sheet.actor .vehicle-system-list .item.container,
+.Alternityd100.sheet.actor .inventory-list .crew.container,
+.Alternityd100.sheet.actor .crew-list .crew.container,
+.Alternityd100.sheet.actor .vehicle-system-list .crew.container,
+
+.Alternityd100.sheet.actor .inventory-list .item.container,
+.Alternityd100.sheet.actor .crew-list .item.container,
+.Alternityd100.sheet.actor .vehicle-system-list .item.container,
+.Alternityd100.sheet.actor .inventory-list .crew.container,
+.Alternityd100.sheet.actor .crew-list .crew.container,
+.Alternityd100.sheet.actor .vehicle-system-list .crew.container{
+  background: linear-gradient(130deg, rgba(12, 45, 74, 0.1) 0%, rgba(35, 86, 131, 0.1) 40%, rgba(35, 86, 131, 0.1) 60%, rgba(29, 125, 209, 0.1) 100%);
+}
+.Alternityd100.sheet.actor .inventory-list .item .item-name,
+.Alternityd100.sheet.actor .crew-list .item .item-name,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name,
+.Alternityd100.sheet.actor .crew-list .crew .item-name,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name,
+.Alternityd100.sheet.actor .crew-list .item .crew-name,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name,
+
+.Alternityd100.sheet.actor .inventory-list .item .item-name,
+.Alternityd100.sheet.actor .crew-list .item .item-name,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name,
+.Alternityd100.sheet.actor .crew-list .crew .item-name,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name,
+.Alternityd100.sheet.actor .crew-list .item .crew-name,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name{
+  cursor: pointer;
+}
+.Alternityd100.sheet.actor .inventory-list .item .item-name.modifier-name,
+.Alternityd100.sheet.actor .crew-list .item .item-name.modifier-name,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name.modifier-name,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name.modifier-name,
+.Alternityd100.sheet.actor .crew-list .crew .item-name.modifier-name,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name.modifier-name,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name.modifier-name,
+.Alternityd100.sheet.actor .crew-list .item .crew-name.modifier-name,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name.modifier-name,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name.modifier-name,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name.modifier-name,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name.modifier-name,
+
+.Alternityd100.sheet.actor .inventory-list .item .item-name.modifier-name,
+.Alternityd100.sheet.actor .crew-list .item .item-name.modifier-name,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name.modifier-name,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name.modifier-name,
+.Alternityd100.sheet.actor .crew-list .crew .item-name.modifier-name,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name.modifier-name,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name.modifier-name,
+.Alternityd100.sheet.actor .crew-list .item .crew-name.modifier-name,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name.modifier-name,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name.modifier-name,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name.modifier-name,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name.modifier-name
+{
+  cursor: default;
+}
+.Alternityd100.sheet.item .inventory-list .item .item-name .item-image,
+.Alternityd100.sheet.actor .inventory-list .item .item-name .scan-image,
+.Alternityd100.sheet.actor .inventory-list .item .item-name .item-image,
+.Alternityd100.sheet.actor .crew-list .item .item-name .item-image,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .item-image,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .item-image,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .item-image,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .item-image,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .item-image,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .item-image,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .item-image,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .item-image,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .item-image,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .item-image,
+.Alternityd100.sheet.actor .inventory-list .item .item-name .crew-image,
+.Alternityd100.sheet.actor .crew-list .item .item-name .crew-image,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .crew-image,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .crew-image,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .crew-image,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .crew-image,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .crew-image,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .crew-image,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .crew-image,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .crew-image,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .crew-image,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .crew-image {
+  flex: 0 0 45px;
+  background-size: 15px;
+  margin-right: 5px;
+  background-repeat: no-repeat;
+}
+.Alternityd100.sheet.actor .inventory-list .item .item-name .item-image.small,
+.Alternityd100.sheet.actor .crew-list .item .item-name .item-image.small,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .item-image.small,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .item-image.small,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .item-image.small,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .item-image.small,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .item-image.small,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .item-image.small,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .item-image.small,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .item-image.small,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .item-image.small,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .item-image.small,
+.Alternityd100.sheet.actor .inventory-list .item .item-name .crew-image.small,
+.Alternityd100.sheet.actor .crew-list .item .item-name .crew-image.small,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .crew-image.small,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .crew-image.small,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .crew-image.small,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .crew-image.small,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .crew-image.small,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .crew-image.small,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .crew-image.small,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .crew-image.small,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .crew-image.small,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .crew-image.small {
+  flex: 0 0 15px;
+  background-size: 15px;
+  margin-right: 2px;
+  background-repeat: no-repeat;
+}
+
+.Alternityd100.sheet.actor .inventory-list .item .item-name h4,
+.Alternityd100.sheet.actor .crew-list .item .item-name h4,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name h4,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name h4,
+.Alternityd100.sheet.actor .crew-list .crew .item-name h4,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name h4,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name h4,
+.Alternityd100.sheet.actor .crew-list .item .crew-name h4,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name h4,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name h4,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name h4,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name h4 {
+  margin: 0;
+}
+
+.Alternityd100.sheet.actor .inventory-list .item .item-name:hover .item-image,
+.Alternityd100.sheet.actor .crew-list .item .item-name:hover .item-image,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name:hover .item-image,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name:hover .item-image,
+.Alternityd100.sheet.actor .crew-list .crew .item-name:hover .item-image,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name:hover .item-image,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name:hover .item-image,
+.Alternityd100.sheet.actor .crew-list .item .crew-name:hover .item-image,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name:hover .item-image,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name:hover .item-image,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name:hover .item-image,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name:hover .item-image {
+  background-image: url("/icons/svg/d20-grey.svg") !important;
+  background-repeat: no-repeat;
+}
+
+
+.Alternityd100.sheet.actor .inventory-list .item .item-name .item-image:hover,
+.Alternityd100.sheet.actor .crew-list .item .item-name .item-image:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .item-image:hover,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .item-image:hover,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .item-image:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .item-image:hover,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .item-image:hover,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .item-image:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .item-image:hover,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .item-image:hover,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .item-image:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .item-image:hover {
+  background-image: url("/icons/svg/d20-black.svg") !important;
+}
+
+.Alternityd100.sheet.actor .inventory-list .item .item-name .scan-image:hover
+ {
+  background-image: url("/icons/svg/target.svg") !important;
+  background-color: #000000;
+}
+
+.Alternityd100.sheet.actor .inventory-list .item .item-name .item-action,
+.Alternityd100.sheet.actor .crew-list .item .item-name .item-action,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .item-action,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .item-action,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .item-action,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .item-action,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .item-action,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .item-action,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .item-action,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .item-action,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .item-action,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .item-action {
+  flex: 0 0 25%;
+}
+
+.Alternityd100.sheet.actor .inventory-list .item .item-name .item-action,
+
+
+/*.Alternityd100.sheet.actor .item-action  {padding: 2pt; font-size: 10px;}*/
+
+.Alternityd100.sheet.actor .inventory-list .item .item-name .item-action .attack ,
+.Alternityd100.sheet.actor .crew-list .item .item-name .item-action .attack,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .item-action .attack,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .item-action .attack,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .item-action .attack,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .item-action .attack,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .item-action .attack,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .item-action .attack,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .item-action .attack,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .item-action .attack,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .item-action .attack,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .item-action .attack  {
+  width: auto;
+  background: #235683;
+  color: #fff;
+  cursor: pointer;
+  font-size: 100%;
+ 
+
+  font-size: 13px;
+  line-height: 15px;
+  
+}
+.Alternityd100.sheet.actor .inventory-list .item .item-name .item-action .scan ,
+.Alternityd100.sheet.actor .crew-list .item .item-name .item-action .scan,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .item-action .scan,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .item-action .scan,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .item-action .scan,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .item-action .scan,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .item-action .scan,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .item-action .scan,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .item-action .scan,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .item-action .scan,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .item-action .scan,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .item-action .scan  {
+  width: auto;
+  background: #a18819;
+  color: #fff;
+  cursor: pointer;
+  font-size: 100%;
+ 
+
+  font-size: 13px;
+  line-height: 15px;
+  
+}
+
+
+/*.Alternityd100.sheet.actor .inventory-list .item .item-name .item-action .attack {padding: 2pt; font-size: 5px;}*/
+/*.Alternityd100.sheet.actor .item-action  {padding: 2pt; font-size: 10px;}*/
+
+.Alternityd100.sheet.actor .inventory-list .item .item-name .item-action .attack:hover,
+.Alternityd100.sheet.actor .crew-list .item .item-name .item-action .attack:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .item-action .attack:hover,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .item-action .attack:hover,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .item-action .attack:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .item-action .attack:hover,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .item-action .attack:hover,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .item-action .attack:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .item-action .attack:hover,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .item-action .attack:hover,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .item-action .attack:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .item-action .attack:hover,
+.Alternityd100.sheet.actor .inventory-list .item .item-name .item-action .attack:focus,
+.Alternityd100.sheet.actor .crew-list .item .item-name .item-action .attack:focus,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .item-action .attack:focus,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .item-action .attack:focus,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .item-action .attack:focus,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .item-action .attack:focus,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .item-action .attack:focus,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .item-action .attack:focus,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .item-action .attack:focus,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .item-action .attack:focus,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .item-action .attack:focus,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .item-action .attack:focus {
+  box-shadow: 0 0 5px #235683;
+}
+
+
+.Alternityd100.sheet.actor .inventory-list .item .item-name .item-action .damage,
+.Alternityd100.sheet.actor .crew-list .item .item-name .item-action .damage,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .item-action .damage,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .item-action .damage,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .item-action .damage,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .item-action .damage,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .item-action .damage,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .item-action .damage,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .item-action .damage,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .item-action .damage,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .item-action .damage,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .item-action .damage {
+  width: auto;
+  background: #c41e1e;
+  color: #fff;
+  cursor: pointer;
+  font-size: 100%;
+
+
+  font-size: 13px;
+  line-height: 15px;
+}
+
+.Alternityd100.sheet.actor .inventory-list .item .item-name .item-action .damage button{
+
+  line-height: 15px;
+}
+
+.Alternityd100.sheet.actor .inventory-list .item .item-name .item-action .healing,
+.Alternityd100.sheet.actor .crew-list .item .item-name .item-action .healing,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .item-action .healing,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .item-action .healing,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .item-action .healing,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .item-action .healing,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .item-action .healing,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .item-action .healing,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .item-action .healing,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .item-action .healing,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .item-action .healing,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .item-action .healing,
+
+.Alternityd100.sheet.actor .inventory-list .item .item-name .item-action .healing,
+.Alternityd100.sheet.actor .crew-list .item .item-name .item-action .healing,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .item-action .healing,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .item-action .healing,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .item-action .healing,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .item-action .healing,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .item-action .healing,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .item-action .healing,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .item-action .healing,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .item-action .healing,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .item-action .healing,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .item-action .healing {
+  width: auto;
+  background: #179c17;
+  color: #fff;
+  cursor: pointer;
+  font-size: 100%;
+  font-size: 100%;
+
+
+  font-size: 13px;
+  line-height: 15px;
+}
+
+.Alternityd100.sheet.actor .inventory-list .item .item-name .item-action .healing:hover,
+.Alternityd100.sheet.actor .crew-list .item .item-name .item-action .healing:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .item-action .healing:hover,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .item-action .healing:hover,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .item-action .healing:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .item-action .healing:hover,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .item-action .healing:hover,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .item-action .healing:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .item-action .healing:hover,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .item-action .healing:hover,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .item-action .healing:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .item-action .healing:hover,
+.Alternityd100.sheet.actor .inventory-list .item .item-name .item-action .healing:focus,
+.Alternityd100.sheet.actor .crew-list .item .item-name .item-action .healing:focus,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .item-action .healing:focus,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .item-action .healing:focus,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .item-action .healing:focus,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .item-action .healing:focus,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .item-action .healing:focus,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .item-action .healing:focus,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .item-action .healing:focus,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .item-action .healing:focus,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .item-action .healing:focus,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .item-action .healing:focus {
+  box-shadow: 0 0 5px #179c17;
+}
+
+.Alternityd100.sheet.actor .inventory-list .item .item-name .item-action .defence,
+.Alternityd100.sheet.actor .crew-list .item .item-name .item-action .defence,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .item-action .defence,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .item-action .defence,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .item-action .defence,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .item-action .defence,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .item-action .defence,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .item-action .defence,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .item-action .defence,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .item-action .defence,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .item-action .defence,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .item-action .defence {
+  width: auto;
+  background: #6d0d6d;
+  color: #fff;
+  cursor: pointer;
+  font-size: 100%;
+  font-size: 100%;
+  height: 16px;
+
+  font-size: 13px;
+  line-height: 16px;
+}
+.Alternityd100.sheet.actor .inventory-list .item .item-name .item-action .defence:hover,
+.Alternityd100.sheet.actor .crew-list .item .item-name .item-action .defence:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .item-action .defence:hover,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .item-action .defence:hover,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .item-action .defence:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .item-action .defence:hover,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .item-action .defence:hover,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .item-action .defence:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .item-action .defence:hover,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .item-action .defence:hover,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .item-action .defence:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .item-action .defence:hover,
+.Alternityd100.sheet.actor .inventory-list .item .item-name .item-action .defence:focus,
+.Alternityd100.sheet.actor .crew-list .item .item-name .item-action .defence:focus,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .item-action .defence:focus,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .item-action .defence:focus,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .item-action .defence:focus,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .item-action .defence:focus,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .item-action .defence:focus,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .item-action .defence:focus,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .item-action .defence:focus,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .item-action .defence:focus,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .item-action .defence:focus,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .item-action .defence:focus {
+  box-shadow: 0 0 5px #6d0d6d;
+}
+
+
+.Alternityd100.sheet.actor .inventory-list .item .item-name .item-action .use,
+.Alternityd100.sheet.actor .crew-list .item .item-name .item-action .use,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .item-action .use,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .item-action .use,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .item-action .use,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .item-action .use,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .item-action .use,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .item-action .use,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .item-action .use,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .item-action .use,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .item-action .use,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .item-action .use
+{
+  width: auto;
+  background: #ecde70;
+  color: #000;
+  cursor: pointer;
+}
+
+
+.Alternityd100.sheet.actor .inventory-list .item .item-name .item-action .use:hover,
+.Alternityd100.sheet.actor .crew-list .item .item-name .item-action .use:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .item-action .use:hover,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .item-action .use:hover,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .item-action .use:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .item-action .use:hover,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .item-action .use:hover,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .item-action .use:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .item-action .use:hover,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .item-action .use:hover,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .item-action .use:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .item-action .use:hover,
+.Alternityd100.sheet.actor .inventory-list .item .item-name .item-action .use:focus,
+.Alternityd100.sheet.actor .crew-list .item .item-name .item-action .use:focus,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .item-action .use:focus,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .item-action .use:focus,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .item-action .use:focus,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .item-action .use:focus,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .item-action .use:focus,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .item-action .use:focus,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .item-action .use:focus,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .item-action .use:focus,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .item-action .use:focus,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .item-action .use:focus
+ {
+  box-shadow: 0 0 5px #ecde70;
+}
+
+
+
+.Alternityd100.sheet.actor .inventory-list .item .item-name .actor-resource-name,
+.Alternityd100.sheet.actor .crew-list .item .item-name .actor-resource-name,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .actor-resource-name,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .actor-resource-name,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .actor-resource-name,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .actor-resource-name,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .actor-resource-name,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .actor-resource-name,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .actor-resource-name,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .actor-resource-name,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .actor-resource-name,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .actor-resource-name {
+  flex: 0 0 calc(100% - 200px);
+  line-height: 21px;
+}
+
+.Alternityd100.sheet.actor .inventory-list .item .item-name .actor-resource-name .name-label,
+.Alternityd100.sheet.actor .crew-list .item .item-name .actor-resource-name .name-label,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .actor-resource-name .name-label,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .actor-resource-name .name-label,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .actor-resource-name .name-label,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .actor-resource-name .name-label,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .actor-resource-name .name-label,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .actor-resource-name .name-label,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .actor-resource-name .name-label,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .actor-resource-name .name-label,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .actor-resource-name .name-label,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .actor-resource-name .name-label {
+  display: inline-block;
+  width: calc(100%);
+}
+
+
+.Alternityd100.sheet.actor .inventory-list .item .item-name .actor-resource-name .value-label,
+.Alternityd100.sheet.actor .crew-list .item .item-name .actor-resource-name .value-label,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .actor-resource-name .value-label,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .actor-resource-name .value-label,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .actor-resource-name .value-label,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .actor-resource-name .value-label,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .actor-resource-name .value-label,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .actor-resource-name .value-label,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .actor-resource-name .value-label,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .actor-resource-name .value-label,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .actor-resource-name .value-label,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .actor-resource-name .value-label {
+  display: inline-block;
+  width: calc(100%);
+}
+
+
+.Alternityd100.sheet.actor .inventory-list .item .item-name .actor-resource-values,
+.Alternityd100.sheet.actor .crew-list .item .item-name .actor-resource-values,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .actor-resource-values,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .actor-resource-values,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .actor-resource-values,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .actor-resource-values,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .actor-resource-values,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .actor-resource-values,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .actor-resource-values,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .actor-resource-values,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .actor-resource-values,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .actor-resource-values {
+  flex: 0 0 180px;
+  line-height: 21px;
+}
+
+
+.Alternityd100.sheet.actor .inventory-list .item .item-name .actor-resource-values .actor-resource-base-label,
+.Alternityd100.sheet.actor .crew-list .item .item-name .actor-resource-values .actor-resource-base-label,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .actor-resource-values .actor-resource-base-label,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .actor-resource-values .actor-resource-base-label,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .actor-resource-values .actor-resource-base-label,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .actor-resource-values .actor-resource-base-label,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .actor-resource-values .actor-resource-base-label,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .actor-resource-values .actor-resource-base-label,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .actor-resource-values .actor-resource-base-label,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .actor-resource-values .actor-resource-base-label,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .actor-resource-values .actor-resource-base-label,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .actor-resource-values .actor-resource-base-label {
+  display: inline-block;
+  width: 105px;
+}
+
+.Alternityd100.sheet.actor .crew-list .item .item-name .actor-resource-values .actor-resource-base-input,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .actor-resource-values .actor-resource-base-input,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .actor-resource-values .actor-resource-base-input,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .actor-resource-values .actor-resource-base-input,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .actor-resource-values .actor-resource-base-input,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .actor-resource-values .actor-resource-base-input,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .actor-resource-values .actor-resource-base-input,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .actor-resource-values .actor-resource-base-input,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .actor-resource-values .actor-resource-base-input,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .actor-resource-values .actor-resource-base-input,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .actor-resource-values .actor-resource-base-input,
+.Alternityd100.sheet.actor .inventory-list .item .item-name .actor-resource-values .actor-resource-base-input {
+  width: 70px;
+}
+
+.Alternityd100.sheet.actor .crew-list .item .item-name .actor-resource-values .actor-resource-computed-label,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-name .actor-resource-values .actor-resource-computed-label,
+.Alternityd100.sheet.actor .inventory-list .crew .item-name .actor-resource-values .actor-resource-computed-label,
+.Alternityd100.sheet.actor .crew-list .crew .item-name .actor-resource-values .actor-resource-computed-label,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-name .actor-resource-values .actor-resource-computed-label,
+.Alternityd100.sheet.actor .inventory-list .item .crew-name .actor-resource-values .actor-resource-computed-label,
+.Alternityd100.sheet.actor .crew-list .item .crew-name .actor-resource-values .actor-resource-computed-label,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-name .actor-resource-values .actor-resource-computed-label,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-name .actor-resource-values .actor-resource-computed-label,
+.Alternityd100.sheet.actor .crew-list .crew .crew-name .actor-resource-values .actor-resource-computed-label,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-name .actor-resource-values .actor-resource-computed-label,
+.Alternityd100.sheet.actor .inventory-list .item .item-name .actor-resource-values .actor-resource-computed-label {
+  display: inline-block;
+  width: 109px;
+}
+.Alternityd100.sheet.actor .inventory-list .item .item-properties,
+.Alternityd100.sheet.actor .crew-list .item .item-properties,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-properties,
+.Alternityd100.sheet.actor .inventory-list .crew .item-properties,
+.Alternityd100.sheet.actor .crew-list .crew .item-properties,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-properties,
+.Alternityd100.sheet.actor .inventory-list .item .crew-properties,
+.Alternityd100.sheet.actor .crew-list .item .crew-properties,
+.Alternityd100.sheet.actor .vehicle-system-list .item .crew-properties,
+.Alternityd100.sheet.actor .inventory-list .crew .crew-properties,
+.Alternityd100.sheet.actor .crew-list .crew .crew-properties,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .crew-properties {
+  margin-top: 3px;
+}
+
+.Alternityd100.sheet.actor .crew-list .item .item-recharge,
+.Alternityd100.sheet.actor .vehicle-system-list .item .item-recharge,
+.Alternityd100.sheet.actor .inventory-list .crew .item-recharge,
+.Alternityd100.sheet.actor .crew-list .crew .item-recharge,
+.Alternityd100.sheet.actor .vehicle-system-list .crew .item-recharge
+{
+  flex: 0 0 80px;
+  text-align: right;
+  font-size: 11px;
+  color: #7a7971;
+}
+.Alternityd100.sheet.actor .inventory-list .inventory-header,
+.Alternityd100.sheet.actor .crew-list .inventory-header,
+.Alternityd100.sheet.actor .vehicle-system-list .inventory-header,
+.Alternityd100.sheet.actor .inventory-list .crew-header,
+.Alternityd100.sheet.actor .crew-list .crew-header,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-header, 
+
+.Alternityd100.sheet.actor .inventory-list .inventory-header,
+.Alternityd100.sheet.actor .crew-list .inventory-header,
+.Alternityd100.sheet.actor .vehicle-system-list .inventory-header,
+.Alternityd100.sheet.actor .inventory-list .crew-header,
+.Alternityd100.sheet.actor .crew-list .crew-header,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-header
+{
+  margin: 2px 0;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove #eeede0;
+  font-weight: bold;
+  line-height: 24px;
+}
+.Alternityd100.sheet.actor .inventory-list .inventory-header.disabled h3,
+.Alternityd100.sheet.actor .inventory-list .inventory-header.disabled h3,
+.Alternityd100.sheet.actor .vehicle-system-list .inventory-header.disabled h3,
+.Alternityd100.sheet.actor .inventory-list .crew-header.disabled h3,
+.Alternityd100.sheet.actor .crew-list .crew-header.disabled h3,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-header.disabled h3, 
+
+.Alternityd100.sheet.actor .inventory-list .inventory-header.disabled h3,
+.Alternityd100.sheet.actor .crew-list .inventory-header.disabled h3,
+.Alternityd100.sheet.actor .vehicle-system-list .inventory-header.disabled h3,
+.Alternityd100.sheet.actor .inventory-list .crew-header.disabled h3,
+.Alternityd100.sheet.actor .crew-list .crew-header.disabled h3,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-header.disabled h3{
+  color: gray;
+}
+.Alternityd100.sheet.actor .inventory-list .inventory-header h3,
+.Alternityd100.sheet.actor .crew-list .inventory-header h3,
+.Alternityd100.sheet.actor .vehicle-system-list .inventory-header h3,
+.Alternityd100.sheet.actor .inventory-list .crew-header h3,
+.Alternityd100.sheet.actor .crew-list .crew-header h3,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-header h3,
+
+
+.Alternityd100.sheet.actor .inventory-list .inventory-header h3,
+.Alternityd100.sheet.actor .crew-list .inventory-header h3,
+.Alternityd100.sheet.actor .vehicle-system-list .inventory-header h3,
+.Alternityd100.sheet.actor .inventory-list .crew-header h3,
+.Alternityd100.sheet.actor .crew-list .crew-header h3,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-header h3 {
+  margin: 0 -5px 0 0;
+  padding-left: 5px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.Alternityd100.sheet.actor .crew-list .inventory-header .item-controls a.item-create,
+.Alternityd100.sheet.actor .vehicle-system-list .inventory-header .item-controls a.item-create,
+.Alternityd100.sheet.actor .inventory-list .crew-header .item-controls a.item-create,
+.Alternityd100.sheet.actor .crew-list .crew-header .item-controls a.item-create,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-header .item-controls a.item-create,
+.Alternityd100.sheet.actor .inventory-list .inventory-header .item-controls a.modifier-create,
+.Alternityd100.sheet.actor .crew-list .inventory-header .item-controls a.modifier-create,
+.Alternityd100.sheet.actor .vehicle-system-list .inventory-header .item-controls a.modifier-create,
+.Alternityd100.sheet.actor .inventory-list .crew-header .item-controls a.modifier-create,
+.Alternityd100.sheet.actor .crew-list .crew-header .item-controls a.modifier-create,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-header .item-controls a.modifier-create,
+.Alternityd100.sheet.actor .inventory-list .inventory-header .crew-controls a.crew-create,
+.Alternityd100.sheet.actor .crew-list .inventory-header .crew-controls a.crew-create,
+.Alternityd100.sheet.actor .vehicle-system-list .inventory-header .crew-controls a.crew-create,
+.Alternityd100.sheet.actor .inventory-list .crew-header .crew-controls a.crew-create,
+.Alternityd100.sheet.actor .crew-list .crew-header .crew-controls a.crew-create,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-header .crew-controls a.crew-create,
+.Alternityd100.sheet.actor .inventory-list .inventory-header .crew-controls a.skill-create,
+.Alternityd100.sheet.actor .crew-list .inventory-header .crew-controls a.skill-create,
+.Alternityd100.sheet.actor .vehicle-system-list .inventory-header .crew-controls a.skill-create,
+.Alternityd100.sheet.actor .inventory-list .crew-header .crew-controls a.skill-create,
+.Alternityd100.sheet.actor .crew-list .crew-header .crew-controls a.skill-create,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-header .crew-controls a.skill-create {
+  flex: 0 0 100%;
+}
+.Alternityd100.sheet.actor .inventory-list .item-detail,
+.Alternityd100.sheet.actor .crew-list .item-detail,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail,
+.Alternityd100.sheet.actor .inventory-list .crew-detial,
+.Alternityd100.sheet.actor .crew-list .crew-detial,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial,
+
+.Alternityd100.sheet.actor .inventory-list .item-detail,
+.Alternityd100.sheet.actor .crew-list .item-detail,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail,
+.Alternityd100.sheet.actor .inventory-list .crew-detial,
+.Alternityd100.sheet.actor .crew-list .crew-detial,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial {
+  flex: 0 0 82px;
+  font-size: 12px;
+  color: #7a7971;
+  text-align: center;
+  border-right: 1px solid #c9c7b8;
+}
+.Alternityd100.sheet.actor .inventory-list .item-detail.modifier-effect-type,
+.Alternityd100.sheet.actor .crew-list .item-detail.modifier-effect-type,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail.modifier-effect-type,
+.Alternityd100.sheet.actor .inventory-list .crew-detial.modifier-effect-type,
+.Alternityd100.sheet.actor .crew-list .crew-detial.modifier-effect-type,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial.modifier-effect-type,
+
+
+.Alternityd100.sheet.actor .inventory-list .item-detail.modifier-effect-type,
+.Alternityd100.sheet.actor .crew-list .item-detail.modifier-effect-type,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail.modifier-effect-type,
+.Alternityd100.sheet.actor .inventory-list .crew-detial.modifier-effect-type,
+.Alternityd100.sheet.actor .crew-list .crew-detial.modifier-effect-type,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial.modifier-effect-type {
+  flex: 0 0 160px;
+}
+.Alternityd100.sheet.actor .inventory-list .item-detail.modifier-value-affected,
+.Alternityd100.sheet.actor .crew-list .item-detail.modifier-value-affected,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail.modifier-value-affected,
+.Alternityd100.sheet.actor .inventory-list .crew-detial.modifier-value-affected,
+.Alternityd100.sheet.actor .crew-list .crew-detial.modifier-value-affected,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial.modifier-value-affected,
+
+.Alternityd100.sheet.actor .inventory-list .item-detail.modifier-value-affected,
+.Alternityd100.sheet.actor .crew-list .item-detail.modifier-value-affected,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail.modifier-value-affected,
+.Alternityd100.sheet.actor .inventory-list .crew-detial.modifier-value-affected,
+.Alternityd100.sheet.actor .crew-list .crew-detial.modifier-value-affected,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial.modifier-value-affected {
+  flex: 0 0 120px;
+}
+.Alternityd100.sheet.actor .inventory-list .item-detail.modifier-type,
+.Alternityd100.sheet.actor .crew-list .item-detail.modifier-type,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail.modifier-type,
+.Alternityd100.sheet.actor .inventory-list .crew-detial.modifier-type,
+.Alternityd100.sheet.actor .crew-list .crew-detial.modifier-type,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial.modifier-type,
+
+.Alternityd100.sheet.actor .inventory-list .item-detail.modifier-type,
+.Alternityd100.sheet.actor .crew-list .item-detail.modifier-type,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail.modifier-type,
+.Alternityd100.sheet.actor .inventory-list .crew-detial.modifier-type,
+.Alternityd100.sheet.actor .crew-list .crew-detial.modifier-type,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial.modifier-type {
+  flex: 0 0 95px;
+}
+.Alternityd100.sheet.actor .inventory-list .item-detail:last-child,
+.Alternityd100.sheet.actor .crew-list .item-detail:last-child,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail:last-child,
+.Alternityd100.sheet.actor .inventory-list .crew-detial:last-child,
+.Alternityd100.sheet.actor .crew-list .crew-detial:last-child,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial:last-child,
+
+.Alternityd100.sheet.actor .inventory-list .item-detail:last-child,
+.Alternityd100.sheet.actor .crew-list .item-detail:last-child,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail:last-child,
+.Alternityd100.sheet.actor .inventory-list .crew-detial:last-child,
+.Alternityd100.sheet.actor .crew-list .crew-detial:last-child,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial:last-child
+{
+  border-right: none;
+}
+.Alternityd100.sheet.actor .inventory-list .item-detail .featDeactivate,
+.Alternityd100.sheet.actor .crew-list .item-detail .featDeactivate,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail .featDeactivate,
+.Alternityd100.sheet.actor .inventory-list .crew-detial .featDeactivate,
+.Alternityd100.sheet.actor .crew-list .crew-detial .featDeactivate,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial .featDeactivate,
+.Alternityd100.sheet.actor .inventory-list .item-detail .vehicle-system-deactivate,
+.Alternityd100.sheet.actor .crew-list .item-detail .vehicle-system-deactivate,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail .vehicle-system-deactivate,
+.Alternityd100.sheet.actor .inventory-list .crew-detial .vehicle-system-deactivate,
+.Alternityd100.sheet.actor .crew-list .crew-detial .vehicle-system-deactivate,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial .vehicle-system-deactivate,
+
+.Alternityd100.sheet.actor .inventory-list .item-detail .featDeactivate,
+.Alternityd100.sheet.actor .crew-list .item-detail .featDeactivate,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail .featDeactivate,
+.Alternityd100.sheet.actor .inventory-list .crew-detial .featDeactivate,
+.Alternityd100.sheet.actor .crew-list .crew-detial .featDeactivate,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial .featDeactivate,
+.Alternityd100.sheet.actor .inventory-list .item-detail .vehicle-system-deactivate,
+.Alternityd100.sheet.actor .crew-list .item-detail .vehicle-system-deactivate,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail .vehicle-system-deactivate,
+.Alternityd100.sheet.actor .inventory-list .crew-detial .vehicle-system-deactivate,
+.Alternityd100.sheet.actor .crew-list .crew-detial .vehicle-system-deactivate,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial .vehicle-system-deactivate
+{
+  background: #c41e1e;
+  color: #fff;
+  cursor: pointer;
+}
+.Alternityd100.sheet.actor .inventory-list .item-detail .featActivate,
+.Alternityd100.sheet.actor .crew-list .item-detail .featActivate,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail .featActivate,
+.Alternityd100.sheet.actor .inventory-list .crew-detial .featActivate,
+.Alternityd100.sheet.actor .crew-list .crew-detial .featActivate,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial .featActivate,
+.Alternityd100.sheet.actor .inventory-list .item-detail .vehicle-system-activate,
+.Alternityd100.sheet.actor .crew-list .item-detail .vehicle-system-activate,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail .vehicle-system-activate,
+.Alternityd100.sheet.actor .inventory-list .crew-detial .vehicle-system-activate,
+.Alternityd100.sheet.actor .crew-list .crew-detial .vehicle-system-activate,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial .vehicle-system-activate,
+
+.Alternityd100.sheet.actor .inventory-list .item-detail .featActivate,
+.Alternityd100.sheet.actor .crew-list .item-detail .featActivate,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail .featActivate,
+.Alternityd100.sheet.actor .inventory-list .crew-detial .featActivate,
+.Alternityd100.sheet.actor .crew-list .crew-detial .featActivate,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial .featActivate,
+.Alternityd100.sheet.actor .inventory-list .item-detail .vehicle-system-activate,
+.Alternityd100.sheet.actor .crew-list .item-detail .vehicle-system-activate,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail .vehicle-system-activate,
+.Alternityd100.sheet.actor .inventory-list .crew-detial .vehicle-system-activate,
+.Alternityd100.sheet.actor .crew-list .crew-detial .vehicle-system-activate,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial .vehicle-system-activate{
+  background: #179c17;
+  color: #fff;
+  cursor: pointer;
+}
+
+.Alternityd100.sheet.actor .inventory-list .item-detail .featActivate:hover,
+.Alternityd100.sheet.actor .crew-list .item-detail .featActivate:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail .featActivate:hover,
+.Alternityd100.sheet.actor .inventory-list .crew-detial .featActivate:hover,
+.Alternityd100.sheet.actor .crew-list .crew-detial .featActivate:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial .featActivate:hover,
+.Alternityd100.sheet.actor .inventory-list .item-detail .vehicle-system-activate:hover,
+.Alternityd100.sheet.actor .crew-list .item-detail .vehicle-system-activate:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail .vehicle-system-activate:hover,
+.Alternityd100.sheet.actor .inventory-list .crew-detial .vehicle-system-activate:hover,
+.Alternityd100.sheet.actor .crew-list .crew-detial .vehicle-system-activate:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial .vehicle-system-activate:hover,
+.Alternityd100.sheet.actor .inventory-list .item-detail .featActivate:focus,
+.Alternityd100.sheet.actor .crew-list .item-detail .featActivate:focus,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail .featActivate:focus,
+.Alternityd100.sheet.actor .inventory-list .crew-detial .featActivate:focus,
+.Alternityd100.sheet.actor .crew-list .crew-detial .featActivate:focus,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial .featActivate:focus,
+.Alternityd100.sheet.actor .inventory-list .item-detail .vehicle-system-activate:focus,
+.Alternityd100.sheet.actor .crew-list .item-detail .vehicle-system-activate:focus,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail .vehicle-system-activate:focus,
+.Alternityd100.sheet.actor .inventory-list .crew-detial .vehicle-system-activate:focus,
+.Alternityd100.sheet.actor .crew-list .crew-detial .vehicle-system-activate:focus,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial .vehicle-system-activate:focus,
+
+.Alternityd100.sheet.actor .inventory-list .item-detail .featActivate:hover,
+.Alternityd100.sheet.actor .crew-list .item-detail .featActivate:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail .featActivate:hover,
+.Alternityd100.sheet.actor .inventory-list .crew-detial .featActivate:hover,
+.Alternityd100.sheet.actor .crew-list .crew-detial .featActivate:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial .featActivate:hover,
+.Alternityd100.sheet.actor .inventory-list .item-detail .vehicle-system-activate:hover,
+.Alternityd100.sheet.actor .crew-list .item-detail .vehicle-system-activate:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail .vehicle-system-activate:hover,
+.Alternityd100.sheet.actor .inventory-list .crew-detial .vehicle-system-activate:hover,
+.Alternityd100.sheet.actor .crew-list .crew-detial .vehicle-system-activate:hover,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial .vehicle-system-activate:hover,
+.Alternityd100.sheet.actor .inventory-list .item-detail .featActivate:focus,
+.Alternityd100.sheet.actor .crew-list .item-detail .featActivate:focus,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail .featActivate:focus,
+.Alternityd100.sheet.actor .inventory-list .crew-detial .featActivate:focus,
+.Alternityd100.sheet.actor .crew-list .crew-detial .featActivate:focus,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial .featActivate:focus,
+.Alternityd100.sheet.actor .inventory-list .item-detail .vehicle-system-activate:focus,
+.Alternityd100.sheet.actor .crew-list .item-detail .vehicle-system-activate:focus,
+.Alternityd100.sheet.actor .vehicle-system-list .item-detail .vehicle-system-activate:focus,
+.Alternityd100.sheet.actor .inventory-list .crew-detial .vehicle-system-activate:focus,
+.Alternityd100.sheet.actor .crew-list .crew-detial .vehicle-system-activate:focus,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-detial .vehicle-system-activate:focus {
+  box-shadow: 0 0 5px #179c17;
+}
+
+.Alternityd100.sheet.actor .inventory-list .item-weight,
+.Alternityd100.sheet.actor .crew-list .item-weight,
+.Alternityd100.sheet.actor .vehicle-system-list .item-weight,
+
+.Alternityd100.sheet.actor .inventory-list .item-weight,
+.Alternityd100.sheet.actor .crew-list .item-weight,
+.Alternityd100.sheet.actor .vehicle-system-list .item-weight{
+  flex: 0 0 60px;
+  border-left: 1px solid #c9c7b8;
+  border-right: 1px solid #c9c7b8;
+}
+.Alternityd100.sheet.actor .inventory-list .item-list,
+.Alternityd100.sheet.actor .crew-list .item-list,
+.Alternityd100.sheet.actor .vehicle-system-list .item-list,
+.Alternityd100.sheet.actor .inventory-list .crew-item-list,
+.Alternityd100.sheet.actor .crew-list .crew-item-list,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-item-list 
+
+.Alternityd100.sheet.actor .inventory-list .crew-detail-list,
+.Alternityd100.sheet.actor .crew-list .item-list,
+.Alternityd100.sheet.actor .vehicle-system-list .item-list,
+.Alternityd100.sheet.actor .inventory-list .crew-item-list,
+.Alternityd100.sheet.actor .crew-list .crew-detail-list,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-item-list
+{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  /*line-height: 300pt;*/
+}
+.Alternityd100.sheet.actor  .crew-det
+{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  /*line-height: 300pt;*/
+}
+
+.Alternityd100.sheet.actor .crew-det .crew-name .crew-image {
+  flex: 0 0 45px;
+  background-size: 25px;
+  margin-right: 5px;
+  background-repeat: no-repeat;
+}
+
+.Alternityd100.sheet.actor .inventory-list .item-list-child,
+.Alternityd100.sheet.actor .crew-list .item-list-child,
+.Alternityd100.sheet.actor .vehicle-system-list .item-list-child,
+
+.Alternityd100.sheet.actor .inventory-list .item-list-child,
+.Alternityd100.sheet.actor .crew-list .item-list-child,
+.Alternityd100.sheet.actor .vehicle-system-list .item-list-child {
+  list-style: none;
+  width: 97%;
+  margin: 0 0 0 3%;
+  padding: 0;
+}
+.Alternityd100.sheet.actor .inventory-list .item-controls,
+.Alternityd100.sheet.actor .crew-list .item-controls,
+.Alternityd100.sheet.actor .vehicle-system-list .item-controls,
+.Alternityd100.sheet.actor .inventory-list .crew-controls,
+.Alternityd100.sheet.actor .crew-list .crew-controls,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-controls,
+
+.Alternityd100.sheet.actor .inventory-list .item-controls,
+.Alternityd100.sheet.actor .crew-list .item-controls,
+.Alternityd100.sheet.actor .vehicle-system-list .item-controls,
+.Alternityd100.sheet.actor .inventory-list .crew-controls,
+.Alternityd100.sheet.actor .crew-list .crew-controls,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-controls {
+  flex: 0 0 90px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  justify-content: flex-end;
+}
+.Alternityd100.sheet.actor .inventory-list .item-controls > *,
+.Alternityd100.sheet.actor .crew-list .item-controls > *,
+.Alternityd100.sheet.actor .vehicle-system-list .item-controls > *,
+.Alternityd100.sheet.actor .inventory-list .crew-controls > *,
+.Alternityd100.sheet.actor .crew-list .crew-controls > *,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-controls > *,
+
+.Alternityd100.sheet.actor .inventory-list .item-controls > *,
+.Alternityd100.sheet.actor .crew-list .item-controls > *,
+.Alternityd100.sheet.actor .vehicle-system-list .item-controls > *,
+.Alternityd100.sheet.actor .inventory-list .crew-controls > *,
+.Alternityd100.sheet.actor .crew-list .crew-controls > *,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-controls > * {
+  flex: 1;
+}
+.Alternityd100.sheet.actor .inventory-list .item-controls .flex1,
+.Alternityd100.sheet.actor .crew-list .item-controls .flex1,
+.Alternityd100.sheet.actor .vehicle-system-list .item-controls .flex1,
+.Alternityd100.sheet.actor .inventory-list .crew-controls .flex1,
+.Alternityd100.sheet.actor .crew-list .crew-controls .flex1,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-controls .flex1,
+
+.Alternityd100.sheet.actor .inventory-list .item-controls .flex1,
+.Alternityd100.sheet.actor .crew-list .item-controls .flex1,
+.Alternityd100.sheet.actor .vehicle-system-list .item-controls .flex1,
+.Alternityd100.sheet.actor .inventory-list .crew-controls .flex1,
+.Alternityd100.sheet.actor .crew-list .crew-controls .flex1,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-controls .flex1 {
+  flex: 1;
+}
+.Alternityd100.sheet.actor .inventory-list .item-controls .flex2,
+.Alternityd100.sheet.actor .crew-list .item-controls .flex2,
+.Alternityd100.sheet.actor .vehicle-system-list .item-controls .flex2,
+.Alternityd100.sheet.actor .inventory-list .crew-controls .flex2,
+.Alternityd100.sheet.actor .crew-list .crew-controls .flex2,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-controls .flex2,
+
+.Alternityd100.sheet.actor .inventory-list .item-controls .flex2,
+.Alternityd100.sheet.actor .crew-list .item-controls .flex2,
+.Alternityd100.sheet.actor .vehicle-system-list .item-controls .flex2,
+.Alternityd100.sheet.actor .inventory-list .crew-controls .flex2,
+.Alternityd100.sheet.actor .crew-list .crew-controls .flex2,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-controls .flex2 {
+  flex: 2;
+}
+.Alternityd100.sheet.actor .inventory-list .item-controls .flex3,
+.Alternityd100.sheet.actor .crew-list .item-controls .flex3,
+.Alternityd100.sheet.actor .vehicle-system-list .item-controls .flex3,
+.Alternityd100.sheet.actor .inventory-list .crew-controls .flex3,
+.Alternityd100.sheet.actor .crew-list .crew-controls .flex3,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-controls .flex3,
+
+.Alternityd100.sheet.actor .inventory-list .item-controls .flex3,
+.Alternityd100.sheet.actor .crew-list .item-controls .flex3,
+.Alternityd100.sheet.actor .vehicle-system-list .item-controls .flex3,
+.Alternityd100.sheet.actor .inventory-list .crew-controls .flex3,
+.Alternityd100.sheet.actor .crew-list .crew-controls .flex3,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-controls .flex3 {
+  flex: 3;
+}
+.Alternityd100.sheet.actor .inventory-list .item-controls .flex4,
+.Alternityd100.sheet.actor .crew-list .item-controls .flex4,
+.Alternityd100.sheet.actor .vehicle-system-list .item-controls .flex4,
+.Alternityd100.sheet.actor .inventory-list .crew-controls .flex4,
+.Alternityd100.sheet.actor .crew-list .crew-controls .flex4,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-controls .flex4,
+
+.Alternityd100.sheet.actor .inventory-list .item-controls .flex4,
+.Alternityd100.sheet.actor .crew-list .item-controls .flex4,
+.Alternityd100.sheet.actor .vehicle-system-list .item-controls .flex4,
+.Alternityd100.sheet.actor .inventory-list .crew-controls .flex4,
+.Alternityd100.sheet.actor .crew-list .crew-controls .flex4,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-controls .flex4 {
+  flex: 4;
+}
+.Alternityd100.sheet.actor .inventory-list .item-controls a,
+.Alternityd100.sheet.actor .crew-list .item-controls a,
+.Alternityd100.sheet.actor .vehicle-system-list .item-controls a,
+.Alternityd100.sheet.actor .inventory-list .crew-controls a,
+.Alternityd100.sheet.actor .crew-list .crew-controls a,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-controls a,
+
+.Alternityd100.sheet.actor .inventory-list .item-controls a,
+.Alternityd100.sheet.actor .crew-list .item-controls a,
+.Alternityd100.sheet.actor .vehicle-system-list .item-controls a,
+.Alternityd100.sheet.actor .inventory-list .crew-controls a,
+.Alternityd100.sheet.actor .crew-list .crew-controls a,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-controls a {
+  flex: 0 0 20px;
+  font-size: 12px;
+  text-align: center;
+  color: #666;
+}
+.Alternityd100.sheet.actor .inventory-list .item-controls b,
+.Alternityd100.sheet.actor .crew-list .item-controls b,
+.Alternityd100.sheet.actor .vehicle-system-list .item-controls b,
+.Alternityd100.sheet.actor .inventory-list .crew-controls b,
+.Alternityd100.sheet.actor .crew-list .crew-controls b,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-controls b {
+  flex: 0 0 40px;
+  font-size: 12px;
+  text-align: center;
+  color: #666;
+}
+.Alternityd100.sheet.actor .inventory-list .item-summary,
+.Alternityd100.sheet.actor .crew-list .item-summary,
+.Alternityd100.sheet.actor .vehicle-system-list .item-summary,
+.Alternityd100.sheet.actor .inventory-list .crew-summary,
+.Alternityd100.sheet.actor .crew-list .crew-summary,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-summary,
+
+.Alternityd100.sheet.actor .inventory-list .item-summary,
+.Alternityd100.sheet.actor .crew-list .item-summary,
+.Alternityd100.sheet.actor .vehicle-system-list .item-summary,
+.Alternityd100.sheet.actor .inventory-list .crew-summary,
+.Alternityd100.sheet.actor .crew-list .crew-summary,
+.Alternityd100.sheet.actor .vehicle-system-list .crew-summary {
+  flex: 0 0 100%;
+  font-size: 12px;
+  line-height: 16px;
+  padding: 0.25em 0.5em;
+  border-top: 1px solid #c9c7b8;
+}
+.Alternityd100.sheet.actor .error,
+.Alternityd100.sheet.actor .error {
+  color: #c00;
+}
+.Alternityd100.sheet.actor .attribute-multibox,
+.Alternityd100.sheet.actor .attribute-multibox {
+  list-style: none;
+  margin: 0;
+  padding: 0 5px;
+  overflow-y: auto;
+}
+.Alternityd100.sheet.actor .attribute-multibox .box-header,
+.Alternityd100.sheet.actor .attribute-multibox .box-header {
+  line-height: 10px;
+}
+.Alternityd100.sheet.actor .attribute-multibox .box-header label,
+.Alternityd100.sheet.actor .attribute-multibox .box-header label {
+  font-size: 10px;
+}
+.Alternityd100.sheet.actor .attribute-multibox label,
+.Alternityd100.sheet.actor .attribute-multibox label {
+  font-size: 16px;
+  padding-top: 1px;
+}
+.Alternityd100.sheet.actor .attribute-multibox input,
+.Alternityd100.sheet.actor .attribute-multibox input {
+  display: inline;
+  max-width: 80%;
+  margin: 0;
+  font-size: 16px;
+  padding: 0;
+}
+.Alternityd100.sheet.actor .spellbook .inventory-list,
+.Alternityd100.sheet.actor .spellbook .inventory-list {
+  height: calc(100% - 50px);
+}
+.Alternityd100.sheet.actor .spell-class,
+.Alternityd100.sheet.actor .spell-class {
+  line-height: 14px;
+  display: inline-block;
+  text-align: center;
+  padding: 0 5px;
+  padding-top: 1px;
+  color: #c9c7b8;
+  background: #155c9b;
+  border: 1px solid transparent;
+  border-radius: 8px;
+}
+.Alternityd100.sheet.actor .spell-class input,
+.Alternityd100.sheet.actor .spell-class input {
+  color: #c9c7b8;
+}
+.Alternityd100.sheet.actor .spell-slots,
+.Alternityd100.sheet.actor .spell-comps {
+  flex: none;
+  padding: 0 5px;
+  font-size: 12px;
+  text-align: center;
+  color: #7a7971;
+  border-right: 1px solid #c9c7b8;
+}
+.Alternityd100.sheet.actor .spell-slots.fit-classes,
+.Alternityd100.sheet.actor .spell-comps.fit-classes {
+  width: calc(100% - 430px);
+  text-align: right;
+}
+.Alternityd100.sheet.actor .spell-component,
+.Alternityd100.sheet.actor .spell-component {
+  display: inline-block;
+  text-align: center;
+  padding-top: 1px;
+  width: 16px;
+  line-height: 14px;
+  color: #c9c7b8;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid transparent;
+  border-radius: 8px;
+}
+.Alternityd100.sheet.actor .spell-slots input,
+.Alternityd100.sheet.actor .spell-slots span.sep {
+  display: inline;
+  max-width: 20px;
+  text-align: center;
+}
+.Alternityd100.sheet.actor .spell-uses,
+.Alternityd100.sheet.actor .spell-uses {
+  padding-right: 8px;
+  text-align: right !important;
+}
+.Alternityd100.sheet.actor .spell-school,
+.Alternityd100.sheet.actor .spell-action {
+  flex: 0 0 120px;
+  font-size: 12px;
+  color: #7a7971;
+  text-align: center;
+  border-right: 1px solid #c9c7b8;
+}
+.Alternityd100.sheet.actor .spellbook-empty .item-controls,
+.Alternityd100.sheet.actor .spellbook-empty .item-controls {
+  flex: 1;
+}
+.Alternityd100.sheet.actor .editor,
+.Alternityd100.sheet.actor .editor {
+  padding: 0 8px;
+}
+.Alternityd100.sheet.actor .bio-properties textarea,
+.Alternityd100.sheet.actor .bio-properties textarea {
+  padding: 5px;
+  margin: 0 3px 0 0;
+  margin-right: 0;
+  resize: vertical;
+  height: 100%;
+  min-width: 200px;
+  max-width: 200px;
+  overflow-x: hidden;
+}
+.Alternityd100.sheet.item,
+.Alternityd100.sheet.item  {
+  min-height: 420px;
+  /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Item Details Form                        */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Item Actions                             */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Item Actions                             */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Loot Sheet (No Tabs)                     */
+  /* ----------------------------------------- */
+}
+.Alternityd100.sheet.item .sheet-header img.profile,
+.Alternityd100.sheet.item .sheet-header img.profile {
+  flex: 0 0 150px;
+  height: 150px;
+}
+.Alternityd100.sheet.item .sheet-header .item-subtitle,
+.Alternityd100.sheet.item .sheet-header .item-subtitle {
+  flex: 0 0 80px;
+  height: 60px;
+  margin: 0;
+  padding: 5px;
+  text-align: right;
+  color: #ebec87;
+  flex: 1;
+}
+.Alternityd100.sheet.item .sheet-header .item-subtitle .item-type,
+.Alternityd100.sheet.item .sheet-header .item-subtitle .item-type {
+  font-size: 24px;
+  line-height: 26px;
+  margin: 0;
+}
+.Alternityd100.sheet.item .sheet-header .item-subtitle .item-status,
+.Alternityd100.sheet.item .sheet-header .item-subtitle .item-status {
+  font-size: 16px;
+  line-height: 24px;
+}
+.Alternityd100.sheet.item .sheet-header .source-wide,
+.Alternityd100.sheet.item .sheet-header .source-wide {
+  border-bottom: 2px groove #eeede0;
+}
+.Alternityd100.sheet.item .sheet-header .source-wide li,
+.Alternityd100.sheet.item .sheet-header .source-wide li {
+  width: 100%;
+}
+.Alternityd100.sheet.item .sheet-header .summary,
+.Alternityd100.sheet.item .sheet-header .summary {
+  border-bottom: 2px groove #eeede0;
+}
+.Alternityd100.sheet.item .sheet-header .summary li.short,
+.Alternityd100.sheet.item .sheet-header .summary li.short {
+  flex: 1;
+  padding-left: 5px;
+}
+.Alternityd100.sheet.item .sheet-header .summary li.wide,
+.Alternityd100.sheet.item .sheet-header .summary li.wide {
+  flex: 2 3;
+  margin-left: 8px;
+  padding-right: 8px;
+}
+.Alternityd100.sheet.item .sheet-header ul.attributes,
+.Alternityd100.sheet.item .sheet-header ul.attributes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 49px;
+}
+.Alternityd100.sheet.item .sheet-header ul.attributes li.attribute,
+.Alternityd100.sheet.item .sheet-header ul.attributes li.attribute {
+  margin: 0;
+  border: none;
+  border-right: 2px groove #eeede0;
+  border-radius: 0;
+  font-family: "serpentine", sans-serif;
+  text-align: center;
+}
+.Alternityd100.sheet.item .sheet-header ul.attributes li.attribute:last-child,
+.Alternityd100.sheet.item .sheet-header ul.attributes li.attribute:last-child {
+  border-right: none;
+}
+.Alternityd100.sheet.item .sheet-header ul.attributes li.attribute .attribute-value,
+.Alternityd100.sheet.item .sheet-header ul.attributes li.attribute .attribute-value {
+  margin-top: -5px;
+}
+.Alternityd100.sheet.item .sheet-header ul.attributes li.attribute .attribute-value2,
+.Alternityd100.sheet.item .sheet-header ul.attributes li.attribute .attribute-value2 {
+  margin-top: -5px;
+  font-size: 16px;
+}
+
+.Alternityd100.sheet.item .sheet-header ul.attributes li.attribute .attribute-value input {
+  display: inline;
+  max-width: 80%;
+  font-size: 16px;
+}
+.Alternityd100.sheet.item .sheet-header ul.attributes li.attribute .attribute-value span {
+  font-size: 20px;
+}
+.Alternityd100.sheet.item .sheet-header ul.attributes li.attribute .attribute-value span.sep {
+  display: inline;
+  position: relative;
+  font-size: 16px;
+  color: #7a7971;
+}
+.Alternityd100.sheet.item .sheet-header ul.attributes li.attribute .attribute-value.multiple input {
+  max-width: 33%;
+}
+.Alternityd100.sheet.item .sheet-navigation {
+  margin-bottom: 5px;
+}
+.Alternityd100.sheet.item .sheet-navigation .item {
+  font-size: 18px;
+}
+.Alternityd100.sheet.item .sheet-body {
+  overflow: hidden auto;
+}
+.Alternityd100.sheet.item .sheet-body .tab {
+  padding: 0 5px;
+}
+.Alternityd100.sheet.item .sheet-body .item-properties {
+  height: 100%;
+  flex: 0 0 120px;
+  margin: 5px 5px 5px 0;
+  padding-right: 5px;
+  border-right: 2px groove #eeede0;
+}
+.Alternityd100.sheet.item .sheet-body .item-properties .form-group {
+  margin: 0;
+}
+.Alternityd100.sheet.item .sheet-body .item-properties .form-group label {
+  line-height: 20px;
+}
+.Alternityd100.sheet.item .sheet-body .item-properties .form-group input {
+  text-align: right;
+}
+.Alternityd100.sheet.item .sheet-body .item-properties .form-group.equal {
+  flex: 1;
+}
+.Alternityd100.sheet.item .sheet-body .item-properties .properties-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.Alternityd100.sheet.item .sheet-body .item-properties .properties-list li {
+  margin: 3px 0;
+  padding: 0 2px;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove #eeede0;
+  text-align: center;
+  font-size: 12px;
+  line-height: 18px;
+}
+.Alternityd100.sheet.item .details .section-header {
+  margin: 15px 0 0.25em 0;
+  padding: 0 2px;
+  font-family: "serpentine", sans-serif;
+  font-size: 18px;
+  border-bottom: 2px groove #eeede0;
+}
+.Alternityd100.sheet.item .details .first {
+  margin: 0 0 0.25em 0;
+}
+.Alternityd100.sheet.item .details input[type="text"],
+.Alternityd100.sheet.item .details select {
+  border: 1px solid #7a7971;
+  background: rgba(0, 0, 0, 0.05);
+}
+.Alternityd100.sheet.item .details .form-group.input-select select {
+  flex: 1.8;
+}
+.Alternityd100.sheet.item .details .form-group.input-select select[multiple] {
+  height: 200px;
+}
+.Alternityd100.sheet.item .details .form-group.input-select-select select {
+  flex: 1.5;
+}
+.Alternityd100.sheet.item .details .form-group.uses-per input {
+  flex: 1;
+}
+.Alternityd100.sheet.item .details .form-group.uses-per span {
+  text-align: center;
+  flex: 0 0 16px;
+  line-height: 24px;
+}
+.Alternityd100.sheet.item .details .form-group.uses-per select {
+  flex: 3;
+}
+.Alternityd100.sheet.item .details span.sep {
+  flex: 0 0 8px;
+  line-height: 24px;
+  text-align: center;
+}
+.Alternityd100.sheet.item .details .prepared {
+  flex: 1.3 !important;
+  text-align: right;
+  padding-right: 10px;
+}
+.Alternityd100.sheet.item .details .spell-materials {
+  flex: 0 0 100%;
+  margin: 0.25em 0;
+  justify-content: flex-end;
+}
+.Alternityd100.sheet.item .details .spell-materials label {
+  flex: 0 0 64px;
+  text-align: right;
+  margin-right: 5px;
+  font-size: 12px;
+  line-height: 24px;
+}
+.Alternityd100.sheet.item .details .spell-materials input[type="text"] {
+  flex: 0 0 48px;
+  margin-right: 10px;
+}
+.Alternityd100.sheet.item h4.damage-header,
+.Alternityd100.sheet.item h4.visualization-header,
+.Alternityd100.sheet.item h4.ability-adjustments-header {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  line-height: 24px;
+  color: #4b4a44;
+}
+.Alternityd100.sheet.item ol.damage-parts,
+.Alternityd100.sheet.item ol.visualization-parts {
+  border-top: groove 2px #fff;
+}
+.Alternityd100.sheet.item ol.damage-parts img.part-image,
+.Alternityd100.sheet.item ol.visualization-parts img.part-image {
+  flex: 0 0 50px;
+  height: 50px;
+}
+.Alternityd100.sheet.item li.damage-part,
+.Alternityd100.sheet.item li.visualization-part {
+  border-bottom: groove 2px #fff;
+}
+.Alternityd100.sheet.item .damage-parts,
+.Alternityd100.sheet.item .visualization-parts,
+.Alternityd100.sheet.item .ability-adjustment-parts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.Alternityd100.sheet.item .damage-parts .damage-part,
+.Alternityd100.sheet.item .visualization-parts .damage-part,
+.Alternityd100.sheet.item .ability-adjustment-parts .damage-part,
+.Alternityd100.sheet.item .damage-parts .visualization-part,
+.Alternityd100.sheet.item .visualization-parts .visualization-part,
+.Alternityd100.sheet.item .ability-adjustment-parts .visualization-part,
+.Alternityd100.sheet.item .damage-parts .ability-adjustment-part,
+.Alternityd100.sheet.item .visualization-parts .ability-adjustment-part,
+.Alternityd100.sheet.item .ability-adjustment-parts .ability-adjustment-part {
+  flex: 0 0 100%;
+  padding: 0;
+}
+.Alternityd100.sheet.item .damage-parts .damage-part input,
+.Alternityd100.sheet.item .visualization-parts .damage-part input,
+.Alternityd100.sheet.item .ability-adjustment-parts .damage-part input,
+.Alternityd100.sheet.item .damage-parts .visualization-part input,
+.Alternityd100.sheet.item .visualization-parts .visualization-part input,
+.Alternityd100.sheet.item .ability-adjustment-parts .visualization-part input,
+.Alternityd100.sheet.item .damage-parts .ability-adjustment-part input,
+.Alternityd100.sheet.item .visualization-parts .ability-adjustment-part input,
+.Alternityd100.sheet.item .ability-adjustment-parts .ability-adjustment-part input {
+  flex: 3;
+}
+.Alternityd100.sheet.item .damage-parts .damage-part select,
+.Alternityd100.sheet.item .visualization-parts .damage-part select,
+.Alternityd100.sheet.item .ability-adjustment-parts .damage-part select,
+.Alternityd100.sheet.item .damage-parts .visualization-part select,
+.Alternityd100.sheet.item .visualization-parts .visualization-part select,
+.Alternityd100.sheet.item .ability-adjustment-parts .visualization-part select,
+.Alternityd100.sheet.item .damage-parts .ability-adjustment-part select,
+.Alternityd100.sheet.item .visualization-parts .ability-adjustment-part select,
+.Alternityd100.sheet.item .ability-adjustment-parts .ability-adjustment-part select {
+  margin-left: 5px;
+  flex: 1;
+}
+.Alternityd100.sheet.item .damage-parts .damage-part .visualization-part-mode,
+.Alternityd100.sheet.item .visualization-parts .damage-part .visualization-part-mode,
+.Alternityd100.sheet.item .ability-adjustment-parts .damage-part .visualization-part-mode,
+.Alternityd100.sheet.item .damage-parts .visualization-part .visualization-part-mode,
+.Alternityd100.sheet.item .visualization-parts .visualization-part .visualization-part-mode,
+.Alternityd100.sheet.item .ability-adjustment-parts .visualization-part .visualization-part-mode,
+.Alternityd100.sheet.item .damage-parts .ability-adjustment-part .visualization-part-mode,
+.Alternityd100.sheet.item .visualization-parts .ability-adjustment-part .visualization-part-mode,
+.Alternityd100.sheet.item .ability-adjustment-parts .ability-adjustment-part .visualization-part-mode {
+  flex: 0 0 220px;
+  line-height: 20px;
+}
+.Alternityd100.sheet.item .damage-parts .damage-part .visualization-part-mode span,
+.Alternityd100.sheet.item .visualization-parts .damage-part .visualization-part-mode span,
+.Alternityd100.sheet.item .ability-adjustment-parts .damage-part .visualization-part-mode span,
+.Alternityd100.sheet.item .damage-parts .visualization-part .visualization-part-mode span,
+.Alternityd100.sheet.item .visualization-parts .visualization-part .visualization-part-mode span,
+.Alternityd100.sheet.item .ability-adjustment-parts .visualization-part .visualization-part-mode span,
+.Alternityd100.sheet.item .damage-parts .ability-adjustment-part .visualization-part-mode span,
+.Alternityd100.sheet.item .visualization-parts .ability-adjustment-part .visualization-part-mode span,
+.Alternityd100.sheet.item .ability-adjustment-parts .ability-adjustment-part .visualization-part-mode span {
+  margin: 0px 0px 0px 4px;
+}
+.Alternityd100.sheet.item .damage-parts .damage-part .visualization-part-mode select,
+.Alternityd100.sheet.item .visualization-parts .damage-part .visualization-part-mode select,
+.Alternityd100.sheet.item .ability-adjustment-parts .damage-part .visualization-part-mode select,
+.Alternityd100.sheet.item .damage-parts .visualization-part .visualization-part-mode select,
+.Alternityd100.sheet.item .visualization-parts .visualization-part .visualization-part-mode select,
+.Alternityd100.sheet.item .ability-adjustment-parts .visualization-part .visualization-part-mode select,
+.Alternityd100.sheet.item .damage-parts .ability-adjustment-part .visualization-part-mode select,
+.Alternityd100.sheet.item .visualization-parts .ability-adjustment-part .visualization-part-mode select,
+.Alternityd100.sheet.item .ability-adjustment-parts .ability-adjustment-part .visualization-part-mode select {
+  margin-top: 1px;
+  margin-bottom: 1px;
+  margin-left: 0px;
+  margin-right: 2px;
+}
+.Alternityd100.sheet.item .damage-parts .damage-part .visualization-part-middle,
+.Alternityd100.sheet.item .visualization-parts .damage-part .visualization-part-middle,
+.Alternityd100.sheet.item .ability-adjustment-parts .damage-part .visualization-part-middle,
+.Alternityd100.sheet.item .damage-parts .visualization-part .visualization-part-middle,
+.Alternityd100.sheet.item .visualization-parts .visualization-part .visualization-part-middle,
+.Alternityd100.sheet.item .ability-adjustment-parts .visualization-part .visualization-part-middle,
+.Alternityd100.sheet.item .damage-parts .ability-adjustment-part .visualization-part-middle,
+.Alternityd100.sheet.item .visualization-parts .ability-adjustment-part .visualization-part-middle,
+.Alternityd100.sheet.item .ability-adjustment-parts .ability-adjustment-part .visualization-part-middle {
+  flex: 0 0 58px;
+  align-items: center;
+  justify-content: center;
+}
+.Alternityd100.sheet.item .damage-parts .damage-part .visualization-part-title,
+.Alternityd100.sheet.item .visualization-parts .damage-part .visualization-part-title,
+.Alternityd100.sheet.item .ability-adjustment-parts .damage-part .visualization-part-title,
+.Alternityd100.sheet.item .damage-parts .visualization-part .visualization-part-title,
+.Alternityd100.sheet.item .visualization-parts .visualization-part .visualization-part-title,
+.Alternityd100.sheet.item .ability-adjustment-parts .visualization-part .visualization-part-title,
+.Alternityd100.sheet.item .damage-parts .ability-adjustment-part .visualization-part-title,
+.Alternityd100.sheet.item .visualization-parts .ability-adjustment-part .visualization-part-title,
+.Alternityd100.sheet.item .ability-adjustment-parts .ability-adjustment-part .visualization-part-title {
+  justify-content: center;
+}
+.Alternityd100.sheet.item .damage-parts .damage-part .visualization-part-delete,
+.Alternityd100.sheet.item .visualization-parts .damage-part .visualization-part-delete,
+.Alternityd100.sheet.item .ability-adjustment-parts .damage-part .visualization-part-delete,
+.Alternityd100.sheet.item .damage-parts .visualization-part .visualization-part-delete,
+.Alternityd100.sheet.item .visualization-parts .visualization-part .visualization-part-delete,
+.Alternityd100.sheet.item .ability-adjustment-parts .visualization-part .visualization-part-delete,
+.Alternityd100.sheet.item .damage-parts .ability-adjustment-part .visualization-part-delete,
+.Alternityd100.sheet.item .visualization-parts .ability-adjustment-part .visualization-part-delete,
+.Alternityd100.sheet.item .ability-adjustment-parts .ability-adjustment-part .visualization-part-delete {
+  flex: 0 0 30px;
+}
+.Alternityd100.sheet.item .damage-parts .visualization-part,
+.Alternityd100.sheet.item .visualization-parts .visualization-part,
+.Alternityd100.sheet.item .ability-adjustment-parts .visualization-part {
+  padding-bottom: 4px;
+}
+.Alternityd100.sheet.item .damage-control,
+.Alternityd100.sheet.item .visualization-control,
+.Alternityd100.sheet.item .ability-adjustments-control {
+  line-height: 24px;
+  color: #7a7971;
+  text-align: right;
+}
+.Alternityd100.sheet.item .damage-control,
+.Alternityd100.sheet.item .visualization-control {
+  width: 18px;
+  flex: 0 0 18px;
+  float: right;
+}
+.Alternityd100.sheet.item .ability-adjustments-control {
+  width: 110px;
+  flex: 0 0 20px;
+}
+.Alternityd100.sheet.item .recharge span {
+  line-height: 24px;
+  flex: 0 0 80px;
+}
+.Alternityd100.sheet.item .recharge label.checkbox {
+  flex: 0 0 80px;
+  text-align: right;
+}
+.Alternityd100.sheet.item .weapon-properties label.checkbox {
+  flex: 0 0 130px;
+}
+.Alternityd100.sheet.item .loot-header {
+  margin-bottom: 10px;
+}
+.Alternityd100.sheet.item .inventory-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 5px;
+  overflow-y: auto;
+}
+.Alternityd100.sheet.item .inventory-list .item {
+  
+  padding: 0 2px;
+  border-bottom: 1px solid #c9c7b8;
+}
+.Alternityd100.sheet.item .inventory-list .item:last-child {
+  border-bottom: none;
+}
+.Alternityd100.sheet.item .inventory-list .item .item-name {
+  cursor: pointer;
+}
+.Alternityd100.sheet.item .inventory-list .item .item-name.modifier-name {
+  cursor: default;
+}
+.Alternityd100.sheet.item .inventory-list .item .item-name .item-image {
+  flex: 0 0 45px;
+  background-size: 45px;
+  margin-right: 5px;
+}
+.Alternityd100.sheet.item .inventory-list .item .item-name h4 {
+  margin: 0;
+}
+.Alternityd100.sheet.item .inventory-list .item .item-name:hover .item-image {
+  background-image: url("/icons/svg/d20-grey.svg") !important;
+}
+.Alternityd100.sheet.item .inventory-list .item .item-name .item-image:hover {
+  background-image: url("/icons/svg/d20-black.svg") !important;
+}
+.Alternityd100.sheet.item .inventory-list .item .item-name .item-action {
+  flex: 0 0 15%;
+}
+.Alternityd100.sheet.item .inventory-list .item .item-name .item-action .attack {
+  width: auto;
+  background: #235683;
+  color: #fff;
+  cursor: pointer;
+}
+.Alternityd100.sheet.item .inventory-list .item .item-name .item-action .attack:hover,
+.Alternityd100.sheet.item .inventory-list .item .item-name .item-action .attack:focus {
+  box-shadow: 0 0 5px #235683;
+}
+.Alternityd100.sheet.item .inventory-list .item .item-name .item-action .damage {
+  width: auto;
+  background: #c41e1e;
+  color: #fff;
+  cursor: pointer;
+}
+.Alternityd100.sheet.item .inventory-list .item .item-name .item-action .healing {
+  width: auto;
+  background: #179c17;
+  color: #fff;
+  cursor: pointer;
+}
+.Alternityd100.sheet.item .inventory-list .item .item-name .item-action .healing:hover,
+.Alternityd100.sheet.item .inventory-list .item .item-name .item-action .healing:focus {
+  box-shadow: 0 0 5px #179c17;
+}
+.Alternityd100.sheet.item .inventory-list .item .item-name .item-action .defence {
+  width: auto;
+  background: #179c17;
+  color: #fff;
+  cursor: pointer;
+}
+.Alternityd100.sheet.item .inventory-list .item .item-name .item-action .defence:hover,
+.Alternityd100.sheet.item .inventory-list .item .item-name .item-action .defence:focus {
+  box-shadow: 0 0 5px #179c17;
+}
+
+.Alternityd100.sheet.item .inventory-list .item .item-properties {
+  margin-top: 3px;
+}
+.Alternityd100.sheet.item .inventory-list .item .item-recharge {
+  flex: 0 0 80px;
+  text-align: right;
+  font-size: 11px;
+  color: #7a7971;
+}
+.Alternityd100.sheet.item .inventory-list .inventory-header {
+  margin: 2px 0;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove #eeede0;
+  font-weight: bold;
+  line-height: 24px;
+}
+.Alternityd100.sheet.item .inventory-list .inventory-header h3 {
+  margin: 0 -5px 0 0;
+  padding-left: 5px;
+  font-size: 13px;
+  font-weight: bold;
+}
+.Alternityd100.sheet.item .inventory-list .inventory-header .item-controls a.modifier-create {
+  flex: 0 0 100%;
+}
+.Alternityd100.sheet.item .inventory-list .item-detail {
+  flex: 0 0 80px;
+  font-size: 12px;
+  color: #7a7971;
+  text-align: center;
+  border-right: 1px solid #c9c7b8;
+}
+
+.Alternityd100.sheet.item .inventory-list .ordnance-detail {
+  flex: 0 0 50px;
+  font-size: 12px;
+  color: #7a7971;
+  text-align: center;
+  border-right: 1px solid #c9c7b8;
+}
+
+.Alternityd100.sheet.item .inventory-list .item-detail.modifier-effect-type {
+  flex: 0 0 160px;
+}
+.Alternityd100.sheet.item .inventory-list .item-detail.modifier-value-affected {
+  flex: 0 0 120px;
+}
+.Alternityd100.sheet.item .inventory-list .item-detail.modifier-type {
+  flex: 0 0 95px;
+}
+.Alternityd100.sheet.item .inventory-list .item-detail:last-child {
+  border-right: none;
+}
+.Alternityd100.sheet.item .inventory-list .item-weight {
+  flex: 0 0 60px;
+  border-left: 1px solid #c9c7b8;
+  border-right: 1px solid #c9c7b8;
+}
+.Alternityd100.sheet.item .inventory-list .item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.Alternityd100.sheet.item .inventory-list .item-controls {
+  flex: 0 0 75px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  justify-content: flex-end;
+}
+.Alternityd100.sheet.item .inventory-list .item-controls > * {
+  flex: 1;
+}
+.Alternityd100.sheet.item .inventory-list .item-controls .flex1 {
+  flex: 1;
+}
+.Alternityd100.sheet.item .inventory-list .item-controls .flex2 {
+  flex: 2;
+}
+.Alternityd100.sheet.item .inventory-list .item-controls .flex3 {
+  flex: 3;
+}
+.Alternityd100.sheet.item .inventory-list .item-controls .flex4 {
+  flex: 4;
+}
+.Alternityd100.sheet.item .inventory-list .item-controls a {
+  flex: 0 0 22px;
+  font-size: 10px;
+  text-align: center;
+  color: #666;
+}
+.Alternityd100.sheet.item .inventory-list .item-controls a .item-create,
+.Alternityd100.sheet.item .inventory-list .item-controls a .modifier-create {
+  flex: 0 0 100%;
+}
+.Alternityd100.sheet.item .inventory-list .item-summary {
+  flex: 0 0 100%;
+  font-size: 12px;
+  line-height: 16px;
+  padding: 0.25em 0.5em;
+  border-top: 1px solid #c9c7b8;
+}
+.Alternityd100.sheet.item .spells-known th {
+  text-align: center;
+}
+.Alternityd100.sheet.item .spells-known th.class-level {
+  width: 60px;
+}
+.Alternityd100.sheet.item .spells-known td {
+  text-align: center;
+}
+.Alternityd100.sheet.item .error {
+  color: #c00;
+  text-align: left;
+}
+/* ----------------------------------------- */
+/*  Chat Cards
+/* ----------------------------------------- */
+#chat-log .message {
+  background: #f2f2f2 url("../images/hexellence.png") repeat;
+  font-size: 13px;
+  position: relative;
+}
+#chat-form textarea {
+  background: #f2f2f2 url("../images/hexellence.png") repeat;
+}
+.dice-tooltip .dice-rolls .roll {
+  font-size: 13px;
+}
+.chat-card-custom .chat-card-custom-item img {
+  margin: 5px;
+  float: left;
+  border: none;
+  border-radius: 10px;
+  width: 30px;
+}
+.chat-card-custom .chat-card-custom-item p span {
+  display: block;
+  color: black;
+  font-weight: bold;
+}
+.chat-card-custom .chat-card-custom-item p button {
+  margin: 5px 0px;
+  background-color: #c41e1e;
+  border-color: #000000;
+  color: #FFFFFF;
+  font-size: 12px;
+  height: 20px;
+  width: 60px;
+  line-height: inherit;
+}
+.chat-card-custom .chat-card-custom-item p button.chat-button-save {
+  margin: 5px 0px;
+  background-color: grey;
+  border-color: black;
+  color: #FFFFFF;
+  font-size: 12px;
+  height: 20px;
+  width: auto;
+  line-height: inherit;
+}
+.chat-card-custom .chat-card-custom-item h2 {
+  position: initial;
+}
+.chat-card-custom div.chard-card-custom-token img {
+  float: left;
+  border: none;
+  width: 60px;
+}
+.chard-card-custom-details {
+  margin-top: 3px;
+}
+.chard-card-custom-details ul {
+  margin: 0;
+  padding: 0;
+}
+.chard-card-custom-details li {
+  display: inline-block;
+  margin: 0 2px 0 0;
+  padding: 0 3px;
+  font-size: 10px;
+  line-height: 16px;
+  border: 1px solid #999;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.chat-card {
+  font-style: normal;
+  font-size: 12px;
+}
+
+.chat-card .card-header {
+  padding: 3px 0;
+  border-top: 2px groove #fff;
+  border-bottom: 2px groove #fff;
+}
+.chat-card .card-header  img {
+    flex: 0 0 36px;
+    margin-right: 5px;
+  }
+
+  .chat-card .card-header h3 {
+    flex: 1;
+    margin: 0;
+    line-height: 14px;
+    color: #4b4a44;
+  }
+
+
+  .chat-card .card-content {
+  margin: 5px 0;
+  }
+  .chat-card .card-content h3 {
+    font-size: 12px;
+    margin: 0;
+    font-weight: bold;
+  }
+
+
+
+  .chat-card .card-range {
+  display: block;
+  margin: 0 2px 1px 0;
+  padding: 1px 3px;
+  font-size: 14px;
+  line-height: 20px;
+  border: 1px solid #999;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.05);
+  flex: 0 1 auto;
+  text-align: center;
+}
+
+
+
+.card-range hover {
+    border-color: blue;
+  }
+
+
+
+
+.message-content h2 {
+  font-weight: bold;
+  text-align: center;
+  position: absolute;
+  width: 96%;
+  top: 5px;
+}
+.message-content div.chat-card-custom-container {
+  padding: 3px;
+  background-color: rgba(0, 0, 0, 0.05);
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+.message-content div.dice-roll .dice-formula {
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+}
+.message-content div.flexrow div h2 {
+  position: initial;
+}
+.message-header {
+  background-color: rgba(150, 200, 255, 0.4);
+  padding: 2px;
+  z-index: 5;
+}
+.message-header h4.message-sender {
+  z-index: 1;
+  color: #0a8383;
+  font-weight: bold;
+}
+
+.message h2.attack-targets:hover {
+  text-shadow: 0 0 10px red;
+  cursor: pointer;
+}
+.message div.attack-targets {
+  margin-bottom: 4px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+.message div.attack-targets .target {
+  display: flex;
+  flex-flow: row nowrap;
+  flex: 0 0 content;
+  margin-right: 2px;
+  margin-bottom: 2px;
+  border: 1px solid black;
+  padding: 2px;
+  align-items: center;
+}
+.message div.attack-targets .target .icon {
+  height: 16px;
+}
+.message div.attack-targets .target .saving-throws {
+  display: flex;
+  flex-flow: column nowrap;
+ /* justify-content: space-evenly;*/
+  min-width: 70px;
+  padding: 2px;
+}
+.message div.attack-targets .target .saving-throws > div {
+  display: flex;
+ /* justify-content: space-evenly;*/
+}
+.message div.attack-targets .target .saving-throws > div.click:hover {
+  box-shadow: 0 0 10px red;
+  cursor: pointer;
+}
+.message div.attack-targets .target .saving-throws > div > * {
+  flex: 0 0 60px;
+  line-height: 18px;
+}
+.message div.attack-targets .target .saving-throws2 > div > * {
+  flex: 0 0 85px;
+  line-height: 18px;
+}
+.message div.attack-targets .target .saving-throws > div .value.success {
+  color: #18520b;
+  font-weight: bold;
+}
+.message div.attack-targets .target .saving-throws > div .value.failure {
+  color: #aa0200;
+  font-weight: bold;
+}
+.message div.attack-targets .target img.target-image {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  max-width: 60px;
+  max-height: 48px;
+  border: 1px solid black;
+  object-fit: cover;
+  object-position: 50% 0;
+  margin: 0;
+  border-radius: 0;
+}
+.message div.attack-targets .target .ac {
+  display: flex;
+  flex-flow: column nowrap;
+  /*justify-content: space-evenly;*/
+  min-width: 60px;
+  padding: 2px;
+}
+
+.message div.attack-targets .target .ac button  {
+  width: 40px;
+  padding: 2px;
+  background-color: #ee857d;
+  line-height: 12px;
+}
+
+.message div.attack-targets .target .ac button:hover {
+  box-shadow: 0 0 10px red;
+  cursor: pointer;
+}
+.message div.attack-targets .target .ac > div {
+  display: flex;
+  justify-content: space-evenly;
+  /*padding: 2px;*/
+}
+.message div.attack-targets .target .ac > div > * {
+  flex: 0 0 26px;
+  /*padding: 2px;*/
+}
+.message .chat-attack {
+  margin-bottom: 2px;
+}
+.message .chat-attack .attack-flavor i.fas {
+  color: red;
+}
+.message .chat-attack .dice-roll {
+  overflow: hidden;
+}
+.message .chat-attack .dice-roll .dice-flavor {
+  color: #4c6d9f;
+  font-size: 11px;
+  text-align: center;
+  white-space: nowrap;
+}
+.message .chat-attack .dice-roll .dice-total {
+  font-size: 16px;
+  line-height: 20px;
+}
+.message .property-group {
+  flex: 0 0 24px;
+  /* Tags */
+}
+.message .property-group .tag {
+  display: inline-block;
+  padding: 1px 3px;
+  font-size: var(--font-size-11, 8pt);
+  line-height: 1.2;
+  border: 1px solid #999;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.05);
+  flex: 0 1 auto;
+  white-space: initial;
+}
+.message .property-group input[type="text"] {
+  height: 24px;
+  margin: 2px;
+}
+.message .property-group label {
+  flex: 2;
+  color: #4b4a44;
+  font-weight: bold;
+}
+.message .extra-text {
+  margin-top: 8px;
+  flex: 0 0 100%;
+  white-space: pre-wrap;
+}
+.message .extra-text label {
+  flex: 2;
+  color: #4b4a44;
+  font-weight: bold;
+}
+.message .extra-effect:not(:last-child),
+.message .extra-misc:not(:last-child) {
+  margin-bottom: 5px;
+}
+.message .extra-effect {
+  position: relative;
+  margin: 0;
+  line-height: 20px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid #999;
+  border-radius: 3px;
+  box-shadow: 0 0 2px #fff inset;
+}
+.message .extra-misc {
+  position: relative;
+  margin: 0;
+  line-height: 20px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid #999;
+  border-radius: 3px;
+  box-shadow: 0 0 2px #fff inset;
+}
+.message .extra-roll-label {
+  font-weight: bold;
+  font-size: 14px;
+}
+.message div.defence table {
+  font-size: 14px;
+  width: 100%;
+  table-layout: fixed;
+}
+.message div.defence table td,
+.message div.defence table th {
+  text-align: center;
+}
+.message .level-up .item {
+  margin-bottom: 4px;
+}
+.message .level-up .item img {
+  vertical-align: middle;
+}
+.message .level-up .level-change {
+  margin-bottom: 4px;
+}
+.message .level-up div.part {
+  margin-bottom: 4px;
+}
+
+.Alternityd100.chat-card {
+  font-style: normal;
+  font-size: 12px;
+}
+.Alternityd100.chat-card .card-header {
+  padding: 3px 0;
+  border-top: 2px groove #FFF;
+  border-bottom: 2px groove #FFF;
+}
+.Alternityd100.chat-card .card-header img {
+  flex: 0 0 36px;
+  margin-right: 5px;
+  width: 36px;
+  height: 36px;
+}
+.Alternityd100.chat-card .card-header .action-img {
+  flex: 0 0 50px;
+  width: 50px;
+  height: 50px;
+}
+.Alternityd100.chat-card .card-header h3 {
+  flex: 1;
+  margin: 0;
+  line-height: 36px;
+  font-family: "serpentine", sans-serif;
+  color: #4b4a44;
+}
+.Alternityd100.chat-card .card-header h3:hover {
+  color: #111;
+  text-shadow: 0 0 10px #c41e1e;
+}
+.Alternityd100.chat-card .card-header h3.action-name {
+  line-height: 20px;
+  font-size: 15px;
+}
+.Alternityd100.chat-card .card-header h3.item-name {
+  line-height: 30px;
+  font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.Alternityd100.chat-card .card-header .action-activation {
+  height: 20px;
+  text-align: right;
+}
+.Alternityd100.chat-card .card-content {
+  margin: 5px 0;
+}
+.Alternityd100.chat-card .card-content h3 {
+  font-size: 12px;
+  margin: 0;
+  font-weight: bold;
+}
+.Alternityd100.chat-card .card-content > * {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+.Alternityd100.chat-card .card-buttons {
+  margin: 5px 0;
+}
+.Alternityd100.chat-card .card-buttons span {
+  display: block;
+  line-height: 28px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+.Alternityd100.chat-card .card-buttons button {
+  font-size: 12px;
+  height: 24px;
+  line-height: 20px;
+  margin: 2px 0;
+  font-family: "serpentine", sans-serif;
+}
+.Alternityd100.chat-card .card-footer {
+  padding: 3px 0 0;
+  border-top: 2px groove #FFF;
+}
+.Alternityd100.chat-card .card-footer span {
+  border-right: 2px groove #FFF;
+  padding: 0 5px 5px 0;
+  font-size: 10px;
+}
+.Alternityd100.chat-card .card-footer span:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+.Alternityd100.dice-roll .dice-footer {
+  border-top: 2px groove #fff;
+  font-size: 12px;
+  font-style: normal;
+  order: 3;
+  padding: 3px 0 0;
+  margin-top: 5px;
+}
+.Alternityd100.dice-roll .dice-footer span {
+  border-right: 2px groove #fff;
+  padding: 0 5px 0 0;
+  font-size: 10px;
+}
+.Alternityd100.dice-roll .dice-footer span:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+/* ----------------------------------------- */
+/*  Basic Structure                          */
+/* ----------------------------------------- */
+.Alternityd100.sheet.actor.character,
+.Alternityd100.sheet.actor.npc {
+  min-width: 715px;
+  /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Sheet Body                               */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Inventory                                */
+  /* ----------------------------------------- */
+  /* Encumbrance Bar */
+  /* ----------------------------------------- */
+  /*  Spellbook                                */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Modifiers                                */
+  /* ----------------------------------------- */
+}
+.Alternityd100.sheet.actor.character .sheet-header img.profile,
+.Alternityd100.sheet.actor.npc .sheet-header img.profile {
+  flex: 0 0 180px;
+  height: 180px;
+}
+.Alternityd100.sheet.actor.character .sheet-header .charlevel,
+.Alternityd100.sheet.actor.npc .sheet-header .charlevel {
+  flex: 0 0 180px;
+  padding: 0 5px 2px;
+}
+.Alternityd100.sheet.actor.character .sheet-header .charlevel .level,
+.Alternityd100.sheet.actor.npc .sheet-header .charlevel .level {
+  height: 28px;
+}
+.Alternityd100.sheet.actor.character .sheet-header .charlevel .experience input[type="text"] ,
+.Alternityd100.sheet.actor.npc .sheet-header .charlevel .experience input[type="text"] {
+  width: 100px;
+}
+.Alternityd100.sheet.actor.character .sheet-header .charlevel .xpbar {
+  width: 100%;
+  flex: 0 0 8px;
+  background: #666;
+  border: 1px solid #000;
+  border-radius: 3px;
+}
+.Alternityd100.sheet.actor.character .sheet-header .charlevel .xpbar .bar {
+  height: 4px;
+  margin: 1px;
+  display: block;
+  background: #c41e1e;
+  border: 1px solid #000;
+  border-radius: 2px;
+}
+.Alternityd100.sheet.actor.character .sheet-header .summary {
+  border-bottom: 2px groove #eeede0;
+}
+.Alternityd100.sheet.actor.character .sheet-header .attributes,
+.Alternityd100.sheet.actor.npc .sheet-header .attributes {
+  height: 120px;
+  margin: 0;
+}
+.Alternityd100.sheet.actor.character .sheet-header .attributes .attribute,
+.Alternityd100.sheet.actor.npc .sheet-header .attributes .attribute {
+  height: 30px;
+  margin: 0;
+  border: none;
+  border-right: 2px groove #eeede0;
+  border-radius: 0;
+}
+.Alternityd100.sheet.actor.character .sheet-header .attributes .attribute:last-child,
+.Alternityd100.sheet.actor.npc .sheet-header .attributes .attribute:last-child {
+  border-right: none;
+}
+.Alternityd100.sheet.actor.character .sheet-header .attributes .attribute .attribute-value,
+.Alternityd100.sheet.actor.npc .sheet-header .attributes .attribute .attribute-value {
+  margin: 5px 0 0;
+  height: 15px;
+  line-height: 15px;
+}
+.Alternityd100.sheet.actor.character .sheet-header .attributes .attribute .attribute-value span,
+.Alternityd100.sheet.actor.npc .sheet-header .attributes .attribute .attribute-value span {
+  font-size: 25px;
+}
+.Alternityd100.sheet.actor.character .sheet-header .attributes .attribute .attribute-name,
+.Alternityd100.sheet.actor.npc .sheet-header .attributes .attribute .attribute-name {
+  margin-top: 6px;
+}
+.Alternityd100.sheet.actor.character .sheet-header .attributes .attribute .attribute-footer,
+.Alternityd100.sheet.actor.npc .sheet-header .attributes .attribute .attribute-footer {
+  margin-bottom: 2px;
+}
+.Alternityd100.sheet.actor.character .sheet-header .attributes a.rest,
+.Alternityd100.sheet.actor.npc .sheet-header .attributes a.rest {
+  border: 1px solid #b5b3a4;
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 1px 3px;
+  margin: 0 6px;
+}
+.Alternityd100.sheet.actor.character .attributes .resource .attribute-name,
+.Alternityd100.sheet.actor.npc .attributes .resource .attribute-name {
+  margin: 0 8px;
+}
+.Alternityd100.sheet.actor.character .attributes .resource .attribute-name input[type="text"],
+.Alternityd100.sheet.actor.npc .attributes .resource .attribute-name input[type="text"] {
+  height: 20px;
+  margin: 2px 0 -2px;
+  line-height: 24px;
+}
+.Alternityd100.sheet.actor.character .attributes .resource label.checkbox ,
+.Alternityd100.sheet.actor.npc .attributes .resource label.checkbox {
+  margin: 0 3px;
+}
+.Alternityd100.sheet.actor.character .attributes .resource label.checkbox input[type="checkbox"] {
+  transform: scale(1.2);
+}
+.Alternityd100.sheet.actor.character .attributes .initiative .attribute-footer input,
+.Alternityd100.sheet.actor.character .attributes .save .attribute-footer input {
+  width: 32px;
+}
+.Alternityd100.sheet.actor.character .attributes a.rest {
+  border: 1px solid #b5b3a4;
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 1px 3px;
+  margin: 0 6px;
+}
+.Alternityd100.sheet.actor.character .ability-scores {
+  flex: 0 0 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.Alternityd100.sheet.actor.character .ability-scores .ability {
+  height: 94px;
+  margin: 0 2px;
+  text-align: center;
+  border: 2px groove #eeede0;
+  border-radius: 3px;
+}
+.Alternityd100.sheet.actor.character .ability-scores .ability .ability-header {
+  height: 24px;
+  margin: 0;
+}
+.Alternityd100.sheet.actor.character .ability-scores .ability .ability-header input[type="text"].ability-damage {
+  flex: 1;
+  height: 24px;
+  border-bottom: 2px groove #eeede0;
+  border-right: 2px groove #eeede0;
+}
+.Alternityd100.sheet.actor.character .ability-scores .ability .ability-header input[type="text"].ability-penalty {
+  flex: 1;
+  height: 24px;
+  border-bottom: 2px groove #eeede0;
+}
+.Alternityd100.sheet.actor.character .ability-scores .ability .ability-header input[type="text"].ability-drain {
+  flex: 1;
+  height: 24px;
+  border-bottom: 2px groove #eeede0;
+  border-left: 2px groove #eeede0;
+}
+.Alternityd100.sheet.actor.character .ability-scores .ability h4.box-title {
+  line-height: 16px;
+  margin: 4px 8px 25px;
+  font-size: 18px;
+  border-bottom: 1px solid #b5b3a4;
+}
+.Alternityd100.sheet.actor.character .ability-scores .ability .ability-modifiers {
+  height: 32px;
+}
+.Alternityd100.sheet.actor.character .ability-scores .ability .ability-modifiers span.ability-mod,
+.Alternityd100.sheet.actor.character .ability-scores .ability .ability-modifiers input[type="text"].ability-base {
+  flex: 0 0 32px;
+  height: 30px;
+  overflow: hidden;
+  border-top: 2px groove #eeede0;
+}
+.Alternityd100.sheet.actor.character .ability-scores .ability .ability-modifiers span.ability-mod {
+  border-right: 2px groove #eeede0;
+  padding: 7px 0 0;
+}
+.Alternityd100.sheet.actor.character .ability-scores .ability .ability-modifiers div.ability-center {
+  margin: -10px 0 10px;
+  font-size: 24px;
+  overflow: hidden;
+}
+.Alternityd100.sheet.actor.character .ability-scores .ability .ability-modifiers input[type="text"].ability-base {
+  border-left: 2px groove #eeede0;
+  border-radius: 0;
+}
+.Alternityd100.sheet.actor.character ul.skills-list {
+  flex: 0 0 49%;
+}
+.Alternityd100.sheet.actor.character ul.skills-list h3.skill-ranks {
+  text-align: center;
+  margin-bottom: 3px;
+}
+.Alternityd100.sheet.actor.character ul.skills-list h3.skill-ranks.red {
+  color: #c41e1e;
+}
+.Alternityd100.sheet.actor.character ul.skills-list li.skills-header {
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove #eeede0;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 15px;
+  padding: 3px;
+}
+.Alternityd100.sheet.actor.character ul.skills-list li.skills-header h3 {
+  flex: 0 0 50%;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0;
+}
+.Alternityd100.sheet.actor.character ul.skills-list li.skills-header div.skill-header-prof,
+.Alternityd100.sheet.actor.character ul.skills-list li.skills-header div.skill-header-mod {
+  flex: 0 0 10%;
+}
+.Alternityd100.sheet.actor.character ul.skills-list li.skills-header div.skill-header-rank,
+.Alternityd100.sheet.actor.character ul.skills-list li.skills-header div.skill-header-ability {
+  flex: 0 0 15%;
+}
+.Alternityd100.sheet.actor.character ul.skills-list li.skills-header div.skill-header-rank {
+  text-align: center;
+}
+.Alternityd100.sheet.actor.character ul.skills-list li.skill {
+  padding: 3px;
+}
+.Alternityd100.sheet.actor.character ul.skills-list li.skill h4 {
+  flex: 0 0 50%;
+  margin: 0;
+  font-size: 13px;
+}
+.Alternityd100.sheet.actor.character ul.skills-list li.skill .skill-proficiency {
+  flex: 0 0 10%;
+  text-align: center;
+}
+.Alternityd100.sheet.actor.character ul.skills-list li.skill .skill-ranks,
+.Alternityd100.sheet.actor.character ul.skills-list li.skill .skill-ability {
+  flex: 0 0 15%;
+}
+.Alternityd100.sheet.actor.character ul.skills-list li.skill .skill-mod {
+  flex: 0 0 10%;
+}
+.Alternityd100.sheet.actor.character .counters .death-saves {
+  flex: 2;
+}
+.Alternityd100.sheet.actor.character .counters .death-saves .counter-value {
+  flex: 0 0 90px;
+}
+.Alternityd100.sheet.actor.character .item-detail.player-class {
+  flex: 0 0 180px;
+  text-align: right;
+  padding-right: 10px;
+}
+.Alternityd100.sheet.actor.character .encumbrance {
+  flex: 0 0 12px;
+  background: #7a7971;
+  margin: 1px 15px 5px 15px;
+  border: 1px solid #191813;
+  border-radius: 3px;
+  position: relative;
+}
+.Alternityd100.sheet.actor.character .encumbrance .encumbrance-bar {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  background: #6c8aa5;
+  height: 8px;
+  border: 1px solid #cde4ff;
+  border-radius: 2px;
+}
+.Alternityd100.sheet.actor.character .encumbrance .encumbrance-label {
+  height: 10px;
+  padding: 0 5px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 13px;
+  line-height: 12px;
+  text-align: right;
+  color: #EEE;
+  text-shadow: 0 0 5px #000;
+}
+.Alternityd100.sheet.actor.character .encumbrance .encumbrance-breakpoint {
+  position: absolute;
+  left: 50%;
+}
+.Alternityd100.sheet.actor.character .encumbrance .arrow-up {
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid #000;
+}
+.Alternityd100.sheet.actor.character .encumbrance .arrow-down {
+  top: 0;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #000;
+}
+.Alternityd100.sheet.actor.character .encumbrance.encumbered .arrow-up {
+  border-bottom: 4px solid #c41e1e;
+}
+.Alternityd100.sheet.actor.character .encumbrance.encumbered .arrow-down {
+  border-top: 4px solid #c41e1e;
+}
+.Alternityd100.sheet.actor.character .item-controls {
+  flex: 0 0 65px;
+}
+.Alternityd100.sheet.actor.character .spellbook .item-controls {
+  flex: 0 0 75px;
+}
+.Alternityd100.sheet.actor.character .spellbook .item-controls .toggle-prepared {
+  color: #b5b3a4;
+}
+.Alternityd100.sheet.actor.character .spellbook .item-controls .toggle-prepared.prepared {
+  color: #4b4a44;
+}
+.Alternityd100.sheet.actor.character .form-group.stacked label.checkbox {
+  flex: 0 0 20%;
+}
+.Alternityd100.sheet.actor.hazard {
+  min-width: 600px;
+  min-height: 685px;
+}
+.Alternityd100.sheet.actor.hazard .form-group {
+  padding: 0 5px;
+  align-items: baseline;
+}
+.Alternityd100.sheet.actor.hazard .form-group label {
+  width: 80px;
+  flex: 1;
+}
+.Alternityd100.sheet.actor.hazard .form-group .form-fields {
+  flex: 3;
+}
+.Alternityd100.sheet.actor.hazard .form-group .form-fields input[type="text"],
+.Alternityd100.sheet.actor.hazard .form-group .form-fields textarea {
+  border: 1px solid #7a7971;
+  background: rgba(0, 0, 0, 0.05);
+}
+.Alternityd100.sheet.actor.hazard .form-group .form-fields textarea {
+  resize: vertical;
+}
+/* ----------------------------------------- */
+/*  Basic Structure                          */
+/* ----------------------------------------- */
+.Alternityd100.sheet.actor.npc {
+  min-width: 720px;
+  min-height: 765px;
+}
+.Alternityd100.sheet.actor.npc .initiative .attribute-footer input,
+.Alternityd100.sheet.actor.npc .save .attribute-footer input {
+  width: 32px;
+}
+.Alternityd100.sheet.actor.npc ul.attributes li.attribute.save {
+  height: 90px;
+}
+.Alternityd100.sheet.actor.npc .ability-scores .ability .ability-modifiers span.ability-mod {
+  flex: 0 0 24px;
+  height: 24px;
+}
+.Alternityd100.sheet.actor.npc ul.skills-list li.skill h4 {
+  flex: 0 0 66%;
+}
+.Alternityd100.sheet.actor.npc ul.skills-list input.skill-mod {
+  flex: 0 0 33%;
+  text-align: center;
+  height: 18px;
+}
+.Alternityd100.sheet.actor.npc .item-controls {
+  flex: 0 0 75px;
+}
+.Alternityd100.sheet.actor.npc .ecology label {
+  flex: 0 0 100px;
+  line-height: 20px;
+  font-weight: bold;
+  margin: 0;
+}
+.Alternityd100.sheet {
+  /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Modifiers                                */
+  /* ----------------------------------------- */
+  /* Warning Footer Bar */
+}
+.Alternityd100.sheet .sheet-header {
+  /* Profile Image */
+  /* Header Summary Details */
+}
+.Alternityd100.sheet .sheet-header img.profile {
+  flex: 0 0 140px;
+  height: 140px;
+  object-fit: contain;
+  border: none;
+  border-right: 4px groove #19d6b7;
+}
+.Alternityd100.sheet .sheet-header .summary-row1 {
+  flex: 0 0 100%;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 4px groove #19d6b7;
+  border-bottom: none;
+  font-size: 16px;
+}
+.Alternityd100.sheet .sheet-header .summary-row1 li {
+  width: 45%;
+  float: left;
+  height: 34px;
+  margin: 2px 0;
+  padding: 0 3px;
+  border-right: 4px groove #19d6b7;
+  line-height: 34px;
+  color: #4b4a44;
+}
+.Alternityd100.sheet .sheet-header .summary-row1 li:first-child {
+  width: 55%;
+}
+.Alternityd100.sheet .sheet-header .summary-row1 li:last-child {
+  border-right: none;
+}
+.Alternityd100.sheet .sheet-header .summary-row2 {
+  flex: 0 0 100%;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 4px groove #19d6b7;
+  border-bottom: none;
+  font-size: 16px;
+}
+.Alternityd100.sheet .sheet-header .summary-row2 li {
+  width: 45%;
+  float: left;
+  height: 34px;
+  margin: 2px 0;
+  padding: 0 3px;
+  border-right: 2px groove #eeede0;
+  line-height: 34px;
+  color: #4b4a44;
+}
+.Alternityd100.sheet .sheet-header .summary-row2 li:first-child {
+  width: 10%;
+}
+.Alternityd100.sheet .sheet-header .summary-row2 li:last-child {
+  border-right: none;
+}
+.Alternityd100.sheet .form-group.stacked label.checkbox {
+  flex: 0 0 20%;
+}
+.Alternityd100.sheet .warningFooter {
+  flex: 0 0 12px;
+  background: #44191A;
+  margin: 1px 15px 5px 15px;
+  border: 1px solid #191813;
+  border-radius: 3px;
+  position: relative;
+  color: white;
+}
+.Alternityd100.sheet.actor.starship img.profile {
+  flex: 0 0 180px;
+  height: 180px;
+  width: 160px;
+}
+.Alternityd100.sheet.actor.starship .form-header {
+  margin-top: 5px;
+  padding: 0 5px;
+}
+.Alternityd100.sheet.actor.starship .form-group {
+  padding: 0 5px;
+}
+.Alternityd100.sheet.actor.starship .form-group .form-fields input[type="text"],
+.Alternityd100.sheet.actor.starship .form-group .form-fields select {
+  border: 1px solid #7a7971;
+  background: rgba(0, 0, 0, 0.05);
+}
+.Alternityd100.sheet.actor.starship .traits {
+  margin: 0;
+}
+.Alternityd100.sheet.actor.starship .sheet-header .header-details .header-background .charname {
+  flex: 1;
+}
+.Alternityd100.sheet.actor.starship .sheet-header .header-details .header-background .charlevel .level.noxp {
+  margin-top: 0 !important;
+}
+.Alternityd100.sheet.actor.starship .sheet-header .header-details .header-background .charlevel .level.noxp input {
+  width: 60px;
+}
+.Alternityd100.sheet.actor.starship .sheet-header .summary {
+  border-bottom: 4px groove #19d6b7;
+}
+.Alternityd100.sheet.actor.starship .sheet-header .summary .no-frame {
+  color: #E00;
+  text-shadow: -1px -1px 0 #A66, 1px -1px 0 #A66, -1px 1px 0 #A66, 1px 1px 0 #A66;
+}
+.Alternityd100.sheet.actor.starship .sheet-header .attributes {
+  height: 120px;
+  margin: 0;
+}
+.Alternityd100.sheet.actor.starship .sheet-header .attributes .attribute {
+  height: 120px;
+  margin: 0;
+  border: none;
+  border-right: 4px groove #19d6b7;
+  border-radius: 0;
+}
+.Alternityd100.sheet.actor.starship .sheet-header .attributes .attribute:last-child {
+  border-right: none;
+}
+.Alternityd100.sheet.actor.starship .sheet-header .attributes .attribute .attribute-value {
+  margin: 3px 0 0;
+  height: 16px;
+  line-height: 16px;
+  font-size: 16px;
+}
+.Alternityd100.sheet.actor.starship .sheet-header .attributes .attribute .attribute-value span {
+  flex: 0 0 80px;
+  font-size: 24px;
+}
+.Alternityd100.sheet.actor.starship .sheet-header .attributes .attribute .attribute-name {
+  margin-top: 6px;
+}
+.Alternityd100.sheet.actor.starship .sheet-header .attributes .attribute .attribute-footer {
+  margin-bottom: 2px;
+}
+.Alternityd100.sheet.actor.starship .sheet-body .attributes .attribute.defences {
+  height: 140px;
+}
+.Alternityd100.sheet.actor.starship .sheet-body .attributes .attribute .attribute-value span {
+  font-size: 24px;
+}
+.Alternityd100.sheet.actor.starship .sheet-body .attributes .attribute .attribute-value label {
+  font-size: 16px;
+}
+.Alternityd100.sheet.actor.starship .sheet-body .attributes .attribute .attribute-value label.rightAligned {
+  text-align: right;
+}
+.Alternityd100.sheet.actor.starship .sheet-body .attributes .attribute .attribute-value label.notInstalled {
+  flex: 6;
+  font-size: 12px;
+  text-align: left;
+}
+.Alternityd100.sheet.actor.starship .sheet-body .attributes .attribute .attribute-value .name {
+  flex: 6;
+}
+.Alternityd100.sheet.actor.starship .sheet-body .attributes .attribute .attribute-value .quadrantText {
+  flex: 2;
+  font-size: 16px;
+}
+.Alternityd100.sheet.actor.starship .sheet-body .attributes .attribute .attribute-value .quadrantFiller {
+  flex: 4;
+}
+.Alternityd100.sheet.actor.starship .sheet-body .attributes .attribute .attribute-value input.quadrantdefence {
+  flex: 2;
+  text-align: center;
+}
+.Alternityd100.sheet.actor.starship .sheet-body a.critical-edit,
+.Alternityd100.sheet.actor.starship .sheet-body i.fas {
+  flex: 0 0 22px;
+  font-size: 10px;
+  text-align: center;
+  color: #666;
+}
+.Alternityd100.sheet.actor.starship .item-controls,
+.Alternityd100.sheet.actor.starship .item-controls {
+  flex: 0 0 45px;
+}
+.Alternityd100.sheet.actor.starship .crew-controls {
+  flex: 0 0 80px;
+}
+.Alternityd100.sheet.actor.starship .crew-settings {
+  margin: 0 8px;
+  flex: 0 0 20px;
+}
+.Alternityd100.sheet.actor.starship .crew-settings h3,
+.Alternityd100.sheet.actor.starship .crew-settings .filter-title {
+  font-family: "serpentine", sans-serif;
+  color: #4b4a44;
+  font-size: 18px;
+  margin: 0;
+}
+.Alternityd100.sheet.actor.starship .crew-settings .settings {
+  list-style: none;
+  margin: 4px 0 8px;
+  padding: 0;
+  font-size: 12px;
+}
+.Alternityd100.sheet.actor.starship .crew-settings .settings label {
+  margin-left: 8px;
+  text-align: right;
+  line-height: 20px;
+}
+.Alternityd100.sheet.actor.starship .action-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 5px;
+  overflow-y: auto;
+}
+.Alternityd100.sheet.actor.starship .action-list.noPadding {
+  padding: 0;
+}
+.Alternityd100.sheet.actor.starship .action-list .action {
+  line-height: 45px;
+  padding: 0 2px;
+  border-bottom: 1px solid #b5b3a4;
+}
+.Alternityd100.sheet.actor.starship .action-list .action:last-child {
+  border-bottom: none;
+}
+.Alternityd100.sheet.actor.starship .action-list .action.small {
+  line-height: 25px;
+}
+.Alternityd100.sheet.actor.starship .action-list .action.container {
+  background: linear-gradient(130deg, rgba(12, 45, 74, 0.1) 0%, rgba(35, 86, 131, 0.1) 40%, rgba(35, 86, 131, 0.1) 60%, rgba(29, 125, 209, 0.1) 100%);
+}
+.Alternityd100.sheet.actor.starship .action-list .action .action-name {
+  cursor: pointer;
+  flex: 3;
+}
+.Alternityd100.sheet.actor.starship .action-list .action .action-name.modifier-name {
+  cursor: default;
+}
+.Alternityd100.sheet.actor.starship .action-list .action .action-name .action-image {
+  flex: 0 0 45px;
+  background-size: 45px;
+  margin-right: 5px;
+}
+.Alternityd100.sheet.actor.starship .action-list .action .action-name .action-image.small {
+  flex: 0 0 25px;
+  background-size: 25px;
+  margin-right: 2px;
+}
+.Alternityd100.sheet.actor.starship .action-list .action .action-name h4 {
+  margin: 0;
+}
+.Alternityd100.sheet.actor.starship .action-list .action .action-name:hover .action-image {
+  background-image: url("/icons/svg/d20-grey.svg") !important;
+}
+.Alternityd100.sheet.actor.starship .action-list .action .action-name .action-image:hover {
+  background-image: url("/icons/svg/d20-black.svg") !important;
+}
+.Alternityd100.sheet.actor.starship .action-list .action .action-phase, 
+.Alternityd100.sheet.actor.starship .action-list .action .action-skill 
+{
+  flex: 2;
+}
+.Alternityd100.sheet.actor.starship .action-list .action .action-resolve {
+  flex: 1;
+}
+.Alternityd100.sheet.actor.starship .action-list .action-header {
+  margin: 2px 0;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove #eeede0;
+  font-weight: bold;
+  line-height: 24px;
+}
+.Alternityd100.sheet.actor.starship .action-list .action-header.disabled h3 {
+  color: gray;
+}
+.Alternityd100.sheet.actor.starship .action-list .action-header h3 {
+  margin: 0 -5px 0 0;
+  padding-left: 5px;
+  font-size: 13px;
+  font-weight: bold;
+}
+.Alternityd100.sheet.actor.starship .action-list .action-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.Alternityd100.sheet.actor.starship .action-list .action-list-child {
+  list-style: none;
+  width: 97%;
+  margin: 0 0 0 3%;
+  padding: 0;
+}
+.Alternityd100.sheet.actor.vehicle {
+  min-width: 600px;
+  min-height: 685px;
+  /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
+}
+.Alternityd100.sheet.actor.vehicle .sheet-header .charlevel {
+  flex: 0 0 180px;
+  padding: 0 5px 2px;
+}
+.Alternityd100.sheet.actor.vehicle .sheet-header .charlevel .level {
+  height: 28px;
+}
+.Alternityd100.sheet.actor.vehicle .summary li {
+  width: 100%;
+}
+.Alternityd100.sheet.actor.vehicle .summary li input[type="text"] {
+  width: 66%;
+}
+.Alternityd100.sheet.actor.vehicle .form-group {
+  padding: 0 5px;
+}
+.Alternityd100.sheet.actor.vehicle .form-group .form-fields input[type="text"],
+.Alternityd100.sheet.actor.vehicle .form-group .form-fields select {
+  border: 1px solid #7a7971;
+  background: rgba(0, 0, 0, 0.05);
+}
+.Alternityd100.sheet.actor.vehicle .traits {
+  margin: 0;
+}
+.Alternityd100.sheet.actor.vehicle .sheet-body ul.attributes {
+  overflow: hidden;
+}
+.Alternityd100.sheet.actor.vehicle .sheet-body ul.attributes li.attribute {
+  height: 95px;
+}
+.Alternityd100.sheet.actor.vehicle .sheet-body ul.attributes li.attribute .attribute-value span {
+  font-size: 24px;
+}
+.Alternityd100.sheet.actor.vehicle .sheet-body ul.attributes li.attribute .attribute-footer input {
+  max-width: 33%;
+}
+.Alternityd100.sheet.actor.vehicle .passenger-action {
+  flex: 0 0 25%;
+}
+.Alternityd100.sheet.actor.vehicle .passenger-action .passengerPilotingSkill {
+  width: auto;
+  background: #235683;
+  color: #fff;
+  cursor: pointer;
+}
+.Alternityd100.sheet.actor.vehicle .passenger-action .passengerPilotingSkill:hover,
+.Alternityd100.sheet.actor.vehicle .passenger-action .passengerPilotingSkill:focus {
+  box-shadow: 0 0 5px #235683;
+}
+.Alternityd100.sheet.actor.vehicle .passenger-action .pilotPilotingSkill {
+  width: auto;
+  display: block;
+  background: url("/icons/svg/d20-grey.svg") no-repeat 50% 50%;
+  background-size: 16px;
+  margin: 0 0.5em;
+}
+.Alternityd100.sheet.actor.vehicle .passenger-action .pilotPilotingSkill:hover,
+.Alternityd100.sheet.actor.vehicle .passenger-action .pilotPilotingSkill:focus {
+  background-image: url("/icons/svg/d20-black.svg");
+}
+.Alternityd100.sheet.actor.vehicle .vehicle-system-action {
+  flex: 0 0 25%;
+}
+.Alternityd100.sheet.actor.vehicle .vehicle-system-action .roll-piloting {
+  width: auto;
+  background: #235683;
+  color: #fff;
+  cursor: pointer;
+}
+.Alternityd100.sheet.actor.vehicle .vehicle-system-action .roll-piloting:hover,
+.Alternityd100.sheet.actor.vehicle .vehicle-system-action .roll-piloting:focus {
+  box-shadow: 0 0 5px #235683;
+}
+/* ----------------------------------------- */
+/*  Basic Structure                          */
+/* ----------------------------------------- */
+.Alternityd100.sheet.actor.drone {
+  min-width: 715px;
+  /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Sheet Body                               */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Inventory                                */
+  /* ----------------------------------------- */
+  /* Encumbrance Bar */
+  /* ----------------------------------------- */
+  /*  Modifiers                                */
+  /* ----------------------------------------- */
+}
+.Alternityd100.sheet.actor.drone .sheet-header .header-background .charname {
+  flex: 0 0 calc(100% - 250px);
+}
+.Alternityd100.sheet.actor.drone .sheet-header img.profile {
+  flex: 0 0 180px;
+  height: 180px;
+}
+.Alternityd100.sheet.actor.drone .sheet-header .charlevel {
+  flex: 0 0 240px;
+  padding: 0 5px 2px;
+}
+.Alternityd100.sheet.actor.drone .sheet-header .charlevel .level {
+  height: 28px;
+}
+.Alternityd100.sheet.actor.drone .sheet-header .charlevel .level .no-chassis {
+  color: #E00;
+  text-shadow: -1px -1px 0 #444, 1px -1px 0 #444, -1px 1px 0 #444, 1px 1px 0 #444;
+}
+.Alternityd100.sheet.actor.drone .sheet-header .summary {
+  border-bottom: 2px groove #eeede0;
+}
+.Alternityd100.sheet.actor.drone .sheet-header .summary li {
+  width: 100%;
+}
+.Alternityd100.sheet.actor.drone .sheet-header .attributes {
+  height: 80px;
+  margin: 0;
+}
+.Alternityd100.sheet.actor.drone .sheet-header .attributes .attribute {
+  height: 80px;
+  margin: 0;
+  border: none;
+  border-right: 2px groove #eeede0;
+  border-radius: 0;
+}
+.Alternityd100.sheet.actor.drone .sheet-header .attributes .attribute:last-child {
+  border-right: none;
+}
+.Alternityd100.sheet.actor.drone .sheet-header .attributes .attribute .attribute-row {
+  height: 18px;
+  flex: 0;
+  font-size: 12px;
+}
+.Alternityd100.sheet.actor.drone .sheet-header .attributes .attribute .attribute-row .defence-name {
+  padding: 0 0 0 10px;
+  text-align: left;
+}
+.Alternityd100.sheet.actor.drone .sheet-header .attributes .attribute .attribute-value {
+  margin: 5px 0 0;
+  height: 32px;
+  line-height: 32px;
+}
+.Alternityd100.sheet.actor.drone .sheet-header .attributes .attribute .attribute-value span {
+  font-size: 25px;
+}
+.Alternityd100.sheet.actor.drone .sheet-header .attributes .attribute .attribute-value span.attribute-max {
+  font-size: 16px;
+}
+.Alternityd100.sheet.actor.drone .sheet-header .attributes .attribute .attribute-value a {
+  font-size: 14px;
+}
+.Alternityd100.sheet.actor.drone .sheet-header .attributes .attribute .attribute-name {
+  margin-top: 6px;
+}
+.Alternityd100.sheet.actor.drone .sheet-header .attributes .attribute .attribute-footer {
+  margin-bottom: 2px;
+}
+.Alternityd100.sheet.actor.drone .sheet-header .attributes a.rest {
+  border: 1px solid #b5b3a4;
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 1px 3px;
+  margin: 0 6px;
+}
+.Alternityd100.sheet.actor.drone ul.left-side {
+  margin-top: 0px;
+  margin-left: -19px;
+  flex: 2.5;
+}
+.Alternityd100.sheet.actor.drone section.center-pane {
+  flex: 3.5;
+}
+.Alternityd100.sheet.actor.drone .attributes .resource .attribute-name {
+  margin: 0 8px;
+}
+.Alternityd100.sheet.actor.drone .attributes .resource .attribute-name input[type="text"] {
+  height: 20px;
+  margin: 2px 0 -2px;
+  line-height: 24px;
+}
+.Alternityd100.sheet.actor.drone .attributes .resource label.checkbox {
+  margin: 0 3px;
+}
+.Alternityd100.sheet.actor.drone .attributes .resource label.checkbox input[type="checkbox"] {
+  transform: scale(1.2);
+}
+.Alternityd100.sheet.actor.drone .attributes .initiative .attribute-footer input,
+.Alternityd100.sheet.actor.drone .attributes .save .attribute-footer input {
+  width: 32px;
+}
+.Alternityd100.sheet.actor.drone .attributes a.rest {
+  border: 1px solid #b5b3a4;
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 1px 3px;
+  margin: 0 6px;
+}
+.Alternityd100.sheet.actor.drone .attributes li.speed {
+  height: 75px;
+}
+.Alternityd100.sheet.actor.drone .ability-scores {
+  flex: 0 0 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.Alternityd100.sheet.actor.drone .ability-scores .ability {
+  height: 70px;
+  margin: 0 2px;
+  text-align: center;
+  border: 2px groove #eeede0;
+  border-radius: 3px;
+}
+.Alternityd100.sheet.actor.drone .ability-scores .ability .ability-header {
+  height: 24px;
+  margin: 0;
+}
+.Alternityd100.sheet.actor.drone .ability-scores .ability .ability-header input[type="text"].ability-damage {
+  flex: 1;
+  height: 24px;
+  border-bottom: 2px groove #eeede0;
+  border-right: 2px groove #eeede0;
+}
+.Alternityd100.sheet.actor.drone .ability-scores .ability .ability-header input[type="text"].ability-penalty {
+  flex: 1;
+  height: 24px;
+  border-bottom: 2px groove #eeede0;
+}
+.Alternityd100.sheet.actor.drone .ability-scores .ability .ability-header input[type="text"].ability-drain {
+  flex: 1;
+  height: 24px;
+  border-bottom: 2px groove #eeede0;
+  border-left: 2px groove #eeede0;
+}
+.Alternityd100.sheet.actor.drone .ability-scores .ability h4.box-title {
+  line-height: 16px;
+  margin: 4px 8px 25px;
+  font-size: 18px;
+  border-bottom: 1px solid #b5b3a4;
+}
+.Alternityd100.sheet.actor.drone .ability-scores .ability .ability-modifiers {
+  height: 32px;
+}
+.Alternityd100.sheet.actor.drone .ability-scores .ability .ability-modifiers span.ability-mod,
+.Alternityd100.sheet.actor.drone .ability-scores .ability .ability-modifiers input[type="text"].ability-base {
+  flex: 0 0 32px;
+  height: 30px;
+  overflow: hidden;
+  border-top: 2px groove #eeede0;
+}
+.Alternityd100.sheet.actor.drone .ability-scores .ability .ability-modifiers span.ability-mod {
+  border-right: 2px groove #eeede0;
+  padding: 7px 0 0;
+}
+.Alternityd100.sheet.actor.drone .ability-scores .ability .ability-modifiers div.ability-center {
+  margin: -10px 0 10px;
+  font-size: 24px;
+  overflow: hidden;
+}
+.Alternityd100.sheet.actor.drone .ability-scores .ability .ability-modifiers input[type="text"].ability-base {
+  border-left: 2px groove #eeede0;
+  border-radius: 0;
+}
+.Alternityd100.sheet.actor.drone ul.skills-list {
+  flex: 0 0 31.6%;
+}
+.Alternityd100.sheet.actor.drone ul.skills-list li.skills-header {
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove #eeede0;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 15px;
+  padding: 3px;
+}
+.Alternityd100.sheet.actor.drone ul.skills-list li.skills-header h3 {
+  flex: 0 0 50%;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0;
+}
+.Alternityd100.sheet.actor.drone ul.skills-list li.skills-header div.skill-header-prof,
+.Alternityd100.sheet.actor.drone ul.skills-list li.skills-header div.skill-header-mod {
+  flex: 0 0 10%;
+}
+.Alternityd100.sheet.actor.drone ul.skills-list li.skills-header div.skill-header-rank,
+.Alternityd100.sheet.actor.drone ul.skills-list li.skills-header div.skill-header-ability {
+  flex: 0 0 15%;
+}
+.Alternityd100.sheet.actor.drone ul.skills-list li.skills-header div.skill-header-rank {
+  text-align: center;
+}
+.Alternityd100.sheet.actor.drone ul.skills-list li.skill {
+  padding: 3px;
+}
+.Alternityd100.sheet.actor.drone ul.skills-list li.skill h4 {
+  flex: 0 0 50%;
+  margin: 0;
+  font-size: 13px;
+}
+.Alternityd100.sheet.actor.drone ul.skills-list li.skill .skill-proficiency {
+  flex: 0 0 10%;
+  text-align: center;
+}
+.Alternityd100.sheet.actor.drone ul.skills-list li.skill .skill-ranks,
+.Alternityd100.sheet.actor.drone ul.skills-list li.skill .skill-ability {
+  flex: 0 0 15%;
+}
+.Alternityd100.sheet.actor.drone ul.skills-list li.skill .skill-mod {
+  flex: 0 0 10%;
+}
+.Alternityd100.sheet.actor.drone ul.skills-list .skills-footer {
+  text-align: center;
+  padding-top: 2px;
+  padding-bottom: 3px;
+}
+.Alternityd100.sheet.actor.drone .counters .death-saves {
+  flex: 2;
+}
+.Alternityd100.sheet.actor.drone .counters .death-saves .counter-value {
+  flex: 0 0 90px;
+}
+.Alternityd100.sheet.actor.drone .item-detail.player-class {
+  flex: 0 0 180px;
+  text-align: right;
+  padding-right: 10px;
+}
+.Alternityd100.sheet.actor.drone .encumbrance {
+  flex: 0 0 12px;
+  background: #7a7971;
+  margin: 1px 15px 5px 15px;
+  border: 1px solid #191813;
+  border-radius: 3px;
+  position: relative;
+}
+.Alternityd100.sheet.actor.drone .encumbrance .encumbrance-bar {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  background: #6c8aa5;
+  height: 8px;
+  border: 1px solid #cde4ff;
+  border-radius: 2px;
+}
+.Alternityd100.sheet.actor.drone .encumbrance .encumbrance-label {
+  height: 10px;
+  padding: 0 5px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 13px;
+  line-height: 12px;
+  text-align: right;
+  color: #EEE;
+  text-shadow: 0 0 5px #000;
+}
+.Alternityd100.sheet.actor.drone .encumbrance .encumbrance-breakpoint {
+  position: absolute;
+  left: 50%;
+}
+.Alternityd100.sheet.actor.drone .encumbrance .arrow-up {
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid #000;
+}
+.Alternityd100.sheet.actor.drone .encumbrance .arrow-down {
+  top: 0;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #000;
+}
+.Alternityd100.sheet.actor.drone .encumbrance.encumbered .arrow-up {
+  border-bottom: 4px solid #c41e1e;
+}
+.Alternityd100.sheet.actor.drone .encumbrance.encumbered .arrow-down {
+  border-top: 4px solid #c41e1e;
+}
+.Alternityd100.sheet.actor.drone .item-controls {
+  flex: 0 0 75px;
+}
+.Alternityd100.sheet.actor.drone .form-group.stacked label.checkbox {
+  flex: 0 0 20%;
+}
+/*  spellbrowser  */
+/*  resizing  */
+.Alternityd100.item-browser-window {
+  resize: both;
+  overflow: auto;
+  max-width: 1100px;
+  max-height: 90vh;
+}
+.Alternityd100.item-browser-window .window-content {
+  overflow-y: hidden !important;
+}
+.Alternityd100.item-browser-window .item-browser {
+  display: flex;
+  min-height: 100px;
+  /*  item list  */
+}
+.Alternityd100.item-browser-window .item-browser .control-area {
+  position: sticky;
+  display: block;
+  padding-right: 5px;
+  flex: 0 0 320px;
+  height: 85%;
+}
+.Alternityd100.item-browser-window .item-browser .control-area .item-browser-filters {
+  height: 100%;
+  overflow-y: auto;
+}
+.Alternityd100.item-browser-window .item-browser .filtercontainer,
+.Alternityd100.item-browser-window .item-browser .sortcontainer {
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  margin-top: 5px;
+  padding: 2px;
+}
+.Alternityd100.item-browser-window .item-browser .filtercontainer h3,
+.Alternityd100.item-browser-window .item-browser .sortcontainer h3 {
+  margin: 0;
+  cursor: pointer;
+}
+.Alternityd100.item-browser-window .item-browser .filtercontainer dt {
+  width: 10%;
+}
+.Alternityd100.item-browser-window .item-browser .filtercontainer dt > input[type=checkbox] {
+  transform: none;
+  flex: none;
+  height: auto;
+  margin: 3px 3px;
+}
+.Alternityd100.item-browser-window .item-browser .filtercontainer dd {
+  width: 88%;
+}
+.Alternityd100.item-browser-window .item-browser dl {
+  margin: 5px 0;
+}
+.Alternityd100.item-browser-window .item-browser dt {
+  display: inline-block;
+  width: 40%;
+  padding-left: 5px;
+}
+.Alternityd100.item-browser-window .item-browser dd {
+  display: inline-block;
+  width: 58%;
+  margin-left: 0;
+}
+.Alternityd100.item-browser-window .item-browser dd select {
+  width: 100%;
+}
+.Alternityd100.item-browser-window .item-browser #tagfilter input {
+  width: 100%;
+  height: 1.6em;
+}
+.Alternityd100.item-browser-window .item-browser .hint {
+  font-size: 12px;
+  border: 1px solid #00ff0547;
+  border-radius: 5px;
+  padding: 3px;
+}
+.Alternityd100.item-browser-window .item-browser .content {
+  flex: 1;
+}
+.Alternityd100.item-browser-window .item-browser .header {
+  flex: 0 0 15px;
+  padding: 0px 10px;
+}
+.Alternityd100.item-browser-window .item-browser .header .item-image {
+  width: 32px;
+  height: 15px;
+}
+.Alternityd100.item-browser-window .item-browser .header .item-name {
+  height: 15px;
+  padding-left: 5px;
+}
+.Alternityd100.item-browser-window .item-browser .header .item-tags {
+  flex: 0 0 50px;
+  height: 15px;
+  padding-left: 5px;
+}
+.Alternityd100.item-browser-window .item-browser .header .item-sort-link {
+  font-weight: 900;
+}
+.Alternityd100.item-browser-window .item-browser .header .item-sort-link:hover {
+  color: #111;
+  text-shadow: 0 0 10px red;
+}
+.Alternityd100.item-browser-window .item-browser .item-list {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 5px 10px;
+  border-radius: 5px;
+  overflow: auto;
+  flex: 1 1 0;
+}
+.Alternityd100.item-browser-window .item-browser .item {
+  cursor: default;
+  vertical-align: middle;
+  line-height: 32px;
+  margin: 2px 0;
+}
+.Alternityd100.item-browser-window .item-browser .item-image {
+  max-width: 32px;
+  height: 32px;
+  border: none !important;
+}
+.Alternityd100.item-browser-window .item-browser .filtercontainer h3 {
+  padding: 5px 10px;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px dashed #000000;
+}
+.Alternityd100.item-browser-window .item-browser .item-image img {
+  border: none !important;
+}
+.Alternityd100.item-browser-window .item-browser .item-level {
+  text-align: center;
+  font-weight: 900;
+  max-width: 18px;
+  height: 32px;
+}
+.Alternityd100.item-browser-window .item-browser .item-name {
+  height: 32px;
+  padding-left: 5px;
+}
+.Alternityd100.item-browser-window .item-browser .item-tags {
+  flex: 0 0 50px;
+  text-align: right;
+  margin-right: 3px;
+  font-weight: 0;
+  max-width: 100px;
+  height: 32px;
+}
+.Alternityd100.item-browser-window .item-browser .spacer {
+  display: inline-block;
+  min-width: 5px;
+}
+.Alternityd100.item-browser-window .item-browser .spacer-large {
+  display: inline-block;
+  min-width: 15px;
+}
+.Alternityd100.item-browser-window .item-browser li.item:hover {
+  background: #cccccc;
+}
+.Alternityd100.item-browser-window .item-browser li.item {
+  border-bottom: 1px dashed #4b4a44;
+}
+/* ----------------------------------------- */
+/*  Basic Structure                          */
+/* ----------------------------------------- */
+.Alternityd100.dialog.roll {
+  min-width: 500px;
+}
+.Alternityd100.dialog.roll div.damage-type-selector-list .damage-type-list-title {
+  color: #4b4a44;
+  font-weight: bold;
+  font-size: 1em;
+  border-bottom: 1px solid #666;
+  margin-top: 5px;
+}
+.Alternityd100.dialog.roll div.damage-type-selector-list .damage-type {
+  color: #4b4a44;
+}
+.Alternityd100.dialog.roll ul.modifier-list {
+  flex: 0 0 49%;
+  list-style: none;
+  margin: 5px 0px 9px;
+  padding: 2px 2px 0;
+  border: 2px groove #eeede0;
+  border-radius: 3px;
+}
+.Alternityd100.dialog.roll ul.modifier-list h3.modifier-list-title {
+  text-align: center;
+  margin-bottom: 3px;
+}
+#hud{
+
+  font-size: 18px;
+}
+.Alternityd100.dialog.roll ul.modifier-list li.modifier-list-header {
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove #eeede0;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 15px;
+  padding: 3px;
+}
+.Alternityd100.dialog.roll ul.modifier-list li.modifier-list-header div.modifier-list-header-enabled {
+  flex: 0 0 10%;
+  text-align: center;
+}
+.Alternityd100.dialog.roll ul.modifier-list li.modifier-list-header h3.modifier-list-header-name {
+  flex: 0 0 40%;
+  text-align: left;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0;
+}
+.Alternityd100.dialog.roll ul.modifier-list li.modifier-list-header div.modifier-list-header-modifier {
+  flex: 0 0 50%;
+  text-align: left;
+}
+.Alternityd100.dialog.roll ul.modifier-list li.modifier {
+  height: 22px;
+  padding: 3px;
+}
+.Alternityd100.dialog.roll ul.modifier-list li.modifier:hover {
+  background-color: rgba(201, 199, 184, 0.4);
+}
+.Alternityd100.dialog.roll ul.modifier-list li.modifier h4 {
+  flex: 0 0 50%;
+  margin: 0;
+  font-size: 13px;
+  line-height: 18px;
+}
+.Alternityd100.dialog.roll ul.modifier-list li.modifier .modifier-enabled {
+  flex: 0 0 10%;
+  text-align: center;
+}
+.Alternityd100.dialog.roll ul.modifier-list li.modifier .modifier-name {
+  flex: 0 0 40%;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.Alternityd100.dialog.roll ul.modifier-list li.modifier .modifier-modifier {
+  flex: 0 0 50%;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+table.LauncherTable {
+  font-family: "serpentine-bold", cursive, sans-serif;
+  border: 5px solid #1d7dd1;
+  background-color: #000000;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+table.LauncherTable td, table.LauncherTable th {
+  border: 4px solid #AAAAAA;
+  padding: 3px 3px;
+
+}
+table.LauncherTable tbody td {
+  font-size: 15px;
+  color: #FFFFFF;
+  height:50px;
+}
+
+table.LauncherTable tbody td:hover {
+  background-color: red;
+  background-size: 40px;
+}
+
+table.LauncherTable tfoot {
+  font-size: 12px;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #6BCD9A;
+  background: -moz-linear-gradient(top, #90d9b3 0%, #79d2a4 66%, #6BCD9A 100%);
+  background: -webkit-linear-gradient(top, #90d9b3 0%, #79d2a4 66%, #6BCD9A 100%);
+  background: linear-gradient(130deg, #0c2d4a 0%, #235683 40%, #235683 60%, #1d7dd1 100%);
+  border-top: 2px solid #417C5D;
+}
+table.LauncherTable tfoot td {
+  font-size: 12px;
+}
+table.LauncherTable tfoot .links {
+  text-align: right;
+}
+table.LauncherTable tfoot .links a{
+  display: inline-block;
+  background: #417C5D;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+table.LauncherTable tr:nth-child(even) {
+  background: #000000;
+}
+
+table.LauncherTable .item-image {
+  flex: 0 0 40px;
+  background-size: 40px;
+  margin-right: 3px;
+  width: 40px;
+  height: 40px;
+  background-color: #043a3a;
+}
+table.LauncherTable .item-name {
+margin: 3px;
+height: 40px;
+font-size:  14px;
+}
+table.LauncherTable h4 {
+  margin: 0;
+}
+#token-hud .attribute.elevation {
+  position: relative;
+  width: 56px;
+  margin: 8px 0;
+  font-size: 25px;
+}
+.placeable-hud input[type="text"] {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 15px var(--color-shadow-dark);
+  border: 1px solid var(--color-border-dark-3);
+  color: var(--color-text-light-2);
+  height: 40px;
+  line-height: 40px;
+  margin: 0;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  pointer-events: all;
+}
+
+
+
+
+/*General style for tables
+}*/
+
+
+.Alternityd100.sheet .window-content form table.generalTable {
+  border: 1px solid #0EAAAA;
+  background-color: #EEF8F8;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+.Alternityd100.sheet .window-content form table.generalTable td, 
+.Alternityd100.sheet .window-content form table.generalTable th {
+  border: 2px solid #0EAAAA;
+  padding: 2px 2px;
+}
+.Alternityd100.sheet .window-content form table.generalTable tbody td {
+  font-size: 12px;
+}
+.Alternityd100.sheet .window-content form table.generalTable thead {
+  background: #0EAAAA;
+  background: -moz-linear-gradient(top, #4abfbf 0%, #26b2b2 66%, #0EAAAA 100%);
+  background: -webkit-linear-gradient(top, #4abfbf 0%, #26b2b2 66%, #0EAAAA 100%);
+  background: linear-gradient(to bottom, #4abfbf 0%, #26b2b2 66%, #0EAAAA 100%);
+  border-bottom: 2px solid #444444;
+}
+.Alternityd100.sheet .window-content form table.generalTable thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-align: center;
+  border-left: 2px solid #D0E4F5;
+}
+.Alternityd100.sheet .window-content form table.generalTable thead th:first-child {
+  border-left: none;
+}
+
+.Alternityd100.sheet .window-content form table.generalTable tfoot td {
+  font-size: 14px;
+}
+.Alternityd100.sheet .window-content form table.generalTable tfoot .links {
+  text-align: right;
+}
+.Alternityd100.sheet .window-content form table.generalTable tfoot .links a{
+  display: inline-block;
+  background: #1C6EA4;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px;
+}

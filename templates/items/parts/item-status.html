@@ -1,0 +1,15 @@
+
+
+           <div class="form-group">
+                    <input type="checkbox" name="system.equippable" {{checked itemData.equippable}}/> {{ localize "SFRPG.Items.Equippable" }}
+           
+                {{#if itemData.equippable}}
+               
+                    <input type="checkbox" name="system.equipped" {{checked itemData.equipped}}/> {{ localize "SFRPG.Items.Equipped" }}
+           
+                {{/if}}
+             
+                    <input type="checkbox" name="system.identified" {{checked itemData.identified}}/> {{ localize "SFRPG.Items.Identified" }}
+       
+            </div>
+ 

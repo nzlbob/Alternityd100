@@ -1,0 +1,307 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    {{> "systems/Alternityd100/templates/items/parts/item-header.html"}}
+
+     {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SFRPG.Details" }}</a>
+      
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+        {{> "systems/Alternityd100/templates/items/parts/item-description.html"}}
+
+        <div class="tab details" data-tab="details" data-group="primary">
+            <h4 class="form-header">{{ localize "Missiles, Bombs, and Mines" }}</h4>
+
+            <h4 class="section-header">"Propulsion System"</h4>
+            {{!-- Equipment Status --}}
+
+            
+
+
+            {{!-- Weapon Progress Level --}}
+            <div class="form-group">
+            <label>{{ localize "d100A.Items.Weapon.PL" }}</label>
+            <select name="system.PropProgressLevel">
+            {{#select itemData.PropProgressLevel}}
+            {{#each d100Aconfig.progressLevel as |name type|}}
+            <option value="{{type}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+            </select>
+            </div>
+            {{!-- Propulsion Name --}}
+                    
+            <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.accTooltip" }}">
+                <label>{{ localize "d100A.Items.Ordnance.PropName" }}</label>
+                <div class="form-fields">
+                    <input type="text" style="text-align: center; size: 20 px; " name="system.propName" value="{{itemData.propName}}" data-dtype="String" placeholder="0"/>
+                 </div>
+            </div>
+
+            <div class="form-group">
+                <label>{{ localize "d100A.Items.Ordnance.OrdnanceType" }}</label>
+                <div class="form-fields">
+                    <select name="system.ammunitionType">
+                        {{#select itemData.ammunitionType}}
+                        <option value="">{{ localize "d100A.Items.Ordnance.Type.None" }}</option>
+                        {{#each d100Aconfig.ordnanceTypes as |ammunition type|}}
+                        <option value="{{type}}">{{ammunition}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+            
+            {{!-- Guidance Tech --}}
+                     
+            <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.accTooltip" }}">
+                <label>{{ localize "d100A.Items.Ordnance.Tech" }}</label>
+                <div class="form-fields">
+                    <input type="text" style="text-align: center; size: 20 px; " name="system.propTech" value="{{itemData.propTech}}" data-dtype="String" placeholder="0"/>
+                 </div>
+            </div>
+
+            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.SizeTooltip" }}">
+         
+                <label>{{ localize "d100A.Items.Ordnance.Size" }}</label>
+                <div class="form-fields">
+                    <input type="text" style="text-align: center; size: 20 px; " name="system.size" value="{{itemData.size}}" data-dtype="Number" placeholder=1 />
+                </div>
+              </div>
+             
+              <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.SizeTooltip" }}">
+         
+                <label>{{ localize "d100A.Items.Ordnance.War" }}</label>
+                <div class="form-fields">
+                    <input type="text" style="text-align: center; size: 20 px; " name="system.warhead" value="{{itemData.warhead}}" data-dtype="Number" placeholder=1 />
+                </div>
+              </div>   
+             
+              <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.SizeTooltip" }}">
+         
+                <label>{{ localize "d100A.Items.Ordnance.PropCost" }}</label>
+                <div class="form-fields">
+                    <input type="text" style="text-align: center; size: 20 px; " name="system.propCost" value="{{itemData.propCost}}" data-dtype="Number" placeholder=1 />
+                </div>
+              </div>      
+
+              <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.SizeTooltip" }}">
+         
+                <label>{{ localize "d100A.Items.Ordnance.PropAcc" }}</label>
+                <div class="form-fields">
+                    <input type="text" style="text-align: center; size: 20 px; " name="system.propAcc" value="{{itemData.propAcc}}" data-dtype="Number" placeholder=1 />
+                </div>
+              </div>            
+         
+              <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.SizeTooltip" }}">
+         
+                <label>{{ localize "d100A.Items.Ordnance.Endurance" }}</label>
+                <div class="form-fields">
+                    <input type="text" style="text-align: center; size: 20 px; " name="system.end" value="{{itemData.end}}" data-dtype="Number" placeholder=1 />
+                </div>
+              </div>   
+              <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.SizeTooltip" }}">
+         
+                <label>{{ localize "d100A.Items.Ordnance.Acceleration" }}</label> 
+                <div class="form-fields">
+                    <input type="text" style="text-align: center; size: 20 px; " name="system.accel" value="{{itemData.accel}}" data-dtype="Number" placeholder=1 />
+                </div>
+              </div>
+             <!-- **************  Warhead Details  ***************************-->
+
+            <h4 class="section-header">Warhead</h4>
+
+            {{!-- Warhead Progress Level --}}
+            <div class="form-group">
+            <label>{{ localize "d100A.Items.Weapon.PL" }}</label>
+            <select name="system.progressLevel">
+            {{#select itemData.progressLevel}}
+            {{#each d100Aconfig.progressLevel as |name type|}}
+            <option value="{{type}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+            </select>
+            </div>
+           
+            {{!-- Warhead Name --}}
+                    
+            <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.accTooltip" }}">
+                <label>{{ localize "d100A.Items.Ordnance.WarName" }}</label>
+                <div class="form-fields">
+                    <input type="text" style="text-align: center; size: 20 px; " name="system.warName" value="{{itemData.warName}}" data-dtype="String" placeholder="0"/>
+                 </div>
+            </div>
+            {{!-- Warhead Tech --}}
+                    
+            <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.accTooltip" }}">
+                <label>{{ localize "Tech" }}</label>
+                <div class="form-fields">
+                    <input type="text" style="text-align: center; size: 20 px; " name="system.warTech" value="{{itemData.warTech}}" data-dtype="String" placeholder="0"/>
+                 </div>
+            </div>
+
+
+            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.SizeTooltip" }}">
+              <label>{{ localize "d100A.Items.Ordnance.War" }}</label>
+              <div class="form-fields">
+                  <input type="text" style="text-align: center; size: 20 px; " name="system.warwarhead" value="{{itemData.warwarhead}}" data-dtype="Number" placeholder=1 />
+              </div>
+            </div> 
+            
+            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.SizeTooltip" }}">
+         
+              <label>{{ localize "d100A.Items.Ordnance.WarCost" }}</label>
+              <div class="form-fields">
+                  <input type="text" style="text-align: center; size: 20 px; " name="system.warCost" value="{{itemData.warCost}}" data-dtype="Number" placeholder=1 />
+              </div>
+            </div>      
+
+            {{!-- Warhead Accuracy --}}
+                    
+            <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.accTooltip" }}">
+                <label>{{ localize "d100A.Items.Ordnance.WarAccur" }}</label>
+                <div class="form-fields">
+                    <input type="text" style="text-align: center; size: 20 px; " name="system.warAccur" value="{{itemData.warAccur}}" data-dtype="Number" placeholder="0"/>
+                 </div>
+            </div>
+
+            {{!-- Weapon Type --}}
+            <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.typeTooltip" }}">
+
+             <label>{{ localize "d100A.Items.Weapon.typename" }}</label>
+             <select name="system.type">
+             {{#select itemData.type}}
+             {{#each d100Aconfig.damagetype as |name type|}}
+             <option value="{{type}}">{{name}}</option>
+             {{/each}}
+             {{/select}}
+             </select>
+            </div>    
+         
+                {{!-- Weapon Firepower --}}
+                <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.firepowerTooltip" }}">
+
+                  <label>{{ localize "d100A.Items.Weapon.firepowername" }}</label>
+                  <select name="system.firepower">
+                  {{#select itemData.firepower}}
+                  {{#each d100Aconfig.starshipFirepower as |name type|}}
+                  <option value="{{type}}">{{name}}</option>
+                  {{/each}}
+                  {{/select}}
+                  </select>
+                </div> 
+
+                                            
+                {{!-- Weapon Damage O --}}
+                <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.damageTooltip" }}">
+
+                  <label>{{ localize "d100A.Items.Weapon.damageo" }}</label>
+                  <input type="text" style="text-align: center" name="system.damage.ord.dice" value="{{itemData.damage.ord.dice}}" data-dtype="String" placeholder="0"/>/
+                  
+                <select name="system.damage.ord.type">
+                  {{#select itemData.damage.ord.type}}
+                  {{#each d100Aconfig.damageQ as |name type2|}}
+                  <option value="{{type2}}">{{name}}</option>
+                  {{/each}}
+                  {{/select}}
+                  </select>
+                </div>     
+                {{!-- Weapon Damage Good --}}
+                <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.damageTooltip" }}">
+
+                  <label>{{ localize "d100A.Items.Weapon.damageg" }}</label>
+                  <input type="text" style="text-align: center" name="system.damage.goo.dice" value="{{itemData.damage.goo.dice}}" data-dtype="String" placeholder="0"/>/
+                  
+                <select name="system.damage.goo.type">
+                  {{#select itemData.damage.goo.type}}
+                  {{#each d100Aconfig.damageQ as |name type2|}}
+                  <option value="{{type2}}">{{name}}</option>
+                  {{/each}}
+                  {{/select}}
+                  </select>
+                </div>  
+                {{!-- Weapon Damage Amazing --}}
+                <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.damageTooltip" }}">
+
+                  <label>{{ localize "d100A.Items.Weapon.damagea" }}</label>
+                  <input type="text" style="text-align: center" name="system.damage.ama.dice" value="{{itemData.damage.ama.dice}}" data-dtype="String" placeholder="0"/>/
+                  
+                <select name="system.damage.ama.type">
+                  {{#select itemData.damage.ama.type}}
+                  {{#each d100Aconfig.damageQ as |name type2|}}
+                  <option value="{{type2}}">{{name}}</option>
+                  {{/each}}
+                  {{/select}}
+                  </select>
+                </div>  
+ 
+             <!-- **************  Guidance Details  ***************************-->
+
+             <h4 class="section-header">Guidance Systems</h4>
+
+             {{!-- Warhead Progress Level --}}
+             <div class="form-group">
+             <label>{{ localize "d100A.Items.Weapon.PL" }}</label>
+             <select name="system.guidanceProgressLevel">
+             {{#select itemData.guidanceProgressLevel}}
+             {{#each d100Aconfig.progressLevel as |name type|}}
+             <option value="{{type}}">{{name}}</option>
+             {{/each}}
+             {{/select}}
+             </select>
+             </div>
+            
+             {{!-- Guidance Name --}}
+                     
+             <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.accTooltip" }}">
+                 <label>{{ localize "d100A.Items.Ordnance.GuidanceName" }}</label>
+                 <div class="form-fields">
+                     <input type="text" style="text-align: center; size: 20 px; " name="system.guidanceName" value="{{itemData.guidanceName}}" data-dtype="String" placeholder="0"/>
+                  </div>
+             </div>
+             {{!-- Guidance Tech --}}
+                     
+             <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.accTooltip" }}">
+                 <label>{{ localize "d100A.Items.Ordnance.Tech" }}</label>
+                 <div class="form-fields">
+                     <input type="text" style="text-align: center; size: 20 px; " name="system.guidanceTech" value="{{itemData.guidanceTech}}" data-dtype="String" placeholder="0"/>
+                  </div>
+             </div>
+ 
+             <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.SizeTooltip" }}">
+         
+              <label>{{ localize "d100A.Items.Ordnance.GuidanceCost" }}</label>
+              <div class="form-fields">
+                  <input type="text" style="text-align: center; size: 20 px; " name="system.guidanceCost" value="{{itemData.guidanceCost}}" data-dtype="Number" placeholder=1 />
+              </div>
+            </div>      
+ 
+             {{!-- Guidance Accuracy --}}
+                     
+             <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.accTooltip" }}">
+                 <label>{{ localize "d100A.Items.Ordnance.GuidanceAccur" }}</label>
+                 <div class="form-fields">
+                     <input type="number" style="text-align: center; size: 20 px; " name="system.guidanceAccur" value="{{itemData.guidanceAccur}}" data-dtype="Number" placeholder="0"/>
+                  </div>
+             </div>
+             {{!-- Guidance Notes --}}
+                     
+             <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.accTooltip" }}">
+                 <label>{{ localize "d100A.Items.Ordnance.Notes" }}</label>
+                 <div class="form-fields">
+                     <input type="text" style="text-align: center; size: 20 px; " name="system.guidanceNotes" value="{{itemData.guidanceNotes}}" data-dtype="String" placeholder="0"/>
+                  </div>
+             </div>
+
+
+        </div>
+
+
+
+    </section>
+</form>

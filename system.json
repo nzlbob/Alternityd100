@@ -1,0 +1,74 @@
+{
+  "name": "Alternityd100",
+  "title": "Alternity by d100",
+  "description": "This is a Very Draft implementation of the Alternity RPG Rules (c) 1998 TSR Inc. There are lots of features to Implement, such as Bioware and Psionics (FX).",
+  "version": "0.45",
+  "compatibility": {
+    "minimum": 11, 
+    "verified": "11.309", 
+    "maximum": 11 
+  },
+
+  "authors": [
+    {
+      "name": "d100 Group",
+      "discord": "Thorgrim#5749"
+    }
+  ],
+  "scripts": [
+    "lib/popperjs/core/popper.min.js",
+    "lib/tippy/tippy.min.js"
+],
+"media": [
+  {
+      "type": "thumbnail",
+      "url": "systems/Alternityd100/images/VTTlogo3.png",
+      "name": "Alternity"
+  },
+  {
+      "type": "setup",
+      "url": "systems/Alternityd100/images/VTTlogo3.png",
+      "name": "Alternity"
+  },
+  {
+    "type": "cover",
+    "link": "https://raw.githubusercontent.com/nzlbob/Alternityd100/main/images/VTTlogo3.png"
+}
+
+],
+
+  "esmodules": ["module/d100alternity.js"],
+  "styles": ["styles/tippy.css","styles/simple.css","styles/attributeHud.css"],
+  "packs": [		
+    {
+      "label": "Starship Actions",
+      "type": "Item",
+      "name": "starship-actions",
+      "path": "./packs/starship-actions.db",
+      "system": "Alternityd100"
+  },
+  {
+    "label": "Starship System Damage",
+    "type": "Item",
+    "name": "starship-damage",
+   
+    "system": "Alternityd100"
+}
+],
+
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "gridDistance": 2,
+  "gridUnits": "m",
+  "primaryTokenAttribute": "stun",
+  "secondaryTokenAttribute": "wound",
+  "url": "https://github.com/nzlbob/alt_core",
+  "manifest": "https://raw.githubusercontent.com/nzlbob/Alternityd100/main/system.json",
+  "download": "https://github.com/nzlbob/Alternityd100/archive/refs/heads/main.zip",
+  "license": "This isn't licenced, Lots of other peoples work was used in the creation of this VTT implemntation. A LOT of Starfinder is used, because for some reason Many features from Alternity (the Original) are used in Starfinder so it was easy to port across. Barbrawl was used as a basis for the token bars, I think I sole some code for token movement as well. All in all Alternity stands apon the shoulders of GIANTS!"
+}

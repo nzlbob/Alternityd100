@@ -1,0 +1,123 @@
+{{#if isShip }}
+{{#unless isUseWarshipsOptions}}
+<div class="divTable crewTable">
+    
+    <div class="divTableRow">
+        <div class="divTableCell">
+
+
+            <div class="divTable crewTable">
+                <div class="divTableHeading">
+                <div class="divTableRow">
+                <div class="divTableHead">Compartment</div>
+                <div class="divTableHead">Durability</div>
+            
+            
+                </div>
+                </div>
+                <div class="divTableBody">
+                    {{#each actor.system.compartment.compartments as |compartment id|}}
+            
+                    <div class="divTableRow">
+                    <div class="divTableCell">{{compartment.name}}</div>
+                    <div class="divTableCell">
+                        fjhgfgh
+                        <input class="setCompartmentDur"  name="" type="number" value="{{compartment.value}}"
+                            data-dtype="Number" data-compart="{{id}}1" data-category="{{id}}2" data-compart="{{id}}3" data-position="{{id}}" placeholder="10" />
+
+
+                    </div>
+                    </div>
+                    {{/each}}
+                    
+
+            
+                    </div>
+
+            </div> 
+        </div>
+        <div class="divTableCell">
+
+<div class="divTable crewTable">
+    <div class="divTableHeading">
+    <div class="divTableRow">
+    <div class="divTableHead">head2</div>
+    <div class="divTableHead">SHIPS STATUS</div>
+
+
+    </div>
+    </div>
+    <div class="divTableBody">
+
+            <div class="divTableRow">
+            <div class="divTableCell"></div>
+            <div class="divTableCell"></div>
+
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell"></div>
+                <div class="divTableCell"></div>
+
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell"></div>
+                <div class="divTableCell"></div>
+
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell"></div>
+                <div class="divTableCell"></div>
+
+            </div>
+            </div>
+    </div> 
+
+
+</div>
+</div>
+</div>
+{{/unless}}
+
+
+{{/if}}
+
+{{#unless noFilters}}
+<div class="inventory-filters">
+    <ul class="filter-list flexrow" data-filter="features">
+        <li class="filter-title">{{localize "SFRPG.FeaturesFilter"}}</li>
+        <li class="filter-item" data-filter="action">{{localize "SFRPG.ActorSheet.Features.Filters.Action"}}</li>
+        <li class="filter-item" data-filter="bonus">{{localize "SFRPG.ActorSheet.Features.Filters.Bonus"}}</li>
+        <li class="filter-item" data-filter="reaction">{{localize "SFRPG.ActorSheet.Features.Filters.Reaction"}}</li>
+    </ul>
+</div>
+{{/unless}}
+
+<ol class="inventory-list">
+{{#each sections as |section sid|}}
+    <li class="inventory-header flexrow">
+        <h3 class="item-name flexrow">{{section.label}}</h3>
+
+        {{#if section.hasActions}}
+        <div class="item-detail item-uses">{{localize "SFRPG.FeaturesCharges"}}</div>
+        <div class="item-detail item-action">{{localize "SFRPG.FeaturesUsage"}}</div>
+        {{/if}}
+
+        {{#if ../isOwner}}
+        <div class="item-controls">
+            {{#if section.dataset.type}}
+            <a style="flex-basis:45px" class="item-control item-create" title="Create Item" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+                <i class="fas fa-plus"></i> {{localize "SFRPG.FeaturesAdd"}}
+            </a>
+            {{/if}}
+        </div>
+        {{/if}}
+    </li>
+
+    <ol class="item-list">
+    {{#each section.items as |item iid|}}
+        {{> "systems/Alternityd100/templates/actors/parts/actor-features-item.html" ../../this section=section item=item}}
+
+    {{/each}}
+    </ol>
+{{/each}}
+</ol>

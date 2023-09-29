@@ -1,0 +1,206 @@
+<div class="Alternityd100 chat-card item-card" data-actor-id="{{actor.id}}" data-item-id="{{item.id}}" {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}} {{#if sceneId}}data-scene-id="{{sceneId}}"{{/if}}>
+    <span  title="{{rollData.armorroll}}" >Damage: {{rollData.data.damage}} {{localize rollData.data.dmgtype}} ({{rollData.data.type}})({{rollData.data.firepower}})  </span>
+    {{console "Item Defence- Card 3" }}
+    {{console this }}
+    {{#each rollData.defence as |rd count|}}
+   
+    <header class="card-header flexrow">
+        <img class="action-img" src="{{rd.armor.img}}" title="{{rd.armor.name}} {{rd.roll.formula}}" />
+        <div class="flexcol">
+            <h4 title="{{r.armorroll}}" class="action-name">{{rd.armor.name}} Reduces{{localize action}} 
+                <a class="inline-roll inline-dsn-hidden inline-result{{#if atk.attack.isNat20}} natural-20{{/if}}{{#if atk.attack.isCrit}} critical-threat success{{/if}}{{#if atk.attack.isFumble}} failure{{/if}}"
+                title="{{rd.roll.formula}}" data-roll="{{json-string rd.roll}}">
+                <i class="fas fa-dice-d20"></i> {{rd.roll.total}}
+                </a>
+                
+                 </h4>
+            
+            <span  title="{{rollData.armorroll}}"> <p>Stun: {{rd.damage.stu}}</p><p> Wounds: {{rd.damage.wou}} </p><p>Mortal: {{rd.damage.mor}}</p><p>Critical: {{rd.damage.cri}} </p></span>
+            
+          
+        </div>
+    </header>
+    <div class="dice-roll">
+        <div class="dice-result">
+            <h4 class="dice-total{{#if isNat20}} natural-20{{/if}}{{#if isCrit}} critical-threat success{{/if}}{{#if isFumble}} failure{{/if}}">{{total}}</h4>
+            {{{tooltip}}}
+        </div>
+      </div>
+
+<!----------------------------------------------->
+{{console "Item Defence- Card 31" }}
+    {{console ../this }}
+      <div class="chat-attack">
+        
+        <table>
+          <thead>
+            {{#if true}}
+            <tr>
+              <th class="attack-flavor" {{#if atk.hasCritConfirm}}colspan="4"{{else}}colspan="2"{{/if}}>
+                {{atk.attack.flavor}}
+
+              </th>
+            </tr>
+
+
+            {{/if}}
+          </thead>
+    
+          <tbody>
+            {{#if false}}
+            <tr>
+              <td {{#if atk.hasCritConfirm}}colspan="2"{{else}}colspan="4"{{/if}}>
+                <a class="inline-roll inline-dsn-hidden inline-result{{#if atk.attack.isNat20}} natural-20{{/if}}{{#if atk.attack.isCrit}} critical-threat success{{/if}}{{#if atk.attack.isFumble}} failure{{/if}}"
+                title="{{atk.attack.formula}}" data-roll="{{json-string rd.roll}}">
+                <i class="fas fa-dice-d20"></i> {{rd.roll.total}}ff
+                </a>
+              </td>
+              {{#if false}}
+              <td colspan="2">
+                <a class="inline-roll inline-dsn-hidden inline-result{{#if atk.critConfirm.isCrit}} success{{/if}}{{#if atk.critConfirm.isFumble}} failure{{/if}}"
+                title="{{atk.critConfirm.formula}}" data-roll="{{json-string atk.critConfirm.roll}}">
+                <i class="fas fa-dice-d20"></i> {{atk.critConfirm.total}}gg
+                </a>
+              </td>
+              {{/if}}
+            </tr>
+    
+            {{#if false}}
+            <tr>
+              <th colspan="2">
+                {{atk.damage.flavor}}
+                <a class="fake-inline-roll inline-dsn-hidden inline-result" title="{{localize "PF1.Total"}}">
+                  {{rd.roll.total}}aa
+                </a>
+              </th>
+              {{#if atk.hasCritConfirm}}
+              <th colspan="2">
+                {{atk.critDamage.flavor}}
+                <a class="fake-inline-roll inline-dsn-hidden inline-result" title="{{localize "PF1.Total"}}">
+                  {{atk.critDamage.total}}
+                </a>
+              </th>
+              {{/if}}
+            </tr>
+    
+            {{!-- Damage parts in an attack --}}
+            {{#each atk.damageRows as |dr|}}
+            <tr>
+              {{#if dr.normal}}
+              <td>
+                <a class="inline-roll inline-dsn-hidden inline-result" title="{{dr.normal.roll.formula}}" data-roll="{{json-string dr.normal.roll}}">
+                  <i class="fas fa-dice-d20"></i> {{dr.normal.roll.total}}
+                </a>
+              </td>
+              <td>{{dr.normal.damageType}}</td>
+              {{else}}
+              <td></td>
+              <td></td>
+              {{/if}}
+              {{#if atk.hasCritConfirm}}
+              {{#if dr.crit}}
+              <td>
+                <a class="inline-roll inline-dsn-hidden inline-result" title="{{dr.crit.roll.formula}}" data-roll="{{json-string dr.crit.roll}}">
+                  <i class="fas fa-dice-d20"></i> {{dr.crit.roll.total}}
+                </a>
+              </td>
+              <td>{{dr.crit.damageType}}</td>
+              {{else}}
+              <td></td>
+              <td></td>
+              {{/if}}
+              {{/if}}
+            </tr>
+            {{/each}}
+            {{/if}}
+    
+            {{else}}
+    
+            {{!-- Damage parts without an attack roll --}}
+            {{#each atk.damageRows as |dr|}}
+            <tr>
+              {{#if dr.normal}}
+              <td>
+                <a class="inline-roll inline-dsn-hidden inline-result" title="{{dr.normal.roll.formula}}" data-roll="{{json-string dr.normal.roll}}">
+                  <i class="fas fa-dice-d20"></i> {{dr.normal.roll.total}}
+                </a>
+              </td>
+              <td>{{dr.normal.damageType}}</td>
+              {{else}}
+              <td></td>
+              <td></td>
+              {{/if}}
+              {{#if atk.hasCritConfirm}}
+              {{#if dr.crit}}
+              <td>
+                <a class="inline-roll inline-dsn-hidden inline-result" title="{{dr.crit.roll.formula}}" data-roll="{{json-string dr.crit.roll}}">
+                  <i class="fas fa-dice-d20"></i> {{dr.crit.roll.total}}
+                </a>
+              </td>
+              <td>{{dr.crit.damageType}}</td>
+              {{else}}
+              <td></td>
+              <td></td>
+              {{/if}}
+              {{/if}}
+            </tr>
+            {{/each}}
+            {{/if}}
+          </tbody>
+        </table>
+        
+    
+        {{#if atk.hasCards}}
+        <hr>
+    
+        <div class="flexcol card-buttons">
+          {{#each atk.cards as |cardGroup|}}
+          <div class="card-button-group flexcol">
+            <label>{{cardGroup.label}}</label>
+            <div class="flexrow">
+            {{#each cardGroup.items as |item|}}
+              <button data-action="{{item.action}}" data-value="{{item.value}}" data-tags="{{item.tags}}">{{item.label}}</button>
+            {{/each}}
+            </div>
+          </div>
+          {{/each}}
+          {{#if ../hasSave}}
+          <button data-action="save" data-dc="{{../save.dc}}" data-type="{{../save.type}}"
+            {{#if ../save.gmSensitiveLabel}} data-gm-sensitive-inner="{{../save.gmSensitiveLabel}}"{{/if}}
+            data-tags="{{item.tags}}">{{../save.label}}</button>
+          {{/if}}
+        </div>
+        {{else}}
+        <div class="card-button-group flexcol">
+          {{#if ../hasSave}}
+          <button data-action="save" data-dc="{{../save.dc}}" data-type="{{../save.type}}"
+            {{#if ../save.gmSensitiveLabel}} data-gm-sensitive-inner="{{../save.gmSensitiveLabel}}"{{/if}}
+            data-tags="{{item.tags}}">{{../save.label}}</button>
+          {{/if}}
+        </div>
+        {{/if}}
+    
+        {{{atk.effectNotesHTML}}}
+      </div>
+    
+<!----------------------------------------------->
+
+    {{/each}}
+    <div class="card-content">
+       Apply Damage at the end of the Phase
+    </div>
+
+    <div class="card-buttons">
+        {{#if hasAttack}}<button data-action="attack">{{ localize "SFRPG.Attack" }}</button>{{/if}}
+        {{#if hasDamage}}<button data-action="damage">{{ localize "SFRPG.Damage.Title" }}</button>{{/if}}
+        {{!-- {{#if isVersatile}}<button data-action="versatile">{{ localize "SFRPG.Versatile" }}</button>{{/if}} --}}
+        {{#if hasSave}}<button data-action="save" data-type="{{item.system.save.type}}">{{ localize "SFRPG.Save" }} {{labels.save}}</button>{{/if}}
+    </div>
+
+    <footer class="card-footer">
+        {{#each data.properties}}
+        <span>{{this}}</span>
+        {{/each}}
+        
+    </footer>
+</div>

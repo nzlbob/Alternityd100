@@ -1,0 +1,68 @@
+<form style="width:2000px font-family: serpentine; ">
+
+  
+<div class="form-group">
+    <label>{{stepflavor}}</label>
+    
+  </div>
+
+  <div class="form-group">
+    <label>Base Roll</label>
+    <input type="text" name="formula" value="{{formula}}" disabled/>
+  </div>
+  <!--<div class="form-group">
+    <label>Difficulty Steps</label>
+    <input type="text" name="bonus" value="" placeholder="e.g. +1d4"/>
+  </div>-->
+    <div class="form-group">
+    <label>Difficulty Steps</label>
+    <select name="dstep" style="font-family: serpentine;">
+      {{#select step}}
+     <!-- {{#each steps as |label stp|}}
+      <option style="font-family: serpentine;"  {{#if null}} selected {{/if}} value="{{stp}}"><span style="font-family: serpentine;">{{localize label}}</span></option>
+      {{/each}}
+
+Done like this because selecting the 5th item is hard :-(
+
+      -->
+     <option style="font-family: serpentine;"  value="-5"><span style="font-family: serpentine;">-5 steps No Sweat</span></option>
+     <option style="font-family: serpentine;"  value="-4"><span style="font-family: serpentine;">-4 steps Cakewalk</span></option>
+     <option style="font-family: serpentine;"  value="-3"><span style="font-family: serpentine;">-3 steps Extremely Easy</span></option>
+     <option style="font-family: serpentine;"  value="-2"><span style="font-family: serpentine;">-2 steps Very Easy</span></option>
+     <option style="font-family: serpentine;"  value="-1"><span style="font-family: serpentine;">-1 steps Easy</span></option>
+     <option style="font-family: serpentine;"  selected value="0"><span style="font-family: serpentine;">0 steps Average</span></option>
+     <option style="font-family: serpentine;"  value="1"><span style="font-family: serpentine;">+1 steps Tough</span></option>
+     <option style="font-family: serpentine;"  value="2"><span style="font-family: serpentine;">+2 steps Hard</span></option>
+     <option style="font-family: serpentine;"  value="3"><span style="font-family: serpentine;">+3 steps Challenging</span></option>
+     <option style="font-family: serpentine;"  value="4"><span style="font-family: serpentine;">+4 steps Formidable</span></option>
+     <option style="font-family: serpentine;"  value="5"><span style="font-family: serpentine;">+5 steps Grueling</span></option>
+     <option style="font-family: serpentine;"  value="6"><span style="font-family: serpentine;">+6 steps Gargantuan</span></option>
+     <option style="font-family: serpentine;"  value="7"><span style="font-family: serpentine;">+7 steps Leroy Jenkins</span></option>
+     
+     
+     
+     
+     
+
+     
+     
+     
+     
+      {{/select}}
+    </select>
+  </div>
+  <div class="form-group">
+    <label>RollMode</label>
+    <select name="rollMode" style="font-family: serpentine;">
+      {{#select rollMode}}
+      {{#each rollModes as |label mode|}}
+      <option style="font-family: serpentine;" value="{{mode}}"><span style="font-family: serpentine;">{{localize label}}</span></option>
+      {{/each}}
+      {{/select}}
+    </select>
+  </div>
+   <div class="form-group">
+
+    </div>
+    
+</form>

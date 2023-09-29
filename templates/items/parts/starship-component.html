@@ -1,0 +1,52 @@
+
+            <h4 class="section-header first">{{ localize "SFRPG.ItemSheet.StarshipComponent.Header" }}</h4>
+
+            {{#unless nobhpCost}}
+            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.Cost" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.CostTooltip" }}">
+                <label>{{ localize "SFRPG.ItemSheet.StarshipComponent.Cost" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.bhpCost" value="{{itemData.bhpCost}}" data-dtype="Number" placeholder="0"/>
+                </div>
+            </div>
+
+            
+            {{/unless}}
+
+            {{#unless noPCUCost}}
+            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.PCU" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.PCUTooltip" }}">
+                <label>{{ localize "SFRPG.ItemSheet.StarshipComponent.PCU" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.pcu" value="{{itemData.pcu}}" data-dtype="Number" placeholder="0" />
+                </div>
+            </div>
+            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.PoweredState" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.PoweredStateTooltip" }}">
+                <label>{{ localize "Is PCU Per Hull Point?" }}</label>
+                <div class="form-fields">
+                    <label class="checkbox">
+                        <input type="checkbox" name="system.isPCUPerBHP" {{checked itemData.isPCUPerBHP}}/> 
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.PoweredState" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.PoweredStateTooltip" }}">
+                <label>{{ localize "SFRPG.ItemSheet.StarshipComponent.PoweredState" }}</label>
+                <div class="form-fields">
+                    <label class="checkbox">
+                        <input type="checkbox" name="system.isPowered" {{checked itemData.isPowered}}/> {{ localize "SFRPG.ItemSheet.StarshipComponent.IsPowered" }}
+                    </label>
+                </div>
+            </div>
+            {{/unless}}
+
+            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.PriceTooltip" }}">
+                <label>{{ localize "Base Price" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.price" value="{{itemData.price}}" data-dtype="Number" />
+                </div>
+            </div>
+            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.PriceTooltip" }}">
+                <label>{{ localize "Price per BHP" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.pricePerBHP" value="{{itemData.pricePerBHP}}" data-dtype="Number" />
+                </div>
+            </div>
