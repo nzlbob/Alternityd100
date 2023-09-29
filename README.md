@@ -1,3 +1,3 @@
-# Simple Worldbuilding System
+# Alternity by d100 Group
 
-A simple game system for Foundry VTT which allows for flexible definition of Actors and Items to assist with worldbuilding or for running games which do not have a more complete system implementation available.
+This is a Very Draft implementation of the Alternity RPG Rules (c) 1998 TSR Inc for use with Foundary Vtt. This is a very early implementation, there are bugs, there are lots of features yet to Implement, such as Bioware and Psionics (FX).
