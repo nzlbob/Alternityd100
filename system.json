@@ -23,16 +23,17 @@
   {
       "type": "thumbnail",
       "url": "systems/Alternityd100/images/VTTlogo3.png",
-      "name": "Alternity"
+      "name": "Alternity by d100 Group"
   },
   {
       "type": "setup",
       "url": "systems/Alternityd100/images/VTTlogo3.png",
-      "name": "Alternity"
+      "name": "Alternity by d100 Group"
   },
   {
     "type": "cover",
-    "link": "https://raw.githubusercontent.com/nzlbob/Alternityd100/main/images/VTTlogo3.png"
+    "url":"https://raw.githubusercontent.com/nzlbob/Alternityd100/main/images/VTTlogo3.png",
+    "caption": "Alternity by d100 Group"
 }
 
 ],
