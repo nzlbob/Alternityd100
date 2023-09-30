@@ -611,8 +611,10 @@ export function handleOnDrop(event) {
  * Macrobar hook.
  */
 Hooks.on("hotbarDrop",(bar, data, slot) => {
+
+  console.log("\n A", bar, data, slot)
   let a = createAlternityd100Macro(data, slot)
-  console.log("\n A", a)
+  
   return false
 
 }

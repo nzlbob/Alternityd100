@@ -95,7 +95,17 @@ html.find('.rollable').click(this._onRoll.bind(this));
     // Roll Skill Checks
     html.find('.rollable-skill').click(this._onRollSkillCheck.bind(this));
     //html.find(".skill > .skill-name > .rollable-skill").click(this._onRollSubSkillCheck.bind(this));
+    html.find('.skilldrag').each((i, a) => {
+        a.setAttribute("draggable", true);
+        a.addEventListener("dragstart", ev => {
+            let dragData = ev.currentTarget.dataset;
+        ev.dataTransfer.setData('text/plain', JSON.stringify(dragData));
+      //  console.log(ev,i,a)
+      }, false);
+          //  console.log(i,a)
+        })
 
+    
 
     // Item Controls
     html.find(".item-control").click(this._onItemControl.bind(this));
@@ -105,7 +115,9 @@ html.find('.rollable').click(this._onRoll.bind(this));
     // Add draggable for Macro creation
     html.find(".attributes a.attribute-roll ").each((i, a) => {
       a.setAttribute("draggable", true);
+     
       a.addEventListener("dragstart", ev => {
+        console.log(ev)
         let dragData = ev.currentTarget.dataset;
         ev.dataTransfer.setData('text/plain', JSON.stringify(dragData));
       }, false);

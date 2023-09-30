@@ -1,3 +1,4 @@
+import { d100A } from "./d100Aconfig.js";
 /**
  * Create a Macro from an attribute drop.
  * Get an existing Alternityd100 macro if one exists, otherwise create a new one.
@@ -7,6 +8,9 @@
  */
 export async function createAlternityd100Macro(data, slot,a) {
   //let actor = game.actors.get(actorId);
+//console.log(data, slot,a)
+
+if (data.skill) return skillmacro(data, slot)
 
   let A = _parseUuid(data.uuid)
   let B = fromUuidSync(data.uuid)
@@ -32,6 +36,29 @@ export async function createAlternityd100Macro(data, slot,a) {
   }
   game.user.assignHotbarMacro(macro, slot);
   return false;
+
+  async function skillmacro(data, slot){
+
+console.log(data, slot)
+const command = ` actor.rollSkill("${data.skill}") `;
+let macroName = d100A.skills[data.skill]
+let macro = game.macros.contents.find(m => (m.name === macroName) && (m.command === command));
+
+if (!macro) {
+  macro = await Macro.create({
+    name: macroName,
+    img:"systems/Alternityd100/icons/conditions/icons8-skill-64.png",
+    type: "script",
+    command: command,
+    flags: { "Alternityd100.itemMacro": true }
+  });
+}
+game.user.assignHotbarMacro(macro, slot);
+
+return false
+  }
+
+
 }
 /***
  *  if("Item"===t.type)return async function(e,t){const o=await Item.fromDropData(e),r=`game.sfrpg.rollItemMacro("${o.name}");`;
