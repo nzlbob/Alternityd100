@@ -1,3 +1,7 @@
 2023/09/30-18:28:59.680 28fc Recovering log #137
 2023/09/30-18:28:59.768 28fc Delete type=0 #137
 2023/09/30-18:28:59.768 28fc Delete type=3 #135
+2023/09/30-20:31:42.974 ac4 Level-0 table #142: started
+2023/09/30-20:31:42.974 ac4 Level-0 table #142: 0 bytes OK
+2023/09/30-20:31:43.032 ac4 Delete type=0 #140
+2023/09/30-20:31:43.062 ac4 Manual compaction at level-0 from '!items!3mVD2O6KeSs9JSel' @ 72057594037927935 : 1 .. '!items!vrKrTg3cfc0CQjPU' @ 0 : 0; will stop at (end)
