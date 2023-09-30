@@ -81,8 +81,8 @@
 
 
                  {{!-- Weapon Availability --}}
-                <div class="form-group">
-                <label>{{ localize "d100A.availability" }}</label>
+                <div class="form-group" data-tooltip="{{localize 'd100A.availabilitytooltip' }}">
+                <label  >{{ localize "d100A.availability" }}</label>
                 <select name="system.availability">
                 {{#select itemData.availability}}
                 {{#each d100Aconfig.availability as |name type|}}

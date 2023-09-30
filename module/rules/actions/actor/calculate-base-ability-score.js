@@ -90,6 +90,7 @@ export default function (engine) {
             );
 
             let score = ability.base ? ability.base : 10;
+            
             ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreBaseTooltip", { mod: score.signedString() }));
 
             const modFromPerk = perkMod[abl] ?? 0;

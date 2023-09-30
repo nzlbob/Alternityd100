@@ -57,9 +57,9 @@
 
             {{#if (eq modifier.effectType "ac")}}
             <option value=""></option>
-            <!--this should update immediatly but it doesn't-->
-            {{#each d100Aconfig.modifierResistanceAffectedValues as |armorClass key|}}
-            <option value="{{key}}">{{armorClass}}</option>
+            <!--this should update immediatly but it does now-->
+            {{#each d100Aconfig.modifierResistanceAffectedValues as |resistance key|}}
+            <option value="{{key}}">{{resistance}}</option>
             {{/each}}
             
             

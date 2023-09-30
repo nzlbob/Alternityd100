@@ -865,7 +865,7 @@ d100A.NPCCrewArray = {
 
 d100A.skillData = {
 
-   "armorop" :{"name" :"d100A.armorop" , "attrib":"str","isBroad" : true,"id" : 0,"broad" : "armorop"},
+   "armorop" :{"name" :"d100A.armorop" , "attrib":"str","isBroad" : true,"id" : 0,"broad" : "armorop", "tooltip" : "Armor that's bulky, heavy, and cumbersome hinders the character using it. This is reflected by a penalty la the character s action check and the lessening or negating of a character s Dexterity resistance modifier. The Armor Operation broad skill and its specially skills help to alleviate these penalties Table P41: AlLMOR an page ESB in Chapter Jl: Weapons & Armor lists the various types of armor available and indicates which ones require the user to take an action check and Dexterity resistance modifier penalty, Under the Skill 1 column on that table, an entry of ' means that the Armor Operation skill is not needed to use the armor effectively, and no action check or Dexterity resistance modifier penalty is associated with it. II either Armor Op / combat / or 'powered appears under Skill, then the penalty (given in the AP"},
    "combaar" :{"name" :"d100A.combaar" , "attrib":"str","isBroad" : false,"id" : 1,"broad" : "armorop"},
    "powerar" :{"name" :"d100A.powerar" , "attrib":"str","isBroad" : false,"id" : 2,"broad" : "armorop"},
    "athle" :{"name" :"d100A.athle" , "attrib":"str","isBroad" : true,"id" : 3,"broad" : "athle"},
@@ -2057,11 +2057,11 @@ d100A.resistanceType = {
       "initiative": "SFRPG.ModifierEffectTypeInit",
       
      // "skill": "SFRPG.ModifierEffectTypeSkill",
-      "ranged-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.RangedAttackRolls",
-      "melee-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.MeleeAttackRolls",
-      "spell-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpellAttackRolls",
-      "weapon-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificWeaponAttackRolls",
-      "all-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllAttackRolls",
+      //"ranged-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.RangedAttackRolls",
+     // "melee-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.MeleeAttackRolls",
+     // "spell-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpellAttackRolls",
+     // "weapon-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificWeaponAttackRolls",
+     // "all-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllAttackRolls",
 
      /* "stamina-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.Stamina",
       "resolve-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.Resolve",
@@ -2069,9 +2069,9 @@ d100A.resistanceType = {
       "cmd": "SFRPG.ModifierEffectTypeCMD",
       "acp": "SFRPG.ModifierEffectTypeACP",
       
-      "ability-skills": "SFRPG.ModifierEffectTypeAbilitySkills",
+      "ability-skills": "SFRPG.ModifierEffectTypeAbilitySkills",*/
       "ability-score": "SFRPG.ModifierEffectTypeAbilityScore",
-      "ability-check": "SFRPG.ModifierEffectTypeAbilityCheck",
+      /*"ability-check": "SFRPG.ModifierEffectTypeAbilityCheck",
       "ability-checks": "SFRPG.ModifierEffectTypeAbilityChecks",
       
       "all-skills": "SFRPG.ModifierEffectTypeAllSkills",

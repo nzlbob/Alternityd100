@@ -11,9 +11,9 @@ export default function (engine) {
             
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.INITIATIVE].includes(mod.effectType);
         });
-        console.log( "------filteredMods------",  context, filteredMods)  // Looking for [1].valueAffected
+      //  console.log( "------filteredMods------",  context, filteredMods)  // Looking for [1].valueAffected
         const mods = context.parameters.stackModifiers.process(filteredMods, context);
-        console.log( "------Mods------",mods) // This is a bunch of array objects with the type of bonus. Alternity are all untyped
+      //  console.log( "------Mods------",mods) // This is a bunch of array objects with the type of bonus. Alternity are all untyped
 
         const mod = Object.entries(mods).reduce((prev, curr) => {
             if (curr[1] === null || curr[1].length < 1) return prev;
@@ -37,7 +37,7 @@ export default function (engine) {
                     console
                     if(bonus.valueAffected == "steps") { 
                         let a = addModifier(bonus, data, init.step, "SFRPG.InitiativeModiferTooltip")
-                        console.log("Hello" ,a ,bonus, data, init.step)
+                     //   console.log("Hello" ,a ,bonus, data, init.step)
                         
                         prev += a //addModifier(bonus, data, init.step, "SFRPG.InitiativeModiferTooltip");
                 }

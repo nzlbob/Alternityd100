@@ -33,6 +33,8 @@ export default function (engine) {
             return computedBonus;
         };
 
+        
+
         const filteredMods = modifiers.filter(mod => {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.ABILITY_MODIFIER, SFRPGEffectType.ABILITY_MODIFIERS].includes(mod.effectType);
         })

@@ -205,7 +205,7 @@
     <div class="divTableRow">
  <!-- Ability Scores -->    
             <div class="divTableCell">
-            <div class="divTable blueTable"style="width: 180px;">
+            <div class="divTable blueTable">
             <div class="divTableBody">
             <div class="divTableRow">
             <div class="divTableCell" style="text-align:center;font-family: serpentine-bold;">Cur / Base</div>
@@ -215,7 +215,7 @@
             <div class="divTableRow">
             <div class="divTableCell"style="text-align:right">STR<input disabled="true" type="number" name="system.abilities.str.value" value="{{systemData.abilities.str.value}}"/><input type="number" name="system.abilities.str.base" value="{{systemData.abilities.str.base}}"/></div>
 
-            <div class="divTableCell"><input disabled="true" type="number" name="system.abilities.str.mod" value="{{systemData.abilities.str.mod}}"/></div>
+            <div class="divTableCell"><input disabled="true" type="number" data-tooltip="{{system.abilities.str.tooltip}}" name="system.abilities.str.mod" value="{{systemData.abilities.str.mod}}"/></div>
             <div class="divTableCell"></div>
 
 
@@ -224,27 +224,27 @@
             </div>
             <div class="divTableRow">
                 <div class="divTableCell"style="text-align:right">DEX<input disabled="true" type="number" name="system.abilities.dex.value" value="{{systemData.abilities.dex.value}}"/><input type="number" name="system.abilities.dex.base" value="{{systemData.abilities.dex.base}}"/></div>
-                <div class="divTableCell"><input disabled="true" type="number" name="system.abilities.dex.mod" value="{{systemData.abilities.dex.mod}}"/></div>
+                <div class="divTableCell"><input disabled="true" data-tooltip="{{system.abilities.dex.tooltip}}" type="number" name="system.abilities.dex.mod" value="{{systemData.abilities.dex.mod}}"/></div>
                 <div class="divTableCell"></div>
             </div>
             <div class="divTableRow">
                 <div class="divTableCell"style="text-align:right">CON<input  disabled="true" type="number" name="system.abilities.con.value" value="{{systemData.abilities.con.value}}"/><input type="number" name="system.abilities.con.base" value="{{systemData.abilities.con.base}}"/></div>
-                <div class="divTableCell"><input disabled="true" type="number" name="system.abilities.con.mod" value="{{systemData.abilities.con.mod}}"/></div>
+                <div class="divTableCell"><input disabled="true" type="number" data-tooltip="{{system.abilities.con.tooltip}}" name="system.abilities.con.mod" value="{{systemData.abilities.con.mod}}"/></div>
                 <div class="divTableCell"></div>
             </div>
             <div class="divTableRow">
                 <div class="divTableCell"style="text-align:right">INT<input  disabled="true" type="number" name="system.abilities.int.value" value="{{systemData.abilities.int.value}}"/><input type="number" name="system.abilities.int.base" value="{{systemData.abilities.int.base}}"/></div>
-                <div class="divTableCell"><input disabled="true" type="number" name="system.abilities.int.mod" value="{{systemData.abilities.int.mod}}"/></div>
+                <div class="divTableCell"><input disabled="true" type="number" data-tooltip="{{system.abilities.int.tooltip}}" name="system.abilities.int.mod" value="{{systemData.abilities.int.mod}}"/></div>
                 <div class="divTableCell"></div>
             </div>
             <div class="divTableRow">
                 <div class="divTableCell"style="text-align:right">WIL<input disabled="true" type="number" name="system.abilities.wil.value" value="{{systemData.abilities.wil.value}}"/><input type="number" name="system.abilities.wil.base" value="{{systemData.abilities.wil.base}}"/></div>
-                <div class="divTableCell"><input disabled="true" type="number" name="system.abilities.wil.mod" value="{{systemData.abilities.wil.mod}}"/></div>
+                <div class="divTableCell"><input disabled="true" type="number" data-tooltip="{{system.abilities.wil.tooltip}}" name="system.abilities.wil.mod" value="{{systemData.abilities.wil.mod}}"/></div>
                 <div class="divTableCell"></div>
             </div>
             <div class="divTableRow">
                 <div class="divTableCell"style="text-align:right">PER<input disabled="true"type="number" name="system.abilities.per.value" value="{{systemData.abilities.per.value}}"/><input type="number" name="system.abilities.per.base" value="{{systemData.abilities.per.base}}"/></div>
-                <div class="divTableCell"><input disabled="true" type="number" name="system.abilities.per.mod" value="{{systemData.abilities.per.mod}}"/></div>
+                <div class="divTableCell"><input disabled="true" type="number" data-tooltip="{{system.abilities.per.tooltip}}" name="system.abilities.per.mod" value="{{systemData.abilities.per.mod}}"/></div>
                 <div class="divTableCell"></div>
             </div>
             </div>
@@ -256,7 +256,7 @@
     
    <!-- Speed Scores -->  
 <div class="divTableCell">
-    <div class="divTable blueTable"style="width: 30%;">
+    <div class="divTable blueTable">
     <div class="divTableBody">
     <div class="divTableRow">
     <div class="divTableCell" style="text-align:center;font-family: serpentine-bold;">Combat Movement</div>
@@ -307,8 +307,9 @@
     <div class="divTable blueTable">
     <div class="divTableBody">
     <div class="divTableRow">
-    <div class="divTableCell" style="text-align:right;font-family: serpentine-bold;">Biodata</div>
-    <div class="divTableCell" style="text-align:right;width: fit-content;">-</div>
+        <div class="divTableCell" style="text-align:center;font-family: serpentine-bold;">Biodata</div>
+        <div class="divTableCell" style="text-align:center"></div>
+
     </div>
     <!--<div class="divTableRow">
         <div class="divTableCell"style="text-align:right">Species</div>
@@ -399,9 +400,8 @@
 
 
 
-    <div class="divTableCell">cell4_1</div></div>
-    <div class="divTableRow">
-    <div class="divTableCell">cell1_2</div><div class="divTableCell">cell2_2</div><div class="divTableCell">cell3_2</div><div class="divTableCell">cell4_2</div></div>
+    </div>
+    
     </div>
     
 </div>

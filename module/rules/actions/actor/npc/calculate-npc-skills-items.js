@@ -8,8 +8,8 @@ export default function (engine) {
 
         const PChange =  (systemData.details.profession.historicP != profession)
         const QChange =  (systemData.details.profession.historicQ != npcQuality)
-        console.log(PChange,QChange)
-        console.log(d100A.npc.skills[profession])
+     //   console.log(PChange,QChange)
+     //   console.log(d100A.npc.skills[profession])
 
         if(PChange||QChange){
             for (let [k,v] of Object.entries(systemData.skills)) {
