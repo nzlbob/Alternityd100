@@ -23,6 +23,7 @@ export const preloadHandlebarsTemplates = async function() {
 "systems/Alternityd100/templates/actors/parts/actor-traits.html",
 "systems/Alternityd100/templates/actors/parts/actor-vehicle-system-item.html",
 "systems/Alternityd100/templates/actors/parts/actor-vehicle-systems.html",
+"systems/Alternityd100/templates/actors/parts/actor-skills.html",
 "systems/Alternityd100/templates/actors/parts/actor-starship-crew.html",
 "systems/Alternityd100/templates/actors/parts/actor-starship-status.html",
 "systems/Alternityd100/templates/actors/parts/actor-starship-config.html",

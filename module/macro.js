@@ -39,9 +39,12 @@ if (data.skill) return skillmacro(data, slot)
 
   async function skillmacro(data, slot){
 
-console.log(data, slot)
-const command = ` actor.rollSkill("${data.skill}") `;
-let macroName = d100A.skills[data.skill]
+//console.log(data, slot)
+const command = ` if(!actor){ui.notifications.warn("No token selected"); return };  actor.rollSkill("${data.skill}") `;
+let macroName = d100A.skills[d100A.skillData[data.skill].broad]
+if (!d100A.skillData[data.skill].isBroad){
+  macroName += "<br/>" + d100A.skills[data.skill]
+}
 let macro = game.macros.contents.find(m => (m.name === macroName) && (m.command === command));
 
 if (!macro) {

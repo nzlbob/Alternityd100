@@ -35,25 +35,25 @@
         <col style="width: 18%">
         </colgroup>
 
-    <tr style="height: 18px;"  >
-    <th class="resource-headx" title="{{ systemData.attributes.stu.label }}" >
-    Stun
-    </th>
-    <th class="resource-headx" title="{{ systemData.attributes.wou.tooltip }}">
-        Wound
-    </th>
-    <th class="resource-headx" title="{{ systemData.attributes.mor.tooltip }}">
-        Mortal
-    </th>
-    <th class="resource-heady" title="{{ systemData.attributes.actchk.tooltip }}">
-        Action Check
-    </th>
-    <th class="resource-headx"  >
-        Actions
-    </th>
-
-    
-</tr> 
+        <tr style="height: 18px;"  >
+            <th class="resource-headx" title="{{ systemData.attributes.stu.label }}" >
+            Stun
+            </th>
+            <th class="resource-headx" title="{{ systemData.attributes.wou.tooltip }}">
+                Wound
+            </th>
+            <th class="resource-headx" title="{{ systemData.attributes.mor.tooltip }}">
+                Mortal
+            </th>
+            <th class="resource-heady" title="{{ systemData.attributes.actchk.tooltip }}">
+                Action Check
+            </th>
+            <th class="resource-headx"  >
+                Actions
+            </th>
+        
+            
+        </tr> 
 
 <tr>
       
@@ -419,279 +419,8 @@
 
         {{!-- Skills Tab --}}
 
+        {{> "systems/Alternityd100/templates/actors/parts/actor-skills.html" }}
         
-        <div class="tab skills" data-group="primary" data-tab="skills">
-            <div class="divTable blueTable"style="width: 100%x;">
-                <div class="divTableBody">
-                    <div class="divTableRow">
-                        <div class="divTableCell" style="width: 30%; text-align: center;">
-                        
-                            Broad Skill Points: {{systemData.details.usedbroadskillpoints}} / {{systemData.details.broadskillpoints}} 
-                        </div>
-                        <div class="divTableCell" style="width: 30%;text-align: center;">
-                            Skill Points:{{systemData.details.usedskillpoints}} / {{systemData.details.skillpoints}} 
-                        </div>
-
-                        <div class="divTableCell" style="width: 30%;text-align: center;">
-                            <label>{{localize "Show All"}}</label>
-                            <input  class="squaredcheck"  type="checkbox" name="system.skillpoints.showAllSkills" {{checked systemData.skillpoints.showAllSkills}}/>
-                   
-                        </div>
-
-
-                        
-                    </div>
-                </div>
-            </div>
-
-
-
-<div class="divTable blueTable"style="width: 100%x;">
-    <div class="divTableBody">
-        <div class="divTableRow">
-            <div class="divTableCell" style="width: 30%;">
-
-<!-- FIRST Column -->
-
-<!-- the skills should be in their own tables -->
-
-    <div class="divTable blueTable" style="width: 100%;">
-    <div class="divTableBody">
-
-        <div class="divTableRow">
-
-<!--“text-indent: 40px”>
-
-Source: How to Indent in HTML? (Simple Guide) - Dopinger (https://blog.dopinger.com/how-to-indent-in-html-simple-guide)-->
-
-            <div class="divTableCell" style="text-align:left;font-size: 100%;height:80%; " > <h4 style="text-align: center;"> STR-DEX-CON </h4>
-
-                <h4 style="text-align: center;"> STRENGTH </h4>
-                {{#each systemData.skills as |skill s|}}
-                
-                
-                {{#if (or skill.show ../systemData.skillpoints.showAllSkills )}}
-
-                {{#if (eq skill.ability "str")}}
-                <div>
-                    <input 
-                    {{#if skill.type}} {{#if skill.untrained}} style="width:50% ;text-align:left;font-size: 70%;height:50%; text-indent: 10px "  {{else}}
-                    style="width:50% ;text-align:left;font-size: 70%;height:50%;color: rgb(0, 95, 87);text-indent: 10px " {{/if}} {{else}}
-                     style="width:50% ;text-align:left;font-size: 75%;height:50%; font-family: serpentine-bold; "{{/if}}
-                
-                    {{#if skill.customname}} {{else}} disabled = "true" {{/if}} name="system.skills.{{s}}.label" value="{{skill.label}}" type="Text" />
-                    
-                    <input style="width:15px ;text-align:left;font-size: 70%;height:60%" {{#if skill.type}} {{else}} disabled = "true" {{/if}} type="number" class="skill-ranks" title="Skill Ranks" name="system.skills.{{s}}.ranks"
-                        value="{{skill.ranks}}" />
-
-                       
-                        <span  style=" font-size: 70%;" class="attributes rollable-skill" data-skillId = {{s}} data-step={{skill.step}} data-roll="1d20{{skill.stepdie}}" data-label="{{skill.label}}">[{{skill.base}},{{skill.good}},{{skill.amazing}}] {{skill.stepdie}}</span>
-                       
-                        {{#if ../systemData.skillpoints.showAllSkills }}
-                        <input style="width:10px ;height:10px" class="squaredcheck"  type="checkbox" name="system.skills.{{s}}.show" {{checked skill.show}}/>
-                        {{/if}}
-                    </div>
-
-
-                    {{/if}}
-                    {{/if}}
-
-                    {{/each}}
-
-                <h4 style="text-align: center;"> DEXTERITY</h4>
-
-        {{#each systemData.skills as |skill s|}}
-
-
-        {{#if (or skill.show ../systemData.skillpoints.showAllSkills )}}
-
-        {{#if (eq skill.ability "dex")}}
-        <div>
-            <input 
-            {{#if skill.type}} {{#if skill.untrained}} style="width:50% ;text-align:left;font-size: 70%;height:50%; text-indent: 10px "  {{else}}
-            style="width:50% ;text-align:left;font-size: 70%;height:50%;color: rgb(0, 95, 87);text-indent: 10px " {{/if}} {{else}}
-             style="width:50% ;text-align:left;font-size: 75%;height:50%; font-family: serpentine-bold; "{{/if}}
-        
-            {{#if skill.customname}} {{else}} disabled = "true" {{/if}} name="system.skills.{{s}}.label" value="{{skill.label}}" type="Text" />
-            
-            <input style="width:15px ;text-align:left;font-size: 70%;height:60%" {{#if skill.type}} {{else}} disabled = "true" {{/if}} type="number" class="skill-ranks" title="Skill Ranks" name="system.skills.{{s}}.ranks"
-                value="{{skill.ranks}}" />
-
-               
-                <span style="font-size: 70%;" class=" rollable-skill" data-skillId = {{s}} data-step={{skill.step}} data-roll="1d20{{skill.stepdie}}" data-label="{{skill.label}}">[{{skill.base}},{{skill.good}},{{skill.amazing}}] {{skill.stepdie}}</span>
-               
-                {{#if ../systemData.skillpoints.showAllSkills }}
-                <input style="width:10px ;height:10px" class="squaredcheck"  type="checkbox" name="system.skills.{{s}}.show" {{checked skill.show}}/>
-                {{/if}}
-            </div>
-
-
-                    {{/if}}
-                    {{/if}}
-
-                    {{/each}}
-
-        <h4 style="text-align: center;"> CONSTITUTION </h4>
-{{#each systemData.skills as |skill s|}}
-
-
-{{#if (or skill.show ../systemData.skillpoints.showAllSkills )}}
-{{#if (eq skill.ability "con")}}
-<div>
-    <input 
-    {{#if skill.type}} {{#if skill.untrained}} style="width:50% ;text-align:left;font-size: 70%;height:50%; text-indent: 10px "  {{else}}
-    style="width:50% ;text-align:left;font-size: 70%;height:50%;color: rgb(0, 95, 87);text-indent: 10px " {{/if}} {{else}}
-     style="width:50% ;text-align:left;font-size: 75%;height:50%; font-family: serpentine-bold; "{{/if}}
-
-    {{#if skill.customname}} {{else}} disabled = "true" {{/if}} name="system.skills.{{s}}.label" value="{{skill.label}}" type="Text" />
-    
-    <input style="width:15px ;text-align:left;font-size: 70%;height:60%" {{#if skill.type}} {{else}} disabled = "true" {{/if}} type="number" class="skill-ranks" title="Skill Ranks" name="system.skills.{{s}}.ranks"
-        value="{{skill.ranks}}" />
-
-       
-        <span style="font-size: 70%;" class=" rollable-skill" data-skillId = {{s}} data-step={{skill.step}} data-roll="1d20{{skill.stepdie}}" data-label="{{skill.label}}">[{{skill.base}},{{skill.good}},{{skill.amazing}}] {{skill.stepdie}}</span>
-       
-        {{#if ../systemData.skillpoints.showAllSkills }}
-        <input style="width:10px ;height:10px" class="squaredcheck"  type="checkbox" name="system.skills.{{s}}.show" {{checked skill.show}}/>
-        {{/if}}
-    </div>
-
-                    {{/if}}
-                    {{/if}}
-
-                    {{/each}}
-
-            </div> 
-
-</div> 
-
-</div></div></div>
-
-<!-- Second Column -->
-<div class="divTableCell" style="width: 30%;">
-<div class="divTable blueTable"style="width: 100%;">
-    <div class="divTableBody">
-
-        <div class="divTableRow">
-
-<div class="divTableCell">
-
-    <h4 style="text-align: center;"> INTELLIGENCE </h4>
-    {{#each systemData.skills as |skill s|}}
-    {{#if (or skill.show ../systemData.skillpoints.showAllSkills )}}
-    {{#if (eq skill.ability "int")}}
-    <div>
-        <input 
-        {{#if skill.type}} {{#if skill.untrained}} style="width:50% ;text-align:left;font-size: 70%;height:50%; text-indent: 10px "  {{else}}
-        style="width:50% ;text-align:left;font-size: 70%;height:50%;color: rgb(0, 95, 87);text-indent: 10px " {{/if}} {{else}}
-         style="width:50% ;text-align:left;font-size: 75%;height:50%; font-family: serpentine-bold; "{{/if}}
-    
-        {{#if skill.customname}} {{else}} disabled = "true" {{/if}} name="system.skills.{{s}}.label" value="{{skill.label}}" type="Text" />
-        
-        <input style="width:15px ;text-align:left;font-size: 70%;height:60%" {{#if skill.type}} {{else}} disabled = "true" {{/if}} type="number" class="skill-ranks" title="Skill Ranks" name="system.skills.{{s}}.ranks"
-            value="{{skill.ranks}}" />
-
-           
-            <span style="font-size: 70%;" class=" rollable-skill" data-skillId = {{s}} data-step={{skill.step}} data-roll="1d20{{skill.stepdie}}" data-label="{{skill.label}}">[{{skill.base}},{{skill.good}},{{skill.amazing}}] {{skill.stepdie}}</span>
-           
-            {{#if ../systemData.skillpoints.showAllSkills }}
-            <input style="width:10px ;height:10px" class="squaredcheck"  type="checkbox" name="system.skills.{{s}}.show" {{checked skill.show}}/>
-            {{/if}}
-        </div>
-                    {{/if}}
-                    {{/if}}
-
-                    {{/each}}
-
-
-
-
-</div>
-</div></div></div> 
-</div>
-
-<div class="divTableCell" style="width: 30%;">
-
-    <!-- FIRST Column -->
-    
-        <div class="divTable blueTable" style="width: 100%;">
-        <div class="divTableBody">
-    
-            <div class="divTableRow">
-    
-    
-    
-                <div class="divTableCell" style="text-align:left;font-size: 100%;height:70%"> <h4 style="text-align: center;"> WIL-PER </h4>
-                    <h4 style="text-align: center;"> WILL </h4>
-                    {{#each systemData.skills as |skill s|}}
-                    {{#if (or skill.show ../systemData.skillpoints.showAllSkills )}}
-                    {{#if (eq skill.ability "wil")}}
-                    <div>
-                        <input 
-                        {{#if skill.type}} {{#if skill.untrained}} style="width:50% ;text-align:left;font-size: 70%;height:50%; text-indent: 10px "  {{else}}
-                        style="width:50% ;text-align:left;font-size: 70%;height:50%;color: rgb(0, 95, 87);text-indent: 10px " {{/if}} {{else}}
-                         style="width:50% ;text-align:left;font-size: 75%;height:50%; font-family: serpentine-bold; "{{/if}}
-                    
-                        {{#if skill.customname}} {{else}} disabled = "true" {{/if}} name="system.skills.{{s}}.label" value="{{skill.label}}" type="Text" />
-                        
-                        <input style="width:15px ;text-align:left;font-size: 70%;height:60%" {{#if skill.type}} {{else}} disabled = "true" {{/if}} type="number" class="skill-ranks" title="Skill Ranks" name="system.skills.{{s}}.ranks"
-                            value="{{skill.ranks}}" />
-    
-                           
-                            <span style="font-size: 70%;" class=" rollable-skill" data-skillId = {{s}} data-step={{skill.step}} data-roll="1d20{{skill.stepdie}}" data-label="{{skill.label}}">[{{skill.base}},{{skill.good}},{{skill.amazing}}] {{skill.stepdie}}</span>
-                           
-                            {{#if ../systemData.skillpoints.showAllSkills }}
-                            <input style="width:10px ;height:10px" class="squaredcheck"  type="checkbox" name="system.skills.{{s}}.show" {{checked skill.show}}/>
-                            {{/if}}
-                        </div>
-                    {{/if}}
-                    {{/if}}
-
-                    {{/each}}
-    
-                   <h4 style="text-align: center;"> PERSONALITY</h4>
-    
-            {{#each systemData.skills as |skill s|}}
-            {{#if (or skill.show ../systemData.skillpoints.showAllSkills )}}
-            {{#if (eq skill.ability "per")}}
-            <div>
-                <input 
-                {{#if skill.type}} {{#if skill.untrained}} style="width:50% ;text-align:left;font-size: 70%;height:50%; text-indent: 10px "  {{else}}
-                style="width:50% ;text-align:left;font-size: 70%;height:50%;color: rgb(0, 95, 87);text-indent: 10px " {{/if}} {{else}}
-                 style="width:50% ;text-align:left;font-size: 75%;height:50%; font-family: serpentine-bold; "{{/if}}
-            
-                {{#if skill.customname}} {{else}} disabled = "true" {{/if}} name="system.skills.{{s}}.label" value="{{skill.label}}" type="Text" />
-                
-                <input style="width:15px ;text-align:left;font-size: 70%;height:60%" {{#if skill.type}} {{else}} disabled = "true" {{/if}} type="number" class="skill-ranks" title="Skill Ranks" name="system.skills.{{s}}.ranks"
-                    value="{{skill.ranks}}" />
-
-                   
-                    <span style="font-size: 70%;" class=" rollable-skill" data-skillId = {{s}} data-step={{skill.step}} data-roll="1d20{{skill.stepdie}}" data-label="{{skill.label}}">[{{skill.base}},{{skill.good}},{{skill.amazing}}] {{skill.stepdie}}</span>
-                   
-                    {{#if ../systemData.skillpoints.showAllSkills }}
-                    <input style="width:10px ;height:10px" class="squaredcheck"  type="checkbox" name="system.skills.{{s}}.show" {{checked skill.show}}/>
-                    {{/if}}
-                </div>
-                    {{/if}}
-                    {{/if}}
-
-                    {{/each}}
-    
-    
-    
-                </div> 
-    
-    </div> 
-    
-    </div></div></div>
-
-
-
-</div><!-- End Row -->
-</div><!-- End Body -->
-</div><!-- End Table-->
-</div>
-
 {{!-- Features Tab --}}
 <div class="tab features flexcol" data-group="primary" data-tab="features">
     {{> "systems/Alternityd100/templates/actors/parts/actor-features.html" sections=features}}
