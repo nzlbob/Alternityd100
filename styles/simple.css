@@ -652,6 +652,7 @@ div.crewTable {
   width: 100%;
   text-align: left;
   border-collapse: collapse;
+  vertical-align:top;
 }
 .divTable.crewTable .divTableCell, .divTable.crewTable .divTableHead {
   border: 2px solid #0EAAAA;
@@ -659,9 +660,17 @@ div.crewTable {
 }
 .divTable.crewTable .divTableBody .divTableCell {
   font-size: 13px;
-  padding: 2px 1px;
+  padding: 3px 1px;
+
 }
 
+.divTable.crewTable  td {
+  font-size: 13px;
+  padding: 5px 5px;
+  text-align: justify;
+  vertical-align:top;
+  border: 2px solid #0EAAAA;
+}
 
 .divTable.crewTable .divTableBody .divTableCell img{
   height: 15px;

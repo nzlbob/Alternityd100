@@ -8,23 +8,24 @@ import { d100A } from "./d100Aconfig.js";
  */
 export async function createAlternityd100Macro(data, slot,a) {
   //let actor = game.actors.get(actorId);
-//console.log(data, slot,a)
+console.log(data, slot,a)
 
 if (data.skill) return skillmacro(data, slot)
 
-  let A = _parseUuid(data.uuid)
+  //let A = _parseUuid(data.uuid)
   let B = fromUuidSync(data.uuid)
   let C = fromUuid(data.uuid)
   let actor = game.actors.get(B.actor);
  // const command = `const roll = new Roll("${data.roll}", actor ? actor.getRollData() : {});
  // roll.toMessage({speaker, flavor: "${B.name}"});`;
-
-  const command = ` let Item = fromUuidSync("${data.uuid}"); Item.rollAttack()`;
-
+ let command =""
+ if (B.hasAttack) command = ` let Item = fromUuidSync("${data.uuid}"); Item.rollAttack()`;
+ if (B.hasScan) command = ` let Item = fromUuidSync("${data.uuid}"); Item.rollScan()`;
+ if (B.hasDefence) command = ` let Item = fromUuidSync("${data.uuid}"); Item.rollDefence()`;
  //const command = `game.sfrpg.rollItemMacro("${item.name}");`;
   let macro = game.macros.contents.find(m => (m.name === B.name) && (m.command === command));
  
-  console.log(data,slot,A,B,command,macro)
+  console.log(data,slot,B,command,macro)
   if (!macro) {
     macro = await Macro.create({
       name: B.name,

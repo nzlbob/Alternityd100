@@ -150,435 +150,108 @@
          
             <div class="divTable crewTable">
                 <div class="divTableHeading">
-                <div class="divTableRow">
-                <div class="divTableHead">SHIPS CREW</div>
-                <div class="divTableHead">head2</div>
-                </div>
+                    <div class="divTableRow">
+                        <div class="divTableHead">SHIPS CREW</div>
+                    </div>
                 </div>
                 <div class="divTableBody">
-                <div class="divTableRow">
-                <div class="divTableCell">
-
-                    <table class="crewTable">
-                        <tbody>
-
-                    {{#each crew as |role rolename|}}
-                    
-                    {{#each role.actorlist as |actor a|}}
-                        {{#each actor as |skill b|}}
-                        <tr class="divTableRow" >
-                            <td class="crew-role">{{role.shortlabel}}</td>
-                            <td class="crew-view">{{skill.actor.name}}</td>
-                            <td class="crew-role">{{skill.label}}</td>
-                            <td class="crew-score" data-dtype="Number" data-role="{{role.dataset.role}}" data-attrib="{{skill.attrib}}" data-skill="{{skill.name}}" data-actorid="{{skill.actor.id}}">{{skill.score}}</td>
-                        
-                            </tr>
-                        {{/each}}
-                    {{/each}}
-                {{/each}}
-
-
-
-            </tbody>
-        </table>
-
-
-
-
+                    <div class="divTableRow">
+                        <div class="divTableCell">
+                            <table class="crewTable">
+                                <tbody>
+                                    {{#each crew as |role rolename|}}
+                                        {{#each role.actorlist as |actor a|}}
+                                            {{#each actor as |skill b|}}
+                                                <tr class="divTableRow" >
+                                                    <td class="crew-role">{{role.shortlabel}}</td>
+                                                    <td class="crew-view">{{skill.actor.name}}</td>
+                                                    <td class="crew-role">{{skill.label}}</td>
+                                                    <td class="crew-score" data-dtype="Number" data-role="{{role.dataset.role}}" data-attrib="{{skill.attrib}}" data-skill="{{skill.name}}" data-actorid="{{skill.actor.id}}">{{skill.score}}</td>
+                                                </tr>
+                                            {{/each}}
+                                        {{/each}}
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div class="divTableCell">cell2_1</div>
-                </div>
-                </div>
-                </div>
+            </div>
                 <img src="systems/Alternityd100/images/core/Fig_0.1.png" alt="Italian Trulli" style="width:700px;height:73px;">
 
-                <div class="divTable crewTable">
-                    <div class="divTableHeading">
+            <div class="divTable crewTable">
+                <div class="divTableHeading">
                     <div class="divTableRow">
-                    <div class="divTableHead">SHIPS CREW</div>
-                    <div class="divTableHead">head2</div>
-
+                        <div class="divTableHead"> <a href="https://archive.org/details/MyRpgCollection/Alternity_Warships/page/n9/mode/1up">Vehicle Maneuvers</a>  </div>
                     </div>
-                    </div>
-                    <div class="divTableBody">
+                </div>
+                <div class="divTableBody2">
                     <div class="divTableRow">
-                    <div class="divTableCell">
-    
-                        <img src="systems/Alternityd100/images/core/Fig_1-3.png" alt="Italian Trulli" style="width:235px;height:285px;">
-    
-    
-    
-            
+                        <div class="divTableCell">
+                            <table class="crewTable">
+                                <tbody>
+                                    <tr class="divTableRow" >
+                                        <th> 
+                                            <p> <b>Maneuvers</b></p>
+                                        </th>
+                                        <th> 
+                                            <p> <b>Maneuver Checks</b></p>
+                                        </th>
+                                        <th> 
+                                            <p> <b>Acceleration and Maneuver Checks</b></p>
+                                        </th>
+                                        <th> 
+                                            <p> <b>Jinking</b></p>
+                                        </th>   
+                                    </tr>
+                                    <tr class="divTableRow" >  
+                                        <td>
+                                            <p>For the basic combat game, we're assuming that starships are equipped with engines that permit cinematic maneuvers banks, loops, turns, and rolls. In effect, the gravity induction engine engages a medium against which it can exert force — the omnipresent gravitational energy of the universe. We'll examine other methods for moving and maneuvering ships in Chapter 2: Advanced Combat. <br> Ships may perform a number of maneuvers in one round equal to their Maneuverability Class.                                   
+                                                A speed of 5-8 reduces a ship's MC by 1 point; a speed of 9-12 reduces MC by 2 points; a speed of 13 to 16 reduces MC by 3 points. (Every 4 points of speed reduces maneuverability class by an additional point.)                                
+                                                <br>A ship at MC0 can only make maneuvers once every other round (Phase). A ship at MC -1 can maneuver once per three rounds; MC -2, once per four rounds; and so on. 
+                                            </p><p>There are four basic maneuvers available to a ship:
+                                            </p><p>Straight The ship simply moves forward one hex per point of speed. This isn't really a maneuver. A ship doesn't have to use its engines or perform any maneuvers to keep moving straightahead.
+                                            </p><p>Roll: The ship moves into any one of the four hexes on either side instead of moving into the hex directly ahead of it and maintains its current heading. Executing a roll does not cost any speed points.
+                                            </p><p> Turn: The ship moves forward one hex and then changes its heading by one hexside. Changing heading counts as one point of speed, so a ship with a speed of 5 could move 5 hexes in a straight line, or 4 hexes and turn.
+                                            </p><p> Loop and Turn: The ship moves straight ahead one hex and then selects any new heading desired. This costs two extra points of speed, so a ship with a speed of 5 could move 3 hexes and execute a loop and turn maneuver. 
+                                            </p>
+                                        </td>
+                                        
+                                        <td> 
+                                            <p> All ships are assigned a Maneuverability Class based on the size and hull type. However, a ship may attempt a crew check (or Vehicle Ops-spacecraft skill check on the part of the character at the helm) to increase its Maneuverability Class by 1, 2, or 3 for an Ordinary, Good, or Amazing success. <br> For example, a destroyer has a base Maneuverability Class 3. If it's traveling at a speed of 9, its MC is reduced by two points to MC 1. Under normal circumstances, the ship is limited to one maneuver per round. If the helmsman rolls an Ordinary success on the check, the destroyer's Maneuverability Class is increased to 2, allowing it to perform one more maneuver this round than it would normally due to its high speed.</p>
+                                        </td>
+                                        <td> 
+                                            <p> <b>Each point of acceleration "left over" after the ship adjusts its speed for the round adds a -1 step bonus to the maneuver check (or skill check). If the destroyer in the preceding example had two points of acceleration unused in the current phase, the pilot would roll his maneuver check with a -2 step bonus</p>
+                                        </td>
+                                        <td> 
+                                            <p> Instead of using a maneuver check to increase its maneuverability, a ship can instead use a maneuver check to "jink," making itself harder to hit. An Ordinary, Good, or Amazing result on the maneuver check adds a +1, +2, or +3 step penalty to any incoming enemy fire, missile attacks, or bomb attacks in the following fire phase. Just like a normal maneuver check, unused acceleration in the current round adds a - 1 step bonus per point left over to the maneuver check. In addition, the ship's size modifier is reversed and added to the pilot's skill check. For example, a fighter has a +3 step size modifier for targeting, but this becomes a - 3 step bonus for jinking attempts.Only</p>
+                                        </td>                                    
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="divTableCell">
-                        <img src="systems/Alternityd100/images/core/Fig_2-1.png" alt="Italian Trulli" style="width:550px;height:315px;">
-                    </div>
+                </div>
+            </div>
 
-                    </div>
-
+            <div class="divTable crewTable">
+                <div class="divTableBody">
                     <div class="divTableRow">
-                        <img src="systems/Alternityd100/images/core/Fig_2-2.png" alt="Italian Trulli" style="width:800px;height:560px;">
+                        <div class="divTableCell">
+                            <img src="systems/Alternityd100/images/core/Fig_1-3.png" alt="Italian Trulli" style="width:456px;height:560px;">
+                            <img src="systems/Alternityd100/images/core/WS_Fig_1-2.png" style="width:456px;height:1144px;" >
+                        </div>
+                        <div class="divTableCell">
+                             
+                        </div>
                     </div>
-                    </div>
-                    </div>
+                </div>
+            </div>
+
+          
                             
- 
 
-         
-
-            <div class="flexcol">
-                <h3 class="form-header">{{ localize "SFRPG.Attributes"}}</h3>
-                <ul class="attributes flexrow">
-                    <li class="attribute" data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.Complement" }}<br />@attributes.complement.min<br />@attributes.complement.max">
-                        <h4 class="attribute-name box-title">{{ localize "SFRPG.StarshipSheet.Attributes.Complement" }}</h4>
-                        <div class="attribute-value multiple">
-                            <span data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.ComplementMin" }}">{{system.attributes.complement.min}}</span>
-                            <span class="sep"> / </span>
-                            <span data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.ComplementMax" }}">{{system.attributes.complement.max}}</span>
-                        </div>
-                    </li>
-                    <li class="attribute" data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.DriftRating" }}<br />@attributes.drift.value<br/><br/>{{#each system.attributes.drift.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
-                        <h4 class="attribute-name box-title">{{ localize "SFRPG.StarshipSheet.Attributes.DriftRating" }}</h4>
-                        <div class="attribute-value">
-                            {{#if (eq system.attributes.drift.value 0)}}
-                            {{localize "SFRPG.StarshipSheet.Attributes.DriftNotAvailable"}}
-                            {{else}}
-                            <span class="ability-mod">{{system.attributes.drift.value}}</span>
-                            {{/if}}
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="flexcol">
-                <h3 class="form-header">{{localize "SFRPG.StarshipSheet.Quadrants.Header"}}</h3>
-                <ul class="attributes flexrow">
-                    <li class="attribute defences">
-                        <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Sides.Forward"}}</h4>
-                        <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Forward"}}<br />@quadrants.forward.shields.value{{#if system.hasDeflectorShields}}<br />@quadrants.forward.shields.max{{/if}}">
-                            <label class="name rightAligned">{{#if system.hasDeflectorShields}}{{localize "SFRPG.StarshipSheet.Details.Shields.Deflector"}}{{else}}{{localize "SFRPG.StarshipSheet.Details.Shields.Conventional"}}{{/if}}&nbsp;</label>
-                            {{#if system.hasShields}}
-                            {{#if system.hasDeflectorShields}}
-                            <input type="text" class="quadrantdefence" name="system.quadrants.forward.shields.value" value="{{system.quadrants.forward.shields.value}}" data-dtype="Number" placeholder="0" />
-                            <label>/</label>
-                            <label class="quadrantText">{{system.quadrants.forward.shields.max}}</label>
-                            <label></label>
-                            {{else}}
-                            <input type="text" class="quadrantdefence" name="system.quadrants.forward.shields.value" value="{{system.quadrants.forward.shields.value}}" data-dtype="Number" placeholder="0" />
-                            <label class="quadrantFiller"></label>
-                            {{/if}}
-                            {{else}}
-                            <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrants.NotAvailable"}}</label>
-                            {{/if}}
-                        </div>
-                        <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Ablative.Forward"}}<br />@quadrants.forward.ablative.value">
-                            <label class="name rightAligned">{{localize "SFRPG.StarshipSheet.Details.Ablative.Header"}}&nbsp;</label>
-                            {{#if system.hasAblativeArmor}}
-                            <input type="text" class="quadrantdefence" name="system.quadrants.forward.ablative.value" value="{{system.quadrants.forward.ablative.value}}" data-dtype="Number" placeholder="0" />
-                            <label>/</label>
-                            <input type="text" class="quadrantdefence" name="system.quadrants.forward.ablative.max" value="{{system.quadrants.forward.ablative.max}}" data-dtype="Number" placeholder="0" />
-                            <label></label>
-                            {{else}}
-                            <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrants.NotAvailable"}}</label>
-                            {{/if}}
-                        </div>
-                        <ol class="attribute-multibox">
-                            <li class="box-header flexrow">
-                                <label></label>
-                                <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
-                                <label>{{localize "SFRPG.StarshipSheet.Header.Misc"}}</label>
-                            </li>
-                            <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Quadrants.ArmorClass"}}<br/>@quadrants.forward.ac.value<br/>@quadrants.forward.ac.misc<br/><br/>{{#each system.quadrants.forward.ac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
-                                <label>AC</label>
-                                <label>{{system.quadrants.forward.ac.value}}</label>
-                                <input type="text" name="system.quadrants.forward.ac.misc" value="{{numberFormat system.quadrants.forward.ac.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
-                            </li>
-                            <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Quadrants.TargetLock"}}<br/>@quadrants.forward.targetLock.value<br/>@quadrants.forward.targetLock.misc<br/><br/>{{#each system.quadrants.forward.targetLock.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
-                                <label>TL</label>
-                                <label>{{system.quadrants.forward.targetLock.value}}</label>
-                                <input type="text" name="system.quadrants.forward.targetLock.misc" value="{{numberFormat system.quadrants.forward.targetLock.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
-                            </li>
-                        </ol>
-                    </li>
-                    <li class="attribute defences">
-                        <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Sides.Port"}}</h4>
-                        <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Port"}}<br />@quadrants.port.shields.value{{#if system.hasDeflectorShields}}<br />@quadrants.port.shields.max{{/if}}">
-                            <label class="name rightAligned">{{#if system.hasDeflectorShields}}{{localize "SFRPG.StarshipSheet.Details.Shields.Deflector"}}{{else}}{{localize "SFRPG.StarshipSheet.Details.Shields.Conventional"}}{{/if}}&nbsp;</label>
-                            {{#if system.hasShields}}
-                            {{#if system.hasDeflectorShields}}
-                            <input type="text" class="quadrantdefence" name="system.quadrants.port.shields.value" value="{{system.quadrants.port.shields.value}}" data-dtype="Number" placeholder="0" />
-                            <label>/</label>
-                            <label class="quadrantText">{{system.quadrants.port.shields.max}}</label>
-                            <label></label>
-                            {{else}}
-                            <input type="text" class="quadrantdefence" name="system.quadrants.port.shields.value" value="{{system.quadrants.port.shields.value}}" data-dtype="Number" placeholder="0" />
-                            <label class="quadrantFiller"></label>
-                            {{/if}}
-                            {{else}}
-                            <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrants.NotAvailable"}}</label>
-                            {{/if}}
-                        </div>
-                        <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Ablative.Port"}}<br />@quadrants.port.ablative.value">
-                            <label class="name rightAligned">{{localize "SFRPG.StarshipSheet.Details.Ablative.Header"}}&nbsp;</label>
-                            {{#if system.hasAblativeArmor}}
-                            <input type="text" class="quadrantdefence" name="system.quadrants.port.ablative.value" value="{{system.quadrants.port.ablative.value}}" data-dtype="Number" placeholder="0" />
-                            <label>/</label>
-                            <input type="text" class="quadrantdefence" name="system.quadrants.port.ablative.max" value="{{system.quadrants.port.ablative.max}}" data-dtype="Number" placeholder="0" />
-                            <label></label>
-                            {{else}}
-                            <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrants.NotAvailable"}}</label>
-                            {{/if}}
-                        </div>
-                        <ol class="attribute-multibox">
-                            <li class="box-header flexrow">
-                                <label></label>
-                                <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
-                                <label>{{localize "SFRPG.StarshipSheet.Header.Misc"}}</label>
-                            </li>
-                            <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Quadrants.ArmorClass"}}<br/>@quadrants.port.ac.value<br/>@quadrants.port.ac.misc<br/><br/>{{#each system.quadrants.port.ac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
-                                <label>AC</label>
-                                <label>{{system.quadrants.port.ac.value}}</label>
-                                <input type="text" name="system.quadrants.port.ac.misc" value="{{numberFormat system.quadrants.port.ac.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
-                            </li>
-                            <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Quadrants.TargetLock"}}<br/>@quadrants.port.targetLock.value<br/>@quadrants.port.targetLock.misc<br/><br/>{{#each system.quadrants.port.targetLock.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
-                                <label>TL</label>
-                                <label>{{system.quadrants.port.targetLock.value}}</label>
-                                <input type="text" name="system.quadrants.port.targetLock.misc" value="{{numberFormat system.quadrants.port.targetLock.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
-                            </li>
-                        </ol>
-                    </li>
-                    <li class="attribute defences">
-                        <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Sides.Starboard"}}</h4>
-                        <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Starboard"}}<br />@quadrants.starboard.shields.value{{#if system.hasDeflectorShields}}<br />@quadrants.starboard.shields.max{{/if}}">
-                            <label class="name rightAligned">{{#if system.hasDeflectorShields}}{{localize "SFRPG.StarshipSheet.Details.Shields.Deflector"}}{{else}}{{localize "SFRPG.StarshipSheet.Details.Shields.Conventional"}}{{/if}}&nbsp;</label>
-                            {{#if system.hasShields}}
-                            {{#if system.hasDeflectorShields}}
-                            <input type="text" class="quadrantdefence" name="system.quadrants.starboard.shields.value" value="{{system.quadrants.starboard.shields.value}}" data-dtype="Number" placeholder="0" />
-                            <label>/</label>
-                            <label class="quadrantText">{{system.quadrants.starboard.shields.max}}</label>
-                            <label></label>
-                            {{else}}
-                            <input type="text" class="quadrantdefence" name="system.quadrants.starboard.shields.value" value="{{system.quadrants.starboard.shields.value}}" data-dtype="Number" placeholder="0" />
-                            <label class="quadrantFiller"></label>
-                            {{/if}}
-                            {{else}}
-                            <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrants.NotAvailable"}}</label>
-                            {{/if}}
-                        </div>
-                        <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Ablative.Starboard"}}<br />@quadrants.starboard.ablative.value">
-                            <label class="name rightAligned">{{localize "SFRPG.StarshipSheet.Details.Ablative.Header"}}&nbsp;</label>
-                            {{#if system.hasAblativeArmor}}
-                            <input type="text" class="quadrantdefence" name="system.quadrants.starboard.ablative.value" value="{{system.quadrants.starboard.ablative.value}}" data-dtype="Number" placeholder="0" />
-                            <label>/</label>
-                            <input type="text" class="quadrantdefence" name="system.quadrants.starboard.ablative.max" value="{{system.quadrants.starboard.ablative.max}}" data-dtype="Number" placeholder="0" />
-                            <label></label>
-                            {{else}}
-                            <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrants.NotAvailable"}}</label>
-                            {{/if}}
-                        </div>
-                        <ol class="attribute-multibox">
-                            <li class="box-header flexrow">
-                                <label></label>
-                                <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
-                                <label>{{localize "SFRPG.StarshipSheet.Header.Misc"}}</label>
-                            </li>
-                            <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Quadrants.ArmorClass"}}<br/>@quadrants.starboard.ac.value<br/>@quadrants.starboard.ac.misc<br/><br/>{{#each system.quadrants.starboard.ac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
-                                <label>AC</label>
-                                <label>{{system.quadrants.starboard.ac.value}}</label>
-                                <input type="text" name="system.quadrants.starboard.ac.misc"
-                                    value="{{numberFormat system.quadrants.starboard.ac.misc decimals=0 sign=true}}" data-dtype="Number"
-                                    placeholder="+Misc" />
-                            </li>
-                            <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Quadrants.TargetLock"}}<br/>@quadrants.starboard.targetLock.value<br/>@quadrants.starboard.targetLock.misc<br/><br/>{{#each system.quadrants.starboard.targetLock.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
-                                <label>TL</label>
-                                <label>{{system.quadrants.starboard.targetLock.value}}</label>
-                                <input type="text" name="system.quadrants.starboard.targetLock.misc" value="{{numberFormat system.quadrants.starboard.targetLock.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
-                            </li>
-                        </ol>
-                    </li>
-                    <li class="attribute defences">
-                        <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Sides.Aft"}}</h4>
-                        <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Shields.Aft"}}<br />@quadrants.aft.shields.value{{#if system.hasDeflectorShields}}<br />@quadrants.aft.shields.max{{/if}}">
-                            <label class="name rightAligned">{{#if system.hasDeflectorShields}}{{localize "SFRPG.StarshipSheet.Details.Shields.Deflector"}}{{else}}{{localize "SFRPG.StarshipSheet.Details.Shields.Conventional"}}{{/if}}&nbsp;</label>
-                            {{#if system.hasShields}}
-                            {{#if system.hasDeflectorShields}}
-                            <input type="text" class="quadrantdefence" name="system.quadrants.aft.shields.value" value="{{system.quadrants.aft.shields.value}}" data-dtype="Number" placeholder="0" />
-                            <label>/</label>
-                            <label class="quadrantText">{{system.quadrants.aft.shields.max}}</label>
-                            <label></label>
-                            {{else}}
-                            <input type="text" class="quadrantdefence" name="system.quadrants.aft.shields.value" value="{{system.quadrants.aft.shields.value}}" data-dtype="Number" placeholder="0" />
-                            <label class="quadrantFiller"></label>
-                            {{/if}}
-                            {{else}}
-                            <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrants.NotAvailable"}}</label>
-                            {{/if}}
-                        </div>
-                        <div class="attribute-value flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.Ablative.Aft"}}<br />@quadrants.aft.ablative.value">
-                            <label class="name rightAligned">{{localize "SFRPG.StarshipSheet.Details.Ablative.Header"}}&nbsp;</label>
-                            {{#if system.hasAblativeArmor}}
-                            <input type="text" class="quadrantdefence" name="system.quadrants.aft.ablative.value" value="{{system.quadrants.aft.ablative.value}}" data-dtype="Number" placeholder="0" />
-                            <label>/</label>
-                            <input type="text" class="quadrantdefence" name="system.quadrants.aft.ablative.max" value="{{system.quadrants.aft.ablative.max}}" data-dtype="Number" placeholder="0" />
-                            <label></label>
-                            {{else}}
-                            <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrants.NotAvailable"}}</label>
-                            {{/if}}
-                        </div>
-                        <ol class="attribute-multibox">
-                            <li class="box-header flexrow">
-                                <label></label>
-                                <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
-                                <label>{{localize "SFRPG.StarshipSheet.Header.Misc"}}</label>
-                            </li>
-                            <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Quadrants.ArmorClass"}}<br/>@quadrants.aft.ac.value<br/>@quadrants.aft.ac.misc<br/><br/>{{#each system.quadrants.aft.ac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
-                                <label>AC</label>
-                                <label>{{system.quadrants.aft.ac.value}}</label>
-                                <input type="text" name="system.quadrants.aft.ac.misc" value="{{numberFormat system.quadrants.aft.ac.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
-                            </li>
-                            <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Quadrants.TargetLock"}}<br/>@quadrants.aft.targetLock.value<br/>@quadrants.aft.targetLock.misc<br/><br/>{{#each system.quadrants.aft.targetLock.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
-                                <label>TL</label>
-                                <label>{{system.quadrants.aft.targetLock.value}}</label>
-                                <input type="text" name="system.quadrants.aft.targetLock.misc" value="{{numberFormat system.quadrants.aft.targetLock.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
-                            </li>
-                        </ol>
-                    </li>
-                </ul>
-            </div>
-            
-            {{#if (or system.hasAblativeArmor (and system.hasShields (not system.hasDeflectorShields)))}}
-            <div class="flexcol traits">
-                <div class="flexrow">
-                    <div class="flexcol">
-                        {{#if (and system.hasShields (not system.hasDeflectorShields))}}
-                        <div>
-                            <label>&nbsp;&nbsp;{{localize "SFRPG.StarshipSheet.Quadrants.ShieldHeader"}}</label>
-                            <span>({{system.attributes.shields.value}} / {{system.attributes.shields.max}})</span>
-                            <span>- {{localize "SFRPG.StarshipSheet.Quadrants.EvenDistribution"}}:</span>
-                            <span>{{system.attributes.shields.evenDistribution}}</span>
-                            <span>- {{localize "SFRPG.StarshipSheet.Quadrants.QuadrantLimit"}}:</span>
-                            <span>{{system.attributes.shields.limit}}</span>
-                            {{#if (greaterThan system.attributes.shields.value system.attributes.shields.max)}}
-                            <span> - </span>
-                            <label class="error" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.ShieldTotalTooHighTooltip"}}">{{localize "SFRPG.StarshipSheet.Details.ShieldTotalTooHigh"}}</label>
-                            {{else}}
-                            {{#if (greaterThan system.attributes.shields.highest system.attributes.shields.limit)}}
-                            <span> - </span>
-                            <label class="error" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.ShieldHighestTooHighTooltip"}}">{{localize "SFRPG.StarshipSheet.Details.ShieldHighestTooHigh"}}</label>
-                            {{/if}}
-                            {{/if}}
-                        </div>
-                        {{/if}}
-                        {{#if system.hasAblativeArmor}}
-                        <div>
-                            <label>&nbsp;&nbsp;{{localize "SFRPG.StarshipSheet.Quadrants.AblativeHeader"}}</label>
-                            <span>({{system.attributes.ablative.value}} / {{system.attributes.ablative.total}} / {{system.attributes.ablative.max}})</span>
-                            <span>- {{localize "SFRPG.StarshipSheet.Quadrants.EvenDistribution"}}:</span>
-                            <span>{{system.attributes.ablative.evenDistribution}}</span>
-                            {{#if (greaterThan system.attributes.ablative.max (mult system.attributes.hp.max 2))}}
-                            <span> - </span>
-                            <label class="error" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.AblativeExceedsHullTooltip"}}">{{localize "SFRPG.StarshipSheet.Details.AblativeExceedsHull"}}</label>
-                            {{else}}
-                            {{#if (or (greaterThan system.attributes.ablative.value system.attributes.ablative.max) (greaterThan system.attributes.ablative.total system.attributes.ablative.max))}}
-                            <span> - </span>
-                            <label class="error" data-tippy-content="{{localize "SFRPG.StarshipSheet.Details.AblativeTooHighTooltip"}}">{{localize "SFRPG.StarshipSheet.Details.AblativeTooHigh"}}</label>
-                            {{/if}}
-                            {{/if}}
-                        </div>
-                        {{/if}}
-                    </div>
-                </div>
-            </div>
-            {{/if}}
-                        
-            <div class="flexcol traits">
-                <h3 class="form-header">{{localize "SFRPG.StarshipSheet.Critical.Header"}}</h3>
-                <div class="flexrow">
-                    <div class="flexcol">
-                        <div class="form-group">
-                            <label for="system.attributes.systems.lifeSupport.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.LifeSupport"}} <a class="critical-edit" data-system="lifeSupport" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
-                            <select name="system.attributes.systems.lifeSupport.value">
-                                {{#select system.attributes.systems.lifeSupport.value}}
-                                {{#each config.starshipSystemStatus as |status statusKey|}}
-                                <option value="{{statusKey}}">{{status}}</option>
-                                {{/each}}
-                                {{/select}}
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="system.attributes.systems.sensors.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.Sensors"}} <a class="critical-edit" data-system="sensors" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
-                            <select name="system.attributes.systems.sensors.value">
-                                {{#select system.attributes.systems.sensors.value}}
-                                {{#each config.starshipSystemStatus as |status statusKey|}}
-                                <option value="{{statusKey}}">{{status}}</option>
-                                {{/each}}
-                                {{/select}}
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="system.attributes.systems.engines.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.Engines"}} <a class="critical-edit" data-system="engines" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
-                            <select name="system.attributes.systems.engines.value">
-                                {{#select system.attributes.systems.engines.value}}
-                                {{#each config.starshipSystemStatus as |status statusKey|}}
-                                <option value="{{statusKey}}">{{status}}</option>
-                                {{/each}}
-                                {{/select}}
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="system.attributes.systems.powerCore.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.PowerCore"}} <a class="critical-edit" data-system="powerCore" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
-                            <select name="system.attributes.systems.powerCore.value">
-                                {{#select system.attributes.systems.powerCore.value}}
-                                {{#each config.starshipSystemStatus as |status statusKey|}}
-                                <option value="{{statusKey}}">{{status}}</option>
-                                {{/each}}
-                                {{/select}}
-                            </select>
-                        </div>
-                    </div>
-                    <div class="flexcol">
-                        <div class="form-group">
-                            <label for="system.attributes.systems.weaponsArrayForward.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.WeaponsArrayForward"}} <a class="critical-edit" data-system="weaponsArrayForward" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
-                            <select name="system.attributes.systems.weaponsArrayForward.value">
-                                {{#select system.attributes.systems.weaponsArrayForward.value}}
-                                {{#each config.starshipSystemStatus as |status statusKey|}}
-                                <option value="{{statusKey}}">{{status}}</option>
-                                {{/each}}
-                                {{/select}}
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="system.attributes.systems.weaponsArrayPort.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.WeaponsArrayPort"}} <a class="critical-edit" data-system="weaponsArrayPort" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
-                            <select name="system.attributes.systems.weaponsArrayPort.value">
-                                {{#select system.attributes.systems.weaponsArrayPort.value}}
-                                {{#each config.starshipSystemStatus as |status statusKey|}}
-                                <option value="{{statusKey}}">{{status}}</option>
-                                {{/each}}
-                                {{/select}}
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="system.attributes.systems.weaponsArrayStarboard.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.WeaponsArrayStarboard"}} <a class="critical-edit" data-system="weaponsArrayStarboard" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
-                            <select name="system.attributes.systems.weaponsArrayStarboard.value">
-                                {{#select system.attributes.systems.weaponsArrayStarboard.value}}
-                                {{#each config.starshipSystemStatus as |status statusKey|}}
-                                <option value="{{statusKey}}">{{status}}</option>
-                                {{/each}}
-                                {{/select}}
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="system.attributes.systems.weaponsArrayAft.value">{{localize "SFRPG.StarshipSheet.Critical.Systems.WeaponsArrayAft"}} <a class="critical-edit" data-system="WeaponsArrayAft" title="{{localize "SFRPG.StarshipSheet.Critical.Edit"}}"><i class="fas fa-edit"></i></a></label>
-                            <select name="system.attributes.systems.weaponsArrayAft.value">
-                                {{#select system.attributes.systems.weaponsArrayAft.value}}
-                                {{#each config.starshipSystemStatus as |status statusKey|}}
-                                <option value="{{statusKey}}">{{status}}</option>
-                                {{/each}}
-                                {{/select}}
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        
 
             starship-sheet-full
         </div>
