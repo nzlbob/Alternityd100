@@ -69,6 +69,7 @@ import { ActorInventoryMixin } from "./actor/mixins/actor-inventory.js";
     const armorUpgrades = items.filter(item => item.type === "upgrade");
     const asis = items.filter(item => item.type === "asi");
     const actorResources = items.filter(item => item.type === "actorResource");
+    const psionics = items.filter(item => item.type === "psionic");
     //console.log("\n\n\n\----------------\nweapons",weapons,this)
 
 
@@ -94,7 +95,8 @@ return game.Alternityd100.engine.process("process-actors", {
   armorUpgrades:armorUpgrades,
   asis:asis,
   frames:frames,
-  actorResources:actorResources
+  actorResources:actorResources,
+  psionics:psionics
 });
 }
 

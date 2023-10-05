@@ -145,13 +145,14 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
         }
 /*console.log("physicalInventoryItems" , physicalInventoryItems)*/
         //   0      1       2      3        4      5       6           7            8           9                10   asis,
-        let [items, spells, feats, classes, races, perks, flaws, achievements, archetypes, conditionItems, actorResources] = data.actor.items.reduce((arr, item) => {
+        let [items, spells, feats, classes, races, perks, flaws, achievements, archetypes, conditionItems, actorResources, psionCon,psionInt,psionWil,psionPer ] = data.actor.items.reduce((arr, item) => {
      //console.log(item)
             item.img = item.img || DEFAULT_TOKEN;
             item.isStack = item.quantity ? item.quantity > 1 : false;
             item.isOnCooldown = item.recharge && !!item.recharge.value && (item.recharge.charged === false);
             if (["meleeW"].includes(item.weaponType)){item.actionType = "mwak"}
             if (["rangedW","explos","heavy"].includes(item.weaponType)){item.actionType = "rwak"}
+            console.log(item.type === "psionic" , item.system.ability)
 
             //item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.actionType) //&& (!["weapon", "shield"].includes(item.type) || item.system.equipped);
             //console.log("HD",item,["weapon", "shield"].includes(item.type))
@@ -191,6 +192,14 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
                 }
                 item.isFeat = true;
             }
+            
+            else if ((item.type === "psionic") && (item.system.ability === "con")) arr[11].push(item); // classes
+            else if ((item.type === "psionic") && (item.system.ability === "int")) arr[12].push(item); // classes
+            else if ((item.type === "psionic") && (item.system.ability === "wil")) arr[13].push(item); // classes
+            else if ((item.type === "psionic") && (item.system.ability === "per")) arr[14].push(item); // classes
+
+
+
             else if (item.type === "class") arr[3].push(item); // classes
             else if (item.type === "race") arr[4].push(item); // races
             else if (item.type === "perk") arr[5].push(item); // perks
@@ -203,7 +212,7 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
             else arr[0].push(item); // items
            // console.log(arr);
             return arr;
-        }, [[], [], [], [], [], [], [], [], [], [],[],[],[]]);
+        }, [[], [], [], [], [], [], [], [], [], [],[],[],[],[],[]]);
         
         //const spellbook = this._prepareSpellbook(data, spells);
 
@@ -289,6 +298,8 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
         let encumbrance = this._computeEncumbrance(totalWeight, actorData.actor.system);
         let inventoryValue = Math.floor(totalValue);
 
+//const psionics = psion
+
         const features = {
             classes: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Classes"), items: [], hasActions: false, dataset: { type: "class" }, isClass: true },
             race: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Race"), items: [], hasActions: false, dataset: { type: "race" }, isRace: true },
@@ -320,7 +331,14 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
 
         data.inventory = Object.values(inventory);
         //data.spellbook = spellbook;
+        
+        
+        
         data.features = Object.values(features);
+
+console.log(psionCon,psionInt)
+
+        data.psionics = {con : Object.values(psionCon), int : Object.values(psionInt) , wil : Object.values(psionWil), per : Object.values(psionPer) };
 
         const modifiers = {
             conditions: { label: "SFRPG.ModifiersConditionsTabLabel", modifiers: [], dataset: { subtab: "conditions" }, isConditions: true },

@@ -2095,7 +2095,14 @@ d100A.resistanceType = {
 
       "actor-resource": "SFRPG.ActorSheet.Modifiers.EffectTypes.ActorResource"
   };
-  
+  d100A.psionAbility = {
+   "con": "d100A.AbilityCon",
+   "int": "d100A.AbilityInt",
+   "wil": "d100A.AbilityWil",
+   "per": "d100A.AbilityPer"
+
+};
+
   d100A.modifierType = {
       "constant": "SFRPG.ModifierTypeConstant",
       "formula": "SFRPG.ModifierTypeFormula"

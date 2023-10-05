@@ -23,7 +23,8 @@ export class ActorSheetSFRPG extends ActorSheet {
         this._filters = {
             inventory: new Set(),
             spellbook: new Set(),
-            features: new Set()
+            features: new Set(),
+            psionic: new Set()
         };
 
         this._tooltips = null;
@@ -37,6 +38,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                 ".features .inventory-list",
                 ".spellbook .inventory-list",
                 ".modifiers .inventory-list",
+                ".psionics .inventory-list",
                 ".tab.status",
                 ".tab.features",
                 ".tab.skills"

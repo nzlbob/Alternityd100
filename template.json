@@ -4624,7 +4624,8 @@
         "hybrid",
         "magic",
         "mod",
-        "perk",          
+        "perk",    
+        "psionic",      
         "race",
         "shield",
         "spell",
@@ -5112,6 +5113,34 @@
               "10": {"1": 3,    "2": 3,    "3": 2,    "4": 2,    "5": 2,    "6": 2}
           }
       },
+      "psionic":{
+        "templates": ["itemDescription", "modifiers"],
+        "ability": "",
+        "actionType": null,
+
+        "untrained": true,
+        "isBroad" : true,
+        "show" : true,
+       "broadPsion" : "",
+
+      "name": "core",
+      "psitype": 0,
+      "energy": "",
+       "fxsource": 0,
+        "id": 0,
+
+        "statid": 6,
+
+   "custom": false,
+        "broadid": 162,
+     "baseCost": 4,
+
+   "multi": false,
+   "customname": false,
+    "professions": ""
+
+      },
+      
       "spell": {
           "templates": ["itemDescription", "activatedEffect", "action", "modifiers"],
           "level": 1,

@@ -149,9 +149,21 @@ export class ItemSheetSFRPG extends ItemSheet {
         // Physical items
         const physicalItems = ["weapon", "equipment", "consumable", "goods", "container", "technological", "magic", "hybrid", "upgrade", "augmentation", "shield", "weaponAccessory"];
         data.isPhysicalItem = physicalItems.includes(data.item.type);
-
+        console.log(data)
         // Item attributes
         const itemData = this.item.system;
+        
+        if(["psionic"].includes(data.document.type)){
+            data.broadPsionList = []
+            console.log(this)
+            data.broadPsionList = game.items.filter((item) => {
+                console.log("Hello",item.name)
+                return item.system.type == "psionic" && item.system.isBroad
+                
+            });
+
+        }
+
         data.placeholders = this.item.flags.placeholders || {};
 
         // Only physical items have hardness, hp, and their own saving throw when attacked.

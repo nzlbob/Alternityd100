@@ -398,7 +398,7 @@ Hooks.once("setup", function () {
             "damageTypeOperators", "flightManeuverability", "npcCrewQualities"
         ];
     
-        const d100toLocalize = ["abilities","conditionTypes", "weaponTypes","progressLevel","pubnsource","availability","skills","damagetype", "firepower", "damageQ",/*"starshipSensorModes","starshipSensorTypes",*/
+        const d100toLocalize = ["abilities","conditionTypes", "weaponTypes","progressLevel","pubnsource","availability","skills","damagetype", "firepower", "damageQ","psionAbility",/*"starshipSensorModes","starshipSensorTypes",*/
         "modifierEffectTypes","modifierHitPointsAffectedValues","feature","mountTypes","ordnanceTypes","starshipFirepower","starshipFirepowerDial", "modifierResistanceAffectedValues" ,"coverType","movementType", "dodgeType" ];
 
         for (let o of toLocalize) {
