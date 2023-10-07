@@ -313,6 +313,8 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
             resources: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"), items: [], hasActions: false, dataset: { type: "actorResource" } }
         };
 
+
+
         for (let f of feats) {
             if (f.system.activation.type) features.active.items.push(f);
             else features.passive.items.push(f);
@@ -336,9 +338,32 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
         
         data.features = Object.values(features);
 
-console.log(psionCon,psionInt)
+        let psionScore = {}
+        const attrib = this.document.system.abilities
+        for (const [k,v] of Object.entries(attrib))
+        {
+            psionScore[k] = attrib[k].value+"/"+ Math.floor(attrib[k].value/2)+"/"+ Math.floor(attrib[k].value/4)
+        }
 
-        data.psionics = {con : Object.values(psionCon), int : Object.values(psionInt) , wil : Object.values(psionWil), per : Object.values(psionPer) };
+
+console.log(psionCon,psionInt)
+const psionics = {
+    con: { score: psionScore.con, label: game.i18n.format("d100A.PsionBroadSkills.con.name"), tooltip: "d100A.PsionBroadSkills.con.tooltip",items: [], hasActions: false, dataset: { type: "psionic", stat:"con" }, isPsionic: true },
+    int: { score: psionScore.int, label: game.i18n.format("d100A.PsionBroadSkills.int.name"), tooltip: "d100A.PsionBroadSkills.int.tooltip", items: [], hasActions: false, dataset: { type: "psionic" , stat:"con"}, isPsionic: true },
+    wil: { score: psionScore.wil, label: game.i18n.format("d100A.PsionBroadSkills.wil.name"), tooltip: "d100A.PsionBroadSkills.wil.tooltip", items: [], hasActions: false, dataset: { type: "psionic" , stat:"con"}, isPsionic: true },
+    per: { score: psionScore.per, label: game.i18n.format("d100A.PsionBroadSkills.per.name"), tooltip: "d100A.PsionBroadSkills.per.tooltip", items: [], hasActions: false, dataset: { type: "psionic" , stat:"con"}, isPsionic: true }
+}
+       
+        
+    psionics.con.items = Object.values(psionCon);
+    psionics.int.items = Object.values(psionInt) , 
+    psionics.wil.items = Object.values(psionWil) ; 
+    psionics.per.items = Object.values(psionPer) ;
+
+
+        
+
+        data.psionics = Object.values(psionics);
 
         const modifiers = {
             conditions: { label: "SFRPG.ModifiersConditionsTabLabel", modifiers: [], dataset: { subtab: "conditions" }, isConditions: true },

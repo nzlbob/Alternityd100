@@ -55,26 +55,6 @@
         <div class="tab details" data-group="primary" data-tab="details">
             <h3 class="form-header">{{ localize "SFRPG.Items.Spell.Details" }}</h3>
 
-            {{!-- Preparation Mode --}}
-            <div class="form-group input-select">
-                <label>{{ localize "Broad Skill" }}</label>
-                <div class="form-fields">
-                    <label class="checkbox">
-                        <input type="checkbox" name="system.isBroad" {{checked itemData.isBroad}}/> 
-                    </label>
-                    <span>&nbsp;</span>
-                    {{#if (not itemData.isBroad)}}
-                    <select name="system.preparation.mode">
-                        {{#select itemData.broadPsion}}
-                        <option value=""></option>
-                        {{#each broadPsionList as |psion key|}}
-                        <option value="{{key}}">{{psion.name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                    {{/if}}
-                </div>
-            </div>
 
 
             {{!-- Psion Ability --}}
@@ -91,6 +71,16 @@
                 </div>
             </div>
             
+
+            {{!-- Ranks--}}
+            <div class="form-group">
+                <label>{{ localize "Ranks" }}</label>
+                <div class="form-fields">
+                    <input class="ranks" type="number" name="system.rank" value="{{itemData.rank}}"/>
+                    
+                 
+                </div>
+            </div>
 
             {{!-- Spell Components --}}
             <div class="spell-components form-group">

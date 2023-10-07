@@ -2945,6 +2945,25 @@
 },
 
 "d100A": {
+"PsionBroadSkills" :{
+    "con": {
+        "tooltip":"This skill can't be used untrained. This skill allows a character to harness the power of his mind lo enhance his body's functions. With just the broad skill, a character can attempt to use any of the related specialty skills except those that can't be used untrained. The difficulty oJ such an action is reflected in the increased psionic energy cost and the higher base situation die for using just the broad skill.",
+        "name" :"Biokinesis"
+    },
+    "int": {
+        "tooltip":"This skill can't be used untrained. <br> This skill allows a character to experience his environment through an agency beyond the normal senses, using the power of his mind. With just the broad skill, a character can attempt to use any ol the related specialty skills except those that can't be used untrained. The difficulty ol such an action is reflected in Ihe increased psionic energy cost and the higher base situation die for using just the broad skill.",
+        "name" :"ESP"
+    
+    },
+        "wil": {
+        "tooltip":"This skill can't be used untrained. <br>This skill allows a hero to manipulate his physical environment wilh only the power of his mind. With just the broad skill, a character can attempt to use any of the related specialty skills excepl those that can'l be used untrained. The difficulty of such cm action is reflected in ihe increased psionic energy cost and the higher base situation die for using jusl the broad skill.",
+        "name" :"Telekinesis"
+    },
+        "per": {
+        "tooltip":"This skill can't be used untrained.  <br> This skill allows a character to open his mind to the thoughts of others or send his own thoughts into the minds of others. With just the broad skill, a character can attempt to use any of the related specialty skills except those that can't be used untrained. The difficulty of such an action is reflected in the increased psionic energy cost and the higher base situation die Jar using jusl the broad skill.",
+        "name" :"Telepathy"
+    }
+},
 
     "ShipSystems": {
         "starshipSensorModes":{

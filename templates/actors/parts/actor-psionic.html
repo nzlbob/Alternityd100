@@ -13,10 +13,10 @@
 </div>
 
 <ol class="inventory-list">
-{{#each psionics as |section|}}
+{{#each psionics as |section key|}}
     <li class="item flexrow inventory-header spellbook-header">
-        <div class="item-name flexrow">
-            <h3>jhgfjhg{{localize section.label}}</h3>
+        <div class="item-name flexrow" data-tooltip = "{{localize section.tooltip}}">
+            <h3>{{localize section.label}}</h3> {{section.score}} 
         </div>
 
         <div class="spell-slots fit-classes">
@@ -56,14 +56,17 @@
     </li>
 
     <ol class="item-list">
-    {{#each section as |item i|}}
+    {{#each section.items as |item i|}}
         <li class="item flexrow" data-item-id="{{item._id}}">
             <div class="item-name flexrow rollable">
                 <div class="item-image" style="background-image: url({{item.img}})"></div>
-                <h4>{{item.name}}</h4>
-                {{#if item.system.uses.max }}
-                <div class="item-detail spell-uses">{{localize "SFRPG.SpellBook.Uses"}} {{item.system.uses.value}} / {{item.system.uses.max}}</div>
-                {{/if}}
+                <h4>{{item.name}} </h4>
+                
+                <input style="width:15px ;text-align:left;font-size: 70%;height:100%"  type="number" class="skill-ranks" data-tooltip="Spell Ranks" name="item.rank"
+        value="{{item.rank}}" />
+
+                <div class="item-detail spell-uses">{{localize "SFRPG.SpellBook.Uses"}} {{item.system.rank}} </div>
+                
             </div>
 
             <div class="spell-comps">

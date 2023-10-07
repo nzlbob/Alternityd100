@@ -2102,6 +2102,25 @@ d100A.resistanceType = {
    "per": "d100A.AbilityPer"
 
 };
+d100A.psionBroadSkill = {
+   "con": {
+      "name": "d100A.PsionBroadSkills.con.name",
+      "tooltip" :"d100A.PsionBroadSkills.con.tooltip"
+   },
+   "int": {
+      "name": "d100A.PsionBroadSkills.con.name",
+      "tooltip" :"d100A.PsionBroadSkills.con.tooltip"
+   },
+   "wil": {
+      "name": "d100A.PsionBroadSkills.con.name",
+      "tooltip" :"d100A.PsionBroadSkills.con.tooltip"
+   },
+   "per": {
+      "name": "d100A.PsionBroadSkills.con.name",
+      "tooltip" :"d100A.PsionBroadSkills.con.tooltip"
+   }
+   
+}
 
   d100A.modifierType = {
       "constant": "SFRPG.ModifierTypeConstant",

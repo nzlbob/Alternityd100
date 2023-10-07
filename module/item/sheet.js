@@ -152,18 +152,24 @@ export class ItemSheetSFRPG extends ItemSheet {
         console.log(data)
         // Item attributes
         const itemData = this.item.system;
-        
+        /*
         if(["psionic"].includes(data.document.type)){
-            data.broadPsionList = []
-            console.log(this)
-            data.broadPsionList = game.items.filter((item) => {
-                console.log("Hello",item.name)
-                return item.system.type == "psionic" && item.system.isBroad
+            data.broadPsionList = {}
+            for (const [key, ability] of Object.entries(d100A.psionBroadSkill)) {
                 
-            });
+                data.broadPsionList[key] = game.items.filter((item) => {
+                    console.log("Hello",item.name)
+                    return item.system.type == "psionic" && item.system.skill == key
+                    
+                });
+
+            }
+            
+
+
 
         }
-
+*/
         data.placeholders = this.item.flags.placeholders || {};
 
         // Only physical items have hardness, hp, and their own saving throw when attacked.

@@ -5117,27 +5117,25 @@
         "templates": ["itemDescription", "modifiers"],
         "ability": "",
         "actionType": null,
-
         "untrained": true,
         "isBroad" : true,
         "show" : true,
-       "broadPsion" : "",
-
-      "name": "core",
-      "psitype": 0,
-      "energy": "",
-       "fxsource": 0,
+        "broadPsion" : "",
+        "name": "core",
+        "psitype": 0,
+        "energy": "",
+        "fxsource": 0,
         "id": 0,
-
         "statid": 6,
-
-   "custom": false,
-        "broadid": 162,
-     "baseCost": 4,
-
-   "multi": false,
-   "customname": false,
-    "professions": ""
+        "custom": false,
+        "broadid": 0,
+        "baseCost": 4,
+        "multi": false,
+        "customname": false,
+        "professions": "",
+        "rank": 0,
+        "step":0,
+        "label": ""
 
       },
       

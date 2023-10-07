@@ -62,13 +62,13 @@ export class d100ActorSheet extends ActorSheetSFRPG {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  getData() {
+ /* getData() {
     const context = super.getData();
     
 console.log(context.status)
     return context;
 }
-
+*/
 
  
   
@@ -282,7 +282,7 @@ _onRollSkillCheck(event) {
    * Listen for roll buttons on items.
    * @param {MouseEvent} event    The originating left click event
    */
-  _onItemRoll(event) {
+  _xxxonItemRoll(event) {
     let button = $(event.currentTarget);
     const li = button.parents(".item");
     const item = this.actor.items.get(li.data("itemId"));
@@ -638,7 +638,7 @@ async _onDeactivateFeat(event) {
  * Handle rolling of an item from the Actor sheet, obtaining the Item instance and dispatching to it's roll method
  * @param {Event} event The triggering event
  */
-_onItemRoll(event) {
+_xxxxxxonItemRoll(event) {
     event.preventDefault();
     const itemId = event.currentTarget.closest('.item').dataset.itemId;
     const item = this.actor.items.get(itemId);
@@ -785,7 +785,7 @@ _getClassSkillIcon(level) {
  * 
  * @param {Event} event The html event
  */
-async _onItemSummary(event) {
+async _xxxxonItemSummary(event) {
     event.preventDefault();
     let li = $(event.currentTarget).parents('.item'),
         item = this.actor.items.get(li.data('item-id')),
