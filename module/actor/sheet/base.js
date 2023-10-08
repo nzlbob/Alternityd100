@@ -298,8 +298,23 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         // Condition toggling
         html.find('.conditions input[type="checkbox"]').change(this._onToggleConditions.bind(this));
+
+        html.find('.spellRank').change(this._onspellRankChanged.bind(this));
     }
     
+    async _onspellRankChanged(event) {
+    
+    console.log("Changed",event)
+
+    const newValue = event.currentTarget.valueAsNumber
+    const itemId = event.currentTarget.dataset.id
+    const item = this.actor.items.get(itemId)
+
+    let a = item.update({ "system.rank": newValue });
+
+    console.log(item,a)
+}
+
    async _onDurabilityChange(event) {
         let actiontype = event.currentTarget.dataset.type;
         let category = event.currentTarget.dataset.category;

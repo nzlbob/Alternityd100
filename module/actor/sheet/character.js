@@ -345,6 +345,43 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
             psionScore[k] = attrib[k].value+"/"+ Math.floor(attrib[k].value/2)+"/"+ Math.floor(attrib[k].value/4)
         }
 
+        for (const [k,v] of Object.entries(psionCon))
+        {
+            console.log(k,v,v.name,this.document.system.abilities)
+            v.ordinary = this.document.system.abilities.con.value + (v.system.rank||0)
+            v.good = Math.floor(v.ordinary/2)
+            v.amazing = Math.floor(v.ordinary/4)
+            v.step = 0
+            v.psionScore = v.ordinary+"/"+ v.good +"/"+ v.amazing
+        }
+        for (const [k,v] of Object.entries(psionInt))
+        {
+            console.log(k,v,v.name,this.document.system.abilities)
+            v.ordinary = this.document.system.abilities.int.value + (v.system.rank||0)
+            v.good = Math.floor(v.ordinary/2)
+            v.amazing = Math.floor(v.ordinary/4)
+            v.step = 0
+            v.psionScore = v.ordinary+"/"+ v.good +"/"+ v.amazing
+        }
+        for (const [k,v] of Object.entries(psionWil))
+        {
+            console.log(k,v,v.name,this.document.system.abilities)
+            v.ordinary = this.document.system.abilities.wil.value + (v.system.rank||0)
+            v.good = Math.floor(v.ordinary/2)
+            v.amazing = Math.floor(v.ordinary/4)
+            v.step = 0
+            v.psionScore = v.ordinary+"/"+ v.good +"/"+ v.amazing
+        }
+        for (const [k,v] of Object.entries(psionPer))
+        {
+            console.log(k,v,v.name,this.document.system.abilities)
+            v.ordinary = this.document.system.abilities.per.value + (v.system.rank||0)
+            v.good = Math.floor(v.ordinary/2)
+            v.amazing = Math.floor(v.ordinary/4)
+            v.step = 0
+            v.psionScore = v.ordinary+"/"+ v.good +"/"+ v.amazing
+        }
+
 
 console.log(psionCon,psionInt)
 const psionics = {

@@ -43,8 +43,8 @@
             {{/if}}
         </div>
 
-        <div class="spell-school">{{localize "SFRPG.SpellBook.SpellSchool"}}</div>
-        <div class="spell-action">{{localize "SFRPG.SpellBook.SpellUsage"}}</div>
+        <div class="spell-school">{{localize "Ranks"}}</div>
+        <div class="spell-action">{{localize "Usage"}}</div>
 
         <div class="item-controls">
             {{#if section.canCreate}}
@@ -60,12 +60,11 @@
         <li class="item flexrow" data-item-id="{{item._id}}">
             <div class="item-name flexrow rollable">
                 <div class="item-image" style="background-image: url({{item.img}})"></div>
-                <h4>{{item.name}} </h4>
-                
-                <input style="width:15px ;text-align:left;font-size: 70%;height:100%"  type="number" class="skill-ranks" data-tooltip="Spell Ranks" name="item.rank"
-        value="{{item.rank}}" />
+                <h4>{{item.name}} {{item.psionScore}}</h4>
+             
 
-                <div class="item-detail spell-uses">{{localize "SFRPG.SpellBook.Uses"}} {{item.system.rank}} </div>
+
+                <div class="item-detail spell-uses">{{localize "Rank"}} {{item.system.rank}} </div>
                 
             </div>
 
@@ -74,7 +73,8 @@
                 <span class="spell-component" data-tippy-content="<strong>{{ localize "SFRPG.Items.Spell.Concentration" }}</strong><br>{{ localize "SFRPG.Items.Spell.ConcentrationTooltip" }}">C</span>
                 {{/if}}
             </div>
-            <div class="spell-school">{{localize labels.school}}</div>
+            <div class="spell-school">                <input class="spellRank" style="width:15px ;text-align:left;font-size: 70%;height:100%"  type="number" class="skill-ranks" data-tooltip="Spell Ranks" name="item.system.rank"
+                value="{{item.system.rank}}" data-id="{{item.id}}" /> </div>
             <div class="spell-action">{{labels.activation}}</div>
 
             {{#if ../../isOwner}}
