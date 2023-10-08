@@ -856,7 +856,7 @@ if (this.type=="starship"){
 
 
   if (notes.length > 0) props.push({ header: game.i18n.localize("PF1.Notes"), value: notes });
- 
+ */
  console.log( "event:", options.event, 
  "fastForward:", options.skipDialog === true,
   "staticRoll:", options.staticRoll, 
@@ -875,7 +875,7 @@ if (this.type=="starship"){
   "skill", skl,
   
   )
-*/
+
   let A =  Diced100.skillRoll({
     event: options.event,
     fastForward: options.skipDialog === true,
@@ -904,16 +904,60 @@ console.log("\nDiced100.skillRoll({\n", A)
 let rollresult = {}
   return A
 
+}
+
+/**
+   * Generates an array with all the active context-sensitive notes for the given context on this actor.
+   *
+   * @param {string} context - The context to draw from.
+   */
+rollSkillObject(item,  options) {
+
+ // this.actor.useSpell(item, {configureDialog: !event.shiftKey});
+ 
+let parts = []
+let dice=null
+let stepbonus = 0
+let rollData = {}
+let skillId = item.name
+let title = item.name + item.psionScore  //was skl.name
+let ordinary = item.ordinary
+let good = item.ordinary
+let amazing = item.amazing
+options.nosound = false
+const props = ["something","2.jghf"];
 
 
+ let A =  Diced100.skillRoll({
+  event: options.event,
+  fastForward: !(options.skipDialog === true),
+  staticRoll: options.staticRoll,
+  parts,
+  stepbonus,
+  stepflavor:options.stepflavor,
+  skillflavor: options.skillflavor,
+  ordinary: ordinary,
+  good: good,
+  amazing: amazing,
+  dice: options.dice,
+  data: rollData,
+  subject: { skill: skillId },
+  title: title,
+  flavor :item.name+" Range/",
+  speaker: ChatMessage.getSpeaker({ actor: this }),
+  chatTemplate: "systems/Alternityd100/templates/chat/roll-ext.hbs",
+  chatTemplateData: { hasProperties: props.length > 0, properties: props },
+  chatMessage: "Hello" + options.chatMessage,
+  noSound: options.noSound,
+  compendiumEntry: null
+});
 
-
-
-  
-
-
+console.log("\nDiced100.skillRoll({\n", A)
+let rollresult = {}
+return A
 
 }
+
 
 /**
    * Generates an array with all the active context-sensitive notes for the given context on this actor.

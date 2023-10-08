@@ -671,7 +671,7 @@ console.log("supportedTypes",type,supportedTypes)
         const item = this.actor.items.get(itemId);
 
         if (item.system.type === "psionic") {
-            return this.actor.useSpell(item, {configureDialog: !event.shiftKey});
+            return this.actor.rollSkillObject(item, {event:event,skipDialog: !event.shiftKey});
         }
 
         else return item.roll();

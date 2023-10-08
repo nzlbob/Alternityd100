@@ -153,7 +153,7 @@ html.find('.rollable').click(this._onRoll.bind(this));
 
 
         // Item Rolling
-        html.find('.item .item-image').click(event => this._onItemRoll(event));
+       // html.find('.item .item-image').click(event => this._onItemRoll(event));
 
 
 
