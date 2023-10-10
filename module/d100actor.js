@@ -914,7 +914,8 @@ let rollresult = {}
 rollSkillObject(item,  options) {
 
  // this.actor.useSpell(item, {configureDialog: !event.shiftKey});
- 
+ options.skillflavour = "Hellow"
+ options.stepflavour = "+0"
 let parts = []
 let dice=null
 let stepbonus = 0
@@ -922,10 +923,12 @@ let rollData = {}
 let skillId = item.name
 let title = item.name + item.psionScore  //was skl.name
 let ordinary = item.ordinary
-let good = item.ordinary
+let good = item.good
 let amazing = item.amazing
 options.nosound = false
-const props = ["something","2.jghf"];
+let hasDegreeText = true
+let degreeText = item.system.degreeText
+const props = {header:"something",value:"2.jghf",extra:"fsfdg"};
 
 
  let A =  Diced100.skillRoll({
@@ -949,7 +952,9 @@ const props = ["something","2.jghf"];
   chatTemplateData: { hasProperties: props.length > 0, properties: props },
   chatMessage: "Hello" + options.chatMessage,
   noSound: options.noSound,
-  compendiumEntry: null
+  compendiumEntry: null,
+  hasDegreeText,
+  degreeText
 });
 
 console.log("\nDiced100.skillRoll({\n", A)

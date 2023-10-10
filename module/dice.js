@@ -1357,6 +1357,8 @@ console.log(resistance)
     ordinary,
     good,
     amazing,
+    hasDegreeText,
+    degreeText
   }) {
 /*
     console.log( 
@@ -1463,6 +1465,9 @@ console.log(resistance)
               degree: degree,
               stepflavor:stepflavor,
               compendiumEntry: compendiumEntry,
+            
+              hasDegreeText,
+              degreeText
             },
             chatTemplateData || {}
           );
@@ -1477,8 +1482,10 @@ console.log(resistance)
             rollMode: rollMode,
             stepflavor:stepflavor,
             roll: roll.toJSON(),
+            
             degree: degree ,//subject.ordinary ,
             "flags.pf1.noRollRender": true,
+
           };
           if (subject) setProperty(chatData, "flags.pf1.subject", subject);
 
@@ -1495,6 +1502,7 @@ console.log(resistance)
               stepflavor:stepflavor,
               rollMode: rollMode,
               sound: a === 0 ? CONFIG.sounds.dice : null,
+
             };
             if (subject) setProperty(msgData, "flags.pf1.subject", subject);
 

@@ -65,3 +65,27 @@
 </div>
 {{/each}}
 {{/if}}
+{{#if hasDegreeText}}
+
+{{#if (eq degree "Critical Failure") }}
+ {{degreeText.critical}}
+{{/if}}
+ {{#if (eq degree "Failure") }}
+ {{degreeText.failure}}
+{{/if}}
+{{#if (eq degree "Ordinary") }}
+ {{degreeText.ordinary}}
+{{/if}}
+{{#if (eq degree "Good") }}
+ {{degreeText.good}}
+{{/if}}
+{{#if (eq degree "Amazing!") }}
+ {{degreeText.amazing}}
+{{/if}}
+{{#if (eq degree "Critical Success") }}
+ {{degreeText.amazing}}
+{{/if}}
+
+
+
+{{/if}}

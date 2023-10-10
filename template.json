@@ -5135,7 +5135,8 @@
         "professions": "",
         "rank": 0,
         "step":0,
-        "label": ""
+        "label": "",
+        "degreeText":{"critical": "","failure": "","ordinary": "","good": "","amazing": ""}
 
       },
       
