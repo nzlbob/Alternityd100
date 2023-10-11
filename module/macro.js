@@ -22,6 +22,12 @@ if (data.skill) return skillmacro(data, slot)
  if (B.hasAttack) command = ` let Item = fromUuidSync("${data.uuid}"); Item.rollAttack()`;
  if (B.hasScan) command = ` let Item = fromUuidSync("${data.uuid}"); Item.rollScan()`;
  if (B.hasDefence) command = ` let Item = fromUuidSync("${data.uuid}"); Item.rollDefence()`;
+ 
+ if (B.hasPsionic) command = ` let Item = fromUuidSync("${data.uuid}"); actor.rollSkillObject(Item, {skipDialog: false });`;
+
+
+
+
  //const command = `game.sfrpg.rollItemMacro("${item.name}");`;
   let macro = game.macros.contents.find(m => (m.name === B.name) && (m.command === command));
  

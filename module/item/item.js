@@ -99,6 +99,19 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const hasType = !!saveData.type;
         return hasType;
     }
+    /**
+     * Does the Item implement a saving throw as part of its usage
+     * @type {boolean}
+     */
+    get hasPsionic() {
+        const saveData = this.type ==="psionic";
+        if (!saveData) {
+            return false;
+        }
+
+        //const hasType = !!saveData.type;
+        return saveData;
+    }
    get hasCapacity() {
         //console.log("\n\n\n*******hasCapacity()**********\n\n\n")
         if (this.type === "starshipWeapon") {
