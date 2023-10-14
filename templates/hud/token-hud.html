@@ -45,19 +45,19 @@
     <div class="col middle">
         <div class="attribute bar3">
             {{#if displayBar3}}
-            <input type="text" name="bar3.value" data-bar="bar3" value="{{bar3Data.value}}" {{#unless bar3Data.editable}}disabled{{/unless}}>
+            <input type="number" name="bar3.value" data-bar="bar3" value="{{bar3Data.value}}" {{#unless bar3Data.editable}}disabled{{/unless}}>
             {{/if}}
         </div>
 
         <div class="attribute bar2">
             {{#if displayBar2}}
-            <input type="text" name="bar2.value" data-bar="bar2" value="{{bar2Data.value}}" {{#unless bar2Data.editable}}disabled{{/unless}}>
+            <input type="number" name="bar2.value" data-bar="bar2" value="{{bar2Data.value}}" {{#unless bar2Data.editable}}disabled{{/unless}}>
             {{/if}}
         </div>
 
         <div class="attribute bar1">
             {{#if displayBar1}}
-            <input type="text" name="bar1.value" data-bar="bar1" value="{{bar1Data.value}}" {{#unless bar1Data.editable}}disabled{{/unless}}>
+            <input type="number" name="bar1.value" data-bar="bar1" value="{{bar1Data.value}}" {{#unless bar1Data.editable}}disabled{{/unless}}>
             {{/if}}
         </div>
     </div>
@@ -79,7 +79,7 @@
                 {{/each}}
             </div>
         </div>
-        {{console "token-hud 82"}}
+        {{console "hud/token-hud 82"}}
         {{console xstatus}}
         {{#if canToggleCombat}}
         <div class="control-icon {{combatClass}}" data-action="combat">

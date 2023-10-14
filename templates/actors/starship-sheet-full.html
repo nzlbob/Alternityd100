@@ -97,20 +97,24 @@
                 </li>
                 
                 <li class="attribute">
-                    <h4 class="attribute-name box-title" data-tippy-content="{{localize "SFRPG.StarshipSheet.Header.Movement.Maneuverability"}}<br/>@attributes.maneuverability<br/><br/>{{localize "SFRPG.StarshipSheet.Header.Movement.ManeuverabilityTooltip" maneuverability=(capitalize system.attributes.maneuverability)}}">{{localize "SFRPG.StarshipSheet.Header.Movement.Title"}}</h4>
-                    <ol class="attribute-multibox">
+                    <h4 class="attribute-name box-title" data-tooltip="{{localize "SFRPG.StarshipSheet.Header.Movement.Maneuverability"}}<br/>@attributes.maneuverability<br/><br/>{{system.attributes.maneuverability}}">{{localize "SFRPG.StarshipSheet.Header.Movement.Title"}}</h4>
+                    <ol class="attribute-multibox " >
                         {{#if hasEngines}}
                         <li class="box-header flexrow">
                             <label></label>
                             <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
                         </li>
-                        <li class="flexrow" data-tippy-content="{{localize "SFRPG.StarshipSheet.Header.Movement.Speed"}}<br/>@attributes.accel.value<br/><br/>{{#each system.attributes.accel.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
-                            <label>{{localize "Accel"}}</label>
-                            <label>{{system.attributes.accel.value}}</label>
+                        <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Header.Movement.Speed"}}<br/>@attributes.accel.value<br/><br/>{{#each system.attributes.accel.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <label style="font-size: 13px;">{{localize "Accel"}}</label>
+                            <label style="font-size: 13px;">{{system.attributes.accel.value}}</label>
                         </li>
-                        <li class="flexrow" data-tippy-content="{{localize "FTL"}}<br/>@attributes.ftl.value<br/><br/>{{#each system.attributes.ftl.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
-                            <label>{{localize "FTL"}}</label>
-                            <label>{{system.attributes.ftl.value}}</label>
+                        <li class="flexrow" data-tooltip="{{localize "Maneuverability"}}<br/>@attributes.maneuverability<br/><br/>{{system.attributes.maneuverability}}<br/>">
+                            <label style="font-size: 13px;">{{localize "Maneuver"}}</label>
+                            <label style="font-size: 13px;">{{system.attributes.maneuverability}}</label>
+                        </li>
+                        <li class="flexrow" data-tooltip="{{localize "FTL"}}<br/>@attributes.ftl.text<br/><br/>{{system.attributes.ftl.text}}<br/>">
+                            <label style="font-size: 13px;">{{localize "FTL "}}</label>
+                            <label style="font-size: 13px;">{{system.attributes.ftl.range}}</label>
                         </li>
                         {{else}}
                         <li class="flexrow">

@@ -19,12 +19,16 @@ export default function (engine) {
                     data.attributes.ftl.tooltip.push(`${engine.name}: ${engineData.accel[rate]}`);   
                     console.log(rate,data.attributes.ftl.value,engineData.bhpCost,engineData.pcu)
                 }
+
                 function defaultftl(rate) {
                     data.attributes.ftl.value = engineData.accel[rate];
                     data.attributes.ftl.tooltip.push(`${engine.name}: ${engineData.accel[rate]}`);  
                     console.log(data.attributes.ftl.value )
                 }
 
+                data.attributes.ftl.text = "Speed: "+ engineData.ftlRange+" / " +engineData.ftlDuration+ " Cooldown: " + engineData.ftlCooldown
+                data.attributes.ftl.range = engineData.ftlRange
+/*
                 if (enginesize < 5 ) {
                     data.attributes.accel.value = "-";
                 }
@@ -61,7 +65,7 @@ export default function (engine) {
 
                 }
 
-
+*/
                    
     
                 

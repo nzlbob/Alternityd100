@@ -77,10 +77,10 @@
             <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.TargetTooltip" }}">
                 <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.Target" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="system.target" value="{{itemData.target}}" data-dtype="Number" />
+                    <input type="number" name="system.target" value="{{itemData.target}}" data-dtype="Number" />
                 </div>
             </div>
-
+<!--
             <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.ManeuverabilityTooltip" }}">
                 <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.Maneuverability" }}</label>
                 <div class="form-fields">
@@ -93,33 +93,40 @@
                     </select>
                 </div>
             </div>
+-->
+            <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.ManeuverabilityTooltip" }}">
+                <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.Maneuverability" }}</label>
+                <div class="form-fields">
+                    <input type="number" name="system.maneuverability" value="{{itemData.maneuverability}}" data-dtype="Number" />
+                </div>
+            </div>
 
             <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.DurabilityTooltip" }}">
                 <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.Durability" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="system.durability" value="{{itemData.durability}}" data-dtype="Number" />
+                    <input type="number" name="system.durability" value="{{itemData.durability}}" data-dtype="Number" />
                 </div>
             </div>
 
             <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.NumCompartmentsTooltip" }}">
                 <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.NumCompartments" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="system.numCompartments" value="{{itemData.numCompartments}}" data-dtype="Number" />
+                    <input type="number" name="system.numCompartments" value="{{itemData.numCompartments}}" data-dtype="Number" />
                 </div>
             </div>
 
             <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.CrewTooltip" }}">
                 <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.CrewMinimum" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="system.crew.minimum" value="{{itemData.crew.minimum}}" data-dtype="Number" /> / 
-                    <input type="text" name="system.crew.maximum" value="{{itemData.crew.maximum}}" data-dtype="Number" />
+                    <input type="number" name="system.crew.minimum" value="{{itemData.crew.minimum}}" data-dtype="Number" /> / 
+                    <input type="number" name="system.crew.maximum" value="{{itemData.crew.maximum}}" data-dtype="Number" />
                 </div>
             </div>
 
             <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.PriceTooltip" }}">
                 <label>{{ localize "Price" }}</label>
                 <div class="form-fields">
-                    <input type="text" name="system.price" value="{{itemData.price}}" data-dtype="Number" />
+                    <input type="number" step="100" name="system.price" value="{{itemData.price}}" data-dtype="Number" />
                 </div>
             </div>
 

@@ -51,12 +51,29 @@
                     <td><input type="text" name="system.supportedSize" value="{{itemData.supportedSize}}" data-dtype="Number" placeholder="0" /></td>
             </div>
 
+            {{#if itemData.isFTL}}
 
+            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipEngine.Size" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipEngine.SizeTooltip" }}">
+                <label>{{ localize "FTL Distance" }}</label>
+                    <td><input type="text" name="system.ftlRange" value="{{itemData.ftlRange}}" data-dtype="Text" placeholder="0 ly" /></td>
+            </div>
+            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipEngine.Size" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipEngine.SizeTooltip" }}">
+                <label>{{ localize "FTL Duration" }}</label>
+                    <td><input type="text" name="system.ftlDuration" value="{{itemData.ftlDuration}}" data-dtype="Text" placeholder="0" /></td>
+            </div>
+            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipEngine.Size" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipEngine.SizeTooltip" }}">
+                <label>{{ localize "Cooldown Time" }}</label>
+                    <td><input type="text" name="system.ftlCooldown" value="{{itemData.ftlCooldown}}" data-dtype="Text" placeholder="0" /></td>
+            </div>
 
+            {{/if}}
 
             <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipEngine.Speed" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipEngine.SpeedTooltip" }}">
-                {{#unless itemData.isFTL}} <label>{{ localize "Accel Rating" }}</label> {{/unless}}
-                {{#if itemData.isFTL}} <label>{{ localize "FTL Accel Rating" }}</label> {{/if}}
+                {{#unless itemData.isFTL}} 
+                <label>{{ localize "Accel Rating" }}</label> 
+   
+                
+            
                 <div class="form-fields">
                         <table class="blueTable">
                         <thead>
@@ -71,7 +88,7 @@
                         </tfoot>
                         <tbody>
                         <tr>
-                        {{#unless itemData.isFTL}}
+                        
                         <td><input type="text" name="system.accel.five" value="{{itemData.accel.five}}" data-dtype="Number" placeholder="0" /></td>
                         <td><input type="text" name="system.accel.ten" value="{{itemData.accel.ten}}" data-dtype="Number" placeholder="0" /></td>
                         <td><input type="text" name="system.accel.fifteen" value="{{itemData.accel.fifteen}}" data-dtype="Number" placeholder="0" /></td>
@@ -79,16 +96,8 @@
                         <td><input type="text" name="system.accel.thirty" value="{{itemData.accel.thirty}}" data-dtype="Number" placeholder="0" /></td>
                         <td><input type="text" name="system.accel.forty" value="{{itemData.accel.forty}}" data-dtype="Number" placeholder="0" /></td>
                         <td><input type="text" name="system.accel.fifty" value="{{itemData.accel.fifty}}" data-dtype="Number" placeholder="0" /></td>
-                        {{/unless}}
-                        {{#if itemData.isFTL}}
-                        <td><input type="text" name="system.accel.five" value="{{itemData.accel.five}}" data-dtype="Text" placeholder="-" /></td>
-                        <td><input type="text" name="system.accel.ten" value="{{itemData.accel.ten}}" data-dtype="Text" placeholder="-" /></td>
-                        <td><input type="text" name="system.accel.fifteen" value="{{itemData.accel.fifteen}}" data-dtype="Text" placeholder="-" /></td>
-                        <td><input type="text" name="system.accel.twenty" value="{{itemData.accel.twenty}}" data-dtype="Text" placeholder="-" /></td>
-                        <td><input type="text" name="system.accel.thirty" value="{{itemData.accel.thirty}}" data-dtype="Text" placeholder="-" /></td>
-                        <td><input type="text" name="system.accel.forty" value="{{itemData.accel.forty}}" data-dtype="Text" placeholder="-" /></td>
-                        <td><input type="text" name="system.accel.fifty" value="{{itemData.accel.fifty}}" data-dtype="Text" placeholder="-" /></td>
-                        {{/if}}
+                       
+                        
                         </tr>
 
                         </tbody>
@@ -99,7 +108,7 @@
                
                 </div>
            
-           
+                {{/unless}}
            
            
             </div>

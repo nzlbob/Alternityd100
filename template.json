@@ -5494,7 +5494,7 @@
               "increment": 0
           },
           "numCompartments":2,
-          "durability":8,
+          "durability":0,
           "damageThreshold": {
               "base": 0
           },
@@ -5719,6 +5719,9 @@
           "speed": 0,
           "pilotingModifier": 0,
           "isFTL": false,
+          "ftlRange":"",
+          "ftlDuration":"",
+          "ftlCooldown":"",
           "isEnabled": true,
           "accel":{"five":0,"ten":0,"fifteen":0,"twenty":0,"thirty":0,"forty":0,"fifty":0}
       },
