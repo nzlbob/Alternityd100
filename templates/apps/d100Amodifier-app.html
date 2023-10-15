@@ -101,10 +101,14 @@
             {{#each config.abilities as |ability abl|}}
             <option value="{{abl}}">{{ability}}</option>
             {{/each}}
+
+
             {{else if (eq modifier.effectType "ability-score")}}
-            {{#each config.abilities as |ability abl|}}
-            <option value="{{abl}}">{{ability}}</option>
+            {{#each d100Aconfig.abilities as |ability abl|}}
+            <option value="{{abl}}">{{localize ability}}</option>
             {{/each}}
+          
+
             {{else if (eq modifier.effectType "weapon-attacks")}}
             {{#each config.weaponTypes as |name key|}}
             <option value="{{key}}">{{name}}</option>
