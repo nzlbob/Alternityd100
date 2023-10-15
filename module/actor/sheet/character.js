@@ -386,9 +386,9 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
 console.log(psionCon,psionInt)
 const psionics = {
     con: { score: psionScore.con, label: game.i18n.format("d100A.PsionBroadSkills.con.name"), tooltip: "d100A.PsionBroadSkills.con.tooltip",items: [], hasActions: false, dataset: { type: "psionic", stat:"con" }, isPsionic: true },
-    int: { score: psionScore.int, label: game.i18n.format("d100A.PsionBroadSkills.int.name"), tooltip: "d100A.PsionBroadSkills.int.tooltip", items: [], hasActions: false, dataset: { type: "psionic" , stat:"con"}, isPsionic: true },
-    wil: { score: psionScore.wil, label: game.i18n.format("d100A.PsionBroadSkills.wil.name"), tooltip: "d100A.PsionBroadSkills.wil.tooltip", items: [], hasActions: false, dataset: { type: "psionic" , stat:"con"}, isPsionic: true },
-    per: { score: psionScore.per, label: game.i18n.format("d100A.PsionBroadSkills.per.name"), tooltip: "d100A.PsionBroadSkills.per.tooltip", items: [], hasActions: false, dataset: { type: "psionic" , stat:"con"}, isPsionic: true }
+    int: { score: psionScore.int, label: game.i18n.format("d100A.PsionBroadSkills.int.name"), tooltip: "d100A.PsionBroadSkills.int.tooltip", items: [], hasActions: false, dataset: { type: "psionic" , stat:"int"}, isPsionic: true },
+    wil: { score: psionScore.wil, label: game.i18n.format("d100A.PsionBroadSkills.wil.name"), tooltip: "d100A.PsionBroadSkills.wil.tooltip", items: [], hasActions: false, dataset: { type: "psionic" , stat:"wil"}, isPsionic: true },
+    per: { score: psionScore.per, label: game.i18n.format("d100A.PsionBroadSkills.per.name"), tooltip: "d100A.PsionBroadSkills.per.tooltip", items: [], hasActions: false, dataset: { type: "psionic" , stat:"per"}, isPsionic: true }
 }
        
         

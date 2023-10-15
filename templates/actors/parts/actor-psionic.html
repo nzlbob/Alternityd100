@@ -1,19 +1,36 @@
 <div class="inventory-filters spellbook-filters">
     <div class="form-group spellcasting-ability">
-        <label><h3>{{localize "SFRPG.SpellBook.SpellCastingAbility"}} <a class="item-control spell-browse" title="{{localize "SFRPG.SpellBook.Browse"}}" data-type="spell" data-level="0" data-location="{{entry._id}}"> - <i class="fas fa-search"></i>{{localize "SFRPG.SpellBook.SearchSpell"}}</a></h3></label>
-        <select name="system.attributes.spellcasting" data-type="String">
-            {{#select system.attributes.spellcasting}}
-            <option value="">{{localize "SFRPG.SpellBook.AttributesNone"}}</option>
-            {{#each system.abilities as |abl a|}}
-            <option value="{{a}}">{{abl.label}}</option>
-            {{/each}}
-            {{/select}}
-        </select>
+        <label><h3>{{localize "Broad Psionic Skills"}} </h3></label>
+        
+        {{#each d100Aconfig.psionBroadSkill as |name prop|}}
+      
+        <input type="checkbox" name="system.psionics.{{prop}}"  {{checked (lookup ../systemData.psionics prop)}} /> {{ localize name.name }}
+
+
+        {{/each}}   
+
+        <label><h3>{{localize "Psionic Energy"}} </h3></label>
+        
+    
+            <input class="spellRank"   type="number" class="skill-ranks" data-tooltip="Spell Ranks" name="system.psionics.value"
+            value="{{systemData.psionics.value}}" data-id="{{item.id}}" /> 
+            <input class="spellRank"  type="number" class="skill-ranks" data-tooltip="Spell Ranks" name="system.psionics.max"
+            value="{{systemData.psionics.max}}" data-id="{{item.id}}" /> 
+
     </div>
+    
 </div>
+{{console this}}
+
+
+
+
 
 <ol class="inventory-list">
 {{#each psionics as |section key|}}
+  
+{{#if (lookup ../systemData.psionics section.dataset.stat)}}
+
     <li class="item flexrow inventory-header spellbook-header">
         <div class="item-name flexrow" data-tooltip = "{{localize section.tooltip}}">
             <h3>{{localize section.label}}</h3> {{section.score}} 
@@ -84,20 +101,14 @@
             </div>
             {{/if}}
         </li>
+
+        
     {{/each}}
     </ol>
-{{else}}
-    {{#if isOwner}}
-    {{#if filters.spellbook.size}}
-    <li class="item flexrow"><p class="notes">{{localize "SFRPG.SpellBook.NoSpells"}}</p></li>
-    {{else}}
-    <li class="item flexrow inventory-header spellbook-header spellbook-empty">
-        <div class="item-controls">
-            <a class="item-control item-create" title="{{localize "SFRPG.SpellBook.CreateSpell"}}" data-type="spell"
-               data-level="{{lvl}}"><i class="fas fa-plus"></i> {{localize "SFRPG.SpellBook.AddSpells"}}</a>
-        </div>
+ 
+    
     {{/if}}
-    {{/if}}
-    </li>
+
 {{/each}}
+
 </ol>

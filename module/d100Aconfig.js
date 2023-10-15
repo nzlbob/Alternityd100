@@ -2108,16 +2108,16 @@ d100A.psionBroadSkill = {
       "tooltip" :"d100A.PsionBroadSkills.con.tooltip"
    },
    "int": {
-      "name": "d100A.PsionBroadSkills.con.name",
-      "tooltip" :"d100A.PsionBroadSkills.con.tooltip"
+      "name": "d100A.PsionBroadSkills.int.name",
+      "tooltip" :"d100A.PsionBroadSkills.int.tooltip"
    },
    "wil": {
-      "name": "d100A.PsionBroadSkills.con.name",
-      "tooltip" :"d100A.PsionBroadSkills.con.tooltip"
+      "name": "d100A.PsionBroadSkills.wil.name",
+      "tooltip" :"d100A.PsionBroadSkills.int.tooltip"
    },
    "per": {
-      "name": "d100A.PsionBroadSkills.con.name",
-      "tooltip" :"d100A.PsionBroadSkills.con.tooltip"
+      "name": "d100A.PsionBroadSkills.per.name",
+      "tooltip" :"d100A.PsionBroadSkills.per.tooltip"
    }
    
 }
