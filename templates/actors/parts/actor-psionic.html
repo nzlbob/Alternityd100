@@ -9,12 +9,12 @@
 
         {{/each}}   
 
-        <label><h3>{{localize "Psionic Energy"}} </h3></label>
+        <label><h3 data-tooltip="<h4>Action Energy Lost </h4><p>Critical Failure 3</p><p>Broad Skill 2</p><p>Specialty Skill 1</p> " >{{localize "Psionic Energy"}} </h3></label>
         
     
-            <input class="spellRank"   type="number" class="skill-ranks" data-tooltip="Spell Ranks" name="system.psionics.value"
+            <input class="spellRank"   type="number" class="skill-ranks" data-tooltip="Current" name="system.psionics.value"
             value="{{systemData.psionics.value}}" data-id="{{item.id}}" /> 
-            <input class="spellRank"  type="number" class="skill-ranks" data-tooltip="Spell Ranks" name="system.psionics.max"
+            <input class="spellRank"  type="number" class="skill-ranks" data-tooltip="Maximum" name="system.psionics.max"
             value="{{systemData.psionics.max}}" data-id="{{item.id}}" /> 
 
     </div>

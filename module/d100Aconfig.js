@@ -1321,6 +1321,7 @@ d100A.pubnsource = {
    "warships": "d100A.source.warships",
    "tangents": "d100A.source.tangents",
    "dataware": "d100A.source.dataware",
+   "mindwalking" :"d100A.source.mindwalking",
    "dragon273": "d100A.source.dragon273",
    "externals": "d100A.source.externals",
    "gammaworld": "d100A.source.gammaworld",
@@ -2119,6 +2120,8 @@ d100A.psionBroadSkill = {
       "name": "d100A.PsionBroadSkills.per.name",
       "tooltip" :"d100A.PsionBroadSkills.per.tooltip"
    }
+
+
    
 }
 

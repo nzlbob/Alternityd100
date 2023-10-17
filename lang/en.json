@@ -3035,7 +3035,7 @@
 
     "AbilityStr": "Strength",
     "AbilityDex": "Dexterity",
-    "AbilityCon": "Consitution",
+    "AbilityCon": "Constitution",
     "AbilityInt": "Intelligence",
     "AbilityWil": "Willpower",
     "AbilityPer": "Personality",
@@ -3390,7 +3390,7 @@
     "warships": "Warships",
     "tangents": "Tangents",
     "dataware": "Dataware",
-
+    "mindwalking" : "Mindwalking",
     "sdaeg": "Stardrive AEG",
     "dragon273": "Dragon 273",
     "externals": "Externals",

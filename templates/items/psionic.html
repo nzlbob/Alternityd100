@@ -81,6 +81,25 @@
                  
                 </div>
             </div>
+
+            {{!-- Weapon Source --}}
+            <div class="form-group">
+                <label>{{ localize "d100A.pubnSource" }}</label>
+                    <div class="form-fields">
+                        <select name="system.pubnsource">
+                        {{#select itemData.pubnsource}}
+                            {{#each d100Aconfig.pubnsource as |name type|}}
+                            <option value="{{type}}">{{name}}</option>
+                            {{/each}}
+                        {{/select}}
+                        </select>
+                    </div>
+            </div>
+                        
+
+
+
+
             <div class="form-group" data-tooltip="{{ localize "Effect on a Critical Failure" }}">
                 <label>{{ localize "Critical Failure" }}</label>
                 <div class="form-fields">
