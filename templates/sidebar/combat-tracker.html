@@ -97,12 +97,13 @@
                     </div>
                 </div>
             </div>
-
-            {{#if this.hasResource}}
+<!--  console "------combat-tracker 100-----"}}
+console this-->
             <div class="token-resource">
-                <span class="resource">{{this.resource}}</span>
+                <span class="resource">{{this.actions.remaining}}/{{this.actions.total}}</span>
             </div>
-            {{/if}}
+
+
 
             <div class="token-initiative">
                 {{#if this.hasRolled}}

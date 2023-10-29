@@ -13,7 +13,7 @@ export default function (engine) {
         "resModBonus":0
 */
 //Resistance modifier bonus from Skills
-console.log(data.abilities.int)
+//console.log(data.abilities.int)
 // Strength
 for (let [abl, ability] of Object.entries(data.abilities)) {
 
@@ -47,7 +47,7 @@ for (let [abl, ability] of Object.entries(data.abilities)) {
     Skillmod[abl] = 0
    if (bonus[abl]) Skillmod[abl] =  addModifier(bonus[abl], data, ability, "SFRPG.AbilityModifiersTooltip");
 
-    console.log("Skillmod[abl] ",Skillmod[abl] ,bonus[abl] )
+ //   console.log("Skillmod[abl] ",Skillmod[abl] ,bonus[abl] )
 }
 
 
@@ -55,7 +55,7 @@ for (let [abl, ability] of Object.entries(data.abilities)) {
         const filteredMods = modifiers.filter(mod => {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.AC, SFRPGEffectType.AC].includes(mod.effectType);
         })
-            console.log("filteredMods",filteredMods)
+      //      console.log("filteredMods",filteredMods)
         for (let [abl, ability] of Object.entries(data.abilities)) {
 
             const abilityMods = context.parameters.stackModifiers.process(
@@ -67,7 +67,7 @@ for (let [abl, ability] of Object.entries(data.abilities)) {
             if (Number.isNaN(Number.parseInt(abilityValue))) {
                 abilityValue = 10;
             }
-            console.log(abilityMods)
+         //   console.log(abilityMods)
             const baseMod = Math.floor((abilityValue - 10) / 2);
             //ability.modifierTooltip.push(game.i18n.format("SFRPG.AbilityModifierBase", { mod: baseMod.signedString() }));
 
@@ -76,7 +76,7 @@ for (let [abl, ability] of Object.entries(data.abilities)) {
 
                 if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
                     for (const bonus of mod[1]) {
-                    console.log(bonus)
+        //            console.log(bonus)
                            sum += addModifier(bonus, data, ability, "SFRPG.AbilityModifiersTooltip");
                     }
                 } else {

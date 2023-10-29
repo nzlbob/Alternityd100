@@ -102,9 +102,15 @@ const update = {
     "flags.sfrpg.combatType": "starship"
 };
 await this.update(update);
-
 }
-
+if(!this.scene.isStarship){
+    this.isSpace = false
+    this.test = false
+const update = {
+    "flags.sfrpg.combatType": "normal"
+};
+await this.update(update);
+}
 //console.log(data, options,userId,this)
 
 
@@ -115,7 +121,7 @@ await this.activate({render: true});
 async _onCreateDescendantDocuments(type, documents, result, options, userId)
 
 {
-    super._onCreateDescendantDocuments(type, documents, result, options, userId);
+ await   super._onCreateDescendantDocuments(type, documents, result, options, userId);
  //   const current = this.combatant;
  //   console.log(this,type, documents, result, options, userId,current)
  console.log("\n_onCreateEmbeddedDocuments\n")
@@ -139,25 +145,47 @@ async _onCreateDescendantDocuments(type, documents, result, options, userId)
                await this.updateEmbeddedDocuments("Combatant", updates);
            
 */
+const updates = this.combatants.map(c => { 
+    let crewRole = "";           
+  /* if (this.flags.sfrpg.combatType == "starship" ){
+       
+       crewRole = c.token.actor.findCrewJob(c.actorID) 
+   }     
+*/
+console.log("-----------THIS ONCE!!!------------THIS ONCE!!!-----------------THIS ONCE!!!---------------------THIS ONCE!!!")
+               return {
+                _id: c.id,
+                flags: {actions: {total: c.apr,remaining:c.apr},delayed:null},
+                actions: {total: c.apr},
+             //  initiative: null,
+             //  flags: {degree: null, canAct:false,crewRole : crewRole}
+             
+           }});
+           console.log("updates",updates)
+           await this.updateEmbeddedDocuments("Combatant", updates);
+           console.log(this)
 
    //this.collections.
 
-  //  Hooks.callAll("renderCombatTracker");
+    //Hooks.callAll("renderCombatTracker");
     //   FOUNDRY 37225 combat.createEmbeddedDocuments("Combatant", createData);
     if ( this.active && (options.render !== false) ) this.collection.render();
     //await this.update({test:true})
-    //await ui.combat.getData()
+   // await ui.combat.getData()
+
+   // Hooks.callAll("onAfterUpdateCombat");
+   
+    await ui.combat._render(false);
 }
 
-async _onUpdateEmbeddedDocuments(name, documents, result, options, userId)
+async _onUpdateDescendantDocuments(name, documents, result, options, userId)
 
 {
-    console.log("\n_onUpdateEmbeddedDocuments\n",name, documents, result, options, userId)
-    super._onUpdateEmbeddedDocuments(name, documents, result, options, userId)
+    super._onUpdateDescendantDocuments(name, documents, result, options, userId)
  //   const current = this.combatant;
  // console.log(this,name, documents, result, options, userId, current)
 
-
+   console.log("\n_onUpdateEmbeddedDocuments\n")
    //this.collections.
 
   //  Hooks.callAll("renderCombatTracker");
@@ -165,24 +193,8 @@ async _onUpdateEmbeddedDocuments(name, documents, result, options, userId)
    
    
     //FOUNDRY.JS 18904 interesting Code
-    if ( this.active && (options.render !== false) ) this.collection.render();
+ //   if ( this.active && (options.render !== false) ) this.collection.render();
 }
-
-async _xxonUpdateDescendantDocuments(name, documents, result, options, userId)
-
-{
-    console.log("\n_onUpdateDescendantDocuments\n",name, documents, result, options, userId)
-    super._onUpdateDescendantDocuments((name, documents, result, options, userId))
-
-
-   console.log("\n_onUpdateDescendantDocuments\n")
-
-   
-   
-    //FOUNDRY.JS 18904 interesting Code
-    if ( this.active && (options.render !== false) ) this.collection.render();
-}
-
 
 
 
@@ -219,9 +231,9 @@ async _xxonUpdateDescendantDocuments(name, documents, result, options, userId)
                 const updates = this.combatants.map(c => { return {
                     _id: c.id,
                     initiative: null,
-                    flags: {degree: null, canAct:false}
+                    flags: {degree: null, canAct:false,delayed:null,actions: {total: c.apr,remaining:c.apr}}
                 }});
-               // console.log("updates",updates)
+                console.log("updates",updates)
                 await this.updateEmbeddedDocuments("Combatant", updates);
                 console.log("this.combatants",this.combatants[0].flags)
             }
@@ -337,11 +349,13 @@ async _xxonUpdateDescendantDocuments(name, documents, result, options, userId)
 //---------------------------------------------------------------------------------
     async  delayTurn(){
 
-console.log("Delay")
+//console.log("Delay")
 let turn = this.turn;
 const oldCombatant = this.turns[turn]
+/*
 console.log (oldCombatant,oldCombatant.initiative)
-/*const updates = [ {
+
+const updates = [ {
                _id: oldCombatant.id,
                initiative: 111,
                flags: {delayed:oldCombatant.initiative}
@@ -349,7 +363,7 @@ console.log (oldCombatant,oldCombatant.initiative)
            }];
            console.log("updates",updates)
            await this.updateEmbeddedDocuments("Combatant", updates);
- */      
+  */    
 this.nextTurn(false)
 
 
@@ -381,6 +395,9 @@ this.nextTurn(false)
                 ){ 
                     newround = true}
 
+
+
+
         let thisTurn = {
             round: this.round,
             phase:this.flags.sfrpg.phase, 
@@ -390,19 +407,50 @@ this.nextTurn(false)
             newround: newround
         }
         const oldCombatant = this.turns[turn]
-        console.log (oldCombatant,oldCombatant?.flags?.delayed !== null)
-        
-        if( useAction && !!oldCombatant && (oldCombatant?.flags?.delayed !== null)){
-       /* const updates = [ {
+
+        if (!!oldCombatant){
+        console.log ("oldCombatant" ,turn)
+        console.log ("oldCombatant" ,this.turns)
+        console.log ("oldCombatant" ,oldCombatant)
+        console.log ("oldCombatant" ,oldCombatant.flags)
+        console.log ("oldCombatant" ,oldCombatant.flags.delayed)
+
+
+        console.log ( useAction , !!oldCombatant , (oldCombatant?.flags?.delayed !== null), useAction && !!oldCombatant && (oldCombatant?.flags?.delayed !== null))
+        }
+// this was commented out
+
+//has acted, was a combatant, reduce the turns remaining
+
+        if( useAction && !!oldCombatant ){
+            const remaining = oldCombatant.flags.actions.remaining - 1
+            
+             
+        const updates = [ {
                        _id: oldCombatant.id,
-                       initiative: oldCombatant.flags.delayed,
-                       flags: {acted:true,canAct:false}
+                       
+                       flags: {canAct: !(remaining < 0)    ,actions:{total:oldCombatant.apr,remaining:remaining}}
                        
                    }];
                    console.log("updates",updates)
                    await this.updateEmbeddedDocuments("Combatant", updates);
-*/
+
                 }
+
+       /*
+       
+        if( useAction && !!oldCombatant && (oldCombatant?.flags?.delayed !== null)){
+       const updates = [ {
+                       _id: oldCombatant.id,
+                       initiative: oldCombatant.flags.delayed,
+                       flags: {acted:true,canAct:false,delayed:null}
+                       
+                   }];
+                   console.log("updates",updates)
+                   await this.updateEmbeddedDocuments("Combatant", updates);
+                }
+
+*/
         const phases = this.getPhases();
         const subPhases = this.getSubPhases();
         const currentPhase = phases[thisTurn.phase];
@@ -582,7 +630,7 @@ console.log("\n nextRound",nextTurn.round,"\n nextPhase",nextTurn.phase,"\n next
         let nextPhase = 0;
         let nextSubPhase = 0;
         let nextTurn = 0;
-
+fsgsfgfgsfg
         const phases = this.getPhases();
         const subPhases = this.getSubPhases();
         const newPhase = phases[nextPhase];
@@ -601,7 +649,6 @@ console.log("\n nextRound",nextTurn.round,"\n nextPhase",nextTurn.phase,"\n next
         const subPhases = this.getSubPhases();
         const currentPhase = phases[this.flags.sfrpg.phase];
         const currentSubPhase = subPhases[this.flags.sfrpg.subPhase];
-
         const newPhase = phases[nextPhase];
         const newSubPhase = subPhases[nextSubPhase];
         
@@ -628,6 +675,8 @@ console.log("\n nextRound",nextTurn.round,"\n nextPhase",nextTurn.phase,"\n next
         if (!eventData.isNewRound && !eventData.isNewPhase && !eventData.isNewSubPhase && !eventData.isNewTurn) {
               return;
         }
+        
+        
         await this._notifyBeforeUpdate(eventData);
 
         if (!newPhase.iterateTurns) {
@@ -653,6 +702,10 @@ console.log("\n nextRound",nextTurn.round,"\n nextPhase",nextTurn.phase,"\n next
         const actedUpdate = []
         for (let c of this.combatants)  {
             console.log(c)
+
+            
+
+
             if (c.flags?.acted){
                 actedUpdate.push({_id: c.id,flags: {canAct:true, acted: null,delayed:null}});
             }
@@ -687,7 +740,7 @@ console.log("\n nextRound",nextTurn.round,"\n nextPhase",nextTurn.phase,"\n next
                     return {
                     _id: c.id,
                     initiative: null,
-                    flags: {degree: null, canAct:false,crewRole : crewRole}
+                    flags: {degree: null, canAct:false,crewRole : crewRole ,actions: {total: c.apr,remaining:c.apr}}
                     
                 }});
                 console.log("updates",updates)
@@ -1000,7 +1053,7 @@ async    setActiveCombatants(thisTurn) {
         //if (nextphase) (phase ++) % 4;
         console.log("\nPhase sent/ cur",phase,this.flags.sfrpg.phase)
         const updates = this.combatants.map(c => { 
-            console.log(c.flags.crewRole)
+          //  console.log(c.flags.crewRole)
             let crewRole = "";           
             if (this.flags.sfrpg.combatType == "starship" ){
                 
@@ -1013,9 +1066,7 @@ async    setActiveCombatants(thisTurn) {
                         crewRole = c.flags.crewRole
                     }
           
-          
-          
-          
+        
             }          
             
           //  console.log(c)
@@ -1026,7 +1077,6 @@ async    setActiveCombatants(thisTurn) {
         }});
       //  console.log("setActiveCombatants()  updates",updates)
         await this.updateEmbeddedDocuments("Combatant", updates);
-       // await this._onUpdateDescendantDocuments("Combatant", updates);
            // if (reset) combatant.active = false            
        //    console.log("\n---this.combatants---\n",this.combatants)
        await ui.combat.getData()
@@ -1125,7 +1175,7 @@ async    setActiveCombatants(thisTurn) {
         if ( !combatant?.isOwner ) return results;
     console.log("\nactionCheck\n",combatant.actor.system.attributes, actionCheck)
         const parts = [actionCheck.step.total," Base, "]
-        let stepbonus = actionCheck.step.total;
+        let stepbonus = actionCheck.total;
       //  console.log("\nactionCheck\n", actionCheck)
         const props = ["something","2.jghf"];
         // Roll initiative
@@ -1190,9 +1240,8 @@ async    setActiveCombatants(thisTurn) {
 
       if ( !updates.length ) return this;
   
-      // Update multiple combatants  
+      // Update multiple combatants
       await this.updateEmbeddedDocuments("Combatant", updates);
-      //await this._onUpdateDescendantDocuments("Combatant", updates);
 
       await this.setActiveCombatants()
 
@@ -1341,9 +1390,9 @@ async function onConfigClicked(combat, direction) {
 }
 
 Hooks.on('renderCombatTracker', (app, html, data) => {
-    //console.log(app, html, data)
+   // console.log(app, html, data)
     //console.trace(data)
-    const activeCombat = data.combat;
+    const activeCombat = app.viewed;
     if (!activeCombat) {
         return;
     }

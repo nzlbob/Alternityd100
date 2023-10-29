@@ -16,7 +16,7 @@ export class d100ACombatTracker extends CombatTracker {
   async getData() {
     let context = await super.getData();
 
-
+console.log("contect", context)
  
 if  (["starship"].includes(context.combat?.flags?.sfrpg?.combatType)){
 for(let currentTurn of context.turns){
@@ -27,9 +27,14 @@ for(let currentTurn of context.turns){
     currentTurn.crewRole = currentCombatant.flags.crewRole 
     currentTurn.isPilot = false;
     currentTurn.image = "";
+    currentTurn.actions = currentCombatant.flags.actions
+
       if (["Pilot","Copilot","pilot","copilot"].includes(currentTurn.crewRole)){
         currentTurn.isPilot = true
         currentTurn.image = "systems/Alternityd100/icons/roles/pilot.png"
+        
+
+
       }
 //console.log( "currentTurn.crewmember.name", currentTurn.crewmember.name)
     }
@@ -38,9 +43,11 @@ for(let currentTurn of context.turns){
 if  (["normal"].includes(context.combat?.flags?.sfrpg?.combatType)){
   for(let currentTurn of context.turns){
       const currentCombatant = context.combat.combatants.get(currentTurn.id)
-      //  console.log( "currentCombatant", currentCombatant)
+  //      console.log( "currentCombatant", currentCombatant)
       //currentTurn.crewmember = {"name" : currentCombatant.actor.name}
       currentTurn.canAct = currentCombatant.flags.canAct
+      currentTurn.actions = currentCombatant.flags.actions
+
       //currentTurn.crewRole = currentCombatant.flags.crewRole
       //currentTurn.isPilot = false;
       //currentTurn.image = "";

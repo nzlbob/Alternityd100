@@ -6,6 +6,7 @@ import { d100A } from "./d100Aconfig.js";
  */
  export class d100ACombatant extends Combatant {
 /** @override */
+//actions = {total:null,remaining:null};
 
 
 
@@ -25,6 +26,11 @@ import { d100A } from "./d100Aconfig.js";
     if ( this.token && notStarship) return this.token.actor;
     if(!notStarship && isNPCCrew) return this.buildNPCCrewman ()
     return game.actors.get(this.actorId) || null;
+  }
+
+  get apr() {
+return this.actor.system.attributes.actchk.apr
+
   }
 
 async rollInitiative(formula) {

@@ -4,9 +4,9 @@ export default function (engine) {
     engine.closures.add("calculateStarshipCompartments", (fact, context) => {
         const data = fact.actor.system;
         if (data.frame.name) {
-            console.log("\n Compartments \n",data.frame.system.compartment,"\n fact \n",fact)
+   //         console.log("\n Compartments \n",data.frame.system.compartment,"\n fact \n",fact)
         }
-        console.log("\n\n\n\--------------------------------\n\n\n")
+     //   console.log("\n\n\n\--------------------------------\n\n\n")
         //const shipFrame = fact.items.filter(x => x.type.== "starship");
         const shipFrame = fact.items.find(x => x.type === "starshipFrame")
         
