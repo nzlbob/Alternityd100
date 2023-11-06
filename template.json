@@ -76,6 +76,41 @@
             }
         },
         "attributes": {
+
+            "ECM": {
+                "radar": {                
+                    "base": 0,
+                    "value": 0,
+                    "temp": 0,
+                    "tooltip": []
+                },
+                "laser": {                
+                    "base": 0,
+                    "value": 0,
+                    "temp": 0,
+                    "tooltip": []
+                },
+                "mass": {                
+                    "base": 0,
+                    "value": 0,
+                    "temp": 0,
+                    "tooltip": []
+                },
+                "thermal": {                
+                    "base": 0,
+                    "value": 0,
+                    "temp": 0,
+                    "tooltip": []
+                },
+                "psi": {                
+                    "base": 0,
+                    "value": 0,
+                    "temp": 0,
+                    "tooltip": []
+                }
+            },
+
+
             "fat": {
               "label": "Fatigue",
               "min": 0,
@@ -4615,28 +4650,20 @@
         "achievement", 
         "actorResource",
         "ammunition",
-        "archetypes",
-        "asi",
-        "augmentation",
-        "chassis",
-        "class",
-        "consumable",
-        "container",
         "equipment",
+        "clothing",
+        "communications",
+        "container",
+        "augmentation",
         "feat",
         "flaw", 
-        "fusion",
         "goods",
-        "hybrid",
-        "magic",
-        "mod",
-        "perk",    
+        "perk",  
+        "pharmaceutical",
         "psionic",      
         "race",
         "shield",
-        "spell",
         "technological",
-        "upgrade",
         "weapon",
         "weaponAccessory",
 
@@ -4650,23 +4677,35 @@
         "starshipComputer",
         "starshipCrewQuarter",
         "starshipDefence",
-        "starshipDefensiveCountermeasure",
-        "starshipDriftEngine",
         "starshipElectronicCountermeasure",
         "starshipEngine",
-        "starshipExpansionBay",
-        "starshipFortifiedHull",
         "starshipFrame",
         "starshipOrdnance",
         "starshipOtherSystem",
         "starshipPowerCore",
-        "starshipReinforcedBulkhead",
-        "starshipSecuritySystem",
         "starshipSensor",
         "starshipShield",
         "starshipSystemDamage",
-        "starshipWeapon"
+        "starshipWeapon",
 
+
+
+        "archetypes",
+        "asi",
+        "chassis",
+        "class",
+        "hybrid",
+        "spell",
+        "upgrade",
+        "fusion",
+        "magic",
+        "mod",
+        "starshipDefensiveCountermeasure",
+        "starshipDriftEngine",
+        "starshipExpansionBay",
+        "starshipFortifiedHull",
+        "starshipReinforcedBulkhead",
+        "starshipSecuritySystem"
 
       ],
       "templates": {
@@ -4989,7 +5028,7 @@
               "isOpen": true
           }
       },
-      "consumable": {
+      "pharmaceutical": {
           "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "modifiers", "container"],
           "consumableType": "serum",
           "uses": {
@@ -5027,7 +5066,7 @@
                       "type": "bulk",
                       "subtype": "",
                       "amount": 0,
-                      "acceptsType": ["weapon", "shield", "equipment", "goods", "consumable", "container", "technological", "fusion", "upgrade", "augmentation", "magic", "hybrid"],
+                      "acceptsType": ["weapon", "shield", "equipment", "goods", "pharmaceutical", "container", "technological", "fusion", "upgrade", "augmentation", "magic", "hybrid"],
                       "affectsEncumbrance": true,
                       "weightProperty": "bulk"
                   }
@@ -5119,6 +5158,14 @@
               "10": {"1": 3,    "2": 3,    "3": 2,    "4": 2,    "5": 2,    "6": 2}
           }
       },
+      "clothing":{
+        "templates": ["itemDescription", "modifiers"]
+      },
+      "communications":{
+        "templates": ["itemDescription", "modifiers"]
+      },
+
+      
       "psionic":{
         "templates": ["itemDescription", "modifiers"],
         "ability": "",

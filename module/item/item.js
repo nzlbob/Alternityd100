@@ -551,7 +551,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         }
 
         // Render the chat card template
-        const templateType = ["tool", "consumable"].includes(this.type) ? this.type : "item";
+        const templateType = ["tool", "pharmaceutical"].includes(this.type) ? this.type : "item";
         const template = `systems/Alternityd100/templates/chat/${templateType}-card.html`;
         const html = await renderTemplate(template, templateData);
 
@@ -696,7 +696,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     /* -------------------------------------------- */
 
     /**
-     * Prepare chat card data for consumable type items
+     * Prepare chat card data for pharmaceutical type items
      * @private
      */
     _consumableChatData(data, labels, props) {
@@ -2758,7 +2758,7 @@ console.log( "event\t", event,
     /* -------------------------------------------- */
 
     /**
-     * Use a consumable item
+     * Use a pharmaceutical item
      */
     async rollConsumable(options = {}) {
         const itemData = this.system;
@@ -2919,7 +2919,7 @@ console.log(parseInt(game.settings.get("Alternityd100", "starshipHitLocLen")),ga
           default: 0,
         };
        // if (!allowSpell) delete dialogData.buttons.spell;
-        new Dialog(dialogData, { classes: ["dialog", "pf1", "create-consumable"] }).render(true);
+        new Dialog(dialogData, { classes: ["dialog", "pf1", "create-pharmaceutical"] }).render(true);
       });
     
       console.log(SAA)
@@ -2984,7 +2984,7 @@ const itemData = targetToken.actor.system
 
 
 
-        const templateType = ["tool", "consumable"].includes(this.type) ? this.type : "item";
+        const templateType = ["tool", "pharmaceutical"].includes(this.type) ? this.type : "item";
         //const template = `systems/Alternityd100/templates/chat/${templateType}-card.html`;
         const template = `systems/Alternityd100/templates/chat/roll-hitLoc.hbs`;
         const html = await renderTemplate(template, templateData);
@@ -3163,7 +3163,7 @@ i.notifications.warn(msg);
             return;
         }
 
-        // Consumable usage
+        // Pharmaceutical usage
         else if (action === "consume") await item.rollConsumable({ event });
 
         // Re-enable the button

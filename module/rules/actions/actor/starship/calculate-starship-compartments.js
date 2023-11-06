@@ -89,7 +89,7 @@ export default function (engine) {
                 for (const component of starshipComponents) {
                     //const componentData = component.system;
         
-                    const excludedComponents = ["starshipFrame"];
+                    const excludedComponents = ["starshipFrame","starshipArmor"];
                     if (!excludedComponents.includes(component.type)) {
                         if (component.system.location) {     // e.g system.location = "L"
                             //let compartment = compartments.find("location",component.system.location)
@@ -127,7 +127,11 @@ export default function (engine) {
                     tempcomp.maxHull = d100A.hullTypes[data.frame?.system.hullType]?.zoneLimit
                     tempcomp.curHull = 0
                     for (let[key2,tempitem] of Object.entries(tempcomp.contents)){
+                        const excludedComponents = ["starshipArmor"];
+
+                        if (!excludedComponents.includes(tempitem.type)) {
                         tempcomp.curHull += tempitem.system.bhpCost
+                        }
                     }
 
                     if(tempcomp.curHull>tempcomp.maxHull) tempcomp.overload = true

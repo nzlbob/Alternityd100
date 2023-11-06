@@ -211,13 +211,13 @@ export class ItemSheetPF_Container extends ItemSheetPF {
         dataset: { type: "equipment" },
         hasSlots: true,
       },
-      consumable: {
+      pharmaceutical: {
         label: game.i18n.localize("PF1.InventoryConsumables"),
         canCreate: true,
         hasActions: true,
         items: [],
         canEquip: false,
-        dataset: { type: "consumable" },
+        dataset: { type: "pharmaceutical" },
       },
       gear: {
         label: CONFIG.PF1.lootTypes["gear"],
@@ -502,7 +502,7 @@ console.log("container")
     // Sort item
     if (data.containerId === this.item.id) return this._onSortItem(event, itemData);
 
-    // Create consumable from spell
+    // Create pharmaceutical from spell
     if (itemData.type === "spell") {
       const resultData = await createConsumableSpellDialog(itemData, { allowSpell: false });
       if (resultData) return this.item.createContainerContent(resultData);

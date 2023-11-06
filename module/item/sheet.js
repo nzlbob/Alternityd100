@@ -147,7 +147,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         
      //   console.log("SHEET.JS CONFIG SFRPG", data.config,"data.itemData", data.itemType,data.itemProperties )
         // Physical items
-        const physicalItems = ["weapon", "equipment", "consumable", "goods", "container", "technological", "magic", "hybrid", "upgrade", "augmentation", "shield", "weaponAccessory"];
+        const physicalItems = ["weapon", "equipment", "pharmaceutical", "goods", "container", "technological", "magic", "hybrid", "upgrade", "augmentation", "shield", "weaponAccessory"];
         data.isPhysicalItem = physicalItems.includes(data.item.type);
         console.log(data)
         // Item attributes
@@ -537,7 +537,7 @@ delete this.item.system.skills
             category.enabled = true;
             category.value = SFRPG.equipmentTypes[item.system.armor.type];
             category.tooltip = "SFRPG.Items.Equipment.Category";
-        } else if (item.type === "consumable") {
+        } else if (item.type === "pharmaceutical") {
             category.enabled = true;
             category.value = SFRPG.consumableTypes[item.consumableType];
             category.tooltip = "SFRPG.ItemSheet.Consumables.Category";

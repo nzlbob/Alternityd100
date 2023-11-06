@@ -102,6 +102,7 @@ object.document.bar2.attribute
       isSpaceActor:this.object.actor.system.isSpaceActor,
       speed:this.object.actor.system.attributes.speed?.value,
       accel:this.object.actor.system.attributes.accel?.value,
+      lightAngle: this.object.light.data.rotation
     });
     data.statusEffects =this._getStatusEffectChoices(data);
     console.log("getData",data,"\nThis\n", this,"\noptions\n",options,"\nCONFIG\n",CONFIG,"\n\nCONFIG.statusEffects \n ",CONFIG.d100A.statusEffects,"\nactor\n",this.object.actor,"\neffects\n",this.object.actor.effects)
@@ -183,7 +184,13 @@ console.log("HERE--",html)
     html.find(".status-effects")
      // .on("click", ".effect-control", this._onToggleEffect.bind(this))
      // .on("contextmenu", ".effect-control", event => this._onToggleEffect(event, {overlay: true}));
-     
+    
+     html.find(".lightAngle input")
+     .click(this._onAttributeClick)
+     .keydown(this._onAttributeKeydown.bind(this))
+     .focusout(this._onLightAngleUpdate.bind(this))
+
+
      html.find("control-icon2")
      .click(this._onRotateClick)
      //.keydown(this._onAttributeKeydown.bind(this))
@@ -191,6 +198,29 @@ console.log("HERE--",html)
 
 
   }
+ async _onLightAngleUpdate(event) {
+    event.preventDefault();
+    if ( !this.object ) return;
+
+    // Acquire string input
+    const input = event.currentTarget;
+    let strVal = input.value.trim();
+    let isDelta = strVal.startsWith("+") || strVal.startsWith("-");
+    if (strVal.startsWith("=")) strVal = strVal.slice(1);
+    let value = Number(strVal);
+console.log("event",event,"\n",strVal,this.object)
+
+this.object.light.data.rotation = 90  
+console.log("sdfsdf",this.object.light.data.rotation)
+console.log("sdfsdf",this.object.light)
+
+//await this.object.updateLightSource()
+
+  }
+
+
+
+
   _onRotateClick(event) {
     const button = event.currentTarget;
     let newangle  = 0

@@ -2057,7 +2057,9 @@ d100A.resistanceType = {
       
       "initiative": "SFRPG.ModifierEffectTypeInit",
       
-     // "skill": "SFRPG.ModifierEffectTypeSkill",
+      "skill": "SFRPG.ModifierEffectTypeSkill",
+      //"skill-ranks": "SFRPG.ActorSheet.Modifiers.EffectTypes.SkillRanks",
+
       //"ranged-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.RangedAttackRolls",
      // "melee-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.MeleeAttackRolls",
      // "spell-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpellAttackRolls",

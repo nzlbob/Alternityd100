@@ -95,6 +95,7 @@
                         <!--Alternaity addition-->    
                         {{else if (eq modifier.effectType "hit-points")}}
                         {{lookup ../../d100Aconfig.modifierHitPointsAffectedValues modifier.valueAffected}}
+                        
                         {{else if (eq modifier.effectType "initiative")}}
                         {{localize (lookup ../../d100Aconfig.modifierActionCheckAffectedValues modifier.valueAffected)}}
                         <!--/Alternaity addition-->  
@@ -111,7 +112,10 @@
 
 
                         {{else if (eq modifier.effectType "skill")}}
-                            {{lookup ../../config.skills modifier.valueAffected}}
+                            {{lookup ../../d100Aconfig.skills modifier.valueAffected}}
+
+
+
                         {{else if (eq modifier.effectType "skill-ranks")}}
                             {{lookup ../../config.skills modifier.valueAffected}}
                         {{else if (eq modifier.effectType "save")}}

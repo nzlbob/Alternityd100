@@ -56,14 +56,16 @@
   },
     "Item": {
     "achievement": "Achievement",
-    "actorresource": "Actor Resource",
+    "actorresource": "X (Actor Resource)",
     "ammunition": "Ammunition",
-    "archetypes": "Archetype",
+    "archetypes": "X (Archetype)",
     "asi": "X (Ability Score Increase)",
     "augmentation": "Cybertech",
     "chassis": "X (Drone Chassis)",
     "class": "X (Class)",
-    "consumable": "Consumable",
+    "clothing": "Clothing and Equipment",
+    "communications": "Communications",
+    "pharmaceutical": "Pharmaceutical",
     "container": "Container",
     "equipment": "Armor",
     "feat": "Feat",
@@ -72,7 +74,7 @@
     "goods": "Goods",
     "hybrid": "X (Hybrid)",
     "magic": "Magic",
-    "mod": "Drone Mod",
+    "mod": "X (Drone Mod)",
     "perk": "Perk",
     "psionic": "Psionic Ability",
     "race": "Species",
@@ -92,6 +94,7 @@
     "starshipsystemdamage": "Starship System Damage",
     "starshipSystemDamage": "Starship System Damage",
     "starshipablativearmor": "Starship Ablative Armor",
+    "starshipaAlativeArmor": "Starship Ablative Armor",
     "starshipaction": "Starship Action",
     "starshipAction": "Starship Action",
     "starshiparmor": "Starship Armor",
@@ -1138,12 +1141,12 @@
             "WeaponFusions": "Weapon Fusions",
             "Weapons": "Weapons"
         },
-        "Consumable": {
-            "Action": "Consumable Action",
+        "Pharmaceutical": {
+            "Action": "Pharmaceutical Action",
             "DestroyWhenEmpty": "Destroy when empty",
             "OnUse": "Consume on use",
-            "Type": "Consumable Type",
-            "Usage": "Consumable Usage"
+            "Type": "Pharmaceutical Type",
+            "Usage": "Pharmaceutical Usage"
         },
         "Description": {
             "Bulk": "Mass",
@@ -1355,7 +1358,7 @@
             }
         },
         "Consumables": {
-            "Category": "Consumable Type"
+            "Category": "Pharmaceutical Type"
         },
         "Containers": {
             "ContainerTooltip": "Containers can contain just about any item. Increase the storage capacity to allow adding content."

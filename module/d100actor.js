@@ -96,7 +96,9 @@ return game.Alternityd100.engine.process("process-actors", {
   asis:asis,
   frames:frames,
   actorResources:actorResources,
-  psionics:psionics
+  psionics:psionics,
+  //clothing:clothing
+
 });
 }
 

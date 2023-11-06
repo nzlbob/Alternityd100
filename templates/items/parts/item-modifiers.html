@@ -64,8 +64,10 @@
 
 
                     {{else if (eq modifier.effectType "skill")}}
-                        {{lookup ../config.skills modifier.valueAffected}}
-                    {{else if (eq modifier.effectType "save")}}
+                        {{lookup ../d100Aconfig.skills modifier.valueAffected}}
+                    
+                    
+                        {{else if (eq modifier.effectType "save")}}
                         {{#if (eq modifier.valueAffected "highest")}}
                             {{localize "SFRPG.ModifierSaveHighest"}}
                         {{else if (eq modifier.valueAffected "lowest")}}

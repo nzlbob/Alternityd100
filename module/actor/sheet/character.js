@@ -129,7 +129,7 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
             shield: { label: game.i18n.format(SFRPG.itemTypes["shield"]), items: [], dataset: { type: "shield" }, allowAdd: true },
             equipment: { label: game.i18n.format(SFRPG.itemTypes["equipment"]), items: [], dataset: { type: "equipment" }, allowAdd: true },
             ammunition: { label: game.i18n.format(SFRPG.itemTypes["ammunition"]), items: [], dataset: { type: "ammunition" }, allowAdd: true },
-            consumable: { label: game.i18n.format(SFRPG.itemTypes["consumable"]), items: [], dataset: { type: "consumable" }, allowAdd: true },
+            pharmaceutical: { label: game.i18n.format(SFRPG.itemTypes["pharmaceutical"]), items: [], dataset: { type: "pharmaceutical" }, allowAdd: true },
             goods: { label: game.i18n.format(SFRPG.itemTypes["goods"]), items: [], dataset: { type: "goods" }, allowAdd: true },
             container: { label: game.i18n.format(SFRPG.itemTypes["container"]), items: [], dataset: { type: "container" }, allowAdd: true },
             technological: { label: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.SpecialItems"), items: [], dataset: { type: "technological,magic,hybrid" }, allowAdd: true },
@@ -152,7 +152,7 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
             item.isOnCooldown = item.recharge && !!item.recharge.value && (item.recharge.charged === false);
             if (["meleeW"].includes(item.weaponType)){item.actionType = "mwak"}
             if (["rangedW","explos","heavy"].includes(item.weaponType)){item.actionType = "rwak"}
-            console.log(item.type === "psionic" , item.system.ability)
+          //  console.log(item.type === "psionic" , item.system.ability)
 
             //item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.actionType) //&& (!["weapon", "shield"].includes(item.type) || item.system.equipped);
             //console.log("HD",item,["weapon", "shield"].includes(item.type))
@@ -383,7 +383,7 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
         }
 
 
-console.log(psionCon,psionInt)
+//console.log(psionCon,psionInt)
 const psionics = {
     con: { score: psionScore.con, label: game.i18n.format("d100A.PsionBroadSkills.con.name"), tooltip: "d100A.PsionBroadSkills.con.tooltip",items: [], hasActions: false, dataset: { type: "psionic", stat:"con" }, isPsionic: true },
     int: { score: psionScore.int, label: game.i18n.format("d100A.PsionBroadSkills.int.name"), tooltip: "d100A.PsionBroadSkills.int.tooltip", items: [], hasActions: false, dataset: { type: "psionic" , stat:"int"}, isPsionic: true },

@@ -1,10 +1,15 @@
 import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../../../modifiers/types.js";
+import { d100stepdie } from "../../../../module/modifiers/d100mod.js";
 
 export default function (engine) {
     engine.closures.add('calculateSkillModifiers', (fact, context) => {
         const skills = fact.actor.system.skills;
         const flags = fact.flags;
         const modifiers = fact.modifiers;
+
+
+
+
 
         const addModifier = (bonus, data, item, localizationKey) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {
@@ -37,6 +42,21 @@ export default function (engine) {
         const filteredMods = modifiers.filter(mod => {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.ABILITY_SKILLS, SFRPGEffectType.SKILL, SFRPGEffectType.ALL_SKILLS].includes(mod.effectType);
         });
+
+        console.log("n\calculateSkillModifiers\n","\nskills\n",skills,"\nflags\n",flags,"\nmodifiers\n",modifiers,"\nfilteredMods\n",filteredMods)
+
+
+for (let mofifier of filteredMods){
+if(mofifier.enabled){
+
+    skills[mofifier.valueAffected].step = skills[mofifier.valueAffected].step +  parseInt(mofifier.modifier,10)
+
+    skills[mofifier.valueAffected].stepdie = d100stepdie(skills[mofifier.valueAffected].step);
+}
+
+}
+
+
 /* old skill thing
         // Skills
         for (let [skl, skill] of Object.entries(skills)) {

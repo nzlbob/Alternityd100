@@ -4,7 +4,7 @@ import { SFRPG } from "../config.js"
 const equipmentTypes = {
     "ammunition"   : "SFRPG.Items.Categories.Ammunition",
     "augmentation" : "SFRPG.Items.Categories.Augmentations",
-    "consumable"   : "SFRPG.Items.Categories.Consumables",
+    "pharmaceutical"   : "SFRPG.Items.Categories.Consumables",
     "container"    : "SFRPG.Items.Categories.Containers",
     "equipment"    : "SFRPG.Items.Categories.Equipment",
     "fusion"       : "SFRPG.Items.Categories.WeaponFusions",

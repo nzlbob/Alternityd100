@@ -89,10 +89,13 @@
             {{#each config.saves as |save key|}}
             <option value="{{key}}">{{save}}</option>
             {{/each}}
+
             {{else if (eq modifier.effectType "skill")}}
-            {{#each config.skills as |skill key|}}
-            <option value="{{key}}">{{skill}}</option>
+            {{#each d100Aconfig.skills as |skill key|}}
+            <option value="{{key}}">{{localize skill}}</option>
             {{/each}}
+
+
             {{else if (eq modifier.effectType "skill-ranks")}}
             {{#each config.skills as |skill key|}}
             <option value="{{key}}">{{skill}}</option>

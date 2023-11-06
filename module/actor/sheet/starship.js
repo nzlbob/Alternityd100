@@ -12,7 +12,7 @@ import { moveItemBetweenActorsAsync, getFirstAcceptableStorageIndex, ActorItemHe
  */
 export class d100AActorSheetStarship extends ActorSheetSFRPG {
     static get AcceptedEquipment() { 
-        return "starshipOrdnance,augmentation,consumable,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon,weaponAccessory,actorResource";
+        return "starshipOrdnance,augmentation,pharmaceutical,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon,weaponAccessory,actorResource";
     }
     static StarshipActionsCache = null;
 
