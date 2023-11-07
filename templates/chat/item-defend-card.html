@@ -1,31 +1,43 @@
 <div class="Alternityd100 chat-card item-card" data-actor-id="{{actor.id}}" data-item-id="{{item.id}}" {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}} {{#if sceneId}}data-scene-id="{{sceneId}}"{{/if}}>
-    <span  title="{{rollData.armorroll}}" >Damage: {{rollData.data.damage}} {{localize rollData.data.dmgtype}} ({{rollData.data.type}})({{rollData.data.firepower}})  </span>
+    <h3 title="{{rollData.armorroll}}" >Damage: {{rollData.data.damage}} {{localize rollData.data.dmgtype}} ({{rollData.data.type}})({{rollData.data.firepower}})  </h3>
     {{console "Item Defence- Card 3" }}
     {{console this }}
     {{#each rollData.defence as |rd count|}}
    
+
+
     <header class="card-header flexrow">
         <img class="action-img" src="{{rd.armor.img}}" title="{{rd.armor.name}} {{rd.roll.formula}}" />
         <div class="flexcol">
-            <h4 title="{{r.armorroll}}" class="action-name">{{rd.armor.name}} Reduces{{localize action}} 
-                <a class="inline-roll inline-dsn-hidden inline-result{{#if atk.attack.isNat20}} natural-20{{/if}}{{#if atk.attack.isCrit}} critical-threat success{{/if}}{{#if atk.attack.isFumble}} failure{{/if}}"
-                title="{{rd.roll.formula}}" data-roll="{{json-string rd.roll}}">
-                <i class="fas fa-dice-d20"></i> {{rd.roll.total}}
-                </a>
+            <h3 title="{{r.armorroll}}" class="action-name">{{rd.armor.name}} ({{rd.armor.system.firepower}})
                 
-                 </h4>
+                
+                 </h3>
             
-            <span  title="{{rollData.armorroll}}"> <p>Stun: {{rd.damage.stu}}</p><p> Wounds: {{rd.damage.wou}} </p><p>Mortal: {{rd.damage.mor}}</p><p>Critical: {{rd.damage.cri}} </p></span>
+            <span  title="{{rollData.armorroll}}"> Stun: {{rd.damage.stu}}<br> Wounds: {{rd.damage.wou}} <br>Mortal: {{rd.damage.mor}}<br>Critical: {{rd.damage.cri}} </span>
             
           
         </div>
     </header>
-    <div class="dice-roll">
+
+    <div data-tooltip-direction="UP"  data-tooltip="{{rd.armor.name}} {{rd.roll.formula}}"  class="dice-roll">
         <div class="dice-result">
-            <h4 class="dice-total{{#if isNat20}} natural-20{{/if}}{{#if isCrit}} critical-threat success{{/if}}{{#if isFumble}} failure{{/if}}">{{total}}</h4>
-            {{{tooltip}}}
+            <h4 class="dice-total{{#if isNat20}} natural-20{{/if}}{{#if isCrit}} critical-threat success{{/if}}{{#if isFumble}} failure{{/if}}">{{rd.roll.total}}</h4>
+            {{{rd.roll.tooltip}}}
         </div>
       </div>
+
+     
+
+      <div class="card-content">
+        {{console "IDC 190"}}
+        {{console rd}}
+        {{console ../this}}
+      <div class="ApplyPending" data-gm-sensitive-uuid="{{t.token.uuid}}">
+        <button data-action="rollHitLoc" data-stun="{{rd.damage.stu}}" data-wound="{{rd.damage.wou}}" data-mortal="{{rd.damage.mor}}" data-critical="{{rd.damage.cri}}" data-tokenid = "{{../tokenId}}" data-actorId="{{../actor._id}}" data-firepower="{{t.firepower}}" data-type="{{t.type}}" data-tooltip-direction="UP" data-tooltip="{{rd.armor.name}} {{rd.roll.formula}}" > Apply As Pending Damage </button>
+      </div>
+    </div>
+
 
 <!----------------------------------------------->
 {{console "Item Defence- Card 31" }}
@@ -85,6 +97,7 @@
     
             {{!-- Damage parts in an attack --}}
             {{#each atk.damageRows as |dr|}}
+
             <tr>
               {{#if dr.normal}}
               <td>
@@ -186,9 +199,11 @@
 <!----------------------------------------------->
 
     {{/each}}
-    <div class="card-content">
-       Apply Damage at the end of the Phase
-    </div>
+
+
+
+
+
 
     <div class="card-buttons">
         {{#if hasAttack}}<button data-action="attack">{{ localize "SFRPG.Attack" }}</button>{{/if}}

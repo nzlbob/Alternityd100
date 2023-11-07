@@ -2891,11 +2891,52 @@ return aspect
         html.on('click', '.item-name', this._onChatCardToggleContent.bind(this));
         html.on('click', '.ac button', this._onDefenceChatCardAction.bind(this));
         html.on('click', '.HitLoc button', this._onRollHitLocation2.bind(this));
+        html.on('click', '.ApplyPending button', this._onApplyPending.bind(this));
         //html.on('click', '.ac button', this._onChatCardAction.bind(this));
 
     }
   /* -------------------------------------------- */
 
+  
+  static async _onApplyPending(event) {
+
+
+    console.log(parseInt(game.settings.get("Alternityd100", "starshipHitLocLen")),game.settings.get("Alternityd100", "starshipHitLocLen"))
+    const button = event.currentTarget;
+    const tokenId = button.dataset.tokenid;
+    const actorId = button.dataset.actorid;
+    const aspect = button.dataset.aspect;
+    const targetToken = await findTokenById(tokenId)
+    const realActor = await game.actors.get(actorId)
+    console.log("targetToken",button.dataset)
+    console.log("targetToken",targetToken)
+    console.log("realActor",realActor)
+    const actor = targetToken? targetToken.actor : realActor //  game.actors.get(actorId);
+    const token = null  //this.actor.token;
+    const stun = parseInt(  button.dataset.stun,10);
+    const wound = parseInt( button.dataset.wound,10);
+    const mortal = parseInt( button.dataset.mortal,10);
+    const critical = parseInt( button.dataset.critical,10);
+
+
+
+    console.log("tokenId",tokenId)
+    console.log("button.dataset",button.dataset)
+    console.log("targetToken",targetToken)
+    console.log("actor",actor)
+const myupdate = duplicate(actor.system.attributes);
+myupdate.stu.pending -= stun
+myupdate.wou.pending -= wound
+myupdate.mor.pending -= mortal
+
+if (actor.isSpaceActor) myupdate.cri.pending -= critical;
+
+actor.update({"system.attributes":myupdate })
+
+ui.notifications.info("Damage Applied")
+
+  }
+  
   static async _onRollHitLocation2(event) {
 
 
