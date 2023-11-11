@@ -1989,24 +1989,25 @@ if(data.contrActor.isSpaceActor){
 
 }console.log(dmgtype,alteredDamage, defendroll.total)
 
+let damageReduced = Math.max(0,defendroll.total)
 
 //https://archive.org/details/MyRpgCollection/Alternity_Players_Handbook/page/n53/mode/1up
 
-  if(  dmgtype === "stu" ) damage.stu = Math.max( 0, alteredDamage - defendroll.total) ;
+  if(  dmgtype === "stu" ) damage.stu = Math.max( 0, alteredDamage - damageReduced) ;
   if(  dmgtype === "wou" ) 
     { damage.stu = Math.floor(Math.max(0, (alteredDamage )/2 ) )
-      damage.wou = Math.max( 0, alteredDamage - defendroll.total);
+      damage.wou = Math.max( 0, alteredDamage - damageReduced);
     };
     if(  dmgtype === "mor" ) 
     { damage.stu = Math.floor(Math.max( 0, (alteredDamage )/2));
       damage.wou = Math.floor(Math.max( 0, (alteredDamage )/2));
-      damage.mor = Math.max( 0, alteredDamage - defendroll.total);
+      damage.mor = Math.max( 0, alteredDamage - damageReduced);
     };
     if(  dmgtype === "cri" ) 
     { damage.stu = Math.floor(Math.max( 0, (alteredDamage )/2));
       damage.wou = Math.floor(Math.max( 0, (alteredDamage )/2));
       damage.mor = Math.floor(Math.max( 0, (alteredDamage )/2));
-      damage.cri = Math.max( 0, alteredDamage - defendroll.total);
+      damage.cri = Math.max( 0, alteredDamage - damageReduced);
     };
 
 

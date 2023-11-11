@@ -233,6 +233,8 @@ export class ActorSheetSFRPG extends ActorSheet {
         // Weapon Mode Toggle
         html.find('.item .toggle-mode').click(event => this._onToggleModeChange(event));
 
+
+
         /* -------------------------------------------- */
         /*  Spellbook
         /* -------------------------------------------- */
@@ -300,8 +302,38 @@ export class ActorSheetSFRPG extends ActorSheet {
         html.find('.conditions input[type="checkbox"]').change(this._onToggleConditions.bind(this));
 
         html.find('.spellRank').change(this._onspellRankChanged.bind(this));
+
+        // Apply Temp Damage
+        html.find('.clickapplydamge').click(event => this._onApplyPendingDamage(event)); 
+
+
     }
     
+    async _onApplyPendingDamage(event)
+{
+
+console.log(event.currentTarget,this.actor)
+
+const actor = this.actor
+const systemData = actor.system
+
+
+let leftover = 0
+
+const attributes = {stu: duplicate(systemData.attributes.stu), wou: duplicate(systemData.attributes.wou), mor : duplicate(systemData.attributes.mor) }
+if (actor.isSpaceActor) attributes.cri = duplicate(systemData.attributes.cri)
+for (const [k,o] of Object.entries(attributes)){
+o.value += o.pending + leftover
+o.value = Math.min( o.value , o.max) 
+leftover =  Math.trunc (Math.min( o.value, 0  )/2)
+o.value = Math.max(o.value,0)
+o.pending = 0
+}
+
+actor.update({"system.attributes": attributes})
+
+}
+
     async _onspellRankChanged(event) {
     
     console.log("Changed",event)

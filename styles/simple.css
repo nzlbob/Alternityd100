@@ -39,6 +39,47 @@
   
 }
 
+.Alternityd100 .window-content {
+  height: 100%;
+  padding: 5px;
+  overflow-y: hidden;
+  font-family: serpentine;
+}
+
+.Alternityd100.sheet.actor ul.attributes .statTable table {
+  text-align: center;
+  border-collapse: collapse;
+}
+.Alternityd100.sheet.actor ul.attributes .statTable td, 
+.Alternityd100.sheet.actor ul.attributes .statTable th {
+  border: 1px solid #AAAAAA;
+  padding: 1px 1px;
+}
+.Alternityd100.sheet.actor ul.attributes .statTable tbody td {
+  font-size: 12px;
+}
+.Alternityd100.sheet.actor ul.attributes .statTable input {
+  height: 16px;
+}
+.Alternityd100.sheet.actor ul.attributes .statTable thead {
+    border-bottom: 1px solid #444444;
+}
+.Alternityd100.sheet.actor ul.attributes .statTable thead th {
+  font-size: 12px;
+  font-weight: normal;
+  text-align: center;
+  border-left: 1px solid #D0E4F5;
+}
+.Alternityd100.sheet.actor ul.attributes .statTable thead th:first-child {
+  border-left: none;
+}
+
+
+
+
+
+
+
 form .form-group label {
   font-size: 13px;
   font-family: serpentine ;
@@ -93,7 +134,7 @@ form .form-group label {
 
 
 .Alternityd100 .sheet-header {
-  flex: 0 0 200px ;
+  flex: 0 0 208px;
  
   overflow: hidden;
   display: flex;
@@ -172,6 +213,14 @@ background-color: rgb(97, 97, 97);
   font-size:14px;
   width: 0ch;
 }
+.Alternityd100 .resource-headx button{
+  border-radius: 3px;
+  font-family:"serpentine";
+  font-size:14px;
+
+  color: #fff
+}
+
 .Alternityd100 .resource-heady{
   text-align: center;
   border: 2px solid #13cccc;

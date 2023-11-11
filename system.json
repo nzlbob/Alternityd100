@@ -2,7 +2,7 @@
   "name": "Alternityd100",
   "title": "Alternity by d100",
   "description": "This is a draft implementation of the Alternity RPG Rules (c) 1998 TSR Inc. There are lots of features yet to implement. Work is continuing",
-  "version": "0.480",
+  "version": "0.481",
   "compatibility": {
     "minimum": 11, 
     "verified": "11.313", 
@@ -46,14 +46,22 @@
       "type": "Item",
       "name": "starship-actions",
       "path": "./packs/starship-actions.db",
-      "system": "Alternityd100"
+      "system": "Alternityd100",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+    }
   },
   {
     "label": "Starship System Damage",
     "type": "Item",
     "name": "starship-damage",
    
-    "system": "Alternityd100"
+    "system": "Alternityd100",
+    "ownership": {
+      "PLAYER": "OBSERVER",
+      "ASSISTANT": "OWNER"
+  }
 }
 ],
 

@@ -31,19 +31,105 @@
             <ul class="attributes flexrow">
                 <li class="attribute health" data-tippy-content="{{ localize "SFRPG.HullPoints" }}<br />@attributes.hp.value<br />@attributes.hp.max">
                     <h4 class="attribute-name box-title">{{ localize "SFRPG.Durability" }}</h4>
-                    <div class="attribute-value multiple">
+                    <table class="statTable">
+<tbody>
+    <tr>
+
+        <th>
+            <label>TYPE</label>
+        </th>
+        <th>
+            <label>PEND</label>
+        </th>
+        <th>
+            <label>VAL</label>
+        </th>
+        <th  >
+            <label>MAX</label>
+        </th>
+
+    </tr>
+    <tr>
+
+        <td style="text-align: left" >
+            <label>Stun</label>
+        </td>
+        <td>
+            <input  name="system.attributes.stu.pending" type="number" value="{{system.attributes.stu.pending}}" data-dtype="Number" placeholder="10" />
+        </td>
+        <td>
+            <input  name="system.attributes.stu.value" type="number" value="{{system.attributes.stu.value}}" data-dtype="Number" placeholder="10" />
+        </td>
+        <td>
+            <input  disabled name="system.attributes.stu.max" type="number" value="{{system.attributes.stu.max}}" data-dtype="Number" placeholder="10" />
+        </td>
+    </tr>
+    <tr >
+
+        <td style="text-align: left;" >
+            <label>Wound</label>
+        </td>
+        <td>
+            <input name="system.attributes.wou.pending" type="number" value="{{system.attributes.wou.pending}}" data-dtype="Number" placeholder="10" />
+        </td>
+        <td>
+            <input  name="system.attributes.wou.value" type="number" value="{{system.attributes.wou.value}}" data-dtype="Number" placeholder="10" />
+        </td>
+        <td  >
+            <input  disabled name="system.attributes.wou.max" type="number" value="{{system.attributes.wou.max}}" data-dtype="Number" placeholder="10" />
+        </td>
+    </tr>
+    <tr>
+
+        <td style="text-align: left;" >
+            <label>Mortal</label>
+        </td>
+        <td>
+            <input   name="system.attributes.mor.pending" type="number" value="{{system.attributes.mor.pending}}" data-dtype="Number" placeholder="10" />
+        </td>
+        <td>
+            <input  name="system.attributes.mor.value" type="number" value="{{system.attributes.mor.value}}" data-dtype="Number" placeholder="10" />
+        </td>
+        <td>
+            <input  disabled name="system.attributes.mor.max" type="number" value="{{system.attributes.mor.max}}" data-dtype="Number" placeholder="10" />
+        </td>
+    </tr>
+    <tr>
+
+        <td style="text-align: left;" >
+            <label>Critical</label>
+        </td>
+        <td>
+            <input  name="system.attributes.cri.pending" type="number" value="{{system.attributes.cri.pending}}" data-dtype="Number" placeholder="10" />
+        </td>
+        <td>
+            <input name="system.attributes.cri.value" type="number" value="{{system.attributes.cri.value}}" data-dtype="Number" placeholder="10" />
+        </td>
+        <td>
+            <input  disabled name="system.attributes.cri.max" type="number" value="{{system.attributes.cri.max}}" data-dtype="Number" placeholder="10" />
+        </td>
+    </tr>
+</tbody>
+
+                    </table>
+                    
+                    
+                    
+                   <!-- <div class="attribute-value multiple">
+                        
                         <label> Stun__ </label>
 
-                        <input name="system.attributes.stu.value" type="text" value="{{system.attributes.stu.value}}"
-                            data-dtype="Number" placeholder="10" />
+                        <input name="system.attributes.stu.pending" type="text" value="{{system.attributes.stu.value}}" data-dtype="Number" placeholder="10" />
                         <span class="sep"> / </span>
                         <label>{{system.attributes.stu.max}}</label>
                     </div>
                     <div class="attribute-value multiple">
                         <label>Wound</label>
-                        <input name="system.attributes.wou.value" type="text" value="{{system.attributes.wou.value}}"
-                            data-dtype="Number" placeholder="10" />
-                        <span class="sep"> / </span>
+                        <input name="system.attributes.wou.pending" type="number" value="{{system.attributes.wou.pending}}"
+                            data-dtype="Number" placeholder="10" />/
+                            <input name="system.attributes.wou.value" type="number" value="{{system.attributes.wou.value}}"
+                            data-dtype="Number" placeholder="10" />/
+
                         <label>{{system.attributes.wou.max}}</label>
                     </div>
                     <div class="attribute-value multiple">
@@ -60,40 +146,56 @@
                         <span class="sep"> / </span>
                         <label>{{system.attributes.cri.max}}</label>
                     </div>
+                    -->
                 </li>
+                
                 <li class="attribute">
                     <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Header.Statistics"}}</h4>
-                    <ol class="attribute-multibox">
-                        <li class="box-header flexrow">
-                            <label></label>
-                            <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
-                            <label>{{localize "SFRPG.StarshipSheet.Header.Max"}}</label>
-                        </li>
-                        <li class="flexrow" data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.Power" }}<br/>@attributes.power.value<br/>@attributes.power.max<br/><br/>{{ localize "SFRPG.StarshipSheet.Attributes.PowerConsumption" }}:<br/>{{#each system.attributes.power.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
-                            {{#if hasPower}}
-                            <label>{{localize "SFRPG.StarshipSheet.Header.PCU"}}</label>
-                            <label style="flex: 3; font-size: 13px;">{{system.attributes.power.value}}</label>
-                            <label style="flex: 3; font-size: 13px;">{{system.attributes.power.max}}</label>
-                            {{else}}
-                            <label class="error" style="flex: 3; font-size: 12px;">{{localize "SFRPG.StarshipSheet.Attributes.PowerMissing"}}</label>
-                            {{/if}}
-                        </li>
-                        <li class="flexrow" data-tippy-content="{{ localize "SFRPG.StarshipSheet.Attributes.BuildPoints" }}<br/>@attributes.hullPoints.value<br/>@attributes.hullPoints.max<br/><br/>{{ localize "SFRPG.StarshipSheet.Attributes.BuildPointsUsage" }}:<br/>{{#each system.attributes.hullPoints.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
-                            <label>{{localize "SFRPG.StarshipSheet.Header.BHP"}}</label>
-                            <label style="flex: 3; font-size: 13px;">{{system.attributes.hullPoints.value}}</label>
-                            <label style="flex: 3; font-size: 13px;">{{system.attributes.hullPoints.max}}</label>
-                        </li>
-                        <li class="flexrow" data-tooltip-direction = "UP" data-tooltip ="{{system.attributes.resistance.tooltip}}">
-                            <label>{{localize "RES"}}</label>
-                            <label style="flex: 3; font-size: 13px;">{{system.attributes.resistance.base}}</label>
+                    <table class="statTable">
+                        <thead>
+                        <tr>
+                        <th></th>
+                        <th>{{localize "SFRPG.StarshipSheet.Header.Value"}}</th>
+                        <th>{{localize "SFRPG.StarshipSheet.Header.Max"}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                        <td>{{localize "SFRPG.StarshipSheet.Header.PCU"}}</td>
+                        <td>{{system.attributes.power.value}}</td>
+                        <td>{{system.attributes.hullPoints.max}}</td>
+                        </tr>
+                        <tr>
+                        <td>{{localize "SFRPG.StarshipSheet.Header.BHP"}}</td>
+                        <td>{{system.attributes.hullPoints.value}}</td>
+                        <td>{{system.attributes.hullPoints.max}}</td>
+                        </tr>
+                        <tr data-tippy-content="laser-mass-psi-radar-thermal" >
+                        <td>{{localize "ECM"}}</td>
+                        <td colspan = "2"  > {{#each system.attributes.ECM as |res|}}  
+                              {{res.value}}
+                            {{/each}}
+                            </td>
+                        
+                        </tr>
+                        <tr data-tippy-content="{{system.attributes.resistance.tooltip}} (area-beam-bomb-mine-missile-projectile-special-torpedo)">
+                            <td>{{localize "RES"}}</td>
+                            <td colspan = "2"   >  
+                                {{system.attributes.resistance.base}} ({{system.attributes.resistance.area}}-{{system.attributes.resistance.beam}}-{{system.attributes.resistance.bomb}}-{{system.attributes.resistance.mine}}-{{system.attributes.resistance.missile}}-{{system.attributes.resistance.projectile}}-{{system.attributes.resistance.special}}-{{system.attributes.resistance.torpedo}})   
+                            </td>
                             
-                        </li>
-                        <li class="flexrow" data-tippy-content="{{ localize "Price" }}<br/>@price.value<br/><br/>{{ localize "Price" }}:<br/>{{#each system.price.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
-                            <label>{{localize "Price"}}</label>
-                            <label style="flex: 3; font-size: 13px;">{{system.price.value}}</label>
-                            
-                        </li>
-                    </ol>
+                            </tr>
+                        <tr>
+                        <td>{{localize "Price"}}</td>
+                        <td colspan = "2">{{system.price.value}}</td>
+                        
+                        </tr>
+                        </tbody>
+                        </table>
+                    
+                    
+                    
+
                 </li>
                 
                 <li class="attribute">
