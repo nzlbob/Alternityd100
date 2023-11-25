@@ -1,0 +1,76 @@
+<div class="tab details" data-group="primary" data-tab="details">
+    <h3 class="form-header">{{ localize "SFRPG.Items.Spell.Details" }}</h3>
+
+
+
+    {{!-- Psion Ability --}}
+    <div class="form-group">
+        <label>{{ localize "Key Ability" }}</label>
+        <div class="form-fields">
+            <select name="system.skill">
+                {{#select itemData.skill}}
+                {{#each d100Aconfig.skills as |name skill|}}
+                <option value="{{skill}}">{{localize name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+        </div>
+    </div>
+    
+
+
+    {{!-- Weapon Source --}}
+    <div class="form-group">
+        <label>{{ localize "d100A.pubnSource" }}</label>
+            <div class="form-fields">
+                <select name="system.pubnsource">
+                {{#select itemData.pubnsource}}
+                    {{#each d100Aconfig.pubnsource as |name type|}}
+                    <option value="{{type}}">{{name}}</option>
+                    {{/each}}
+                {{/select}}
+                </select>
+            </div>
+    </div>
+                
+
+
+
+
+    <div class="form-group" data-tooltip="{{ localize "Effect on a Critical Failure" }}">
+        <label>{{ localize "Critical Failure" }}</label>
+        <div class="form-fields">
+            <textarea rows="4" cols="50" name="system.degreeText.critical"  placeholder="Enter text">{{itemData.degreeText.critical}}</textarea>
+        </div>
+    </div>
+
+    <div class="form-group" data-tooltip="{{ localize "Effect on a Failure" }}">
+        <label>{{ localize "Marginal Failure" }}</label>
+        <div class="form-fields">
+            <textarea rows="4" cols="50" name="system.degreeText.failure"  placeholder="Enter text">{{itemData.degreeText.failure}}</textarea>
+        </div>
+    </div>
+
+    <div class="form-group" data-tooltip="{{ localize "Effect on a Ordinary Success" }}">
+        <label>{{ localize "Ordinary Success" }}</label>
+        <div class="form-fields">
+            <textarea rows="4" cols="50" name="system.degreeText.ordinary"  placeholder="Enter text">{{itemData.degreeText.ordinary}}</textarea>
+        </div>
+    </div>
+
+    <div class="form-group" data-tooltip="{{ localize "Effect on a Good Success" }}">
+        <label>{{ localize "Good Success" }}</label>
+        <div class="form-fields">
+            <textarea rows="4" cols="50" name="system.degreeText.good"  placeholder="Enter text">{{itemData.degreeText.good}}</textarea>
+        </div>
+    </div>
+
+    <div class="form-group" data-tooltip="{{ localize "Effect on a Amazing Success" }}">
+        <label>{{ localize "Amazing Success" }}</label>
+        <div class="form-fields">
+            <textarea rows="4" cols="50" name="system.degreeText.amazing"  placeholder="Enter text">{{itemData.degreeText.amazing}}</textarea>
+        </div>
+    </div>
+
+
+</div>

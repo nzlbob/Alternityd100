@@ -128,14 +128,32 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
             weapon: { label: game.i18n.format(SFRPG.itemTypes["weapon"]), items: [], dataset: { type: "weapon" }, allowAdd: true },
             shield: { label: game.i18n.format(SFRPG.itemTypes["shield"]), items: [], dataset: { type: "shield" }, allowAdd: true },
             equipment: { label: game.i18n.format(SFRPG.itemTypes["equipment"]), items: [], dataset: { type: "equipment" }, allowAdd: true },
-            ammunition: { label: game.i18n.format(SFRPG.itemTypes["ammunition"]), items: [], dataset: { type: "ammunition" }, allowAdd: true },
+         //   ammunition: { label: game.i18n.format(SFRPG.itemTypes["ammunition"]), items: [], dataset: { type: "ammunition" }, allowAdd: true },
+         sensor: { label: game.i18n.format(SFRPG.itemTypes["sensor"]), items: [], dataset: { type: "sensor" }, allowAdd: true },
+            clothing: { label: game.i18n.format(SFRPG.itemTypes["clothing"]), items: [], dataset: { type: "clothing" }, allowAdd: true },
+            communication: { label: game.i18n.format(SFRPG.itemTypes["communication"]), items: [], dataset: { type: "communication" }, allowAdd: true },
+            computer: { label: game.i18n.format(SFRPG.itemTypes["computer"]), items: [], dataset: { type: "computer" }, allowAdd: true },
+            medical: { label: game.i18n.format(SFRPG.itemTypes["medical"]), items: [], dataset: { type: "medical" }, allowAdd: true },
+            professional: { label: game.i18n.format(SFRPG.itemTypes["professional"]), items: [], dataset: { type: "professional" }, allowAdd: true },
+            survival: { label: game.i18n.format(SFRPG.itemTypes["survival"]), items: [], dataset: { type: "survival" }, allowAdd: true },
+            miscellaneous: { label: game.i18n.format(SFRPG.itemTypes["miscellaneous"]), items: [], dataset: { type: "miscellaneous" }, allowAdd: true },
             pharmaceutical: { label: game.i18n.format(SFRPG.itemTypes["pharmaceutical"]), items: [], dataset: { type: "pharmaceutical" }, allowAdd: true },
-            goods: { label: game.i18n.format(SFRPG.itemTypes["goods"]), items: [], dataset: { type: "goods" }, allowAdd: true },
-            container: { label: game.i18n.format(SFRPG.itemTypes["container"]), items: [], dataset: { type: "container" }, allowAdd: true },
-            technological: { label: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.SpecialItems"), items: [], dataset: { type: "technological,magic,hybrid" }, allowAdd: true },
-            fusion: { label: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.EquipmentEnhancements"), items: [], dataset: { type: "fusion,upgrade,weaponAccessory" }, allowAdd: true },
+            
+            
+          //  goods: { label: game.i18n.format(SFRPG.itemTypes["goods"]), items: [], dataset: { type: "goods" }, allowAdd: true },
+            
+           // container: { label: game.i18n.format(SFRPG.itemTypes["container"]), items: [], dataset: { type: "container" }, allowAdd: true },
+          //  technological: { label: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.SpecialItems"), items: [], dataset: { type: "technological,magic,hybrid" }, allowAdd: true },
+          //  fusion: { label: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.EquipmentEnhancements"), items: [], dataset: { type: "fusion,upgrade,weaponAccessory" }, allowAdd: true },
             augmentation: { label: game.i18n.format(SFRPG.itemTypes["augmentation"]), items: [], dataset: { type: "augmentation" }, allowAdd: true }
+       
+       
+       
         };
+
+
+
+
 
         let physicalInventoryItems = [];
         for (const [key, value] of Object.entries(inventory)) {

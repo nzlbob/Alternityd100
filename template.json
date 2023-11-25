@@ -4652,22 +4652,28 @@
         "ammunition",
         "equipment",
         "clothing",
-        "communications",
+        "communication",
+        "computer",
         "container",
         "augmentation",
         "feat",
         "flaw", 
-        "goods",
+
+        "medical",
+        "miscellaneous",
         "perk",  
         "pharmaceutical",
+        "professional",
         "psionic",      
         "race",
+        "sensor",
         "shield",
+        "survival",
         "technological",
         "weapon",
         "weaponAccessory",
-
-        "vehicleAttack",
+ 
+         "vehicleAttack",
         "vehicleSystem",
         
         "starshipAblativeArmor",
@@ -4695,6 +4701,7 @@
         "chassis",
         "class",
         "hybrid",
+        "goods",
         "spell",
         "upgrade",
         "fusion",
@@ -4709,7 +4716,10 @@
 
       ],
       "templates": {
-        
+        "skilledItem": {
+            "skill": ""
+        },
+
         "compartmentTemplate" : {
     
                 "contents": [],
@@ -5161,10 +5171,27 @@
       "clothing":{
         "templates": ["itemDescription", "modifiers"]
       },
-      "communications":{
+      "communication":{
         "templates": ["itemDescription", "modifiers"]
       },
-
+      "computer":{
+        "templates": ["itemDescription", "modifiers"]
+      },
+      "medical":{
+        "templates": ["itemDescription", "modifiers","skilledItem"]
+      },
+      "miscellaneous":{
+        "templates": ["itemDescription", "modifiers"]
+      },
+      "professional":{
+        "templates": ["itemDescription", "modifiers"]
+      },
+      "sensor":{
+        "templates": ["itemDescription", "modifiers"]
+      },
+      "survival":{
+        "templates": ["itemDescription", "modifiers"]
+      },
       
       "psionic":{
         "templates": ["itemDescription", "modifiers"],

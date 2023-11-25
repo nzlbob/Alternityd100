@@ -1393,14 +1393,27 @@ SFRPG.capacityUsagePer = {
 };
 
 SFRPG.itemTypes = {
+    
+    "clothing": "SFRPG.Items.Categories.Clothing",  
+    "communication":"SFRPG.Items.Categories.Communication",
+    "computer":"SFRPG.Items.Categories.Computer",
+    "medical":"SFRPG.Items.Categories.Medical",
+    "miscellaneous":"SFRPG.Items.Categories.Miscellaneous",
+    "pharmaceutical": "SFRPG.Items.Categories.Pharmaceutical",
+    "professional": "SFRPG.Items.Categories.Professional",
+    "sensor": "SFRPG.Items.Categories.Sensor",
+    "survival": "SFRPG.Items.Categories.Survival",
+    
+    "perk": "SFRPG.Items.Categories.Perks",
+    "flaw": "SFRPG.Items.Categories.Flaws",
+
+    // 
     "asi": "SFRPG.Items.Categories.AbilityScoreIncrease",
     "archetypes": "SFRPG.Items.Categories.Archetypes",
     "augmentation": "SFRPG.Items.Categories.Augmentations",
     "chassis": "SFRPG.Items.Categories.DroneChassis",
     "class": "SFRPG.Items.Categories.Classes",
-    "pharmaceutical": "SFRPG.Items.Categories.Consumables",
     "container": "SFRPG.Items.Categories.Containers",
-    "clothing": "SFRPG.Items.Categories.clothing",
     "equipment": "SFRPG.Items.Categories.Armor",
     "feat": "SFRPG.Items.Categories.Feats",
     "fusion": "ITEM.TypeFusion",
@@ -1431,8 +1444,7 @@ SFRPG.itemTypes = {
     "starshipEngine": "SFRPG.Items.Categories.StarshipEngines",
     "starshipWeapon": "SFRPG.Items.Categories.StarshipWeapons",
     "technological": "SFRPG.Items.Categories.TechnologicalItems",
-    "perk": "SFRPG.Items.Categories.Perks",
-    "flaw": "SFRPG.Items.Categories.Flaws",
+
     "achievement": "SFRPG.Items.Categories.Achievements",
     "upgrade": "ITEM.TypeUpgrade",
     "weapon": "SFRPG.Items.Categories.Weapons",

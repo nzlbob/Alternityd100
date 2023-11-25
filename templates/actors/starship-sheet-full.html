@@ -32,23 +32,25 @@
                 <li class="attribute health" data-tippy-content="{{ localize "SFRPG.HullPoints" }}<br />@attributes.hp.value<br />@attributes.hp.max">
                     <h4 class="attribute-name box-title">{{ localize "SFRPG.Durability" }}</h4>
                     <table class="statTable">
-<tbody>
+                        <thead>
     <tr>
 
         <th>
-            <label>TYPE</label>
+            <label>Type</label>
         </th>
         <th>
-            <label>PEND</label>
+            <label>Pend</label>
         </th>
         <th>
-            <label>VAL</label>
+            <label>Val</label>
         </th>
         <th  >
-            <label>MAX</label>
+            <label>Max</label>
         </th>
 
     </tr>
+</thead> 
+<tbody>
     <tr>
 
         <td style="text-align: left" >
@@ -197,7 +199,55 @@
                     
 
                 </li>
-                
+                <li class="attribute">
+                    <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Header.Movement.Title"}}</h4>
+                    <table class="statTable">
+                        <thead>
+                        <tr>
+                        
+                        <th>Attribute</th>
+                        <th>Value</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                        <td>Accel</td>
+                        <td>{{system.attributes.accel.value}}</td>
+                        
+                        </tr>
+                        <tr>
+                            <td>{{localize "Speed"}}</td>
+                            <td>
+                            <input  name="system.attributes.speed.value" type="number" value="{{system.attributes.speed.value}}" data-dtype="Number" placeholder="0" />
+                            </td>
+                        </tr>
+
+                        <tr>
+                          <td>{{localize "Maneuver"}}</td>
+                        <td>{{system.attributes.maneuverability}}</td>
+                 
+                        </tr>
+                        <tr>
+                            <td>{{localize "FTL "}}</td>
+                          <td>{{system.attributes.ftl.range}}</td>
+                   
+                          </tr>
+
+                       
+                          
+                        <tr>
+                        <td></td>
+                        <td ></td>
+                        
+                        </tr>
+                        </tbody>
+                        </table>
+                    
+                    
+                    
+
+                </li>
+<!--
                 <li class="attribute">
                     <h4 class="attribute-name box-title" data-tooltip="{{localize "SFRPG.StarshipSheet.Header.Movement.Maneuverability"}}<br/>@attributes.maneuverability<br/><br/>{{system.attributes.maneuverability}}">{{localize "SFRPG.StarshipSheet.Header.Movement.Title"}}</h4>
                     <ol class="attribute-multibox " >
@@ -225,6 +275,7 @@
                         {{/if}}
                     </ol>
                 </li>
+-->
             </ul>
 
         </div>
@@ -296,7 +347,7 @@
                         <div class="divTableCell">
                             <table class="crewTable">
                                 <tbody>
-                                    <tr class="divTableRow" >
+                                    <tr  >
                                         <th> 
                                             <p> <b>Maneuvers</b></p>
                                         </th>
@@ -304,13 +355,13 @@
                                             <p> <b>Maneuver Checks</b></p>
                                         </th>
                                         <th> 
-                                            <p> <b>Acceleration and Maneuver Checks</b></p>
+                                            <p> <b>Acceleration and <br>Maneuver Checks</b></p>
                                         </th>
                                         <th> 
                                             <p> <b>Jinking</b></p>
                                         </th>   
                                     </tr>
-                                    <tr class="divTableRow" >  
+                                    <tr >  
                                         <td>
                                             <p>For the basic combat game, we're assuming that starships are equipped with engines that permit cinematic maneuvers banks, loops, turns, and rolls. In effect, the gravity induction engine engages a medium against which it can exert force — the omnipresent gravitational energy of the universe. We'll examine other methods for moving and maneuvering ships in Chapter 2: Advanced Combat. <br> Ships may perform a number of maneuvers in one round equal to their Maneuverability Class.                                   
                                                 A speed of 5-8 reduces a ship's MC by 1 point; a speed of 9-12 reduces MC by 2 points; a speed of 13 to 16 reduces MC by 3 points. (Every 4 points of speed reduces maneuverability class by an additional point.)                                
@@ -327,7 +378,7 @@
                                             <p> All ships are assigned a Maneuverability Class based on the size and hull type. However, a ship may attempt a crew check (or Vehicle Ops-spacecraft skill check on the part of the character at the helm) to increase its Maneuverability Class by 1, 2, or 3 for an Ordinary, Good, or Amazing success. <br> For example, a destroyer has a base Maneuverability Class 3. If it's traveling at a speed of 9, its MC is reduced by two points to MC 1. Under normal circumstances, the ship is limited to one maneuver per round. If the helmsman rolls an Ordinary success on the check, the destroyer's Maneuverability Class is increased to 2, allowing it to perform one more maneuver this round than it would normally due to its high speed.</p>
                                         </td>
                                         <td> 
-                                            <p> <b>Each point of acceleration "left over" after the ship adjusts its speed for the round adds a -1 step bonus to the maneuver check (or skill check). If the destroyer in the preceding example had two points of acceleration unused in the current phase, the pilot would roll his maneuver check with a -2 step bonus</p>
+                                            <p> Each point of acceleration "left over" after the ship adjusts its speed for the round adds a -1 step bonus to the maneuver check (or skill check). If the destroyer in the preceding example had two points of acceleration unused in the current phase, the pilot would roll his maneuver check with a -2 step bonus</p>
                                         </td>
                                         <td> 
                                             <p> Instead of using a maneuver check to increase its maneuverability, a ship can instead use a maneuver check to "jink," making itself harder to hit. An Ordinary, Good, or Amazing result on the maneuver check adds a +1, +2, or +3 step penalty to any incoming enemy fire, missile attacks, or bomb attacks in the following fire phase. Just like a normal maneuver check, unused acceleration in the current round adds a - 1 step bonus per point left over to the maneuver check. In addition, the ship's size modifier is reversed and added to the pilot's skill check. For example, a fighter has a +3 step size modifier for targeting, but this becomes a - 3 step bonus for jinking attempts.Only</p>

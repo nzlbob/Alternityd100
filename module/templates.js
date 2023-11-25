@@ -36,6 +36,7 @@ export const preloadHandlebarsTemplates = async function() {
     "systems/Alternityd100/templates/items/parts/item-capacity.html",
     "systems/Alternityd100/templates/items/parts/item-modifiers.html",
     "systems/Alternityd100/templates/items/parts/item-header.html",
+    "systems/Alternityd100/templates/items/parts/item-skilled.html",
     "systems/Alternityd100/templates/items/parts/item-status.html",
     "systems/Alternityd100/templates/items/parts/physical-item-details.html",
     "systems/Alternityd100/templates/items/parts/starship-component.html",
