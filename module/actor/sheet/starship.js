@@ -1065,7 +1065,7 @@ for (let A of contents.contents ){
     const sensorOperator = npcCrew? actor : actorData.crew.defences.actors[0]
     const skillId ="defen"
     let defenSkill = npcCrew?  npcSkill.skills[skillId]  : sensorOperator.system.skills[skillId] 
-    let stepbonus = defenSkill.step + actorData.attributes.damageControl.value//+ rangesteps -  targetRes
+    let stepbonus =  actorData.attributes.damageControl.value//+ rangesteps -  targetRes
 
     let defen1 =  await sensorOperator.rollSkill(skillId,{steps:stepbonus,skillflavor:skillflavor,stepflavor:stepflavor})
 

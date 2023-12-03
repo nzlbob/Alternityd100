@@ -99,7 +99,7 @@ if(this.scene.isStarship){
     this.isSpace = true
     this.test = false
 const update = {
-    "flags.sfrpg.combatType": "starship"
+    "flags.sfrpg.combatType": "starship","flags.lastuserAct":false
 };
 await this.update(update);
 }
@@ -107,8 +107,8 @@ if(!this.scene.isStarship){
     this.isSpace = false
     this.test = false
 const update = {
-    "flags.sfrpg.combatType": "normal"
-};
+    "flags.sfrpg.combatType": "normal","flags.lastuserAct":false
+    };
 await this.update(update);
 }
 //console.log(data, options,userId,this)
@@ -381,13 +381,45 @@ this.nextTurn(false)
         if (this.isEveryCombatantDefeated()) {
             return;
         }
-        
+        console.log("Turn", this)
         let nextRound = this.round;
         let nextPhase = this.flags.sfrpg.phase;
         let nextSubPhase = this.flags.sfrpg.subPhase;
         let turn = this.turn;
         let newround = false
+
+
+        console.log("Turn", this.combatant?.flags.delayed)
+       if((turn == (this.turns.length-1) ) && !game.users.current.isGM ) {
+        console.log("Turn", this.combatant?.flags.delayed)
+        //combatant.flags.delayed
+        const update = {
+            "flags.delayed": useAction,
+        };
+    
+        await this.combatant.update(update);
+        useAction? ui.notifications.info("Turn Complete - Acted - GM to end phase") : ui.notifications.info("Turn Complete - Delayed - GM to end phase")
         
+       
+
+    return
+    }
+    if((turn == (this.turns.length-1)) && game.users.current.isGM && !(this.combatant.flags.delayed === null)) {
+        useAction = this.combatant.flags.delayed;
+        console.log("Turn", this.combatant?.flags.delayed)
+
+        const update = {
+            "flags.delayed": null,
+        };
+    
+        await this.combatant.update(update);
+
+
+        console.log("Turn", this.combatant?.flags.delayed)
+
+    }
+    console.log("Turn", this.combatant?.flags.delayed)
+
             if (nextRound > 0 && 
                 nextPhase == 0 &&
                 nextSubPhase == 0 &&
@@ -630,7 +662,7 @@ console.log("\n nextRound",nextTurn.round,"\n nextPhase",nextTurn.phase,"\n next
         let nextPhase = 0;
         let nextSubPhase = 0;
         let nextTurn = 0;
-fsgsfgfgsfg
+//fsgsfgfgsfg
         const phases = this.getPhases();
         const subPhases = this.getSubPhases();
         const newPhase = phases[nextPhase];
@@ -1175,7 +1207,7 @@ async    setActiveCombatants(thisTurn) {
         if ( !combatant?.isOwner ) return results;
     console.log("\nactionCheck\n",combatant.actor.system.attributes, actionCheck)
         const parts = [actionCheck.step.total," Base, "]
-        let stepbonus = actionCheck.total;
+        let stepbonus = actionCheck.step.total;
       //  console.log("\nactionCheck\n", actionCheck)
         const props = ["something","2.jghf"];
         // Roll initiative

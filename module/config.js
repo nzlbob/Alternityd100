@@ -939,9 +939,10 @@ SFRPG.starshipRoles = {
     "communications"    : "SFRPG.ShipSystems.StarshipRoles.Communications",
     "damageControl"  : "SFRPG.ShipSystems.StarshipRoles.DamageControl",
     "defences"  :   "SFRPG.ShipSystems.StarshipRoles.Defences",
-    "engineer"      : "SFRPG.ShipSystems.StarshipRoles.Engineers",
-    "sensors"  : "SFRPG.ShipSystems.StarshipRoles.Sensors",
-    "gunner"        : "SFRPG.ShipSystems.StarshipRoles.Gunners"
+    "engineer"      : "SFRPG.ShipSystems.StarshipRoles.Engineer",
+    "gunner"        : "SFRPG.ShipSystems.StarshipRoles.Gunners",
+    "sensors"  : "SFRPG.ShipSystems.StarshipRoles.Sensors"
+
 
 };
 

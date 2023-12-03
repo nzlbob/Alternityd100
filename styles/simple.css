@@ -3121,6 +3121,7 @@ background: radial-gradient( #39879d ,#212c48  );
   color: #666;
 }
 .Alternityd100.sheet.actor .inventory-list .item-summary,
+.Alternityd100.sheet.actor .action-list .action-summary,
 .Alternityd100.sheet.actor .crew-list .item-summary,
 .Alternityd100.sheet.actor .vehicle-system-list .item-summary,
 .Alternityd100.sheet.actor .inventory-list .crew-summary,

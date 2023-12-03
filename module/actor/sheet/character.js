@@ -17,7 +17,7 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
             width: 750,
             height: 600,
             //tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "inventory"}],
-            scrollY: [".biography", ".items", ".attributes"],
+            scrollY: [".biography", ".items", ".attributes",".skills"],
             dragDrop: [{dragSelector: ".item-list .item", dropSelector: null}]
         });
 
@@ -282,6 +282,7 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
             let targetItemType = itemType;
             if (!(itemType in inventory)) {
                 for (let [key, entry] of Object.entries(inventory)) {
+                   // if (!entry.dataset.type) {console.log(entry); break};
                     if (entry.dataset.type.includes(itemType)) {
                         targetItemType = key;
                         break;

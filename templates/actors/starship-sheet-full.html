@@ -442,7 +442,7 @@
 
 
                 </li>
-                {{console "Starship 563"}}
+                {{console "Starship 445"}}
                 {{console this}}
                 {{console scanTargets}}
                 <ol class="item-list">
@@ -864,8 +864,8 @@
                             <div class="action-image small" style="background-image: url({{action.img}})"></div>
                             <h4>{{localize action.name}}</h4>
                         </div>
-                        <div class="action-skill flexrow" data-tippy-content="<strong>{{localize action.system.skill.name}}</strong><br/>{{localize action.system.skill.tooltip}}{{#if action.system.isPush}}<br/><br/><strong>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.Push"}}</strong><br/>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.PushTooltip"}}{{/if}}">{{action.system.skill.name}}{{#if action.system.isPush}} ({{localize "SFRPG.StarshipSheet.Actions.Tooltips.Push"}}){{/if}}</div>
-                        <div class="action-phase flexrow" data-tippy-content="<strong>{{localize action.system.phase.name}}</strong><br/>{{localize action.system.phase.tooltip}}{{#if action.system.isPush}}<br/><br/><strong>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.Push"}}</strong><br/>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.PushTooltip"}}{{/if}}">{{action.system.phase.name}}{{#if action.system.isPush}} ({{localize "SFRPG.StarshipSheet.Actions.Tooltips.Push"}}){{/if}}</div>
+                        <div class="action-skill flexrow" data-tippy-content="<strong>{{localize action.system.skill.name}}</strong><br/>{{localize action.system.skill.tooltip}}{{#if action.system.isPush}}<br/><br/><strong>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.Push"}}</strong><br/>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.PushTooltip"}}{{/if}}">{{localize (append "d100A." action.system.skill.name) }}{{#if action.system.isPush}} ({{localize "SFRPG.StarshipSheet.Actions.Tooltips.Push"}}){{/if}}</div>
+                        <div class="action-phase flexrow" data-tippy-content="<strong>{{localize action.system.phase.name}}</strong><br/>{{localize action.system.phase.tooltip}}{{#if action.system.isPush}}<br/><br/><strong>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.Push"}}</strong><br/>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.PushTooltip"}}{{/if}}">{{localize (append "d100A.phaseType." action.system.phase.name) }}{{#if action.system.isPush}} ({{localize "SFRPG.StarshipSheet.Actions.Tooltips.Push"}}){{/if}}</div>
                                             
                     </li>
                     {{/each}}

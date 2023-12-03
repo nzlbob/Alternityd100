@@ -4835,7 +4835,8 @@
                   "dc": null,
                   "descriptor": ""
               },
-              "descriptors": []
+              "descriptors": [],
+              "degreeText":{"critical": "","failure": "","ordinary": "","good": "","amazing": ""}
           },
           "itemUsage": {
               "ammunitionType": "",

@@ -201,6 +201,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         filterLists.on("click", ".filter-item", this._onToggleFilter.bind(this));
 
         html.find('.item .item-name h4').click(event => this._onItemSummary(event));
+        html.find('.action .action-name h4').click(event => this._onItemSummary(event,true));
         html.find('.item .item-name h4').contextmenu(event => this._onItemSplit(event));
 
         if (!this.options.editable) return;
@@ -861,20 +862,43 @@ console.log("supportedTypes",type,supportedTypes)
      * 
      * @param {Event} event The html event
      */
-  async  _onItemSummary(event) {
+  async  _onItemSummary(event,action = false) {
+    
+    
+    console.log("Hello",action,$(event.currentTarget).parents('.action'))
         event.preventDefault();
-        let li = $(event.currentTarget).parents('.item'),
+
+        const itemz = $(event.currentTarget).parents('.action') //this.actor.items.get(event.currentTarget.item-id)
+        console.log("Hello",itemz)
+        //let dgdhd = game.items.get(itemz.data('action-id'))
+        console.log("Hello",itemz.data('action-id'))
+    const compendium = game.packs.get("Alternityd100.starship-actions")
+    console.log("Hello",compendium)
+    const itemb = await compendium.get(itemz.data('action-id'))
+    console.log("Hello",itemb)
+    const chatDatab = await itemb.getChatData({ secrets: this.actor.isOwner, rollData: this.actor.system });
+    console.log("Hello",chatDatab)
+    var li,item,chatData,div,props,type
+    if(!action){
+            li = $(event.currentTarget).parents('.item'),
             item = this.actor.items.get(li.data('item-id')),
             chatData = await item.getChatData({ secrets: this.actor.isOwner, rollData: this.actor.system });
-
+    }
+    if(action){
+        li = $(event.currentTarget).parents('.action'),
+        item = itemb,
+        chatData = chatDatab;
+}
+action? type="action":type="item"
         if (li.hasClass('expanded')) {
-            let summary = li.children('.item-summary');
+            let summary = li.children('.'+type+'-summary');
             summary.slideUp(200, () => summary.remove());
         } else {
       //console.log(chatData)
             const desiredDescription = await TextEditor.enrichHTML(chatData.description.short || chatData.description.value, {});
-            let div = $(`<div class="item-summary">${desiredDescription}</div>`);
-            let props = $(`<div class="item-properties"></div>`);
+            action? div = $(`<div class="action-summary">${desiredDescription}</div>`): div = $(`<div class="item-summary">${desiredDescription}</div>`);
+            
+            action? props = $(`<div class="action-properties"></div>`): props = $(`<div class="item-properties"></div>`);
             chatData.properties.forEach(p => props.append(`<span class="tag" ${ p.tooltip ? ("data-tippy-content='" + p.tooltip + "'") : ""}>${p.name}</span>`));
 
             div.append(props);

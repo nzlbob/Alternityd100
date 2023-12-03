@@ -7,9 +7,33 @@ import { d100A } from "./d100Aconfig.js";
  export class d100ACombatant extends Combatant {
 /** @override */
 //actions = {total:null,remaining:null};
+/*
+static metadata = Object.freeze(mergeObject(super.metadata, {
+  name: "Combatant",
+  collection: "combatants",
+  label: "DOCUMENT.Combatant",
+  labelPlural: "DOCUMENT.Combatants",
+  isEmbedded: true,
+  permissions: {
+    //create: this.#canCreate,
+    update: this.canUpdate
+  }
+}, {inplace: false}));
 
-
-
+ /**
+     * Is a user able to update an existing Combatant?
+     * @private
+     */
+  #canUpdate(user, doc, data) {
+  console.log((user, doc, data))
+  loadLauncherOrdnance.lp.lp
+  return true;
+  if ( user.isGM ) return true; // GM users can do anything
+  if ( doc.actor && !doc.actor.canUserModify(user, "update", data) ) return false;
+  const updateKeys = new Set(Object.keys(data));
+  const allowedKeys = new Set(["_id", "initiative", "flags", "defeated"]);
+  return updateKeys.isSubset(allowedKeys); // Players may only update initiative scores, flags, and the defeated state
+}
 
 // FIX THIS FOR STARSHIPS
 /* -------------------------------------------- */

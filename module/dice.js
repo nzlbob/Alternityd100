@@ -1360,38 +1360,39 @@ console.log(resistance)
     hasDegreeText,
     degreeText
   }) {
-/*
+
     console.log( 
-"    event,",    event,
-"    parts,",    parts,
-"stepbonus", stepbonus,
-"ordinary", ordinary,
-"good", good,
-"amazing", amazing,
-"    dice = 1d20 ",    dice ,
-"    data,",    data,
-"    subject,",    subject,
-"    template,",    template,
-"    title,",    title,
-"    speaker,",    speaker,
-"    flavor,",    flavor,
-"    takeTwenty = true,",    takeTwenty ,
-"    situational = true,",    situational ,
-"    fastForward = true,",    fastForward ,
-"    critical = 1,",    critical ,
-"    fumble = 20,",    fumble ,
-"    onClose,",    onClose,
-"    dialogOptions = {},",    dialogOptions ,
-"    extraRolls = [],",    extraRolls ,
-"    chatTemplate,",    chatTemplate,
-"    chatTemplateData,",    chatTemplateData,
-"    staticRoll = null,",    staticRoll ,
-"    chatMessage = true,",    chatMessage,
-"    noSound = false,",    noSound ,
-"    compendiumEntry = null,",    compendiumEntry ,
+      "Actor -- ", data,
+"\n    event,",    event,
+"\n    parts,",    parts,
+"\nstepbonus", stepbonus,
+"\nordinary", ordinary,
+"\ngood", good,
+"\namazing", amazing,
+"\n    dice = 1d20 ",    dice ,
+"\n    data,",    data,
+"\n    subject,",    subject,
+"\n    template,",    template,
+"\n    title,",    title,
+"\n    speaker,",    speaker,
+"\n    flavor,",    flavor,
+"\n    takeTwenty = true,",    takeTwenty ,
+"\n    situational = true,",    situational ,
+"\n    fastForward = true,",    fastForward ,
+"\n    critical = 1,",    critical ,
+"\n    fumble = 20,",    fumble ,
+"\n    onClose,",    onClose,
+"\n    dialogOptions = {},",    dialogOptions ,
+"\n    extraRolls = [],",    extraRolls ,
+"\n    chatTemplate,",    chatTemplate,
+"\n    chatTemplateData,",    chatTemplateData,
+"\n    staticRoll = null,",    staticRoll ,
+"\n    chatMessage = true,",    chatMessage,
+"\n    noSound = false,",    noSound ,
+"\n    compendiumEntry = null,",    compendiumEntry ,
 
 )
-*/
+
     // Handle input arguments
     flavor = flavor || title;
 
@@ -1436,7 +1437,7 @@ console.log(resistance)
        const roll = await Roll.create(dice.concat(d100stepdie(totalbonus))).evaluate({ async: true });
        // determin degree of sucess or failure
        
-       if (roll.total > ordinary) {degree = "Failure"};
+       if (roll.total > ordinary) {degree = "Marginal"};
        if (roll.total <= ordinary) {degree = "Ordinary"};
        if (roll.total <= good) {degree = "Good"};
        if (roll.total <= amazing) {degree = "Amazing!"};

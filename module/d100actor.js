@@ -797,6 +797,7 @@ if (this.type=="starship"){
   // Gather changes*/
   const parts = [skl.step," Base, "]
   let stepbonus = skl.step;
+  console.log(stepbonus)
   /*
   const changes = this.changes.filter((c) => {
     let cf = getChangeFlat.call(this, c.subTarget, c.modifier);
@@ -815,7 +816,7 @@ if (this.type=="starship"){
     parts.push(options.steps," Range Bonus, ");
     stepbonus += options.steps
   }
-
+  console.log(stepbonus)
 /*
   // Add rank
   if (skl.rank > 0) {

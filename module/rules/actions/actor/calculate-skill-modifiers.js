@@ -47,8 +47,9 @@ export default function (engine) {
 
 
 for (let mofifier of filteredMods){
-if(mofifier.enabled){
+if(mofifier.enabled && mofifier.valueAffected){
 
+    console.log(mofifier,skills[mofifier.valueAffected])
     skills[mofifier.valueAffected].step = skills[mofifier.valueAffected].step +  parseInt(mofifier.modifier,10)
 
     skills[mofifier.valueAffected].stepdie = d100stepdie(skills[mofifier.valueAffected].step);
