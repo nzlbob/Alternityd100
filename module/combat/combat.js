@@ -1217,7 +1217,7 @@ async    setActiveCombatants(thisTurn) {
         staticRoll: options.staticRoll,
         parts,
         stepbonus,
-        ordinary: actionCheck.base,
+        ordinary: actionCheck.ordinary,
         good: actionCheck.good,
         amazing: actionCheck.amazing,
         dice: options.dice,
