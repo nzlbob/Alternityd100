@@ -201,7 +201,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         filterLists.on("click", ".filter-item", this._onToggleFilter.bind(this));
 
         html.find('.item .item-name h4').click(event => this._onItemSummary(event));
-        html.find('.action .action-name h4').click(event => this._onItemSummary(event,true));
+        //html.find('.action .action-name h4').click(event => this._onItemSummary(event,true));
         html.find('.item .item-name h4').contextmenu(event => this._onItemSplit(event));
 
         if (!this.options.editable) return;
@@ -874,7 +874,7 @@ console.log("supportedTypes",type,supportedTypes)
         console.log("Hello",itemz.data('action-id'))
     const compendium = game.packs.get("Alternityd100.starship-actions")
     console.log("Hello",compendium)
-    const itemb = await compendium.get(itemz.data('action-id'))
+    const itemb = await compendium.getDocument(itemz.data('action-id'))
     console.log("Hello",itemb)
     const chatDatab = await itemb.getChatData({ secrets: this.actor.isOwner, rollData: this.actor.system });
     console.log("Hello",chatDatab)

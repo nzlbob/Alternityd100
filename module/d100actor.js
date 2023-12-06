@@ -755,7 +755,7 @@ return null
 
 rollSkill(
   skillId,
-  options = { steps:0, event: null, skipDialog: false, staticRoll: null, chatMessage: true, noSound: false, dice: "1d20",skillflavor:"",stepbonus:0 }
+  options = { steps:0, event: null, skipDialog: false, staticRoll: null, chatMessage: true, noSound: false, dice: "1d20",skillflavor:"",stepbonus:0 ,degreeText:{}}
 ) {
   console.log(skillId,options)
   if (!this.isOwner) {
@@ -900,7 +900,9 @@ if (this.type=="starship"){
     chatTemplateData: { hasProperties: props.length > 0, properties: props },
     chatMessage: options.chatMessage,
     noSound: options.noSound,
-    compendiumEntry: null
+    compendiumEntry: null,
+    degreeText:options.degreeText,
+    hasDegreeText:options.degreeText? true : false
   });
 
 console.log("\nDiced100.skillRoll({\n", A)

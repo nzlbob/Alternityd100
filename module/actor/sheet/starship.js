@@ -950,8 +950,9 @@ let score = ""
             li.addEventListener("dragleave", this._onCrewDragLeave, false);
         });
 
-        html.find('.action .action-name h4').click(event => this._onActionRoll(event));
-        html.find('.action .action-image').click(event => this._onActionRoll(event));
+       html.find('.action .action-name h4').click(event => this._onCrewActionOpen (event));//_onActionRoll
+       html.find('.action .action-image').click(event => this._onCrewActionRoll(event));
+      //  html.find('.action .action-image').click(event => this._onActionRoll(event));
         html.find('.action-name2').click(event => this._onNPCreset(event));
 
         html.find('.crew-score').click(event => this._onSkillroll(event));
@@ -979,8 +980,51 @@ let score = ""
         html.find('.value-equipmentStatus').change(event => this._onChangeStatus(event));
         html.find('.setCompartmentDur').change(event => this._onChangesetCompartmentDur(event));
         html.find('.clickonoff').click(event => this._onOnOff(event)); 
+       
+
     }
     
+    async _onCrewActionRoll(event) {
+        console.log("Ping")
+        event.preventDefault();
+                const actionId = event.currentTarget.closest('.action').dataset.actionId;
+                
+                const skill = event.currentTarget.parentElement.dataset.skill;
+                
+              //  const action = game.compendium.get()
+                
+                //return this.actor.useStarshipAction(actionId);
+        
+                const compendium = game.packs.get("Alternityd100.starship-actions")
+           // console.log("Hello",compendium)
+            const action = await compendium.getDocument(actionId)
+           
+        const role = action.system.role
+        const actorData = this.actor.system.crew[role]
+       // { steps:0, event: null, skipDialog: false, staticRoll: null, chatMessage: true, noSound: false, dice: "1d20",skillflavor:"",stepbonus:0 }
+        const options = { steps:0, event: null, skipDialog: false, staticRoll: null, chatMessage: "true", noSound: false, dice: "1d20",skillflavor:"skillflavor",stepbonus:0,degreeText:action.system.degreeText }
+        actorData.actors[0]? actorData.actors[0].rollSkill(skill,options) : ui.notifications.error(`No Crew in Station`);
+        console.log("GO",actionId,skill,action,actorData,this.actor.system.crew)
+    }
+    async _onCrewActionOpen(event) {
+console.log("Ping")
+event.preventDefault();
+        const actionId = event.currentTarget.closest('.action').dataset.actionId;
+        
+        const skill = event.currentTarget.parentElement.dataset.skill;
+        
+      //  const action = game.compendium.get()
+        
+        //return this.actor.useStarshipAction(actionId);
+
+        const compendium = game.packs.get("Alternityd100.starship-actions")
+    console.log("Hello",compendium)
+    const action = await compendium.getDocument(actionId)
+    console.log("GO",actionId,skill,action)
+action.sheet.render(true)
+    }
+
+
     async _onOnOff(event) {
 
   
@@ -1487,6 +1531,7 @@ console.log(data,"data")
         event.preventDefault();
         const actionId = event.currentTarget.closest('.action').dataset.actionId;
         const type = event.currentTarget.closest('.action').dataset.type;
+        console.log("GO")
         return this.actor.useStarshipAction(actionId);
     }
     async _onNPCreset(event) {

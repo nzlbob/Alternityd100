@@ -1437,7 +1437,7 @@ console.log(resistance)
        const roll = await Roll.create(dice.concat(d100stepdie(totalbonus))).evaluate({ async: true });
        // determin degree of sucess or failure
        
-       if (roll.total > ordinary) {degree = "Marginal"};
+       if (roll.total > ordinary) {degree = "Failure"};
        if (roll.total <= ordinary) {degree = "Ordinary"};
        if (roll.total <= good) {degree = "Good"};
        if (roll.total <= amazing) {degree = "Amazing!"};
