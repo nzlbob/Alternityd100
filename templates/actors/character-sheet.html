@@ -115,9 +115,9 @@
                         {{#each status.durability as |category id|}}
 
                         <div class="divTableRow">
-                        {{#if (eq id "stu") }}<div class="divTableCell">{{ localize "d100A.stun"}}</div> {{/if}}
-                        {{#if (eq id "wou") }}<div class="divTableCell">{{ localize "d100A.wound"}}</div> {{/if}}
-                        {{#if (eq id "mor") }}<div class="divTableCell">{{ localize "d100A.mortal"}}</div> {{/if}}
+                        {{#if (eq id "stu") }}<div class="divTableCell" data-tooltip = "{{ localize "d100A.DamageTypeTooltip.Stun" }}" >{{ localize "d100A.stun"}}</div> {{/if}}
+                        {{#if (eq id "wou") }}<div class="divTableCell" data-tooltip = "{{ localize "d100A.DamageTypeTooltip.Wound" }}" >{{ localize "d100A.wound"}}</div> {{/if}}
+                        {{#if (eq id "mor") }}<div class="divTableCell" data-tooltip = "{{ localize "d100A.DamageTypeTooltip.Mortal" }}" >{{ localize "d100A.mortal"}}</div> {{/if}}
 
                         <div class="divTableCell">
                             {{#each category.good as |position|}}
@@ -216,7 +216,7 @@
             <div class="divTableRow">
             <div class="divTableCell"style="text-align:right">STR<input disabled="true" type="number" name="system.abilities.str.value" value="{{systemData.abilities.str.value}}"/><input type="number" name="system.abilities.str.base" value="{{systemData.abilities.str.base}}"/></div>
 
-            <div class="divTableCell"><input disabled="true" type="number" data-tooltip="{{system.abilities.str.tooltip}}" name="system.abilities.str.mod" value="{{systemData.abilities.str.mod}}"/></div>
+            <div class="divTableCell"><input disabled="true" type="number" data-tooltip="{{system.abilities.str.tooltip}}" name="system.abilities.str.resModValue" value="{{systemData.abilities.str.resModValue}}"/></div>
             <div class="divTableCell"></div>
 
 
@@ -225,27 +225,27 @@
             </div>
             <div class="divTableRow">
                 <div class="divTableCell"style="text-align:right">DEX<input disabled="true" type="number" name="system.abilities.dex.value" value="{{systemData.abilities.dex.value}}"/><input type="number" name="system.abilities.dex.base" value="{{systemData.abilities.dex.base}}"/></div>
-                <div class="divTableCell"><input disabled="true" data-tooltip="{{system.abilities.dex.tooltip}}" type="number" name="system.abilities.dex.mod" value="{{systemData.abilities.dex.mod}}"/></div>
+                <div class="divTableCell"><input disabled="true" data-tooltip="{{system.abilities.dex.tooltip}}" type="number" name="system.abilities.dex.resModValue" value="{{systemData.abilities.dex.resModValue}}"/></div>
                 <div class="divTableCell"></div>
             </div>
             <div class="divTableRow">
                 <div class="divTableCell"style="text-align:right">CON<input  disabled="true" type="number" name="system.abilities.con.value" value="{{systemData.abilities.con.value}}"/><input type="number" name="system.abilities.con.base" value="{{systemData.abilities.con.base}}"/></div>
-                <div class="divTableCell"><input disabled="true" type="number" data-tooltip="{{system.abilities.con.tooltip}}" name="system.abilities.con.mod" value="{{systemData.abilities.con.mod}}"/></div>
+                <div class="divTableCell"><input disabled="true" type="number" data-tooltip="{{system.abilities.con.tooltip}}" name="system.abilities.con.resModValue" value="{{systemData.abilities.con.resModValue}}"/></div>
                 <div class="divTableCell"></div>
             </div>
             <div class="divTableRow">
                 <div class="divTableCell"style="text-align:right">INT<input  disabled="true" type="number" name="system.abilities.int.value" value="{{systemData.abilities.int.value}}"/><input type="number" name="system.abilities.int.base" value="{{systemData.abilities.int.base}}"/></div>
-                <div class="divTableCell"><input disabled="true" type="number" data-tooltip="{{system.abilities.int.tooltip}}" name="system.abilities.int.mod" value="{{systemData.abilities.int.mod}}"/></div>
+                <div class="divTableCell"><input disabled="true" type="number" data-tooltip="{{system.abilities.int.tooltip}}" name="system.abilities.int.resModValue" value="{{systemData.abilities.int.resModValue}}"/></div>
                 <div class="divTableCell"></div>
             </div>
             <div class="divTableRow">
                 <div class="divTableCell"style="text-align:right">WIL<input disabled="true" type="number" name="system.abilities.wil.value" value="{{systemData.abilities.wil.value}}"/><input type="number" name="system.abilities.wil.base" value="{{systemData.abilities.wil.base}}"/></div>
-                <div class="divTableCell"><input disabled="true" type="number" data-tooltip="{{system.abilities.wil.tooltip}}" name="system.abilities.wil.mod" value="{{systemData.abilities.wil.mod}}"/></div>
+                <div class="divTableCell"><input disabled="true" type="number" data-tooltip="{{system.abilities.wil.tooltip}}" name="system.abilities.wil.resModValue" value="{{systemData.abilities.wil.resModValue}}"/></div>
                 <div class="divTableCell"></div>
             </div>
             <div class="divTableRow">
                 <div class="divTableCell"style="text-align:right">PER<input disabled="true"type="number" name="system.abilities.per.value" value="{{systemData.abilities.per.value}}"/><input type="number" name="system.abilities.per.base" value="{{systemData.abilities.per.base}}"/></div>
-                <div class="divTableCell"><input disabled="true" type="number" data-tooltip="{{system.abilities.per.tooltip}}" name="system.abilities.per.mod" value="{{systemData.abilities.per.mod}}"/></div>
+                <div class="divTableCell"><input disabled="true" type="number" data-tooltip="{{system.abilities.per.tooltip}}" name="system.abilities.per.resModValue" value="{{systemData.abilities.per.resModValue}}"/></div>
                 <div class="divTableCell"></div>
             </div>
             </div>

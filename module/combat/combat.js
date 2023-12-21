@@ -1242,7 +1242,7 @@ async    setActiveCombatants(thisTurn) {
           continue;
         }
         let degree = "marginal"
-        if(actionRoll.rolls[0].total <= actionCheck.base ) degree = "ordinary";
+        if(actionRoll.rolls[0].total <= actionCheck.ordinary ) degree = "ordinary";
         if(actionRoll.rolls[0].total <= actionCheck.good ) degree = "good";
         if(actionRoll.rolls[0].total <= actionCheck.amazing ) degree = "amazing";
         if(actionRoll.rolls[0].dice[0].total == 1 ) degree = "amazing";
@@ -1253,7 +1253,7 @@ async    setActiveCombatants(thisTurn) {
           continue;
         }
         let degree = "marginal"
-        if(actionRoll.total <= actionCheck.base ) degree = "ordinary";
+        if(actionRoll.total <= actionCheck.ordinary ) degree = "ordinary";
         if(actionRoll.total <= actionCheck.good ) degree = "good";
         if(actionRoll.total <= actionCheck.amazing ) degree = "amazing";
         if(actionRoll.dice[0].total == 1 ) degree = "amazing";

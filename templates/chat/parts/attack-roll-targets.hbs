@@ -106,14 +106,16 @@
 
 
     </div>
-   
+   {{#if actor.isSpaceActor}}
     <div class="HitLoc" data-gm-sensitive-uuid="{{t.token.uuid}}">
     <button data-action="rollHitLoc" data-aspect="{{t.aspect}}" data-atttokenid = "{{../atttokenid}}" data-targetid="{{t._id}}" data-firepower="{{t.firepower}}" data-type="{{t.type}}" data-value="{{t.dmgresult.ama.damage.total}}" data-tooltip-direction="UP" data-tooltip="<p>System damage is possible any time one of the following occurs:</p><p>• The target suffers mortal or critical damage.</p><p>• The target marks off its last stun or wound box.</p><p>• The attacker achieves an Amazing success with her attack and at least 1 point of primary damage penetrates the target's armor.</p>" > System Damage </button>
 </div>
+{{/if}}
     </div>
 
 
   {{/each}}
 
  {{console this}}
+  {{console "Att-roll-targets 120"}}
 

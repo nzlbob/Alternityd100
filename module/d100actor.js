@@ -189,16 +189,20 @@ render(force, context={}) {
   {
 
   
+/*
+***Moved to calculate initiative modifiers**
 
   actorData.attributes.actchk.base = Math.floor(( actorData.abilities.dex.base+actorData.abilities.int.base)/2);
   actorData.attributes.actchk.ordinary = actorData.attributes.actchk.base ;
   actorData.attributes.actchk.marginal = actorData.attributes.actchk.ordinary +1;
   actorData.attributes.actchk.good = Math.floor((actorData.attributes.actchk.ordinary)/2);
   actorData.attributes.actchk.amazing = Math.floor((actorData.attributes.actchk.good)/2);
-  actorData.attributes.actchk.die = "";
+  actorData.attributes.actchk.die = "";*/
   //console.log("\n\nACT\n\n",actorData.attributes.actchk.base,actorData.abilities.dex.base,actorData.abilities.int.base)
   
   //Action Check calculation 
+  //***Moved to calculate initiative modifiers**
+/*
   conwil=actorData.abilities.con.base+actorData.abilities.wil.base;
   if (conwil>7) {actorData.attributes.actchk.aprbase = 1};
   if (conwil>15) {actorData.attributes.actchk.aprbase = 2};
@@ -206,9 +210,9 @@ render(force, context={}) {
   if (conwil>31) {actorData.attributes.actchk.aprbase = 4};
   
   actorData.attributes.actchk.apr = actorData.attributes.actchk.aprbase;
-  
+  */
   //Combat Movement 
-  
+  /*
   strdex=actorData.abilities.str.value + actorData.abilities.dex.value;
 
   if (strdex<8) {actorData.attributes.speed.sprint.base = 6};
@@ -228,9 +232,9 @@ render(force, context={}) {
   if (actorData.attributes.speed.sprint.base>29) {actorData.attributes.speed.walk.base = 8};
   actorData.attributes.speed.swim.base = actorData.attributes.speed.walk.base;
   actorData.attributes.speed.easyswim.base = actorData.attributes.speed.walk.base/2;
- 
+ */
   //Hit point Calculation
- 
+ /*
   actorData.attributes.mor.base = Math.ceil(actorData.abilities.con.base/2);
   actorData.attributes.wou.base = actorData.abilities.con.base;
   actorData.attributes.stu.base = actorData.abilities.con.base;
@@ -243,7 +247,7 @@ render(force, context={}) {
   actorData.abilities.wil.modBase= d100resmod(actorData.abilities.wil.base);
   actorData.abilities.per.modBase= d100resmod(actorData.abilities.per.base);
 
-
+*/
   
   //-- get bonus skills for being human. This is not great, should be in json file
   

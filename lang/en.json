@@ -2972,6 +2972,18 @@
 "normal":"Normal"}
 ,
 
+"DamageTypeTooltip" : { 
+    "Stun" : "If all your hero's stun boxes are marked off, he is immediately knocked out. PHB 52. If Amazing damage taken — must make a Stamina-endurance skill check after the damage is applied at the end of the phase or be knocked out." ,
+    "Wound" : "1f all of your hero's wound boxes are marked off, he is knocked out. PHB 52",
+    "Mortal" : "For every point of mortal damage your hero suffers, he receives a + 1 step penalty to all subsequent actions he attempts. PHB 53",
+    "Critical" : ""
+
+}
+
+
+,
+
+
 "PsionBroadSkills" :{
     "con": {
         "tooltip":"This skill can't be used untrained. This skill allows a character to harness the power of his mind lo enhance his body's functions. With just the broad skill, a character can attempt to use any of the related specialty skills except those that can't be used untrained. The difficulty oJ such an action is reflected in the increased psionic energy cost and the higher base situation die for using just the broad skill.",
@@ -3151,7 +3163,7 @@
             "damageo": "Ordinary",
             "damageg": "Good",
             "damagea": "Amazing",
-
+            "availTooltip": "The availability of the weapon — either Any Common (Com), Controlled (Con), Military (Mil), or Restricted (Res), ranging from easiest to most difficult to obtain. Any refers to weapons that also serve ae tools or are otherwise available to everyone without the need of permission or regulations. Common weapons are available to anyone with money and an easy-to-got license. If a hero wishes to avoid the registration of such a weapon, or Is for some reason unable to secure one through legal means, the cost is doubled. Controlled weapons are available to police forces, security details, criminal gangs, and to any private citizen who has a special, hard-to-get license. Law enforcement agencies take a dim view of those who illegally carry and use controlled weapons. Unless a hero has legal access to such a weapon, its listed cost is tripled. Military weapons are available to the special assault squads of some police and security forces, the most aggressive criminal gangs, and legitimate mill* tary forces. Very few licenses for military hardware are handed out, and few heroes have ready access to these weapons. Purchase of military hardware through illegal means multiplies the listed cost by a factor of live. Restricted weapons are military weapons of great destructive power. Only military forces can acquire restricted weapons, and until they're needed they remain under some form of control. Only those characters who are completely above or oblivious to the law can acquire such weapons. Weapons of this sort cost 10 to 20 times their listed price if procured illegal ly — if the Gamemaster allows them to be available at all.",
             "actions" : "Actions", "actionsTooltip": "Option: The The number of times the weapon can be used in a single round",
             "cost" : "Cost", "costTooltip": "The Average cost of the weapon.",
             "clipSize": "Clip Size","clipSizeTooltip": "For powered melee weapons, this number is equal to the number of hits the weapon can strike before its charge pack is empty and requires replacement. For ranged weapons and heavy weapons, this number describes how many shots a weapon can fire before its clip is exhausted (or, for a revolver, before all of its chambers are empty). Clip sizes numbers for burst as per PHB are not used online",

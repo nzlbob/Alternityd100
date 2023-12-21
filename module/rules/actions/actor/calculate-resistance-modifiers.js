@@ -1,12 +1,22 @@
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
-import { addModifier } from "../../../modifiers/d100mod.js";
+import { addModifier, d100resmod } from "../../../modifiers/d100mod.js";
+
 export default function (engine) {
     engine.closures.add("calculateResistanceModifiers", (fact, context) => {
 
 
-        //console.log("----------ResmoD---------",fact, context)
+        console.log("----------ResmoD---------",fact, context)
         const data = fact.actor.system;
         const modifiers = fact.modifiers;
+        data.abilities.str? console.log("OK") : console.log("Bad", fact) 
+        data.abilities.str.modBase= d100resmod(data.abilities.str.value);
+        data.abilities.con.modBase= d100resmod(data.abilities.con.value);
+        data.abilities.dex.modBase= d100resmod(data.abilities.dex.value);
+        data.abilities.int.modBase= d100resmod(data.abilities.int.value);
+        data.abilities.wil.modBase= d100resmod(data.abilities.wil.value);
+        data.abilities.per.modBase= d100resmod(data.abilities.per.value);
+
+
 /*
         "resModBase":0,
         "resModValue":0,

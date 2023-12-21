@@ -993,8 +993,8 @@ if (!isSkill) skl2 = weaponskill;
 //   Automatic weapon attack modes  AWAMode  ????     
 ****/
 let title = ""
-if (isSkill) title = skl.label+" ("+ options.attackType +") | " +item.name  ;
-else {title = itemData.name +" - "+ options.attackType +"." ;}
+if (isSkill) title = skl.label+" ("+ itemData.fireMode +") | " +item.name  ;
+else {title = itemData.name +" - "+ itemData.fireMode +"." ;}
 
 
 target.accur = parseInt(itemData.accur)
@@ -1139,12 +1139,12 @@ console.log(numberOfActiveTargets)
             targetData[x].units = game.scenes.current.grid.units
             targetData[x].resMod = {}; // Fill the resistance modifier array
 if (["character","npc"].includes(target.actor.system.type)){
-            targetData[x].resMod.dex = target.actor.system.abilities.dex.mod;
-            targetData[x].resMod.str = target.actor.system.abilities.str.mod;
-            targetData[x].resMod.con = target.actor.system.abilities.con.mod;
-            targetData[x].resMod.int = target.actor.system.abilities.int.mod;
-            targetData[x].resMod.wil = target.actor.system.abilities.wil.mod;
-            targetData[x].resMod.per = target.actor.system.abilities.per.mod;
+            targetData[x].resMod.dex = target.actor.system.abilities.dex.resModValue;
+            targetData[x].resMod.str = target.actor.system.abilities.str.resModValue;
+            targetData[x].resMod.con = target.actor.system.abilities.con.resModValue;
+            targetData[x].resMod.int = target.actor.system.abilities.int.resModValue;
+            targetData[x].resMod.wil = target.actor.system.abilities.wil.resModValue;
+            targetData[x].resMod.per = target.actor.system.abilities.per.resModValue;
 }
             targetData[x].token = targettedTokenData[x]  
             targetData[x].dmgtype = {ord:"" ,goo:"", ama:"" };         
@@ -1267,8 +1267,8 @@ const parts = [];
         }
         console.log("itemData.skill",skl)
         let title = ""
-        if (isSkill) title = /*game.settings.get('Alternityd100', 'useCustomChatCards') ? skill : */skl.label+" ("+ options.attackType +") | " +item.name  ;
-        else {title = /*game.settings.get('Alternityd100', 'useCustomChatCards') ? skill :*/ itemData.name +" - "+ options.attackType +"." ;
+        if (isSkill) title = /*game.settings.get('Alternityd100', 'useCustomChatCards') ? skill : */skl.label+" ("+ itemData.fireMode +") | " +item.name  ;
+        else {title = /*game.settings.get('Alternityd100', 'useCustomChatCards') ? skill :*/ itemData.name +" - "+ itemData.fireMode +"." ;
 
     console.log("itemData.skill",itemData.skill,weaponskill)
     
@@ -1968,9 +1968,9 @@ return target
         const targets = true;
         let shotsfired = 1;
         //console.log("---ThisCLOSe1",this.system.actionType)
-        if(options.attackType == "dtap") {shotsfired = 2};
-        if(options.attackType == "burst") {shotsfired = 3};
-        if(options.attackType == "auto") {shotsfired = 9};
+        if(itemData.fireMode == "dtap") {shotsfired = 2};
+        if(itemData.fireMode == "burst") {shotsfired = 3};
+        if(itemData.fireMode == "auto") {shotsfired = 9};
         /*if (itemData.hasOwnProperty("usage") && !options.disableDeductAmmo) {
           */
             //console.log("FIRE")
@@ -2899,7 +2899,10 @@ return aspect
 
   
   static async _onApplyPending(event) {
-
+   // getElementById("p1").innerHTML = "New text!";
+   console.log (event)
+   event.currentTarget.innerHTML = "Applied";
+   event.currentTarget.style.backgroundColor = "lightgreen"
 
     console.log(parseInt(game.settings.get("Alternityd100", "starshipHitLocLen")),game.settings.get("Alternityd100", "starshipHitLocLen"))
     const button = event.currentTarget;

@@ -202,7 +202,7 @@ export class DragRuler extends Ruler{
 	        .lineStyle(4, this.color, 0.25).moveTo(s.ray.A.x, s.ray.A.y).lineTo(s.ray.B.x, s.ray.B.y);
 	        // Draw the distance label just after the endpoint of the segment
 			
-			const token = this._getMovementToken();
+			const token = await this._getMovementToken();
 			let tokenSpeed = token.actor.system.attributes.speed
 			let tokenAccel = token.actor.system.attributes.accel?.value
 

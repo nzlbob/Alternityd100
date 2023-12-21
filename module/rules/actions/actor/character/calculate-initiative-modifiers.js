@@ -7,6 +7,21 @@ export default function (engine) {
         const init = data.attributes.actchk;
         const modifiers = fact.modifiers;
 
+        init.base = Math.floor(( data.abilities.dex.value+data.abilities.int.value)/2);
+        //init.ordinary = actorData.attributes.actchk.base ;
+        //init.marginal = actorData.attributes.actchk.ordinary +1;
+        //init.good = Math.floor((actorData.attributes.actchk.ordinary)/2);
+        //init.amazing = Math.floor((actorData.attributes.actchk.good)/2);
+        init.die = "";
+        const conwil=data.abilities.con.value+data.abilities.wil.value;
+        if (conwil>7) {data.attributes.actchk.aprbase = 1};
+        if (conwil>15) {data.attributes.actchk.aprbase = 2};
+        if (conwil>23) {data.attributes.actchk.aprbase = 3};
+        if (conwil>31) {data.attributes.actchk.aprbase = 4};
+        
+        data.attributes.actchk.apr = data.attributes.actchk.aprbase;
+
+
         const filteredMods = modifiers.filter(mod => {
             
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.INITIATIVE].includes(mod.effectType);

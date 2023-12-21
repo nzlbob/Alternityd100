@@ -1221,9 +1221,9 @@ for (let A of contents.contents ){
    // if ( !this.actor.isOwner ) return false;
 
    let parsedDragData = data;
-   const uuidarray = parsedDragData.uuid.split(".")
-   parsedDragData.id = uuidarray[uuidarray.length-1]
-   parsedDragData.uuidarray = uuidarray
+  // const uuidarray = parsedDragData.uuid.split(".")
+  // parsedDragData.id = uuidarray[uuidarray.length-1]
+  // parsedDragData.uuidarray = uuidarray
   /* parsedDragData.pack = "";
    if (parsedDragData.uuidarray[0] == "Compendium"){
        let packlen = parsedDragData.uuidarray.length-1;

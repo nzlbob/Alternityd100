@@ -330,7 +330,7 @@ targetData[0].rangemod = attackModData(item.system.weaponType,rollSkill,targetDa
 
   + parseInt(currentTarget.accur )
   + parseInt(currentTarget.AWAModeMod )
-  + parseInt(currentTarget.movementmod )
+  + parseInt(dialogMovement )  //currentTarget.movementmod  THIS can be included when the target remombers its movement
   + parseInt(currentTarget.rangemod )
   + parseInt(currentTarget.resPenalty) 
   + parseInt(currentTarget.covermod)
@@ -341,7 +341,7 @@ currentTarget.flavor += "\nSkill Step: " + stepbonus
 currentTarget.flavor += "\nSituation: " + sitBonus
 currentTarget.flavor += "\nAccuracy: " + currentTarget.accur
 currentTarget.flavor += "\nFire Mode: " + currentTarget.AWAModeMod
-currentTarget.flavor += "\nMovement: " + currentTarget.movementmod
+currentTarget.flavor += "\nMovement: " + dialogMovement //currentTarget.movementmod
 currentTarget.flavor += "\nRange Mod: " + currentTarget.rangemod
 currentTarget.flavor += "\nRes Mod: " + currentTarget.resPenalty
 currentTarget.flavor += "\nCover Mod: " + currentTarget.covermod
@@ -453,8 +453,9 @@ currentTarget.flavor += "\nDodging Mod: " + currentTarget.dodgemod
         /*** For the second rolls, roll the d20 as well as the bonus dice */
         else{
           targetData[a].attroll = await Roll.create(targetData[0].attroll.terms[0].results[0].result + d100stepdie(targetData[a].attackbonus + parseInt(sitBonus))).evaluate({ async: true });
+        
         }
-        console.log(targetData[0].attackbonus,targetData[0].attroll)
+        console.log(targetData[a],targetData[a].attackbonus,targetData[a].attroll)
       /**Check what kind of success was rolled */  
       if (targetData[a].attroll.total > ordinary) {targetData[a].degree = "Failure" };
       if (targetData[a].attroll.total <= ordinary) {targetData[a].degree = "Ordinary"};

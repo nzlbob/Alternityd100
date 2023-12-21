@@ -161,7 +161,7 @@ Hooks.once("init", function() {
     d100AActorSheetCharacter,
     d100AActorSheetNPC,
     ItemSheetSFRPG,
-    //DragRuler,
+    DragRuler,
     //TokenHUD,
     ItemCollectionSheet,
     ItemDeletionDialog,
