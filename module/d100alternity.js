@@ -83,8 +83,8 @@ import {
  */
 
  import { extendBarRenderer, redrawBar } from "./barbrawl/module/rendering.js";
- import { extendTokenConfig } from "./barbrawl/module/config.js";
- import { extendTokenHud } from "./barbrawl/module/hud.js";
+ //C0002 import { extendTokenConfig } from "./barbrawl/module/config.js";
+ //C0002 import { extendTokenHud } from "./barbrawl/module/hud.js";
  import { getDefaultResources, registerSettings } from "./barbrawl/module/settings.js";
  import { createOverrideData, prepareUpdate } from "./barbrawl/module/synchronization.js";
  import { refreshBarVisibility } from "./barbrawl/module/api.js";
@@ -715,8 +715,8 @@ Hooks.on("getItemDirectoryEntryContext", (html, options) => {
 });
 
 
-Hooks.on("renderTokenHUD", extendTokenHud);
-Hooks.on("renderTokenConfig", extendTokenConfig);
+//C0002 Hooks.on("renderTokenHUD", extendTokenHud);
+//C0002 Hooks.on("renderTokenConfig", extendTokenConfig);
 /*
 Hooks.on('canvasReady', ()=>{
 	canvas.controls.dragRulers = null;
