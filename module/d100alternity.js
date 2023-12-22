@@ -71,7 +71,7 @@ import {
   sortArrayByName,
   findInCompendia,
 } from "../module/lib.js";
-import { DragRuler } from "./move/d100move.js";
+//C0001 import { DragRuler } from "./move/d100move.js";
 
 //window.TargetsTable = TargetsTable;
 //window.NPCTargeting = NPCTargeting;
@@ -161,7 +161,7 @@ Hooks.once("init", function() {
     d100AActorSheetCharacter,
     d100AActorSheetNPC,
     ItemSheetSFRPG,
-    DragRuler,
+    //C0001 DragRuler,
     //TokenHUD,
     ItemCollectionSheet,
     ItemDeletionDialog,
@@ -813,7 +813,7 @@ Hooks.on("preCreateActor", function (doc) {
 Hooks.on("hoverToken", refreshBarVisibility);
 Hooks.on("controlToken", refreshBarVisibility);
 
-Hooks.on('init', DragRuler.init);
+//C0001 Hooks.on('init', DragRuler.init);
 
 
 
