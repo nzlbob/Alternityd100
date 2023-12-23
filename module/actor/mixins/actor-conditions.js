@@ -28,7 +28,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
         }
 
         const conditionItem = this.getCondition(conditionName);
-
+console.log(conditionName,enabled )
         // Reflect state on tokens
         const tokens = this.getActiveTokens(true);
         for (const token of tokens) {

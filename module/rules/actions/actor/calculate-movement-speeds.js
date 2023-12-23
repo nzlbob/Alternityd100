@@ -20,13 +20,18 @@ export default function (engine) {
   speed.fly.base = speed.sprint.base*2;
   //speed.fly.base = 100;
   
-  if (speed.sprint.base<8) {speed.run.base = 4;speed.walk.base = 2};
-  if (speed.sprint.base>7) {speed.run.base = speed.sprint.base -4;speed.walk.base = 2};
-  if (speed.sprint.base>15) {speed.run.base = speed.sprint.base -6;speed.walk.base = 4};
-  if (speed.sprint.base>19) {speed.run.base = speed.sprint.base -8};
-  if (speed.sprint.base>23) {speed.walk.base = 6};
-  if (speed.sprint.base>25) {speed.run.base = speed.sprint.base -10};
-  if (speed.sprint.base>29) {speed.walk.base = 8};
+ // if (speed.sprint.base<8) {speed.run.base = 4;speed.walk.base = 2};
+ // if (speed.sprint.base>7) {speed.run.base = speed.sprint.base -4;speed.walk.base = 2};
+ // if (speed.sprint.base>15) {speed.run.base = speed.sprint.base -6;speed.walk.base = 4};
+// if (speed.sprint.base>19) {speed.run.base = speed.sprint.base -8};
+ // if (speed.sprint.base>23) {speed.walk.base = 6};
+ // if (speed.sprint.base>25) {speed.run.base = speed.sprint.base -10};
+ // if (speed.sprint.base>29) {speed.walk.base = 8};
+
+  speed.walk.base = Math.floor(speed.sprint.base / 4);
+  speed.run.base = speed.walk.base * 3 ;
+  
+
   speed.swim.base = speed.walk.base;
   speed.easyswim.base = speed.walk.base/2;
 
