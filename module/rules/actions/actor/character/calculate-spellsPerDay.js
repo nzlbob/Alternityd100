@@ -1,9 +1,9 @@
 export default function (engine) {
     engine.closures.add("calculateSpellsPerDay", (fact, context) => {
         const data = fact.actor.system;
-        const classes = fact.classes;
+        const profession = fact.profession;
 
-        data.spells.classes = [];
+        data.spells.profession = [];
         const casterData = duplicate(data.spells);
 
         const computeSpellsPerDay = (spellLevel, classData, keyAbilityMod) => {
@@ -24,7 +24,7 @@ export default function (engine) {
             return totalSpells;
         }
 
-        for (const cls of classes) {
+        for (const cls of profession) {
             const classData = cls.system;
 
             const className = cls.name.slugify({replacement: "_", strict: true});
@@ -39,7 +39,7 @@ export default function (engine) {
             };
 
             if (classInfo.isCaster) {
-                casterData.classes.push({
+                casterData.profession.push({
                     classItem: cls,
                     name: cls.name,
                     key: className

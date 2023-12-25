@@ -304,9 +304,14 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         // Apply Temp Damage
         html.find('.clickapplydamge').click(event => this._onApplyPendingDamage(event));
-
+        html.find('.clickpingtoken').click(event => this._onPingToken(event));
 
     }
+    async _onPingToken(event){
+
+        canvas.ping(this.token.object.center)
+    }
+    
 
     async _onApplyPendingDamage(event) {
 
@@ -327,21 +332,27 @@ export class ActorSheetSFRPG extends ActorSheet {
             o.value = Math.max(o.value, 0)
             o.pending = 0
         }
-        let knockedout = actor.system.conditions.knockedout
+        let isKO = actor.system.conditions.knockedout
+        let isDead = actor.system.conditions.dead
+        
         if (!actor.isSpaceActor) {
-            ((attributes.stu.value < 1) || (attributes.wou.value < 1)) ? await actor.setCondition("knockedout", true) : await actor.setCondition("knockedout", false)
+            isKO = ((attributes.stu.value < 1) || (attributes.wou.value < 1)) 
+            isDead = (attributes.mor.value < 1) 
+            await actor.setCondition("knockedout", isKO) 
+
 
              //  (attributes.mor.value < 1) ? await actor.setCondition("dead", true) : await actor.setCondition("dead", false)
 
 
         }
 
-        await actor.update({ "system.attributes": attributes })
+        actor.update({ "system.attributes": attributes, "system.conditions.knockedout": isKO, "system.conditions.dead": isDead   })
         if (!actor.isSpaceActor) {
           //  (attributes.stu.value < 1) ? await actor.setCondition("knockedout", true) : await actor.setCondition("knockedout", false)
 
-               (attributes.mor.value < 1) ? await actor.setCondition("dead", true) : await actor.setCondition("dead", false)
-
+               
+               
+               await actor.setCondition("dead", isDead)
 
         }
 

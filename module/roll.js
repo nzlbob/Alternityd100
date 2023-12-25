@@ -153,6 +153,7 @@ export class RollPF extends Roll {
 }
 
 export const parseRollStringVariable = function (value) {
+  console.log(value)
   if (value === "false") return false;
   if (value === "true") return true;
   if (value === "null") return null;

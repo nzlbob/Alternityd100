@@ -5,7 +5,7 @@ export default function (engine) {
         const data = fact.actor.system;
         const skills = data.skills;
         const perk = fact.perk;
-        const classes = fact.classes;
+        const profession = fact.profession;
         let curbroadskill = 0;
         let curbroadskillpoints = 0
        // console.log(fact.actor.name);

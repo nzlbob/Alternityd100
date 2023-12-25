@@ -43,7 +43,7 @@ export default function (engine) {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.ABILITY_SKILLS, SFRPGEffectType.SKILL, SFRPGEffectType.ALL_SKILLS].includes(mod.effectType);
         });
 
-        console.log("n\calculateSkillModifiers\n","\nskills\n",skills,"\nflags\n",flags,"\nmodifiers\n",modifiers,"\nfilteredMods\n",filteredMods)
+     //   console.log("n\calculateSkillModifiers\n","\nskills\n",skills,"\nflags\n",flags,"\nmodifiers\n",modifiers,"\nfilteredMods\n",filteredMods)
 
 
 for (let mofifier of filteredMods){

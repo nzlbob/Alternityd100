@@ -1034,8 +1034,8 @@ SFRPG.vehicleCoverTypes = {
  * Base Attack Bonus Progression
  */
 SFRPG.babProgression = {
-    "moderate": "SFRPG.BABProgressionModerate",
-    "full": "SFRPG.BABProgressionFull"
+    "primary": "SFRPG.ProfessionPrimary",  //BABProgressionModerate",
+    "secondary": "SFRPG.ProfessionSecondary" // BABProgressionFull"
 };
 
 /**
@@ -1407,13 +1407,13 @@ SFRPG.itemTypes = {
     
     "perk": "SFRPG.Items.Categories.Perks",
     "flaw": "SFRPG.Items.Categories.Flaws",
-
+    "profession": "SFRPG.Items.Categories.Profession",
     // 
     "asi": "SFRPG.Items.Categories.AbilityScoreIncrease",
     "archetypes": "SFRPG.Items.Categories.Archetypes",
     "augmentation": "SFRPG.Items.Categories.Augmentations",
     "chassis": "SFRPG.Items.Categories.DroneChassis",
-    "class": "SFRPG.Items.Categories.Classes",
+
     "container": "SFRPG.Items.Categories.Containers",
     "equipment": "SFRPG.Items.Categories.Armor",
     "feat": "SFRPG.Items.Categories.Feats",

@@ -81,12 +81,12 @@
                 {{#each statusEffects as |status src|}}
                 <img class="effect-control {{status.cssClass}}" src="{{status.src}}"
 
-                     {{#if status.title}}title="{{status.title}}"{{/if}} data-status-id="{{status.id}}"/>
+                     {{#if status.title}} data-tooltip ="{{status.title}}"{{/if}} data-status-id="{{status.id}}"/>
                 {{/each}}
             </div>
         </div>
         {{console "hud/token-hud 82"}}
-        {{console xstatus}}
+        {{console this}}
         {{#if canToggleCombat}}
         <div class="control-icon {{combatClass}}" data-action="combat">
             <img src="{{icons.combat}}" width="36" height="36" title="{{localize "HUD.ToggleCombatState"}}"/>

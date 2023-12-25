@@ -1,7 +1,8 @@
 {
 
 "pisto":"Modern Ranged Weapon - Pistol",
-
+"primary":"Primary",
+"secondary":"Secondary",
 
 
   "SETTINGS":{
@@ -64,7 +65,7 @@
     "asi": "X (Ability Score Increase)",
     "augmentation": "Cybertech",
     "chassis": "X (Drone Chassis)",
-    "class": "X (Class)",
+    "profession": "Profession",
     "clothing": "Clothing and Accessories",
     "communications": "Communication",
     "computer": "Computer",
@@ -240,7 +241,7 @@
                 "ActiveFeats": "Active Feats",
                 "ActorResources": "Actor Resources",
                 "Archetypes": "Archetypes",
-                "Classes": "Classes",
+                "Profession": "Profession",
                 "PassiveFeats": "Passive Feats",
                 "Species": "Species",
                 "Race": "Species",
@@ -463,8 +464,8 @@
     "AugSkinAndThroat": "Skin and Throat",
     "AugSpinalColumn": "Spinal column",
     "AugThroat": "Throat",
-    "BABProgressionFull": "Full",
-    "BABProgressionModerate": "Moderate",
+    "ProfessionPrimary": "Primary",
+    "ProfessionSecondary": "Secondary",
     "BABTooltip": "{class} Bonus: {bonus}",
     "BaseAttackBonusLabel": "BAB",
     "BaseAttackBonusTitle": "Base Attack Bonus",
@@ -710,7 +711,7 @@
     "ConditionsFlatFooted": "Flat-footed",
     "ConditionsFlying":"Flying",
     "ConditionsFrightened": "Frightened",
-    "ConditionsGlyde":"Glydeing",
+    "ConditionsGlide":"Gliding",
     "ConditionsGrappled": "Grappled",
     "ConditionsHelpless": "Helpless",
     "ConditionsNauseated": "Nauseated",
@@ -1124,6 +1125,7 @@
             "MiscellaneousItems": "Miscellaneous Items",
             "Pharmaceutical":"Pharmaceuticals",
             "Professional":"Professional Equipment",
+            "Profession":"Profession",
             "Races": "Races",
             "Sensor":"Sensors",
             "Shields": "Shields",
@@ -3465,7 +3467,7 @@
                     "walk": "Walk",
                     "easyswim": "Easy Swim",
                     "swim": "Swim",
-                    "glyde": "Glyde",
+                    "glide": "Glide",
                     "fly":"Fly",
                     "Special": "Special"
                 }
@@ -3492,7 +3494,8 @@
                 "ActiveFeats": "Active Feats",
                 "ActorResources": "Actor Resources",
                 "Archetypes": "Archetypes",
-                "Classes": "Classes",
+                "Profession":"Profession",
+                
                 "PassiveFeats": "Passive Feats",
                 "Species": "Species",
                 "Perk": "Perks",
@@ -3654,9 +3657,55 @@
         "UI": {
             "ErrorNoCharges": "{name} has no charges remaining."
         }
+    },
+    "EFFECT" :{
+    "StatusAiming":"Aiming",
+    "Aiming":"Aiming",
+    "StatusAsleep": "Asleep",
+    "StatusBleeding": "Bleeding",
+    "StatusBlinded": "Blinded",
+    "StatusBroken": "Broken (item only)",
+    "StatusBurning": "Burning",
+    "StatusCharging":"Charging",
+    "StatusConfused": "Confused",
+    "StatusCowering": "Cowering",
+    "StatusDazed": "Dazed",
+    "StatusDazzled": "Dazzled",
+    "StatusDead": "Dead",
+    "StatusDeafened": "Deafened",
+    "StatusDying": "Dying",
+    "StatusEncumbered": "Encumbered",
+    "StatusEntangled": "Entangled",
+    "StatusEasySwim":"Easy Swim",
+    "StatusExhausted": "Exhausted",
+    "StatusFascinated": "Fascinated",
+    "StatusFatigued": "Fatigued",
+    "StatusFlatFooted": "Flat-footed",
+    "StatusFlying":"Flying",
+    "StatusFrightened": "Frightened",
+    "StatusGliding":"Gliding",
+    "StatusGrappled": "Grappled",
+    "StatusHelpless": "Helpless",
+    "StatusNauseated": "Nauseated",
+    "StatusKnockedOut": "Knocked Out",
+    "StatusOffKilter": "Off-kilter",
+    "StatusOffTarget": "Off-target",
+    "StatusOverburdened": "Overburdened",
+    "StatusPanicked": "Panicked",
+    "StatusParalyzed": "Paralyzed",
+    "StatusPinned": "Pinned",
+    "StatusProne": "Prone",
+    "StatusRunning":"Running",
+    "StatusShaken": "Shaken",
+    "StatusSickened": "Sickened",
+    "StatusSprinting":"Sprinting",
+    "StatusStable": "Stable",
+    "StatusStaggered": "Staggered",
+    "StatusStunned": "Stunned",
+    "StatusSwim":"Swimming",
+    "StatusSuppressed":"Suppressed",
+    "StatusUnconscious": "Unconscious"
     }
-
-
 },
 "fat":"Fatigue",
 "stu": "Stun",
@@ -3746,6 +3795,8 @@
             }
         },
         "localization-moved": "The japanese localization of this module requires the dedicated translation module called 日本語化（オンセ工房 Foundry VTT 本体＆Mod日本語化）, which you can find on https://github.com/BrotherSharper/foundryVTTja."
+  
+  
     }
 
 

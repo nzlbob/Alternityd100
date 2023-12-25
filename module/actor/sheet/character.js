@@ -163,7 +163,7 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
         }
 /*console.log("physicalInventoryItems" , physicalInventoryItems)*/
         //   0      1       2      3        4      5       6           7            8           9                10   asis,
-        let [items, spells, feats, classes, races, perks, flaws, achievements, archetypes, conditionItems, actorResources, psionCon,psionInt,psionWil,psionPer ] = data.actor.items.reduce((arr, item) => {
+        let [items, spells, feats, profession, races, perks, flaws, achievements, archetypes, conditionItems, actorResources, psionCon,psionInt,psionWil,psionPer ] = data.actor.items.reduce((arr, item) => {
      //console.log(item)
             item.img = item.img || DEFAULT_TOKEN;
             item.isStack = item.quantity ? item.quantity > 1 : false;
@@ -218,7 +218,7 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
 
 
 
-            else if (item.type === "class") arr[3].push(item); // classes
+            else if (item.type === "profession") arr[3].push(item); // classes
             else if (item.type === "race") arr[4].push(item); // races
             else if (item.type === "perk") arr[5].push(item); // perks
             else if (item.type === "flaw") arr[6].push(item); // flaws
@@ -320,7 +320,7 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
 //const psionics = psion
 
         const features = {
-            classes: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Classes"), items: [], hasActions: false, dataset: { type: "class" }, isClass: true },
+            profession: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Profession"), items: [], hasActions: false, dataset: { type: "profession" }, isClass: true },
             race: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Race"), items: [], hasActions: false, dataset: { type: "race" }, isRace: true },
             perk: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Perk"), items: [], hasActions: false, dataset: { type: "perk" }, isPerk: true },
             flaw: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Flaw"), items: [], hasActions: false, dataset: { type: "flaw" }, isFlaw: true },
@@ -339,9 +339,9 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
             else features.passive.items.push(f);
         }
 
-        classes.sort((a, b) => b.levels - a.levels);
+        profession.sort((a, b) => b.levels - a.levels);
        // console.log(races,flaws,achievements,archetypes)
-        features.classes.items = classes;
+        features.profession.items = profession;
         features.race.items = races;
         features.perk.items = perks;
         features.flaw.items = flaws;

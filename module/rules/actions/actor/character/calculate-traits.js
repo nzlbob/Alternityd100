@@ -1,8 +1,8 @@
 export default function (engine) {
     engine.closures.add("calculateTraits", (fact, context) => {
-        const data = fact.actor.system;
+      /*  const data = fact.actor.system;
 
-        /** Update race field, but only if it is left empty. */
+        // Update race field, but only if it is left empty. 
         try {
             const races = fact.races;
             let race = data.details.race;
@@ -14,7 +14,7 @@ export default function (engine) {
 
         }
 
-        /** Update perk field, but only if it is left empty. */
+        // Update perk field, but only if it is left empty. 
         try {
             if (!data.details.perk && fact.perk) {
                 data.details.perk = fact.perk.name;
@@ -25,7 +25,7 @@ export default function (engine) {
 
         // --ALTERNITY-----Didnt add Flaws or Achievements Here 
 
-        /** Update proficiencies from classes, but only if they are not set yet by the user. */
+        // Update proficiencies from classes, but only if they are not set yet by the user. 
         try {
             const classes = fact.classes;
             for (const cls of classes) {
@@ -45,7 +45,7 @@ export default function (engine) {
         } catch (error) {
 
         }
-
+*/
         return fact;
     });
 }

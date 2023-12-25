@@ -60,7 +60,7 @@ import { ActorInventoryMixin } from "./actor/mixins/actor-inventory.js";
     const weapons = items.filter(item => item.type === "weapon" && item.system.equipped);
     const races = items.filter(item => item.type === "race");
     const frames = items.filter(item => item.type === "starshipFrame");
-    const classes = items.filter(item => item.type === "class");
+    const profession = items.filter(item => item.type === "profession");
     const chassis = items.filter(item => item.type === "chassis");
     const perks = items.find(item => item.type === "perk");
     const flaws = items.find(item => item.type === "flaw");
@@ -85,7 +85,7 @@ return game.Alternityd100.engine.process("process-actors", {
   shields:shields,
   weapons:weapons,
   races:races,
-  classes:classes,
+  profession:profession,
   chassis:chassis,
   modifiers:modifiers,
   perks:perks,
@@ -285,6 +285,8 @@ render(force, context={}) {
  // for (let[key3,stat] of Object.entries(actorData.abilities)){
   
    for (let [key, skill] of Object.entries(actorData.skills)) { if (skill.id == skill.broadid){skill.ranks = null};
+   if (["movem","race","swim","trail"].includes(key)){ skill.ability = "con"}
+   if (["race"].includes(key)){ skill.label = "Run"}
    for (let [key2,race] of Object.entries(actorData.charoptions.species)){if (key2 == actorData.details.species){if (race.freebroad1 == skill.id||race.freebroad2 == skill.id||race.freebroad3 == skill.id||race.freebroad4 == skill.id||race.freebroad5 == skill.id||race.freebroad6 == skill.id){freeflag = true}}}
     br_sk_id[skill.id]=2; if (skill.id == skill.broadid && !freeflag) {br_sk_id[skill.id]=2} else {if (skill.ranks>0 || freeflag ){br_sk_id[skill.broadid]=1;freeflag=false}}
     // skill dice

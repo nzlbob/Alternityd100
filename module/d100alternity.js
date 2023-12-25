@@ -30,7 +30,7 @@ import { AbilityTemplate } from "./pixi/ability-template.js";
 import { preloadHandlebarsTemplates } from "./templates.js";
 import { createAlternityd100Macro } from "./macro.js";
 import { Diced100 } from "./dice.js";
-//import { RollPF } from "./roll.js";
+//import { RollPF , parseRollStringVariable} from "./roll.js";
 import { ItemSFRPG } from "./item/item.js";
 import { Combatd100A } from "./combat/combat.js";
 import { d100ASceneConfig } from "./d100ASceneConfig.js";

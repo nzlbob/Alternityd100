@@ -1,5 +1,5 @@
 <form class="{{cssClass}} flexcol" autocomplete="off">
-    <h2 style="background-color: crimson; font-size: 30px;"> NOT IMPLEMENTED DO NOT USE </h2>
+   <!-- <h2 style="background-color: crimson; font-size: 30px;"> NOT IMPLEMENTED DO NOT USE </h2>-->
     {{!-- Item Sheet Header --}}
     <header class="sheet-header flexrow">
         <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img" />
@@ -40,15 +40,9 @@
         <div class="tab details" data-group="primary" data-tab="details">
 
             {{!-- Class Levels --}}
-            <div class="form-group">
-                <label>{{localize "SFRPG.ClassLevelLabel"}}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.levels" value="{{itemData.levels}}" data-dtype="Number" />
-                </div>
-            </div>
 
             <div class="form-group">
-                <label>{{localize "SFRPG.ClassBABProgression"}}</label>
+                <label>{{localize "Primary / Secondary "}}</label>
                 <div class="form-fields">
                     <select name="system.bab">
                         {{#select itemData.bab}}
@@ -59,7 +53,7 @@
                     </select>
                 </div>
             </div>
-
+            <!--
             <div class="form-group">
                 <label>{{localize "SFRPG.ClassFortSaveProgression"}}</label>
                 <div class="form-fields">
@@ -283,6 +277,7 @@
                 </label>
                 {{/each}}
             </div>
+            -->
         </div>
 
         {{!-- Modifiers Tab --}}

@@ -4,7 +4,7 @@ export default function (engine) {
     engine.closures.add("calculateSkillpoints", (fact, context) => {
         const data = fact.actor.system;
         const skills = fact.actor.system.skills;
-        const classes = fact.classes;
+        const profession = fact.profession;
 
         /** Fix the skillpoints field if not present. (Old data) */
         if (!data.skillpoints) {
@@ -100,7 +100,9 @@ export default function (engine) {
         */
         let skillpointsMax = 0;
         let totalLevel = 0;
-        for (const cls of classes) {
+
+        /*
+        for (const cls of profession) {
             const classData = cls.system;
 
             const classBonus = classData.levels * (intModifier + classData.skillRanks.value);
@@ -108,10 +110,13 @@ export default function (engine) {
             totalLevel += classData.levels;
 
             data.skillpoints.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Modifiers.Tooltips.ClassSkillpoints", {
-                class: cls.name,
+                profession: cls.name,
                 total: classBonus.signedString()
             }));
         }
+
+
+        */
 /* NXfVMYLwRMWYvLhD 
         let skillpointsUsed = 0;
         for (const [key, skill] of Object.entries(data.skills)) {

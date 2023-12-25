@@ -15,7 +15,9 @@
                 </h1>
             </td>
             <td >
-                Combat: {{testvalue.type}}
+                {{#if isGM}}
+               <p class = "clickpingtoken" > Token: {{options.token.name}} </p> 
+                {{/if}}
          <!--       <input class=" rollable " style="font-family: serpentine" type="button" data-roll="d20" name="Actioncheck" value="Action Check"/> -->
             </td>
           </tr>
@@ -45,7 +47,7 @@
     <th class="resource-headx" title="{{ systemData.attributes.mor.tooltip }}">
         Mortal
     </th>
-    <th class="resource-heady" title="{{ systemData.attributes.actchk.tooltip }}">
+    <th class="resource-heady" data-tooltip="<h3>Base<h3>{{ systemData.attributes.actchk.tooltip }} <br><h3>Steps<h3> {{ systemData.attributes.actchk.step.tooltip }} ">
         Action Check
     </th>
     <th class="resource-headx"  >
@@ -289,7 +291,7 @@
         <!--<div class="divTableCell"></div>-->
     </div>
     <div class="divTableRow">
-        <div class="divTableCell"style="text-align:right">Glyde</div>
+        <div class="divTableCell"style="text-align:right">Glide</div>
         <div class="divTableCell"><input style="width: 40px" disabled="true" type="number" name="system.attributes.speed.glide.base" value="{{systemData.attributes.speed.glide.base}}"/></div>
         <!--<div class="divTableCell"></div>-->
     </div>
@@ -326,7 +328,7 @@
 
     
     <div class="divTableRow">
-        <div class="divTableCell"style="text-align:right">Gender</div>
+        <div class="divTableCell"style="text-align:right">Gender:</div>
         <!--<div class="divTableCell"><input style="width: fit-content;text-align:left" type="text" name="daxta.details.gender" value="{{systemData.details.gender}}"/></div>-->
                     <select  class="selectrace"  name="system.details.gender"  data-type="String">
                 {{#select systemData.details.gender}}
@@ -336,36 +338,29 @@
         </div>
 
     <div class="divTableRow">
-        <div class="divTableCell"style="text-align:right">Profession</div>
+        <div class="divTableCell"style="text-align:right">Profession:</div>
         <!--<div class="divTableCell"><input style="width: fit-content;text-align:left" type="text" name="system.details.profession.primary" value="{{systemData.details.profession.primary}}"/></div>
     -->
-    <select  class="selectrace"  name="system.details.profession.primary"  data-type="String">
-{{#select systemData.details.profession.primary}}
-{{#each systemData.charoptions.profession as |prof key|}}
-<option  value="{{key}}">{{prof.label}}</option> {{/each}} {{/select}}
-</select>
+    {{system.details.profession.primary.name}}
+    
 </div>
 
 
     <div class="divTableRow">
-        <div class="divTableCell"style="text-align:right">Secondary</div>
+        <div class="divTableCell"style="text-align:right">Secondary:</div>
     <!--    <div class="divTableCell"><input style="width: fit-content;text-align:left" type="text" name="system.details.profession.secondary" value="{{systemData.details.profession.secondary}}"/></div>
     -->
-    <select  class="selectrace"  name="system.details.profession.secondary"  data-type="String">
-{{#select systemData.details.profession.secondary}}
-{{#each systemData.charoptions.profession as |prof key|}}
-<option  value="{{key}}">{{prof.label}}</option> {{/each}} {{/select}}
-</select>
+    {{system.details.profession.secondary.name}}
 </div>
 
 
     <div class="divTableRow">
-        <div class="divTableCell"style="text-align:right">Career</div>
+        <div class="divTableCell"style="text-align:right">Career:</div>
         <div class="divTableCell"><input style="width: fit-content;text-align:left"  type="text" name="system.details.career" value="{{systemData.details.career}}"/></div>
         <!--<div class="divTableCell"></div>-->
     </div>
     <div class="divTableRow">
-        <div class="divTableCell"style="text-align:right">Attributes-</div>
+        <div class="divTableCell"style="text-align:right">Attributes:</div>
         <div class="divTableCell"><input style="width: fit-content;text-align:left"  type="text" name="system.details.socAttributes.Motivation" value="{{systemData.details.socAttributes.Motivation}}"/></div>
         <!--<div class="divTableCell"></div>-->
     </div>
@@ -385,12 +380,12 @@
         <!--<div class="divTableCell"></div>-->
     </div>
     <div class="divTableRow">
-        <div class="divTableCell"style="text-align:right">Setting</div>
+        <div class="divTableCell"style="text-align:right">Setting:</div>
         <div class="divTableCell"><input style="width: fit-content;text-align:left"  type="text" name="system.details.setting" value="{{systemData.details.setting}}"/></div>
         <!--<div class="divTableCell"></div>-->
     </div>
     <div class="divTableRow">
-        <div class="divTableCell"style="text-align:right">GM</div>
+        <div class="divTableCell"style="text-align:right">GM:</div>
         <div class="divTableCell"><input style="width: fit-content;text-align:left"  type="text" name="system.details.gm" value="{{systemData.details.gm}}"/></div>
         <!--<div class="divTableCell"></div>-->
     </div>

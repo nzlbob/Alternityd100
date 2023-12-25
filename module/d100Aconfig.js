@@ -2221,12 +2221,12 @@ d100A.statusEffects =
       {
          "id": "charging",
          "label": "EFFECT.StatusCharging",
-         "icon": "systems/Alternityd100/icons/conditions/sprint.png"
+         "icon": "systems/Alternityd100/icons/conditions/charge.png"
       },
       {
-         "id": "glyde",
-         "label": "EFFECT.StatusGlyding",
-         "icon": "systems/Alternityd100/icons/conditions/glyde.png"
+         "id": "glide",
+         "label": "EFFECT.StatusGliding",
+         "icon": "systems/Alternityd100/icons/conditions/glide.png"
       },
       {
          "id": "flying",
@@ -2254,16 +2254,7 @@ d100A.statusEffects =
           "icon": "systems/Alternityd100/icons/conditions/falling.png"
       },
       
-      {
-         "id": "unconscious",
-         "label": "EFFECT.StatusUnconscious",
-         "icon": "systems/Alternityd100/icons/conditions/unconscious.png"
-     },
-     {
-         "id": "asleep",
-         "label": "EFFECT.StatusAsleep",
-         "icon": "systems/Alternityd100/icons/conditions/sleep.png"
-     }
+
   ]
 
 ;
@@ -2274,15 +2265,14 @@ d100A.statusEffectIcons = [
 "systems/Alternityd100/icons/conditions/suppressed.png",
 "systems/Alternityd100/icons/conditions/run2.png",
  "systems/Alternityd100/icons/conditions/sprint.png",
-"systems/Alternityd100/icons/conditions/sprint.png",
-"systems/Alternityd100/icons/conditions/glyde.png",
+"systems/Alternityd100/icons/conditions/charge.png",
+"systems/Alternityd100/icons/conditions/glide.png",
 "systems/Alternityd100/icons/conditions/flying2.png",
 "systems/Alternityd100/icons/conditions/eswim2.png",
 "systems/Alternityd100/icons/conditions/swim3.png",
 "systems/Alternityd100/icons/conditions/aiming.png",
 "systems/Alternityd100/icons/conditions/falling.png",
-"systems/Alternityd100/icons/conditions/unconscious.png",
-"systems/Alternityd100/icons/conditions/sleep.png"
+
 ];
 
 d100A.statusEffectIconMapping = {
@@ -2293,15 +2283,14 @@ d100A.statusEffectIconMapping = {
    "suppressed": "systems/Alternityd100/icons/conditions/suppressed.png",
    "run": "systems/Alternityd100/icons/conditions/run2.png",
    "sprint": "systems/Alternityd100/icons/conditions/sprint.png",
-   "charging": "systems/Alternityd100/icons/conditions/sprint.png",
-   "glyde": "systems/Alternityd100/icons/conditions/glyde.png",
+   "charging": "systems/Alternityd100/icons/conditions/charge.png",
+   "glide": "systems/Alternityd100/icons/conditions/glide.png",
    "flying": "systems/Alternityd100/icons/conditions/flying2.png",
    "eswim": "systems/Alternityd100/icons/conditions/eswim2.png",
    "swim": "systems/Alternityd100/icons/conditions/swim3.png",
    "aiming": "systems/Alternityd100/icons/conditions/aiming.png",
    "prone": "systems/Alternityd100/icons/conditions/falling.png",
-   "unconscious": "systems/Alternityd100/icons/conditions/unconscious.png",
-   "asleep": "systems/Alternityd100/icons/conditions/sleep.png",
+
 };
 d100A.conditionTypes = {
    "dead": "SFRPG.ConditionsDead",
@@ -2311,14 +2300,13 @@ d100A.conditionTypes = {
    "run":"SFRPG.ConditionsRun",
    "sprint":"SFRPG.ConditionsSprint",
    "charging":"SFRPG.ConditionsCharging",
-   "glyde":"SFRPG.ConditionsGlyde",
+   "glide":"SFRPG.ConditionsGlide",
    "flying":"SFRPG.ConditionsFlying",
    "eswim":"SFRPG.ConditionsEswim",
    "swim":"SFRPG.ConditionsSwim",
    "aiming" : "SFRPG.ConditionsAiming",
    "prone": "SFRPG.ConditionsProne",
-   "unconscious": "SFRPG.ConditionsUnconscious",
-   "asleep": "SFRPG.ConditionsAsleep",
+
 
 };
 // TODO localize
@@ -2329,63 +2317,52 @@ d100A.conditions = {
   },
   "dying": {
    modifiers: [],
-   tooltip: "<strong>Dying</strong><br><br>You're unconscious, you can take no actions, and you must stabilize or lose Resolve Points and potentially die."
+   tooltip: "<strong>Dying</strong><br>DMG 54<br>A character or creature that has suffered any amount al mortal damage is considered to be dying. At the end of the scene, a Sta mi na-en durance check is made. The result ol the check determines if additional mortal damage accrues; Critical Failure, 2 additional points of mortal damage; Failure, l additional point ol mortal damage. On any success, the character suffers no additional mortal damage Following the end ol the scene, the dying character must continue to make Stamina-endurance checks every hour with similar effects. <br>Revovery <br> Mortal damage doesn't naturally heal; it can only be healed by the use 'll a medical slid!. Successful U&e of Knowledge hint aid or Medical Science -treatment can stabilize the dying character and reduce the need for Stamina checks to once every day. Medical Science surgery is required to actually improve the dying character's condition and heal mortal damage"
 },
 "knockedout": {
    modifiers: [],
-   tooltip: "<strong>Dying</strong><br><br>You're unconscious, you can take no actions, and you must stabilize or lose Resolve Points and potentially die."
+   tooltip: "<strong>Knocked Out</strong><br>DMG 53<br>You're unconscious, and likely being robbed.<br>Stunned <br>A hero who doesn't receive medical attention remains unconscious for the remainder of the round he was rendered unconscious, and all of the next round as well. Thereafter, an unconscious hero can make □ Resolve-physical resolve check every round to recover. Success brings consciousness, and the degree of success determines a number of stuns recovered: Ordinary, 2 stun points: Good, 4 stun points; Amazing, 6 stun points. Characters can't take any actions in the same round they recover; all they do is wake up and lake stock of their surroundings. <br>Wounded <br>If a character is unconscious because all of his wound points have been lost, he can't regain consciousness until at least 1 point of wound damage is healed. "
 },
 "suppressed": {
    modifiers: [],
-   tooltip: "<strong>Dying</strong><br><br>You're suppressed, "
+   tooltip: "<strong>Suppressed DMG 49</strong><br><br> Suppressive fire is intended to force the enemy to keep his head down and ruin any shots he's taking. It’s especially useful for protecting an ally who's trying to cross open ground. When a character declares that he's using suppressive fire, he makes a normal skill check, but instead of inflicting damage, the result of the check inflicts a * 1, #2, or +3 penalty to any ranged attacks that the target makes during this phase. Suppressive fire with an automatic weapon is particularly effective, since the character laying down the covering fire can alfecl the attacks ol up to three enemy characters. The effects of suppressive fire aren't cumulative. The enemy’s skill check is only allecled by the best suppressive fire result used against him, not the sum of all suppressive fire. Suppressive fire has a different effect on targets that aren’t aware of, or don't care about, the threat. Many animals won't be deter red unless they are injured, and an enemy in a superior position (such as inside a body tank) is unlikely to keep his head down because someone's shooting at him with a pistol. For targets such as these who opt to ignore suppressive fire, normal damage, is rolled for the result indicated. "
 },
 "run": {
    modifiers: [],
-   tooltip: "<strong>Dying</strong><br><br>You're running, "
+   tooltip: "<strong>Running</strong><br><br>You're running, -2 to second actions"
 },
 "sprint": {
    modifiers: [],
-   tooltip: "<strong>Dying</strong><br><br>You're sprinting, "
+   tooltip: "<strong>Sprinting</strong><br><br>You're sprinting, -3 to actions. If you move to your maximum spring you can take no actions except take cover "
 },
 "charging": {
    modifiers: [],
-   tooltip: "<strong>Dying</strong><br><br>You're charging, "
+   tooltip: "<strong>Charging DMG 49</strong><br><br>A common tactic for entering a hand lo-hcmd fight is a charge. A charging hero ignores the penalties associated with attacking while running and gains a -2 bonus to his skill check. On the downside, his opponents gain a -2 bonus to strike him during his heroic dash. Once a character is engaged in melee combat with the enemy, its impossible to charge again until I he hero is tree and clear of the fight "
 },
-"glyde": {
+"glide": {
    modifiers: [],
-   tooltip: "<strong>Dying</strong><br><br>You're glyde, "
+   tooltip: "<strong>Gliding</strong><br><br>You're glide, "
 },
 "flying": {
    modifiers: [],
-   tooltip: "<strong>Dying</strong><br><br>You're flying, "
+   tooltip: "<strong>Flying</strong><br><br>You're flying, "
 },
 "eswim": {
    modifiers: [],
-   tooltip: "<strong>Dying</strong><br><br>You're easy swimming, "
+   tooltip: "<strong>Easy Swimm</strong><br><br>You're easy swimming, "
 },
 "swim": {
    modifiers: [],
-   tooltip: "<strong>Dying</strong><br><br>You're swimming, "
+   tooltip: "<strong>Swimming</strong><br><br>You're swimming, "
 },
 "aiming": {
    modifiers: [],
-   tooltip: "<strong>Dying</strong><br><br>You're aiming, "
+   tooltip: "<strong>Aiming / Point Blank</strong><br>DMG /49 47 <br> A character making an attack with a ranged weapon or a direct lire heavy weapon can spend an action aiming beiore the attack is made. Aiming provides a -I bonus to the next attack, provided the heio makes the attack in the next phase he is entitled to act.   It's not possible lo aim when using burst or autofire modes. Paint: Blank  You may allow characters to receive a bonus to attacks from extremely close range. Point-blank shots occur al a range o! less than 1 meter. Pistols, rifles, SMGs, and heavy weapons {direct) receive a -3 bonus for shooling in this range.<br>Coup de Grace<br>You can automatically inflict Amazing Damage against a Bound, Paralyzed or Knocked Out opponent or friend. The attack must be within personal range, requires an actio, and armour is normally effective (called shot may be required)"
 },
 "prone": {
    modifiers: [],
-   tooltip: "<strong>Dying</strong><br><br>You're prone, "
-},
-
-
-
-  "unconscious": {
-      modifiers: [],
-      tooltip: "<strong>Unconscious</strong><br><br>You're knocked out and helpless."
-  },
-   "asleep": {
-       modifiers: [],
-       tooltip: "<strong>Asleep</strong><br><br>You take a -10 penalty to Perception checks to notice things."
-   },
+   tooltip: "<strong>Prone</strong><br><br>You're prone, "
+}
 
 
 };

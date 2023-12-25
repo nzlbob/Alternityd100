@@ -142,7 +142,7 @@ object.document.bar2.attribute
 
     console.log("\ntokenEffects\n",tokenEffects)
     return CONFIG.d100A.statusEffects.concat(tokenEffects).reduce((obj, e) => {
-    //  console.log("e",e)
+      console.log("e",e)
       const src = e.icon ?? e;
       if ( src in obj ) return obj;
       const status = statuses[e.id] || {};
@@ -150,7 +150,7 @@ object.document.bar2.attribute
       const isOverlay = !!status.overlay || token.document.overlayEffect === src;
       obj[src] = {
         id: e.id ?? "",
-        title: e.label ? game.i18n.localize(e.label) : null,
+        title: e.label ? game.i18n.localize("d100A." + e.label) : null,
         src,
         isActive,
         isOverlay,
@@ -180,7 +180,7 @@ console.log("HERE--",html)
       .focusout(this._onAttributeUpdate.bind(this))
 
     // Status Effects Controls
-    this._toggleStatusEffects(this._statusEffects);
+    //this._toggleStatusEffects(this._statusEffects);
     html.find(".status-effects")
      // .on("click", ".effect-control", this._onToggleEffect.bind(this))
      // .on("contextmenu", ".effect-control", event => this._onToggleEffect(event, {overlay: true}));
@@ -408,9 +408,14 @@ console.log("sdfsdf",this.object.light)
       
       let conditions = duplicate(this.object.actor.system.conditions)
       conditions[effect.id]=!conditions[effect.id]
+
+      this.object.actor.setCondition(effect.id, conditions[effect.id]) 
       this.object.actor.update({'system.conditions': conditions})
       console.log("effect", effect,"\n\nsdf\n", this.object.actor.system.conditions[effect.id])
-    return this.object.toggleEffect(effect, {overlay});
+      // 
+      this.object.document.update()
+      canvas.tokens.hud.refreshStatusIcons()
+    return  //this.object.toggleEffect(effect, {overlay});
   }
 
   /* -------------------------------------------- */

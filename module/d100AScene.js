@@ -11,7 +11,7 @@ export class d100AScene extends Scene {
 /** @inheritdoc */
 prepareBaseData() {
   super.prepareBaseData()
-  console.log("d100AScene",this)
+//  console.log("d100AScene",this)
   //this.sceneType = this.sceneType? this.sceneType : "" ; 
 
 

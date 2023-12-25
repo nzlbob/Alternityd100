@@ -1,7 +1,11 @@
 import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../../../modifiers/types.js";
 
 export default function (engine) {
+
+   
     engine.closures.add('calculateActorResources', (fact, context) => {
+       
+       /*
         const data = fact.actor.system;
         const actorResources = fact.actorResources;
         const modifiers = fact.modifiers;
@@ -133,8 +137,9 @@ export default function (engine) {
                 }
             }
         }
-
+*/
 
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });
+    
 }

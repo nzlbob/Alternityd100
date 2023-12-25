@@ -49,10 +49,10 @@ export default function (engine) {
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(curr[0])) {
                 for (const bonus of curr[1]) {
                     
-                    console
+                    
                     if(bonus.valueAffected == "steps") { 
                         let a = addModifier(bonus, data, init.step, "SFRPG.InitiativeModiferTooltip")
-                     //   console.log("Hello" ,a ,bonus, data, init.step)
+                        console.log("Hello" ,a ,bonus, data, init.step)
                         
                         prev += a //addModifier(bonus, data, init.step, "SFRPG.InitiativeModiferTooltip");
                 }
@@ -106,13 +106,23 @@ if(modFromPerk) {
     init.step.tooltip.push(game.i18n.format("SFRPG.AbilityScorePerkTooltip", { mod: modFromPerk.signedString() }));
 }
 
+
+//let a = addModifier(bonus, data, init.step, "SFRPG.InitiativeModiferTooltip")
+let mortalDamage = 0
+if (data.attributes.mor.value<data.attributes.mor.max){
+   mortalDamage = data.attributes.mor.max - data.attributes.mor.value
+
+    init.step.tooltip.push(game.i18n.format("Mortal Damage: " + mortalDamage.signedString())) 
+}
+
+
 init.step.base = 0 + modFromPerk // + modFromFlaw
         
 
-init.step.bonus = steps
-init.step.total = steps + init.step.base
+init.step.bonus = steps + mortalDamage
+init.step.total = init.step.bonus + init.step.base
 
-//console.log(init)
+console.log(init,init.step.bonus,init.step.total,steps,)
 
 
 
