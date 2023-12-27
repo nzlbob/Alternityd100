@@ -82,12 +82,12 @@ import {
  * @author Adrian Haberecht
  */
 
- import { extendBarRenderer, redrawBar } from "./barbrawl/module/rendering.js";
+ //import { extendBarRenderer, redrawBar } from "./barbrawl/module/rendering.js";
  //C0002 import { extendTokenConfig } from "./barbrawl/module/config.js";
  //C0002 import { extendTokenHud } from "./barbrawl/module/hud.js";
- import { getDefaultResources, registerSettings } from "./barbrawl/module/settings.js";
- import { createOverrideData, prepareUpdate } from "./barbrawl/module/synchronization.js";
- import { refreshBarVisibility } from "./barbrawl/module/api.js";
+ //import { getDefaultResources, registerSettings } from "./barbrawl/module/settings.js";
+ //import { createOverrideData, prepareUpdate } from "./barbrawl/module/synchronization.js";
+ //import { refreshBarVisibility } from "./barbrawl/module/api.js";
  import { d100ACombatTracker } from './combat/combat-tracker.js'
  //import {
  // DragRuler
@@ -341,8 +341,9 @@ if (true) {
   //canvas.controdragRuler = new DragRuler();
   
   //DragRuler.init;
-  console.log('barbrawl | Initializing barbrawl');
+  //console.log('barbrawl | Initializing barbrawl');
 
+ /*
   registerSettings();
   Handlebars.registerHelper("barbrawl-concat", function () {
       let output = "";
@@ -351,15 +352,17 @@ if (true) {
       }
       return output;
   });
+*/
+
 //console.log("---------THIS LOADS----------")
-  let a = loadTemplates(["systems/Alternityd100/module/barbrawl/templates/bar-config-minimal.hbs", "systems/Alternityd100/module/barbrawl/templates/bar-config.hbs"]);
+  //let a = loadTemplates(["systems/Alternityd100/module/barbrawl/templates/bar-config-minimal.hbs", "systems/Alternityd100/module/barbrawl/templates/bar-config.hbs"]);
 //    console.log("---------THIS LOADS----------",a)
 
 
 });
 
 /** Hooks to replace UI elements. */
-Hooks.once("setup", extendBarRenderer);
+//Hooks.once("setup", extendBarRenderer);
 
 
 Hooks.once("setup", function () {
@@ -729,13 +732,18 @@ Hooks.on('updateUser', (user,data,diff, id)=>{
 */
 
 /** Hook to apply changes to the prototype token. */
+/*
 Hooks.on("preUpdateActor", function (actor, newData) {
   console.log("actor, newData",actor, newData)
   if (!hasProperty(newData, "prototypeToken.flags.barbrawl.resourceBars")) return;
   prepareUpdate(actor.prototypeToken, newData.prototypeToken);
 });
+*/
+
 
 /** Hook to update bars. */
+
+/*
 Hooks.on("updateToken", function (doc, changes) {
   const token = doc.object;
   
@@ -781,8 +789,9 @@ Hooks.on("updateToken", function (doc, changes) {
   token.drawBars();
   if (token.hasActiveHUD) canvas.tokens.hud.render();
 });
-
+*/
 /** Hooks to initialize tokens and actors with default bars. */
+/*
 Hooks.on("preCreateToken", function (doc, data) {
   // Always make the bar container visible.
   console.log("preCreateToken",doc, data,CONST.TOKEN_DISPLAY_MODES.ALWAYS)
@@ -799,7 +808,8 @@ Hooks.on("preCreateToken", function (doc, data) {
   doc.update(createOverrideData(barConfig));
   console.log("preCreateToken2")
 });
-
+*/
+/*
 Hooks.on("preCreateActor", function (doc) {
   console.log("preCreateActor")
   if (!doc.token || foundry.utils.hasProperty(doc.token, "flags.barbrawl.resourceBars")) return;
@@ -808,10 +818,10 @@ Hooks.on("preCreateActor", function (doc) {
   if (!barConfig) return;
   doc.updateSource(createOverrideData(barConfig, true));
 });
-
+*/
 /** Hook to update bar visibility. */
-Hooks.on("hoverToken", refreshBarVisibility);
-Hooks.on("controlToken", refreshBarVisibility);
+//Hooks.on("hoverToken", refreshBarVisibility);
+//Hooks.on("controlToken", refreshBarVisibility);
 
 //C0001 Hooks.on('init', DragRuler.init);
 

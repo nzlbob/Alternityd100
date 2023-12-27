@@ -54,8 +54,8 @@ export const preloadHandlebarsTemplates = async function() {
 "systems/Alternityd100/templates/hud/token-hud.html",
 
     //Barbrawl
-    "/systems/Alternityd100/module/barbrawl/templates/bar-config-minimal.hbs", 
-    "/systems/Alternityd100/module/barbrawl/templates/bar-config.hbs"
+    //"/systems/Alternityd100/module/barbrawl/templates/bar-config-minimal.hbs", 
+    //"/systems/Alternityd100/module/barbrawl/templates/bar-config.hbs"
 
 
   ];
