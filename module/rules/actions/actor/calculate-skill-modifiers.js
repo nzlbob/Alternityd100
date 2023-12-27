@@ -88,6 +88,17 @@ if(mofifier.enabled && mofifier.valueAffected){
             skill.mod += accumulator;
         }
 */
+const damage = fact.actor.system.attributes.mor.max - fact.actor.system.attributes.mor.value
+if (damage > 0){
+    for (let [skl, skill] of Object.entries(skills)) {
+
+skill.step += damage
+skill.stepdie = d100stepdie(skill.step);
+    }
+
+
+}
+
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });
 }

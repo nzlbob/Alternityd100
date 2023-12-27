@@ -18,50 +18,7 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h3 class="form-header">Pharmaceutical Details</h3>
-
-            {{!-- Pharmaceutical Type --}}
-            <div class="form-group">
-                <label>{{ localize "SFRPG.Items.Pharmaceutical.Type" }}</label>
-                <select name="system.consumableType">
-                    {{#select itemData.consumableType}}
-                    {{#each config.consumableTypes as |name type|}}
-                    <option value="{{type}}">{{name}}</option>
-                    {{/each}}
-                    {{/select}}
-                </select>
-            </div>
-
-            <br />
-
-            <h3 class="form-header">{{ localize "SFRPG.Items.Pharmaceutical.Usage" }}</h3>
-
-            {{!-- Item Activation Template --}}
-            {{> "systems/Alternityd100/templates/items/parts/item-activation.html"}}
-
-            {{!-- Pharmaceutical Usage --}}
-            {{#if itemData.activation.type}}
-            <div class="form-group">
-                <label>{{ localize "SFRPG.Items.Pharmaceutical.Usage" }}</label>
-                <label class="checkbox">
-                    <input type="checkbox" name="system.uses.autoUse" {{checked itemData.uses.autoUse}}/> {{ localize "SFRPG.Items.Pharmaceutical.OnUse" }}
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="system.uses.autoDestroy" {{checked itemData.uses.autoDestroy}}/> {{ localize "SFRPG.Items.Pharmaceutical.DestroyWhenEmpty" }}
-                </label>
-            </div>
-            {{/if}}
-
-            <br />
-
-            <h3 class="form-header">{{ localize "SFRPG.Items.Pharmaceutical.Action" }}</h3>
-
-            {{!-- Item Action Template --}}
-            {{> "systems/Alternityd100/templates/items/parts/item-action.html"}}
-
-            <br />
-
-            {{> "systems/Alternityd100/templates/items/parts/physical-item-details.html"}}
+            {{> "systems/Alternityd100/templates/items/parts/item-skilled.html"}}
         </div>
 
         {{!-- Modifiers Tab --}}

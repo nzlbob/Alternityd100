@@ -730,8 +730,9 @@ export class Combatd100A extends Combat {
 
         if (eventData.isNewPhase) {
             // Update delayed Characters
-
+            // console.log(this)
             const actedUpdate = []
+
             for (let c of this.combatants) {
                 console.log(c)
 
@@ -741,9 +742,9 @@ export class Combatd100A extends Combat {
                 if (c.flags?.acted) {
                     actedUpdate.push({ _id: c.id, flags: { canAct: true, acted: null, delayed: null } });
                 }
-
-                c.actor.sheet._onApplyPendingDamage()
-               
+                if ((this.flags.sfrpg.combatType == "normal")) {
+                    c.actor.sheet._onApplyPendingDamage()
+                }
                 //         _id: c.id,
                 //         initiative: c.flags.delayed,
                 //         flags: {acted: null,delayed:null}
@@ -785,7 +786,16 @@ export class Combatd100A extends Combat {
 
         }
         //this.setActiveCombatants()
+        if (!(this.flags.sfrpg.combatType == "normal")) {
+console.log(game.scenes.active.tokens)
+            for (const [key, token] of Object.entries(game.scenes.active.tokens.contents)) {
+                console.log(key)
+                console.log(token)
+                token.actor.sheet._onApplyPendingDamage()
+            }
 
+
+        }
 
         console.log("\n---this.combatants---\n", this.combatants)
         console.log("\n------_handleUpdate----\n", this)

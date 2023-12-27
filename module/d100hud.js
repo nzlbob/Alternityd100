@@ -43,7 +43,7 @@
   
    // Refresh the currently active state of all status effect icons in the Token HUD selector.
    
-  refreshStatusIcons() {
+  xxrefreshStatusIcons() {
     const effects = this.element.find(".status-effects")[0];
     const statuses = this._getStatusEffectChoices();
     for ( let img of effects.children ) {
@@ -78,7 +78,7 @@
     let data = super.getData(options);
     const bar1 = this.object.document.getBarAttribute("bar1");
     const bar2 = this.object.document.getBarAttribute("bar2");
-    console.log(this.object.document)
+    //console.log(this.object.document)
     //const bar3 = this.object.document.getBarAttribute("bar3");
     //const bar4 = this.object.document.getBarAttribute("bar4");
 /*
@@ -105,7 +105,7 @@ object.document.bar2.attribute
       lightAngle: this.object.light.data.rotation
     });
     data.statusEffects =this._getStatusEffectChoices(data);
-    console.log("getData",data,"\nThis\n", this,"\noptions\n",options,"\nCONFIG\n",CONFIG,"\n\nCONFIG.statusEffects \n ",CONFIG.d100A.statusEffects,"\nactor\n",this.object.actor,"\neffects\n",this.object.actor.effects)
+  //  console.log("getData",data,"\nThis\n", this,"\noptions\n",options,"\nCONFIG\n",CONFIG,"\n\nCONFIG.statusEffects \n ",CONFIG.d100A.statusEffects,"\nactor\n",this.object.actor,"\neffects\n",this.object.actor.effects)
     return data;
   }
 
@@ -142,7 +142,7 @@ object.document.bar2.attribute
 
     console.log("\ntokenEffects\n",tokenEffects)
     return CONFIG.d100A.statusEffects.concat(tokenEffects).reduce((obj, e) => {
-      console.log("e",e)
+    //  console.log("e",e)
       const src = e.icon ?? e;
       if ( src in obj ) return obj;
       const status = statuses[e.id] || {};
@@ -169,9 +169,9 @@ object.document.bar2.attribute
 
   /** @override */
   activateListeners(html) {
-console.log("HERE--",html)
+//console.log("HERE--",html)
     super.activateListeners(html);
-    console.log("Rotate",html)
+  //  console.log("Rotate",html)
     // Attribute Bars
     //kjhg
     html.find(".attribute input")
@@ -208,11 +208,11 @@ console.log("HERE--",html)
     let isDelta = strVal.startsWith("+") || strVal.startsWith("-");
     if (strVal.startsWith("=")) strVal = strVal.slice(1);
     let value = Number(strVal);
-console.log("event",event,"\n",strVal,this.object)
+//console.log("event",event,"\n",strVal,this.object)
 
 this.object.light.data.rotation = 90  
-console.log("sdfsdf",this.object.light.data.rotation)
-console.log("sdfsdf",this.object.light)
+//console.log("sdfsdf",this.object.light.data.rotation)
+//console.log("sdfsdf",this.object.light)
 
 //await this.object.updateLightSource()
 
@@ -395,7 +395,7 @@ console.log("sdfsdf",this.object.light)
    * Handle toggling a token status effect icon
    * @private
    */
-  _onToggleEffect(event, {overlay=false}={}) {
+ async _onToggleEffect(event, {overlay=false}={}) {
     //console.debug
    // kghfjhgf
     console.log("_onToggleEffect",event)
@@ -409,11 +409,11 @@ console.log("sdfsdf",this.object.light)
       let conditions = duplicate(this.object.actor.system.conditions)
       conditions[effect.id]=!conditions[effect.id]
 
-      this.object.actor.setCondition(effect.id, conditions[effect.id]) 
-      this.object.actor.update({'system.conditions': conditions})
-      console.log("effect", effect,"\n\nsdf\n", this.object.actor.system.conditions[effect.id])
+     await this.object.actor.setCondition(effect.id, conditions[effect.id]) 
+     await this.object.actor.update({'system.conditions': conditions})
+     // console.log("effect", effect,"\n\nsdf\n", this.object.actor.system.conditions[effect.id])
       // 
-      this.object.document.update()
+      await this.object.document.update()
       canvas.tokens.hud.refreshStatusIcons()
     return  //this.object.toggleEffect(effect, {overlay});
   }

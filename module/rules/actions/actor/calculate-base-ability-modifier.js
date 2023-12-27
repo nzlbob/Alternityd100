@@ -1,9 +1,12 @@
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
+//import {d100resmod} from "../../../d100Actor.js"
 
 export default function (engine) {
     engine.closures.add("calculateBaseAbilityModifier", (fact, context) => {
         const data = fact.actor.system;
         const modifiers = fact.modifiers;
+
+/*
 
         const addModifier = (bonus, data, item, localizationKey) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {
@@ -48,10 +51,12 @@ export default function (engine) {
 
             let abilityValue = ability.value;
             if (Number.isNaN(Number.parseInt(abilityValue))) {
-                abilityValue = 10;
+                abilityValue = 0;
             }
 
-            const base = Math.floor((abilityValue - 10) / 2);
+            //const base = Math.floor((abilityValue - 10) / 2);
+            //const base = d100resmod(abilityValue)
+
             ability.modifierTooltip.push(game.i18n.format("SFRPG.AbilityModifierBase", { mod: base.signedString() }));
 
             let mod = Object.entries(abilityMods).reduce((sum, mod) => {
@@ -78,7 +83,7 @@ export default function (engine) {
 
             ability.mod = abilityModifier;
         }
-
+*/
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });
 }

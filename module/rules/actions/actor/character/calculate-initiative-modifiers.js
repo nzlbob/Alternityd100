@@ -122,7 +122,7 @@ init.step.base = 0 + modFromPerk // + modFromFlaw
 init.step.bonus = steps + mortalDamage
 init.step.total = init.step.bonus + init.step.base
 
-console.log(init,init.step.bonus,init.step.total,steps,)
+//console.log(init,init.step.bonus,init.step.total,steps,)
 
 
 

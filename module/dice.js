@@ -154,7 +154,7 @@ export class Diced100 {
       rollMode = form ? form.find('[name="rollMode"]').val() : rollMode;
 
 
-      console.log ("*******operator******",/*operator,parts, setRoll, form,dialogRange,*/dialogResistance/*,this*/)
+    //  console.log ("*******operator******",/*operator,parts, setRoll, form,dialogRange,*/dialogResistance/*,this*/)
     //  dSteps = form ? form.find('[name="dstep"]').val() : dSteps;
     if (isStarshipweapon){
       activegunner = validgunner[operator]

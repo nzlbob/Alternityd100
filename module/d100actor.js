@@ -37,7 +37,10 @@ import { ActorInventoryMixin } from "./actor/mixins/actor-inventory.js";
       //console.log(`Constructor for actor named ${data.name} of type ${data.type}`);
   }
 
-
+  xtestUserPermission (){
+    super.testUserPermission();
+console.log("HI")
+  }
   
   /** @override */
   prepareData() {

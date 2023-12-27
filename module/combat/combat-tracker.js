@@ -84,10 +84,10 @@ if  (["normal"].includes(context.combat?.flags?.sfrpg?.combatType)){
 
     //  return acc;
    // },{spark: [], npc: []});
-   console.log("\n---async getData() context---\n",context)
-   console.log("\nRound:",context.combat?.round," Phase:",context.combat?.flags.sfrpg?.phase,
-   "\nTurn:",context.combat?.turn," subPhase:",context.combat?.flags.sfrpg?.subPhase
-   )
+  // console.log("\n---async getData() context---\n",context)
+  // console.log("\nRound:",context.combat?.round," Phase:",context.combat?.flags.sfrpg?.phase,
+  // "\nTurn:",context.combat?.turn," subPhase:",context.combat?.flags.sfrpg?.subPhase
+  // )
   
     return context;
   }
@@ -131,7 +131,7 @@ if  (["normal"].includes(context.combat?.flags?.sfrpg?.combatType)){
     const li = btn.closest(".combatant");
     const combat = this.viewed;
     const c = combat.combatants.get(li.dataset.combatantId);
-console.log(btn)
+//console.log(btn)
     // Switch control action
     switch (btn.dataset.control) {
 
@@ -227,7 +227,7 @@ console.log(btn)
    * @protected
    */
   async _onPingCombatant(combatant) {
-    console.log("d100A_onPingCombatant")
+  //  console.log("d100A_onPingCombatant")
     if ( !canvas.ready || (combatant.sceneId !== canvas.scene.id) ) return;
     if ( !combatant.token.object.visible ) return ui.notifications.warn(game.i18n.localize("COMBAT.PingInvisibleToken"));
     await canvas.ping(combatant.token.object.center);

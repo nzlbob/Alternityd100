@@ -4,10 +4,11 @@ export default function (engine) {
     engine.closures.add("calculateHitpoints", (fact, context) => {
         const data = fact.actor.system;
        // console.log(fact)
+       if(!fact.actor.isSpaceActor){
         data.attributes.mor.base = Math.ceil(data.abilities.con.value/2);
         data.attributes.wou.base = data.abilities.con.base;
         data.attributes.stu.base = data.abilities.con.base;
-        
+    }
         
 
       

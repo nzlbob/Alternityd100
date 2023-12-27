@@ -89,7 +89,7 @@ export default function (engine) {
                 context
             );
 
-            let score = ability.base ? ability.base : 10;
+            let score = ability.base ? ability.base : 0;
             
             ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreBaseTooltip", { mod: score.signedString() }));
 

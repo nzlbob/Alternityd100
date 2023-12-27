@@ -4719,7 +4719,8 @@
       ],
       "templates": {
         "skilledItem": {
-            "skill": ""
+            "skill": "",
+            "degreeText":{"critical": "","failure": "","ordinary": "","good": "","amazing": ""}
         },
 
         "compartmentTemplate" : {
@@ -5044,7 +5045,7 @@
           }
       },
       "pharmaceutical": {
-          "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "modifiers", "container"],
+          "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "modifiers", "container" ,"skilledItem"],
           "consumableType": "serum",
           "uses": {
               "value": 0,
@@ -5177,10 +5178,10 @@
         "templates": ["itemDescription", "physicalItem","modifiers"]
       },
       "communication":{
-        "templates": ["itemDescription","physicalItem", "modifiers"]
+        "templates": ["itemDescription","physicalItem", "modifiers","skilledItem"]
       },
       "computer":{
-        "templates": ["itemDescription","physicalItem", "modifiers"]
+        "templates": ["itemDescription","physicalItem", "modifiers","skilledItem"]
       },
       "medical":{
         "templates": ["itemDescription","physicalItem", "modifiers","skilledItem"]
@@ -5189,10 +5190,10 @@
         "templates": ["itemDescription","physicalItem", "modifiers"]
       },
       "professional":{
-        "templates": ["itemDescription","physicalItem", "modifiers"]
+        "templates": ["itemDescription","physicalItem", "modifiers","skilledItem"]
       },
       "sensor":{
-        "templates": ["itemDescription","physicalItem", "modifiers"]
+        "templates": ["itemDescription","physicalItem", "modifiers","skilledItem"]
       },
       "survival":{
         "templates": ["itemDescription","physicalItem", "modifiers"]

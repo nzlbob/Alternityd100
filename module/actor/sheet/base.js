@@ -332,27 +332,28 @@ export class ActorSheetSFRPG extends ActorSheet {
             o.value = Math.max(o.value, 0)
             o.pending = 0
         }
-        let isKO = actor.system.conditions.knockedout
-        let isDead = actor.system.conditions.dead
+        // let isKO = actor.system.conditions.knockedout
+        // let isDead = actor.system.conditions.dead
         
         if (!actor.isSpaceActor) {
-            isKO = ((attributes.stu.value < 1) || (attributes.wou.value < 1)) 
-            isDead = (attributes.mor.value < 1) 
+            let isKO = ((attributes.stu.value < 1) || (attributes.wou.value < 1)) 
+            let isDead = (attributes.mor.value < 1) 
             await actor.setCondition("knockedout", isKO) 
 
-
+            actor.update({ "system.attributes": attributes, "system.conditions.knockedout": isKO, "system.conditions.dead": isDead   })
+            await actor.setCondition("dead", isDead)
              //  (attributes.mor.value < 1) ? await actor.setCondition("dead", true) : await actor.setCondition("dead", false)
 
 
         }
 
-        actor.update({ "system.attributes": attributes, "system.conditions.knockedout": isKO, "system.conditions.dead": isDead   })
-        if (!actor.isSpaceActor) {
+             if (actor.isSpaceActor) {
           //  (attributes.stu.value < 1) ? await actor.setCondition("knockedout", true) : await actor.setCondition("knockedout", false)
 
+          actor.update({ "system.attributes": attributes  })
+           
                
                
-               await actor.setCondition("dead", isDead)
 
         }
 
