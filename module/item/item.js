@@ -41,8 +41,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
     get hasScan() {
         if (this.type === "starshipSensor") return true;
+        return false
     }
-
+    get isSkilled() {
+        if (this.system.isSkilled) return true;
+        return false
+    }
     get hasDamage() {
         if (this.type === "starshipWeapon") return true;
         //console.log(this)

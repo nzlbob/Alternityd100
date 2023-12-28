@@ -4719,6 +4719,7 @@
       ],
       "templates": {
         "skilledItem": {
+            "isSkilled":true,
             "skill": "",
             "degreeText":{"critical": "","failure": "","ordinary": "","good": "","amazing": ""}
         },
@@ -4839,6 +4840,7 @@
                   "descriptor": ""
               },
               "descriptors": [],
+              "isSkilled": false,
               "degreeText":{"critical": "","failure": "","ordinary": "","good": "","amazing": ""}
           },
           "itemUsage": {

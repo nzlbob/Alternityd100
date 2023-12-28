@@ -17,7 +17,7 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
             width: 750,
             height: 600,
             //tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "inventory"}],
-            scrollY: [".biography", ".items", ".attributes",".skills"],
+            scrollY: [".biography", ".items", ".attributes",".skills",".inventory"],
             dragDrop: [{dragSelector: ".item-list .item", dropSelector: null}]
         });
 

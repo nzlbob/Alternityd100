@@ -2249,7 +2249,18 @@ background: radial-gradient( #39879d ,#212c48  );
   flex: 0 0 25%;
 }
 
-.Alternityd100.sheet.actor .inventory-list .item .item-name .item-action,
+.Alternityd100.sheet.actor .inventory-list .item .item-name .item-action{
+
+  width: auto;
+ /* background: #235683;*/
+  color: #fff;
+  cursor: pointer;
+  font-size: 100%;
+ 
+
+  font-size: 13px;
+  line-height: 15px;
+}
 
 
 /*.Alternityd100.sheet.actor .item-action  {padding: 2pt; font-size: 10px;}*/
@@ -2491,8 +2502,11 @@ background: radial-gradient( #39879d ,#212c48  );
 {
   width: auto;
   background: #ecde70;
-  color: #000;
-  cursor: pointer;
+   font-size: 100%;
+  font-size: 100%;
+  height: 16px;
+  font-size: 13px;
+  line-height: 16px;
 }
 
 

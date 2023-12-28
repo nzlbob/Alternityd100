@@ -926,19 +926,26 @@ let rollresult = {}
    * @param {string} context - The context to draw from.
    */
 rollSkillObject(item,  options) {
-
+  console.log(this)
+const actorData = this.system
  // this.actor.useSpell(item, {configureDialog: !event.shiftKey});
- options.skillflavour = "Hellow"
+ console.log (item)
+const psionic =  item.type == "psionic"
+ options.skillflavour = "Hello"
  options.stepflavour = "+0"
 let parts = []
 let dice=null
-let stepbonus = 0
+
 let rollData = {}
 let skillId = item.name
-let title = item.name + item.psionScore  //was skl.name
-let ordinary = item.ordinary
-let good = item.good
-let amazing = item.amazing
+
+
+
+let title = psionic? item.name + item.psionScore :  item.name + ": " + item.system.skill //was skl.name
+let ordinary = psionic? item.ordinary : actorData.skills[item.system.skill].base
+let good = psionic? item.good : actorData.skills[item.system.skill].good
+let amazing = psionic? item.amazing : actorData.skills[item.system.skill].amazing 
+let stepbonus = psionic? 0 : actorData.skills[item.system.skill].step 
 options.nosound = false
 let hasDegreeText = true
 let degreeText = item.system.degreeText

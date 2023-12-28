@@ -10,14 +10,20 @@
                     {{/if}}
                 </h4>
                 
-                {{#if (and isOwner (and bigItem item.hasAttack))}}
+                {{#if isOwner}}
+               
                 <div class="item-action flexrow">
                     {{#if item.hasAttack}}
-
+                    
                     <button class="tag attack">{{localize "d100A.actionattack"}}</button>
                     {{/if}}
                     {{#if item.hasScan}}
                     <button class="tag scan">{{localize "d100A.actionscan"}}</button>
+                    {{/if}}
+                   
+                    {{#if item.isSkilled}}
+                   
+                    <button class="tag use">{{localize "d100A.actionSkillUse"}}</button>
                     {{/if}}
 
                     {{#if item.hasDamage}}
@@ -29,16 +35,16 @@
                            
                         {{/if}}
                     {{/if}}
-
+                    {{#if item.hasDefence}}
+                    
+                    <button class= "tag defence" >{{localize "d100A.actiondefence"}}</button>
+                
+                    {{/if}}
 
                 </div>
                 {{/if}}
                 
-                {{#if item.hasDefence}}
-                <div class="item-action flexrow">
-                <button class= "tag defence" >{{localize "d100A.actiondefence"}}</button>
-            </div>
-                {{/if}}
+
             </div>
             
 

@@ -6,66 +6,67 @@ import { d100A } from "./d100Aconfig.js";
  * @param {number} slot     The hotbar slot to use
  * @returns {Promise}
  */
-export async function createAlternityd100Macro(data, slot,a) {
+export async function createAlternityd100Macro(data, slot, a) {
   //let actor = game.actors.get(actorId);
-console.log(data, slot,a)
+  console.log(data, slot, a)
 
-if (data.skill) return skillmacro(data, slot)
 
-  //let A = _parseUuid(data.uuid)
+
+  if (data.skill) return skillmacro(data, slot)
   let B = fromUuidSync(data.uuid)
   let C = fromUuid(data.uuid)
   let actor = game.actors.get(B.actor);
- // const command = `const roll = new Roll("${data.roll}", actor ? actor.getRollData() : {});
- // roll.toMessage({speaker, flavor: "${B.name}"});`;
- let command =""
- if (B.hasAttack) command = ` let Item = fromUuidSync("${data.uuid}"); Item.rollAttack()`;
- if (B.hasScan) command = ` let Item = fromUuidSync("${data.uuid}"); Item.rollScan()`;
- if (B.hasDefence) command = ` let Item = fromUuidSync("${data.uuid}"); Item.rollDefence()`;
- 
- if (B.hasPsionic) command = ` let Item = fromUuidSync("${data.uuid}"); actor.rollSkillObject(Item, {skipDialog: false });`;
+  //let A = _parseUuid(data.uuid)
+  // const command = `const roll = new Roll("${data.roll}", actor ? actor.getRollData() : {});
+  // roll.toMessage({speaker, flavor: "${B.name}"});`;
+  let command = ""
+  if (B.hasAttack) command = ` let Item = fromUuidSync("${data.uuid}"); Item.rollAttack()`;
+  if (B.hasScan) command = ` let Item = fromUuidSync("${data.uuid}"); Item.rollScan()`;
+  if (B.hasDefence) command = ` let Item = fromUuidSync("${data.uuid}"); Item.rollDefence()`;
+
+  if (B.hasPsionic) command = ` let Item = fromUuidSync("${data.uuid}"); actor.rollSkillObject(Item, {skipDialog: false });`;
 
 
 
 
- //const command = `game.sfrpg.rollItemMacro("${item.name}");`;
+  //const command = `game.sfrpg.rollItemMacro("${item.name}");`;
   let macro = game.macros.contents.find(m => (m.name === B.name) && (m.command === command));
- 
-  console.log(data,slot,B,command,macro)
+
+  console.log(data, slot, B, command, macro)
   if (!macro) {
     macro = await Macro.create({
       name: B.name,
-      img:B.img,
+      img: B.img,
       type: "script",
       command: command,
       flags: { "Alternityd100.itemMacro": true }
     });
   }
-  game.user.assignHotbarMacro(macro, slot);
+  game.user.assignHotbarMacro(macro, slot, actor);
   return false;
 
-  async function skillmacro(data, slot){
+  async function skillmacro(data, slot) {
 
-//console.log(data, slot)
-const command = ` if(!actor){ui.notifications.warn("No token selected"); return };  actor.rollSkill("${data.skill}") `;
-let macroName = d100A.skills[d100A.skillData[data.skill].broad]
-if (!d100A.skillData[data.skill].isBroad){
-  macroName += "<br/>" + d100A.skills[data.skill]
-}
-let macro = game.macros.contents.find(m => (m.name === macroName) && (m.command === command));
+    console.log(data, slot)
+    const command = ` if(!actor || actor.isSpaceActor ) {actor = game.actors.get("${data.actorid}")};  actor.rollSkill("${data.skill}") `;
+    let macroName = d100A.skills[d100A.skillData[data.skill].broad]
+    if (!d100A.skillData[data.skill].isBroad) {
+      macroName += "<br/>" + d100A.skills[data.skill]
+    }
+    let macro = game.macros.contents.find(m => (m.name === macroName) && (m.command === command));
 
-if (!macro) {
-  macro = await Macro.create({
-    name: macroName,
-    img:"systems/Alternityd100/icons/conditions/icons8-skill-64.png",
-    type: "script",
-    command: command,
-    flags: { "Alternityd100.itemMacro": true }
-  });
-}
-game.user.assignHotbarMacro(macro, slot);
+    if (!macro) {
+      macro = await Macro.create({
+        name: macroName,
+        img: "systems/Alternityd100/icons/conditions/icons8-skill-64.png",
+        type: "script",
+        command: command,
+        flags: { "Alternityd100.itemMacro": true }
+      });
+    }
+    game.user.assignHotbarMacro(macro, slot);
 
-return false
+    return false
   }
 
 

@@ -277,6 +277,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         // Roll attack from item 
         html.find('.item-action .attack').click(event => this._onItemRollAttack(event));
         html.find('.item-action .scan').click(event => this._onItemRollScan(event));
+        html.find('.item-action .use').click(event => this._onItemRoll(event));
         // Roll fire from item 
         html.find('.item-action .fire').click(event => this._onItemRollAttack(event, "fire"));
         // Roll burstfire from item 
@@ -670,11 +671,11 @@ export class ActorSheetSFRPG extends ActorSheet {
         }
     }
 
-    _onItemRollAttack(event) {
+    _onItemRollAttackx(event) {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
-
+ghjkghjkghk
         return item.rollAttack({ event: event });
     }
 
@@ -728,6 +729,9 @@ export class ActorSheetSFRPG extends ActorSheet {
         const item = this.actor.items.get(itemId);
 
         if (item.system.type === "psionic") {
+            return this.actor.rollSkillObject(item, { event: event, skipDialog: !event.shiftKey });
+        }
+        if (item.isSkilled) {
             return this.actor.rollSkillObject(item, { event: event, skipDialog: !event.shiftKey });
         }
 
