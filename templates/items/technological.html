@@ -19,14 +19,10 @@
             
             {{!-- Equipment Status --}}
             {{> "systems/Alternityd100/templates/items/parts/item-status.html"}}
-
-            <br />
-
-            {{> "systems/Alternityd100/templates/items/parts/item-capacity.html"}}
-
-            <br />
-
-            {{> "systems/Alternityd100/templates/items/parts/physical-item-details.html"}}
+           
+            {{#if isSkilled}}
+            {{> "systems/Alternityd100/templates/items/parts/item-skilled.html"}}
+            {{/if}}
         </div>
 
         {{!-- Modifiers Tab --}}

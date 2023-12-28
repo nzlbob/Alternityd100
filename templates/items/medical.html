@@ -19,7 +19,10 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
             {{> "systems/Alternityd100/templates/items/parts/item-status.html"}}
-            {{> "systems/Alternityd100/templates/items/parts/physical-item-details.html"}}
+           
+            {{#if isSkilled}}
+            {{> "systems/Alternityd100/templates/items/parts/item-skilled.html"}}
+            {{/if}}
         </div>
 
         {{!-- Modifiers Tab --}}
