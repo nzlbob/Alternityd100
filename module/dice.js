@@ -1627,14 +1627,14 @@ console.log(resistance)
 //parseInt(data.damagebonus)
 const damageResults = {ord:{damage:""},goo:{damage:""},ama:{damage:""}};
 
-
+const actorData = actor.system
 //console.log(data,damageResults )
 //console.log(data.damage.ord.dice )
-damageResults.ord.damage = await Roll.create(data.damage.ord.dice  ).evaluate({ async: false });
-damageResults.goo.damage = await Roll.create(data.damage.goo.dice   ).evaluate({ async: false });
-damageResults.ama.damage = await Roll.create(data.damage.ama.dice   ).evaluate({ async: false });
+damageResults.ord.damage = await Roll.create(data.damage.ord.dice,actorData  ).evaluate({ async: false });
+damageResults.goo.damage = await Roll.create(data.damage.goo.dice , actorData ).evaluate({ async: false });
+damageResults.ama.damage = await Roll.create(data.damage.ama.dice,actorData   ).evaluate({ async: false });
 
-
+console.log("*****************************************", damageResults,data)
 return damageResults;
   }
   
@@ -1806,6 +1806,8 @@ return defence;
       chatTemplate = chatTemplate || "systems/Alternityd100/templates/chat/simple-damage.hbs";
       var rolldice = data.damage.ord.dice; //+ "+" + parts.join("+")
       const rollOrd = Roll.create(rolldice, data);
+      console.log(data)+
+      aetyertyety
 //console.log("Roll Data" ,  rollContext,"\nParts\n",parts,"\nRoll\n",rollOrd.terms,parts.join("+"),"\nChat\n",chatTemplate,"\nrolldice\n" ,rolldice)
      /* if (crit === true) {
         const mult = data.item.ability.critMult || 2;
