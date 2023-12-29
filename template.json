@@ -14,67 +14,38 @@
     "common": {
         "abilities": {
             "str": {
-                "value": 6,
                 "min": 3,
                 "misc": 0,
-                "mod": 0,
-                "base": 6,
-                "resModBase":0,
-                "resModValue":0,
-                "resModBonus":0
-
+                "base": 10
             },
             "dex": {
-                "value": 14,
                 "min": 3,
                 "misc": 0,
-                "mod": 0,
-                "base": 14,
-                "resModBase":0,
-                "resModValue":0,
-                "resModBonus":0
+                "base": 10
             },
             "con": {
-                "value": 7,
                 "min": 3,
                 "misc": 0,
-                "mod": 0,
-                "base": 7,
-                "resModBase":0,
-                "resModValue":0,
-                "resModBonus":0
+                "base": 10
             },
             "int": {
-                "value": 11,
                 "min": 3,
                 "misc": 0,
-                "mod": 0,
-                "base": 11,
-                "resModBase":0,
-                "resModValue":0,
-                "resModBonus":0
+                "base": 10
             },
             "wil": {
-                "value": 9,
                 "min": 3,
                 "misc": 0,
-                "mod": 0,
-                "base": 9,
-                "resModBase":0,
-                "resModValue":0,
-                "resModBonus":0
+                "base": 10
             },
             "per": {
-                "value": 14,
                 "min": 3,
                 "misc": 0,
-                "mod": 0,
-                "base": 14,
-                "resModBase":0,
-                "resModValue":0,
-                "resModBonus":0
+                "base": 10
+
             }
         },
+        "formula":[],
         "attributes": {
 
             "ECM": {
