@@ -6,8 +6,8 @@ export default function (engine) {
        // console.log(fact)
        if(!fact.actor.isSpaceActor){
         data.attributes.mor.base = Math.ceil(data.abilities.con.value/2);
-        data.attributes.wou.base = data.abilities.con.base;
-        data.attributes.stu.base = data.abilities.con.base;
+        data.attributes.wou.base = data.abilities.con.value;
+        data.attributes.stu.base = data.abilities.con.value;
     }
         
 
