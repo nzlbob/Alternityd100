@@ -500,7 +500,7 @@ async processDroppedData(event, parsedDragData) {
      * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
      * @param {Event} event The originating click event
      */
- async _onItemCreate(event) {
+ async _onItemCreate3(event) {
     event.preventDefault();
     const header = event.currentTarget;
     console.log(header,event)

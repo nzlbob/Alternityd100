@@ -398,8 +398,18 @@ export class Combatd100A extends Combat {
 
             await this.combatant.update(update);
             useAction ? ui.notifications.info("Turn Complete - Acted - GM to end phase") : ui.notifications.info("Turn Complete - Delayed - GM to end phase")
+            //
+            //
 
-
+            const isKosh = (Math.random() < 0.02)
+            let sound = "systems/Alternityd100/sounds/oet.wav"
+            isKosh ? sound = "systems/Alternityd100/sounds/Kosh-Pebbles.wav" : sound = "systems/Alternityd100/sounds/oet.wav"
+            const chatData2 = [{
+                flavor: "DM End Phase",
+                speaker: ChatMessage.getSpeaker({ actor: this.combatant.actor }),
+                sound: sound  // //sounds/notify.wav CONFIG.sounds.dice
+            }];
+            await CONFIG.ChatMessage.documentClass.create(chatData2);
 
             return
         }
@@ -787,7 +797,7 @@ export class Combatd100A extends Combat {
         }
         //this.setActiveCombatants()
         if (!(this.flags.sfrpg.combatType == "normal")) {
-console.log(game.scenes.active.tokens)
+            console.log(game.scenes.active.tokens)
             for (const [key, token] of Object.entries(game.scenes.active.tokens.contents)) {
                 console.log(key)
                 console.log(token)

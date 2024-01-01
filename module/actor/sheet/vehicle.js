@@ -18,14 +18,14 @@ export class d100AActorSheetVehicle extends ActorSheetSFRPG {
    async getData() {
         const data = super.getData();
 
-        let lvl = parseFloat(data.data.details.level || 0);
+        let lvl = 1 //parseFloat(data.data.details.level || 0);
         let levels = { 0: "0", 0.25: "1/4", [1/3]: "1/3", 0.5: "1/2" };
         data.labels["level"] = lvl >= 1 ? String(lvl) : levels[lvl] || 1;
 
         this._getCrewData(data)
         this._getHangarBayData(data)
 // Encrich text editors
-data.enrichedDescription = await TextEditor.enrichHTML(this.object.system.details.description.value, {async: true});
+data.enrichedDescription = await TextEditor.enrichHTML(this.actor.system.details.biography.value, {async: true});
 
         return data;
     }
@@ -113,10 +113,10 @@ data.enrichedDescription = await TextEditor.enrichHTML(this.object.system.detail
             inventory.inventory.items.push(itemData);
         });
         data.inventory = inventory
-
+console.log(data)
         const features = {
             primarySystems: { label: game.i18n.localize("SFRPG.VehicleSheet.Hangar.PrimarySystems"), items: primarySystems, hasActions: true, dataset: { type: "vehicleSystem" } },
-            expansionBays: { label: game.i18n.format(game.i18n.localize("SFRPG.VehicleSheet.Hangar.ExpansionBays") + " " + game.i18n.localize("SFRPG.VehicleSheet.Hangar.AssignedCount"), {current: expansionBays.length, max: data.data.attributes.expansionBays.value}), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } },
+            expansionBays: { label: game.i18n.format(game.i18n.localize("SFRPG.VehicleSheet.Hangar.ExpansionBays") + " " + game.i18n.localize("SFRPG.VehicleSheet.Hangar.AssignedCount"), {current: expansionBays.length, max: 1 /*data.system.attributes.expansionBays.value*/}), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } },
             resources: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"), items: actorResources, hasActions: false, dataset: { type: "actorResource" } }
         };
         data.features = Object.values(features);

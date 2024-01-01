@@ -10,6 +10,19 @@
       "vehicle"
 ],
   "templates": {
+    "itemDescription": {
+        "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "value": "",
+            "unidentified": ""
+        },
+        "source": "",
+          "pubnsource": "",
+        "type": "",
+        "availability":""
+    },
     
     "common": {
         "abilities": {
@@ -4392,6 +4405,31 @@
     }
   }
 },
+"hazard": {
+    "templates": [
+        "common",
+      "modifiers",
+      "conditions"
+      
+  ],
+      "attributes":{"blank" : false,"actchk": {
+      "label": "Action Check",
+      "value": 0,
+      "base": 0,
+      "marginal": 0,
+      "ordinary": 0,
+      "good": 0,
+      "amazing": 0,
+      "apr":0,
+      "die":"",
+      "step":{ "base":0,"bonus":0,"total":0,"tooltip" : [] },
+      "total":0,
+      "tooltip": []
+      
+    }
+},
+    "groups": {}
+  },
 "ordnance": {
     "templates": [
        
@@ -4399,18 +4437,8 @@
       "conditions"
       
   ],
-    "health": {
-      "value": 10,
-      "min": 0,
-      "max": 10
-    },
-    "power": {
-      "value": 5,
-      "min": 0,
-      "max": 5
-    },
-    "attributes":{"blank" : false,"actchk": {
-        "label": "Action Check",
+      "attributes":{"blank" : false,"actchk": {
+      "label": "Action Check",
       "value": 0,
       "base": 0,
       "marginal": 0,
@@ -4437,17 +4465,27 @@
       "counterClassesManagement"
   ],
 
-    "power": {
-      "value": 5,
-      "min": 0,
-      "max": 5
-    },
     "attributes":{
         "blank" : false,
         "fumble":20
     },
     "groups": {}
   },
+  "drone": {
+    "templates": [
+      "common",
+      "modifiers",
+      "conditions"
+      
+  ],
+
+    "attributes":{
+        "blank" : false,
+        "fumble":20
+    },
+    "groups": {}
+  },
+
   "npc": {
     "templates": [
       "common",
@@ -4459,19 +4497,144 @@
     "profession": {"primary" : "Administrator","secondary" : null,"npcQuality":"marginal"}
 
   },
-    "health": {
-      "value": 10,
-      "min": 0,
-      "max": 10
-    },
-    "power": {
-      "value": 5,
-      "min": 0,
-      "max": 5
-    },
+
     "attributes": {},
     "groups": {}
   },
+  "vehicle": {
+    "details":{
+        "role":"civilian",
+        "toughness":{
+            "firepowerN":0,
+            "firepower":""
+            
+        }
+
+    },
+
+
+    "biography": "",
+    
+    "scanTargets":[],
+    "compartment" :{
+        "config" : ["F","A"]
+    },
+    "price":{
+        "tooltip":[]},
+    "attributes": {
+            "ECM": {
+                "radar": {                
+                    "base": 0,
+                    "value": 0,
+                    "temp": 0,
+                    "tooltip": []
+                },
+                "laser": {                
+                    "base": 0,
+                    "value": 0,
+                    "temp": 0,
+                    "tooltip": []
+                },
+                "mass": {                
+                    "base": 0,
+                    "value": 0,
+                    "temp": 0,
+                    "tooltip": []
+                },
+                "thermal": {                
+                    "base": 0,
+                    "value": 0,
+                    "temp": 0,
+                    "tooltip": []
+                },
+                "psi": {                
+                    "base": 0,
+                    "value": 0,
+                    "temp": 0,
+                    "tooltip": []
+                }
+            },
+        "hullPoints":{
+            "tooltip":[]
+        },
+        "power":{
+            "tooltip":[]
+        }
+        ,
+        "accel":{
+            "tooltip":[]
+        },
+        "ftl":{
+            "tooltip":[]
+        },
+        "cri":{            
+            "label": "Critical",
+            "min": 0,
+            "base": 1,
+            "value": 8,
+            "temp": 0,
+            "tempmax": 100,
+            "tooltip": [],
+            "pending": 0 
+        },
+          "stu": {
+            "label": "Stun",
+            "min": 0,
+            "base": 1,
+            "value": 8,
+            "temp": 0,
+            "tempmax": 100,
+            "tooltip": [],
+            "pending": 0
+          },
+          "wou": {
+            "label": "Wounds",
+            "min": 0,
+            "base": 1,
+            "value": 9,
+            "temp": 0,
+            "tempmax": 100,
+            "tooltip": [],
+            "pending": 0
+          },
+          "mor": {
+              "label": "Mortal",
+              "min": 0,
+              "base": 1,
+              "value": 10,
+              "temp": 0,
+              "tempmax": 100,
+              "tooltip": [],
+              "pending": 0
+          },
+          "damageControl": {
+            "label": "Damage Control",
+            "min": 0,
+            "base": 0,
+            "value": 0,
+            "temp": 0,
+            "tempmax": 100,
+            "tooltip": [],
+            "pending": 0
+        },
+        "resistance": {
+          "base": 0,
+          "area": 0,
+          "beam": 0,
+          "bomb": 0,
+          "mine": 0,
+          "missile": 0,
+          "projectile": 0,
+          "special":0,
+          "torpedo":0,
+          "tooltip": []
+
+      }
+
+    },
+    "groups": {}
+  },
+
   "starship": {
     "details":{
         "role":"civilian",
@@ -4732,7 +4895,7 @@
           "physicalItem": {
             "progressLevel": "pl0",
               "quantity": 1,
-              "bulk": "L",
+              "bulk": 0,
               "price": 0,
               "quantityPerPack": 1,
               "level": 1,

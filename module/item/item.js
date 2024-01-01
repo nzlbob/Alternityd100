@@ -2939,7 +2939,13 @@ myupdate.mor.pending -= mortal
 if (actor.isSpaceActor) myupdate.cri.pending -= critical;
 
 actor.update({"system.attributes":myupdate })
-
+console.log(this)
+const chatData2 = [{
+    flavor: actor.name + " damaged: " + stun + "s/"+ wound + "w/" + mortal +"m."  ,
+    speaker: ChatMessage.getSpeaker({ actor: actor }),
+    sound:  CONFIG.sounds.notification
+}];
+await CONFIG.ChatMessage.documentClass.create(chatData2);
 ui.notifications.info("Damage Applied")
 
   }

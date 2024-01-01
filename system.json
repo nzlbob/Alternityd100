@@ -4,11 +4,10 @@
   "description": "This is a draft implementation of the Alternity RPG Rules (c) 1998 TSR Inc. There are lots of features yet to implement. Work is continuing",
   "version": "0.504",
   "compatibility": {
-    "minimum": 11, 
-    "verified": "11.313", 
-    "maximum": 11 
+    "minimum": 11,
+    "verified": "11.313",
+    "maximum": 11
   },
-
   "authors": [
     {
       "name": "d100 Group",
@@ -18,76 +17,64 @@
   "scripts": [
     "lib/popperjs/core/popper.min.js",
     "lib/tippy/tippy.min.js"
-],
-"media": [
-  {
+  ],
+  "media": [
+    {
       "type": "thumbnail",
       "url": "systems/Alternityd100/images/VTTlogo3.png",
       "name": "Alternity by d100 Group"
-  },
-  {
+    },
+    {
       "type": "setup",
       "url": "systems/Alternityd100/images/VTTlogo3.png",
       "name": "Alternity by d100 Group"
-  },
-  {
-    "type": "cover",
-    "url":"https://raw.githubusercontent.com/nzlbob/Alternityd100/main/images/VTTlogo3.png",
-    "caption": "Alternity by d100 Group"
-}
-
-],
-
-  "esmodules": ["module/d100alternity.js"],
-  "styles": ["styles/tippy.css","styles/simple.css","styles/attributeHud.css"],
+    },
+    {
+      "type": "cover",
+      "url": "https://raw.githubusercontent.com/nzlbob/Alternityd100/main/images/VTTlogo3.png",
+      "caption": "Alternity by d100 Group"
+    }
+  ],
+  "esmodules": [
+    "module/d100alternity.js"
+  ],
+  "styles": [
+    "styles/tippy.css",
+    "styles/simple.css",
+    "styles/attributeHud.css"
+  ],
   "packFolders": [
     {
       "name": "Game Options",
       "packs": [
-        "starship-actions", 
-      "starship-damage",
-    "home-rules"
-    ],
+        "starship-damage",
+        "starship-actions"
+      ],
       "color": "#19d6b7"
     }
   ],
-  
-  "packs": [		
+  "packs": [
     {
       "label": "Starship Actions",
       "type": "Item",
       "name": "starship-actions",
-      "path": "./packs/starship-actions.db",
       "system": "Alternityd100",
       "ownership": {
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "label": "Starship System Damage",
+      "type": "Item",
+      "name": "starship-damage",
+      "system": "Alternityd100",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     }
-  },
-  {
-    "label": "Home Rules",
-    "type": "JournalEntry",
-    "name": "home-rules",
-    "path": "./packs/home-rules.db",
-    "system": "Alternityd100",
-    "ownership": {
-      "PLAYER": "OWNER",
-      "ASSISTANT": "OWNER"
-  }
-},
-  {
-    "label": "Starship System Damage",
-    "type": "Item",
-    "name": "starship-damage",
-    
-    "system": "Alternityd100",
-    "ownership": {
-      "PLAYER": "OBSERVER",
-      "ASSISTANT": "OWNER"
-  }
-}
-],
-
+  ],
   "languages": [
     {
       "lang": "en",

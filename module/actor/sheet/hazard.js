@@ -17,9 +17,9 @@ export class d100AActorSheetHazard extends ActorSheetSFRPG {
     }
     async getData() {
         const data = super.getData();
-
+console.log(data)
         // Enrich text editors
-        data.enrichedDescription = await TextEditor.enrichHTML(this.object.system.details.description.value, {async: true});
+        data.enrichedDescription = await TextEditor.enrichHTML(this.actor.system.details.biography.value, {async: true});
 
         return data;
     }
