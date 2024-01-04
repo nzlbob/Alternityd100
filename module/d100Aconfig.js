@@ -2049,6 +2049,8 @@ d100A.resistanceType = {
   }
 
    d100A.modifierEffectTypes = {
+      "all-actions": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllActions",
+      "ignore-mortal": "SFRPG.ActorSheet.Modifiers.EffectTypes.IgnoreMortal",
       "actions": "SFRPG.ModifierEffectTypeActions",
       "hit-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.Hitpoints",
       "ac": "SFRPG.ModifierEffectTypeAC",
@@ -2058,6 +2060,7 @@ d100A.resistanceType = {
       "initiative": "SFRPG.ModifierEffectTypeInit",
       
       "skill": "SFRPG.ModifierEffectTypeSkill",
+      "all-skills": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllSkills",
       //"skill-ranks": "SFRPG.ActorSheet.Modifiers.EffectTypes.SkillRanks",
 
       //"ranged-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.RangedAttackRolls",
@@ -2093,10 +2096,10 @@ d100A.resistanceType = {
       "bulk": "SFRPG.ActorSheet.Modifiers.EffectTypes.Encumbrance",
       "all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllSpeeds",
       "specific-speed": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificSpeed",
-      "multiply-all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.MultiplyAllSpeeds",*/
+      "multiply-all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.MultiplyAllSpeeds",
 
 
-      "actor-resource": "SFRPG.ActorSheet.Modifiers.EffectTypes.ActorResource"
+      "actor-resource": "SFRPG.ActorSheet.Modifiers.EffectTypes.ActorResource"*/
   };
   d100A.psionAbility = {
    "con": "d100A.AbilityCon",

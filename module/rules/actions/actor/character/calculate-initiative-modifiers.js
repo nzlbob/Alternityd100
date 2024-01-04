@@ -24,7 +24,7 @@ export default function (engine) {
 
         const filteredMods = modifiers.filter(mod => {
             
-            return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.INITIATIVE].includes(mod.effectType);
+            return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.INITIATIVE,SFRPGEffectType.ALL_ACTIONS].includes(mod.effectType);
         });
       //  console.log( "------filteredMods------",  context, filteredMods)  // Looking for [1].valueAffected
         const mods = context.parameters.stackModifiers.process(filteredMods, context);
@@ -50,7 +50,7 @@ export default function (engine) {
                 for (const bonus of curr[1]) {
                     
                     
-                    if(bonus.valueAffected == "steps") { 
+                    if((bonus.valueAffected == "steps") || (bonus.effectType=="all-actions") ) { 
                         let a = addModifier(bonus, data, init.step, "SFRPG.InitiativeModiferTooltip")
                         console.log("Hello" ,a ,bonus, data, init.step)
                         
@@ -114,12 +114,22 @@ if (data.attributes.mor.value<data.attributes.mor.max){
 
     init.step.tooltip.push(game.i18n.format("Mortal Damage: " + mortalDamage.signedString())) 
 }
+const filteredIMortal = modifiers.filter(mod => {     
+    return mod.enabled  && [SFRPGEffectType.IGNORE_MORTAL].includes(mod.effectType);
+});
+console.log(filteredIMortal)
+let IM = 0
+for ( let modIM of filteredIMortal){
+IM -=  parseInt(modIM.modifier)
+console.log (modIM,modIM.modifier,parseInt(modIM.modifier),IM)
+init.step.tooltip.push(game.i18n.format("<br>Ignore Mortal: " + (0-parseInt(modIM.modifier)).signedString())) 
 
+}
 
 init.step.base = 0 + modFromPerk // + modFromFlaw
-        
-
-init.step.bonus = steps + mortalDamage
+let mortalPenalty = Math.max(0, mortalDamage + IM)
+console.log (mortalPenalty)
+init.step.bonus = steps + mortalPenalty
 init.step.total = init.step.bonus + init.step.base
 
 //console.log(init,init.step.bonus,init.step.total,steps,)

@@ -999,15 +999,16 @@ if (loadType == "loadAll"){
      */
     async _onToggleModifierEnabled(event) {
         event.preventDefault();
+        console.log("hello")
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
 
         const modifiers = duplicate(this.item.system.modifiers);
         const modifier = modifiers.find(mod => mod._id === modifierId);
         modifier.enabled = !modifier.enabled;
-
+        console.log("hello",modifier,modifiers,modifier.enabled)
         await this.item.update({
-            'modifiers': modifiers
+            'system.modifiers': modifiers
         });
     }
 

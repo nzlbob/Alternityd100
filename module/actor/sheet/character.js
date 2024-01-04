@@ -435,7 +435,9 @@ const psionics = {
             return arr;
         }, [[], [], [], [], []]);
 
-        modifiers.conditions.items = conditionItems;
+        //modifiers.conditions.items = conditionItems;
+        modifiers.conditions.items = []
+
         modifiers.permanent.modifiers = permanent;
         modifiers.temporary.modifiers = temporary.concat(conditions);
 

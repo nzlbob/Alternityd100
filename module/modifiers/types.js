@@ -13,6 +13,8 @@ export const SFRPGModifierTypes = Object.freeze({
 });
 
 export const SFRPGEffectType = Object.freeze({
+    ALL_ACTIONS: "all-actions",
+    IGNORE_MORTAL: "ignore-mortal",
     ACTIONS: "actions",
     RANGED_ATTACKS: "ranged-attacks",
     MELEE_ATTACKS: "melee-attacks",

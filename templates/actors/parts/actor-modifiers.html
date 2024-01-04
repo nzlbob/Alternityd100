@@ -21,7 +21,7 @@
             </label>
             {{/each}}
         </div>
-        {{console "actorModifiers 24"}}
+        {{console "actor-Modifiers 24"}}
 {{console this}}
         <ol class="inventory-list">
             <li class="inventory-header flexrow">
@@ -29,7 +29,7 @@
 
                 {{#if ../isOwner}}
                 <div class="item-controls">
-                    {{#if true}}
+                    {{#if false}}
                     <a class="item-control item-create" title="{{localize " SFRPG.ActorSheet.Inventory.Item.Create"}}"
                         {{#each section.dataset as |v k|}}data-{{k}}="{{v}}" {{/each}}>
                         <i class="fas fa-plus"></i> {{localize "SFRPG.InventoryAdd"}}

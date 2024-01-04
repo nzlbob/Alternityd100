@@ -359,6 +359,9 @@
             "EffectTypes": {
                 "ActorResource": "Actor Resource",
                 "AllAttackDamage": "All Attack Damage",
+                "AllActions": "All Actions",
+                "AllSkills": "All Skills",
+                "IgnoreMortal": "Ignore Mortal Penalty",
                 "AllAttackRolls": "All Attack Rolls",
                 "AllSpeeds": "All Speeds",
                 "BAB": "BAB",
@@ -3614,6 +3617,8 @@
             "EffectTypes": {
                 "ActorResource": "Actor Resource",
                 "AllAttackDamage": "All Attack Damage",
+                "AllActions": "All Actions",
+                "IgnoreMortal": "Ignore Mortal Penalty",
                 "AllAttackRolls": "All Attack Rolls",
                 "AllSpeeds": "All Speeds",
                 "BAB": "BAB",
