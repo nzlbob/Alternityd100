@@ -134,7 +134,7 @@ form .form-group label {
 
 
 .Alternityd100 .sheet-header {
-  flex: 0 0 208px;
+  flex: 0 0 218px;
  
   overflow: hidden;
   display: flex;
@@ -144,6 +144,12 @@ form .form-group label {
   margin-bottom: 5px;
   font-family: serpentine;
 }
+
+.Alternityd100 .sheet-header.header2{
+  flex: 0 0 120px;
+
+}
+
 .Alternityd100 .sheet-header .profile-img {
   flex: 0 0 100px;
   height: 100px;

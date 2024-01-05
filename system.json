@@ -2,7 +2,7 @@
   "name": "Alternityd100",
   "title": "Alternity by d100",
   "description": "This is a draft implementation of the Alternity RPG Rules (c) 1998 TSR Inc. There are lots of features yet to implement. Work is continuing",
-  "version": "0.508",
+  "version": "0.509",
   "compatibility": {
     "minimum": 11,
     "verified": "11.313",

@@ -10,6 +10,7 @@ import { ItemDeletionDialog } from "../../apps/item-deletion-dialog.js"
 import { InputDialog } from "../../apps/input-dialog.js"
 import { SFRPG } from "../../config.js";
 import { d100A } from "../../d100Aconfig.js";
+import {d100stepdie } from "../../modifiers/d100mod.js";
 /**
  * Extend the basic ActorSheet class to do all the SFRPG things!
  * This sheet is an Abstract layer which is not used.
@@ -306,7 +307,21 @@ export class ActorSheetSFRPG extends ActorSheet {
         // Apply Temp Damage
         html.find('.clickapplydamge').click(event => this._onApplyPendingDamage(event));
         html.find('.clickpingtoken').click(event => this._onPingToken(event));
+        html.find('.attribute-button').click(event => this._onRollAtt(event));
 
+    }
+
+    async _onRollAtt(event){
+        const totalbonus = 0;
+        const dice ="1d20";
+        const roll = await Roll.create(dice.concat(d100stepdie(totalbonus))).evaluate({ async: true });
+        
+        const chatData = {roll: roll.toJSON(),}
+        await roll.toMessage(chatData);
+
+       // canvas.ping(this.token.object.center)
+  
+  
     }
     async _onPingToken(event){
 

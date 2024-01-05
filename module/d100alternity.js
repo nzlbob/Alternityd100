@@ -17,6 +17,7 @@ import { d100ATokenDoc } from "./d100TokenDoc.js";
 import { d100AToken } from "./d100Token.js";
 import { d100ACombatant } from "./d100Combatant.js";
 import { d100AActorSheetCharacter } from "./actor/sheet/character.js";
+import { d100AActorSheetCharacterSmall} from "./actor/sheet/character-small.js";
 import { d100AActorSheetNPC } from "./actor/sheet/npc.js";
 import { d100AActorSheetStarship } from "./actor/sheet/starship.js";
 import { d100AActorSheetVehicle } from "./actor/sheet/vehicle.js";
@@ -239,6 +240,7 @@ Hooks.once("init", function() {
   //Actors.registerSheet("Alternityd100", SimpleActorSheet, { makeDefault: false });
   //Actors.registerSheet("Alternityd100", d100ActorSheet, { makeDefault: true });
   Actors.registerSheet("Alternityd100", d100AActorSheetCharacter, { types: ["character"], makeDefault: true });
+  Actors.registerSheet("Alternityd100", d100AActorSheetCharacterSmall, { types: ["character"], makeDefault: false });
   Actors.registerSheet("Alternityd100", d100AActorSheetStarship , { types: ["starship"], makeDefault: true });
   Actors.registerSheet("Alternityd100", d100AActorSheetVehicle, { types: ["vehicle"], makeDefault: true });
   Actors.registerSheet("Alternityd100", d100AActorSheetDrone,     { types: ["drone"],     makeDefault: true });

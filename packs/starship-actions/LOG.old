@@ -1,3 +1,8 @@
-2024/01/02-10:50:31.657 dfc Recovering log #1977
-2024/01/02-10:50:31.819 dfc Delete type=0 #1977
-2024/01/02-10:50:31.819 dfc Delete type=3 #1976
+2024/01/05-10:43:34.862 4970 Recovering log #2010
+2024/01/05-10:43:34.918 4970 Delete type=0 #2010
+2024/01/05-10:43:34.919 4970 Delete type=3 #2008
+2024/01/05-10:50:48.853 131c Level-0 table #2015: started
+2024/01/05-10:50:48.853 131c Level-0 table #2015: 0 bytes OK
+2024/01/05-10:50:48.887 131c Delete type=0 #2013
+2024/01/05-10:50:48.936 131c Manual compaction at level-0 from '!items!0CTodeCo4g5w7qF9' @ 72057594037927935 : 1 .. '!items!oqiQXQT7o6IEy404' @ 0 : 0; will stop at (end)
+2024/01/05-10:50:48.938 131c Manual compaction at level-1 from '!items!0CTodeCo4g5w7qF9' @ 72057594037927935 : 1 .. '!items!oqiQXQT7o6IEy404' @ 0 : 0; will stop at (end)
