@@ -950,7 +950,8 @@ options.nosound = false
 let hasDegreeText = true
 let degreeText = item.system.degreeText
 const props = {header:"something",value:"2.jghf",extra:"fsfdg"};
-
+let flavor = item.isSkilled?  actorData.skills[item.system.skill].label + " using" : ""
+flavor += (" " + item.name + ". ")
 
  let A =  Diced100.skillRoll({
   event: options.event,
@@ -967,7 +968,7 @@ const props = {header:"something",value:"2.jghf",extra:"fsfdg"};
   data: rollData,
   subject: { skill: skillId },
   title: title,
-  flavor :item.name+" Range/",
+  flavor : flavor,
   speaker: ChatMessage.getSpeaker({ actor: this }),
   chatTemplate: "systems/Alternityd100/templates/chat/roll-ext.hbs",
   chatTemplateData: { hasProperties: props.length > 0, properties: props },

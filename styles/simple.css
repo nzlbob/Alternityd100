@@ -131,7 +131,11 @@ form .form-group label {
   cursor: pointer;
 }
 
-
+.rollable-attribute:hover, .rollable-attribute:focus {
+  color: #000;
+  text-shadow: 0 0 10px red;
+  cursor: pointer;
+}
 
 .Alternityd100 .sheet-header {
   flex: 0 0 218px;

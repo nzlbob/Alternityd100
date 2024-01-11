@@ -61,7 +61,7 @@
         "qBonus": [],
         "custom":{},
         "attributes": {
-
+            "luck":20,
             "ECM": {
                 "radar": {                
                     "base": 0,

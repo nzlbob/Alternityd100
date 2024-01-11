@@ -312,12 +312,48 @@ export class ActorSheetSFRPG extends ActorSheet {
     }
 
     async _onRollAtt(event){
-        const totalbonus = 0;
+        const stat = game.i18n.localize("d100A.attributes." + event.currentTarget.dataset.attr)
+        const totalbonus = 1;
         const dice ="1d20";
         const roll = await Roll.create(dice.concat(d100stepdie(totalbonus))).evaluate({ async: true });
-        
-        const chatData = {roll: roll.toJSON(),}
+        const a = 0
+        const fumble = this.actor.system.attributes.luck
+       const roll1 = roll.terms[0].results[0].result == 1
+        const ordinary = this.actor.system.abilities[event.currentTarget.dataset.attr].value
+        const good = Math.floor(ordinary/2)
+        const amazing = Math.floor(good/2)
+        let degree =""
+        console.log(roll)
+       if (roll.total > ordinary && !roll1) {degree = "Failure"};
+       if (roll.total > ordinary && roll1) {degree = "Ordinary"};
+       if (roll.total <= ordinary) {degree = "Ordinary"};
+       if (roll.total <= good) {degree = "Good"};
+       if (roll.total <= amazing) {degree = "Amazing!"};
+       if (roll.terms[0].results[0].result > fumble) {degree = "Critical Failure"};
+
+
+        const templateData = {
+            actor: this.actor,
+            formula: roll.formula,
+            total:roll.total   ,
+            roll: roll.toJSON(),
+            tooltip: await roll.getTooltip(),
+            degree :  degree,
+            flavor : stat + " Feat Check" }
+        const template = `systems/Alternityd100/templates/chat/roll-ext.hbs`;// `systems/Alternityd100/templates/chat/roll-ext.hbs`;    
+        const html = await renderTemplate(template, templateData);
+        const chatData = {roll: roll.toJSON(),
+
+        user: game.user.id,
+        type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+        content: html,
+        speaker:  ChatMessage.getSpeaker({actor: this.actor}),
+        sound: a === 0 ? CONFIG.sounds.dice : null,
+        roll: roll.toJSON(),
+        formula: roll.formula
+        }
         await roll.toMessage(chatData);
+
 
        // canvas.ping(this.token.object.center)
   
@@ -747,6 +783,9 @@ ghjkghjkghk
             return this.actor.rollSkillObject(item, { event: event, skipDialog: !event.shiftKey });
         }
         if (item.isSkilled) {
+            return this.actor.rollSkillObject(item, { event: event, skipDialog: !event.shiftKey });
+        }
+        if (item.isChatRole) {
             return this.actor.rollSkillObject(item, { event: event, skipDialog: !event.shiftKey });
         }
 
