@@ -951,6 +951,7 @@ let hasDegreeText = true
 let degreeText = item.system.degreeText
 const props = {header:"something",value:"2.jghf",extra:"fsfdg"};
 let flavor = item.isSkilled?  actorData.skills[item.system.skill].label + " using" : ""
+
 flavor += (" " + item.name + ". ")
 
  let A =  Diced100.skillRoll({

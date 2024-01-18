@@ -1206,6 +1206,7 @@
         },
         "Identified": "Identified",
         "IsSkilled": "Uses Skill",
+        "isOpposed" : "Uses Opposed Check",
         "Magic": {
             "Details": "Magic Item Details"
         },

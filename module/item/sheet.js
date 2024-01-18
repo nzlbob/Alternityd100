@@ -145,6 +145,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.isGM = game.user.isGM;
         data.isOwner = data.owner;
         data.isSkilled = data.itemData.isSkilled
+        data.isOpposed = data.itemData.isOpposed
         
      //   console.log("SHEET.JS CONFIG SFRPG", data.config,"data.itemData", data.itemType,data.itemProperties )
         // Physical items

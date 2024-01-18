@@ -377,6 +377,8 @@ export class Combatd100A extends Combat {
 
     //---------------------------------------------------------------------------------
     async nextTurn(useAction = true) {
+
+        
         if (this.isEveryCombatantDefeated()) {
             return;
         }
@@ -471,7 +473,7 @@ export class Combatd100A extends Combat {
             const updates = [{
                 _id: oldCombatant.id,
 
-                flags: { canAct: !(remaining < 0), actions: { total: oldCombatant.apr, remaining: remaining } }
+                flags: { canAct: !(remaining < 0), actions: { total: oldCombatant.apr, remaining: remaining }, dragRuler:{passedWaypoints: [] ,trackedRound:(this.round-2)} }
 
             }];
             console.log("updates", updates)
@@ -763,7 +765,7 @@ export class Combatd100A extends Combat {
 
 
             console.log("updates", actedUpdate, this.combatants)
-            await this.updateEmbeddedDocuments("Combatant", actedUpdate);
+             this.updateEmbeddedDocuments("Combatant", actedUpdate);
 
 
 

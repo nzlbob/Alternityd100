@@ -30,7 +30,12 @@ export default function (engine) {
                 ability.modifierTooltip = [];
             }
         }
-
+        if (data.skills) {
+            for (let [abl, skill] of Object.entries(data.skills)) {
+                skill.tooltip = [];
+                skill.tooltipSkillText = "";
+            }
+        }
         if (data.attributes.eac) {
             data.attributes.eac.tooltip = [];
         }

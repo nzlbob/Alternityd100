@@ -40,7 +40,7 @@ export default function (engine) {
         };
 
         const filteredMods = modifiers.filter(mod => {
-            return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.ABILITY_SKILLS, SFRPGEffectType.SKILL, SFRPGEffectType.ALL_SKILLS, SFRPGEffectType.ALL_ACTIONS].includes(mod.effectType);
+            return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.ABILITY_SKILLS, SFRPGEffectType.SKILL].includes(mod.effectType);
         });
 
         console.log("n\calculateSkillModifiers\n", "\nskills\n", skills, "\nflags\n", flags, "\nmodifiers\n", modifiers, "\nfilteredMods\n", filteredMods)
@@ -57,7 +57,25 @@ export default function (engine) {
 
         }
 
+        const filteredModsAll = modifiers.filter(mod => {
+            return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.ALL_SKILLS, SFRPGEffectType.ALL_ACTIONS].includes(mod.effectType);
+        });
 
+        for (const skill of Object.entries(skills)) {
+            const skilltooltips = []
+        for (let mofifier of filteredModsAll) {
+        
+            skill.step = skills.step + parseInt(mofifier.modifier, 10)
+            skill.stepdie = d100stepdie(skill.step);
+            skilltooltips.push( {                 
+                mod: parseInt(mofifier.modifier, 10).signedString(),
+                source: mofifier.name
+            })
+        }
+        skill.tooltip = skilltooltips
+
+    }
+console.log(filteredModsAll,skills.bow)
         /* old skill thing
                 // Skills
                 for (let [skl, skill] of Object.entries(skills)) {
