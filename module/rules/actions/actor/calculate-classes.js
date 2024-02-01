@@ -19,7 +19,7 @@ export default function (engine) {
                 name: cls.name
             };
             (classInfo.PriSec == "primary")? data.details.profession.primary = classInfo : data.details.profession.secondary = classInfo 
-            console.log(classInfo,data.details.profession.primary )
+        //    console.log(classInfo,data.details.profession.primary )
 /*
             if (classInfo.isCaster) {
                 data.cl += classInfo.levels;

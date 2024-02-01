@@ -31,6 +31,14 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * Does the Item implement an attack roll as part of its usage
      * @type {boolean}
      */
+    get xxcanBeActivated() {
+        
+        if (this.type === "vehicleSystem") {
+            return true
+        }
+        return false
+    }
+
     get hasAttack() {
         if (this.type === "starshipWeapon") return true;
         if (["meleeW"].includes(this.system.weaponType)){this.system.actionType = "mwak"}
@@ -1083,10 +1091,17 @@ return Diced100.attackAoE({
         const isWeapon = ["weapon", "shield"].includes(this.type);
         const actorData = this.actor.system;
         const actorArray = this.actor.getActiveTokens(true, true);
-        const actorToken = actorArray[0]
+        let actorToken = actorArray[0]
 
         console.log("Options",options,this,actorArray);
+if (!actorToken) {
+    const tokens = game.canvas.activeLayer.controlled.filter(t => t.inCombat );
+      
 
+    actorToken = tokens[0].document
+}
+
+console.log("Options",options,this,actorToken);
         if (!actorToken) NoTokenWarn() 
 
         if (!this.hasAttack) {
@@ -2847,9 +2862,10 @@ console.log( "event\t", event,
  /* -------------------------------------------- */
 
    findHitLocation(actorToken,target){
+    console.log(actorToken,target.object)
     const ray = new Ray({x:actorToken.object.center.x,y:actorToken.object.center.y},{x:target.object.center.x,y:target.object.center.y})
     const angle = raytodeg(ray)+180;
-
+ 
     var aspect
     const arcAngle = Math.normalizeDegrees(angle-target.rotation)
  //   if (item.system.mount.arc.front) {

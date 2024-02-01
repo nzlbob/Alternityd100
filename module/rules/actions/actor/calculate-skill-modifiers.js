@@ -43,13 +43,13 @@ export default function (engine) {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.ABILITY_SKILLS, SFRPGEffectType.SKILL].includes(mod.effectType);
         });
 
-        console.log("n\calculateSkillModifiers\n", "\nskills\n", skills, "\nflags\n", flags, "\nmodifiers\n", modifiers, "\nfilteredMods\n", filteredMods)
+      //  console.log("n\calculateSkillModifiers\n", "\nskills\n", skills, "\nflags\n", flags, "\nmodifiers\n", modifiers, "\nfilteredMods\n", filteredMods)
 
 
         for (let mofifier of filteredMods) {
             if (mofifier.enabled && mofifier.valueAffected) {
 
-                console.log(mofifier, skills[mofifier.valueAffected])
+          //      console.log(mofifier, skills[mofifier.valueAffected])
                 skills[mofifier.valueAffected].step = skills[mofifier.valueAffected].step + parseInt(mofifier.modifier, 10)
 
                 skills[mofifier.valueAffected].stepdie = d100stepdie(skills[mofifier.valueAffected].step);
@@ -75,7 +75,7 @@ export default function (engine) {
         skill.tooltip = skilltooltips
 
     }
-console.log(filteredModsAll,skills.bow)
+//console.log(filteredModsAll,skills.bow)
         /* old skill thing
                 // Skills
                 for (let [skl, skill] of Object.entries(skills)) {
@@ -113,7 +113,7 @@ console.log(filteredModsAll,skills.bow)
             const filteredIMortal = modifiers.filter(mod => {
                 return mod.enabled && [SFRPGEffectType.IGNORE_MORTAL].includes(mod.effectType);
             });
-            console.log(filteredIMortal)
+         //   console.log(filteredIMortal)
             let IM = 0
 
             for (let modIM of filteredIMortal) {
@@ -129,7 +129,7 @@ console.log(filteredModsAll,skills.bow)
             return mod.enabled && [SFRPGEffectType.ALL_SKILLS, SFRPGEffectType.ALL_ACTIONS].includes(mod.effectType);
         });
         let skillBonus = 0
-        console.log(filteredBonus)
+    //    console.log(filteredBonus)
         for (let modIM of filteredBonus) {
             skillBonus += parseInt(modIM.modifier)
             console.log(modIM, modIM.modifier, parseInt(modIM.modifier))

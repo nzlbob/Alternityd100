@@ -380,13 +380,14 @@ delete this.item.system.skills
         else if (item.type === "starshipWeapon") return item.mount.mounted ? "Mounted" : "Not Mounted";
         else if (item.type === "augmentation") return `${item.type} (${item})`;
         else if (item.type === "vehicleSystem")
+        console.log(item,this,this.document,this.document.canBeActivated)
         {
             // Only systems which can be activated have an activation status
-            if (this.document.canBeActivated() === false) {
+            if (this.document.canBeActivated === false) {
                 return ""
             }
 
-            return this.document.isActive() ? "Activated" : "Not Activated";
+            return this.document.isActive ? "Activated" : "Not Activated";
         }
     }
 

@@ -3,8 +3,8 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../..
 export default function (engine) {
     engine.closures.add("calculateHitpoints", (fact, context) => {
         const data = fact.actor.system;
-       // console.log(fact)
-       if(!fact.actor.isSpaceActor){
+        console.log(fact)
+       if(["character","npc"].includes(fact.actor.type)){
         data.attributes.mor.base = Math.ceil(data.abilities.con.value/2);
         data.attributes.wou.base = data.abilities.con.value;
         data.attributes.stu.base = data.abilities.con.value;

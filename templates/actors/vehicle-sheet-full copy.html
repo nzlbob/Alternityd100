@@ -1,160 +1,32 @@
-<form class="flexcol {{cssClass}}" autocomplete="off">
+<form class="{{cssClass}} flexcol" autocomplete="off">
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" />
 
-    {{console this}}
-        {{!-- Sheet Header --}}
-        <header class="sheet-header" style="font-family: serpentine" >
-        <table class="hptable">
-            <thead>
-              <tr>
-                <td class="profile-img" style="width: 110px;" rowspan="2">
-                    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100" />    
-                </td>
-                <td class="header-fields">
-                    <h1 class="charname">
-                        <input  name="name" type="text" value="{{actor.name}}" placeholder="Name" />
-                    </h1>
-                </td>
-                <td >
-                    {{#if isGM}}
-                   <p class = "clickpingtoken" > Token: {{options.token.name}} </p> 
-                    {{/if}}
-             <!--       <input class=" rollable " style="font-family: serpentine" type="button" data-roll="d20" name="Actioncheck" value="Action Check"/> -->
-                </td>
-              </tr>
-              <tr>
-                <td  colspan="2">
-    <!-- Stick in the HP table here-->
-    
-    
-    
-    <table style="width: 100%;" > 
-    
-        <colgroup>
-            <col style="width: 23%">
-            <col style="width: 23%">
-            <col style="width: 23%">
-            <col style="width: 31%">
+        <div class="header-details flexcol">
+            <div class="header-background flexrow" style="flex: 0 0 60px;">
+                <h1 class="charname">
+                    <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize "SFRPG.VehicleSheet.Header.NamePlaceholder" }}" title="{{ localize "SFRPG.VehicleSheet.Header.NameTooltip" }}" />
+                </h1>
 
-            </colgroup>
-    
-        <tr style="height: 18px;"  >
-        <th class="resource-headx" title="{{ system.attributes.stu.label }}" >
-        <button style="height: 30px;"  class="clickapplydamge" data-tooltip-direction="UP" data-tooltip="Apply Temp Damage" >Stun</button>
-        </th>
-        <th class="resource-headx" title="{{ system.attributes.wou.tooltip }}">
-            Wound
-        </th>
-        <th class="resource-headx" title="{{ system.attributes.mor.tooltip }}">
-            Mortal
-        </th>
+                <div class="charlevel">
+                    <div class="level noxp">
+                        <label>{{ localize "SFRPG.VehicleSheet.Header.Level" }}</label>
+                        <input name="system.details.level" type="text" value="{{labels.level}}" placeholder="{{ localize "SFRPG.VehicleSheet.Header.LevelPlaceholder" }}" />
+                    </div>
+                </div>
+            </div>
 
-    
-        
-    </tr> 
-    
-    <tr>
-          
-        <td class="resourcex" title="{{ system.attributes.stu.tooltip }}">
-                <input type="number" name="system.attributes.stu.value" value="{{system.attributes.stu.value}}"/>
-                <input type="number" name="system.attributes.stu.pending" value="{{system.attributes.stu.pending}}"/>
-                <input disabled="true" title="{{ system.attributes.stu.tooltip }}" type="number" name="system.attributes.stu.max" value="{{system.attributes.stu.max}}"/>
-            
-        </td>
-        <td class="resourcex" title="{{ system.attributes.wou.tooltip }}">
-                <input type="number" name="system.attributes.wou.value" value="{{system.attributes.wou.value}}"/>
-                <input type="number" name="system.attributes.wou.pending" value="{{system.attributes.wou.pending}}"/>
-                <input disabled="true" title="{{ system.attributes.wou.tooltip }}" type="number" name="system.attributes.wou.max" value="{{system.attributes.wou.max}}"/>
-     
-        </td>
-        <td class="resourcex" title="{{ system.attributes.mor.tooltip }}">
-                <input type="number" name="system.attributes.mor.value" value="{{system.attributes.mor.value}}"/>
-                <input type="number" name="system.attributes.mor.pending" value="{{system.attributes.mor.pending}}"/>
-                <input disabled="true" title="{{ system.attributes.mor.tooltip }}" type="number" name="system.attributes.mor.max" value="{{system.attributes.mor.max}}"/>
-    
-        </td>
-
-    
-        </tr>
-    
-    
-    </table>
-    
-    
-    
-    
-    <!-- EO HP table here-->
-                </td>
-              </tr>
-    
-    
-    
-    
-            </thead>
-            <tbody>
-                <tr>
-    
-                    <td colspan="3" >
-    
-    
-                        <div class="divTable crewTable">
-    
-                            <div class="divTableBody">
-    
-                            {{#each status.durability as |category id|}}
-    
-                            <div class="divTableRow">
-                            {{#if (eq id "stu") }}<div class="divTableCell" data-tooltip = "{{ localize "d100A.DamageTypeTooltip.Stun" }}" >{{ localize "d100A.stun"}}</div> {{/if}}
-                            {{#if (eq id "wou") }}<div class="divTableCell" data-tooltip = "{{ localize "d100A.DamageTypeTooltip.Wound" }}" >{{ localize "d100A.wound"}}</div> {{/if}}
-                            {{#if (eq id "mor") }}<div class="divTableCell" data-tooltip = "{{ localize "d100A.DamageTypeTooltip.Mortal" }}" >{{ localize "d100A.mortal"}}</div> {{/if}}
-    
-                            <div class="divTableCell">
-                                {{#each category.good as |position|}}
-                                <img class="clickgood" src="{{../../status.image.good}}" title="{{position.title}}" data-position={{position.value}} data-type="total-dec" data-id={{id}} data-category="total" height="15" width="15" />
-                                {{/each}}
-                                {{#each category.pend as |position|}}
-                                <img class="clickgood" src="{{../../status.image.pend}}"  title="{{position.title}}" data-position={{position.value}} data-type="total-inc" data-id={{id}} data-category="total" height="15" width="15" />
-                                {{/each}}  
-                                {{#each category.bad as |position|}}
-                                <img class="clickgood" src="{{../../status.image.bad}}"  title="{{position.title}}" data-position={{position.value}} data-type="total-inc" data-id={{id}} data-category="total" height="15" width="15" />
-                                {{/each}}     
-                   
-                            </div>
-                            </div>
-                            {{/each}}
-                    
-                    
-                            </div>
-                            </div>
-    
-                    </td>
-    
-    
-                </tr>
-    
-    
-            </tbody>
-            </table>
-            
-    
-    
-    
-    
-    
-    
-    
-            
-                    
-    
-    
-    
-    
-                
-                
-                
-                
-     
-    
-        </header>
+            <ul class="summary" style="flex: 0 0 80px;">
+                <li>
+                    <label>{{ localize "SFRPG.VehicleSheet.Header.Price" }}</label>
+                    <input type="text" name="system.details.price" value="{{system.details.price}}" data-dtype="Number" placeholder="{{ localize "SFRPG.VehicleSheet.Header.PricePlaceholder" }}" title="{{ localize "SFRPG.VehicleSheet.Header.PriceTooltip" }}" />
+                </li>
+                <li>
+                    <input type="text" name="system.details.source" value="{{system.details.source}}" placeholder="{{localize "SFRPG.NPCSheet.Header.SourcePlaceHolderText"}}" />
+                </li>
+            </ul>
+        </div>
+    </header>
 
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="details">{{ localize "SFRPG.Details" }}</a>
@@ -171,7 +43,40 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-
+            <div class="flexrow">
+                <ul class="attributes flexrow">
+                    <li data-tippy-content="{{localize 'SFRPG.VehicleSheet.Details.HealthTooltip'}}" class="attribute health">
+                        <h4 class="attribute-name box-title">{{ localize "SFRPG.Health" }}</h4>
+                        <div class="attribute-value multiple">
+                            <input name="system.attributes.hp.value" type="text" value="{{system.attributes.hp.value}}" data-dtype="Number" placeholder="10" />
+                            <span class="sep"> / </span>
+                            <input name="system.attributes.hp.max" type="text" value="{{system.attributes.hp.max}}" data-dtype="Number" placeholder="10" />
+                        </div>
+                        <footer class="attribute-footer">
+                            <div class="flexrow">
+                                <span>{{ localize "SFRPG.VehicleSheet.Details.Threshold" }}</span>
+                                <input name="system.attributes.hp.threshold" type="text" value="{{system.attributes.hp.threshold}}" data-dtype="Number" placeholder="5" />
+                            </div>
+                            <div class="flexrow">
+                                <span>{{ localize "SFRPG.VehicleSheet.Details.Hardness" }}</span>
+                                <input name="system.attributes.hardness" type="text" value="{{system.attributes.hardness}}" data-dtype="Number" placeholder="10" />
+                            </div>
+                        </footer>
+                    </li>
+                    <li class="attribute">
+                        <h4 class="attribute-name box-title">{{ localize "SFRPG.EnergyArmorClass" }}</h4>
+                        <div class="attribute-value">
+                            <input name="system.attributes.eac.value" type="text" value="{{system.attributes.eac.value}}" data-dtype="Number" placeholder="10" />
+                        </div>
+                    </li>
+                    <li class="attribute">
+                        <h4 class="attribute-name box-title">{{ localize "SFRPG.KineticArmorClass" }}</h4>
+                        <div class="attribute-value">
+                            <input name="system.attributes.kac.value" type="text" value="{{system.attributes.kac.value}}" data-dtype="Number" placeholder="10" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
             <div class="flexcol">
                 <h3 class="form-header">{{ localize "SFRPG.VehicleSheet.Details.Movement.Title" }}</h3>
                 <div class="flexrow">
@@ -283,27 +188,6 @@
                 <h3 class="form-header">{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.Title" }}</h3>
                 <div class="flexrow">
                     <div class="flexcol">
-                       
-                        <div class="form-group">
-                            <label>{{ localize "Stun" }}</label>
-                            <div class="form-fields">
-                                <input type="text" name="system.attributes.stu.base" value="{{system.attributes.stu.base}}" data-dtype="Number" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>{{ localize "Wound" }}</label>
-                            <div class="form-fields">
-                                <input type="text" name="system.attributes.wou.base" value="{{system.attributes.wou.base}}" data-dtype="Number" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>{{ localize "Mortal" }}</label>
-                            <div class="form-fields">
-                                <input type="text" name="system.attributes.mor.base" value="{{system.attributes.mor.base}}" data-dtype="Number" />
-                            </div>
-                        </div>
-                       
-                       
                         <div class="form-group">
                             <label>{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.Size" }}</label>
                             <div class="form-fields">

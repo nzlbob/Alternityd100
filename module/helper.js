@@ -3,7 +3,7 @@ import { ATTRIBUTE_TYPES } from "./constants.js";
 export class EntitySheetHelper {
 
   static getAttributeData(data) {
-    //console.log("sheetData", data, data.attributes)
+    console.log("sheetData", data, data.attributes)
     // Determine attributeuteute type.
     for ( let attr of Object.values(data.attributes) ) {
 
@@ -95,6 +95,7 @@ export class EntitySheetHelper {
   /** @override */
   static onSubmit(event) {
     // Closing the form/sheet will also trigger a submit, so only evaluate if this is an event.
+    console.log("\n\n\n\n WFT------------\n\n\n\n")
     if ( event.currentTarget ) {
       // Exit early if this isn't a named attribute.
       if ( (event.currentTarget.tagName.toLowerCase() === 'input') && !event.currentTarget.hasAttribute('name')) {
@@ -137,6 +138,7 @@ export class EntitySheetHelper {
    * @param {MouseEvent} event    The originating left click event
    */
   static async onClickAttributeControl(event) {
+    console.log("\n\n\n\n WFT------------\n\n\n\n")
     event.preventDefault();
     const a = event.currentTarget;
     const action = a.dataset.action;
@@ -173,6 +175,7 @@ export class EntitySheetHelper {
    * @param {MouseEvent} event    The originating left click event
    */
   static onAttributeRoll(event) {
+    console.log("\n\n\n\n WFT------------\n\n\n\n")
     event.preventDefault();
     const button = event.currentTarget;
     const label = button.closest(".attribute").querySelector(".attribute-label")?.value;
@@ -214,6 +217,7 @@ export class EntitySheetHelper {
    * @returns {string} Html string.
    */
   static getAttributeHtml(items, index, group = false) {
+    console.log("\n\n\n\n WFT------------\n\n\n\n")
     // Initialize the HTML.
     let result = '<div style="display: none;">';
     // Iterate over the supplied keys and build their inputs (including whether or not they need a group key).
@@ -265,6 +269,7 @@ export class EntitySheetHelper {
    * @private
    */
   static async createAttribute(event, app) {
+    console.log("\n\n\n\n WFT------------\n\n\n\n")
     const a = event.currentTarget;
     const group = a.dataset.group;
     let dtype = a.dataset.dtype;
@@ -531,7 +536,7 @@ console.log("Attibutes", attributes)
    * @see ClientDocumentMixin.createDialog
    */
   static async createDialog(data={}, options={}) {
-
+    console.log("\n\n\n\n WFT------------\n\n\n\n")
     // Collect data
     const documentName = this.metadata.name;
     const folders = game.folders.filter(f => (f.data.type === documentName) && f.displayed);
@@ -600,6 +605,7 @@ console.log("types---", templates, documentName, types, collection)
    * @returns {number} Html string.
    */
    static d100goodValue(base) {
+    console.log("\n\n\n\n WFT------------\n\n\n\n")
     // Initialize the HTML.
     let result = int(base/2);
     // Iterate over the supplied keys and build their inputs (including whether or not they need a group key).

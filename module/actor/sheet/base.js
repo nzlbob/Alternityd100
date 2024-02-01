@@ -42,7 +42,8 @@ export class ActorSheetSFRPG extends ActorSheet {
                 ".psionics .inventory-list",
                 ".tab.status",
                 ".tab.features",
-                ".tab.skills"
+                ".tab.skills",
+                ".tab.details"
             ],
             tabs: [
                 { navSelector: ".tabs", contentSelector: ".sheet-body", initial: "attributes" },
@@ -1580,5 +1581,92 @@ ghjkghjkghk
             ["system.fireMode"]: item.changeAttackMode()
         });
     }
+
+
+    /* -------------------------------------------- */
+
+  /**
+   * Handle dropping of an Actor data onto another Actor sheet
+   * @param {DragEvent} event            The concluding DragEvent which contains drop data
+   * @param {object} data                The data transfer extracted from the event
+   * @returns {Promise<object|boolean>}  A data object which describes the result of the drop, or false if the drop was
+   *                                     not permitted.
+   * @protected
+   */
+  async _onDropActor(event, data) {
+
+    console.log("_onDropActor_Starship",event, data);
+   // if ( !this.actor.isOwner ) return false;
+
+   let parsedDragData = data;
+   if (!parsedDragData.id){
+   const uuidarray = parsedDragData.uuid.split(".")
+   parsedDragData.id = uuidarray[uuidarray.length-1]
+   parsedDragData.uuidarray = uuidarray
+   }
+
+  /* parsedDragData.pack = "";
+   if (parsedDragData.uuidarray[0] == "Compendium"){
+       let packlen = parsedDragData.uuidarray.length-1;
+       for(let a = 1; a < packlen;a++){
+           parsedDragData.pack += parsedDragData.uuidarray[a];
+           if (a < packlen-1) parsedDragData.pack += ".";
+           console.log("Builder",packlen,parsedDragData.uuidarray[a],a,parsedDragData.pack)
+       }
+
+   }
+    */
+    
+    console.log(this.actor)
+    if (!["starship", "vehicle"].includes(this.actor.type)) return false
+    if (data.type === "Actor") {
+        return this._onCrewDrop(event, parsedDragData);
+    } 
+
+
+  }
+    /* -------------------------------------------- */
+    /**
+     * Handles drop events for the Crew list
+     * 
+     * @param {Event}  event The originating drop event
+     * @param {object} data  The data transfer object.
+     */
+    async _onCrewDrop(event, data) {
+        // event.preventDefault();
+        console.log(this,event,data)
+        $(event.target).css('background', '');
+
+        const targetRole = event.target.dataset.role;
+        if (!targetRole || !data.id) return false;
+
+        const crew = duplicate(this.actor.system.crew);
+        const crewRole = crew[targetRole];
+        const oldRole = this.actor.getCrewRoleForActor(data.id);
+        console.log("this.actor.system.crew",this.actor.system.crew)
+        console.log("oldRole",oldRole)
+        console.log("crewRole",crewRole)
+
+        if (crewRole.limit === -1 || crewRole.actorIds.length < crewRole.limit) {
+            crewRole.actorIds.push(data.id);
+
+            if (oldRole) {
+                const originalRole = crew[oldRole];
+                originalRole.actorIds = originalRole.actorIds.filter(x => x != data.id);
+            }
+    
+            await this.actor.update({
+                "system.crew": crew
+            }).then(this.render(false));
+        } else {
+            ui.notifications.error(game.i18n.format("SFRPG.StarshipSheet.Crew.CrewLimitReached", {targetRole: targetRole}));
+        }
+
+        return true;
+    }
+
+      /* -------------------------------------------- */
+
+
 
 }

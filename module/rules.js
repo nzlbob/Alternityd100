@@ -304,6 +304,7 @@ export default function (engine) {
                 when: { closure: "isActorType", type: "vehicle" },
                 then: [
                     { closure: "calculateActorResources", stackModifiers: "stackModifiers" },
+                    { closure: "calculateHitpoints", stackModifiers: "stackModifiers" },
                     "calculateVehicleControlSkill",
                     "calculateVehicleHangar",
                     "calculateVehiclePassengers",

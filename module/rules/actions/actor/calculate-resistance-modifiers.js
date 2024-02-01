@@ -32,21 +32,25 @@ export default function (engine) {
         }
         let bonus = {}
 
-        if (data.skills.powerma.ranks > 3) bonus.str = { modifier: 1, modifierType: "constant", name: "Power Martial Arts", valuaAffected: "str", type: "untyped" };
-        if (data.skills.powerma.ranks > 7) bonus.str.modifier = 2;
-        if (data.skills.powerma.ranks > 11) bonus.str.modifier = 3;;
+        if (data.skills.powerma.ranks > 3) bonus.powerma = { modifier: 1, modifierType: "constant", name: "Power Martial Arts", valuaAffected: "str", type: "untyped" };
+        if (data.skills.powerma.ranks > 7) bonus.powerma.modifier = 2;
+        if (data.skills.powerma.ranks > 11) bonus.powerma.modifier = 3;
+
+        if (data.skills.defenma.ranks > 3) bonus.defenma = { modifier: 1, modifierType: "constant", name: "Defensive Martial Arts", valuaAffected: "str", type: "untyped" };
+        if (data.skills.defenma.ranks > 7) bonus.defenma.modifier = 2;
+        if (data.skills.defenma.ranks > 11) bonus.defenma.modifier = 3;
         // Dex
-        if (data.skills.powerma.ranks > 3) bonus.dex = { modifier: 1, modifierType: "constant", name: "Power Martial Art", valuaAffected: "dex", type: "untyped" };;
-        if (data.skills.powerma.ranks > 7) bonus.dex.modifier = 2;
-        if (data.skills.powerma.ranks > 11) bonus.dex.modifier = 3;
+        if (data.skills.dodge.ranks > 3) bonus.dodge = { modifier: 1, modifierType: "constant", name: "Dodge", valuaAffected: "dex", type: "untyped" };;
+        if (data.skills.dodge.ranks > 7) bonus.dodge.modifier = 2;
+        if (data.skills.dodge.ranks > 11) bonus.dodge.modifier = 3;
         //Int
-        if (data.skills.deduc.ranks > 3) bonus.int = { modifier: 1, modifierType: "constant", name: "Deduction", valuaAffected: "int", type: "untyped" };;
-        if (data.skills.deduc.ranks > 7) bonus.int.modifier = 2;
-        if (data.skills.deduc.ranks > 11) bonus.int.modifier = 3;
+        if (data.skills.deduc.ranks > 3) bonus.deduc = { modifier: 1, modifierType: "constant", name: "Deduction", valuaAffected: "int", type: "untyped" };;
+        if (data.skills.deduc.ranks > 7) bonus.deduc.modifier = 2;
+        if (data.skills.deduc.ranks > 11) bonus.deduc.modifier = 3;
         //Will
-        if (data.skills.mentare.ranks > 3) bonus.wil = { modifier: 1, modifierType: "constant", name: "Mental Resolve", valuaAffected: "wil", type: "untyped" };;
-        if (data.skills.mentare.ranks > 7) bonus.wil.modifier = 2;
-        if (data.skills.mentare.ranks > 11) bonus.wil.modifier = 3;
+        if (data.skills.mentare.ranks > 3) bonus.mentare = { modifier: 1, modifierType: "constant", name: "Mental Resolve", valuaAffected: "wil", type: "untyped" };;
+        if (data.skills.mentare.ranks > 7) bonus.mentare.modifier = 2;
+        if (data.skills.mentare.ranks > 11) bonus.mentare.modifier = 3;
 
 
 
@@ -55,9 +59,16 @@ export default function (engine) {
         let Skillmod = {}
         for (let [abl, ability] of Object.entries(data.abilities)) {
             Skillmod[abl] = 0
-            if (bonus[abl]) Skillmod[abl] = addModifier(bonus[abl], data, ability, "SFRPG.AbilityModifiersTooltip");
+         //   if (bonus[abl]) Skillmod[abl] = 0 ; //addModifier(bonus[abl], data, ability, "SFRPG.AbilityModifiersTooltip");
 
             //   console.log("Skillmod[abl] ",Skillmod[abl] ,bonus[abl] )
+        }
+        //Skillmod = {per:0,dex:0}
+        for (let [abl, ability] of Object.entries(bonus)) {
+            
+            Skillmod[ability.valuaAffected] +=  addModifier(ability, data, data.abilities[ability.valuaAffected], "SFRPG.AbilityModifiersTooltip");
+
+            //   console.log("Skillmod[abl] ",Skillmod[ability.valuaAffected] ,ability )
         }
 
 

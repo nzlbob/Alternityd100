@@ -5238,16 +5238,16 @@
             "avail": "Any",
             "Cost": "100",
             "skill": "",
-            "accur": "1",
+            "accur": "0",
             "mode": {
                 "fire": true,
-                "burst": true,
-                "auto": true
+                "burst": false,
+                "auto": false
             },
             "range": {
                 "short": "10",
-                "medium": "20",
-                "long": "40"
+                "medium": "10",
+                "long": "10"
             },
             "blastArea": {
                 "short": "2",

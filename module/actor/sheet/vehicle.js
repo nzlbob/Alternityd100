@@ -82,11 +82,11 @@ data.enrichedDescription = await TextEditor.enrichHTML(this.actor.system.details
         };
 
         //   0        1               2              3
-        let [attacks, primarySystems, expansionBays, actorResources] = data.items.reduce((arr, item) => {
+        let [attacks, primarySystems, equipment, expansionBays, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
 
             if (item.type === "actorResource") {
-                this._prepareActorResource(item, actorData);
+         //       this._prepareActorResource(item, actorData);
             }
 
             if (item.type === "weapon" || item.type === "vehicleAttack") {
@@ -97,11 +97,12 @@ data.enrichedDescription = await TextEditor.enrichHTML(this.actor.system.details
                 item.isVehicleSystem = true;
                 arr[1].push(item); // primarySystems
             }
-            else if (item.type === "starshipExpansionBay") arr[2].push(item); // expansionBays
-            else if (item.type === "actorResource") arr[3].push(item); // actorResources
+            else if (item.type === "equipment") arr[2].push(item); // expansionBays
+            else if (item.type === "starshipExpansionBay") arr[3].push(item); // expansionBays
+            else if (item.type === "actorResource") arr[4].push(item); // actorResources
 
             return arr;
-        }, [ [], [], [], []]);
+        }, [ [], [], [], [], []]);
 
         this.processItemContainment(attacks, function (itemType, itemData) {
             // NOTE: We only flag `vehicleAttack` type items as having damage as weapon rolls won't work from the
@@ -116,6 +117,7 @@ data.enrichedDescription = await TextEditor.enrichHTML(this.actor.system.details
 console.log(data)
         const features = {
             primarySystems: { label: game.i18n.localize("SFRPG.VehicleSheet.Hangar.PrimarySystems"), items: primarySystems, hasActions: true, dataset: { type: "vehicleSystem" } },
+            equipment: { label: game.i18n.format("Armor"), items: equipment, dataset: { type: "equipment" }, hasActions: true, },
             expansionBays: { label: game.i18n.format(game.i18n.localize("SFRPG.VehicleSheet.Hangar.ExpansionBays") + " " + game.i18n.localize("SFRPG.VehicleSheet.Hangar.AssignedCount"), {current: expansionBays.length, max: 1 /*data.system.attributes.expansionBays.value*/}), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } },
             resources: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"), items: actorResources, hasActions: false, dataset: { type: "actorResource" } }
         };
@@ -187,7 +189,7 @@ console.log("HERE--",html)
     }
 
     /** @override */
-    async _onDrop(event) {
+    async x_onDrop(event) {
         event.preventDefault();
 
         let data;
@@ -294,7 +296,7 @@ console.log("HERE--",html)
      * @param {Event}  event The originating drop event
      * @param {object} data  The data transfer object.
      */
-    async _onCrewDrop(event, data) {
+    async x_onCrewDrop(event, data) {
         // event.preventDefault();
 
         $(event.target).css('background', '');

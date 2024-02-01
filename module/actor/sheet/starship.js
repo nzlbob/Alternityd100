@@ -1205,48 +1205,11 @@ for (let A of contents.contents ){
 
     }
 
-/* -------------------------------------------- */
 
-  /**
-   * Handle dropping of an Actor data onto another Actor sheet
-   * @param {DragEvent} event            The concluding DragEvent which contains drop data
-   * @param {object} data                The data transfer extracted from the event
-   * @returns {Promise<object|boolean>}  A data object which describes the result of the drop, or false if the drop was
-   *                                     not permitted.
-   * @protected
-   */
-  async _onDropActor(event, data) {
-
-    console.log("_onDropActor_Starship",event, data);
-   // if ( !this.actor.isOwner ) return false;
-
-   let parsedDragData = data;
-  // const uuidarray = parsedDragData.uuid.split(".")
-  // parsedDragData.id = uuidarray[uuidarray.length-1]
-  // parsedDragData.uuidarray = uuidarray
-  /* parsedDragData.pack = "";
-   if (parsedDragData.uuidarray[0] == "Compendium"){
-       let packlen = parsedDragData.uuidarray.length-1;
-       for(let a = 1; a < packlen;a++){
-           parsedDragData.pack += parsedDragData.uuidarray[a];
-           if (a < packlen-1) parsedDragData.pack += ".";
-           console.log("Builder",packlen,parsedDragData.uuidarray[a],a,parsedDragData.pack)
-       }
-
-   }
-    */
-    
-    
-    if (data.type === "Actor") {
-        return this._onCrewDrop(event, parsedDragData);
-    } 
-
-
-  }
 
 
     /** @override */
-    async _onxDrop(event) {
+    async x_onDrop(event) {
         event.preventDefault();
 
         const dragData = event.dataTransfer.getData('text/plain');
@@ -1416,42 +1379,6 @@ console.log(data,"data")
  //console.log(dup)
        return dup;
    }
-
-    /**
-     * Handles drop events for the Crew list
-     * 
-     * @param {Event}  event The originating drop event
-     * @param {object} data  The data transfer object.
-     */
-    async _onCrewDrop(event, data) {
-        // event.preventDefault();
-        console.log(this,event,data)
-        $(event.target).css('background', '');
-
-        const targetRole = event.target.dataset.role;
-        if (!targetRole || !data.id) return false;
-
-        const crew = duplicate(this.actor.system.crew);
-        const crewRole = crew[targetRole];
-        const oldRole = this.actor.getCrewRoleForActor(data.id);
-
-        if (crewRole.limit === -1 || crewRole.actorIds.length < crewRole.limit) {
-            crewRole.actorIds.push(data.id);
-
-            if (oldRole) {
-                const originalRole = crew[oldRole];
-                originalRole.actorIds = originalRole.actorIds.filter(x => x != data.id);
-            }
-    
-            await this.actor.update({
-                "system.crew": crew
-            }).then(this.render(false));
-        } else {
-            ui.notifications.error(game.i18n.format("SFRPG.StarshipSheet.Crew.CrewLimitReached", {targetRole: targetRole}));
-        }
-
-        return true;
-    }
 
     /**
      * Handles dragenter for the crews tab

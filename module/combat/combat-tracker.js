@@ -47,7 +47,10 @@ if  (["normal"].includes(context.combat?.flags?.sfrpg?.combatType)){
       //currentTurn.crewmember = {"name" : currentCombatant.actor.name}
       currentTurn.canAct = currentCombatant.flags.canAct
       currentTurn.actions = currentCombatant.flags.actions
-
+      if (currentCombatant.token.actor.type == "vehicle"){
+        currentTurn.crewmember = {"name" : currentCombatant.actor?.name || currentCombatant.npcActor?.name}
+        currentTurn.crewRole = currentCombatant.flags.crewRole 
+      }
       //currentTurn.crewRole = currentCombatant.flags.crewRole
       //currentTurn.isPilot = false;
       //currentTurn.image = "";

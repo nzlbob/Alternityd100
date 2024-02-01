@@ -311,7 +311,7 @@ if(skill.id ==  91 )
 }
 
 export function addModifier(bonus, data, item, localizationKey) {
-    
+   // console.log(bonus)
         if (bonus.modifierType === SFRPGModifierType.FORMULA) {
             if (item.rolledMods) {
                 item.rolledMods.push({mod: bonus.modifier, bonus: bonus});
