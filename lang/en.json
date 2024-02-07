@@ -2646,6 +2646,8 @@
                 "AttackMoving": "Attack (moving)",
                 "AttackStopped": "Attack (stopped)",
                 "AttackTooltip": "Attack modifiers are applied to character attacks made while on the vehicle or with the vehicles mounted weapons",
+                "DriveTooltip": "Drive rating, an indication of how the vehicle handles, reflected as a bonus or penalty to the operator's Vehicle Operation skill check.",
+                "DriveMod": "Skill Modifier",
                 "Title": "Modifiers"
             },
             "Movement": {
@@ -2658,7 +2660,13 @@
                 "Speed": "Speed",
                 "SpeedPlaceholder": "e.g. 55 mph",
                 "SpeedTooltip": "Overall overland speed.",
-                "Title": "Speed"
+                "Title": "Speed",
+                "AccelTooltip" : "Acceleration in / Phase / Phase",
+                "MaxTooltip": "The maximum design speed (Vne) (Vmax) (Vd/1.1) mpp or km/h.",
+                "Max":"Maximum",
+                "Accel":"Acceleration",
+                "Cost":"Base Cost",
+                "CostTooltip" : "The base cost of the vehicle. The given number is lor a new vehicle constructed at the base Progress Level of the campaign"
             },
             "OtherAttributes": {
                 "Complement": "Complement",
@@ -2667,7 +2675,7 @@
                 "HangarBays": "Hangar Bays",
                 "Passengers": "Passengers",
                 "Size": "Size",
-                "Title": "Other Attributes",
+                "Title": "Attributes",
                 "Type": "Type"
             },
             "Threshold": "Threshold"

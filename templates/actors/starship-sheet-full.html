@@ -4,120 +4,136 @@
 
         <div class="header-details flexrow">
             <div class="header-background flexrow">
-                <h1 class="charname" data-tippy-content="{{localize "SFRPG.ShipNameLabel"}}">
-                    <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "SFRPG.ShipNameLabel"}}" />
+                <h1 class="charname" data-tippy-content="{{localize " SFRPG.ShipNameLabel"}}">
+                    <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "
+                        SFRPG.ShipNameLabel"}}" />
                 </h1>
 
-                <div class="charlevel"  data-tippy-content="{{localize "SFRPG.ShipTierLabel"}}<br />@details.tier" >
-                    <div class="level noxp">
-                        <label> </label>
-                        
-                    </div>
+                <div class="charlevel" data-tippy-content="{{localize " SFRPG.ShipTierLabel"}}<br />@details.tier" >
+                <div class="level noxp">
+                    <label> </label>
+
                 </div>
             </div>
+        </div>
 
-            <ul class="summary">
-                <li data-tippy-content="{{localize "SFRPG.ShipModelLabel"}}<br />@details.model">
-                    <input type="text" name="system.details.model" value="{{system.details.model}}" placeholder="{{localize "SFRPG.ShipModelLabel"}}" />
-                </li>
-                <li data-tippy-content="{{localize "SFRPG.ShipFrameLabel"}}<br />@details.frame">
-                    {{#if activeFrame}}<span>{{activeFrame.name}}</span>{{else}}<span class="no-frame">{{localize "SFRPG.StarshipSheet.Header.FrameMissing"}}</span>{{/if}}
-                </li>
-                <li data-tippy-content="{{ localize "SFRPG.Size"}}<br />@details.size">
-                    <span>{{localize "SFRPG.StarshipSheet.Header.Size" size=system.details.size}}</span>
-                </li>
-            </ul>
+        <ul class="summary">
+            <li data-tippy-content="{{localize " SFRPG.ShipModelLabel"}}<br />@details.model">
+            <input type="text" name="system.details.model" value="{{system.details.model}}" placeholder="{{localize "
+                SFRPG.ShipModelLabel"}}" />
+            </li>
+            <li data-tippy-content="{{localize " SFRPG.ShipFrameLabel"}}<br />@details.frame">
+            {{#if activeFrame}}<span>{{activeFrame.name}}</span>{{else}}<span class="no-frame">{{localize
+                "SFRPG.StarshipSheet.Header.FrameMissing"}}</span>{{/if}}
+            </li>
+            <li data-tippy-content="{{ localize " SFRPG.Size"}}<br />@details.size">
+            <span>{{localize "SFRPG.StarshipSheet.Header.Size" size=system.details.size}}</span>
+            </li>
+        </ul>
 
-            <ul class="attributes flexrow">
-                <li class="attribute health" data-tippy-content="{{ localize "SFRPG.HullPoints" }}<br />@attributes.hp.value<br />@attributes.hp.max">
-                    <h4 class="attribute-name box-title">{{ localize "SFRPG.Durability" }}</h4>
-                    <table class="statTable">
-                        <thead>
-    <tr>
+        <ul class="attributes flexrow">
+            <li class="attribute health" data-tippy-content="{{ localize " SFRPG.HullPoints" }}<br />
+            @attributes.hp.value<br />@attributes.hp.max">
+            <h4 class="attribute-name box-title">{{ localize "SFRPG.Durability" }}</h4>
+            <table class="statTable">
+                <thead>
+                    <tr>
 
-        <th>
-            <label>Type</label>
-        </th>
-        <th>
-            <label>Pend</label>
-        </th>
-        <th>
-            <label>Val</label>
-        </th>
-        <th  >
-            <label>Max</label>
-        </th>
+                        <th>
+                            <label>Type</label>
+                        </th>
+                        <th>
+                            <label>Pend</label>
+                        </th>
+                        <th>
+                            <label>Val</label>
+                        </th>
+                        <th>
+                            <label>Max</label>
+                        </th>
 
-    </tr>
-</thead> 
-<tbody>
-    <tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
 
-        <td style="text-align: left" >
-            <label>Stun</label>
-        </td>
-        <td>
-            <input  name="system.attributes.stu.pending" type="number" value="{{system.attributes.stu.pending}}" data-dtype="Number" placeholder="10" />
-        </td>
-        <td>
-            <input  name="system.attributes.stu.value" type="number" value="{{system.attributes.stu.value}}" data-dtype="Number" placeholder="10" />
-        </td>
-        <td>
-            <input  disabled name="system.attributes.stu.max" type="number" value="{{system.attributes.stu.max}}" data-dtype="Number" placeholder="10" />
-        </td>
-    </tr>
-    <tr >
+                        <td style="text-align: left">
+                            <label>Stun</label>
+                        </td>
+                        <td>
+                            <input name="system.attributes.stu.pending" type="number"
+                                value="{{system.attributes.stu.pending}}" data-dtype="Number" placeholder="10" />
+                        </td>
+                        <td>
+                            <input name="system.attributes.stu.value" type="number"
+                                value="{{system.attributes.stu.value}}" data-dtype="Number" placeholder="10" />
+                        </td>
+                        <td>
+                            <input disabled name="system.attributes.stu.max" type="number"
+                                value="{{system.attributes.stu.max}}" data-dtype="Number" placeholder="10" />
+                        </td>
+                    </tr>
+                    <tr>
 
-        <td style="text-align: left;" >
-            <label>Wound</label>
-        </td>
-        <td>
-            <input name="system.attributes.wou.pending" type="number" value="{{system.attributes.wou.pending}}" data-dtype="Number" placeholder="10" />
-        </td>
-        <td>
-            <input  name="system.attributes.wou.value" type="number" value="{{system.attributes.wou.value}}" data-dtype="Number" placeholder="10" />
-        </td>
-        <td  >
-            <input  disabled name="system.attributes.wou.max" type="number" value="{{system.attributes.wou.max}}" data-dtype="Number" placeholder="10" />
-        </td>
-    </tr>
-    <tr>
+                        <td style="text-align: left;">
+                            <label>Wound</label>
+                        </td>
+                        <td>
+                            <input name="system.attributes.wou.pending" type="number"
+                                value="{{system.attributes.wou.pending}}" data-dtype="Number" placeholder="10" />
+                        </td>
+                        <td>
+                            <input name="system.attributes.wou.value" type="number"
+                                value="{{system.attributes.wou.value}}" data-dtype="Number" placeholder="10" />
+                        </td>
+                        <td>
+                            <input disabled name="system.attributes.wou.max" type="number"
+                                value="{{system.attributes.wou.max}}" data-dtype="Number" placeholder="10" />
+                        </td>
+                    </tr>
+                    <tr>
 
-        <td style="text-align: left;" >
-            <label>Mortal</label>
-        </td>
-        <td>
-            <input   name="system.attributes.mor.pending" type="number" value="{{system.attributes.mor.pending}}" data-dtype="Number" placeholder="10" />
-        </td>
-        <td>
-            <input  name="system.attributes.mor.value" type="number" value="{{system.attributes.mor.value}}" data-dtype="Number" placeholder="10" />
-        </td>
-        <td>
-            <input  disabled name="system.attributes.mor.max" type="number" value="{{system.attributes.mor.max}}" data-dtype="Number" placeholder="10" />
-        </td>
-    </tr>
-    <tr>
+                        <td style="text-align: left;">
+                            <label>Mortal</label>
+                        </td>
+                        <td>
+                            <input name="system.attributes.mor.pending" type="number"
+                                value="{{system.attributes.mor.pending}}" data-dtype="Number" placeholder="10" />
+                        </td>
+                        <td>
+                            <input name="system.attributes.mor.value" type="number"
+                                value="{{system.attributes.mor.value}}" data-dtype="Number" placeholder="10" />
+                        </td>
+                        <td>
+                            <input disabled name="system.attributes.mor.max" type="number"
+                                value="{{system.attributes.mor.max}}" data-dtype="Number" placeholder="10" />
+                        </td>
+                    </tr>
+                    <tr>
 
-        <td style="text-align: left;" >
-            <label>Critical</label>
-        </td>
-        <td>
-            <input  name="system.attributes.cri.pending" type="number" value="{{system.attributes.cri.pending}}" data-dtype="Number" placeholder="10" />
-        </td>
-        <td>
-            <input name="system.attributes.cri.value" type="number" value="{{system.attributes.cri.value}}" data-dtype="Number" placeholder="10" />
-        </td>
-        <td>
-            <input  disabled name="system.attributes.cri.max" type="number" value="{{system.attributes.cri.max}}" data-dtype="Number" placeholder="10" />
-        </td>
-    </tr>
-</tbody>
+                        <td style="text-align: left;">
+                            <label>Critical</label>
+                        </td>
+                        <td>
+                            <input name="system.attributes.cri.pending" type="number"
+                                value="{{system.attributes.cri.pending}}" data-dtype="Number" placeholder="10" />
+                        </td>
+                        <td>
+                            <input name="system.attributes.cri.value" type="number"
+                                value="{{system.attributes.cri.value}}" data-dtype="Number" placeholder="10" />
+                        </td>
+                        <td>
+                            <input disabled name="system.attributes.cri.max" type="number"
+                                value="{{system.attributes.cri.max}}" data-dtype="Number" placeholder="10" />
+                        </td>
+                    </tr>
+                </tbody>
 
-                    </table>
-                    
-                    
-                    
-                   <!-- <div class="attribute-value multiple">
+            </table>
+
+
+
+            <!-- <div class="attribute-value multiple">
                         
                         <label> Stun__ </label>
 
@@ -149,105 +165,108 @@
                         <label>{{system.attributes.cri.max}}</label>
                     </div>
                     -->
-                </li>
-                
-                <li class="attribute">
-                    <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Header.Statistics"}}</h4>
-                    <table class="statTable">
-                        <thead>
-                        <tr>
-                        <th></th>
-                        <th>{{localize "SFRPG.StarshipSheet.Header.Value"}}</th>
-                        <th>{{localize "SFRPG.StarshipSheet.Header.Max"}}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                        <td>{{localize "SFRPG.StarshipSheet.Header.PCU"}}</td>
-                        <td>{{system.attributes.power.value}}</td>
-                        <td>{{system.attributes.hullPoints.max}}</td>
-                        </tr>
-                        <tr>
-                        <td>{{localize "SFRPG.StarshipSheet.Header.BHP"}}</td>
-                        <td>{{system.attributes.hullPoints.value}}</td>
-                        <td>{{system.attributes.hullPoints.max}}</td>
-                        </tr>
-                        <tr data-tippy-content="laser-mass-psi-radar-thermal" >
-                        <td>{{localize "ECM"}}</td>
-                        <td colspan = "2"  > {{#each system.attributes.ECM as |res|}}  
-                              {{res.value}}
-                            {{/each}}
-                            </td>
-                        
-                        </tr>
-                        <tr data-tippy-content="{{system.attributes.resistance.tooltip}} (area-beam-bomb-mine-missile-projectile-special-torpedo)">
-                            <td>{{localize "RES"}}</td>
-                            <td colspan = "2"   >  
-                                {{system.attributes.resistance.base}} ({{system.attributes.resistance.area}}-{{system.attributes.resistance.beam}}-{{system.attributes.resistance.bomb}}-{{system.attributes.resistance.mine}}-{{system.attributes.resistance.missile}}-{{system.attributes.resistance.projectile}}-{{system.attributes.resistance.special}}-{{system.attributes.resistance.torpedo}})   
-                            </td>
-                            
-                            </tr>
-                        <tr>
-                        <td>{{localize "Price"}}</td>
-                        <td colspan = "2">{{system.price.value}}</td>
-                        
-                        </tr>
-                        </tbody>
-                        </table>
-                    
-                    
-                    
+            </li>
 
-                </li>
-                <li class="attribute">
-                    <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Header.Movement.Title"}}</h4>
-                    <table class="statTable">
-                        <thead>
+            <li class="attribute">
+                <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Header.Statistics"}}</h4>
+                <table class="statTable">
+                    <thead>
                         <tr>
-                        
-                        <th>Attribute</th>
-                        <th>Value</th>
+                            <th></th>
+                            <th>{{localize "SFRPG.StarshipSheet.Header.Value"}}</th>
+                            <th>{{localize "SFRPG.StarshipSheet.Header.Max"}}</th>
                         </tr>
-                        </thead>
-                        <tbody>
+                    </thead>
+                    <tbody>
                         <tr>
-                        <td>Accel</td>
-                        <td>{{system.attributes.accel.value}}</td>
-                        
+                            <td>{{localize "SFRPG.StarshipSheet.Header.PCU"}}</td>
+                            <td>{{system.attributes.power.value}}</td>
+                            <td>{{system.attributes.hullPoints.max}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{localize "SFRPG.StarshipSheet.Header.BHP"}}</td>
+                            <td>{{system.attributes.hullPoints.value}}</td>
+                            <td>{{system.attributes.hullPoints.max}}</td>
+                        </tr>
+                        <tr data-tippy-content="laser-mass-psi-radar-thermal">
+                            <td>{{localize "ECM"}}</td>
+                            <td colspan="2"> {{#each system.attributes.ECM as |res|}}
+                                {{res.value}}
+                                {{/each}}
+                            </td>
+
+                        </tr>
+                        <tr
+                            data-tippy-content="{{system.attributes.resistance.tooltip}} (area-beam-bomb-mine-missile-projectile-special-torpedo)">
+                            <td>{{localize "RES"}}</td>
+                            <td colspan="2">
+                                {{system.attributes.resistance.base}}
+                                ({{system.attributes.resistance.area}}-{{system.attributes.resistance.beam}}-{{system.attributes.resistance.bomb}}-{{system.attributes.resistance.mine}}-{{system.attributes.resistance.missile}}-{{system.attributes.resistance.projectile}}-{{system.attributes.resistance.special}}-{{system.attributes.resistance.torpedo}})
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>{{localize "Price"}}</td>
+                            <td colspan="2">{{system.price.value}}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+
+            </li>
+            <li class="attribute">
+                <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Header.Movement.Title"}}</h4>
+                <table class="statTable">
+                    <thead>
+                        <tr>
+
+                            <th>Attribute</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Accel</td>
+                            <td>{{system.attributes.accel.value}}</td>
+
                         </tr>
                         <tr>
                             <td>{{localize "Speed"}}</td>
                             <td>
-                            <input  name="system.attributes.speed.value" type="number" value="{{system.attributes.speed.value}}" data-dtype="Number" placeholder="0" />
+                                <input name="system.attributes.speed.value" type="number"
+                                    value="{{system.attributes.speed.value}}" data-dtype="Number" placeholder="0" />
                             </td>
                         </tr>
 
                         <tr>
-                          <td>{{localize "Maneuver"}}</td>
-                        <td>{{system.attributes.maneuverability}}</td>
-                 
+                            <td>{{localize "Maneuver"}}</td>
+                            <td>{{system.attributes.maneuverability}}</td>
+
                         </tr>
                         <tr>
                             <td>{{localize "FTL "}}</td>
-                          <td>{{system.attributes.ftl.range}}</td>
-                   
-                          </tr>
+                            <td>{{system.attributes.ftl.range}}</td>
 
-                       
-                          
-                        <tr>
-                        <td></td>
-                        <td ></td>
-                        
                         </tr>
-                        </tbody>
-                        </table>
-                    
-                    
-                    
 
-                </li>
-<!--
+
+
+                        <tr>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+
+            </li>
+            <!--
                 <li class="attribute">
                     <h4 class="attribute-name box-title" data-tooltip="{{localize "SFRPG.StarshipSheet.Header.Movement.Maneuverability"}}<br/>@attributes.maneuverability<br/><br/>{{system.attributes.maneuverability}}">{{localize "SFRPG.StarshipSheet.Header.Movement.Title"}}</h4>
                     <ol class="attribute-multibox " >
@@ -276,7 +295,7 @@
                     </ol>
                 </li>
 -->
-            </ul>
+        </ul>
 
         </div>
     </header>
@@ -299,12 +318,12 @@
                 <div class="sturtus flexcol">
                     <h3 class="form-header">{{ localize "SFRPG.Attributes"}}</h3>
                     <ul class="attributes flexrow">
-            
+
                     </ul>
                 </div>
-            </div> 
-            
-         
+            </div>
+
+
             <div class="divTable crewTable">
                 <div class="divTableHeading">
                     <div class="divTableRow">
@@ -317,16 +336,18 @@
                             <table class="crewTable">
                                 <tbody>
                                     {{#each crew as |role rolename|}}
-                                        {{#each role.actorlist as |actor a|}}
-                                            {{#each actor as |skill b|}}
-                                                <tr class="divTableRow" >
-                                                    <td class="crew-role">{{role.shortlabel}}</td>
-                                                    <td class="crew-view">{{skill.actor.name}}</td>
-                                                    <td class="crew-role">{{skill.label}}</td>
-                                                    <td class="crew-score" data-dtype="Number" data-role="{{role.dataset.role}}" data-attrib="{{skill.attrib}}" data-skill="{{skill.name}}" data-actorid="{{skill.actor.id}}">{{skill.score}}</td>
-                                                </tr>
-                                            {{/each}}
-                                        {{/each}}
+                                    {{#each role.actorlist as |actor a|}}
+                                    {{#each actor as |skill b|}}
+                                    <tr class="divTableRow">
+                                        <td class="crew-role">{{role.shortlabel}}</td>
+                                        <td class="crew-view">{{skill.actor.name}}</td>
+                                        <td class="crew-role">{{skill.label}}</td>
+                                        <td class="crew-score" data-dtype="Number" data-role="{{role.dataset.role}}"
+                                            data-attrib="{{skill.attrib}}" data-skill="{{skill.name}}"
+                                            data-actorid="{{skill.actor.id}}">{{skill.score}}</td>
+                                    </tr>
+                                    {{/each}}
+                                    {{/each}}
                                     {{/each}}
                                 </tbody>
                             </table>
@@ -334,12 +355,15 @@
                     </div>
                 </div>
             </div>
-                <img src="systems/Alternityd100/images/core/Fig_0.1.png" alt="Italian Trulli" style="width:700px;height:73px;">
+            <img src="systems/Alternityd100/images/core/Fig_0.1.png" alt="Italian Trulli"
+                style="width:700px;height:73px;">
 
             <div class="divTable crewTable">
                 <div class="divTableHeading">
                     <div class="divTableRow">
-                        <div class="divTableHead"> <a href="https://archive.org/details/MyRpgCollection/Alternity_Warships/page/n9/mode/1up">Vehicle Maneuvers</a>  </div>
+                        <div class="divTableHead"> <a
+                                href="https://archive.org/details/MyRpgCollection/Alternity_Warships/page/n9/mode/1up">Vehicle
+                                Maneuvers</a> </div>
                     </div>
                 </div>
                 <div class="divTableBody2">
@@ -347,42 +371,89 @@
                         <div class="divTableCell">
                             <table class="crewTable">
                                 <tbody>
-                                    <tr  >
-                                        <th> 
+                                    <tr>
+                                        <th>
                                             <p> <b>Maneuvers</b></p>
                                         </th>
-                                        <th> 
+                                        <th>
                                             <p> <b>Maneuver Checks</b></p>
                                         </th>
-                                        <th> 
+                                        <th>
                                             <p> <b>Acceleration and <br>Maneuver Checks</b></p>
                                         </th>
-                                        <th> 
+                                        <th>
                                             <p> <b>Jinking</b></p>
-                                        </th>   
+                                        </th>
                                     </tr>
-                                    <tr >  
+                                    <tr>
                                         <td>
-                                            <p>For the basic combat game, we're assuming that starships are equipped with engines that permit cinematic maneuvers banks, loops, turns, and rolls. In effect, the gravity induction engine engages a medium against which it can exert force — the omnipresent gravitational energy of the universe. We'll examine other methods for moving and maneuvering ships in Chapter 2: Advanced Combat. <br> Ships may perform a number of maneuvers in one round equal to their Maneuverability Class.                                   
-                                                A speed of 5-8 reduces a ship's MC by 1 point; a speed of 9-12 reduces MC by 2 points; a speed of 13 to 16 reduces MC by 3 points. (Every 4 points of speed reduces maneuverability class by an additional point.)                                
-                                                <br>A ship at MC0 can only make maneuvers once every other round (Phase). A ship at MC -1 can maneuver once per three rounds; MC -2, once per four rounds; and so on. 
-                                            </p><p>There are four basic maneuvers available to a ship:
-                                            </p><p>Straight The ship simply moves forward one hex per point of speed. This isn't really a maneuver. A ship doesn't have to use its engines or perform any maneuvers to keep moving straightahead.
-                                            </p><p>Roll: The ship moves into any one of the four hexes on either side instead of moving into the hex directly ahead of it and maintains its current heading. Executing a roll does not cost any speed points.
-                                            </p><p> Turn: The ship moves forward one hex and then changes its heading by one hexside. Changing heading counts as one point of speed, so a ship with a speed of 5 could move 5 hexes in a straight line, or 4 hexes and turn.
-                                            </p><p> Loop and Turn: The ship moves straight ahead one hex and then selects any new heading desired. This costs two extra points of speed, so a ship with a speed of 5 could move 3 hexes and execute a loop and turn maneuver. 
+                                            <p>For the basic combat game, we're assuming that starships are equipped
+                                                with engines that permit cinematic maneuvers banks, loops, turns, and
+                                                rolls. In effect, the gravity induction engine engages a medium against
+                                                which it can exert force — the omnipresent gravitational energy of the
+                                                universe. We'll examine other methods for moving and maneuvering ships
+                                                in Chapter 2: Advanced Combat. <br> Ships may perform a number of
+                                                maneuvers in one round equal to their Maneuverability Class.
+                                                A speed of 5-8 reduces a ship's MC by 1 point; a speed of 9-12 reduces
+                                                MC by 2 points; a speed of 13 to 16 reduces MC by 3 points. (Every 4
+                                                points of speed reduces maneuverability class by an additional point.)
+                                                <br>A ship at MC0 can only make maneuvers once every other round
+                                                (Phase). A ship at MC -1 can maneuver once per three rounds; MC -2, once
+                                                per four rounds; and so on.
+                                            </p>
+                                            <p>There are four basic maneuvers available to a ship:
+                                            </p>
+                                            <p>Straight The ship simply moves forward one hex per point of speed. This
+                                                isn't really a maneuver. A ship doesn't have to use its engines or
+                                                perform any maneuvers to keep moving straightahead.
+                                            </p>
+                                            <p>Roll: The ship moves into any one of the four hexes on either side
+                                                instead of moving into the hex directly ahead of it and maintains its
+                                                current heading. Executing a roll does not cost any speed points.
+                                            </p>
+                                            <p> Turn: The ship moves forward one hex and then changes its heading by one
+                                                hexside. Changing heading counts as one point of speed, so a ship with a
+                                                speed of 5 could move 5 hexes in a straight line, or 4 hexes and turn.
+                                            </p>
+                                            <p> Loop and Turn: The ship moves straight ahead one hex and then selects
+                                                any new heading desired. This costs two extra points of speed, so a ship
+                                                with a speed of 5 could move 3 hexes and execute a loop and turn
+                                                maneuver.
                                             </p>
                                         </td>
-                                        
-                                        <td> 
-                                            <p> All ships are assigned a Maneuverability Class based on the size and hull type. However, a ship may attempt a crew check (or Vehicle Ops-spacecraft skill check on the part of the character at the helm) to increase its Maneuverability Class by 1, 2, or 3 for an Ordinary, Good, or Amazing success. <br> For example, a destroyer has a base Maneuverability Class 3. If it's traveling at a speed of 9, its MC is reduced by two points to MC 1. Under normal circumstances, the ship is limited to one maneuver per round. If the helmsman rolls an Ordinary success on the check, the destroyer's Maneuverability Class is increased to 2, allowing it to perform one more maneuver this round than it would normally due to its high speed.</p>
+
+                                        <td>
+                                            <p> All ships are assigned a Maneuverability Class based on the size and
+                                                hull type. However, a ship may attempt a crew check (or Vehicle
+                                                Ops-spacecraft skill check on the part of the character at the helm) to
+                                                increase its Maneuverability Class by 1, 2, or 3 for an Ordinary, Good,
+                                                or Amazing success. <br> For example, a destroyer has a base
+                                                Maneuverability Class 3. If it's traveling at a speed of 9, its MC is
+                                                reduced by two points to MC 1. Under normal circumstances, the ship is
+                                                limited to one maneuver per round. If the helmsman rolls an Ordinary
+                                                success on the check, the destroyer's Maneuverability Class is increased
+                                                to 2, allowing it to perform one more maneuver this round than it would
+                                                normally due to its high speed.</p>
                                         </td>
-                                        <td> 
-                                            <p> Each point of acceleration "left over" after the ship adjusts its speed for the round adds a -1 step bonus to the maneuver check (or skill check). If the destroyer in the preceding example had two points of acceleration unused in the current phase, the pilot would roll his maneuver check with a -2 step bonus</p>
+                                        <td>
+                                            <p> Each point of acceleration "left over" after the ship adjusts its speed
+                                                for the round adds a -1 step bonus to the maneuver check (or skill
+                                                check). If the destroyer in the preceding example had two points of
+                                                acceleration unused in the current phase, the pilot would roll his
+                                                maneuver check with a -2 step bonus</p>
                                         </td>
-                                        <td> 
-                                            <p> Instead of using a maneuver check to increase its maneuverability, a ship can instead use a maneuver check to "jink," making itself harder to hit. An Ordinary, Good, or Amazing result on the maneuver check adds a +1, +2, or +3 step penalty to any incoming enemy fire, missile attacks, or bomb attacks in the following fire phase. Just like a normal maneuver check, unused acceleration in the current round adds a - 1 step bonus per point left over to the maneuver check. In addition, the ship's size modifier is reversed and added to the pilot's skill check. For example, a fighter has a +3 step size modifier for targeting, but this becomes a - 3 step bonus for jinking attempts.Only</p>
-                                        </td>                                    
+                                        <td>
+                                            <p> Instead of using a maneuver check to increase its maneuverability, a
+                                                ship can instead use a maneuver check to "jink," making itself harder to
+                                                hit. An Ordinary, Good, or Amazing result on the maneuver check adds a
+                                                +1, +2, or +3 step penalty to any incoming enemy fire, missile attacks,
+                                                or bomb attacks in the following fire phase. Just like a normal maneuver
+                                                check, unused acceleration in the current round adds a - 1 step bonus
+                                                per point left over to the maneuver check. In addition, the ship's size
+                                                modifier is reversed and added to the pilot's skill check. For example,
+                                                a fighter has a +3 step size modifier for targeting, but this becomes a
+                                                - 3 step bonus for jinking attempts.Only</p>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -395,32 +466,34 @@
                 <div class="divTableBody">
                     <div class="divTableRow">
                         <div class="divTableCell">
-                            <img src="systems/Alternityd100/images/core/Fig_1-3.png" alt="Italian Trulli" style="width:456px;height:560px;">
-                            <img src="systems/Alternityd100/images/core/WS_Fig_1-2.png" style="width:456px;height:1144px;" >
+                            <img src="systems/Alternityd100/images/core/Fig_1-3.png" alt="Italian Trulli"
+                                style="width:456px;height:560px;">
+                            <img src="systems/Alternityd100/images/core/WS_Fig_1-2.png"
+                                style="width:456px;height:1144px;">
                         </div>
                         <div class="divTableCell">
-                             
+
                         </div>
                     </div>
                 </div>
             </div>
 
-          
-                            
 
-        
+
+
+
 
             starship-sheet-full
         </div>
 
-           
-            {{> "systems/Alternityd100/templates/actors/parts/actor-starship-status.html" }}
+
+        {{> "systems/Alternityd100/templates/actors/parts/actor-starship-status.html" }}
 
 
 
 
-  
-            
+
+
         <div class="tab weapons flexcol" data-group="primary" data-tab="weapons">
             <ol class="inventory-list">
 
@@ -430,13 +503,13 @@
                     </div>
 
                     <div class="item-controls">
-                        <a  style="flex-basis:75px" class="scan-refresh" title="Refresh Scans"  data-scan="refresh">
-                            <i  class="fas fa-redo"></i> Refresh
+                        <a style="flex-basis:75px" class="scan-refresh" title="Refresh Scans" data-scan="refresh">
+                            <i class="fas fa-redo"></i> Refresh
                         </a>
                     </div>
                     <div class="item-controls">
-                        <a  style="flex-basis:50px" class="scan-refresh" title="Clear Scans" data-scan="clear" >
-                            <i  class="fas fa-trash"></i> Clear
+                        <a style="flex-basis:50px" class="scan-refresh" title="Clear Scans" data-scan="clear">
+                            <i class="fas fa-trash"></i> Clear
                         </a>
                     </div>
 
@@ -450,45 +523,61 @@
                     <li class="item flexrow" data-item-id="{{item.token.id}}" data-type="token">
                         <div class="item-name flexrow rollable">
                             <div class="scan-image" style="background-image: url({{item.token.img}})"></div>
-                            {{#if item.aquired}}<h4>{{item.name}} ({{localize item.hullType}})</h4>{{/if}} 
+                            {{#if item.aquired}}<h4>{{item.name}} ({{localize item.hullType}})</h4>{{/if}}
                             {{#if (not item.aquired)}}<h4>{{item.size}}</h4>{{/if}}
-                            
-                            <div style=" padding: 0 ; background-color: black " >
-                                <table style=" padding: 0;  background-color:rgb(61, 61, 70);margin-bottom:0;margin-top:0; text-align: center; width: 170px; "
-                                data-tippy-content="Targeted (T), Obstacle(Ob), Range (000), Bearing(000) <br /> Zero Arc Left (0L), Zero Arc Right (0R)<br />Arcs: Forward (F), Right/Starboard (R), Aft (A), Left/Port (L)<br />Status: (ON) / (OFF)<br />Relod: Available in open space (Green) Not available in open space (Amber) <br />Capicity: Munitions Loaded">
+
+                            <div style=" padding: 0 ; background-color: black ">
+                                <table
+                                    style=" padding: 0;  background-color:rgb(61, 61, 70);margin-bottom:0;margin-top:0; text-align: center; width: 170px; "
+                                    data-tippy-content="Targeted (T), Obstacle(Ob), Range (000), Bearing(000) <br /> Zero Arc Left (0L), Zero Arc Right (0R)<br />Arcs: Forward (F), Right/Starboard (R), Aft (A), Left/Port (L)<br />Status: (ON) / (OFF)<br />Relod: Available in open space (Green) Not available in open space (Amber) <br />Capicity: Munitions Loaded">
                                     <tr>
-                                        {{#if item.aquired}} <td style="width:8% ;color:hwb(129 0% 0%)"  > T</td> {{/if}}
-                                        {{#if (not item.aquired)}} <td style="width:8% ;color:#ffff00"  > C</td> {{/if}}
-                                        {{#if item.collisions}} <td style="width:8% ;color:#ff0000"  > Ob</td> {{/if}}
-                                        {{#if (not item.collisions)}} <td style="width:8% ;color:hwb(0 38% 62%)"  > Ob</td> {{/if}}
-                                        {{#if item.aquired}} <td style="width:20% ;color:hwb(129 0% 0%)"   > {{item.range}}</td> {{/if}}
-                                        {{#if (not item.aquired)}} <td style="width:20% ;color:hwb(0 38% 62%)"  > 000</td> {{/if}}
-                                        {{#if item.aquired}} <td style="width:20% ;color:hwb(129 0% 0%)"   > {{item.angle}}</td> {{/if}}
-                                        {{#if (not item.aquired)}} <td style="width:20% ;color:hwb(0 38% 62%)"  > 000</td> {{/if}}
+                                        {{#if item.aquired}} <td style="width:8% ;color:hwb(129 0% 0%)"> T</td> {{/if}}
+                                        {{#if (not item.aquired)}} <td style="width:8% ;color:#ffff00"> C</td> {{/if}}
+                                        {{#if item.collisions}} <td style="width:8% ;color:#ff0000"> Ob</td> {{/if}}
+                                        {{#if (not item.collisions)}} <td style="width:8% ;color:hwb(0 38% 62%)"> Ob
+                                        </td> {{/if}}
+                                        {{#if item.aquired}} <td style="width:20% ;color:hwb(129 0% 0%)"> {{item.range}}
+                                        </td> {{/if}}
+                                        {{#if (not item.aquired)}} <td style="width:20% ;color:hwb(0 38% 62%)"> 000</td>
+                                        {{/if}}
+                                        {{#if item.aquired}} <td style="width:20% ;color:hwb(129 0% 0%)"> {{item.angle}}
+                                        </td> {{/if}}
+                                        {{#if (not item.aquired)}} <td style="width:20% ;color:hwb(0 38% 62%)"> 000</td>
+                                        {{/if}}
 
 
                                         {{#if item.aquired}}
                                         {{#each item.sensors as |sensor i|}}
-                                         <td style="width:8% ;color:hwb(129 0% 0%)"   > {{sensor.attBonus}}</td> 
+                                        <td style="width:8% ;color:hwb(129 0% 0%)"> {{sensor.attBonus}}</td>
                                         {{/each}}
                                         {{/if}}
-                                        {{#if item.system.mount.arc.stbd}} <td style="width:8% ;color:hwb(129 0% 0%)"  >R</td> {{/if}}
-                                        {{#if (not item.system.mount.arc.stbd)}} <td style="width:8% ;color:hwb(0 38% 62%)"   >R</td> {{/if}}
-      
+                                        {{#if item.system.mount.arc.stbd}} <td style="width:8% ;color:hwb(129 0% 0%)">R
+                                        </td> {{/if}}
+                                        {{#if (not item.system.mount.arc.stbd)}} <td
+                                            style="width:8% ;color:hwb(0 38% 62%)">R</td> {{/if}}
 
-                                        {{#if item.hasCapacity}} 
+
+                                        {{#if item.hasCapacity}}
                                         {{#if (not item.system.capacity.sreload)}}
-                                        <td style="width:10%"  class="item-control reload" title="{{localize "SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo" style = "color:darkorange " ></i></td>
+                                        <td style="width:10%" class="item-control reload" title="{{localize "
+                                            SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo"
+                                                style="color:darkorange "></i></td>
                                         {{/if}}
                                         {{#if item.system.capacity.sreload}}
-                                        <td style="width:10%"  class="item-control reload" title="{{localize "SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo" style = "color:hwb(129 0% 0%)" ></i></td>
-                                        {{/if}}                                       
-                                        <td style="width:12% ;color:hwb(129 0% 0%)" title="{{localize "SFRPG.ActorSheet.Inventory.Weapon.Reload"}}" class="item-control reload" >{{item.capacityCurrent}}</td>
+                                        <td style="width:10%" class="item-control reload" title="{{localize "
+                                            SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo"
+                                                style="color:hwb(129 0% 0%)"></i></td>
                                         {{/if}}
-                                        {{#if (not item.hasCapacity)}} 
-                                        <td style="width:10%"  title="{{localize "SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo" style = "color:hwb(0 41% 59%)" ></i></td>
-                                        <td style="width:12% ;color:hwb(0 41% 59%)"  > - 
+                                        <td style="width:12% ;color:hwb(129 0% 0%)" title="{{localize "
+                                            SFRPG.ActorSheet.Inventory.Weapon.Reload"}}" class="item-control reload">
+                                            {{item.capacityCurrent}}</td>
                                         {{/if}}
+                                        {{#if (not item.hasCapacity)}}
+                                        <td style="width:10%" title="{{localize "
+                                            SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo"
+                                                style="color:hwb(0 41% 59%)"></i></td>
+                                        <td style="width:12% ;color:hwb(0 41% 59%)"> -
+                                            {{/if}}
 
                                     </tr>
                                 </table>
@@ -519,52 +608,70 @@
                             {{item.capacityCurrent}} / {{item.capacityMaximum}}
                             {{#if ../../isOwner}}
                             &nbsp;
-                            <a class="item-control reload" title="{{localize "SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo"></i></a>
+                            <a class="item-control reload" title="{{localize "
+                                SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo"></i></a>
                             {{/if}}
                         </div>
                         {{/if}}
                         <div class="item-detail item-action">
                             {{#if (eq item.type "container")}}
-                                {{#if item.isOpen}}
-                                    <a class="item-control toggle-container" title="{{localize "SFRPG.ActorSheet.Inventory.Container.CloseTooltip"}}"><i class="fas fa-arrow-up"> {{localize "SFRPG.ActorSheet.Inventory.Container.Close"}}</i></a>
-                                {{else}}
-                                    <a class="item-control toggle-container" title="{{localize "SFRPG.ActorSheet.Inventory.Container.OpenTooltip"}}"><i class="fas fa-arrow-down"> {{localize "SFRPG.ActorSheet.Inventory.Container.Open"}}</i></a>
-                                {{/if}}
-                            {{else if item.hasUses}}
-                                {{item.system.capacity.value}} / {{item.system.capacity.max}}
+                            {{#if item.isOpen}}
+                            <a class="item-control toggle-container" title="{{localize "
+                                SFRPG.ActorSheet.Inventory.Container.CloseTooltip"}}"><i class="fas fa-arrow-up">
+                                    {{localize "SFRPG.ActorSheet.Inventory.Container.Close"}}</i></a>
+                            {{else}}
+                            <a class="item-control toggle-container" title="{{localize "
+                                SFRPG.ActorSheet.Inventory.Container.OpenTooltip"}}"><i class="fas fa-arrow-down">
+                                    {{localize "SFRPG.ActorSheet.Inventory.Container.Open"}}</i></a>
                             {{/if}}
-            
+                            {{else if item.hasUses}}
+                            {{item.system.capacity.value}} / {{item.system.capacity.max}}
+                            {{/if}}
+
                             {{#if (eq item.system.type "starshipWeapon")}}
-                         
+
                             {{#if (eq item.system.fireMode "burst")}}
-                            <a class="item-control toggle-mode" title="{{localize "d100A.Items.Weapon.modeTooltip"}}"><i class="fas fa-cog"></i> {{localize "d100A.Items.Weapon.burst"}}</a>
+                            <a class="item-control toggle-mode" title="{{localize "
+                                d100A.Items.Weapon.modeTooltip"}}"><i class="fas fa-cog"></i> {{localize
+                                "d100A.Items.Weapon.burst"}}</a>
                             {{else if (eq item.system.fireMode "auto")}}
-                            <a class="item-control toggle-mode" title="{{localize "d100A.Items.Weapon.modeTooltip"}}"><i class="fas fa-cog"></i> {{localize "d100A.Items.Weapon.auto"}}</a>
+                            <a class="item-control toggle-mode" title="{{localize "
+                                d100A.Items.Weapon.modeTooltip"}}"><i class="fas fa-cog"></i> {{localize
+                                "d100A.Items.Weapon.auto"}}</a>
                             {{else if (eq item.system.fireMode "fire")}}
-                            <a class="item-control toggle-mode" title="{{localize "d100A.Items.Weapon.modeTooltip"}}"><i class="fas fa-cog"></i> {{localize "d100A.Items.Weapon.fire"}}</a>
+                            <a class="item-control toggle-mode" title="{{localize "
+                                d100A.Items.Weapon.modeTooltip"}}"><i class="fas fa-cog"></i> {{localize
+                                "d100A.Items.Weapon.fire"}}</a>
                             {{else if (eq item.system.fireMode "battery")}}
-                            <a class="item-control toggle-mode" title="{{localize "d100A.Items.Weapon.modeTooltip"}}"><i class="fas fa-cog"></i> {{localize "d100A.Items.Weapon.battery"}}</a>
+                            <a class="item-control toggle-mode" title="{{localize "
+                                d100A.Items.Weapon.modeTooltip"}}"><i class="fas fa-cog"></i> {{localize
+                                "d100A.Items.Weapon.battery"}}</a>
 
                             {{else if (eq item.system.fireMode "melee")}}
-                            <a class="item-control toggle-mode" title="{{localize "d100A.Items.Weapon.modeTooltip"}}"><i class="fas fa-cog"> </i>{{localize "d100A.Items.Weapon.melee"}}</a>
-            
+                            <a class="item-control toggle-mode" title="{{localize "
+                                d100A.Items.Weapon.modeTooltip"}}"><i class="fas fa-cog"> </i>{{localize
+                                "d100A.Items.Weapon.melee"}}</a>
+
                             {{/if}}
                             {{/if}}
-            
+
                         </div>
-                        
 
 
-                        <div class="item-controls" style=" background-color: black " >
-                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit" style = "color:hwb(129 0% 0%)"></i></a>
+
+                        <div class="item-controls" style=" background-color: black ">
+                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"
+                                    style="color:hwb(129 0% 0%)"></i></a>
                             {{#if ../../isOwner}}
-                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash" style = "color:hwb(129 0% 0%)"></i></a>
+                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"
+                                    style="color:hwb(129 0% 0%)"></i></a>
                             {{/if}}
                             {{#if (not ../../isOwner)}}
-                            <a class="item-control item-deletex" title="Delete Item"><i class="fas fa-trash" style = "color:hwb(0 41% 59%)"></i></a>
+                            <a class="item-control item-deletex" title="Delete Item"><i class="fas fa-trash"
+                                    style="color:hwb(0 41% 59%)"></i></a>
                             {{/if}}
                         </div>
-                        
+
                     </li>
                     {{/each}}
                 </ol>
@@ -577,8 +684,9 @@
                     </div>
                     {{#if (and ../isOwner section.dataset.allowAdd)}}
                     <div class="item-controls">
-                        <a  style="flex-basis:45px" class="item-control item-create" title="Create Items" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
-                            <i  class="fas fa-plus"></i> Add
+                        <a style="flex-basis:45px" class="item-control item-create" title="Create Items" {{#each
+                            section.dataset as |v k|}}data-{{k}}="{{v}}" {{/each}}>
+                            <i class="fas fa-plus"></i> Add
                         </a>
                     </div>
                     {{/if}}
@@ -590,50 +698,81 @@
                         <div class="item-name flexrow rollable">
                             <div class="item-image" style="background-image: url({{item.img}})"></div>
                             <h4>{{item.name}}</h4>
-                            
-                            <div style=" padding: 0 ; background-color: black " >
-                                <table style=" padding: 0;  background-color:rgb(61, 61, 70);margin-bottom:0;margin-top:0; text-align: center; width: 170px; "
-                                data-tippy-content="<h3>WEAPONS</h3> Mount: Standard (S), Fixed (F), Turret (T)<br> <h3> SENSORS</h3>Mode: Passive (P), Active (A) <br>Type: Radar (R), Ladar (L), Mass (M), Thermal / IR (T), Psionic (P) <br><h3>ALL</h3>Arcs: Zero (Z), Forward (F), Right/Starboard (R), Aft (A), Left/Port (L)<br />Status: (ON) / (OFF)<br />Relod: Available in open space (Green) Not available in open space (Amber) <br />Capicity: Munitions Loaded">
+
+                            <div style=" padding: 0 ; background-color: black ">
+                                <table
+                                    style=" padding: 0;  background-color:rgb(61, 61, 70);margin-bottom:0;margin-top:0; text-align: center; width: 170px; "
+                                    data-tippy-content="<h3>WEAPONS</h3> Mount: Standard (S), Fixed (F), Turret (T)<br> <h3> SENSORS</h3>Mode: Passive (P), Active (A) <br>Type: Radar (R), Ladar (L), Mass (M), Thermal / IR (T), Psionic (P) <br><h3>ALL</h3>Arcs: Zero (Z), Forward (F), Right/Starboard (R), Aft (A), Left/Port (L)<br />Status: (ON) / (OFF)<br />Relod: Available in open space (Green) Not available in open space (Amber) <br />Capicity: Munitions Loaded">
                                     <tr>
-                                        {{#if item.system.mount.isStandard}} <td style="width:8% ;color:hwb(129 0% 0%)"  > S</td> {{/if}}
-                                        {{#if item.system.mount.isFixed}} <td style="width:8% ;color:hwb(129 0% 0%)"  > F</td> {{/if}}
-                                        {{#if item.system.mount.isTurret}} <td style="width:8% ;color:hwb(129 0% 0%)"  > T</td> {{/if}}
-                                        
-                                        {{#if (eq item.system.sensorMode "active") }} <td style="width:8% ;color:hwb(83 0% 0%)"  >A</td> {{/if}}
-                                        {{#if (eq item.system.sensorMode "passive")}} <td style="width:8% ;color:hwb(133 0% 0%)"   >P</td> {{/if}}
-                                        {{#if (eq item.system.sensorType "radar")}} <td style="width:8% ;color:hwb(133 0% 0%)"   >R</td> {{/if}}
-                                        {{#if (eq item.system.sensorType "laser")}} <td style="width:8% ;color:hwb(133 0% 0%)"   >L</td> {{/if}}
-                                        {{#if (eq item.system.sensorType "mass")}} <td style="width:8% ;color:hwb(133 0% 0%)"   >M</td> {{/if}}
-                                        {{#if (eq item.system.sensorType "thermal")}} <td style="width:8% ;color:hwb(133 0% 0%)"   >T</td> {{/if}}
-                                        {{#if (eq item.system.sensorType "psionic")}} <td style="width:8% ;color:hwb(133 0% 0%)"   >P</td> {{/if}}
-                                        
-                                        {{#if item.system.mount.arc.zero}} <td style="width:12% ;color:hwb(129 0% 0%)"  >Z</td> {{/if}}
-                                        {{#if (not item.system.mount.arc.zero)}} <td style="width:12% ;color:hwb(0 36% 63%)"   >Z</td> {{/if}}
-                                        
-                                        
-                                        {{#if item.system.mount.arc.front}} <td style="width:8% ;color:hwb(129 0% 0%)"   >F</td> {{/if}}
-                                        {{#if (not item.system.mount.arc.front)}} <td style="width:8% ;color:hwb(0 36% 64%)"   >F</td> {{/if}}
-                                        {{#if item.system.mount.arc.stbd}} <td style="width:8% ;color:hwb(129 0% 0%)"  >R</td> {{/if}}
-                                        {{#if (not item.system.mount.arc.stbd)}} <td style="width:8% ;color:hwb(0 38% 62%)"   >R</td> {{/if}}
-                                        {{#if item.system.mount.arc.aft}} <td style="width:8% ;color:hwb(129 0% 0%)"  >A</td> {{/if}}
-                                        {{#if (not item.system.mount.arc.aft)}} <td style="width:8% ;color:hwb(0 38% 62%)"   >A</td> {{/if}}
-                                        {{#if item.system.mount.arc.port}} <td style="width:8% ;color:hwb(129 0% 0%)"  >L </td> {{/if}}
-                                        {{#if (not item.system.mount.arc.port)}} <td style="width:8% ;color:hwb(0 41% 59%)"   >L </td> {{/if}}
-                                        {{#if item.system.isPowered}} <td style="width:12% ;color:hwb(129 0% 0%)"  >ON</td> {{/if}}
-                                        {{#if (not item.system.isPowered)}} <td style="width:12% ;color:hwb(0 0% 0%)"   >OFF</td> {{/if}}
-                                        {{#if item.hasCapacity}} 
+                                        {{#if item.system.mount.isStandard}} <td style="width:8% ;color:hwb(129 0% 0%)">
+                                            S</td> {{/if}}
+                                        {{#if item.system.mount.isFixed}} <td style="width:8% ;color:hwb(129 0% 0%)"> F
+                                        </td> {{/if}}
+                                        {{#if item.system.mount.isTurret}} <td style="width:8% ;color:hwb(129 0% 0%)"> T
+                                        </td> {{/if}}
+
+                                        {{#if (eq item.system.sensorMode "active") }} <td
+                                            style="width:8% ;color:hwb(83 0% 0%)">A</td> {{/if}}
+                                        {{#if (eq item.system.sensorMode "passive")}} <td
+                                            style="width:8% ;color:hwb(133 0% 0%)">P</td> {{/if}}
+                                        {{#if (eq item.system.sensorType "radar")}} <td
+                                            style="width:8% ;color:hwb(133 0% 0%)">R</td> {{/if}}
+                                        {{#if (eq item.system.sensorType "laser")}} <td
+                                            style="width:8% ;color:hwb(133 0% 0%)">L</td> {{/if}}
+                                        {{#if (eq item.system.sensorType "mass")}} <td
+                                            style="width:8% ;color:hwb(133 0% 0%)">M</td> {{/if}}
+                                        {{#if (eq item.system.sensorType "thermal")}} <td
+                                            style="width:8% ;color:hwb(133 0% 0%)">T</td> {{/if}}
+                                        {{#if (eq item.system.sensorType "psionic")}} <td
+                                            style="width:8% ;color:hwb(133 0% 0%)">P</td> {{/if}}
+
+                                        {{#if item.system.mount.arc.zero}} <td style="width:12% ;color:hwb(129 0% 0%)">Z
+                                        </td> {{/if}}
+                                        {{#if (not item.system.mount.arc.zero)}} <td
+                                            style="width:12% ;color:hwb(0 36% 63%)">Z</td> {{/if}}
+
+
+                                        {{#if item.system.mount.arc.front}} <td style="width:8% ;color:hwb(129 0% 0%)">F
+                                        </td> {{/if}}
+                                        {{#if (not item.system.mount.arc.front)}} <td
+                                            style="width:8% ;color:hwb(0 36% 64%)">F</td> {{/if}}
+                                        {{#if item.system.mount.arc.stbd}} <td style="width:8% ;color:hwb(129 0% 0%)">R
+                                        </td> {{/if}}
+                                        {{#if (not item.system.mount.arc.stbd)}} <td
+                                            style="width:8% ;color:hwb(0 38% 62%)">R</td> {{/if}}
+                                        {{#if item.system.mount.arc.aft}} <td style="width:8% ;color:hwb(129 0% 0%)">A
+                                        </td> {{/if}}
+                                        {{#if (not item.system.mount.arc.aft)}} <td
+                                            style="width:8% ;color:hwb(0 38% 62%)">A</td> {{/if}}
+                                        {{#if item.system.mount.arc.port}} <td style="width:8% ;color:hwb(129 0% 0%)">L
+                                        </td> {{/if}}
+                                        {{#if (not item.system.mount.arc.port)}} <td
+                                            style="width:8% ;color:hwb(0 41% 59%)">L </td> {{/if}}
+                                        {{#if item.system.isPowered}} <td style="width:12% ;color:hwb(129 0% 0%)">ON
+                                        </td> {{/if}}
+                                        {{#if (not item.system.isPowered)}} <td style="width:12% ;color:hwb(0 0% 0%)">
+                                            OFF</td> {{/if}}
+                                        {{#if item.hasCapacity}}
                                         {{#if (not item.system.capacity.sreload)}}
-                                        <td style="width:10%"  class="item-control reload" title="{{localize "SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo" style = "color:darkorange " ></i></td>
+                                        <td style="width:10%" class="item-control reload" title="{{localize "
+                                            SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo"
+                                                style="color:darkorange "></i></td>
                                         {{/if}}
                                         {{#if item.system.capacity.sreload}}
-                                        <td style="width:10%"  class="item-control reload" title="{{localize "SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo" style = "color:hwb(129 0% 0%)" ></i></td>
-                                        {{/if}}                                       
-                                        <td style="width:12% ;color:hwb(129 0% 0%)" title="{{localize "SFRPG.ActorSheet.Inventory.Weapon.Reload"}}" class="item-control reload" >{{item.capacityCurrent}}</td>
+                                        <td style="width:10%" class="item-control reload" title="{{localize "
+                                            SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo"
+                                                style="color:hwb(129 0% 0%)"></i></td>
                                         {{/if}}
-                                        {{#if (not item.hasCapacity)}} 
-                                        <td style="width:10%"  title="{{localize "SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo" style = "color:hwb(0 41% 59%)" ></i></td>
-                                        <td style="width:12% ;color:hwb(0 41% 59%)"  > - 
+                                        <td style="width:12% ;color:hwb(129 0% 0%)" title="{{localize "
+                                            SFRPG.ActorSheet.Inventory.Weapon.Reload"}}" class="item-control reload">
+                                            {{item.capacityCurrent}}</td>
                                         {{/if}}
+                                        {{#if (not item.hasCapacity)}}
+                                        <td style="width:10%" title="{{localize "
+                                            SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo"
+                                                style="color:hwb(0 41% 59%)"></i></td>
+                                        <td style="width:12% ;color:hwb(0 41% 59%)"> -
+                                            {{/if}}
 
                                     </tr>
                                 </table>
@@ -664,52 +803,70 @@
                             {{item.capacityCurrent}} / {{item.capacityMaximum}}
                             {{#if ../../isOwner}}
                             &nbsp;
-                            <a class="item-control reload" title="{{localize "SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo"></i></a>
+                            <a class="item-control reload" title="{{localize "
+                                SFRPG.ActorSheet.Inventory.Weapon.Reload"}}"><i class="fas fa-redo"></i></a>
                             {{/if}}
                         </div>
                         {{/if}}
                         <div class="item-detail item-action">
                             {{#if (eq item.type "container")}}
-                                {{#if item.isOpen}}
-                                    <a class="item-control toggle-container" title="{{localize "SFRPG.ActorSheet.Inventory.Container.CloseTooltip"}}"><i class="fas fa-arrow-up"> {{localize "SFRPG.ActorSheet.Inventory.Container.Close"}}</i></a>
-                                {{else}}
-                                    <a class="item-control toggle-container" title="{{localize "SFRPG.ActorSheet.Inventory.Container.OpenTooltip"}}"><i class="fas fa-arrow-down"> {{localize "SFRPG.ActorSheet.Inventory.Container.Open"}}</i></a>
-                                {{/if}}
-                            {{else if item.hasUses}}
-                                {{item.system.capacity.value}} / {{item.system.capacity.max}}
+                            {{#if item.isOpen}}
+                            <a class="item-control toggle-container" title="{{localize "
+                                SFRPG.ActorSheet.Inventory.Container.CloseTooltip"}}"><i class="fas fa-arrow-up">
+                                    {{localize "SFRPG.ActorSheet.Inventory.Container.Close"}}</i></a>
+                            {{else}}
+                            <a class="item-control toggle-container" title="{{localize "
+                                SFRPG.ActorSheet.Inventory.Container.OpenTooltip"}}"><i class="fas fa-arrow-down">
+                                    {{localize "SFRPG.ActorSheet.Inventory.Container.Open"}}</i></a>
                             {{/if}}
-            
+                            {{else if item.hasUses}}
+                            {{item.system.capacity.value}} / {{item.system.capacity.max}}
+                            {{/if}}
+
                             {{#if (eq item.system.type "starshipWeapon")}}
-                         
+
                             {{#if (eq item.system.fireMode "burst")}}
-                            <a class="item-control toggle-mode" title="{{localize "d100A.Items.Weapon.modeTooltip"}}"><i class="fas fa-cog"></i> {{localize "d100A.Items.Weapon.burst"}}</a>
+                            <a class="item-control toggle-mode" title="{{localize "
+                                d100A.Items.Weapon.modeTooltip"}}"><i class="fas fa-cog"></i> {{localize
+                                "d100A.Items.Weapon.burst"}}</a>
                             {{else if (eq item.system.fireMode "auto")}}
-                            <a class="item-control toggle-mode" title="{{localize "d100A.Items.Weapon.modeTooltip"}}"><i class="fas fa-cog"></i> {{localize "d100A.Items.Weapon.auto"}}</a>
+                            <a class="item-control toggle-mode" title="{{localize "
+                                d100A.Items.Weapon.modeTooltip"}}"><i class="fas fa-cog"></i> {{localize
+                                "d100A.Items.Weapon.auto"}}</a>
                             {{else if (eq item.system.fireMode "fire")}}
-                            <a class="item-control toggle-mode" title="{{localize "d100A.Items.Weapon.modeTooltip"}}"><i class="fas fa-cog"></i> {{localize "d100A.Items.Weapon.fire"}}</a>
+                            <a class="item-control toggle-mode" title="{{localize "
+                                d100A.Items.Weapon.modeTooltip"}}"><i class="fas fa-cog"></i> {{localize
+                                "d100A.Items.Weapon.fire"}}</a>
                             {{else if (eq item.system.fireMode "battery")}}
-                            <a class="item-control toggle-mode" title="{{localize "d100A.Items.Weapon.modeTooltip"}}"><i class="fas fa-cog"></i> {{localize "d100A.Items.Weapon.battery"}}</a>
+                            <a class="item-control toggle-mode" title="{{localize "
+                                d100A.Items.Weapon.modeTooltip"}}"><i class="fas fa-cog"></i> {{localize
+                                "d100A.Items.Weapon.battery"}}</a>
 
                             {{else if (eq item.system.fireMode "melee")}}
-                            <a class="item-control toggle-mode" title="{{localize "d100A.Items.Weapon.modeTooltip"}}"><i class="fas fa-cog"> </i>{{localize "d100A.Items.Weapon.melee"}}</a>
-            
+                            <a class="item-control toggle-mode" title="{{localize "
+                                d100A.Items.Weapon.modeTooltip"}}"><i class="fas fa-cog"> </i>{{localize
+                                "d100A.Items.Weapon.melee"}}</a>
+
                             {{/if}}
                             {{/if}}
-            
+
                         </div>
-                        
 
 
-                        <div class="item-controls" style=" background-color: black " >
-                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit" style = "color:hwb(129 0% 0%)"></i></a>
+
+                        <div class="item-controls" style=" background-color: black ">
+                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"
+                                    style="color:hwb(129 0% 0%)"></i></a>
                             {{#if ../../isOwner}}
-                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash" style = "color:hwb(129 0% 0%)"></i></a>
+                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"
+                                    style="color:hwb(129 0% 0%)"></i></a>
                             {{/if}}
                             {{#if (not ../../isOwner)}}
-                            <a class="item-control item-deletex" title="Delete Item"><i class="fas fa-trash" style = "color:hwb(0 41% 59%)"></i></a>
+                            <a class="item-control item-deletex" title="Delete Item"><i class="fas fa-trash"
+                                    style="color:hwb(0 41% 59%)"></i></a>
                             {{/if}}
                         </div>
-                        
+
                     </li>
                     {{/each}}
                 </ol>
@@ -719,8 +876,9 @@
 
         {{!-- Features Tab --}}
         <div class="tab features flexcol" data-group="primary" data-tab="features">
-            {{> "systems/Alternityd100/templates/actors/parts/actor-features.html" actor=actor sections=features noFilters=true prefixTable=prefixTable}}
-          
+            {{> "systems/Alternityd100/templates/actors/parts/actor-features.html" actor=actor sections=features
+            noFilters=true prefixTable=prefixTable}}
+
         </div>
 
         {{!-- Crew Tab --}}
@@ -734,7 +892,8 @@
                     {{#if isGM}}
                     <label class="checkbox">
                         <label><b>{{localize "SFRPG.StarshipSheet.Crew.CrewSetting"}}</b></label>
-                        <input class="squaredcheck"  type="checkbox" name="system.crew.useNPCCrew" {{checked system.crew.useNPCCrew}}/>{{localize "SFRPG.StarshipSheet.Crew.IsNPCCrew"}}
+                        <input class="squaredcheck" type="checkbox" name="system.crew.useNPCCrew" {{checked
+                            system.crew.useNPCCrew}} />{{localize "SFRPG.StarshipSheet.Crew.IsNPCCrew"}}
                     </label>
                     {{#if system.crew.useNPCCrew}}
                     <select name="system.crew.npcCrewQuality">
@@ -753,18 +912,22 @@
 
             {{#unless system.crew.useNPCCrew}}
             <ol class="crew-list">
-                
+
                 {{#each crew as |role|}}
-                <li class="flexrow crew-header {{role.cssClass}}" {{#each role.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>{{role.label}}</li>
+                <li class="flexrow crew-header {{role.cssClass}}" {{#each role.dataset as |v k|}}data-{{k}}="{{v}}"
+                    {{/each}}>{{role.label}}</li>
                 <ol class="crew-item-list">
                     {{#each role.actors as |actor a|}}
                     <li class="crew flexrow draggable" data-actor-id="{{actor.id}}">
                         <div class="crew-name flexrow">
                             <div class="crew-image" style="background-image: url({{actor.img}})"></div>
-                            <a class="crew-view"><h4>{{actor.name}}</h4></a>
+                            <a class="crew-view">
+                                <h4>{{actor.name}}</h4>
+                            </a>
                         </div>
                         <div class="crew-controls">
-                            <a class="crew-control crew-delete" title="Remove Crew Member"><i class="fas fa-trash"></i></a>
+                            <a class="crew-control crew-delete" title="Remove Crew Member"><i
+                                    class="fas fa-trash"></i></a>
                         </div>
                     </li>
                     {{/each}}
@@ -779,21 +942,25 @@
 
                     <div class="flexrow">
                         <label>{{localize "Number"}}</label>
-                        <input style="text-align: center;" type="text" class="crew-role-alter" value="{{role.number}}" data-item ="number" data-dtype="Number"  />
+                        <input style="text-align: center;" type="text" class="crew-role-alter" value="{{role.number}}"
+                            data-item="number" data-dtype="Number" />
                     </div>
                     <div class="flexrow" style="text-align: center;">
-                        <label >{{localize "Active"}}</label>
-                        
-                         
+                        <label>{{localize "Active"}}</label>
+
+
                     </div>
                     <div class="flexrow" style="text-align: center;">
-                        <input  type="checkbox" class="crew-role-alter" data-item ="active" {{checked role.active}}/>
-                         
+                        <input type="checkbox" class="crew-role-alter" data-item="active" {{checked role.active}} />
+
                     </div>
                     <div class="flexrow">
                         <label>{{localize "Actions"}}</label>
-                        <input style="text-align: center;" type="text" class="crew-role-alter" value="{{role.numberOfActionsValue}}" data-item ="numberOfActionsValue" data-dtype="Number"  />/
-                        <input style="text-align: center;" type="text" class="crew-role-alter" value="{{role.numberOfActionsMax}}" data-item ="numberOfActionsMax"  data-dtype="Number"  />
+                        <input style="text-align: center;" type="text" class="crew-role-alter"
+                            value="{{role.numberOfActionsValue}}" data-item="numberOfActionsValue"
+                            data-dtype="Number" />/
+                        <input style="text-align: center;" type="text" class="crew-role-alter"
+                            value="{{role.numberOfActionsMax}}" data-item="numberOfActionsMax" data-dtype="Number" />
                     </div>
                 </li>
                 <ol class="crew-item-list">
@@ -818,14 +985,17 @@
                         </div>
                         <div class="flexrow">
                             <div class="form-fields">
-                                <input type="text" class="crew-skill-mod" value="{{skill.mod}}" data-dtype="Number" placeholder="0" />
+                                <input type="text" class="crew-skill-mod" value="{{skill.mod}}" data-dtype="Number"
+                                    placeholder="0" />
                             </div>
                             <div class="form-fields">
-                                <input type="text" class="crew-skill-ranks" value="{{skill.ranks}}" data-dtype="Number" placeholder="0" />
+                                <input type="text" class="crew-skill-ranks" value="{{skill.ranks}}" data-dtype="Number"
+                                    placeholder="0" />
                             </div>
                         </div>
                         <div class="crew-controls">
-                            <a class="crew-control skill-delete" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Delete"}}"><i class="fas fa-trash"></i></a>
+                            <a class="crew-control skill-delete" title="{{localize "
+                                SFRPG.ActorSheet.Inventory.Item.Delete"}}"><i class="fas fa-trash"></i></a>
                         </div>
                     </li>
                     {{/each}}
@@ -836,8 +1006,8 @@
             {{/unless}}
 
 
-                <button class="action-name2"data-action = "pressed">Clear NPC</button>
-                
+            <button class="action-name2" data-action="pressed">Clear NPC</button>
+
 
 
 
@@ -848,7 +1018,7 @@
         {{!-- Actions Tab --}}
         <div class="tab weapons flexcol" data-group="primary" data-tab="actions">
             <ol class="action-list">
-               
+
                 {{#each actions as |role|}}
 
                 <li class="action flexrow action-header">
@@ -860,19 +1030,35 @@
                 <ol class="action-list">
                     {{#each role.actions as |action|}}
                     <li class="action flexrow small" data-action-id="{{action.id}}">
-                        
-                        <div class="action-name flexrow rollable" data-id="{{action.id}}" data-skill="{{action.system.skill.name}}" data-tippy-content="<strong>{{localize action.name}}</strong><br/>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.NormalEffect"}}:<br/>{{localize action.system.effectNormal}}<br/><br/>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.CriticalEffect"}}:<br/>{{localize action.system.effectCritical}}">
-                            <div class="action-image small" style="background-image: url({{action.img}})"></div>
-                            <h4>{{localize action.name}}</h4>
-                        </div>
-                        <div class="action-skill flexrow" data-tippy-content="<strong>{{localize action.system.skill.name}}</strong><br/>{{localize action.system.skill.tooltip}}{{#if action.system.isPush}}<br/><br/><strong>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.Push"}}</strong><br/>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.PushTooltip"}}{{/if}}">{{localize (append "d100A." action.system.skill.name) }}{{#if action.system.isPush}} ({{localize "SFRPG.StarshipSheet.Actions.Tooltips.Push"}}){{/if}}</div>
-                        <div class="action-phase flexrow" data-tippy-content="<strong>{{localize action.system.phase.name}}</strong><br/>{{localize action.system.phase.tooltip}}{{#if action.system.isPush}}<br/><br/><strong>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.Push"}}</strong><br/>{{localize "SFRPG.StarshipSheet.Actions.Tooltips.PushTooltip"}}{{/if}}">{{localize (append "d100A.phaseType." action.system.phase.name) }}{{#if action.system.isPush}} ({{localize "SFRPG.StarshipSheet.Actions.Tooltips.Push"}}){{/if}}</div>
-                                            
-                    </li>
-                    {{/each}}
-                </ol>
-                {{/each}}
-            </ol>
+
+                        <div class="action-name flexrow rollable" data-id="{{action.id}}"
+                            data-skill="{{action.system.skill.name}}"
+                            data-tippy-content="<strong>{{localize action.name}}</strong><br/>{{localize "
+                            SFRPG.StarshipSheet.Actions.Tooltips.NormalEffect"}}:<br />{{localize
+                        action.system.effectNormal}}<br /><br />{{localize
+                        "SFRPG.StarshipSheet.Actions.Tooltips.CriticalEffect"}}:<br />{{localize
+                        action.system.effectCritical}}">
+                        <div class="action-image small" style="background-image: url({{action.img}})"></div>
+                        <h4>{{localize action.name}}</h4>
+        </div>
+        <div class="action-skill flexrow"
+            data-tippy-content="<strong>{{localize action.system.skill.name}}</strong><br/>{{localize action.system.skill.tooltip}}{{#if action.system.isPush}}<br/><br/><strong>{{localize "
+            SFRPG.StarshipSheet.Actions.Tooltips.Push"}}</strong><br />{{localize
+            "SFRPG.StarshipSheet.Actions.Tooltips.PushTooltip"}}{{/if}}">{{localize (append "d100A."
+            action.system.skill.name) }}{{#if action.system.isPush}} ({{localize
+            "SFRPG.StarshipSheet.Actions.Tooltips.Push"}}){{/if}}</div>
+        <div class="action-phase flexrow"
+            data-tippy-content="<strong>{{localize action.system.phase.name}}</strong><br/>{{localize action.system.phase.tooltip}}{{#if action.system.isPush}}<br/><br/><strong>{{localize "
+            SFRPG.StarshipSheet.Actions.Tooltips.Push"}}</strong><br />{{localize
+            "SFRPG.StarshipSheet.Actions.Tooltips.PushTooltip"}}{{/if}}">{{localize (append "d100A.phaseType."
+            action.system.phase.name) }}{{#if action.system.isPush}} ({{localize
+            "SFRPG.StarshipSheet.Actions.Tooltips.Push"}}){{/if}}</div>
+
+        </li>
+        {{/each}}
+        </ol>
+        {{/each}}
+        </ol>
         </div>
 
         {{!-- Inventory Tab --}}
@@ -883,10 +1069,10 @@
         {{!-- Biography Tab --}}
         <div class="tab biography flexcol" data-group="primary" data-tab="notes">
             {{editor
-                enrichedDescription
-                target="system.details.notes"
-                button=true
-                editable=editable
+            enrichedDescription
+            target="system.details.notes"
+            button=true
+            editable=editable
             }}
         </div>
     </section>

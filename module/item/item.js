@@ -952,7 +952,7 @@ if(!this.isAoE) this.rollNormalAttack(options)
         const isWeapon = this.hasAttack
         const actorData = this.actor.system;
         const actorArray = this.actor.getActiveTokens(true, true);
-        const actorToken = actorArray[0]
+        let actorToken = actorArray[0]
         const rollData = duplicate(actorData);
         let template = "systems/Alternityd100/templates/dialogs/attack-dialog.hbs";
         let parts = [];
@@ -961,6 +961,14 @@ if(!this.isAoE) this.rollNormalAttack(options)
         let staticRoll = null;
         var onClose
         const fastForward = (options.skipDialog === true)
+
+        if (!actorToken) {
+            //const tokens = game.canvas.activeLayer.controlled.filter(t => t.inCombat );
+              
+        
+            actorToken = game.canvas.activeLayer.controlled[0].document
+        }
+
         if (!actorToken) NoTokenWarn() 
         if (this.type === "vehicleAttack") return this._rollVehicleAoEAttack(options);
 
@@ -1146,12 +1154,17 @@ console.log(numberOfActiveTargets)
             targetData[x].Name = target.name;
             console.log("targetData[x].Name",targetData[x].Name);
             //targetData[x].distance = Math.ceil(Math.round(canvas.grid.measureDistance({x: actorToken.x, y: actorToken.y}, {x: target.x, y: target.y}),2));
-            let tempdist =  canvas.grid.measureDistance({x: actorToken.x, y: actorToken.y}, {x: target.x, y: target.y})
-            console.log("Range",tempdist)
-            tempdist = tempdist.toFixed(1)
+            let tempdistx =  canvas.grid.measureDistance({x: actorToken.x, y: actorToken.y}, {x: target.x, y: target.y})
+            let tempdisty =  actorToken.elevation-target.document.elevation
+            const tempdistxy =  ((tempdistx**2)+(tempdisty**2))**0.5
+
+
+            console.log("Dist",tempdistx,tempdisty,tempdistx**2,tempdisty**2 )
+            console.log("Range",tempdistxy)
+            let tempdist = tempdistxy.toFixed(1)
             console.log("Range",tempdist)
             tempdist = Math.ceil(tempdist)
-            console.log("Range",tempdist)
+           // console.log("Range",tempdist)
             //console.log("Range",Math.ceil(Math.round(canvas.grid.measureDistance({x: actorToken.x, y: actorToken.y}, {x: target.x, y: target.y})),1) )
             targetData[x].distance = tempdist
             targetData[x].aspect = this.findHitLocation(actorToken,target.document)
@@ -3464,8 +3477,9 @@ i.notifications.warn(msg);
 
 }
 
-async function NoTokenWarn() {
-    let message ="No Token on scene";
+async function NoTokenWarn(combat = false) {
+    let message ="No Token on scene"
+    combat?  message ="No Token on scene" : message ="No Token in combat";
     ui.notifications.warn(message);
     console.warn(message);
 }

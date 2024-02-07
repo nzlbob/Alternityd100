@@ -2,8 +2,8 @@ import { SFRPG } from "../config.js"
 import { d100A } from "../d100Aconfig.js"
 import { d100ActorSheet } from "../d100Actor-sheet.js";
 import { RPC } from "../rpc.js";
-import { loadLauncherOrdnance } from  "../item/item-ordnance-utils.js" 
-import { unloadLauncherOrdnance } from  "../item/item-ordnance-utils.js" 
+import { loadLauncherOrdnance } from "../item/item-ordnance-utils.js"
+import { unloadLauncherOrdnance } from "../item/item-ordnance-utils.js"
 import { d100AActorSheetStarship } from "../actor/sheet/starship.js";
 
 const itemSizeArmorClassModifier = {
@@ -40,7 +40,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         this._tooltips = null;
 
-        
+
     }
 
     /* -------------------------------------------- */
@@ -52,16 +52,16 @@ export class ItemSheetSFRPG extends ItemSheet {
             classes: ["Alternityd100", "sheet", "item"],
             resizable: true,
             scrollY: [".tab.details"],
-            dragDrop: [{dragSelector: ".item-list .item", dropSelector: null}],
+            dragDrop: [{ dragSelector: ".item-list .item", dropSelector: null }],
             tabs: [
-                {navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"},
-                {navSelector: ".descTabs", contentSelector: ".desc-body", initial: "description"}
+                { navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description" },
+                { navSelector: ".descTabs", contentSelector: ".desc-body", initial: "description" }
             ]
         });
 
 
 
-        
+
     }
 
     /* -------------------------------------------- */
@@ -92,7 +92,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (placeholders.savingThrow.value !== newSavingThrowScore.total) {
             placeholders.savingThrow.value = newSavingThrowScore.total;
             await new Promise(resolve => setTimeout(resolve, 500));
-            this.render(false, {editable: this.options.editable});
+            this.render(false, { editable: this.options.editable });
         }
     }
 
@@ -100,16 +100,16 @@ export class ItemSheetSFRPG extends ItemSheet {
      * Prepare item sheet data
      * Start with the base item data and extending with additional properties for rendering.
      */
-   async getData() {
-        
-        
-        
+    async getData() {
+
+
+
 
         const data = super.getData();
-   //     console.log(  "data", data,game.Alternityd100 )
+        //     console.log(  "data", data,game.Alternityd100 )
         //const actorskill= actorData;
 
-  //console.log(  "data before", data)
+        //console.log(  "data before", data)
 
 
         data.itemData = this.document.system;
@@ -118,16 +118,16 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         // Include CONFIG values
         data.config = CONFIG.SFRPG;
-       // data.d100Aconfig = CONFIG.d100A;
+        // data.d100Aconfig = CONFIG.d100A;
         data.d100Aconfig = CONFIG.d100A;
-      //  console.log(  //"_getItemProperties",props,
-      //  "labels", labels,  
-      //  "data.Itemdata" ,data
+        //  console.log(  //"_getItemProperties",props,
+        //  "labels", labels,  
+        //  "data.Itemdata" ,data
         //"Item" , item,  
         //"CONFIG-NEW", CONFIG.SFRPG.weaponProperties, 
-       // "Object Ent", Object.entries(itemData.properties),
-      //  "AEON" ,CONFIG.SFRPG.weaponPropertiesAeon
-     // )
+        // "Object Ent", Object.entries(itemData.properties),
+        //  "AEON" ,CONFIG.SFRPG.weaponPropertiesAeon
+        // )
 
         // Item Type, Status, and Details
         //data.itemType = game.i18n.format(`ITEM.Type.${data.item.type.titleCase()}`);
@@ -146,8 +146,8 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.isOwner = data.owner;
         data.isSkilled = data.itemData.isSkilled
         data.isOpposed = data.itemData.isOpposed
-        
-     //   console.log("SHEET.JS CONFIG SFRPG", data.config,"data.itemData", data.itemType,data.itemProperties )
+
+        //   console.log("SHEET.JS CONFIG SFRPG", data.config,"data.itemData", data.itemType,data.itemProperties )
         // Physical items
         const physicalItems = ["weapon", "equipment", "pharmaceutical", "goods", "container", "technological", "magic", "hybrid", "upgrade", "augmentation", "shield", "weaponAccessory"];
         data.isPhysicalItem = physicalItems.includes(data.item.type);
@@ -190,7 +190,7 @@ export class ItemSheetSFRPG extends ItemSheet {
                 data.placeholders.savingThrow = data.placeholders.savingThrow || {};
                 data.placeholders.savingThrow.formula = `@itemLevel + @owner.abilities.dex.mod`;
                 data.placeholders.savingThrow.value = data.placeholders.savingThrow.value || 10;
-                
+
                 this.item.flags.placeholders = data.placeholders;
                 this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula)
                     .then((total) => this.onPlaceholderUpdated(this.item, total))
@@ -209,7 +209,7 @@ export class ItemSheetSFRPG extends ItemSheet {
                 data.placeholders.savingThrow = data.placeholders.savingThrow || {};
                 data.placeholders.savingThrow.formula = `@itemLevel + @owner.abilities.dex.mod`;
                 data.placeholders.savingThrow.value = data.placeholders.savingThrow.value || 10;
-                
+
                 this.item.system.flags.placeholders = data.placeholders;
                 this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula)
                     .then((total) => this.onPlaceholderUpdated(this.item, total))
@@ -240,110 +240,110 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.modifiers = this.item.system.modifiers;
 
         data.hasSpeed = this.item.system.weaponType === "tracking" || (this.item.system.special && this.item.system.special["limited"]);
-  //console.log("\n\n************************\n\nhasCapacity() {\n***************************\n\n",this,"this.document.hasCapacity()")
+        //console.log("\n\n************************\n\nhasCapacity() {\n***************************\n\n",this,"this.document.hasCapacity()")
         data.hasCapacity = this.object.hasCapacity;
-        
 
 
-    /** Setup for missile/bomb launchers */
+
+        /** Setup for missile/bomb launchers */
 
         if (this.item.isLauncher) {
             //console.log("Launcher", data, this, itemData);    
             data.isLauncher = true;
-            const mt = {name:"Empty", img : ""}
+            const mt = { name: "Empty", img: "" }
             var launchcounter = 0
             data.launcherarray = []
-            data.launcherconfig = {maxtubes : data.item.system.capacity.max} //12
+            data.launcherconfig = { maxtubes: data.item.system.capacity.max } //12
             //console.log("data.item.system.capacity.max",data.item.system.capacity.max,data.launcherconfig.maxtubes)
             data.launcherconfig.maxwidth = 4  //4
             data.item.system.ordnance.forEach(function (value, key) {
                 //console.log("Launcher", value, key);
-                data.launcherconfig.maxtubes -= Math.max (value.system.size-1,0);  
+                data.launcherconfig.maxtubes -= Math.max(value.system.size - 1, 0);
             });
             //console.log("data.item.system.capacity.max",data.item.system.capacity.max,data.launcherconfig.maxtubes)
-            let fullrows = Math.ceil(data.launcherconfig.maxtubes/data.launcherconfig.maxwidth)
-            let remainder = data.launcherconfig.maxwidth - (fullrows * data.launcherconfig.maxwidth - data.launcherconfig.maxtubes) ;
+            let fullrows = Math.ceil(data.launcherconfig.maxtubes / data.launcherconfig.maxwidth)
+            let remainder = data.launcherconfig.maxwidth - (fullrows * data.launcherconfig.maxwidth - data.launcherconfig.maxtubes);
             //console.log("cells\n",data.launcherconfig.maxtubes,fullrows,remainder )
             for (let i = 0; i < fullrows; i++) {
-                let currolen =  data.launcherconfig.maxwidth; 
+                let currolen = data.launcherconfig.maxwidth;
                 data.launcherarray.push([])
-                if (i == fullrows-1) currolen = remainder  ;
-                    for (let j = 0; j < Math.min(data.launcherconfig.maxtubes, currolen ); j++) {
-                        data.launcherarray[i].push([{load:{},ordn : 0}])
-                        //console.log("Loop\n",data.item.system.ordnance.length,launchcounter,i,j,data.launcherarray,data.item.system.ordnance[launchcounter] )
-                        if ((data.item.system.ordnance.length) > launchcounter){
-                            data.launcherarray[i][j].load = data.item.system.ordnance[launchcounter] 
-                        }
-                        else {data.launcherarray[i][j].load = mt}
-                        data.launcherarray[i][j].ordn = launchcounter;
-                        launchcounter++;
+                if (i == fullrows - 1) currolen = remainder;
+                for (let j = 0; j < Math.min(data.launcherconfig.maxtubes, currolen); j++) {
+                    data.launcherarray[i].push([{ load: {}, ordn: 0 }])
+                    //console.log("Loop\n",data.item.system.ordnance.length,launchcounter,i,j,data.launcherarray,data.item.system.ordnance[launchcounter] )
+                    if ((data.item.system.ordnance.length) > launchcounter) {
+                        data.launcherarray[i][j].load = data.item.system.ordnance[launchcounter]
                     }
+                    else { data.launcherarray[i][j].load = mt }
+                    data.launcherarray[i][j].ordn = launchcounter;
+                    launchcounter++;
+                }
             }
         }
         // End Setup for missile/bomb launchers   
-    /** Setup for missile/bomb launchers */
+        /** Setup for missile/bomb launchers */
 
-    if (["race","achievement"].includes(this.item.type) ) {
-        data.skills = {}
-        data.skills.table = []
-        console.log("Broadskills",d100A.skillData )
-        const asArray = Object.entries(d100A.skillData);
+        if (["race", "achievement"].includes(this.item.type)) {
+            data.skills = {}
+            data.skills.table = []
+            console.log("Broadskills", d100A.skillData)
+            const asArray = Object.entries(d100A.skillData);
 
-        data.skills.broadSkillList = asArray.filter(([key, value]) => value.isBroad === true);
-        //data.skills.broadSkillList = d100A.skillData.filter(item => item.isBroad === true); 
+            data.skills.broadSkillList = asArray.filter(([key, value]) => value.isBroad === true);
+            //data.skills.broadSkillList = d100A.skillData.filter(item => item.isBroad === true); 
 
-console.log("Broadskills",data.skills )
-        let tempno = 0
-        for(let row=0;row<10;row++){
-            data.skills.table.push([])
-            for(let cell=0;cell<4;cell++){
-                data.skills.table[row].push([])
-                data.skills.table[row][cell].id = data.skills.broadSkillList[tempno][0];
-                data.skills.table[row][cell].name = data.skills.broadSkillList[tempno][1].name;
-                data.skills.table[row][cell].attrib = data.skills.broadSkillList[tempno][1].attrib;
-                
+            console.log("Broadskills", data.skills)
+            let tempno = 0
+            for (let row = 0; row < 10; row++) {
+                data.skills.table.push([])
+                for (let cell = 0; cell < 4; cell++) {
+                    data.skills.table[row].push([])
+                    data.skills.table[row][cell].id = data.skills.broadSkillList[tempno][0];
+                    data.skills.table[row][cell].name = data.skills.broadSkillList[tempno][1].name;
+                    data.skills.table[row][cell].attrib = data.skills.broadSkillList[tempno][1].attrib;
 
-                tempno += 1
 
+                    tempno += 1
+
+                }
             }
+
         }
-
-    }    
         // Starshup Hull HP Calculation
-     /*   if (data.type == "starshipFrame") {
-            let SW = itemData.data.durability+itemData.data.durability;
-            let MO = Math.round(SW/2);
-            let CR = Math.round(MO/2);
-//
-            itemData.data.attributes.wou.base = SW;
-            itemData.data.attributes.wou.value = SW;
-            itemData.data.attributes.stu.base = SW;
-            itemData.data.attributes.stu.value = SW;
-            itemData.data.attributes.mor.base = MO;
-            itemData.data.attributes.mor.value = MO;
-            itemData.data.attributes.cri.base = CR;
-            itemData.data.attributes.cri.value = CR;
+        /*   if (data.type == "starshipFrame") {
+               let SW = itemData.data.durability+itemData.data.durability;
+               let MO = Math.round(SW/2);
+               let CR = Math.round(MO/2);
+   //
+               itemData.data.attributes.wou.base = SW;
+               itemData.data.attributes.wou.value = SW;
+               itemData.data.attributes.stu.base = SW;
+               itemData.data.attributes.stu.value = SW;
+               itemData.data.attributes.mor.base = MO;
+               itemData.data.attributes.mor.value = MO;
+               itemData.data.attributes.cri.base = CR;
+               itemData.data.attributes.cri.value = CR;
+   
+   }
+   */
+        //if (data.type.startsWith("starship")){
+        console.log("\n-----Say Hello--------\n", data.itemType, data)
 
-}
-*/
-//if (data.type.startsWith("starship")){
-    console.log(  "\n-----Say Hello--------\n",data.itemType,data)
+        //}
+        // Enrich text editors
+        data.enrichedDescription = await TextEditor.enrichHTML(this.object.system.description.value, { async: true });
+        data.enrichedShortDescription = await TextEditor.enrichHTML(this.object.system.description.short, { async: true });
+        data.enrichedGMNotes = await TextEditor.enrichHTML(this.object.system.description.gmNotes, { async: true });
 
-//}
-// Enrich text editors
-data.enrichedDescription = await TextEditor.enrichHTML(this.object.system.description.value, {async: true});
-data.enrichedShortDescription = await TextEditor.enrichHTML(this.object.system.description.short, {async: true});
-data.enrichedGMNotes = await TextEditor.enrichHTML(this.object.system.description.gmNotes, {async: true});
+        if (["ITEM.TypeWeapon", "Weapon"].includes(data.itemType)) {
 
-if (["ITEM.TypeWeapon","Weapon"].includes(data.itemType)){
+            data.allowableSkills = d100A.allowableSkills[this.object.system.weaponType]
+            console.log(data.allowableSkills, this.object.system.weaponType)
+        }
+        console.log("data after", data)
 
-data.allowableSkills = d100A.allowableSkills[this.object.system.weaponType]
-console.log(data.allowableSkills,this.object.system.weaponType)
-}
-console.log(  "data after", data)
-
-//console.log(  "data after", this.item.system.broadSkills.armorop)
-delete this.item.system.skills
+        //console.log(  "data after", this.item.system.broadSkills.armorop)
+        delete this.item.system.skills
         return data;
     }
 
@@ -352,17 +352,17 @@ delete this.item.system.skills
     async _computeSavingThrowValue(itemLevel, formula) {
         try {
             const rollData = {
-                owner: this.item.actor ? duplicate(this.item.actor.system) : {abilities: {dex: {mod: 0}}},
+                owner: this.item.actor ? duplicate(this.item.actor.system) : { abilities: { dex: { mod: 0 } } },
                 item: duplicate(this.item.system),
                 itemLevel: itemLevel
             };
             if (!rollData.owner.abilities?.dex?.mod) {
-                rollData.owner.abilities = {dex: {mod: 0}};
+                rollData.owner.abilities = { dex: { mod: 0 } };
             }
             const saveRoll = Roll.create(formula, rollData);
-            return saveRoll.evaluate({async: true});
+            return saveRoll.evaluate({ async: true });
         } catch (err) {
-      //console.log(err);
+            //console.log(err);
             return null;
         }
     }
@@ -375,18 +375,15 @@ delete this.item.system.skills
     _getItemStatus() {
         const item = this.document.system;
         //const itemData = item.data;
-
+       // console.log(item, this, this.document)
         if (["weapon", "equipment", "shield"].includes(item.type)) return item.equipped ? "Equipped" : "Unequipped";
         else if (item.type === "starshipWeapon") return item.mount.mounted ? "Mounted" : "Not Mounted";
         else if (item.type === "augmentation") return `${item.type} (${item})`;
-        else if (item.type === "vehicleSystem")
-        console.log(item,this,this.document,this.document.canBeActivated)
-        {
+        else if (item.type === "vehicleSystem") {
             // Only systems which can be activated have an activation status
             if (this.document.canBeActivated === false) {
                 return ""
             }
-
             return this.document.isActive ? "Activated" : "Not Activated";
         }
     }
@@ -410,38 +407,38 @@ delete this.item.system.skills
                 .map(e => ({
                     name: CONFIG.SFRPG.weaponProperties[e[0]],
                     tooltip: CONFIG.SFRPG.weaponPropertiesTooltips[e[0]]
-               
-               
+
+
                 })
-            )
-        );
-      //  console.log(  "_getItemProperties",props,
-      //  "labels", labels,  
-       // "Itemdata" ,itemData,
-       // "Item" , item,  
-       // "CONFIG", CONFIG.SFRPG.weaponProperties, 
-       // "Object Ent", Object.entries(itemData.properties),
-      //  "AEON" ,CONFIG.SFRPG.weaponPropertiesAeon
-      //)
+                )
+            );
+            //  console.log(  "_getItemProperties",props,
+            //  "labels", labels,  
+            // "Itemdata" ,itemData,
+            // "Item" , item,  
+            // "CONFIG", CONFIG.SFRPG.weaponProperties, 
+            // "Object Ent", Object.entries(itemData.properties),
+            //  "AEON" ,CONFIG.SFRPG.weaponPropertiesAeon
+            //)
 
-      //d100 converts weapon type to action type
+            //d100 converts weapon type to action type
 
-      //console.log(  "data.Itemdata" ,itemData )
+            //console.log(  "data.Itemdata" ,itemData )
 
-      if (item.weaponType == "meleeW"){item.actionType = "mwak"};
-      if (item.weaponType == "rangedW"){item.actionType = "rwak"};
-      if (item.weaponType == "heavy"){item.actionType = "rwak"};
-      if (item.weaponType == "explos"){item.actionType = "rwak"};
-      //if (data.weaponType == "heavy"){data.actionType = "rsak"};
-      //if (data.weaponType == "explos"){data.actionType = "rsak"};
+            if (item.weaponType == "meleeW") { item.actionType = "mwak" };
+            if (item.weaponType == "rangedW") { item.actionType = "rwak" };
+            if (item.weaponType == "heavy") { item.actionType = "rwak" };
+            if (item.weaponType == "explos") { item.actionType = "rwak" };
+            //if (data.weaponType == "heavy"){data.actionType = "rsak"};
+            //if (data.weaponType == "explos"){data.actionType = "rsak"};
 
         } else if (item.type === "spell") {
             props.push(
-                {name: labels.components, tooltip: null},
-                {name: labels.materials, tooltip: null},
-                item.concentration ? {name: "Concentration", tooltip: null} : null,
-                item.sr ? {name: "Spell Resistence", tooltip: null} : null,
-                item.dismissible ? {name: "Dismissible", tooltip: null} : null
+                { name: labels.components, tooltip: null },
+                { name: labels.materials, tooltip: null },
+                item.concentration ? { name: "Concentration", tooltip: null } : null,
+                item.sr ? { name: "Spell Resistence", tooltip: null } : null,
+                item.dismissible ? { name: "Dismissible", tooltip: null } : null
             )
         } else if (item.type === "equipment") {
             props.push({
@@ -477,7 +474,7 @@ delete this.item.system.skills
                 name: game.i18n.format("SFRPG.Items.Shield.ACP", { acp: item.acp.signedString() }),
                 tooltip: null
             });
-            
+
             const wieldedBonus = item.proficient ? (item.bonus.wielded || 0) : 0;
             const alignedBonus = item.proficient ? (item.bonus.aligned || 0) : 0;
             props.push({
@@ -491,11 +488,10 @@ delete this.item.system.skills
             }
         }
         else if (item.type === "vehicleSystem") {
-            if (item.senses &&  item.senses.usedForSenses == true) {
+            if (item.senses && item.senses.usedForSenses == true) {
                 // We deliminate the senses by `,` and present each sense as a separate property
                 let sensesDeliminated = item.data.senses.senses.split(",");
-                for (let index = 0; index < sensesDeliminated.length; index++)
-                {
+                for (let index = 0; index < sensesDeliminated.length; index++) {
                     var sense = sensesDeliminated[index];
                     props.push(sense);
                 }
@@ -513,10 +509,10 @@ delete this.item.system.skills
         // Action usage
         if ((item.type !== "weapon") && item.activation && !isEmpty(item.activation)) {
             props.push(
-                {name: labels.activation, tooltip: null},
-                {name: labels.range, tooltip: null},
-                {name: labels.target, tooltip: null},
-                {name: labels.duration, tooltip: null}
+                { name: labels.activation, tooltip: null },
+                { name: labels.range, tooltip: null },
+                { name: labels.target, tooltip: null },
+                { name: labels.duration, tooltip: null }
             )
         }
         return props.filter(p => !!p && !!p.name);
@@ -582,7 +578,7 @@ delete this.item.system.skills
                     if (type) arr[i].types[type] = entry[1];
                     break;
             }
-            
+
             return arr;
         }, []);
 
@@ -603,7 +599,7 @@ delete this.item.system.skills
                     if (type) arr[i].types[type] = entry[1];
                     break;
             }
-            
+
             return arr;
         }, []);
 
@@ -620,14 +616,14 @@ delete this.item.system.skills
         return super._updateObject(event, formData);
     }
 
-   
+
     /* -------------------------------------------- */
 
     /**
      * Activate listeners for interactive item sheet events
      */
     activateListeners(html) {
-console.log("HERE--",html)
+        console.log("HERE--", html)
         super.activateListeners(html);
         // Save scroll position
         //console.log("Active")
@@ -675,9 +671,9 @@ console.log("HERE--",html)
 
         html.find('.launchercell').click(ev => {
             //let itemId = $(ev.currentTarget).parents(".item").attr("data-item-id");
-      //console.log("launchercellclick\n",ev.currentTarget.dataset.ordn)
-      //console.log("launchercellclick\n",ev,$(ev.currentTarget).parents(".item"))
-            unloadLauncherOrdnance(ev.currentTarget.dataset.ordn,this.item)
+            //console.log("launchercellclick\n",ev.currentTarget.dataset.ordn)
+            //console.log("launchercellclick\n",ev,$(ev.currentTarget).parents(".item"))
+            unloadLauncherOrdnance(ev.currentTarget.dataset.ordn, this.item)
             //const item = this.item.data.ordnance.get(itemId);
             // const item = this.actor.getEmbeddedEntity("Item", itemId);
             this.render(true);
@@ -687,7 +683,7 @@ console.log("HERE--",html)
         // Update Inventory Item
         html.find('.ordnance-edit').click(ev => {
             let itemId = $(ev.currentTarget).parents(".item").attr("data-item-id");
-      //console.log("itemId",itemId,ev)
+            //console.log("itemId",itemId,ev)
             const item = this.item.data.ordnance.get(itemId);
             // const item = this.actor.getEmbeddedEntity("Item", itemId);
             item.sheet.render(true);
@@ -710,33 +706,33 @@ console.log("HERE--",html)
 
 
     async _onItemLoadOrdn(event) {
-console.log("Ping",event)
-event.preventDefault();
-const loadType = event.currentTarget.dataset.load
-const itemId = event.currentTarget.closest('.item').dataset.itemId;
-const cloost = event.currentTarget.closest('.item')
-//console.log("cloost",cloost)
-const item = this.actor.items.get(itemId);
-console.log("Item", item, itemId);
-//attackType = item.data.fireMode;
-//console.log("event",event)
-if (loadType == "loadOne"){
-loadLauncherOrdnance(item.data,this);
-return; 
-    }
-if (loadType == "loadAll"){
-    loadLauncherOrdnance(item,this,true);
-    return; 
-    }
-//item.rollAttack({event: event, attackType: attackType});
+        console.log("Ping", event)
+        event.preventDefault();
+        const loadType = event.currentTarget.dataset.load
+        const itemId = event.currentTarget.closest('.item').dataset.itemId;
+        const cloost = event.currentTarget.closest('.item')
+        //console.log("cloost",cloost)
+        const item = this.actor.items.get(itemId);
+        console.log("Item", item, itemId);
+        //attackType = item.data.fireMode;
+        //console.log("event",event)
+        if (loadType == "loadOne") {
+            loadLauncherOrdnance(item.data, this);
+            return;
+        }
+        if (loadType == "loadAll") {
+            loadLauncherOrdnance(item, this, true);
+            return;
+        }
+        //item.rollAttack({event: event, attackType: attackType});
 
     }
 
 
-/**
-     * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
-     * @param {Event} event The originating click event
-     */
+    /**
+         * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
+         * @param {Event} event The originating click event
+         */
     async _onItemCreate(event) {
         event.preventDefault();
         const header = event.currentTarget;
@@ -757,8 +753,8 @@ if (loadType == "loadAll"){
                 type: type
             };
 
-            let templateData = {upper: "Item", lower: "item", types: types},
-            dlg = await renderTemplate(`systems/Alternityd100/templates/apps/localized-entity-create.html`, templateData);
+            let templateData = { upper: "Item", lower: "item", types: types },
+                dlg = await renderTemplate(`systems/Alternityd100/templates/apps/localized-entity-create.html`, templateData);
 
             new Dialog({
                 title: game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Title"),
@@ -809,7 +805,7 @@ if (loadType == "loadAll"){
     async _onItemDelete(event) {
         event.preventDefault();
 
-        let li = $(event.currentTarget).parents(".item"), 
+        let li = $(event.currentTarget).parents(".item"),
             itemId = li.attr("data-item-id");
 
         let actorHelper = new ActorItemHelper(this.actor.id, this.token ? this.token.id : null, this.token ? this.token.parent.id : null);
@@ -828,7 +824,7 @@ if (loadType == "loadAll"){
             });
         }
     }
-    
+
     /* -------------------------------------------- */
 
     async _onAbilityAdjustmentsControl(event) {
@@ -867,21 +863,21 @@ if (loadType == "loadAll"){
     async _onDamageControl(event) {
         event.preventDefault();
         const a = event.currentTarget;
-  //console.log("ADD DAMAGE",this.item);
+        //console.log("ADD DAMAGE",this.item);
         // Add new damage component
-        
-            this.item.hasDamage = this.item.hasDamage;
-      //console.log("hasDamage ",this.item,this.item.data.hasDamage,this.item.hasDamage);
 
-            if(this.item.system.damage.ord.dice ==""){this.item.data.hasDamage = false} else{this.item.data.hasDamage = true};
+        this.item.hasDamage = this.item.hasDamage;
+        //console.log("hasDamage ",this.item,this.item.data.hasDamage,this.item.hasDamage);
 
-      //console.log("hasDamage 2 ",this.item,this.item.data.hasDamage,this.item.hasDamage);
-        
-            //(this.item.system.damage.ord.dice && this.item.system.damage.ord.type);
-            //this.item.hasDamage = (this.item.system.damage.ord.dice && this.item.system.damage.ord.type);
+        if (this.item.system.damage.ord.dice == "") { this.item.data.hasDamage = false } else { this.item.data.hasDamage = true };
 
-            
-        
+        //console.log("hasDamage 2 ",this.item,this.item.data.hasDamage,this.item.hasDamage);
+
+        //(this.item.system.damage.ord.dice && this.item.system.damage.ord.type);
+        //this.item.hasDamage = (this.item.system.damage.ord.dice && this.item.system.damage.ord.type);
+
+
+
 
         // Add new damage component
         if (a.classList.contains("add-damage")) {
@@ -927,30 +923,30 @@ if (loadType == "loadAll"){
             });
         }*/
     }
-/**
-     * Add or remove a damage part from the damage formula
-     * @param {Event} event     The original click event
-     * @return {Promise}
-     * @private
-     */
- async _onDefenceControl(event) {
-    event.preventDefault();
-    const a = event.currentTarget;
-    console.log("ADD DAMAGE",this.item);
-    // Add new damage component
-    
-        this.item.data.hasdefence = this.item.hasdefence;
-        
+    /**
+         * Add or remove a damage part from the damage formula
+         * @param {Event} event     The original click event
+         * @return {Promise}
+         * @private
+         */
+    async _onDefenceControl(event) {
+        event.preventDefault();
+        const a = event.currentTarget;
+        console.log("ADD DAMAGE", this.item);
+        // Add new damage component
 
-        if(this.item.system.armor.LI ==""){this.item.data.hasdefence = false} else{this.item.data.hasdefence = true};
+        this.item.data.hasdefence = this.item.hasdefence;
+
+
+        if (this.item.system.armor.LI == "") { this.item.data.hasdefence = false } else { this.item.data.hasdefence = true };
 
         //console.log("hasDamage 2 ",this.item,this.item.data.hasDamage,this.item.hasDamage);
-    
 
 
-    return this.item.update();
 
-}
+        return this.item.update();
+
+    }
 
     /**
      * Add a modifer to this item.
@@ -960,10 +956,10 @@ if (loadType == "loadAll"){
     _onModifierCreate(event) {
         event.preventDefault();
         const target = $(event.currentTarget);
-  //console.log("Modifier L574",this.item)
+        //console.log("Modifier L574",this.item)
         this.item.addModifier({
             name: "New Modifier"
-            
+
         });
     }
 
@@ -1008,7 +1004,7 @@ if (loadType == "loadAll"){
         const modifiers = duplicate(this.item.system.modifiers);
         const modifier = modifiers.find(mod => mod._id === modifierId);
         modifier.enabled = !modifier.enabled;
-        console.log("hello",modifier,modifiers,modifier.enabled)
+        console.log("hello", modifier, modifiers, modifier.enabled)
         await this.item.update({
             'system.modifiers': modifiers
         });
@@ -1207,16 +1203,16 @@ if (loadType == "loadAll"){
 
         const attr = event.currentTarget.dataset.edit;
         const fp = new FilePicker({
-          type: "image",
-          current: currentImage,
-          callback: path => {
-            visualization[visualizationIndex].image = path;
-            this.item.update({
-                "data.combatTracker.visualization": visualization
-            });
-          },
-          top: this.position.top + 40,
-          left: this.position.left + 10
+            type: "image",
+            current: currentImage,
+            callback: path => {
+                visualization[visualizationIndex].image = path;
+                this.item.update({
+                    "data.combatTracker.visualization": visualization
+                });
+            },
+            top: this.position.top + 40,
+            left: this.position.left + 10
         });
         return fp.browse();
     }
@@ -1276,7 +1272,7 @@ if (loadType == "loadAll"){
         if (this._tooltips === null) {
 
 
-      //console.log("Hello","Tooltips:",this._tooltips,this)
+            //console.log("Hello","Tooltips:",this._tooltips,this)
 
 
             this._tooltips = tippy.delegate(`#${this.id}`, {
@@ -1289,7 +1285,7 @@ if (loadType == "loadAll"){
 
 
             });
-/**/
+            /**/
             //console.log("Tooltips:",this._tooltips)
         }
     }
@@ -1307,121 +1303,121 @@ if (loadType == "loadAll"){
     }
 
 
-async _onDrop(event) {
-    event.preventDefault();
-    let a = duplicate(event.dataTransfer)
-   // console.log("This did Something", event)
-    const dragData = event.dataTransfer.getData('text/plain');
-    //console.log("dragData", dragData)
-   // const parsedDragData = JSON.parse(dragData);
-   // console.log("TparsedDragData", parsedDragData)
-//delete(this.item.system.ordnance);
-//delete(this.item.system.ordnance);
+    async _onDrop(event) {
+        event.preventDefault();
+        let a = duplicate(event.dataTransfer)
+        // console.log("This did Something", event)
+        const dragData = event.dataTransfer.getData('text/plain');
+        //console.log("dragData", dragData)
+        // const parsedDragData = JSON.parse(dragData);
+        // console.log("TparsedDragData", parsedDragData)
+        //delete(this.item.system.ordnance);
+        //delete(this.item.system.ordnance);
 
-   // console.log("This did Something", event)
-    let data;
-    try {
-        data = JSON.parse(event.dataTransfer.getData('text/plain'));
-        if (!data) {
-            
-            return false;
-        }
-    } catch (err) {
-  //console.log("This did nothing", data)
-        ui.notifications.warn("This Feature not yet incorporated");
-        return false;
-    }
-    console.log("This did somthing", data, this)
-    //console.log("This did Something", this)
-// Is this a Launcher
-//console.log(this)
-    if (this.item.isLauncher){
-       
- //console.log("This did Something", this)
+        // console.log("This did Something", event)
+        let data;
+        try {
+            data = JSON.parse(event.dataTransfer.getData('text/plain'));
+            if (!data) {
 
-  //  console.log("rawItemData",this.item.type)
-   // console.log("rawItemData",data)
-
-    // Case - Dropped starshipOrdnance onto Launcher
-    if ((this.item.type === "starshipWeapon")  && (data.type === "Item")) {
-
-            const rawItemData = await this._getItemDropData(event, data);
-      //console.log("this.item",this.item,rawItemData)
-            //console.log("rawItemData",data.type)
-            //console.log("rawItemData",rawItemData, "\n", rawItemData.system.ammunitionType, this.item.system.weaponType )
-            
-      //console.log("rawItemData",rawItemData, "\n" )
-
-            if ((rawItemData.type === "starshipOrdnance") && (rawItemData.system.ammunitionType === this.item.system.weaponType ) ) {
-                
-                loadLauncherOrdnance(rawItemData,this);
-                
-
-
-
-            } 
-            /*else if (d100AActorSheetStarship.AcceptedEquipment.includes(rawItemData.type)) {
-                return this.processDroppedData(event, data);
-            } */
-            else {
-                ui.notifications.error(game.i18n.format("SFRPG.InvalidStarshipItem", { name: rawItemData.name }));
                 return false;
             }
-        
-       
-       
-       
-       // return this._onOrdnanceDrop(event, data);
-    } 
-    
-    /*
-    else if (data.type === "Item") {
-        const rawItemData = await this._getItemDropData(event, data);
-
-        if (rawItemData.type.startsWith("starship")) {
-            return this.actor.createEmbeddedDocuments("Item", [rawItemData]);
-        } else if (d100AActorSheetStarship.AcceptedEquipment.includes(rawItemData.type)) {
-            return this.processDroppedData(event, data);
-        } else {
-            ui.notifications.error(game.i18n.format("SFRPG.InvalidStarshipItem", { name: rawItemData.name }));
+        } catch (err) {
+            //console.log("This did nothing", data)
+            ui.notifications.warn("This Feature not yet incorporated");
             return false;
         }
-    } else if (data.type === "ItemCollection") {
-        const starshipItems = [];
-        const acceptedItems = [];
-        const rejectedItems = [];
-        for (const item of data.items) {
-            if (item.type.startsWith("starship")) {
-                starshipItems.push(item);
-            } else if (d100AActorSheetStarship.AcceptedEquipment.includes(item.type)) {
-                acceptedItems.push(item);
-            } else {
-                rejectedItems.push(item);
+        console.log("This did somthing", data, this)
+        //console.log("This did Something", this)
+        // Is this a Launcher
+        //console.log(this)
+        if (this.item.isLauncher) {
+
+            //console.log("This did Something", this)
+
+            //  console.log("rawItemData",this.item.type)
+            // console.log("rawItemData",data)
+
+            // Case - Dropped starshipOrdnance onto Launcher
+            if ((this.item.type === "starshipWeapon") && (data.type === "Item")) {
+
+                const rawItemData = await this._getItemDropData(event, data);
+                //console.log("this.item",this.item,rawItemData)
+                //console.log("rawItemData",data.type)
+                //console.log("rawItemData",rawItemData, "\n", rawItemData.system.ammunitionType, this.item.system.weaponType )
+
+                //console.log("rawItemData",rawItemData, "\n" )
+
+                if ((rawItemData.type === "starshipOrdnance") && (rawItemData.system.ammunitionType === this.item.system.weaponType)) {
+
+                    loadLauncherOrdnance(rawItemData, this);
+
+
+
+
+                }
+                /*else if (d100AActorSheetStarship.AcceptedEquipment.includes(rawItemData.type)) {
+                    return this.processDroppedData(event, data);
+                } */
+                else {
+                    ui.notifications.error(game.i18n.format("SFRPG.InvalidStarshipItem", { name: rawItemData.name }));
+                    return false;
+                }
+
+
+
+
+                // return this._onOrdnanceDrop(event, data);
             }
-        }
 
-        if (starshipItems.length > 0) {
-            await this.actor.createEmbeddedDocuments("Item", [starshipItems]);
-        }
-
-        if (acceptedItems.length > 0) {
-            const acceptedItemData = duplicate(data);
-            acceptedItemData.items = acceptedItems;
-            await this.processDroppedData(event, data);
-        }
-
-        if (rejectedItems.length > 0) {
-            const rejectedItemNames = rejectedItems.map(x => x.name).join(", ");
-            ui.notifications.error(game.i18n.format("SFRPG.InvalidStarshipItem", { name: rejectedItemNames }));
-        }
+            /*
+            else if (data.type === "Item") {
+                const rawItemData = await this._getItemDropData(event, data);
         
-        return true;
+                if (rawItemData.type.startsWith("starship")) {
+                    return this.actor.createEmbeddedDocuments("Item", [rawItemData]);
+                } else if (d100AActorSheetStarship.AcceptedEquipment.includes(rawItemData.type)) {
+                    return this.processDroppedData(event, data);
+                } else {
+                    ui.notifications.error(game.i18n.format("SFRPG.InvalidStarshipItem", { name: rawItemData.name }));
+                    return false;
+                }
+            } else if (data.type === "ItemCollection") {
+                const starshipItems = [];
+                const acceptedItems = [];
+                const rejectedItems = [];
+                for (const item of data.items) {
+                    if (item.type.startsWith("starship")) {
+                        starshipItems.push(item);
+                    } else if (d100AActorSheetStarship.AcceptedEquipment.includes(item.type)) {
+                        acceptedItems.push(item);
+                    } else {
+                        rejectedItems.push(item);
+                    }
+                }
+        
+                if (starshipItems.length > 0) {
+                    await this.actor.createEmbeddedDocuments("Item", [starshipItems]);
+                }
+        
+                if (acceptedItems.length > 0) {
+                    const acceptedItemData = duplicate(data);
+                    acceptedItemData.items = acceptedItems;
+                    await this.processDroppedData(event, data);
+                }
+        
+                if (rejectedItems.length > 0) {
+                    const rejectedItemNames = rejectedItems.map(x => x.name).join(", ");
+                    ui.notifications.error(game.i18n.format("SFRPG.InvalidStarshipItem", { name: rejectedItemNames }));
+                }
+                
+                return true;
+            }
+        
+            */
+        }
+        return false;
     }
-
-    */
-}
-    return false;
-}
 
     /**
     * Get an items data. Same as starship.js, sheet.js
@@ -1429,11 +1425,11 @@ async _onDrop(event) {
     * @param {Event} event The originating drag event
     * @param {object} data The data trasfer object
     */
-     async _getItemDropData(event, data) {
+    async _getItemDropData(event, data) {
         let itemData = null;
         let item = null;
         data.id = data.uuid.slice(-16)
- console.log(event, data)
+        console.log(event, data)
         const actor = this.actor;
         if (data.pack) {
             const pack = game.packs.get(data.pack);
@@ -1448,43 +1444,43 @@ async _onDrop(event) {
             itemData = data.system;
         } else {
             item = game.items.get(data.id);
-      //console.log(item, data.uuid,data.id)
+            //console.log(item, data.uuid,data.id)
             if (!item) return;
             itemData = item.system;
             itemData.name = item.name
         }
-  //console.log(itemData)
+        //console.log(itemData)
         let dup = duplicate(item)
- 
-  //console.log(dup)
+
+        //console.log(dup)
         return dup;
     }
 
 
-/*
-    async _onDrop(event) {
-        event.preventDefault();
-    
-        const dragData = event.dataTransfer.getData('text/plain');
-        const parsedDragData = JSON.parse(dragData);
-  //console.log("dragdata", event.dataTransfer,"dragdata", dragData)
-        if (!parsedDragData) {
-      //console.log("Unknown item data");
-            return;
+    /*
+        async _onDrop(event) {
+            event.preventDefault();
+        
+            const dragData = event.dataTransfer.getData('text/plain');
+            const parsedDragData = JSON.parse(dragData);
+      //console.log("dragdata", event.dataTransfer,"dragdata", dragData)
+            if (!parsedDragData) {
+          //console.log("Unknown item data");
+                return;
+            }
+        
+            return this.processDroppedData(event, parsedDragData);
         }
     
-        return this.processDroppedData(event, parsedDragData);
-    }
-
-    async processDroppedData(event, parsedDragData) {
-  //console.log(this,event,parsedDragData);
-        if (true) {
-            ui.notifications.warn("Well this worked!!!");
-            //ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragToExternalTokenError"));
-            return;
+        async processDroppedData(event, parsedDragData) {
+      //console.log(this,event,parsedDragData);
+            if (true) {
+                ui.notifications.warn("Well this worked!!!");
+                //ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragToExternalTokenError"));
+                return;
+            }
         }
-    }
-*/
+    */
 
 
 

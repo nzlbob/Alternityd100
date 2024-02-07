@@ -154,13 +154,13 @@ export class Diced100 {
       rollMode = form ? form.find('[name="rollMode"]').val() : rollMode;
 
 
-    //  console.log ("*******operator******",/*operator,parts, setRoll, form,dialogRange,*/dialogResistance/*,this*/)
+    //console.log ("*******operator******",/*operator,parts, setRoll, form,dialogRange,*/dialogResistance/*,this*/)
     //  dSteps = form ? form.find('[name="dstep"]').val() : dSteps;
     if (isStarshipweapon){
       activegunner = validgunner[operator]
         
      
-  //  console.log(activegunner.name)
+  //console.log(activegunner.name)
 
     flavor = "Gunner-" + activegunner.name;
     stepbonus = activegunner.system.skills.weapo.step 
@@ -168,7 +168,7 @@ export class Diced100 {
     ordinary = activegunner.system.skills.weapo.base
     good= activegunner.system.skills.weapo.good
     amazing= activegunner.system.skills.weapo.amazing
-  //  console.log("\nordinary",ordinary, "\ngood", good,"\namazing",amazing,"\nactivegunner",activegunner)
+  //console.log("\nordinary",ordinary, "\ngood", good,"\namazing",amazing,"\nactivegunner",activegunner)
 
 
   }
@@ -221,13 +221,13 @@ rect: "PF1.MeasureTemplateRectangle",
 
   // Create template
   let AoETemplate = AbilityTemplate.fromData(templateOptions);
-  console.log(this,templateOptions )
+ //console.log(this,templateOptions )
   
   if (AoETemplate) {
     const sheetRendered = this.parent?.sheet?._element != null;
     if (sheetRendered) this.parent.sheet.minimize();
      AoETemplate = await AoETemplate.drawPreview(event);
-     console.log(event )
+    //console.log(event )
     if (!AoETemplate) {
       if (sheetRendered) this.parent.sheet.maximize();
       return;
@@ -455,7 +455,7 @@ currentTarget.flavor += "\nDodging Mod: " + currentTarget.dodgemod
           targetData[a].attroll = await Roll.create(targetData[0].attroll.terms[0].results[0].result + d100stepdie(targetData[a].attackbonus + parseInt(sitBonus))).evaluate({ async: true });
         
         }
-        console.log(targetData[a],targetData[a].attackbonus,targetData[a].attroll)
+       //console.log(targetData[a],targetData[a].attackbonus,targetData[a].attroll)
       /**Check what kind of success was rolled */  
       if (targetData[a].attroll.total > ordinary) {targetData[a].degree = "Failure" };
       if (targetData[a].attroll.total <= ordinary) {targetData[a].degree = "Ordinary"};
@@ -466,10 +466,10 @@ currentTarget.flavor += "\nDodging Mod: " + currentTarget.dodgemod
       
       
       if (isStarshipweapon){
-        console.log("----------------",)
+       //console.log("----------------",)
       targetData[a].firepower = d100A.starshipFirepowerExtra.abbr[actor.system.details.toughness.firepower];
       targetData[a].firepowerN = d100A.starshipFirepowerExtra.val[actor.system.details.toughness.firepower];
-      console.log("----------------",targetData[a].firepower,targetData[a].firepowerN)
+     //console.log("----------------",targetData[a].firepower,targetData[a].firepowerN)
 
       }
       if (!isStarshipweapon){
@@ -487,15 +487,15 @@ currentTarget.flavor += "\nDodging Mod: " + currentTarget.dodgemod
      
       targetData[a].tooltip = await targetData[a].attroll.getTooltip()
       targetData[a].roll = targetData[0].attroll.toJSON();
-      console.log("\nordinary",ordinary, "\ngood", good,"\namazing",amazing)
-      console.log("\nRoll",targetData[a].attroll, targetData,"\nattack", d100stepdie(targetData[0].attackbonus))
+     //console.log("\nordinary",ordinary, "\ngood", good,"\namazing",amazing)
+     //console.log("\nRoll",targetData[a].attroll, targetData,"\nattack", d100stepdie(targetData[0].attackbonus))
 
       }
 
 
 
 
-      // console.log("\nAttack Roll\n" ,attroll, "\n")
+      //console.log("\nAttack Roll\n" ,attroll, "\n")
        
       //Make the Attack  flavor Text
 
@@ -821,13 +821,13 @@ console.log("****Resistance*****",resistance,targetData[0].resPenalty)
     let dialogCover =  form ? form.find('[name="cover"]').val() :0;
     let dialogMovement =  form ? form.find('[name="movement"]').val() :0;
 
-    console.log ("*******operator******",operator,parts, setRoll, form,dialogRange,dialogResistance,this)
+   //console.log ("*******operator******",operator,parts, setRoll, form,dialogRange,dialogResistance,this)
   //  dSteps = form ? form.find('[name="dstep"]').val() : dSteps;
   if (isStarshipweapon){
     activegunner = validgunner[operator]
       
    
-  console.log(activegunner.name)
+ //console.log(activegunner.name)
 
   flavor = "Gunner-" + activegunner.name;
   stepbonus = activegunner.system.skills.weapo.step 
@@ -835,7 +835,7 @@ console.log("****Resistance*****",resistance,targetData[0].resPenalty)
   ordinary = activegunner.system.skills.weapo.base
   good= activegunner.system.skills.weapo.good
   amazing= activegunner.system.skills.weapo.amazing
-  console.log("\nordinary",ordinary, "\ngood", good,"\namazing",amazing,"\nactivegunner",activegunner)
+ //console.log("\nordinary",ordinary, "\ngood", good,"\namazing",amazing,"\nactivegunner",activegunner)
 
 
 }
@@ -894,7 +894,7 @@ if (AoETemplate) {
   const sheetRendered = this.parent?.sheet?._element != null;
   if (sheetRendered) this.parent.sheet.minimize();
    AoETemplate = await AoETemplate.drawPreview(event);
-   console.log(event )
+  //console.log(event )
   if (!AoETemplate) {
     if (sheetRendered) this.parent.sheet.maximize();
     return;
@@ -905,7 +905,17 @@ if (AoETemplate) {
 AoEdistance = Math.ceil((canvas.grid.measureDistance({x: actorToken.x, y: actorToken.y}, {x: AoETemplate[0].x, y: AoETemplate[0].y}))); 
 
 
-target.distance = AoEdistance
+
+let tempdistx =  actorToken.elevation-0
+if (tempdistx > 0) tempdistx = tempdistx**0.5
+const tempdistxy =  ((AoEdistance**2)+(tempdistx**2))**0.5
+
+
+//console.log("Dist",tempdistx,tempdisty,tempdistx**2,tempdisty**2 )
+//console.log("Range",tempdistxy)
+let tempdist = tempdistxy.toFixed(1)
+
+target.distance = tempdist
 target.rangecat = getRangeCat(target,item)
 
 
@@ -986,10 +996,10 @@ target.flavor += "\nCover Mod: " + target.covermod
       //sitBonus =0;
 
       if (!sitBonus && curParts.indexOf("@bonus") !== -1) curParts.pop();
-      console.log("Data Bonus", sitBonus, " stepbonus", stepbonus)
+     //console.log("Data Bonus", sitBonus, " stepbonus", stepbonus)
 
       totalbonus = target.attackbonus + parseInt(sitBonus);
-      console.log( stepbonus,totalbonus, sitBonus, dice)
+     //console.log( stepbonus,totalbonus, sitBonus, dice)
       let stepflavor = `Difficulty: ${sitBonus} `;
 
       if(item.hasDamage) target.dmgresult = await Diced100.d100AdamageRoll({ 
@@ -1005,7 +1015,7 @@ target.flavor += "\nCover Mod: " + target.covermod
       
       /*** For the second rolls, roll the d20 as well as the bonus dice */
 
-      console.log(target.attackbonus,target.attroll)
+     //console.log(target.attackbonus,target.attroll)
     /**Check what kind of success was rolled */  
     if (target.attroll.total > ordinary) {target.degree = "Failure"; target.degreeShort = "failure" };
     if (target.attroll.total <= ordinary) {target.degree = "Ordinary"; target.degreeShort = "ordinary"};
@@ -1013,7 +1023,7 @@ target.flavor += "\nCover Mod: " + target.covermod
     if (target.attroll.total <= amazing) {target.degree = "Amazing!"; target.degreeShort = "amazing"};
     if (target.attroll.terms[0].total >= fumble) {target.degree = "Critical Failure"; target.degreeShort = "critical"};
     if (target.attroll.terms[0].total == 1) {target.degree = "Critical Success"; target.degreeShort = "amazing"};
-    console.log(target.degree,target.degreeShort,target)
+   //console.log(target.degree,target.degreeShort,target)
 
     target.firepower = item.system.firepower;
     target.type = item.system.damage.type;
@@ -1027,8 +1037,8 @@ target.flavor += "\nCover Mod: " + target.covermod
    
     target.tooltip = await target.attroll.getTooltip()
     target.roll = target.attroll.toJSON();
-    console.log("\nordinary",ordinary, "\ngood", good,"\namazing",amazing)
-    console.log("\nRoll",target.attroll, targetData,"\nattack", d100stepdie(target.attackbonus))
+    //console.log("\nordinary",ordinary, "\ngood", good,"\namazing",amazing)
+    //console.log("\nRoll",target.attroll, targetData,"\nattack", d100stepdie(target.attackbonus))
 
 //if (target.degree == "Failure")  {
   target.missroll = await Roll.create("1d62");
@@ -1036,7 +1046,7 @@ target.flavor += "\nCover Mod: " + target.covermod
   target.mrroll = target.missroll.toJSON()
   target.missangle = target.missroll.total*36/2/Math.PI
       //console.log("target.mrroll",target.missroll,target.mrroll)
-      console.log("target.mrroll",target.missroll,target.mrroll,target.missangle)
+      //console.log("target.mrroll",target.missroll,target.mrroll,target.missangle)
 
 /*Table P2O: Accuracy by Range*
                 Distance from Target*/
@@ -1047,7 +1057,7 @@ let abr = {"critical":{"short":4,"medium":8,"long":12},
 "amazing":{"short":0,"medium":0,"long":0}
 
   }
-  console.log("range", abr.critical.long,abr)
+  //console.log("range", abr.critical.long,abr)
 
   let xloc = AoETemplate[0].x 
   let yloc = AoETemplate[0].y
@@ -1058,7 +1068,7 @@ let abr = {"critical":{"short":4,"medium":8,"long":12},
 
   xloc+=xdelta
   yloc+=ydelta
-  console.log("Loc",xloc,yloc,delta,xdelta,ydelta,target.missroll.total/10,AoETemplate,target.missroll.total)
+  //console.log("Loc",xloc,yloc,delta,xdelta,ydelta,target.missroll.total/10,AoETemplate,target.missroll.total)
   
  actorToken.x, 
  actorToken.y
@@ -1072,9 +1082,9 @@ let ray = new Ray({x:actorToken.object.center.x,y:actorToken.object.center.y},{x
  let coll 
  const collisions = await CONFIG.Canvas.polygonBackends[obsMode].testCollision(ray.A,ray.B,{mode:"all",type:obsMode})
 if (!!collisions.length) coll = collisions[0]
-
-
- console.log("\nLoc",actorToken.object.center.x,actorToken.object.center.y,xloc,yloc,ray,coll)
+//console.log(collisions)
+//[3].value.flags["wall-height"].top
+ //console.log("\nLoc",actorToken.object.center.x,actorToken.object.center.y,xloc,yloc,ray,coll)
   if (!!coll) {
     let wallDelta = 0.1 * canvas.grid.size
     let range = Math.sqrt(Math.pow((coll.x - actorToken.object.center.x),2) + Math.pow((coll.y - actorToken.object.center.y),2))
@@ -1085,9 +1095,9 @@ if (!!collisions.length) coll = collisions[0]
     //xloc = coll.x;
     //yloc = coll.y;
     ui.notifications.info("Hit the Wall");
-    console.log("\nLoc",xloc,yloc,range,ray,coll)
+   //console.log("\nLoc",xloc,yloc,range,ray,coll)
   }
-  console.log("\nLoc",xloc,yloc)
+ //console.log("\nLoc",xloc,yloc)
   
   await AoETemplate[0].update({x : xloc,y : yloc})
 /*
@@ -1099,7 +1109,7 @@ Good                  on target on target 2 m
 Amazing always on target
 /** For thrown objects or indirect fire weapon
 */
-    // console.log("\nAttack Roll\n" ,attroll, "\n")
+    //console.log("\nAttack Roll\n" ,attroll, "\n")
      
 
     //Make the Attack  flavor Text
@@ -1138,7 +1148,7 @@ for ( let token of game.scenes.current.tokens){
  targetData = fulltargetData.filter(function (target) {
   
   let ray = new Ray({x:target.token.object.center.x,y:target.token.object.center.y},{x:xloc,y:yloc})
-   // console.log(ray)
+   //console.log(ray)
     
    /***
     * Maybe add a Grenade launcher light sight move penetration factor
@@ -1150,11 +1160,11 @@ for ( let token of game.scenes.current.tokens){
    let temp = CONFIG.Canvas.polygonBackends[obsMode].testCollision(ray.A,ray.B,{mode:"any",type:obsMode})
   //let temp = canvas.walls.checkCollision(ray,{mode:"any",type:"move"}); Deprecated since Version 11
 
-  console.log(temp, ray, target)
+  //console.log(temp, ray, target)
   return !temp
 });
 
-console.log (targetData)
+//console.log (targetData)
 
 for(let thisTarget of targetData){
   thisTarget.dmgresult = target.dmgresult
@@ -1361,8 +1371,8 @@ console.log(resistance)
     hasDegreeText,
     degreeText
   }) {
-
-    console.log( 
+/*
+   console.log( 
       "Actor -- ", data,
 "\n    event,",    event,
 "\n    parts,",    parts,
@@ -1393,11 +1403,11 @@ console.log(resistance)
 "\n    compendiumEntry = null,",    compendiumEntry ,
 
 )
-
+*/
     // Handle input arguments
     flavor = flavor || title;
 
-   // console.log(flavor)
+   //console.log(flavor)
     let rollMode = game.settings.get("core", "rollMode");
 
     let rolled = false;
@@ -1806,7 +1816,7 @@ return defence;
       chatTemplate = chatTemplate || "systems/Alternityd100/templates/chat/simple-damage.hbs";
       var rolldice = data.damage.ord.dice; //+ "+" + parts.join("+")
       const rollOrd = Roll.create(rolldice, data);
-      console.log(data)+
+     //console.log(data)+
       aetyertyety
 //console.log("Roll Data" ,  rollContext,"\nParts\n",parts,"\nRoll\n",rollOrd.terms,parts.join("+"),"\nChat\n",chatTemplate,"\nrolldice\n" ,rolldice)
      /* if (crit === true) {
@@ -1985,7 +1995,7 @@ if (data.firepower == "G" && armor.system.firepower == "A" ) {
 
 let shipToughness = d100A.starshipFirepowerExtra.abbr[data.contrActor.system.frame?.system?.toughness] || "G"
 if(data.contrActor.isSpaceActor){
-  console.log(d100A.firepowerRating,data.firepower,armor, shipToughness,dmgtype)
+ //console.log(d100A.firepowerRating,data.firepower,armor, shipToughness,dmgtype)
   dmgtype = d100A.firepowerRating[data.firepower][shipToughness][dmgtype]
   if(!dmgtype) alteredDamage = 0;
   if(dmgtype) alteredDamage = data.damage * d100A.firepowerMultiplier[data.firepower][shipToughness][data.dmgtype];
@@ -2016,7 +2026,7 @@ let damageReduced = Math.max(0,defendroll.total)
 
 
 
-     // console.log( "\ndamage\n" ,damage  );
+     //console.log( "\ndamage\n" ,damage  );
       
   //const attack = data.defenceData.value + " " + data.defenceData.dmgtype + " ("+ data.defenceData.type + ")(" + data.defenceData.firepower+")" ;
    //armorroll = bestdefence + " ([" + ""//defend[bestarmor].formula + "] " ;

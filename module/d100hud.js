@@ -100,8 +100,9 @@ object.document.bar2.attribute
       combatClass: this.object.inCombat ? "active" : "",
       targetClass: this.object.targeted.has(game.user) ? "active" : "",
       isSpaceActor:this.object.actor.system.isSpaceActor,
-      speed:this.object.actor.system.attributes.speed?.value,
-      accel:this.object.actor.system.attributes.accel?.value,
+      isVehicle:this.object.actor.type == "vehicle",
+      speed:this.object.actor.type == "starship"? this.object.actor.system.attributes.speed.value : this.object.actor.system.attributes.speed?.current?.value,
+      accel:this.object.actor.type == "starship"? this.object.actor.system.attributes.accel.value : this.object.actor.system.attributes.speed?.accel?.value, 
       lightAngle: this.object.light.data.rotation
     });
     data.statusEffects =this._getStatusEffectChoices(data);
@@ -307,15 +308,17 @@ this.object.light.data.rotation = 90
     // For attribute bar values, update the associated Actor
     const bar = input.dataset.bar;
     const actor = this.object?.actor;
-    
+    console.log("this", event,this,actor)
     // d100A shoehorn in speed box to Token.speed
     if (input.name == "speed"){
 //console.log(this.object.document.speed)
       this.object.document.speed = this.object.document.speed || 0;
-//console.log(this.object.document.speed);
-      this.object.actor.update({["system.attributes.speed.value"]: isDelta ? current + value : value});
-    }
-
+      const current = actor.type == "starship"? actor.system.attributes.speed.value : actor.system.attributes.speed.current.value;
+console.log(this.object.document.speed,this.object.type);
+if(actor.type == "starship") this.object.actor.update({["system.attributes.speed.value"]: isDelta ? current + value : value});
+if(actor.type == "vehicle") this.object.actor.update({["system.attributes.speed.current.value"]: isDelta ? current + value : value});  
+}
+    
 
     else if ( bar && actor ) {
       const attr = this.object.document.getBarAttribute(bar);
@@ -328,7 +331,7 @@ this.object.light.data.rotation = 90
     else {
       const current = foundry.utils.getProperty(this.object.document, input.name);
 //console.log(value,input.name,input,current,actor,this.object.document)
-//console.log(this.object.document.update({[input.name]: isDelta ? current + value : value}));
+console.log(this.object.document.update({[input.name]: isDelta ? current + value : value}));
     }
 
     // Clear the HUD

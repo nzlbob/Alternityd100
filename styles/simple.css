@@ -145,8 +145,9 @@ form .form-group label {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
-  margin-bottom: 5px;
+  margin-bottom: 0px;
   font-family: serpentine;
+  padding: 0px;
 }
 
 .Alternityd100 .sheet-header.header2{
@@ -1307,7 +1308,7 @@ background: radial-gradient( #39879d ,#212c48  );
   border-bottom: none;
   height: 25px;
   margin: 0;
-  padding: 5px;
+  padding: 0px;
 }
 .Alternityd100.sheet .sheet-header h1 input {
   height: 22px;
@@ -2880,6 +2881,7 @@ background: radial-gradient( #39879d ,#212c48  );
   background: #c41e1e;
   color: #fff;
   cursor: pointer;
+  line-height: 16px;
 }
 .Alternityd100.sheet.actor .inventory-list .item-detail .featActivate,
 .Alternityd100.sheet.actor .crew-list .item-detail .featActivate,
@@ -2909,6 +2911,7 @@ background: radial-gradient( #39879d ,#212c48  );
   background: #179c17;
   color: #fff;
   cursor: pointer;
+  line-height: 16px;
 }
 
 .Alternityd100.sheet.actor .inventory-list .item-detail .featActivate:hover,
@@ -2988,11 +2991,15 @@ background: radial-gradient( #39879d ,#212c48  );
 .Alternityd100.sheet.actor .crew-list .crew-detail-list,
 .Alternityd100.sheet.actor .vehicle-system-list .crew-item-list
 {
+  
   list-style: none;
   margin: 0;
   padding: 0;
-  /*line-height: 300pt;*/
+  line-height: 16px;
 }
+
+
+
 .Alternityd100.sheet.actor  .crew-det
 {
   list-style: none;
@@ -5017,12 +5024,85 @@ background: radial-gradient( #39879d ,#212c48  );
   padding: 0;
 }
 .Alternityd100.sheet.actor.vehicle {
-  min-width: 600px;
+  min-width: 700px;
   min-height: 685px;
   /* ----------------------------------------- */
   /*  Sheet Header                             */
   /* ----------------------------------------- */
 }
+.Alternityd100.sheet.actor.vehicle .sheet-header {
+  flex: 0 0 290px;
+  vertical-align: text-top;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: 0px;
+  font-family: serpentine;
+  position:relative;
+vertical-align: top;
+
+}
+
+.Alternityd100.sheet.actor.vehicle .sheet-header .hptable  {
+  vertical-align: top;
+}
+.Alternityd100.sheet.actor.vehicle .sheet-header .hptable thead  {
+ 
+  background-color: rgb(101, 110, 110);
+  padding: 0px;
+  margin: 0px;
+
+  vertical-align: top;
+
+  }
+
+  .Alternityd100.sheet.actor.vehicle ul.attributes li.attribute {
+    height: 100px;
+    margin: 0 5px;
+    border: 2px groove #eeede0;
+    border-radius: 4px;
+    font-family: "serpentine", sans-serif;
+    vertical-align: text-top;
+
+  }
+  .Alternityd100.sheet.actor.vehicle ul.attributes {
+    list-style: none;
+    margin: 5px 0 0;
+    padding: 0;
+  }
+  .Alternityd100.sheet.actor.vehicle ul.attributes li.attribute {
+    height: 115px;
+    margin: 0 5px;
+    border: 2px groove #eeede0;
+    border-radius: 4px;
+    font-family: "serpentine", sans-serif;
+    vertical-align: text-top;
+  }
+
+  .Alternityd100.sheet.actor.vehicle .sheet-header .statTable thead  {
+ height: 20px;
+
+
+  
+    } 
+    .Alternityd100.sheet.actor.vehicle .sheet-header .statTable tr  {
+      height: 20px;
+     
+     
+       
+         } 
+  .Alternityd100.sheet.actor.vehicle .sheet-header .hptable tr {
+ 
+  background-color: rgb(101, 110, 110);
+  padding: 0px;
+  margin: 0px;
+
+
+
+  }
+
 .Alternityd100.sheet.actor.vehicle .sheet-header .charlevel {
   flex: 0 0 180px;
   padding: 0 5px 2px;
@@ -5067,6 +5147,7 @@ background: radial-gradient( #39879d ,#212c48  );
   background: #235683;
   color: #fff;
   cursor: pointer;
+  line-height: 16px;
 }
 .Alternityd100.sheet.actor.vehicle .passenger-action .passengerPilotingSkill:hover,
 .Alternityd100.sheet.actor.vehicle .passenger-action .passengerPilotingSkill:focus {
@@ -5091,6 +5172,7 @@ background: radial-gradient( #39879d ,#212c48  );
   background: #235683;
   color: #fff;
   cursor: pointer;
+  line-height: 16px;
 }
 .Alternityd100.sheet.actor.vehicle .vehicle-system-action .roll-piloting:hover,
 .Alternityd100.sheet.actor.vehicle .vehicle-system-action .roll-piloting:focus {

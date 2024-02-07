@@ -2,38 +2,61 @@
 
     <div class="col left">
         {{#if isSpaceActor}}
-        <div title="Turn Left" class="control-icon" data-action="rotateL">
+        <div data-tooltip ="Turn Left" class="control-icon" data-action="rotateL">
             <i class="fas fa-reply"></i>
         </div>
 
 
-        <div title="Turn Right" class="control-icon" data-action="rotateR">
+        <div data-tooltip = "Turn Right" class="control-icon" data-action="rotateR">
             <i class="fas fa-share"></i>
         </div>
 
         <div class="attribute elevation">
-            <!-- <i class="fas fa-angle-up"></i> -->
+            <i class="fas fa-compass"></i>
             
-            <input type="text" title="Heading" name="rotation" value="{{rotation}}"></input>
+            <input type="text" data-tooltip = "Heading" name="rotation" value="{{rotation}}"></input>
             
         </div>
-        <div title="Current Speed" class="attribute elevation">
-            <!-- <i class="fas fa-angle-up"></i> -->
+        <div data-tooltip ="Speed <br> Accel: &#177 {{accel}}" class="attribute elevation">
+            <i class="fas fa-arrow-left"></i>
             <input type="text" name="speed" value="{{speed}}">
         </div>
         {{/if}}
+        {{console "26"}}
+        {{console this}}
+
+
         {{#if (not isSpaceActor)}}
-        <div class="lightAngle">
+        {{#if (not isVehicle)}}
+      <!--  <div class="lightAngle"> -->
             <!-- <i class="fas fa-angle-up"></i> -->
-            <input type="text" name="lightAngle" value="{{lightAngle}}">
+      <!--       <input type="text" name="lightAngle" value="{{lightAngle}}">
         </div>
+    -->
 
-
-        <div class="attribute elevation">
-            <!-- <i class="fas fa-angle-up"></i> -->
+        <div data-tooltip = "Elevation" class="attribute elevation">
+            <i class="fas fa-angle-up"></i> 
             <input type="text" name="elevation" value="{{elevation}}">
         </div>
+        
+
         {{/if}}
+        {{#if isVehicle}}
+        <!--  <div class="lightAngle"> -->
+              <!-- <i class="fas fa-angle-up"></i> -->
+        <!--       <input type="text" name="lightAngle" value="{{lightAngle}}">
+          </div>
+      -->
+      <div data-tooltip = "Elevation" class="attribute elevation">
+         <i class="fas fa-angle-up"></i> 
+        <input type="text" name="elevation" value="{{elevation}}">
+    </div>
+          <div data-tooltip = "Speed <br> Accel: &#177 {{accel}}" class="attribute elevation">
+               <i class="fas fa-arrow-left"></i> 
+              <input type="text" name="speed" value="{{speed}}">
+          </div>
+          {{/if}}
+          {{/if}}
         {{#if canConfigure}}
         <div class="control-icon" data-action="config">
             <i class="fas fa-cog"></i>
@@ -71,12 +94,12 @@
     <div class="col right">
         {{#if isGM}}
         <div class="control-icon {{visibilityClass}}" data-action="visibility">
-            <img src="{{icons.visibility}}" width="36" height="36" title="{{localize "HUD.ToggleVis"}}"/>
+            <img src="{{icons.visibility}}" width="36" height="36" data-tooltip="{{localize "HUD.ToggleVis"}}"/>
         </div>
         {{/if}}
 
         <div class="control-icon {{effectsClass}}" data-action="effects">
-            <img src="{{icons.effects}}" width="36" height="36" title="{{localize "HUD.AssignStatusEffects"}}"/>
+            <img src="{{icons.effects}}" width="36" height="36" data-tooltip="{{localize "HUD.AssignStatusEffects"}}"/>
             <div class="status-effects">
                 {{#each statusEffects as |status src|}}
                 <img class="effect-control {{status.cssClass}}" src="{{status.src}}"
@@ -89,7 +112,7 @@
         {{console this}}
         {{#if canToggleCombat}}
         <div class="control-icon {{combatClass}}" data-action="combat">
-            <img src="{{icons.combat}}" width="36" height="36" title="{{localize "HUD.ToggleCombatState"}}"/>
+            <img src="{{icons.combat}}" width="36" height="36" data-tooltip="{{localize "HUD.ToggleCombatState"}}"/>
         </div>
         {{/if}}
     </div>

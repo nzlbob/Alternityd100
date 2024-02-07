@@ -77,6 +77,7 @@ import calculateStarshipPower           from './rules/actions/actor/starship/cal
 import calculateStarshipSensors         from './rules/actions/actor/starship/calculate-starship-sensors.js';
 import calculateStarshipShields         from './rules/actions/actor/starship/calculate-starship-shields.js';
 import calculateStarshipSpeed           from './rules/actions/actor/starship/calculate-starship-speed.js';
+import calculateVehicleSpeed           from './rules/actions/actor/vehicle/calculate-vehicle-speed.js';
 import calculateStarshipTargetLock      from './rules/actions/actor/starship/calculate-starship-targetlock.js';
 // Vehicle rules
 import calculateVehicleControlSkill from './rules/actions/actor/vehicle/calculate-vehicle-control-skill.js';
@@ -162,6 +163,7 @@ export default function (engine) {
     calculateVehicleControlSkill(engine);
     calculateVehicleHangar(engine);
     calculateVehiclePassengers(engine);
+    calculateVehicleSpeed(engine);
     // Item actions
     calculateItemData(engine);
 
@@ -308,7 +310,8 @@ export default function (engine) {
                     "calculateVehicleControlSkill",
                     "calculateVehicleHangar",
                     "calculateVehiclePassengers",
-                    "identity"
+                    "identity",
+                    "calculateVehicleSpeed"
                 ]
             }
         ]

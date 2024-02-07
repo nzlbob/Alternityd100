@@ -1192,7 +1192,7 @@ return A
               }
       
               /** Add remaining roles if available. */
-              const crewMates = ["copilot", "navigation","communications","damageControl","defences", "gunner", "engineer", "sensors","chiefMate", "magicOfficer", "passenger", "scienceOfficer", "minorCrew", "openCrew"];
+              const crewMates = ["copilot", "communications","damageControl","defences", "gunner", "engineer", "sensors","chiefMate", "magicOfficer", "passenger", "scienceOfficer", "minorCrew", "openCrew"];
               const allCrewMates = ["minorCrew", "openCrew"];
               for (const crewType of crewMates) {
                   let crewCount = 1;
@@ -1217,6 +1217,7 @@ return A
                           }
                       }
                   } else {
+                    console.log(crewType)
                       const crewList = actorData.crew[crewType].actors;
                       if (crewList && crewList.length > 0) {
                           for (const actor of crewList) {
