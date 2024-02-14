@@ -211,15 +211,15 @@
                                     <tbody>
                                         <tr>
                                             <td>Accel</td>
-                                            <td>{{system.attributes.speed.accel.value}}</td>
+                                            <td>{{system.attributes.accel.value}}</td>
 
                                         </tr>
                                         <tr>
                                             <td>{{localize "Speed"}}</td>
                                             <td>
-                                                <input name="system.attributes.speed.current.value" type="number"
-                                                    value="{{system.attributes.speed.current.value}}"
-                                                    data-dtype="Number" placeholder="0" />
+                                                <input name="system.attributes.speed.value" type="number"
+                                                    value="{{system.attributes.speed.value}}" data-dtype="Number"
+                                                    placeholder="0" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -376,8 +376,8 @@
                             <label data-tooltip="{{ localize " SFRPG.VehicleSheet.Details.Movement.AccelTooltip" }}">{{
                                 localize "SFRPG.VehicleSheet.Details.Movement.Accel" }}</label>
                             <div class="form-fields">
-                                <input type="text" name="system.attributes.speed.accel.base"
-                                    value="{{system.attributes.speed.accel.base}}" placeholder="{{ localize "
+                                <input type="text" name="system.attributes.accel.base"
+                                    value="{{system.attributes.accel.base}}" placeholder="{{ localize "
                                     SFRPG.VehicleSheet.Details.Movement.DrivePlaceholder" }}" />
                             </div>
                         </div>
@@ -385,8 +385,8 @@
                             <label data-tooltip=""="{{ localize " SFRPG.VehicleSheet.Details.Movement.MaxTooltip" }}">{{
                                 localize "SFRPG.VehicleSheet.Details.Movement.Max" }}</label>
                             <div class="form-fields">
-                                <input type="text" name="system.attributes.speed.max.base"
-                                    value="{{system.attributes.speed.max.base}}" placeholder="{{ localize "
+                                <input type="text" name="system.attributes.speed.base"
+                                    value="{{system.attributes.speed.base}}" placeholder="{{ localize "
                                     SFRPG.VehicleSheet.Details.Movement.FullPlaceholder" }}" />
                             </div>
                         </div>
@@ -398,36 +398,29 @@
                 <h3 class="form-header">{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.Title" }}</h3>
                 <div class="flexrow">
                     <div class="flexcol">
+
                         <div class="form-group">
-                            <label>Control</label>
-                            <div class="form-fields">
-                                <select name="system.attributes.controlSkill">
-                                    {{#select system.attributes.controlSkill}}
-                                    <option value="pil">{{ config.skills.pil }}</option>
-                                    <option value="ath">{{ config.skills.ath }}</option>
-                                    <option value="sur">{{ config.skills.sur }}</option>
-                                    <option value="none">None</option>
-                                    {{/select}}
-                                </select>
-                                {{#if (eq system.attributes.controlSkill "pil")}}
-                                <input type="text" name="system.attributes.modifiers.piloting"
-                                    value="{{system.attributes.modifiers.piloting}}" />
-                                <div class="item-name flexrow {{#if (not disableRolling)}}rollable{{/if}}">
-                                    <div class="passenger-action flexcol">
-                                        <a class="pilotPilotingSkill">&nbsp;</a>
-                                    </div>
+                            <label>{{ localize "Pilot Skill" }}</label>
+                            <select name="system.attributes.controlSkill">
+                                {{#select system.attributes.controlSkill}}
+                                {{#each d100Aconfig.pilotingSkills as |name type|}}
+                                <option value="{{type}}">{{localize name}}</option>
+                                {{/each}}
+                                {{/select}}
+                            </select>
+
+                           <div class="item-name flexrow {{#if (not disableRolling)}}rollable{{/if}}">
+                                <div class="passenger-action flexcol">
+                                    <a class="pilotPilotingSkill">&nbsp;</a>
                                 </div>
-                                {{/if}}
-                                {{#if (eq system.attributes.controlSkill "ath")}}
-                                <input type="text" name="system.attributes.modifiers.athletics"
-                                    value="{{system.attributes.modifiers.athletics}}" />
-                                {{/if}}
-                                {{#if (eq system.attributes.controlSkill "sur")}}
-                                <input type="text" name="system.attributes.modifiers.survival"
-                                    value="{{system.attributes.modifiers.survival}}" />
-                                {{/if}}
                             </div>
+
+
+
                         </div>
+
+
+
                         <div class="form-group">
                             <label data-tooltip="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.DriveTooltip'}}">{{
                                 localize "SFRPG.VehicleSheet.Details.Modifiers.DriveMod" }}</label>

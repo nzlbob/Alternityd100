@@ -1468,7 +1468,7 @@ targetedToken.rangecat = getRangeCat(targetedToken,item)
         Medium cover (+2 step penalty) indicates that the target is hiding behind material with good stopping power (heavy wood, brick, or mid- weight metal) or that less than one quarter of the target is exposed.
         Heavy cover f+3 step penalty) indicates that the target is hiding behind almost impenetrable material (steel or some other heavy metal, a bulkhead or vault door, or a solid stone wail) or that the target is almost completely hidden from view,
         */
-        targetedToken.covermod = 1
+        targetedToken.covermod = 0
         console.log(targetedToken)
         //const status = targetedToken.token.statusEffects.find(element=> element.id = dead)
         //if (status,isActive) targetedToken.covermod = 1 

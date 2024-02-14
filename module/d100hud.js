@@ -101,8 +101,8 @@ object.document.bar2.attribute
       targetClass: this.object.targeted.has(game.user) ? "active" : "",
       isSpaceActor:this.object.actor.system.isSpaceActor,
       isVehicle:this.object.actor.type == "vehicle",
-      speed:this.object.actor.type == "starship"? this.object.actor.system.attributes.speed.value : this.object.actor.system.attributes.speed?.current?.value,
-      accel:this.object.actor.type == "starship"? this.object.actor.system.attributes.accel.value : this.object.actor.system.attributes.speed?.accel?.value, 
+      speed: this.object.actor.system.attributes.speed?.value,
+      accel: this.object.actor.system.attributes.accel?.value, 
       lightAngle: this.object.light.data.rotation
     });
     data.statusEffects =this._getStatusEffectChoices(data);
@@ -142,7 +142,12 @@ object.document.bar2.attribute
     if ( token.document.overlayEffect ) tokenEffects.push(token.document.overlayEffect);
 
     console.log("\ntokenEffects\n",tokenEffects)
-    return CONFIG.d100A.statusEffects.concat(tokenEffects).reduce((obj, e) => {
+   
+   
+   
+
+    
+    const A = CONFIG.d100A.statusEffects.concat(tokenEffects).reduce((obj, e) => {
     //  console.log("e",e)
       const src = e.icon ?? e;
       if ( src in obj ) return obj;
@@ -164,6 +169,8 @@ object.document.bar2.attribute
       //console.log(this,obj,actor.effects)
       return obj;
     }, {});
+    console.log("\ntokenEffects\n",A)
+    return A
   }
 
   /* -------------------------------------------- */

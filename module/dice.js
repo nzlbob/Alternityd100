@@ -462,7 +462,7 @@ currentTarget.flavor += "\nDodging Mod: " + currentTarget.dodgemod
       if (targetData[a].attroll.total <= good) {targetData[a].degree = "Good"};
       if (targetData[a].attroll.total <= amazing) {targetData[a].degree = "Amazing!"};
       if (targetData[a].attroll.terms[0].total > fumble) {targetData[a].degree = "Critical Failure"};
-      if (targetData[a].attroll.terms[0].total == 1) {targetData[a].degree = "Critical Success"};
+      //if (targetData[a].attroll.terms[0].total == 1) {targetData[a].degree = "Critical Success"};
       
       
       if (isStarshipweapon){
@@ -514,9 +514,9 @@ currentTarget.flavor += "\nDodging Mod: " + currentTarget.dodgemod
               formula: roll.formula,
               tooltip: await targetData[0].attroll.getTooltip(),
               total: roll.total,
-              isCrit: targetData[0].attroll.total <= critical,
-              isFumble: targetData[0].attroll.total >= fumble,
-              isNat20: targetData[0].attroll.total === 20,
+              isCrit: targetData[0].attroll.terms[0].total <= critical,
+              isFumble: targetData[0].attroll.terms[0].total >= fumble,
+              isNat20: targetData[0].attroll.terms[0].total === 20,
               flavor: flavor,
               targetflavor: targetflavor,
               stepflavor: stepflavor,
@@ -1022,7 +1022,7 @@ target.flavor += "\nCover Mod: " + target.covermod
     if (target.attroll.total <= good) {target.degree = "Good"; target.degreeShort = "good"};
     if (target.attroll.total <= amazing) {target.degree = "Amazing!"; target.degreeShort = "amazing"};
     if (target.attroll.terms[0].total >= fumble) {target.degree = "Critical Failure"; target.degreeShort = "critical"};
-    if (target.attroll.terms[0].total == 1) {target.degree = "Critical Success"; target.degreeShort = "amazing"};
+    //if (target.attroll.terms[0].total == 1) {target.degree = "Critical Success"; target.degreeShort = "amazing"};
    //console.log(target.degree,target.degreeShort,target)
 
     target.firepower = item.system.firepower;
@@ -1186,9 +1186,9 @@ targetData.sort(function(a, b){return a.distance - b.distance});
             formula: roll.formula,
             tooltip: await target.attroll.getTooltip(),
             total: roll.total,
-            isCrit: target.attroll.terms[0].total <= critical,
+            isCrit:   target.attroll.terms[0].total <= critical,
             isFumble: target.attroll.terms[0].total >= fumble,
-            isNat20: target.attroll.total === 20,
+            isNat20:  target.attroll.terms[0].total === 20,
             flavor: flavor,
             targetflavor: targetflavor,
             stepflavor: stepflavor,
@@ -1469,9 +1469,9 @@ console.log(resistance)
               formula: roll.formula,
               tooltip: await roll.getTooltip(),
               total: roll.total,
-              isCrit: d20.total <= critical,
-              isFumble: d20.total >= fumble,
-              isNat20: d20.total === 20,
+              isCrit: d20.results[0].result <= critical,
+              isFumble: d20.results[0].result >= fumble,
+              isNat20: d20.results[0].result === 20,
               flavor: flavor,
               skillflavor:skillflavor,
               degree: degree,

@@ -7,6 +7,14 @@
   src: url(../fonts/Serpentine-Bold.otf);
 }
 
+.dice-tooltip .dice-rolls .roll.success, .dice-tooltip .dice-rolls .roll.min {
+  color: #000000;
+  filter: sepia(0.5) hue-rotate(+60deg);
+}
+.dice-tooltip .dice-rolls .roll.failure, .dice-tooltip .dice-rolls .roll.max {
+  color: #000000;
+  filter: sepia(0.5) hue-rotate(-60deg);
+}
 /*@font-face {
   font-family: "serpentine";
   src: url('fonts/Exo2-VariableFont_wght.ttf');
@@ -238,7 +246,7 @@ background-color: rgb(97, 97, 97);
   border-radius: 3px;
   font-family:"serpentine";
   font-size:14px;
-}
+}chat
 .Alternityd100 .resourcex {
   text-align: center;
   border: 2px solid #13cccc;
@@ -4078,7 +4086,7 @@ background: radial-gradient( #39879d ,#212c48  );
   line-height: 18px;
 }
 .message div.attack-targets .target .saving-throws > div .value.success {
-  color: #18520b;
+  color: #25c002;
   font-weight: bold;
 }
 .message div.attack-targets .target .saving-throws > div .value.failure {
@@ -4305,6 +4313,11 @@ background: radial-gradient( #39879d ,#212c48  );
   margin: 2px 0;
   font-family: "serpentine", sans-serif;
 }
+
+.dice-roll .dice-total.success {
+  color:rgb(106, 255, 47)
+}
+
 .Alternityd100.chat-card .card-footer {
   padding: 3px 0 0;
   border-top: 2px groove #FFF;

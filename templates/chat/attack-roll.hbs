@@ -4,7 +4,7 @@
   {{#if targetData}}
   {{> "systems/Alternityd100/templates/chat/parts/attack-roll-targets.hbs"}}
   {{/if}}
-{{console "attack-roll.hbs - 7"}}
+{{console "attack-roll.hbs - 7."}}
 {{console this}}
 {{console attacks}}
   {{#each attacks as |atk|}}
@@ -42,8 +42,9 @@
       <tbody>
         {{#if atk.hasAttack}}
         <tr>
+          {{console this}}
           <td {{#if atk.hasCritConfirm}}colspan="2"{{else}}colspan="4"{{/if}}>
-            <a class="inline-roll inline-dsn-hidden inline-result{{#if atk.attack.isNat20}} natural-20{{/if}}{{#if atk.attack.isCrit}} critical-threat success{{/if}}{{#if atk.attack.isFumble}} failure{{/if}}"
+            <a class="inline-roll inline-dsn-hidden inline-result{{#if ../isCrit}} natural-20{{/if}}{{#if atk.attack.isCrit}} critical-threat success{{/if}}{{#if atk.attack.isFumble}} failure{{/if}}"
             title="{{atk.attack.formula}}" data-roll="{{json-string atk.attack.roll}}">
             <i class="fas fa-dice-d20"></i> {{atk.attack.total}}
             </a>

@@ -6,8 +6,8 @@
       Range: {{target.distance}} {{target.units}} ({{target.rangecat}})
 
           <div class="degree-text" data-tooltip="{{target.flavor}}">
-            {{console "attack-roll-targets"}}
-            {{console target.degree}}
+            {{console "attack-roll-targets.hbs"}}
+            {{console this}}
           {{target.degree}}
           </div>
           {{/if}}
@@ -34,8 +34,9 @@
       
         {{#if t.degree}}
           <div class="degree-text" data-tooltip-direction="UP" data-tooltip="{{t.flavor}}">
-            {{console "attack-roll-targets"}}
-            {{console t.degree}}
+            {{console "attack-roll-targets37"}}
+            {{console this}}
+             {{console ../this}}
           {{t.degree}}
           </div>
           {{/if}}
@@ -44,7 +45,7 @@
           {{#if t.attroll.formula}}
           <div class="dice-roll">
           <div class="dice-result">
-             <h4 data-tooltip="{{t.flavor}}" class="dice-total{{#if isNat20}} natural-20{{/if}}{{#if isCrit}} critical-threat success{{/if}}{{#if isFumble}} failure{{/if}}">{{ t.attroll.total}}</h4>
+             <h4 data-tooltip="{{t.flavor}}" class="dice-total{{#if isNat20}} natural-20{{/if}}{{#if ../isCrit}} critical-threat success{{/if}}{{#if ../isFumble}} failure{{/if}}">{{ t.attroll.total}}</h4>
             {{{t.tooltip}}} 
             
             </div>

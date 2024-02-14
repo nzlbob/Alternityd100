@@ -428,8 +428,21 @@ console.log("HERE--",html)
 
         const actorId = $(event.currentTarget).parents('.crew').data('actorId');
         const role = this.actor.getCrewRoleForActor(actorId);
+        const actor = game.actors.get(actorId);
+console.log(role,actorId,event,this,this.actor.system.attributes.speed.driveMod.value)
 
-        await this.actor.rollVehiclePilotingSkill(role,actorId);
+const options = { stepbonus: 0,
+    steps:this.actor.system.attributes.speed.driveMod.value ||0, 
+    event: event, 
+    skipDialog: false, 
+    staticRoll: null, 
+    chatMessage: true, 
+    noSound: false, 
+    dice: "1d20",
+    skillflavor:"",
+    degreeText:{}
+}
+        await actor.rollSkill(this.actor.system.attributes.controlSkill,options);
     }
 
     /**

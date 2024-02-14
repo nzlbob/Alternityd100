@@ -4513,7 +4513,6 @@
                 "modifiers": []
             },
             "conditions": {
-                "conditions": {}
             },
             "counterClassesManagement": {
                 "counterClasses": {
@@ -4727,28 +4726,25 @@
                     "tooltip": [],
                     "pending": 0
                 },
-                "speed": {
+                
                     "accel": {
                         "base": 0,
                         "value": 0,
                         "tooltip": []
                     },
-                    "current": {
-                        "value": 0,
-                        "tooltip": []
-                    },
-                    "max": {
-                        "base": 0,
-                        "value": 0,
-                        "tooltip": []
-                    },
-                    "driveMod":{
-                        "base": 0,
-                        "value": 0,
-                        "tooltip": []
-
-                    }
-                },
+                    "speed": {
+                        
+                        "max":0,
+                        "min": 0,
+                        "base": 1,
+                        "value": 10,
+                        "temp": 0,
+                        "tempmax": 100,
+                        "tooltip": [],
+                        "pending": 0
+                        }
+                  
+                ,
                 "damageControl": {
                     "label": "Damage Control",
                     "min": 0,
