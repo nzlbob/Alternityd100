@@ -688,7 +688,7 @@ _onToggleConditions(event) {
     // Try find existing condition
     const conditionName = target.data('condition');
 
-    this.actor.setCondition(conditionName, target[0].checked).then(() => {
+    this.actor.setCondition(conditionName, target[0].checked) //.then(() => {
 /*
         const flatfootedConditions = ["blinded", "cowering", "off-kilter", "pinned", "stunned"];
         let shouldBeFlatfooted = (conditionName === "flat-footed" && target[0].checked);
@@ -704,8 +704,8 @@ _onToggleConditions(event) {
             const flatfooted = $('.condition.flat-footed');
             flatfooted.prop("checked", shouldBeFlatfooted).change();
         }
-        */
-    });
+        
+    });  */
     
 }
 

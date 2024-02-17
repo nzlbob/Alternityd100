@@ -716,6 +716,7 @@ SFRPG.conditionTypes = {
    // "dazzled": "SFRPG.ConditionsDazzled",
     "dead": "SFRPG.ConditionsDead",
     "deafened": "SFRPG.ConditionsDeafened",
+    "dodgecri" : "SFRPG.ConditionsDodgeCri",
     "dodgeord" : "SFRPG.ConditionsDodgeOrd",
     "dodgegoo" : "SFRPG.ConditionsDodgeGoo",
     "dodgeama" : "SFRPG.ConditionsDodgeAma",

@@ -2017,10 +2017,10 @@ d100A.compartmentData = {
       "per": "d100A.RestistanceModifierPER"
    };
 d100A.coverType = {
-   "0": "d100A.CoverType.none",
-   "1": "d100A.CoverType.Light",
-   "2": "d100A.CoverType.Medium",
-   "3": "d100A.CoverType.Heavy",
+   "+0": "d100A.CoverType.none",
+   "+1": "d100A.CoverType.Light",
+   "+2": "d100A.CoverType.Medium",
+   "+3": "d100A.CoverType.Heavy",
 }
 d100A.movementType = {
    "0": "d100A.MovementType.none",
@@ -2030,10 +2030,11 @@ d100A.movementType = {
 
 }
 d100A.dodgeType = {
-   "0": "d100A.DodgeType.0",
-   "1": "d100A.DodgeType.1",
-   "2": "d100A.DodgeType.2",
-   "3": "d100A.DodgeType.3"
+   "-2": "d100A.DodgeType.-2",
+   "+0": "d100A.DodgeType.0",
+   "+1": "d100A.DodgeType.1",
+   "+2": "d100A.DodgeType.2",
+   "+3": "d100A.DodgeType.3"
 }
 d100A.resistanceType = {
    "-5": "-5",
@@ -2301,6 +2302,11 @@ d100A.statusEffects =
          "icon": "systems/Alternityd100/icons/conditions/coverheavy.png"
       },
       {
+         "id": "dodgecri",
+         "label": "EFFECT.StatusDodgeCri",
+         "icon": "systems/Alternityd100/icons/conditions/dodge_04.webp"
+      },
+      {
          "id": "dodgeord",
          "label": "EFFECT.StatusDodgeOrd",
          "icon": "systems/Alternityd100/icons/conditions/dodge_02.webp"
@@ -2353,9 +2359,10 @@ d100A.statusEffectIconMapping = {
    "coverlight": "systems/Alternityd100/icons/conditions/coverlight.png",
    "covermedium": "systems/Alternityd100/icons/conditions/covermedium.png",
    "coverheavy": "systems/Alternityd100/icons/conditions/coverheavy.png",
-"dodgeord" :"systems/Alternityd100/icons/conditions/dodge_02.webp",
-"dodgegoo" :"systems/Alternityd100/icons/conditions/dodge_01.webp",
-"dodgeama" :"systems/Alternityd100/icons/conditions/dodge_03.webp",
+   "dodgecri": "systems/Alternityd100/icons/conditions/dodge_04.webp",
+   "dodgeord": "systems/Alternityd100/icons/conditions/dodge_02.webp",
+   "dodgegoo": "systems/Alternityd100/icons/conditions/dodge_01.webp",
+   "dodgeama": "systems/Alternityd100/icons/conditions/dodge_03.webp",
 
 };
 // This creates the Character sheet Conditions
@@ -2376,9 +2383,10 @@ d100A.conditionTypes = {
    "coverlight": "SFRPG.ConditionsCoverLight",
    "covermedium": "SFRPG.ConditionsCoverMedium",
    "coverheavy": "SFRPG.ConditionsCoverHeavy",
-   "dodgeord" : "SFRPG.ConditionsDodgeOrd",
-   "dodgeord" : "SFRPG.ConditionsDodgeGoo",
-   "dodgeama" : "SFRPG.ConditionsDodgeAma"
+   "dodgecri": "SFRPG.ConditionsDodgeCri",
+   "dodgeord": "SFRPG.ConditionsDodgeOrd",
+   "dodgegoo": "SFRPG.ConditionsDodgeGoo",
+   "dodgeama": "SFRPG.ConditionsDodgeAma"
 
 };
 // TODO localize
@@ -2448,8 +2456,13 @@ d100A.conditions = {
    "heavycover": {
       modifiers: [],
       tooltip: "<strong>Prone</strong><br><br>You have Cover "
-   }
+   },
 
+   "AttackDialog": {
+      
+         "movementTooltip" : "d100A.Items.Weapon.movementTooltip",
+      
+   }
 
 
 };

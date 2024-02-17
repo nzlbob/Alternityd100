@@ -709,6 +709,7 @@
     "ConditionsDazzled": "Dazzled",
     "ConditionsDead": "Dead",
     "ConditionsDeafened": "Deafened",
+    "ConditionsDodgeCri": "Critical Fail Dodge",
     "ConditionsDodgeOrd": "Ordinary Dodge",
     "ConditionsDodgeGoo": "Good Dodge",
     "ConditionsDodgeAma": "Amazing Dodge",
@@ -3078,7 +3079,7 @@
 "acrob" : "This skill" ,
 "dared" : "This skill" ,
 "defenma" : "This skill" ,
-"dodge" : "This skill" ,
+"dodge" : "<p style='font-size: small;' > This specially skill allows a hero to use acrobatics as a defense in combat situations. It's also used when a hero dives for cover or hits the deck when an area-effect attack targets him.Dodge lets a hero tumble, roll, duck, dive, or spring out ol the way of an attack. One skill check (requiring an action) is made alt he beginning of the first phase in which the hero can act. The result ol that check is applied in that phase and lasts lor all subsequent phases in the round. Any additional actions a hero takes in the round receive a +1 penalty as he ducks and rolls to avoid injury.Using dodge provides the following adjustments to a hero's Strength or Dexterity resistance modifier  This defense against Strength -based or Dexterity-based attacks), as is appropriate tor the situation; Critical Failure, -2 steps; Failure, none; Ordinary, + 1 step; Good, +2 steps; Amazing, +3 steps. <br>This skill can't be combined with the parry oi block rank benefits described under Melee Weapons and Acrobatics-defensive martial arts",
 "fall" : "This skill" ,
 "fligh" : "This skill" ,
 "zerogtr" : "This skill" ,
@@ -3231,10 +3232,10 @@
 
 
     "CoverType" :{
-        "none" : "None (+0)",
-        "Light" : "Light (+1)",
-        "Medium" :"Medium (+2)",
-        "Heavy" :"Heavy (+3)"
+        "none" : "None",
+        "Light" : "Light",
+        "Medium" :"Medium",
+        "Heavy" :"Heavy"
     },
 
     "MovementType" :{
@@ -3244,10 +3245,11 @@
         "Sprint" :"Sprint (+3)"
     },
     "DodgeType" :{
-        "0" : "None (+0)",
-        "1" : "Ordinary (+1)",
-        "2" :"Good (+2)",
-        "3" :"Amazing (+3)"
+        "-2" : "Fail",
+        "0" : "None",
+        "1" : "Ordinary",
+        "2" :"Good",
+        "3" :"Amazing"
     },
 
     "RestistanceModifierSTR" :"Strength",
@@ -3325,6 +3327,13 @@
         "defence": "defence",
         "Type": "Type",
         "Weapon":{
+            "rangeTooltip" : "Range Modifiers by Weapon Type on page 73",
+            "dmgTooltip" : "The amount of damage a weapon Inflicts when used in the proper manner. Figures are Ordinary/Good/Amazing order, and the appropriate damage is applied depending on the result of the wielders skill check.",
+            "xdmgTooltip" : "The amount of damage a weapon Inflicts when used in the proper manner. Figures are Ordinary/Good/Amazing order, and the appropriate damage is applied depending on the result of the wielders skill check.",
+            "movementTooltip": "In a combat scene, most characters move by walking or running. If a character has Ihe ability to fly {either naturally or artificially), that option might be available. If the scene takes place in wafer, a character might have to swim to move around.In some cases, a character might try to sprint.         Combat movement (as opposed to aJi-ouf movement, described below) works essentially like any other action. During a round, whenever a character has an available action, ho can move for a single phase at his listed rate. However. it r s also possible lor him to move and perform some other action in the same phase. That additional action usually receives a situation die penalty, as shown on TABLE PI 1: COMBAT MOVEMENT EFFECTS. Note that a character who is using Ins swim movement rale can't move and attempt another action in the same phase, and a character who moves at a walk can perform another action with no penalty, The movement rates for easy swim and glide are provided for those times when a hero is in water or airborne and simply wants to travel without covering distance as quickly as possible",
+            "coverTooltip": "If an opponent in a combat scene uses cover to protect himself from a ranged attack, a modifier is assigned to the hero's situation die. There are three types of cover, each with its own modifier; Light cover (*1 step penalty to opponent) refers to either the type of material the target is hiding behind (sometargetedToken without much stopping power, such as bushes, light-weight doors, garbage cans) or how much ol the target is exposed (half of the target's body or more). Medium cover (+2 step penalty) indicates that the target is hiding behind material with good stopping power (heavy wood, brick, or mid- weight metal) or that less than one quarter of the target is exposed. Heavy cover f+3 step penalty) indicates that the target is hiding behind almost impenetrable material (steel or some other heavy metal, a bulkhead or vault door, or a solid stone wail) or that the target is almost completely hidden from view",
+            "dodgeTooltip": "Target is dodging",
+            "resistanceTooltip": "Resistance modifier of the Victim",
             "PL": "Progress Level",
             "acc": "Accuracy",
             "accTooltip":"An optional rule. A number other than 0 indicates that a bonus or a penalty is applied to the weilder's skill check to account for the weapon's ability to hit its target.",
@@ -3335,7 +3344,7 @@
             "auto" : "Auto", 
             "melee" : "Melee", 
             "modeTooltip" : "Not applicable to melee weapons. This Indicates whether a weapon fires a single shot per phase(F), a burst (B), or is capable of aulofire (A) If weapon can be operated in more than one mode, then the user can decide which one he wishes to employ. For more information, see 'Automatic Weapon Modes' on page 74 in Chapter 4: Skills ",
-            "rangeTooltip" : "Not rangeTooltip",
+            "xrangeTooltip" : "Not rangeTooltip",
             "rangename": "Range",
             "range":{
                 "short": "Short Range",
@@ -3343,6 +3352,7 @@
                 "long": "Long Range"
             },
             "damageTooltip" : "The amount of damage a weapon Inflicts when used in the proper manner. Figures are Ordinary/Good/Amazing order, and the appropriate damage is applied depending on the result of the wielders skill check.",
+           
             "damagename": "Damage",
             "damage":{
                 "ord": "Ordinary",
@@ -3878,6 +3888,7 @@
     "StatusDazzled": "Dazzled",
     "StatusDead": "Dead",
     "StatusDeafened": "Deafened",
+    "StatusDodgeCri": "Critical Fail Dodge",
     "StatusDodgeOrd": "Ordinary Dodge",
     "StatusDodgeGoo": "Good Dodge",
     "StatusDodgeAma": "Amazing Dodge",

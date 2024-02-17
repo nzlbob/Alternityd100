@@ -1,58 +1,89 @@
 <form style="width:2000px font-family: serpentine; ">
- {{console "Attack Dialog 2"}}
- {{console this}}
+  {{console "Attack Dialog 2"}}
+  {{console this}}
+  <label>Skill: {{skl.label }} {{#if (not isStarshipweapon)}} {{skl.base}}/{{skl.good}}/{{skl.amazing}} {{skl.stepdie}}
+    {{/if}} </label>
 
-    <div class="form-group">
+  <div class="form-group">
     <label>Base Roll</label>
-    <input type="text" name="formula" value="{{formula}}" disabled/>
+    <input type="text" name="formula" value="{{formula}}" disabled />
   </div>
-<div class="form-group">
+  <div class="form-group">
     <label>Difficulty Steps</label>
     <select name="dstep" style="font-family: serpentine;">
       {{#select step}}
-     <!-- {{#each steps as |label stp|}}
+      <!-- {{#each steps as |label stp|}}
       <option style="font-family: serpentine;"  {{#if null}} selected {{/if}} value="{{stp}}"><span style="font-family: serpentine;">{{localize label}}</span></option>
       {{/each}}
 
 Done like this because selecting the 5th item is hard :-(
 
       -->
-     <option style="font-family: serpentine;"  value="-5"><span style="font-family: serpentine;">-5 steps No Sweat</span></option>
-     <option style="font-family: serpentine;"  value="-4"><span style="font-family: serpentine;">-4 steps Cakewalk</span></option>
-     <option style="font-family: serpentine;"  value="-3"><span style="font-family: serpentine;">-3 steps Extremely Easy</span></option>
-     <option style="font-family: serpentine;"  value="-2"><span style="font-family: serpentine;">-2 steps Very Easy</span></option>
-     <option style="font-family: serpentine;"  value="-1"><span style="font-family: serpentine;">-1 steps Easy</span></option>
-     <option style="font-family: serpentine;"  selected value="0"><span style="font-family: serpentine;">0 steps Average</span></option>
-     <option style="font-family: serpentine;"  value="1"><span style="font-family: serpentine;">+1 steps Tough</span></option>
-     <option style="font-family: serpentine;"  value="2"><span style="font-family: serpentine;">+2 steps Hard</span></option>
-     <option style="font-family: serpentine;"  value="3"><span style="font-family: serpentine;">+3 steps Challenging</span></option>
-     <option style="font-family: serpentine;"  value="4"><span style="font-family: serpentine;">+4 steps Formidable</span></option>
-     <option style="font-family: serpentine;"  value="5"><span style="font-family: serpentine;">+5 steps Grueling</span></option>
-     <option style="font-family: serpentine;"  value="6"><span style="font-family: serpentine;">+6 steps Gargantuan</span></option>
-     <option style="font-family: serpentine;"  value="7"><span style="font-family: serpentine;">+7 steps Leroy Jenkins</span></option>
+      <option style="font-family: serpentine;" value="-5"><span style="font-family: serpentine;">-5 steps No
+          Sweat</span></option>
+      <option style="font-family: serpentine;" value="-4"><span style="font-family: serpentine;">-4 steps
+          Cakewalk</span></option>
+      <option style="font-family: serpentine;" value="-3"><span style="font-family: serpentine;">-3 steps Extremely
+          Easy</span></option>
+      <option style="font-family: serpentine;" value="-2"><span style="font-family: serpentine;">-2 steps Very
+          Easy</span></option>
+      <option style="font-family: serpentine;" value="-1"><span style="font-family: serpentine;">-1 steps Easy</span>
+      </option>
+      <option style="font-family: serpentine;" selected value="0"><span style="font-family: serpentine;">0 steps
+          Average</span></option>
+      <option style="font-family: serpentine;" value="1"><span style="font-family: serpentine;">+1 steps Tough</span>
+      </option>
+      <option style="font-family: serpentine;" value="2"><span style="font-family: serpentine;">+2 steps Hard</span>
+      </option>
+      <option style="font-family: serpentine;" value="3"><span style="font-family: serpentine;">+3 steps
+          Challenging</span></option>
+      <option style="font-family: serpentine;" value="4"><span style="font-family: serpentine;">+4 steps
+          Formidable</span></option>
+      <option style="font-family: serpentine;" value="5"><span style="font-family: serpentine;">+5 steps Grueling</span>
+      </option>
+      <option style="font-family: serpentine;" value="6"><span style="font-family: serpentine;">+6 steps
+          Gargantuan</span></option>
+      <option style="font-family: serpentine;" value="7"><span style="font-family: serpentine;">+7 steps Leroy
+          Jenkins</span></option>
 
-     
+
       {{/select}}
     </select>
- </div>
+  </div>
 
- {{#if isStarshipweapon}}
- <div class="form-group">
-<label>Weapons Operator</label>
+      
+        <div class="form-group" data-tooltip="{{ localize "d100A.Items.Weapon.movementTooltip" }}">
+          <label>{{ localize "Movement" }}</label>
+          <select style="font-family: serpentine;" name="movement">
+            {{#select movement}}
+            {{#each d100A.movementType as |name movement|}}
+            <option style="font-family: serpentine;" value="{{movement}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+          </select>
+        </div>
+
+
+
+      
+  {{#if isStarshipweapon}}
+  <div class="form-group"  >
+    <label>Weapons Operator</label>
     <select name="operator" style="font-family: serpentine;">
-     {{console "Attack dia 43"}}
-     {{console validgunner}}
+      {{console "Attack dia 43"}}
+      {{console validgunner}}
       {{#select operator}}
       {{#each validgunner as |actor nbr|}}
 
-    <option style="font-family: serpentine;" value="{{nbr}}">{{actor.name}} 
-      ({{actor.system.skills.weapo.base}}/{{actor.system.skills.weapo.good}}/{{actor.system.skills.weapo.amazing}}) {{actor.system.skills.weapo.stepdie}}
+      <option style="font-family: serpentine;" value="{{nbr}}">{{actor.name}}
+        ({{actor.system.skills.weapo.base}}/{{actor.system.skills.weapo.good}}/{{actor.system.skills.weapo.amazing}})
+        {{actor.system.skills.weapo.stepdie}}
 
 
-    </option>
-    {{/each}}
+      </option>
+      {{/each}}
 
-       {{/select}}
+      {{/select}}
     </select>
 
   </div>
@@ -62,144 +93,108 @@ Done like this because selecting the 5th item is hard :-(
   {{/if}}
 
 
-<table style="width:99%">
-  <tr>
-    <td colspan="4">
-      <label>Skill: {{skl.label }}  {{#if (not isStarshipweapon)}} {{skl.base}}/{{skl.good}}/{{skl.amazing}} {{skl.stepdie}} {{/if}}  </label>
-    </td>
-  </tr>
+  <table style="width:99%" style="font-size: 10px;" >
+    <thead>
+      <tr style="font-size: 13px;">
+        <th>
+          Target
+        </th>
+        <th data-tooltip="{{ localize "d100A.Items.Weapon.rangeTooltip" }}" >
+          Range
+        </th>
+        <th data-tooltip="{{ localize "d100A.Items.Weapon.resistanceTooltip" }}">
+          Res
+        </th>
+        <th data-tooltip="{{ localize "d100A.Items.Weapon.coverTooltip" }}">
+          Cover
+        </th>
+        <th data-tooltip="{{ localize "d100A.Items.Weapon.dodgeTooltip" }}">
+          Dodge
+        </th>
+      </tr>
 
-<!--- Row 1 -->
-  <tr style="height: 18px; " >
-    <td>
-      <label>{{ localize "Range" }}</label>
-    </td>
-
-    <td>  
-      <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.dmgtypeTooltip" }}">
-        <select style="font-family: serpentine;" name="range">
-          {{#select range}}
-            {{#each d100A.itemAttack.range as |name range|}}
+    </thead>
+    <tbody>
+      {{#each targetData as |target id|}}
+      <tr style="font-size: 11px; height: 16px" >
+        <td>
+          {{target.Name}}
+        </td>
+        <td>
+          <div class="form-group">
+            <select style="font-family: serpentine;" name="range{{id}}">
+              {{#select target.rangecat}}
+              {{#each ../d100A.itemAttack.range as |name range|}}
               <option style="font-family: serpentine;" value="{{range}}">{{name}}</option>
-            {{/each}}
-          {{/select}}
-        </select>
-      </div> 
-    </td>
+              {{/each}}
+              {{/select}}
+            </select>
+          </div>
+        </td>
+        <td>
+          <div class="form-group" >
+            <select style="font-family: serpentine;" name="resistance{{id}}">
+              {{#select target.resistance}}
+              {{#each ../d100A.resistanceType as |name resistance|}}
 
-    <td>
-      <label>{{ localize "Res Mod" }}</label>
-    </td>
+              <option style="font-family: serpentine;" value="{{resistance}}">{{name}}</option>
+           
+              {{/each}}
+              {{/select}}
+            </select>
+          </div>
+        </td>
+        <td>
+          <div class="form-group" >
+            <select style="font-family: serpentine;" name="cover{{id}}">
+              {{#select target.cover}}
+              {{#each ../d100A.coverType as |name cover|}}
+              <option style="font-family: serpentine;" value="{{cover}}">{{name}}</option>
+              {{/each}}
+              {{/select}}
+            </select>
+          </div>
+        </td>
+        <td>
+          <div class="form-group" >
+            <select style="font-family: serpentine;" name="dodge{{id}}">
+              {{#select target.dodge}}
+              {{#each ../d100A.dodgeType as |name dodge|}}
+              <option style="font-family: serpentine;" value="{{dodge}}">{{name}}</option>
+              {{/each}}
+              {{/select}}
+            </select>
+          </div>
+        </td>
 
-    <td>
-    <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.ResistanceTooltip" }}">
-      <select style="font-family: serpentine;" name="resistance">
-        {{#select resistance}}
-          {{#each d100A.resistanceType as |name resistance|}}
-          
-            <option style="font-family: serpentine;" value="{{resistance}}">{{name}}</option>
-          {{/each}}
-        {{/select}}
-      </select>
-    </div>  
-  </tr>
-
-<!--- Row 2 -->
-
-<tr style="height: 18px; " >
-  <td>
-    <label>{{ localize "Movement" }}</label>
-  </td>
-    
-  <td>
-    <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.movementTooltip" }}">
-      <select style="font-family: serpentine;" name="movement">
-        {{#select movement}}
-          {{#each d100A.movementType as |name movement|}}
-            <option style="font-family: serpentine;" value="{{movement}}">{{name}}</option>
-          {{/each}}
-        {{/select}}
-        </select>
-    </div>  
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
 
 
-
-  </td>
   
- <td>
-  <label>{{ localize "Cover" }}</label>
-  </td>
-    
-  <td>
-    <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.coverTooltip" }}">
-      <select style="font-family: serpentine;" name="cover">
-        {{#select cover}}
-          {{#each d100A.coverType as |name cover|}}
-            <option style="font-family: serpentine;" value="{{cover}}">{{name}}</option>
-          {{/each}}
-        {{/select}}
-      </select>
-    </div>  
-  </td>
-</tr>
-
-<!--- Row 3A -->
-
-<tr style="height: 18px; " >
-  <td>
-    <label>{{ localize "-" }}</label>
-  </td>
-    
-  <td>
-    <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.blankTooltip" }}">
-      <select style="font-family: serpentine;" name="blanks">
-        {{#select blanks}}
-          {{#each d100A.coverType as |name blanks|}}
-            <option style="font-family: serpentine;" value="{{blanks}}">{{name}}</option>
-          {{/each}}
-        {{/select}}
-        </select>
-    </div>  
-  </td>
-
-  <!--- Row 3B -->
-  <td>
-    <label>{{ localize " Dodge" }}</label>
-  </td>
-  
-  <td>
-    <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.dodgeTooltip" }}">
-      <select style="font-family: serpentine;" name="dodge">
-        {{#select dodge}}
-          {{#each d100A.dodgeType as |name dodge|}}
-            <option style="font-family: serpentine;" value="{{dodge}}">{{name}}</option>
-          {{/each}}
-        {{/select}}
-      </select>
-    </div>  
-  </td>
-</tr>
-</table>
- <ol></ol>
+  <ol></ol>
   {{#each defenceData.armor as |armor index|}}
-    <li style="font-family: serpentine;"> {{armor.name}}</li>
-    {{/each}}
+  <li style="font-family: serpentine;"> {{armor.name}}</li>
+  {{/each}}
 
 
-</ol>
+  </ol>
 
   <div class="form-group">
     <label>RollMode</label>
     <select name="rollMode" style="font-family: serpentine;">
       {{#select rollMode}}
       {{#each rollModes as |label mode|}}
-      <option style="font-family: serpentine;" value="{{mode}}"><span style="font-family: serpentine;">{{localize label}}</span></option>
+      <option style="font-family: serpentine;" value="{{mode}}"><span style="font-family: serpentine;">{{localize
+          label}}</span></option>
       {{/each}}
       {{/select}}
     </select>
   </div>
-   <div class="form-group">
+  <div class="form-group">
 
-    </div>
-    
+  </div>
+
 </form>
