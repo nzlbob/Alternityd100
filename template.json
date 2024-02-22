@@ -18,10 +18,9 @@
                     "value": "",
                     "unidentified": ""
                 },
-                "source": "",
-                "pubnsource": "",
-                "type": "",
-                "availability": ""
+
+                "type": ""
+                
             },
             "common": {
                 "abilities": {
@@ -59,6 +58,8 @@
                 "qBonus": [],
                 "custom": {},
                 "attributes": {
+                    "source": "",
+                    "pubnsource": "",
                     "luck": 20,
                     "ECM": {
                         "radar": {
@@ -4632,8 +4633,7 @@
                     "tooltip": [],
                     "base": 0,
                     "value":0
-                },
-                "availability":"com"
+                }
             },
             "biography": "",
             "scanTargets": [],
@@ -4645,6 +4645,8 @@
             },
 
             "attributes": {
+                
+                "availability":"com",
                 "ECM": {
                     "radar": {
                         "base": 0,
@@ -5038,13 +5040,12 @@
                     "value": "",
                     "unidentified": ""
                 },
-                "source": "",
-                "pubnsource": "",
-                "type": "",
-                "availability": ""
+
+                "type": ""
+               
             },
             "physicalItem": {
-                "progressLevel": "pl0",
+
                 "quantity": 1,
                 "bulk": 0,
                 "price": 0,
@@ -5055,9 +5056,14 @@
                 "equippable": false,
                 "identified": true,
                 "attributes": {
+                    "source": "",
+                    "pubnsource": "",
+                    "availability":"com",
+                    "progressLevel": "pl0",
                     "sturdy": false,
                     "customBuilt": false,
-                    "size": "medium",
+                    "manufacturer":"",
+                    "size": 0,
                     "dex": {
                         "mod": ""
                     },
@@ -5257,7 +5263,7 @@
             "clipCost": "10",
             "hide": "0",
             "mass": "1",
-            "avail": "Any",
+
             "Cost": "100",
             "skill": "",
             "accur": "0",
@@ -6287,7 +6293,12 @@
                 "modifiers"
             ],
             "system": "",
-            "type": "cybernetic"
+            "type": "cybernetic",
+            "progressLevel": "pl0",
+            "hide": "0",
+
+            "skill": ""
+            
         },
         "starshipAction": {
             "templates": [
@@ -6638,7 +6649,6 @@
             "clipCost": "10",
             "hide": "0",
             "mass": "1",
-            "avail": "Any",
             "Cost": "100000",
             "skill": "",
             "accur": "1",
@@ -6791,7 +6801,7 @@
             "clipCost": "10",
             "hide": "0",
             "mass": "1",
-            "avail": "Any",
+           
             "Cost": "100",
             "skill": "weapo",
             "accur": "1",

@@ -17,7 +17,13 @@
             <label>{{ localize "SFRPG.Items.Description.Bulk" }}</label>
             <input type="text" name="system.bulk" value="{{itemData.bulk}}" />
         </div>
+        {{#if isCybertech}}
+        <div class="form-group">
+            <label>{{ localize "Size" }}</label>
+            <input type="text" name="system.attributes.size" value="{{itemData.attributes.size}}" />
+        </div>
 
+        {{/if}}
         <div class="form-group">
             <label>{{ localize "SFRPG.Items.Description.Price" }}</label>
             <input type="text" name="system.price" value="{{itemData.price}}" data-dtype="Number"/>

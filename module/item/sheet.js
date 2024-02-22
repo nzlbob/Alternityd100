@@ -146,7 +146,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.isOwner = data.owner;
         data.isSkilled = data.itemData.isSkilled
         data.isOpposed = data.itemData.isOpposed
-
+        data.isCybertech = this.item.isCybertech
         //   console.log("SHEET.JS CONFIG SFRPG", data.config,"data.itemData", data.itemType,data.itemProperties )
         // Physical items
         const physicalItems = ["weapon", "equipment", "pharmaceutical", "goods", "container", "technological", "magic", "hybrid", "upgrade", "augmentation", "shield", "weaponAccessory"];
@@ -378,7 +378,7 @@ export class ItemSheetSFRPG extends ItemSheet {
        // console.log(item, this, this.document)
         if (["weapon", "equipment", "shield"].includes(item.type)) return item.equipped ? "Equipped" : "Unequipped";
         else if (item.type === "starshipWeapon") return item.mount.mounted ? "Mounted" : "Not Mounted";
-        else if (item.type === "augmentation") return `${item.type} (${item})`;
+       // else if (item.type === "augmentation") return `${item.type} (${item.system.progressLevel})`;
         else if (item.type === "vehicleSystem") {
             // Only systems which can be activated have an activation status
             if (this.document.canBeActivated === false) {

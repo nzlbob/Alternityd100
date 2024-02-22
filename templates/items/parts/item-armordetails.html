@@ -42,7 +42,7 @@
            </select>
             </div>        
           
-
+<!--
           {{!-- Equipment Type --}}
           <div class="form-group">
               <label>{{ localize "SFRPG.Items.Equipment.Category" }}</label>
@@ -55,7 +55,7 @@
                   {{/select}}
               </select>
           </div>
-
+-->
                 {{!-- Weapon Progress Level --}}
                 <div class="form-group">
                 <label>{{ localize "d100A.Items.Weapon.PL" }}</label>
@@ -71,11 +71,11 @@
 
 
 
-        {{!-- Weapon Mass --}}
-        <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.massTooltip" }}">
-          <label>{{ localize "d100A.Items.Weapon.mass" }}</label>
+        {{!-- Weapon Hide --}}
+        <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.hideTooltip" }}">
+          <label>{{ localize "d100A.Items.Weapon.hide" }}</label>
           <div class="form-fields">
-              <input type="text" style="text-align: center; size: 20 px; " name="system.mass" value="{{itemData.mass}}" data-dtype="Number" placeholder="0"/>
+              <input type="text" style="text-align: center; size: 20 px; " name="system.hide" value="{{itemData.hide}}" data-dtype="Number" placeholder="0"/>
            </div>
       </div>
 
@@ -93,13 +93,6 @@
                 </div>
 
 
-                {{!-- Weapon Cost --}}
-                <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.costTooltip" }}">
-                  <label>{{ localize "d100A.Items.Weapon.cost" }}</label>
-                  <div class="form-fields">
-                      <input type="text" style="text-align: center; size: 20 px; " name="system.cost" value="{{itemData.cost}}" data-dtype="Number" placeholder="0"/>
-                   </div>
-              </div>
 
 
 

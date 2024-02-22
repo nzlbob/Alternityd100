@@ -55,6 +55,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (this.system.isSkilled) return true;
         return false
     }
+    get isCybertech() {
+        if (this.type === "augmentation") return true;
+        return false
+    }
     get hasDamage() {
         if (this.type === "starshipWeapon") return true;
         //console.log(this)
