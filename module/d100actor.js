@@ -34,9 +34,28 @@ import { ActorInventoryMixin } from "./actor/mixins/actor-inventory.js";
 
   constructor(data, context) {
       super(data, context);
-      //console.log(`Constructor for actor named ${data.name} of type ${data.type}`);
+   /*
+      if(data.type = "hazard"){
+        data.img = "systems/Alternityd100/icons/conditions/hazard_01.webp"
+        data.prototypeToken.texture.src = data.img
+      }
+      if(data.type = "vehicle"){
+        data.img = "systems/Alternityd100/images/tokens/vehicle_01.webp"
+        data.prototypeToken.texture.src = data.img
+      }
+      if(data.type = "starship"){
+        data.img = "systems/Alternityd100/images/tokens/ship_01.webp"
+        data.prototypeToken.texture.src = data.img
+      }
+      console.log(data, context)
+      console.log(`Constructor for actor named ${data.name} of type ${data.type}`);
+     */ 
   }
 
+
+ 
+  
+  
   xtestUserPermission (){
     super.testUserPermission();
 console.log("HI")

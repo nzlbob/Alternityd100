@@ -6,7 +6,7 @@ export default function (engine) {
 
         data.attributes.speed.max =  data.attributes.speed.base;
 
-        data.attributes.speed.driveMod.value =  data.attributes.speed.driveMod.base;
+        data.attributes.speed.value =  data.attributes.speed.base;
         return fact;
     });
 

@@ -203,6 +203,9 @@ Hooks.once("init", function() {
   };
  
   // Define custom Entity classes
+  //CONST.DEFAULT_TOKEN = "systems/Alternityd100/icons/conditions/dead_02.webp"
+  CONFIG.statusEffects[0].icon = "systems/Alternityd100/icons/conditions/dead_02.webp";
+  CONFIG.controlIcons.defeated = "icons/svg/padlock.svg";
   CONFIG.Actor.documentClass = d100Actor;
   CONFIG.Item.documentClass = ItemSFRPG;
   CONFIG.Token.documentClass = d100ATokenDoc;

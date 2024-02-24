@@ -4513,8 +4513,17 @@
             "modifiers": {
                 "modifiers": []
             },
-            "conditions": {
-            },
+            "conditions" : {
+            "conditions" : {
+                "coverlight" : false,
+                "covermedium" : false,
+                "coverheavy" : false,
+                "dodgecri" : false,
+                "dodgeord" : false,
+                "dodgegoo" : false,
+                "dodgeama" : false
+            }
+        },
             "counterClassesManagement": {
                 "counterClasses": {
                     "values": {}
@@ -4623,6 +4632,15 @@
             "groups": {}
         },
         "vehicle": {
+            "templates": [
+                "common",
+                "modifiers",
+                "conditions",
+                "counterClassesManagement"
+            ],
+
+
+
             "details": {
                 "role": "civilian",
                 "toughness": {
@@ -4701,8 +4719,8 @@
                 "stu": {
                     "label": "Stun",
                     "min": 0,
-                    "base": 1,
-                    "value": 8,
+                    "base": 10,
+                    "value": 10,
                     "temp": 0,
                     "tempmax": 100,
                     "tooltip": [],
@@ -4711,8 +4729,8 @@
                 "wou": {
                     "label": "Wounds",
                     "min": 0,
-                    "base": 1,
-                    "value": 9,
+                    "base": 10,
+                    "value": 10,
                     "temp": 0,
                     "tempmax": 100,
                     "tooltip": [],
@@ -4721,8 +4739,8 @@
                 "mor": {
                     "label": "Mortal",
                     "min": 0,
-                    "base": 1,
-                    "value": 10,
+                    "base": 5,
+                    "value": 5,
                     "temp": 0,
                     "tempmax": 100,
                     "tooltip": [],
@@ -4773,6 +4791,21 @@
             "groups": {}
         },
         "starship": {
+            "templates": [
+                "common",
+                "modifiers",
+                "conditions",
+                "counterClassesManagement"
+            ],
+            "conditions" : {
+                "coverlight" : false,
+                "covermedium" : false,
+                "coverheavy" : false,
+                "dodgecri" : false,
+                "dodgeord" : false,
+                "dodgegoo" : false,
+                "dodgeama" : false
+            },
             "details": {
                 "role": "civilian",
                 "toughness": {

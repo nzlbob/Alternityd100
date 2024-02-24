@@ -367,7 +367,7 @@ export class Diced100 {
         currentTarget.flavor += "\nDodging Mod: " + currentTarget.dodgemod
 
         //currentTarget.attackbonus = stepbonus + currentTarget.resPenalty + currentTarget.rangemod + currentTarget.accur
-        /*console.log(
+        console.log(
         "\n attackbonus",currentTarget.attackbonus, 
         "\n skillStep", stepbonus,  
         "\n accur", currentTarget.accur ,
@@ -375,12 +375,12 @@ export class Diced100 {
         "\n rangemod", currentTarget.rangemod, 
         "\n resPenalty", currentTarget.resPenalty, 
         "\n covermod", currentTarget.covermod, 
-        "\n Dodge", //currentTarget.dodgemod, 
+        "\n Dodge", currentTarget.dodgemod, 
         "\n Skill Sit?", //currentTarget.sitmod, 
         "\n Movement", //currentTarget.movementmod, 
         "\n Load", //currentTarget.loadmod, 
         )
-        */
+        
         //console.log("AWAModeMod", currentTarget);
       }
 
@@ -399,9 +399,11 @@ export class Diced100 {
            * 
            */
 
-          targetData[a].flavor += "\nFire Mode: " //+ AWAModeMod[a]
+          targetData[a].flavor += "\nFire Mode: " + targetData[a].AWAModeMod
           targetData[a].flavor += "\nRange Mod: " + targetData[a].rangemod
           targetData[a].flavor += "\nRes Mode: " + targetData[a].resPenalty
+          targetData[a].flavor += "\nCover Mod: " + targetData[a].covermod
+          targetData[a].flavor += "\nDodging Mod: " + targetData[a].dodgemod
           //console.log("AWAModeMod", targetData[a]);
         }
 

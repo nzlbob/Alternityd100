@@ -901,7 +901,7 @@ let score = ""
             data.actions = {
                 captain: d100AActorSheetStarship.StarshipActionsCache.captain,
                 pilot: d100AActorSheetStarship.StarshipActionsCache.pilot,
-                coPilot: d100AActorSheetStarship.StarshipActionsCache.coPilot,
+                copilot: d100AActorSheetStarship.StarshipActionsCache.copilot,
                 communications: d100AActorSheetStarship.StarshipActionsCache.communications,
                 damageControl: d100AActorSheetStarship.StarshipActionsCache.damageControl,
                 defences: d100AActorSheetStarship.StarshipActionsCache.defences,
