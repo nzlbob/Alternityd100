@@ -1113,6 +1113,8 @@
             "UsageValueTooltip": "The time unit used to determine when the item's capacitiy is consumed."
         },
         "Categories": {
+            "everythingelse":"Everything Else",
+            "starshipstuff":"Starship Equipment",
             "AbilityScoreIncrease": "Ability Score Increases",
             "Archetypes": "Archetypes",
             "Armor": "Armor",

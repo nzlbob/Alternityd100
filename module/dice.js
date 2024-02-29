@@ -432,7 +432,7 @@ export class Diced100 {
         //   }
         totalbonus = targetData[0].attackbonus + parseInt(sitBonus);
         //console.log( stepbonus,totalbonus, sitBonus, dice)
-        let stepflavor = `Difficulty: ${sitBonus} `;
+        let stepflavor = `${actor.name} - Difficulty: ${sitBonus} ${actor.name}`;
 
 
         // Execute the roll
@@ -1030,7 +1030,7 @@ export class Diced100 {
 
       totalbonus = target.attackbonus + parseInt(sitBonus);
       //console.log( stepbonus,totalbonus, sitBonus, dice)
-      let stepflavor = `Difficulty: ${sitBonus} `;
+      let stepflavor = `${actor.name} - Difficulty: ${sitBonus} ${actor.name}`;
 
       if (item.hasDamage) target.dmgresult = await Diced100.d100AdamageRoll({
         data: item.system,

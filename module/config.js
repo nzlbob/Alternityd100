@@ -1402,7 +1402,8 @@ SFRPG.capacityUsagePer = {
 };
 
 SFRPG.itemTypes = {
-    
+    "starshipstuff":"SFRPG.Items.Categories.starshipstuff",
+    "everythingelse":"SFRPG.Items.Categories.everythingelse",
     "clothing": "SFRPG.Items.Categories.Clothing",  
     "communication":"SFRPG.Items.Categories.Communication",
     "computer":"SFRPG.Items.Categories.Computer",

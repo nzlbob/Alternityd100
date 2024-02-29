@@ -311,7 +311,7 @@ this.object.light.data.rotation = 90
     let isDelta = strVal.startsWith("+") || strVal.startsWith("-");
     if (strVal.startsWith("=")) strVal = strVal.slice(1);
     let value = Number(strVal);
-//console.log(value)
+console.log(value)
     // For attribute bar values, update the associated Actor
     const bar = input.dataset.bar;
     const actor = this.object?.actor;
@@ -319,11 +319,11 @@ this.object.light.data.rotation = 90
     // d100A shoehorn in speed box to Token.speed
     if (input.name == "speed"){
 //console.log(this.object.document.speed)
-      this.object.document.speed = this.object.document.speed || 0;
-      const current = actor.type == "starship"? actor.system.attributes.speed.value : actor.system.attributes.speed.current.value;
+  //    this.object.document.speed = this.object.document.speed || 0;
+      const current = actor.system.attributes.speed.value ;
 console.log(this.object.document.speed,this.object.type);
 if(actor.type == "starship") this.object.actor.update({["system.attributes.speed.value"]: isDelta ? current + value : value});
-if(actor.type == "vehicle") this.object.actor.update({["system.attributes.speed.current.value"]: isDelta ? current + value : value});  
+if(actor.type == "vehicle") this.object.actor.update({["system.attributes.speed.value"]: isDelta ? current + value : value});  
 }
     
 

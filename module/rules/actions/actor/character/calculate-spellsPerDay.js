@@ -2,7 +2,7 @@ export default function (engine) {
     engine.closures.add("calculateSpellsPerDay", (fact, context) => {
         const data = fact.actor.system;
         const profession = fact.profession;
-
+/*
         data.spells.profession = [];
         const casterData = duplicate(data.spells);
 
@@ -66,7 +66,7 @@ export default function (engine) {
         }
 
         data.spells = mergeObject(data.spells, casterData);
-
+*/
         return fact;
     });
 }

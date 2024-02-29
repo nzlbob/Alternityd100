@@ -4371,36 +4371,7 @@
                     "wil": false,
                     "per": false
                 },
-                "spells": {
-                    "spell0": {
-                        "value": 0,
-                        "max": 0
-                    },
-                    "spell1": {
-                        "value": 0,
-                        "max": 0
-                    },
-                    "spell2": {
-                        "value": 0,
-                        "max": 0
-                    },
-                    "spell3": {
-                        "value": 0,
-                        "max": 0
-                    },
-                    "spell4": {
-                        "value": 0,
-                        "max": 0
-                    },
-                    "spell5": {
-                        "value": 0,
-                        "max": 0
-                    },
-                    "spell6": {
-                        "value": 0,
-                        "max": 0
-                    }
-                },
+                
                 "charoptions": {
                     "species": {
                         "human": {
@@ -5099,10 +5070,6 @@
                     "size": 0,
                     "dex": {
                         "mod": ""
-                    },
-                    "hp": {
-                        "value": 6,
-                        "max": ""
                     },
                     "hardness": {
                         "value": ""
