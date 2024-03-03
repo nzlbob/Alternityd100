@@ -205,29 +205,25 @@
                             </li>
                             <li class="attribute">
                                 <h4 class="attribute-name box-title">{{localize
-                                    "SFRPG.StarshipSheet.Header.Movement.Title"}}</h4>
+                                    "Misc"}}</h4>
                                 <table class="statTable">
 
                                     <tbody>
                                         <tr>
-                                            <td>Accel</td>
+                                            <td>1</td>
                                             <td>{{system.attributes.accel.value}}</td>
 
                                         </tr>
                                         <tr>
-                                            <td>{{localize "Speed"}}</td>
-                                            <td>
-                                                <input name="system.attributes.speed.value" type="number"
-                                                    value="{{system.attributes.speed.value}}" data-dtype="Number"
-                                                    placeholder="0" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>{{localize "Altitude"}}</td>
+                                            <td>{{localize "2"}}</td>
                                             <td>{{options.token.elevation}}</td>
                                         </tr>
                                         <tr>
-                                            <td>{{localize "Heading "}}</td>
+                                            <td>{{localize "3"}}</td>
+                                            <td>{{options.token.elevation}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{localize "4 "}}</td>
                                             <td>{{options.token.rotation}}</td>
                                         </tr>
                                     </tbody>
@@ -286,8 +282,13 @@
                                 {{#each status.durability as |category id|}}
 
                                 <div class="divTableRow">
-                                    {{#if (eq id "stu") }}<div class="divTableCell" data-tooltip="{{ localize "
-                                        d100A.DamageTypeTooltip.Stun" }}">{{ localize "d100A.stun"}}</div> {{/if}}
+                                    {{#if (eq id "stu") }}
+
+                                    <div class="divTableCell"><button style="height: 26px;" class="clickapplydamge"
+                                            data-tooltip-direction="UP" data-tooltip="Apply Temp Damage">{{ localize
+                                            "d100A.stun"}}</button></div>
+
+                                    {{/if}}
                                     {{#if (eq id "wou") }}<div class="divTableCell" data-tooltip="{{ localize "
                                         d100A.DamageTypeTooltip.Wound" }}">{{ localize "d100A.wound"}}</div> {{/if}}
                                     {{#if (eq id "mor") }}<div class="divTableCell" data-tooltip="{{ localize "
@@ -366,215 +367,156 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
-            <div class="flexcol">
-                <h3 class="form-header">{{ localize "SFRPG.VehicleSheet.Details.Movement.Title" }}</h3>
-                <div class="flexrow">
-                    <div class="flexcol">
-                        <div class="form-group">
-                            <label data-tooltip="{{ localize " SFRPG.VehicleSheet.Details.Movement.AccelTooltip" }}">{{
-                                localize "SFRPG.VehicleSheet.Details.Movement.Accel" }}</label>
-                            <div class="form-fields">
-                                <input type="text" name="system.attributes.accel.base"
-                                    value="{{system.attributes.accel.base}}" placeholder="{{ localize "
-                                    SFRPG.VehicleSheet.Details.Movement.DrivePlaceholder" }}" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label data-tooltip=""="{{ localize " SFRPG.VehicleSheet.Details.Movement.MaxTooltip" }}">{{
-                                localize "SFRPG.VehicleSheet.Details.Movement.Max" }}</label>
-                            <div class="form-fields">
-                                <input type="text" name="system.attributes.speed.base"
-                                    value="{{system.attributes.speed.base}}" placeholder="{{ localize "
-                                    SFRPG.VehicleSheet.Details.Movement.FullPlaceholder" }}" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-            </div>
             <div class="flexcol">
                 <h3 class="form-header">{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.Title" }}</h3>
                 <div class="flexrow">
                     <div class="flexcol">
 
-                        <div class="form-group">
-                            <label>{{ localize "Pilot Skill" }}</label>
-                            <select name="system.attributes.controlSkill">
-                                {{#select system.attributes.controlSkill}}
-                                {{#each d100Aconfig.pilotingSkills as |name type|}}
-                                <option value="{{type}}">{{localize name}}</option>
-                                {{/each}}
-                                {{/select}}
-                            </select>
+                        <div class="divTable blueTable2">
+                            <div class="divTableBody">
+                                <div class="divTableRow">
+                                    <div class="divTableCell">
 
-                           <div class="item-name flexrow {{#if (not disableRolling)}}rollable{{/if}}">
-                                <div class="passenger-action flexcol">
-                                    <a class="pilotPilotingSkill">&nbsp;</a>
+
+
+                                        <div style="justify-content: center;" class="form-group">
+                                            <h3 class="form-header"> Basics </h3>
+
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label>{{ localize "Stun" }}</label>
+                                            <div class="form-fields">
+                                                <input type="number" name="system.attributes.stu.base"
+                                                    value="{{system.attributes.stu.base}}" data-dtype="Number" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>{{ localize "Wound" }}</label>
+                                            <div class="form-fields">
+                                                <input type="number" name="system.attributes.wou.base"
+                                                    value="{{system.attributes.wou.base}}" data-dtype="Number" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>{{ localize "Mortal" }}</label>
+                                            <div class="form-fields">
+                                                <input type="number" name="system.attributes.mor.base"
+                                                    value="{{system.attributes.mor.base}}" data-dtype="Number" />
+                                            </div>
+                                        </div>
+                                        {{!-- Weapon Availability --}}
+                                        <div class="form-group"
+                                            data-tooltip="{{localize 'd100A.availabilitytooltip' }}">
+                                            <label>{{ localize "d100A.availability" }}</label>
+                                            <select name="system.details.availability">
+                                                {{#select system.details.availability}}
+                                                {{#each d100Aconfig.availability as |name type|}}
+                                                <option value="{{type}}">{{name}}</option>
+                                                {{/each}}
+                                                {{/select}}
+                                            </select>
+                                        </div>
+
+                                        {{!-- Weapon Clip Cost --}}
+                                        <div class="form-group"
+                                            data-tooltip="{{localize 'SFRPG.VehicleSheet.Details.Movement.CostTooltip'}}">
+                                            <label>{{ localize 'SFRPG.VehicleSheet.Details.Movement.Cost' }}</label>
+                                            <div class="form-fields">
+                                                <input type="text" style="text-align: center; size: 20 px; "
+                                                    name="system.details.price.base"
+                                                    value="{{system.details.price.base}}" data-dtype="Number"
+                                                    placeholder="0" />
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </div>
+                                    <div class="divTableCell">
+
+
+
+                                        <div style="justify-content: center;" class="form-group">
+                                            <h3 class="form-header"> Usage </h3>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.Cover"
+                                                }}</label>
+                                            <div class="form-fields">
+                                                <select name="system.attributes.cover">
+                                                    {{#select system.attributes.cover}}
+                                                    {{#each config.vehicleCoverTypes as |cover c|}}
+                                                    <option value="{{c}}">{{cover}}</option>
+                                                    {{/each}}
+                                                    {{/select}}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-
-
-                        </div>
-
-
-
-                        <div class="form-group">
-                            <label data-tooltip="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.DriveTooltip'}}">{{
-                                localize "SFRPG.VehicleSheet.Details.Modifiers.DriveMod" }}</label>
-                            <div class="form-fields">
-                                <input data-tooltip="{{localize 'SFRPG.VehicleSheet.Details.Modifiers.DriveTooltip'}}"
-                                    type="number" name="system.attributes.speed.driveMod.base"
-                                    value="{{system.attributes.speed.driveMod.base}}" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label data-tooltip="{{localize 'Bob Says Hi'}}">{{ localize "Combat Toughness (Type). Use
-                                Weapon and Armor Toughness" }}</label>
-
-                        </div>
-
-
-                        <div class="form-group">
-                            <label>{{ localize "Stun" }}</label>
-                            <div class="form-fields">
-                                <input type="number" name="system.attributes.stu.base"
-                                    value="{{system.attributes.stu.base}}" data-dtype="Number" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>{{ localize "Wound" }}</label>
-                            <div class="form-fields">
-                                <input type="text" name="system.attributes.wou.base"
-                                    value="{{system.attributes.wou.base}}" data-dtype="Number" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>{{ localize "Mortal" }}</label>
-                            <div class="form-fields">
-                                <input type="text" name="system.attributes.mor.base"
-                                    value="{{system.attributes.mor.base}}" data-dtype="Number" />
-                            </div>
-                        </div>
-                        {{!-- Weapon Availability --}}
-                        <div class="form-group" data-tooltip="{{localize 'd100A.availabilitytooltip' }}">
-                            <label>{{ localize "d100A.availability" }}</label>
-                            <select name="system.details.availability">
-                                {{#select system.details.availability}}
-                                {{#each d100Aconfig.availability as |name type|}}
-                                <option value="{{type}}">{{name}}</option>
-                                {{/each}}
-                                {{/select}}
-                            </select>
-                        </div>
-
-                        {{!-- Weapon Clip Cost --}}
-                        <div class="form-group"
-                            data-tooltip="{{localize 'SFRPG.VehicleSheet.Details.Movement.CostTooltip'}}">
-                            <label>{{ localize 'SFRPG.VehicleSheet.Details.Movement.Cost' }}</label>
-                            <div class="form-fields">
-                                <input type="text" style="text-align: center; size: 20 px; "
-                                    name="system.details.price.base" value="{{system.details.price.base}}"
-                                    data-dtype="Number" placeholder="0" />
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label>{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.Cover" }}</label>
-                            <div class="form-fields">
-                                <select name="system.attributes.cover">
-                                    {{#select system.attributes.cover}}
-                                    {{#each config.vehicleCoverTypes as |cover c|}}
-                                    <option value="{{c}}">{{cover}}</option>
-                                    {{/each}}
-                                    {{/select}}
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.Passengers" }}</label>
-                            <div class="form-fields">
-                                <input type="text" name="system.crew.passenger.limit"
-                                    value="{{system.crew.passenger.limit}}" data-dtype="Number" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.Complement" }}</label>
-                            <div class="form-fields">
-                                <input type="text" name="system.crew.complement.limit"
-                                    value="{{system.crew.complement.limit}}" data-dtype="Number" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.ExpansionBays" }}</label>
-                            <div class="form-fields">
-                                <input type="text" name="system.attributes.expansionBays.value"
-                                    value="{{system.attributes.expansionBays.value}}" data-dtype="Number" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.HangarBays" }}</label>
-                            <div class="form-fields">
-                                <input type="text" name="system.hangarBay.limit" value="{{system.hangarBay.limit}}"
-                                    data-dtype="Number" />
-                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
-
-        {{!-- Attacks Tab --}}
-        <div class="tab attacks" data-group="primary" data-tab="attacks">
-            <p class="notification warning">{{ localize "SFRPG.VehicleSheet.Attacks.ToDo" }}</p>
-            <ol class="inventory-list">
-                {{#each inventory as |section sid|}}
-                <li class="inventory-header flexrow">
-                    <h3 class="item-name flexrow">{{section.label}}</h3>
-                    {{#if ../isOwner}}
-                    <div class="item-controls">
-                        {{#if section.allowAdd}}
-                        <a class="item-control item-create" title="{{localize "
-                            SFRPG.ActorSheet.Inventory.Item.Create"}}" {{#each section.dataset as |v
-                            k|}}data-{{k}}="{{v}}" {{/each}}>
-                            <i class="fas fa-plus"></i> {{localize "SFRPG.InventoryAdd"}}
-                        </a>
+            {{!-- Attacks Tab --}}
+            <div class="tab attacks" data-group="primary" data-tab="attacks">
+                <p class="notification warning">{{ localize "SFRPG.VehicleSheet.Attacks.ToDo" }}</p>
+                <ol class="inventory-list">
+                    {{#each inventory as |section sid|}}
+                    <li class="inventory-header flexrow">
+                        <h3 class="item-name flexrow">{{section.label}}</h3>
+                        {{#if ../isOwner}}
+                        <div class="item-controls">
+                            {{#if section.allowAdd}}
+                            <a class="item-control item-create" title="{{localize "
+                                SFRPG.ActorSheet.Inventory.Item.Create"}}" {{#each section.dataset as |v
+                                k|}}data-{{k}}="{{v}}" {{/each}}>
+                                <i class="fas fa-plus"></i> {{localize "SFRPG.InventoryAdd"}}
+                            </a>
+                            {{/if}}
+                        </div>
                         {{/if}}
-                    </div>
-                    {{/if}}
-                </li>
+                    </li>
 
-                <ol class="item-list">
-                    {{#each section.items as |item iid|}}
-                    {{> "systems/Alternityd100/templates/actors/parts/actor-inventory-item.html" ../../this bigItem=true
-                    item=item.item children=item.contents disableEquipping=true }}
+                    <ol class="item-list">
+                        {{#each section.items as |item iid|}}
+                        {{> "systems/Alternityd100/templates/actors/parts/actor-inventory-item.html" ../../this
+                        bigItem=true
+                        item=item.item children=item.contents disableEquipping=true }}
+                        {{/each}}
+                    </ol>
                     {{/each}}
                 </ol>
-                {{/each}}
-            </ol>
 
-        </div>
+            </div>
 
-    
 
-        {{!-- Inventory Tab --}}
-       
-        <div class="tab inventory flexcol" data-group="primary" data-tab="inventory">
-            {{> "systems/Alternityd100/templates/actors/parts/actor-inventory.html" sections=inventory}}
 
-           
-        </div>
+            {{!-- Inventory Tab --}}
 
-   
-        {{!-- Notes Tab --}}
-        <div class="tab biography flexcol" data-group="primary" data-tab="notes">
-            {{editor
-            enrichedDescription
-            target="system.details.description.value"
-            button=true
-            editable=editable
-            }}
-        </div>
+            <div class="tab inventory flexcol" data-group="primary" data-tab="inventory">
+                {{> "systems/Alternityd100/templates/actors/parts/actor-inventory.html" sections=inventory}}
+
+
+            </div>
+
+
+            {{!-- Notes Tab --}}
+            <div class="tab biography flexcol" data-group="primary" data-tab="notes">
+                {{editor
+                enrichedDescription
+                target="system.details.description.value"
+                button=true
+                editable=editable
+                }}
+            </div>
     </section>
 </form>

@@ -206,6 +206,8 @@ Hooks.once("init", function() {
   //CONST.DEFAULT_TOKEN = "systems/Alternityd100/icons/conditions/dead_02.webp"
   CONFIG.statusEffects[0].icon = "systems/Alternityd100/icons/conditions/dead_02.webp";
   CONFIG.controlIcons.defeated = "icons/svg/padlock.svg";
+  CONFIG.controlIcons.doorOpen = "systems/Alternityd100/icons/items/door_02_open.webp";
+  CONFIG.controlIcons.doorClosed = "systems/Alternityd100/icons/items/door_02.webp";
   CONFIG.Actor.documentClass = d100Actor;
   CONFIG.Item.documentClass = ItemSFRPG;
   CONFIG.Token.documentClass = d100ATokenDoc;

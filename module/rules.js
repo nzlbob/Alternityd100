@@ -255,8 +255,13 @@ export default function (engine) {
             },
             {
                 when: { closure: "isActorType", type: "hazard" },
-                then: []
+                then: [
+
+                    { closure: "calculateHitpoints", stackModifiers: "stackModifiers" },
+
+                ]
                 //then: ["calculateNpcXp"]
+                
             },
             {
                 when: { closure: "isActorType", type: "npc" },

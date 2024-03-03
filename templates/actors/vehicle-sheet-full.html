@@ -286,8 +286,11 @@
                                 {{#each status.durability as |category id|}}
 
                                 <div class="divTableRow">
-                                    {{#if (eq id "stu") }}<div class="divTableCell" data-tooltip="{{ localize "
-                                        d100A.DamageTypeTooltip.Stun" }}">{{ localize "d100A.stun"}}</div> {{/if}}
+                                    {{#if (eq id "stu") }} 
+                                        
+                                        <div class="divTableCell"><button style="height: 26px;"  class="clickapplydamge" data-tooltip-direction="UP" data-tooltip="Apply Temp Damage" >{{ localize "d100A.stun"}}</button></div>
+                                        
+                                        {{/if}}
                                     {{#if (eq id "wou") }}<div class="divTableCell" data-tooltip="{{ localize "
                                         d100A.DamageTypeTooltip.Wound" }}">{{ localize "d100A.wound"}}</div> {{/if}}
                                     {{#if (eq id "mor") }}<div class="divTableCell" data-tooltip="{{ localize "
