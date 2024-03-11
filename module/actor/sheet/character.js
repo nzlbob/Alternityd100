@@ -170,6 +170,7 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
             item.isOnCooldown = item.recharge && !!item.recharge.value && (item.recharge.charged === false);
             if (["meleeW"].includes(item.weaponType)) { item.actionType = "mwak" }
             if (["rangedW", "explos", "heavy"].includes(item.weaponType)) { item.actionType = "rwak" }
+            
             //  console.log(item.type === "psionic" , item.system.ability)
 
             //item.hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.actionType) //&& (!["weapon", "shield"].includes(item.type) || item.system.equipped);

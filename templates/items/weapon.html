@@ -75,6 +75,7 @@
               <div class="form-group">
                 <label>{{ localize "d100A.skill" }}</label>
                 <select name="system.skill">
+                  <option value="" style="color: darkcyan;" >Select Skill</option>
                   {{#select itemData.skill}}
                   {{#each allowableSkills as |name type|}}
                   <option value="{{type}}">{{localize name}}</option>
@@ -159,6 +160,7 @@
               <div class="form-group" data-tooltip="{{localize 'd100A.availabilitytooltip' }}">
                 <label>{{ localize "d100A.availability" }}</label>
                 <select name="system.availability">
+                 
                   {{#select itemData.availability}}
                   {{#each d100Aconfig.availability as |name type|}}
                   <option value="{{type}}">{{name}}</option>
@@ -229,7 +231,28 @@
 
               {{!-- Weapon Blast --}}
               {{#if isAoE }}
-              <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.blastAreaTooltip" }}">
+
+
+              <div class="form-group" data-tooltip="{{localize 'd100A.Items.Weapon.blastShapeTooltip' }}">
+                <label>{{ localize "d100A.Items.Weapon.blastShape" }}</label>
+                <select name="system.blastShape">
+                 
+                  {{#select itemData.blastShape}}
+                  {{#each d100Aconfig.blastShapes as |name type|}}
+                  <option value="{{type}}">{{name}}</option>
+                  {{/each}}
+                  {{/select}}
+                </select>
+
+                <div class="form-fields">
+                  <input type="number" style="text-align: center; size: 20 px; width: 20% " name="system.blastWidth"
+                    value="{{itemData.blastWidth}}" data-dtype="Number" placeholder="0" />
+                </div>
+
+              </div>
+
+
+              <div class="form-group" data-tooltip="{{ localize " d100A.Items.Weapon.blastAreaTooltip" }}">
                 <label>{{ localize "Blast Area" }}</label>
                 <div class="form-group weapon-properties" style="font-size: 12px; text-align: center; ">
                   <input type="text" style="text-align: center" name="system.blastArea.short"

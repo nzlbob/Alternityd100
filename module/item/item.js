@@ -43,6 +43,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (this.type === "starshipWeapon") return true;
         if (["meleeW"].includes(this.system.weaponType)) { this.system.actionType = "mwak" }
         if (["rangedW", "explos", "heavyW"].includes(this.system.weaponType)) { this.system.actionType = "rwak" }
+        if ((["psionic"].includes(this.system.type))&& (["ranged"].includes(this.system.psiEffectType))) { this.system.actionType = "rsak" }
         //console.log("--------------hasAttack----------\n")
         return ["mwak", "rwak", "msak", "rsak"].includes(this.system.actionType);
     }
@@ -63,8 +64,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (this.type === "starshipWeapon") return true;
         //console.log(this)
         const orddice = !!(this.system.damage?.ord?.dice && this.system.damage?.ord?.type)
-        const weaponthing = ["weapon", "shield"].includes(this.type)
-        const a = ["weapon", "shield"].includes(this.type) ? orddice && (weaponthing || this.system.equipped) : false;
+        const weaponthing = ["weapon", "shield","psionic"].includes(this.type)
+        const a = ["weapon", "shield","psionic"].includes(this.type) ? orddice && (weaponthing || this.system.equipped) : false;
         return a;
     }
 
@@ -97,6 +98,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
     //not used
     get isAoE() {
+        if (["area","scan"].includes(this.system.psiEffectType)) return true
         return (["indirfi", "throw"].includes(this.system.skill)) && this.system.blastArea.long > 0;
     }
 
@@ -161,8 +163,20 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const labels = {};
         const item = this;
         const itemData = item.system;
-        const actorData = item.parent ? item.parent.system : {};
+        const actorData = item.parent ? item.parent.system : null;
         item.system.type = item.type
+
+        if (actorData && ["psionic"].includes(itemData.type)) {
+
+            itemData.base = Math.floor((actorData.abilities[itemData.ability]?.value + itemData.rank)) ; 
+            itemData.good =  Math.floor(itemData.base/2) ; 
+            itemData.amazing =  Math.max(1,Math.floor(itemData.base/4)) 
+
+
+
+        }
+
+
         if (this.type == "starshipDefensiveCountermeasure") this.type = "starshipDefence"
         // console.log("C",C,"dtaa",data,"Actor",actorData)
 
@@ -1284,7 +1298,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         itemData.hasAttack = this.hasAttack;
         rollData.item = itemData;
 
-        console.log("rollData", rollData, actorData)
+        console.log("rollData", rollData, actorData,itemData)
         let weaponskill = rollData.item.skill;
         const isSkill = !(["starship"].includes(actorData.type));
         const isStarshipweapon = (["starship"].includes(actorData.type));
@@ -1293,8 +1307,16 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         var skl2 = {};
 
         if (isSkill) { // Get the skill object of the Character shooter Starship weapon skills are selected after selecting crew
+           
+           if (itemData.type == "psionic") {
+            skl = itemData
+            skl2 = itemData.name
+
+           }
+           if (!(itemData.type == "psionic")) {
             skl = rollData.skills[weaponskill]
             skl2 = weaponskill
+           }
         }
         if (!isSkill) { // Get the skill object of the Character shooter Starship weapon skills are selected after selecting crew
             // skl = rollData.skills[weaponskill]
@@ -1459,9 +1481,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 if (skl.ranks > 4 && (targetedToken.rangecat == "long")) distancePrecision = -1;
 
             }
-
-            if (isSkill) targetedToken.rangemod = attackModData(rollData.item.weaponType, skl2, targetedToken.rangecat);
-            else targetedToken.rangemod = 0;
+            console.log(isSkill, skl)
+            if (isSkill && (!(skl.type == "psionic"))) targetedToken.rangemod = attackModData(rollData.item.weaponType, skl2, targetedToken.rangecat);
+            if (isSkill && (skl.type == "psionic")) targetedToken.rangemod = skl.rangeMod[targetedToken.rangecat];
+            if (!isSkill) targetedToken.rangemod = 0;
 
             targetedToken.rangemod += distancePrecision
             /*******************
@@ -1621,7 +1644,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         for (let a = 0; a < numberOfAttacks; a++) {
             targetData[a].AWAModeMod = AWAModeMod[a]
             targetData[a].attackbonus = targetData[a].AWAModeMod
-            targetData[a].accur = parseInt(itemData.accur)
+            targetData[a].accur = parseInt(itemData.accur||0)
 
 
         }

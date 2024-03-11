@@ -58,6 +58,7 @@ export function d100stepdie(step) {
         if ([11,15].includes(skill.broadid)) return defendersResMo?.str;  //Melee Weapons
         
 // NEED TO IMPLEMENT  Psionic Skills WILL
+        if (skill.type == "psionic") return defendersResMo?.wil
         return 0
          }
 /****

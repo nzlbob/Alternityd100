@@ -5,6 +5,15 @@ export const d100A = {};
  * The set of ability scores used with the system
  * @type {Object}
  */
+d100A.psionicEffectType = {
+   "touch": "Touch",
+   "ranged": "Ranged",
+   "area": "Area Attack",
+   "scan": "Area Scan"
+
+
+}
+
 d100A.itemAttack = {
    "range": {
       "short": "Short",
@@ -1362,9 +1371,16 @@ d100A.damagetype = {
 
    "LI": "d100A.Items.Weapon.type.LI",
    "HI": "d100A.Items.Weapon.type.HI",
-   "EN": "d100A.Items.Weapon.type.EN"
+   "EN": "d100A.Items.Weapon.type.EN",
+   "PSI":"d100A.Items.Weapon.type.PSI"
 },
+d100A.blastShapes = {
 
+   cone: "Cone",
+   circle: "Circle",
+   ray: "Ray",
+   rect: "Rectangle",
+},
 
    d100A.firepower = {
       "O": "d100A.Items.Weapon.firepower.O",
@@ -2459,9 +2475,9 @@ d100A.conditions = {
    },
 
    "AttackDialog": {
-      
-         "movementTooltip" : "d100A.Items.Weapon.movementTooltip",
-      
+
+      "movementTooltip": "d100A.Items.Weapon.movementTooltip",
+
    }
 
 

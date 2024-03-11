@@ -36,32 +36,10 @@
             <h3>{{localize section.label}}</h3> {{section.score}} 
         </div>
 
-        <div class="spell-slots fit-classes">
-            {{#if section.usesSlots}}
-                {{#if section.classes}}
-                    <div>
-                        {{#each section.classes as |spellsPerClass|}}
-                            <span class="spell-class">
-                                <span class="sep">{{spellsPerClass.name}}: </span>
-                                <input type="text" name="system.spells.spell{{section.level}}.perClass.{{spellsPerClass.key}}.value" value="{{spellsPerClass.value}}"/>
-                                <span class="sep"> / {{spellsPerClass.max}}</span>
-                            </span>
-                        {{/each}}
-                    </div>
-                {{else}}
-                    <input type="text" name="system.spells.spell{{section.level}}.value" value="{{section.uses}}" placeholder="0"/>
-                    <span class="sep"> / </span>
-                    <input type="text" name="system.spells.spell{{section.level}}.max" value="{{section.slots}}" placeholder="0"/>
-                {{/if}}
-            {{ else }}
-                <span class="spell-slots">{{{section.uses}}}</span>
-                <span class="sep"> / </span>
-                <span class="spell-max">{{{section.slots}}}</span>
-            {{/if}}
-        </div>
 
-        <div class="spell-school">{{localize "Ranks"}}</div>
-        <div class="spell-action">{{localize "Usage"}}</div>
+
+        <div class="spell-school">{{localize "Use"}}</div>
+        <div class="spell-action">{{localize "Ranks"}}</div>
 
         <div class="item-controls">
             {{#if section.canCreate}}
@@ -79,7 +57,18 @@
                 <div class="item-image" style="background-image: url({{item.img}})"></div>
                 <h4>{{item.name}} {{item.psionScore}}</h4>
              
+                             <div class="item-action flexrow">
+                    
+                    {{#if item.hasAttack}}
+                    
+                <button class="tag attack" >{{localize "Attack"}}</button>
+                {{/if}}
+                {{#if item.hasScan}}
+                <button class="tag scan">{{localize "d100A.actionscan"}}</button>
+                {{/if}}
 
+                    
+                  </div>   
 
                 <div class="item-detail spell-uses">{{localize "Rank"}} {{item.system.rank}} </div>
                 
@@ -90,9 +79,8 @@
                 <span class="spell-component" data-tippy-content="<strong>{{ localize "SFRPG.Items.Spell.Concentration" }}</strong><br>{{ localize "SFRPG.Items.Spell.ConcentrationTooltip" }}">C</span>
                 {{/if}}
             </div>
-            <div class="spell-school">                <input class="spellRank" style="width:15px ;text-align:left;font-size: 70%;height:100%"  type="number" class="skill-ranks" data-tooltip="Spell Ranks" name="item.system.rank"
-                value="{{item.system.rank}}" data-id="{{item.id}}" /> </div>
-            <div class="spell-action">{{labels.activation}}</div>
+           
+
 
             {{#if ../../isOwner}}
             <div class="item-controls">

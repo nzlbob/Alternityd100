@@ -5325,6 +5325,7 @@
                 "LI": "0",
                 "HI": "0",
                 "EN": "0",
+                "PSI":"0",
                 "skill": {},
                 "cp": 0,
                 "speedAdjust": 0
@@ -5335,6 +5336,8 @@
                 "parts": []
             },
             "size": "",
+            "blastShape":"circle",
+            "blastWidth": 1,
             "reach": "",
             "proficient": true,
             "container": {
@@ -5974,6 +5977,7 @@
                 "itemDescription",
                 "modifiers"
             ],
+            "psiEffectType":"",
             "ability": "",
             "actionType": null,
             "untrained": true,
@@ -6001,6 +6005,36 @@
                 "ordinary": "",
                 "good": "",
                 "amazing": ""
+            },
+            "range": {
+                "short": "10",
+                "medium": "20",
+                "long": "40"
+            },
+            "rangeMod": {
+                "short": "0",
+                "medium": "1",
+                "long": "2"
+            },
+            "blastArea": {
+                "short": "2",
+                "medium": "4",
+                "long": "6"
+            },
+            "damage": {
+                "type": "PSI",
+                "ord": {
+                    "dice": "0",
+                    "type": "stu"
+                },
+                "goo": {
+                    "dice": "0",
+                    "type": "stu"
+                },
+                "ama": {
+                    "dice": "0",
+                    "type": "stu"
+                }
             }
         },
         "spell": {

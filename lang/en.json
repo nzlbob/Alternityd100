@@ -3362,12 +3362,17 @@
                 "ama": "Amazing"
                 
             },
+
+            "blastAreaTooltip" : "The Blast radius damage",
+            "blastShape": "AoE Shape",
+            "blastShapeTooltip" : "The Area Damage Shape",
             "typeTooltip" : "This describes the form of damage the weapon inflicts: low impact (LI), high impact (HI), or energy (En)",
             "typename": "Damage Type",
             "type":{
                 "LI": "Low Impact",
                 "HI": "High Impact",
-                "EN": "Energy"
+                "EN": "Energy",
+                "PSI": "Psionic"
             },
             "firepowerTooltip" : "This describes the weapon's firepower: Ordinary (O), Good (G) or Amazing (A). If a weapon's firepower is inferior to the toughness of armor it is used against any damage the weapon inflicts is degraded — mortal damage becomes wound damage, for instance.",
             "firepowername": "Damage Firepower",

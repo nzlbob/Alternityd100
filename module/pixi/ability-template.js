@@ -38,8 +38,9 @@ export class AbilityTemplate extends MeasuredTemplate {
     // Additional type-specific data
     switch (type) {
       case "cone":
-        if (game.settings.get("Alternityd100", "useStarfinderAOETemplates") === true) templateData.angle = 90;
-        else templateData.angle = 53.13;
+       // if (game.settings.get("Alternityd100", "useStarfinderAOETemplates") === true) templateData.angle = 90;
+        //else 
+        templateData.angle = 53.13;
         break;
       case "rect":
         templateData.distance = Math.sqrt(Math.pow(distance, 2) + Math.pow(distance, 2));
@@ -128,12 +129,14 @@ export class AbilityTemplate extends MeasuredTemplate {
         handlers.rc(event, false);
 
         const newdoc = await duplicate(this.document)
+        console.log(canvas.scene.templates,"\n This- \n",this.document,"\n newdoc \n",newdoc, this.document.direction )
         newdoc.x = thisx;
         newdoc.y = thisy;
+        newdoc.direction = this.document.direction;
        // console.log("Here" , this, newdoc)
         // Confirm final snapped position
       // await this.document.update(newdoc);
-        console.log(canvas.scene.templates,this.document )
+        console.log(canvas.scene.templates,"\n This- \n",this.document,"\n newdoc \n",newdoc )
         // Create the template
         const result = await canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [newdoc]);
 
@@ -193,4 +196,19 @@ export class AbilityTemplate extends MeasuredTemplate {
 
     return this;
   }
+
+  gettokens() {
+    if (!this.template) return;
+    if (!canvas.scene) return;
+
+    super.refresh();
+
+    if (this.active) {
+      this.highlightGrid();
+    }
+
+    return this;
+  }
+
+
 }
