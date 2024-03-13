@@ -339,7 +339,7 @@ export class Diced100 {
         //console.log("targetData",targetData)
         currentTarget.resPenalty = dialogResistance[key] || 0
 
-        
+
 
         if (!(skl.type == "psionic")) currentTarget.rangemod = attackModData(item.system.weaponType, rollSkill, currentTarget.rangecat);
         if ((skl.type == "psionic")) currentTarget.rangemod = skl.rangeMod[currentTarget.rangecat];
@@ -374,19 +374,19 @@ export class Diced100 {
 
         //currentTarget.attackbonus = stepbonus + currentTarget.resPenalty + currentTarget.rangemod + currentTarget.accur
         console.log(
-        "\n attackbonus",currentTarget.attackbonus, 
-        "\n skillStep", stepbonus,  
-        "\n accur", currentTarget.accur ,
-        "\n AWAModeMod", currentTarget.AWAModeMod ,
-        "\n rangemod", currentTarget.rangemod, 
-        "\n resPenalty", currentTarget.resPenalty, 
-        "\n covermod", currentTarget.covermod, 
-        "\n Dodge", currentTarget.dodgemod, 
-        "\n Skill Sit?", //currentTarget.sitmod, 
-        "\n Movement", //currentTarget.movementmod, 
-        "\n Load", //currentTarget.loadmod, 
+          "\n attackbonus", currentTarget.attackbonus,
+          "\n skillStep", stepbonus,
+          "\n accur", currentTarget.accur,
+          "\n AWAModeMod", currentTarget.AWAModeMod,
+          "\n rangemod", currentTarget.rangemod,
+          "\n resPenalty", currentTarget.resPenalty,
+          "\n covermod", currentTarget.covermod,
+          "\n Dodge", currentTarget.dodgemod,
+          "\n Skill Sit?", //currentTarget.sitmod, 
+          "\n Movement", //currentTarget.movementmod, 
+          "\n Load", //currentTarget.loadmod, 
         )
-        
+
         //console.log("AWAModeMod", currentTarget);
       }
 
@@ -663,13 +663,13 @@ export class Diced100 {
 
     for (let target of targetData) {
 
-    if (!target.resPenalty) target.resPenalty = 0;
-    target.resistance = targetData ? (target.resPenalty > -1) ? "+" + target.resPenalty.toString() : target.resPenalty.toString() : "+0"
-    console.log("****Resistance*****", target.resistance)
-    target.cover = targetData ? (target.covermod > -1) ? "+" + target.covermod.toString() : target.covermod.toString() : "+0"
-    console.log("****covermod*****",  target.cover)
-    target.dodge = targetData ? (target.dodgemod > -1) ? "+" + target.dodgemod.toString() : target.dodgemod.toString() : "+0"
-    console.log("****covermod*****",  target.dodge)
+      if (!target.resPenalty) target.resPenalty = 0;
+      target.resistance = targetData ? (target.resPenalty > -1) ? "+" + target.resPenalty.toString() : target.resPenalty.toString() : "+0"
+      console.log("****Resistance*****", target.resistance)
+      target.cover = targetData ? (target.covermod > -1) ? "+" + target.covermod.toString() : target.covermod.toString() : "+0"
+      console.log("****covermod*****", target.cover)
+      target.dodge = targetData ? (target.dodgemod > -1) ? "+" + target.dodgemod.toString() : target.dodgemod.toString() : "+0"
+      console.log("****covermod*****", target.dodge)
     }
     // Render modal dialog
     template = template || "systems/Alternityd100/templates/chat/roll-dialog.hbs";
@@ -895,13 +895,14 @@ export class Diced100 {
       //console.log(dist)
       // Create data object
       const Aoetype = getProperty(item, "system.blastShape")
-         console.log(dist)
-            console.log(Aoetype,item.system.blastWidth)
+      console.log(dist)
+      console.log(Aoetype, item.system.blastWidth)
       const templateOptions = {
         //type: getProperty(this.data, "data.measureTemplate.type"),
         type: Aoetype,
         distance: dist,
-        angle: item.system.blastWidth
+        angle: item.system.blastWidth,
+        width: item.system.blastWidth
         //texture: PIXI.Texture.from('systems/Alternityd100/icons/conditions/asleep.png')
       };
 
@@ -972,22 +973,22 @@ export class Diced100 {
 
 
       //console.log("targetData",targetData)
-const isRanged = (item.system.range.long+ item.system.range.short+item.system.range.medium) >3
-     if  (isRanged){
+      const isRanged = (item.system.range.long + item.system.range.short + item.system.range.medium) > 3
+      if (isRanged) {
 
-      target.resPenalty = dialogResistance || 0
-      target.rangemod = attackModData(item.system.weaponType, rollSkill, target.rangecat);
-      target.covermod = dialogCover || 0
-      target.movementmod = dialogMovement || 0
-     }
+        target.resPenalty = dialogResistance || 0
+        target.rangemod = attackModData(item.system.weaponType, rollSkill, target.rangecat);
+        target.covermod = dialogCover || 0
+        target.movementmod = dialogMovement || 0
+      }
       //console.log("Target Data",attackModData(item.system.weaponType,rollSkill,targetData[0].rangecat),targetData,dialogRange)
-      if  (!isRanged){
+      if (!isRanged) {
 
         target.resPenalty = 0
         target.rangemod = 0;
         target.covermod = 0
         target.movementmod = 0
-       }
+      }
 
 
       target.attackbonus = 0
@@ -1112,7 +1113,7 @@ const isRanged = (item.system.range.long+ item.system.range.short+item.system.ra
       let xloc = AoETemplate[0].x
       let yloc = AoETemplate[0].y
 
-      let delta = isRanged? abr[target.degreeShort][target.rangecat] * canvas.grid.size : 0
+      let delta = isRanged ? abr[target.degreeShort][target.rangecat] * canvas.grid.size : 0
       let xdelta = parseInt(delta * Math.sin(target.missroll.total / 10))
       let ydelta = parseInt(delta * Math.cos(target.missroll.total / 10))
 
@@ -1170,7 +1171,7 @@ const isRanged = (item.system.range.long+ item.system.range.short+item.system.ra
       for (let token of game.scenes.current.tokens) {
 
 
-        if (this.withinReach(AoETemplate,token,dist,item.system.blastWidth)) {
+        if (this.withinReach(AoETemplate, token, dist, item.system.blastWidth)) {
           console.log(token.name)
           const blastdist = Math.ceil(canvas.grid.measureDistance({ x: AoETemplate[0].x, y: AoETemplate[0].y }, { x: token.object.center.x, y: token.object.center.y }))
           let rangecat
@@ -1197,7 +1198,7 @@ const isRanged = (item.system.range.long+ item.system.range.short+item.system.ra
           fulltargetData.push(temptargetData)
         }
 
-        
+
       }
 
 
@@ -1393,47 +1394,48 @@ const isRanged = (item.system.range.long+ item.system.range.short+item.system.ra
     });
   }
 
-  static withinReach(AoETemplate,token,dist, width){
-    console.log( "AoETemplate\n ",AoETemplate,token)
+  static withinReach(AoETemplate, token, dist, width) {
+    console.log("AoETemplate\n ", AoETemplate, token)
     const range = Math.ceil(canvas.grid.measureDistance({ x: AoETemplate[0].x, y: AoETemplate[0].y }, { x: token.object.center.x, y: token.object.center.y })) <= dist
     if (AoETemplate[0].t == "circle") {
       return range
     }
     if (AoETemplate[0].t == "cone") {
-      
-      let ray = new Ray( { x: AoETemplate[0].x, y: AoETemplate[0].y }, { x: token.object.center.x, y: token.object.center.y })
-    // let length = canvas.grid.measureDistances(ray)
-    let tokenangle = raytodeg(ray)+270;
-    let effectangle = (AoETemplate[0].direction > 270)? AoETemplate[0].direction : AoETemplate[0].direction +360
-      const coneangle = AoETemplate[0].angle/2
-    const inAoE = Math.abs(effectangle - tokenangle) < coneangle 
+
+      let ray = new Ray({ x: AoETemplate[0].x, y: AoETemplate[0].y }, { x: token.object.center.x, y: token.object.center.y })
+      // let length = canvas.grid.measureDistances(ray)
+
+      let tokenangle = (raytodeg(ray) + 270) % 360;
+      let effectangle = AoETemplate[0].direction  // (AoETemplate[0].direction > 270)? AoETemplate[0].direction : AoETemplate[0].direction +360
+      const coneangle = AoETemplate[0].angle / 2
+      const inAoE = (Math.abs(effectangle - tokenangle) < coneangle) || (Math.abs(effectangle - tokenangle + 360) < coneangle) || (Math.abs(effectangle - tokenangle - 360) < coneangle)
 
 
 
-      console.log("ray",token.name, "\n", ray, effectangle, " / ", tokenangle,range , inAoE)
+      console.log("ray", token.name, "\n", ray, raytodeg(ray), tokenangle, " / ", AoETemplate[0].direction, effectangle, " / ", range, inAoE)
       const bearing = true
-    return range && inAoE
+      return range && inAoE
     }
 
     if (AoETemplate[0].t == "ray") {
-      let ray = new Ray( { x: AoETemplate[0].x, y: AoETemplate[0].y }, { x: token.object.center.x, y: token.object.center.y })
+      let ray = new Ray({ x: AoETemplate[0].x, y: AoETemplate[0].y }, { x: token.object.center.x, y: token.object.center.y })
       // let length = canvas.grid.measureDistances(ray)
-      let tokenangle = raytodeg(ray)+270;
-      let effectangle = (AoETemplate[0].direction > 270)? AoETemplate[0].direction : AoETemplate[0].direction +360
-        const coneangle = AoETemplate[0].angle/2
+      let tokenangle = raytodeg(ray) + 270;
+      let effectangle = (AoETemplate[0].direction > 270) ? AoETemplate[0].direction : AoETemplate[0].direction + 360
+      const coneangle = AoETemplate[0].angle / 2
 
 
-     // const inAoE = Math.abs(effectangle - tokenangle) < coneangle 
-  
-  const offset = Math.abs(Math.tan(degtorad(Math.abs(effectangle - tokenangle)))*Math.ceil(canvas.grid.measureDistance({ x: AoETemplate[0].x, y: AoETemplate[0].y }, { x: token.object.center.x, y: token.object.center.y })))
-  const inAoE = (offset < (width/2)) && (Math.abs(effectangle - tokenangle) < 90 )
-        console.log("ray",token.name, "\n", ray, effectangle, " / ", tokenangle,range , inAoE, offset)
-        const bearing = true
+      // const inAoE = Math.abs(effectangle - tokenangle) < coneangle 
+
+      const offset = Math.abs(Math.tan(degtorad(Math.abs(effectangle - tokenangle))) * Math.ceil(canvas.grid.measureDistance({ x: AoETemplate[0].x, y: AoETemplate[0].y }, { x: token.object.center.x, y: token.object.center.y })))
+      const inAoE = (offset < (width / 2)) && (Math.abs(effectangle - tokenangle) < 90)
+      console.log("ray", token.name, "\n", ray, effectangle, " / ", tokenangle, range, inAoE, offset)
+      const bearing = true
       return range && inAoE
 
     }
 
-        return range && true
+    return range && true
   }
 
   static async skillRoll({

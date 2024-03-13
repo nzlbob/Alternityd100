@@ -21,13 +21,15 @@ export class AbilityTemplate extends MeasuredTemplate {
     if (!distance) return null;
     if (!canvas.scene) return null;
     if (!["cone", "circle", "rect", "ray"].includes(type)) return null;
-
+if (type == "cone"){ } 
     // Prepare template data
     const templateData = {
       t: type,
       user: game.user.id,
       distance: distance || 5,
       direction: 0,
+    //  angle: options.angle? options.angle : null,
+    //  width: options.width? options.width : null,
       x: 0,
       y: 0,
       fillColor: options.color ? options.color : game.user.color,
@@ -40,14 +42,14 @@ export class AbilityTemplate extends MeasuredTemplate {
       case "cone":
        // if (game.settings.get("Alternityd100", "useStarfinderAOETemplates") === true) templateData.angle = 90;
         //else 
-        templateData.angle = 53.13;
+        templateData.angle = options.angle;
         break;
       case "rect":
         templateData.distance = Math.sqrt(Math.pow(distance, 2) + Math.pow(distance, 2));
         templateData.direction = 45;
         break;
       case "ray":
-        templateData.width = 2;
+        templateData.width = options.width;
         break;
       default:
         break;
