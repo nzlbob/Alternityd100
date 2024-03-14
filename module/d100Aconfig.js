@@ -2087,7 +2087,8 @@ d100A.allowableSkills = {
       "flint": "d100A.flint"
    },
    "explos": {
-      "throw": "d100A.throw"
+      "throw": "d100A.throw",
+      "setexp":"d100A.setexp"
    },
 
    "heavyW": {
