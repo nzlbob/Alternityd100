@@ -1422,6 +1422,7 @@ export class Diced100 {
       // let length = canvas.grid.measureDistances(ray)
       let tokenangle = raytodeg(ray) + 270;
       let effectangle = (AoETemplate[0].direction > 270) ? AoETemplate[0].direction : AoETemplate[0].direction + 360
+      if ((effectangle-tokenangle) >180)tokenangle+=360;
       const coneangle = AoETemplate[0].angle / 2
 
 
@@ -1429,8 +1430,9 @@ export class Diced100 {
 
       const offset = Math.abs(Math.tan(degtorad(Math.abs(effectangle - tokenangle))) * Math.ceil(canvas.grid.measureDistance({ x: AoETemplate[0].x, y: AoETemplate[0].y }, { x: token.object.center.x, y: token.object.center.y })))
       const inAoE = (offset < (width / 2)) && (Math.abs(effectangle - tokenangle) < 90)
-      console.log("ray", token.name, "\n", ray, effectangle, " / ", tokenangle, range, inAoE, offset)
+
       const bearing = true
+      console.log("ray", token.name, "\n", ray, raytodeg(ray), tokenangle, " / ", AoETemplate[0].direction, effectangle, " / ",offset, range, inAoE)
       return range && inAoE
 
     }
