@@ -1196,6 +1196,32 @@
                         "professions": "c",
                         "description": ""
                     },
+                    
+                    "areaeff": {
+                        "ability": "dex",
+                        "isBroad": false,
+                        "show": false,
+                        "broadSkill": "primira",
+                        "source": "home",
+                        "name": "core",
+                        "psitype": 0,
+                        "energy": "",
+                        "fxsource": 0,
+                        "id": 165,
+                        "label": "Area Effect",
+                        "statid": 2,
+                        "type": 1,
+                        "custom": false,
+                        "tooltip": [],
+                        "tooltipSkillText": "",
+                        "broadid": 34,
+                        "baseprice": 4,
+                        "untrained": false,
+                        "multi": false,
+                        "customname": false,
+                        "professions": "",
+                        "description": ""
+                    },
                     "steal": {
                         "ability": "dex",
                         "isBroad": true,
@@ -5263,7 +5289,7 @@
             "clipCost": "10",
             "hide": "0",
             "mass": "1",
-
+            "blastShape": "circle",
             "Cost": "100",
             "skill": "",
             "accur": "0",

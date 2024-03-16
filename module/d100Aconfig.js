@@ -933,6 +933,7 @@ d100A.skillData = {
    "cross": { "name": "d100A.cross", "attrib": "dex", "isBroad": false, "id": 36, "broad": "primira" },
    "flint": { "name": "d100A.flint", "attrib": "dex", "isBroad": false, "id": 37, "broad": "primira" },
    "sling": { "name": "d100A.sling", "attrib": "dex", "isBroad": false, "id": 38, "broad": "primira" },
+   "areaeff": { "name": "d100A.areaeff", "attrib": "dex", "isBroad": false, "id": 165, "broad": "primira" },
    "steal": { "name": "d100A.steal", "attrib": "dex", "isBroad": true, "id": 39, "broad": "steal" },
    "hide": { "name": "d100A.hide", "attrib": "dex", "isBroad": false, "id": 40, "broad": "steal" },
    "shado": { "name": "d100A.shado", "attrib": "dex", "isBroad": false, "id": 41, "broad": "steal" },
@@ -1117,6 +1118,7 @@ d100A.skills = {
    "cross": "d100A.cross",
    "flint": "d100A.flint",
    "sling": "d100A.sling",
+   "areaeff": "d100A.areaeff",
    "steal": "d100A.steal",
    "hide": "d100A.hide",
    "shado": "d100A.shado",
@@ -2084,7 +2086,8 @@ d100A.allowableSkills = {
       "smg": "d100A.smg",
       "bow": "d100A.bow",
       "cross": "d100A.cross",
-      "flint": "d100A.flint"
+      "flint": "d100A.flint",
+      "areaeff":"d100A.areaeff"
    },
    "explos": {
       "throw": "d100A.throw",

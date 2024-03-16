@@ -202,6 +202,10 @@ return arrayData[quality]
          ' "short": -1 ,' +
          ' "medium": 1 ,' +
          ' "long": 2 },' +
+    '"areaeff": {'+
+         ' "short": 0 ,' +
+         ' "medium": 0 ,' +
+         ' "long": 0 },' +
      '"pisto": {'+
          ' "short": -1 ,' +
          ' "medium": 1 ,' +

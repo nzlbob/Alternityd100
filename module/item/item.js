@@ -99,7 +99,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     //not used
     get isAoE() {
         if (["area","scan"].includes(this.system.psiEffectType)) return true
-        return (["indirfi", "throw","setexp"].includes(this.system.skill)) && this.system.blastArea.long > 0;
+        return (["indirfi", "throw","areaeff","setexp"].includes(this.system.skill)) && this.system.blastArea.long > 0;
     }
 
     /* -------------------------------------------- */
