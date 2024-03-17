@@ -413,7 +413,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         const actor = this.actor
         const systemData = actor.system
-
+        const oldstun = systemData.attributes.stu.value
 
         let leftover = 0
 
@@ -445,11 +445,10 @@ export class ActorSheetSFRPG extends ActorSheet {
             //  (attributes.stu.value < 1) ? await actor.setCondition("knockedout", true) : await actor.setCondition("knockedout", false)
 
             actor.update({ "system.attributes": attributes })
-
-
-
-
         }
+
+        if ((attributes.stu.value == 0) && (oldstun > 0) ) return true;
+        return false
 
     }
 

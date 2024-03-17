@@ -747,19 +747,25 @@ export class Combatd100A extends Combat {
 
             for (let c of this.combatants) {
                 console.log(c)
+                let flagdown = false
 
 
 
 
-                if (c.flags?.acted) {
-                    actedUpdate.push({ _id: c.id, flags: { canAct: true, acted: null, delayed: null } });
-                }
                 if ((this.flags.sfrpg.combatType == "normal")) {
-                    c.actor.sheet._onApplyPendingDamage()
+                   flagdown =  c.actor.sheet._onApplyPendingDamage()
                 }
                 //         _id: c.id,
                 //         initiative: c.flags.delayed,
                 //         flags: {acted: null,delayed:null}
+
+                console.log(flagdown, this.round,c)
+
+                if (c.flags?.acted) {
+                    actedUpdate.push({ _id: c.id, flags: { downround :flagdown? this.round : "-" ,canAct: true, acted: null, delayed: null } });
+                }
+
+
 
             }
 
@@ -1236,7 +1242,7 @@ export class Combatd100A extends Combat {
             //  console.log("\nactionCheck\n", actionCheck)
             const props = ["something", "2.jghf"];
             // Roll initiative
-            const actionRoll = await Diced100.skillRoll({
+            const fullactionRoll = await Diced100.skillRoll({
                 event: options.event,
                 fastForward: options.skipDialog === true,
                 staticRoll: options.staticRoll,
@@ -1259,6 +1265,8 @@ export class Combatd100A extends Combat {
                 fastForward: true
 
             });
+
+            const actionRoll = fullactionRoll.message
             console.log("\nDiced100.actionRoll({\n", actionRoll)
 
 

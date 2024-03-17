@@ -134,7 +134,7 @@ if  (["normal"].includes(context.combat?.flags?.sfrpg?.combatType)){
     const li = btn.closest(".combatant");
     const combat = this.viewed;
     const c = combat.combatants.get(li.dataset.combatantId);
-//console.log(btn)
+console.log(btn)
     // Switch control action
     switch (btn.dataset.control) {
 
@@ -158,6 +158,47 @@ if  (["normal"].includes(context.combat?.flags?.sfrpg?.combatType)){
       // Actively ping the Combatant
       case "pingCombatant":
         return this._onPingCombatant(c);
+
+
+
+        case "rollPhysire":
+         
+        console.log("Pinged",c)
+
+        const diceresults = await c.actor.rollSkill("physire")
+        console.log(diceresults.roll)
+        const rollData = diceresults.roll
+        let basedamage = -2
+        if (rollData.degree == "Good") basedamage -= 2
+        if (rollData.degree == "Amazing!") basedamage -= 4
+        rollData.defence = [{armor : {img:"systems/Alternityd100/icons/conditions/physical_resolve.webp"},damage:{stu:basedamage,wou:0,mor:0}}]
+        const templateData = {
+            actor: c.actor,
+            //item: this,
+            tokenId: c.actor.token?.id,
+            action: "Heals",
+            rollData: rollData
+
+        };
+        //console.log(rollData)
+        const template = `systems/Alternityd100/templates/chat/item-defend-card.html`;
+        const renderPromise = renderTemplate(template, templateData);
+        renderPromise.then((html) => {
+            // Create the chat message
+            const chatData = {
+                type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                content: html,
+                sound: true ? CONFIG.sounds.dice : null,
+            };
+
+            ChatMessage.create(chatData, { displaySheet: false });
+        });
+
+
+
+          return true
+
       case "endTurn":
         /* only allow players to end their turn
          * if combat is running
