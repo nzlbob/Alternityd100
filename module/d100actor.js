@@ -933,10 +933,12 @@ if (this.type=="starship"){
     hasDegreeText:options.degreeText? true : false
   });
 
-console.log("\nDiced100.skillRoll({\n", A)
+console.log("\nDiced100.skillRoll({\n", A.message, A.roll)
 let rollresult = {}
   return A
 
+
+  
 }
 
 /**
@@ -1272,7 +1274,33 @@ return A
       }
   }
 
+  _postDefendMessage(rollData) {
+console.log(this,rollData)
+    // Render the chat card template
+    const templateData = {
+        actor: this,
+        item: this,
+        tokenId: this.token?.id,
+        action: "Heals",
+        rollData: rollData
 
+    };
+    //console.log(rollData)
+    const template = `systems/Alternityd100/templates/chat/item-defend-card.html`;
+    const renderPromise = renderTemplate(template, templateData);
+    renderPromise.then((html) => {
+        // Create the chat message
+        const chatData = {
+            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            content: html,
+            sound: true ? CONFIG.sounds.dice : null,
+        };
+
+        ChatMessage.create(chatData, { displaySheet: false });
+    });
+
+}
 
 
 }

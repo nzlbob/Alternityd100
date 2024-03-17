@@ -2967,7 +2967,7 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
 
     static async _onApplyPending(event) {
         // getElementById("p1").innerHTML = "New text!";
-        console.log(event)
+        console.log(event,this)
         event.currentTarget.innerHTML = "Applied";
         event.currentTarget.style.backgroundColor = "lightgreen"
 

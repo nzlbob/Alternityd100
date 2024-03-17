@@ -10,7 +10,7 @@ import { ItemDeletionDialog } from "../../apps/item-deletion-dialog.js"
 import { InputDialog } from "../../apps/input-dialog.js"
 import { SFRPG } from "../../config.js";
 import { d100A } from "../../d100Aconfig.js";
-import {d100stepdie } from "../../modifiers/d100mod.js";
+import { d100stepdie } from "../../modifiers/d100mod.js";
 /**
  * Extend the basic ActorSheet class to do all the SFRPG things!
  * This sheet is an Abstract layer which is not used.
@@ -307,64 +307,105 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         // Apply Temp Damage
         html.find('.clickapplydamge').click(event => this._onApplyPendingDamage(event));
+        html.find('.rollphysire').click(event => this._onRollPhysire(event));
         html.find('.clickpingtoken').click(event => this._onPingToken(event));
         html.find('.attribute-button').click(event => this._onRollAtt(event));
 
     }
 
-    async _onRollAtt(event){
+    async _onRollPhysire(event) {
+
+        const diceresults = await this.actor.rollSkill("physire")
+        console.log(diceresults.roll)
+        const rollData = diceresults.roll
+        let basedamage = -2
+        if (rollData.degree == "Good") basedamage -= 2
+        if (rollData.degree == "Amazing!") basedamage -= 4
+        rollData.defence = [{armor : {img:"systems/Alternityd100/icons/conditions/physical_resolve.webp"},damage:{stu:basedamage,wou:0,mor:0}}]
+        const templateData = {
+            actor: this.actor,
+            item: this,
+            tokenId: this.actor.token?.id,
+            action: "Heals",
+            rollData: rollData
+
+        };
+        //console.log(rollData)
+        const template = `systems/Alternityd100/templates/chat/item-defend-card.html`;
+        const renderPromise = renderTemplate(template, templateData);
+        renderPromise.then((html) => {
+            // Create the chat message
+            const chatData = {
+                type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                content: html,
+                sound: true ? CONFIG.sounds.dice : null,
+            };
+
+            ChatMessage.create(chatData, { displaySheet: false });
+        });
+
+
+
+
+    }
+
+
+    async _onRollAtt(event) {
         const stat = game.i18n.localize("d100A.attributes." + event.currentTarget.dataset.attr)
         const totalbonus = 1;
-        const dice ="1d20";
+        const dice = "1d20";
         const roll = await Roll.create(dice.concat(d100stepdie(totalbonus))).evaluate({ async: true });
         const a = 0
         const fumble = this.actor.system.attributes.luck
-       const roll1 = roll.terms[0].results[0].result == 1
+        const roll1 = roll.terms[0].results[0].result == 1
         const ordinary = this.actor.system.abilities[event.currentTarget.dataset.attr].value
-        const good = Math.floor(ordinary/2)
-        const amazing = Math.floor(good/2)
-        let degree =""
+        const good = Math.floor(ordinary / 2)
+        const amazing = Math.floor(good / 2)
+        let degree = ""
         console.log(roll)
-       if (roll.total > ordinary && !roll1) {degree = "Failure"};
-       if (roll.total > ordinary && roll1) {degree = "Ordinary"};
-       if (roll.total <= ordinary) {degree = "Ordinary"};
-       if (roll.total <= good) {degree = "Good"};
-       if (roll.total <= amazing) {degree = "Amazing!"};
-       if (roll.terms[0].results[0].result > fumble) {degree = "Critical Failure"};
+        if (roll.total > ordinary && !roll1) { degree = "Failure" };
+        if (roll.total > ordinary && roll1) { degree = "Ordinary" };
+        if (roll.total <= ordinary) { degree = "Ordinary" };
+        if (roll.total <= good) { degree = "Good" };
+        if (roll.total <= amazing) { degree = "Amazing!" };
+        if (roll.terms[0].results[0].result > fumble) { degree = "Critical Failure" };
 
 
         const templateData = {
             actor: this.actor,
             formula: roll.formula,
-            total:roll.total   ,
+            total: roll.total,
             roll: roll.toJSON(),
             tooltip: await roll.getTooltip(),
-            degree :  degree,
-            flavor : stat + " Feat Check" }
+            degree: degree,
+            flavor: stat + " Feat Check"
+        }
         const template = `systems/Alternityd100/templates/chat/roll-ext.hbs`;// `systems/Alternityd100/templates/chat/roll-ext.hbs`;    
         const html = await renderTemplate(template, templateData);
-        const chatData = {roll: roll.toJSON(),
+        const chatData = {
+            roll: roll.toJSON(),
 
-        user: game.user.id,
-        type: CONST.CHAT_MESSAGE_TYPES.OTHER,
-        content: html,
-        speaker:  ChatMessage.getSpeaker({actor: this.actor}),
-        sound: a === 0 ? CONFIG.sounds.dice : null,
-        roll: roll.toJSON(),
-        formula: roll.formula
+            user: game.user.id,
+            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            content: html,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            sound: a === 0 ? CONFIG.sounds.dice : null,
+            roll: roll.toJSON(),
+            formula: roll.formula
         }
         await roll.toMessage(chatData);
 
 
-       // canvas.ping(this.token.object.center)
-  
-  
+        // canvas.ping(this.token.object.center)
+
+
     }
-    async _onPingToken(event){
+    async _onPingToken(event) {
 
         canvas.ping(this.token.object.center)
     }
-    
+
 
     async _onApplyPendingDamage(event) {
 
@@ -387,26 +428,26 @@ export class ActorSheetSFRPG extends ActorSheet {
         }
         // let isKO = actor.system.conditions.knockedout
         // let isDead = actor.system.conditions.dead
-        
-        if (!actor.isSpaceActor) {
-            let isKO = ((attributes.stu.value < 1) || (attributes.wou.value < 1)) 
-            let isDead = (attributes.mor.value < 1) 
-            await actor.setCondition("knockedout", isKO) 
 
-            actor.update({ "system.attributes": attributes, "system.conditions.knockedout": isKO, "system.conditions.dead": isDead   })
+        if (!actor.isSpaceActor) {
+            let isKO = ((attributes.stu.value < 1) || (attributes.wou.value < 1))
+            let isDead = (attributes.mor.value < 1)
+            await actor.setCondition("knockedout", isKO)
+
+            actor.update({ "system.attributes": attributes, "system.conditions.knockedout": isKO, "system.conditions.dead": isDead })
             await actor.setCondition("dead", isDead)
-             //  (attributes.mor.value < 1) ? await actor.setCondition("dead", true) : await actor.setCondition("dead", false)
+            //  (attributes.mor.value < 1) ? await actor.setCondition("dead", true) : await actor.setCondition("dead", false)
 
 
         }
 
-             if (actor.isSpaceActor) {
-          //  (attributes.stu.value < 1) ? await actor.setCondition("knockedout", true) : await actor.setCondition("knockedout", false)
+        if (actor.isSpaceActor) {
+            //  (attributes.stu.value < 1) ? await actor.setCondition("knockedout", true) : await actor.setCondition("knockedout", false)
 
-          actor.update({ "system.attributes": attributes  })
-           
-               
-               
+            actor.update({ "system.attributes": attributes })
+
+
+
 
         }
 
@@ -727,7 +768,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
-ghjkghjkghk
+        ghjkghjkghk
         return item.rollAttack({ event: event });
     }
 
@@ -1585,46 +1626,46 @@ ghjkghjkghk
 
     /* -------------------------------------------- */
 
-  /**
-   * Handle dropping of an Actor data onto another Actor sheet
-   * @param {DragEvent} event            The concluding DragEvent which contains drop data
-   * @param {object} data                The data transfer extracted from the event
-   * @returns {Promise<object|boolean>}  A data object which describes the result of the drop, or false if the drop was
-   *                                     not permitted.
-   * @protected
-   */
-  async _onDropActor(event, data) {
+    /**
+     * Handle dropping of an Actor data onto another Actor sheet
+     * @param {DragEvent} event            The concluding DragEvent which contains drop data
+     * @param {object} data                The data transfer extracted from the event
+     * @returns {Promise<object|boolean>}  A data object which describes the result of the drop, or false if the drop was
+     *                                     not permitted.
+     * @protected
+     */
+    async _onDropActor(event, data) {
 
-    console.log("_onDropActor_Starship",event, data);
-   // if ( !this.actor.isOwner ) return false;
+        console.log("_onDropActor_Starship", event, data);
+        // if ( !this.actor.isOwner ) return false;
 
-   let parsedDragData = data;
-   if (!parsedDragData.id){
-   const uuidarray = parsedDragData.uuid.split(".")
-   parsedDragData.id = uuidarray[uuidarray.length-1]
-   parsedDragData.uuidarray = uuidarray
-   }
+        let parsedDragData = data;
+        if (!parsedDragData.id) {
+            const uuidarray = parsedDragData.uuid.split(".")
+            parsedDragData.id = uuidarray[uuidarray.length - 1]
+            parsedDragData.uuidarray = uuidarray
+        }
 
-  /* parsedDragData.pack = "";
-   if (parsedDragData.uuidarray[0] == "Compendium"){
-       let packlen = parsedDragData.uuidarray.length-1;
-       for(let a = 1; a < packlen;a++){
-           parsedDragData.pack += parsedDragData.uuidarray[a];
-           if (a < packlen-1) parsedDragData.pack += ".";
-           console.log("Builder",packlen,parsedDragData.uuidarray[a],a,parsedDragData.pack)
-       }
+        /* parsedDragData.pack = "";
+         if (parsedDragData.uuidarray[0] == "Compendium"){
+             let packlen = parsedDragData.uuidarray.length-1;
+             for(let a = 1; a < packlen;a++){
+                 parsedDragData.pack += parsedDragData.uuidarray[a];
+                 if (a < packlen-1) parsedDragData.pack += ".";
+                 console.log("Builder",packlen,parsedDragData.uuidarray[a],a,parsedDragData.pack)
+             }
+      
+         }
+          */
 
-   }
-    */
-    
-    console.log(this.actor)
-    if (!["starship", "vehicle"].includes(this.actor.type)) return false
-    if (data.type === "Actor") {
-        return this._onCrewDrop(event, parsedDragData);
-    } 
+        console.log(this.actor)
+        if (!["starship", "vehicle"].includes(this.actor.type)) return false
+        if (data.type === "Actor") {
+            return this._onCrewDrop(event, parsedDragData);
+        }
 
 
-  }
+    }
     /* -------------------------------------------- */
     /**
      * Handles drop events for the Crew list
@@ -1634,7 +1675,7 @@ ghjkghjkghk
      */
     async _onCrewDrop(event, data) {
         // event.preventDefault();
-        console.log(this,event,data)
+        console.log(this, event, data)
         $(event.target).css('background', '');
 
         const targetRole = event.target.dataset.role;
@@ -1643,9 +1684,9 @@ ghjkghjkghk
         const crew = duplicate(this.actor.system.crew);
         const crewRole = crew[targetRole];
         const oldRole = this.actor.getCrewRoleForActor(data.id);
-        console.log("this.actor.system.crew",this.actor.system.crew)
-        console.log("oldRole",oldRole)
-        console.log("crewRole",crewRole)
+        console.log("this.actor.system.crew", this.actor.system.crew)
+        console.log("oldRole", oldRole)
+        console.log("crewRole", crewRole)
 
         if (crewRole.limit === -1 || crewRole.actorIds.length < crewRole.limit) {
             crewRole.actorIds.push(data.id);
@@ -1654,18 +1695,18 @@ ghjkghjkghk
                 const originalRole = crew[oldRole];
                 originalRole.actorIds = originalRole.actorIds.filter(x => x != data.id);
             }
-    
+
             await this.actor.update({
                 "system.crew": crew
             }).then(this.render(false));
         } else {
-            ui.notifications.error(game.i18n.format("SFRPG.StarshipSheet.Crew.CrewLimitReached", {targetRole: targetRole}));
+            ui.notifications.error(game.i18n.format("SFRPG.StarshipSheet.Crew.CrewLimitReached", { targetRole: targetRole }));
         }
 
         return true;
     }
 
-      /* -------------------------------------------- */
+    /* -------------------------------------------- */
 
 
 

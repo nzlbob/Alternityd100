@@ -1606,7 +1606,7 @@ export class Diced100 {
           // Send message
           rolled = true;
           //console.log("Message", CONST.CHAT_MESSAGE_TYPES.ROLL,"subject.ordinary ", subject.ordinary)
-          if (chatMessage) return await ChatMessagePF.create(chatData);
+          if (chatMessage) return {message: await ChatMessagePF.create(chatData),roll:rollData};
         } else {
           rolled = true;
           if (chatMessage) {
@@ -1620,7 +1620,7 @@ export class Diced100 {
             };
             if (subject) setProperty(msgData, "flags.pf1.subject", subject);
 
-            await roll.toMessage(msgData);
+           await roll.toMessage(msgData);
           }
         }
         return roll;

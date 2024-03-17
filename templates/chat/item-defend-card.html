@@ -1,6 +1,12 @@
 <div class="Alternityd100 chat-card item-card" data-actor-id="{{actor.id}}" data-item-id="{{item.id}}" {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}} {{#if sceneId}}data-scene-id="{{sceneId}}"{{/if}}>
-    <h3 title="{{rollData.armorroll}}" >Damage: {{rollData.data.damage}} {{localize rollData.data.dmgtype}} ({{rollData.data.type}})({{rollData.data.firepower}})  </h3>
-    {{console "Item Defence- Card 3" }}
+   {{#if (eq action "Heals")}}
+  <h3 title="{{rollData.armorroll}}" >Healing: {{rollData.data.damage}} </h3>
+  {{/if}}
+  {{#if (eq action "Damage")}}
+  <h3 title="{{rollData.armorroll}}" >Damage: {{rollData.data.damage}} {{localize rollData.data.dmgtype}} ({{rollData.data.type}})({{rollData.data.firepower}})  </h3>
+  {{/if}}
+  
+  {{console "Item Defence- Card 3" }}
     {{console this }}
     {{#each rollData.defence as |rd count|}}
    
@@ -9,10 +15,11 @@
     <header class="card-header flexrow">
         <img class="action-img" src="{{rd.armor.img}}" title="{{rd.armor.name}} {{rd.roll.formula}}" />
         <div class="flexcol">
-            <h3 title="{{r.armorroll}}" class="action-name">{{rd.armor.name}} ({{rd.armor.system.firepower}})
+          {{#if (eq action "Damage")}}
+          <h3 title="{{r.armorroll}}" class="action-name">{{rd.armor.name}} ({{rd.armor.system.firepower}}) </h3>
+            {{/if}}      
                 
-                
-                 </h3>
+                 
             
             <span  title="{{rollData.armorroll}}"> Stun: {{rd.damage.stu}}<br> Wounds: {{rd.damage.wou}} <br>Mortal: {{rd.damage.mor}}<br>Critical: {{rd.damage.cri}} </span>
             
