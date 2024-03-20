@@ -342,9 +342,10 @@ export class Diced100 {
 
 
         if (!(skl.type == "psionic")) currentTarget.rangemod = attackModData(item.system.weaponType, rollSkill, currentTarget.rangecat);
-        if ((skl.type == "psionic")) currentTarget.rangemod = skl.rangeMod[currentTarget.rangecat];
-
-
+        if ((skl.type == "psionic")) {
+          currentTarget.rangemod = skl.rangeMod[currentTarget.rangecat];
+          stepbonus = actor.system.attributes.mor.penalty
+        }
         //console.log("Target Data",attackModData(item.system.weaponType,rollSkill,targetData[0].rangecat),targetData,dialogRange)
 
 
@@ -1422,7 +1423,7 @@ export class Diced100 {
       // let length = canvas.grid.measureDistances(ray)
       let tokenangle = raytodeg(ray) + 270;
       let effectangle = (AoETemplate[0].direction > 270) ? AoETemplate[0].direction : AoETemplate[0].direction + 360
-      if ((effectangle-tokenangle) >180)tokenangle+=360;
+      if ((effectangle - tokenangle) > 180) tokenangle += 360;
       const coneangle = AoETemplate[0].angle / 2
 
 
@@ -1432,7 +1433,7 @@ export class Diced100 {
       const inAoE = (offset < (width / 2)) && (Math.abs(effectangle - tokenangle) < 90)
 
       const bearing = true
-      console.log("ray", token.name, "\n", ray, raytodeg(ray), tokenangle, " / ", AoETemplate[0].direction, effectangle, " / ",offset, range, inAoE)
+      console.log("ray", token.name, "\n", ray, raytodeg(ray), tokenangle, " / ", AoETemplate[0].direction, effectangle, " / ", offset, range, inAoE)
       return range && inAoE
 
     }
@@ -1606,7 +1607,7 @@ export class Diced100 {
           // Send message
           rolled = true;
           //console.log("Message", CONST.CHAT_MESSAGE_TYPES.ROLL,"subject.ordinary ", subject.ordinary)
-          if (chatMessage) return {message: await ChatMessagePF.create(chatData),roll:rollData};
+          if (chatMessage) return { message: await ChatMessagePF.create(chatData), roll: rollData };
         } else {
           rolled = true;
           if (chatMessage) {
@@ -1620,7 +1621,7 @@ export class Diced100 {
             };
             if (subject) setProperty(msgData, "flags.pf1.subject", subject);
 
-           await roll.toMessage(msgData);
+            await roll.toMessage(msgData);
           }
         }
         return roll;

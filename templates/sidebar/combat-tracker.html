@@ -71,8 +71,13 @@
                 <div class="combatant-controls flexrow">
                     
                     <a  class="combatant-control" >
-                    
-                        <img class="combatant-control active" data-tooltip="Roll Stun recovery check: Stunned Round {{this.flags.downround}}" data-control="rollPhysire"src="systems/Alternityd100/icons/conditions/physical_resolve.webp"/>
+                    {{console this}}
+                    {{#if this.down}} 
+                        <img class="combatant-control active" data-tooltip="Roll Stun recovery check: <br> Stunned Round {{this.downround}}" data-control="rollPhysire"src="systems/Alternityd100/icons/conditions/physical_resolve.webp"/>
+                        {{/if}}
+                        {{#if (not this.down) }} 
+                        <img class="combatant-control active" data-tooltip="Roll Stun recovery check" data-control="rollPhysire"src="systems/Alternityd100/icons/conditions/physical_resolve.webp"/>
+                        {{/if}}
 
                     </a>
 

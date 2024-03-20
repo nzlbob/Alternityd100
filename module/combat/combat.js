@@ -378,7 +378,7 @@ export class Combatd100A extends Combat {
     //---------------------------------------------------------------------------------
     async nextTurn(useAction = true) {
 
-        
+
         if (this.isEveryCombatantDefeated()) {
             return;
         }
@@ -473,7 +473,7 @@ export class Combatd100A extends Combat {
             const updates = [{
                 _id: oldCombatant.id,
 
-                flags: { canAct: !(remaining < 0), actions: { total: oldCombatant.apr, remaining: remaining }, dragRuler:{passedWaypoints: [] ,trackedRound:(this.round-2)} }
+                flags: { canAct: !(remaining < 0), actions: { total: oldCombatant.apr, remaining: remaining }, dragRuler: { passedWaypoints: [], trackedRound: (this.round - 2) } }
 
             }];
             console.log("updates", updates)
@@ -748,22 +748,34 @@ export class Combatd100A extends Combat {
             for (let c of this.combatants) {
                 console.log(c)
                 let flagdown = false
+                let newflagdown = await c.actor.sheet._onApplyPendingDamage()
+                let downround = 0
 
-
-
+                // This stuff check if the actor is stunned out and what round she was stunned
 
                 if ((this.flags.sfrpg.combatType == "normal")) {
-                   flagdown =  c.actor.sheet._onApplyPendingDamage()
+                    if (c.flags.downround == "-") {
+                        if (newflagdown) {
+                            flagdown = true
+                            downround = this.round
+                        }
+                    }
+                    else if ((c.actor.system.attributes.stu.value == 0) || (c.actor.system.attributes.wou.value == 0)) {
+                        downround = c.flags.flagdown
+                        flagdown = true
+                    }
+
+
                 }
                 //         _id: c.id,
                 //         initiative: c.flags.delayed,
                 //         flags: {acted: null,delayed:null}
 
-                console.log(flagdown, this.round,c)
+                console.log(flagdown, this.round, c, c.flags.acted)
 
-                if (c.flags?.acted) {
-                    actedUpdate.push({ _id: c.id, flags: { downround :flagdown? this.round : "-" ,canAct: true, acted: null, delayed: null } });
-                }
+                // if (c.flags?.acted) {
+                actedUpdate.push({ _id: c.id, flags: { downround: (flagdown ? downround : "-"), canAct: true, acted: null, delayed: null } });
+                //  }
 
 
 
@@ -771,7 +783,7 @@ export class Combatd100A extends Combat {
 
 
             console.log("updates", actedUpdate, this.combatants)
-             this.updateEmbeddedDocuments("Combatant", actedUpdate);
+            this.updateEmbeddedDocuments("Combatant", actedUpdate);
 
 
 

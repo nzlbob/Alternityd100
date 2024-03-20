@@ -45,7 +45,7 @@ static metadata = Object.freeze(mergeObject(super.metadata, {
   get actor() {
     const combat = this.parent
     const isNPCCrew = this.token?.actor?.system?.crew?.useNPCCrew
-    console.log("combat",combat,combat.flags.sfrpg?.combatType,this,this.token.actor.type)
+  //  console.log("combat",combat,combat.flags.sfrpg?.combatType,this,this.token.actor.type)
     
     const notStarship = !(combat.flags.sfrpg?.combatType == "starship")
     if (this.token.actor.type == "vehicle" ) return game.actors.get(this.actorId) || null;

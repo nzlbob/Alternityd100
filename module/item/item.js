@@ -165,13 +165,13 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const itemData = item.system;
         const actorData = item.parent ? item.parent.system : null;
         item.system.type = item.type
-console.log("Here", itemData.type,itemData)
+//console.log("Here", itemData.type,itemData)
         if (actorData && ["psionic"].includes(itemData.type)) {
 
             itemData.base = Math.floor((actorData.abilities[itemData.ability]?.value + itemData.rank)) || itemData.base ; 
             itemData.good =  Math.floor(itemData.base/2) ; 
             itemData.amazing =  Math.max(1,Math.floor(itemData.base/4)) 
-console.log(actorData.abilities.per.value)
+//console.log(actorData.abilities.per.value)
             console.log("Here", itemData.base, actorData)
 
         }

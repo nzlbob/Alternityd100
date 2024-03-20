@@ -47,6 +47,9 @@ if  (["normal"].includes(context.combat?.flags?.sfrpg?.combatType)){
       //currentTurn.crewmember = {"name" : currentCombatant.actor.name}
       currentTurn.canAct = currentCombatant.flags.canAct
       currentTurn.actions = currentCombatant.flags.actions
+      currentTurn.down = !(currentCombatant.flags.downround == "-")
+      currentTurn.downround = currentCombatant.flags.downround
+     // currentTurn.currentCombatant = currentCombatant
       if (currentCombatant.token.actor.type == "vehicle"){
         currentTurn.crewmember = {"name" : currentCombatant.actor?.name || currentCombatant.npcActor?.name}
         currentTurn.crewRole = currentCombatant.flags.crewRole 

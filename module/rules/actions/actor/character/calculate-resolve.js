@@ -3,6 +3,19 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../..
 export default function (engine) {
     engine.closures.add("calculateResolve", (fact, context) => {
         const data = fact.actor.system;
+
+
+
+
+        let mp = data.attributes.mor.base-data.attributes.mor.value
+
+let bonus = 0
+
+
+mp -= bonus;
+
+data.attributes.mor.penalty = Math.max(mp, 0);
+
 /*
         const addModifier = (bonus, data, item, localizationKey) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {
