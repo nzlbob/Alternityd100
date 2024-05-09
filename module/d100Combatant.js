@@ -24,9 +24,38 @@ static metadata = Object.freeze(mergeObject(super.metadata, {
      * Is a user able to update an existing Combatant?
      * @private
      */
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _onCreate(data, options, userId) {
+    super._onCreate(data, options, userId);
+
+   // console.log(duplicate(this.actor))
+ // console.log("data, options, userId",data, options, userId)
+   
+      data.flags.actions = {
+        total: this.apr,
+        remaining: this.apr
+    },
+       data.flags.delayed = null
+
+
+       data.flags.degree = null, 
+       data.flags.canAct = false, 
+      console.log(duplicate(this))
+
+  }
+    
+
+
+  
+
+
+
   #canUpdate(user, doc, data) {
   console.log((user, doc, data))
-  loadLauncherOrdnance.lp.lp
+  //loadLauncherOrdnance.lp.lp
   return true;
   if ( user.isGM ) return true; // GM users can do anything
   if ( doc.actor && !doc.actor.canUserModify(user, "update", data) ) return false;
@@ -34,6 +63,14 @@ static metadata = Object.freeze(mergeObject(super.metadata, {
   const allowedKeys = new Set(["_id", "initiative", "flags", "defeated"]);
   return updateKeys.isSubset(allowedKeys); // Players may only update initiative scores, flags, and the defeated state
 }
+
+
+  /** @inheritdoc */
+  testUserPermission(user, permission, {exact=false}={}) {
+  //  console.log(user,this.actor?.canUserModify(user, "update"))
+    if ( user.isGM ) return true;
+    return this.actor?.canUserModify(user, "update") || false;
+  }
 
 // FIX THIS FOR STARSHIPS
 /* -------------------------------------------- */

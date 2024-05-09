@@ -1941,13 +1941,13 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                         //scan1.roll = scan1.rolls[0]    
                         scan1.sensorOperator = sensorOperator
                         scan1.skill = npcCrew ? npcSkill.skills[skillId] : sensorOperator.system.skills[skillId]
-                        //console.log(scan1)
-                        if (scan1.rolls[0].total > scan1.skill.base) { scan1.degree = null };
-                        if (scan1.rolls[0].total <= scan1.skill.base) { scan1.degree = "short" };
-                        if (scan1.rolls[0].total <= scan1.skill.good) { scan1.degree = "medium" };
-                        if (scan1.rolls[0].total <= scan1.skill.amazing) { scan1.degree = "long" };
-                        if (scan1.rolls[0].terms[0].results[0].result >= fumble) { scan1.degree = null };
-                        if (scan1.rolls[0].terms[0].results[0].result == 1) { scan1.degree = "long" };
+                        console.log(scan1)
+                        if (scan1.roll.total > scan1.skill.base) { scan1.degree = null };
+                        if (scan1.roll.total <= scan1.skill.base) { scan1.degree = "short" };
+                        if (scan1.roll.total <= scan1.skill.good) { scan1.degree = "medium" };
+                        if (scan1.roll.total <= scan1.skill.amazing) { scan1.degree = "long" };
+                        if (scan1.roll.isFumble) { scan1.degree = null };
+                        if (scan1.roll.isCrit) { scan1.degree = "long" };
                         //console.log("scan1.degree",scan1,scan1.degree)
                         if (scan1.degree) { scan.aquired = true; console.log("Aquired", sensor) }
 

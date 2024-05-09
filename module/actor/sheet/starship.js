@@ -730,21 +730,21 @@ let score = ""
         };
 
         const starshipSystems = [
-            "starshipAblativeArmor",
-            "starshipArmor",
+           // "starshipAblativeArmor",
+            
             "starshipComputer",
-            "starshipCrewQuarter",
-            "starshipDefence",
-            "starshipElectronicCountermeasure",
-            "starshipDriftEngine",
-            "starshipFortifiedHull",
-            "starshipReinforcedBulkhead",
-            "starshipSensor",
-            "starshipShield"
+            "starshipCommunications"
+          //  "starshipDefence",
+          //  "starshipElectronicCountermeasure",
+          //  "starshipDriftEngine",
+          //  "starshipFortifiedHull",
+          //  "starshipReinforcedBulkhead",
+   
+          //  "starshipShield"
         ];
 
         //   0        1          2    3     4       5          6      7           8          9               10            
-        let [forward, starboard, aft, sensors,mounted, unmounted, frame, powerCores, engines, primarySystems, otherSystems, 
+        let [support, armor, defence, sensors,mounted, unmounted, frame, powerCores, engines, primarySystems, otherSystems, 
             //11               12             13     14          15
             securitySystems, expansionBays, cargo, ordnance, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
@@ -765,10 +765,14 @@ let score = ""
                 else arr[5].push(item);
             }
             if (item.type === "starshipSensor") arr[3].push(item);
-            if (item.type === "starshipSensor") arr[9].push(item);
+           // if (item.type === "starshipSensor") arr[9].push(item);
+            else if (item.type === "starshipCrewQuarter") arr[0].push(item);
+            else if (item.type === "starshipArmor") arr[1].push(item);
             else if (item.type === "starshipFrame") arr[6].push(item);
             else if (item.type === "starshipPowerCore") arr[7].push(item);
             else if (item.type === "starshipEngine") arr[8].push(item);
+            else if (item.type === "starshipDefence") arr[2].push(item);
+            
             else if (starshipSystems.includes(item.type)) arr[9].push(item);
             else if (item.type === "starshipOtherSystem") arr[10].push(item);
             else if (item.type === "starshipSecuritySystem") arr[11].push(item);
@@ -841,15 +845,19 @@ let score = ""
 
         const features = {
             frame: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Frame", {"current": frame.length}), items: frame, hasActions: false, dataset: { type: "starshipFrame" } },
+            armor:{ label: game.i18n.format("Armor"), items: armor, hasActions: false, dataset: { type: "starshipArmor" } },
             powerCores: { label: game.i18n.format("SFRPG.StarshipSheet.Features.PowerCores"), items: powerCores, hasActions: false, dataset: { type: "starshipPowerCore" } },
             engines: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Engines"), items: engines, hasActions: false, dataset: { type: "starshipEngine" } },
-            primarySystems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.PrimarySystems"), items: primarySystems, hasActions: false, dataset: { type: starshipSystems.join(',') } },
+           support:{ label: game.i18n.format("Support Systems"), items: support, hasActions: false, dataset: { type: "starshipCrewQuarter" } },
+           weapons: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Weapons"), items: mounted, hasActions: false, dataset: { type: "starshipWeapon,starshipSensor" } }, 
+           defence: { label: game.i18n.format("Defences"), items: defence, hasActions: false, dataset: { type: "starshipDefence" } }, 
+           sensor: { label: game.i18n.format("Sensors"), items: sensors, hasActions: false, dataset: { type: "starshipSensor" } }, 
+           primarySystems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.PrimarySystems"), items: primarySystems, hasActions: false, dataset: { type: starshipSystems.join(',') } },
             otherSystems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.OtherSystems"), items: otherSystems, hasActions: false, dataset: { type: "starshipOtherSystem" } },
-            securitySystems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.SecuritySystems"), items: securitySystems, hasActions: false, dataset: { type: "starshipSecuritySystem" } },
-            expansionBays: { label: game.i18n.format("SFRPG.StarshipSheet.Features.ExpansionBays", {current: expansionBays.length, max: data.system.attributes.expansionBays?.value}), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } },
+          //  securitySystems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.SecuritySystems"), items: securitySystems, hasActions: false, dataset: { type: "starshipSecuritySystem" } },
+         //   expansionBays: { label: game.i18n.format("SFRPG.StarshipSheet.Features.ExpansionBays", {current: expansionBays.length, max: data.system.attributes.expansionBays?.value}), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } },
             ordnance: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Ordnance"), items: ordnance, hasActions: false, dataset: { type: "starshipOrdnance" } },
-            resources: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"), items: actorResources, hasActions: false, dataset: { type: "actorResource" } },
-            weapons: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Weapons"), items: mounted, hasActions: false, dataset: { type: "starshipWeapon,starshipSensor" } },
+          //  resources: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"), items: actorResources, hasActions: false, dataset: { type: "actorResource" } }
         
         };
 

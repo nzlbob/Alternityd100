@@ -2444,13 +2444,13 @@
         "Features": {
             "ExpansionBays": "Expansion Bays ({current} / {max})",
             "Frame": "Hull ({current} / 1)",
-            "OtherSystems": "Other Systems",
-            "PowerCores": "Power Cores",
+            "OtherSystems": "Misc Systems",
+            "PowerCores": "Power Plant",
             "Prefixes": {
                 "StarshipAblativeArmors": "Ablative Armor",
                 "StarshipArmors": "Armor",
                 "StarshipComputers": "Computer",
-                "StarshipCrewQuarters": "Support Systems",
+                "StarshipCrewQuarters": "Support Syst",
                 "StarshipDefences": "Defence",
                 "StarshipElectronicCountermeasures": "Electronic Countermeasure",
                 "StarshipDriftEngine": "Drift Engine",
@@ -2464,7 +2464,7 @@
                     "torp" : "Torpedo",
                     "special" : "Special Weapon"
                 },
-                "StarshipOtherSystems": "Other System",
+                "StarshipOtherSystems": "Misc System",
                 "StarshipPowerCores": "Power Core",
                 "StarshipReinforcedBulkheads": "Reinforced Bulkhead",
                 "StarshipSecuritySystems": "Security System",
@@ -2473,7 +2473,7 @@
                 "StarshipEngines": "Engine",
                 "StarshipWeapons": "Weapon"
             },
-            "PrimarySystems": "Primary Systems",
+            "PrimarySystems": "Command, Computers, Communication",
             "SecuritySystems": "Security Systems",
             "Engines": "Engines",
             "Ordnance": "Launched Ordnance",

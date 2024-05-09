@@ -30,11 +30,12 @@ export default class Engine {
         if (typeof closure === 'string') {
             closure = this.closures.get(closure);
         }
-
+      //  console.log("fact", closure,fact)
         const context = new Context(this);
         try {
             Hooks.callAll("beforeClosureProcessed", closure.name, fact);
             const res = await Promise.resolve(closure.process(fact, context));
+        //    console.log(res,closure,this,context)
             context.fact = res;
             Hooks.callAll("afterClosureProcessed", closure.name, fact);
            // console.log("process",closure, fact)

@@ -318,7 +318,8 @@ export default function (engine) {
             currency: 'EUR',
             minimumFractionDigits: 0
           })
-          data.price.value = 0
+          
+          data.details.price.value = 0
         for (const component of starshipComponents) {
             const componentData = component.system;
 
@@ -330,15 +331,15 @@ export default function (engine) {
             if (componentData.bhpCost === null) componentData.bhpCost =0;
 
             let Price = parseInt (componentData.price) + parseInt (componentData.pricePerBHP) * parseInt (componentData.bhpCost);
-           // console.log(Price,data.price.value,componentData)
-            data.price.value += Price;
+           // console.log(Price,data.details.price.value,componentData)
+            data.details.price.value += Price;
             
-            data.price.tooltip.push(`${component.name}: ${formatter.format(Price)}`);
+            data.details.price.tooltip.push(`${component.name}: ${formatter.format(Price)}`);
            // console.log("component",component,componentData,data,Price)
         }
-        if (data.price.value > 1000000) data.price.value = formatter.format(data.price.value/1000000) + " M"
-        else if (data.price.value > 1000) data.price.value = formatter.format(data.price.value/1000) + " K"
-        else data.price.value = formatter.format(data.price.value)
+        if (data.details.price.value > 1000000) data.details.price.value = formatter.format(data.details.price.value/1000000) + " M"
+        else if (data.details.price.value > 1000) data.details.price.value = formatter.format(data.details.price.value/1000) + " K"
+        else data.details.price.value = formatter.format(data.details.price.value)
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] } );
 }

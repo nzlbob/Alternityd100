@@ -1308,9 +1308,9 @@ console.log(this,rollData)
 Hooks.on("afterClosureProcessed", async (closureName, fact) => {
   if (closureName == "process-actors") {
     
-   // console.log("closureName, fact",closureName, fact)
+  //  console.log("closureName, fact",closureName, fact)
 
-     // await fact.actor.processItemData();
+      await fact.actor.processItemData();
   }
 });
 /*

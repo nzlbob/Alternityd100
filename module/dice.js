@@ -253,7 +253,7 @@ export class Diced100 {
         }
 
         //console.log(AoETemplate)
-        AoEdistance = Math.ceil((canvas.grid.measureDistance({ x: actorToken.x, y: actorToken.y }, { x: AoETemplate[0].x, y: AoETemplate[0].y })));
+        AoEdistance = Math.ceil((canvas.grid.measureDistance({ x: actorToken.object.center.x, y: actorToken.object.center.y }, { x: AoETemplate[0].x, y: AoETemplate[0].y })));
         await AoETemplate[0].update({ "x": 5250, "y": 8820 })
 
         targetData[0].distance = AoEdistance
@@ -944,7 +944,7 @@ export class Diced100 {
       }
 
       //console.log(AoETemplate)
-      AoEdistance = Math.ceil((canvas.grid.measureDistance({ x: actorToken.x, y: actorToken.y }, { x: AoETemplate[0].x, y: AoETemplate[0].y })));
+      AoEdistance = Math.ceil((canvas.grid.measureDistance({ x: actorToken.object.center.x, y: actorToken.object.center.y }, { x: AoETemplate[0].x, y: AoETemplate[0].y })));
 
 
 

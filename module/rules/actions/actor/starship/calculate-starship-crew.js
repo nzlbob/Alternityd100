@@ -44,7 +44,7 @@ export default function (engine) {
                 actorIds: []
             },
             damageControl: {
-                limit: -11,
+                limit: -1,
                 actorIds: []
             },
             defences: {
@@ -52,7 +52,7 @@ export default function (engine) {
                 actorIds: []
             },
             sensors: {
-                limit: -1,
+                limit: 1,
                 actorIds: []
             },
            /* scienceOfficer: {

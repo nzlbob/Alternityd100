@@ -23,7 +23,7 @@ for(let currentTurn of context.turns){
     const currentCombatant = context.combat.combatants.get(currentTurn.id)
     //  console.log( "currentCombatant", currentCombatant)
     currentTurn.crewmember = {"name" : currentCombatant.actor?.name || currentCombatant.npcActor?.name}
-    currentTurn.canAct = currentCombatant.flags.canAct 
+    currentTurn.canAct = currentCombatant.flags.canAct
     currentTurn.crewRole = currentCombatant.flags.crewRole 
     currentTurn.isPilot = false;
     currentTurn.image = "";

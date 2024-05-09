@@ -18,9 +18,7 @@
                     "value": "",
                     "unidentified": ""
                 },
-
                 "type": ""
-                
             },
             "common": {
                 "abilities": {
@@ -1196,7 +1194,6 @@
                         "professions": "c",
                         "description": ""
                     },
-                    
                     "areaeff": {
                         "ability": "dex",
                         "isBroad": false,
@@ -4397,7 +4394,6 @@
                     "wil": false,
                     "per": false
                 },
-                
                 "charoptions": {
                     "species": {
                         "human": {
@@ -4510,17 +4506,17 @@
             "modifiers": {
                 "modifiers": []
             },
-            "conditions" : {
-            "conditions" : {
-                "coverlight" : false,
-                "covermedium" : false,
-                "coverheavy" : false,
-                "dodgecri" : false,
-                "dodgeord" : false,
-                "dodgegoo" : false,
-                "dodgeama" : false
-            }
-        },
+            "conditions": {
+                "conditions": {
+                    "coverlight": false,
+                    "covermedium": false,
+                    "coverheavy": false,
+                    "dodgecri": false,
+                    "dodgeord": false,
+                    "dodgegoo": false,
+                    "dodgeama": false
+                }
+            },
             "counterClassesManagement": {
                 "counterClasses": {
                     "values": {}
@@ -4635,9 +4631,6 @@
                 "conditions",
                 "counterClassesManagement"
             ],
-
-
-
             "details": {
                 "role": "civilian",
                 "toughness": {
@@ -4647,7 +4640,7 @@
                 "price": {
                     "tooltip": [],
                     "base": 0,
-                    "value":0
+                    "value": 0
                 }
             },
             "biography": "",
@@ -4658,10 +4651,8 @@
                     "A"
                 ]
             },
-
             "attributes": {
-                
-                "availability":"com",
+                "availability": "com",
                 "ECM": {
                     "radar": {
                         "base": 0,
@@ -4743,25 +4734,21 @@
                     "tooltip": [],
                     "pending": 0
                 },
-                
-                    "accel": {
-                        "base": 0,
-                        "value": 0,
-                        "tooltip": []
-                    },
-                    "speed": {
-                        
-                        "max":0,
-                        "min": 0,
-                        "base": 1,
-                        "value": 10,
-                        "temp": 0,
-                        "tempmax": 100,
-                        "tooltip": [],
-                        "pending": 0
-                        }
-                  
-                ,
+                "accel": {
+                    "base": 0,
+                    "value": 0,
+                    "tooltip": []
+                },
+                "speed": {
+                    "max": 0,
+                    "min": 0,
+                    "base": 1,
+                    "value": 10,
+                    "temp": 0,
+                    "tempmax": 100,
+                    "tooltip": [],
+                    "pending": 0
+                },
                 "damageControl": {
                     "label": "Damage Control",
                     "min": 0,
@@ -4794,14 +4781,15 @@
                 "conditions",
                 "counterClassesManagement"
             ],
-            "conditions" : {
-                "coverlight" : false,
-                "covermedium" : false,
-                "coverheavy" : false,
-                "dodgecri" : false,
-                "dodgeord" : false,
-                "dodgegoo" : false,
-                "dodgeama" : false
+            
+            "conditions": {
+                "coverlight": false,
+                "covermedium": false,
+                "coverheavy": false,
+                "dodgecri": false,
+                "dodgeord": false,
+                "dodgegoo": false,
+                "dodgeama": false
             },
             "details": {
                 "role": "civilian",
@@ -4812,7 +4800,7 @@
                 "price": {
                     "tooltip": [],
                     "base": 0,
-                    "value":0
+                    "value": 0
                 }
             },
             "biography": "",
@@ -4833,7 +4821,6 @@
                     "A"
                 ]
             },
-
             "attributes": {
                 "ECM": {
                     "radar": {
@@ -5070,12 +5057,9 @@
                     "value": "",
                     "unidentified": ""
                 },
-
                 "type": ""
-               
             },
             "physicalItem": {
-
                 "quantity": 1,
                 "bulk": 0,
                 "price": 0,
@@ -5088,11 +5072,11 @@
                 "attributes": {
                     "source": "",
                     "pubnsource": "",
-                    "availability":"com",
+                    "availability": "com",
                     "progressLevel": "pl0",
                     "sturdy": false,
                     "customBuilt": false,
-                    "manufacturer":"",
+                    "manufacturer": "",
                     "size": 0,
                     "dex": {
                         "mod": ""
@@ -5194,6 +5178,7 @@
                 "pwrPerBHP": 0,
                 "isPCUPerBHP": false,
                 "bhpCost": 0,
+                "location":"F",
                 "progressLevel": "pl0",
                 "targetLockBonus": {
                     "radar": {
@@ -5351,7 +5336,7 @@
                 "LI": "0",
                 "HI": "0",
                 "EN": "0",
-                "PSI":"0",
+                "PSI": "0",
                 "skill": {},
                 "cp": 0,
                 "speedAdjust": 0
@@ -5362,7 +5347,7 @@
                 "parts": []
             },
             "size": "",
-            "blastShape":"circle",
+            "blastShape": "circle",
             "blastWidth": 1,
             "reach": "",
             "proficient": true,
@@ -6003,7 +5988,7 @@
                 "itemDescription",
                 "modifiers"
             ],
-            "psiEffectType":"",
+            "psiEffectType": "",
             "ability": "",
             "actionType": null,
             "untrained": true,
@@ -6356,9 +6341,7 @@
             "type": "cybernetic",
             "progressLevel": "pl0",
             "hide": "0",
-
             "skill": ""
-            
         },
         "starshipAction": {
             "templates": [
@@ -6861,7 +6844,6 @@
             "clipCost": "10",
             "hide": "0",
             "mass": "1",
-           
             "Cost": "100",
             "skill": "weapo",
             "accur": "1",
