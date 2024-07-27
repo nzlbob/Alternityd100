@@ -4,7 +4,7 @@ import { ActorSheetSFRPG } from "./base.js";
 import { SFRPG } from "../../config.js"
 export class d100AActorSheetHazard extends ActorSheetSFRPG {
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
             classes: ["Alternityd100", "sheet", "actor", "hazard"],
             width: 600,
             height: 685

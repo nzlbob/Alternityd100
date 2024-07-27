@@ -2240,104 +2240,180 @@ d100A.equipmentStatus = {
 d100A.statusEffects =
    [
       {
-         "id": "dead",
-         "label": "EFFECT.StatusDead",
-         "icon": "systems/Alternityd100/icons/conditions/dead3.png",
+         id: "dead",
+         name: "d100A.EFFECT.StatusDead",
+         label: "d100A.EFFECT.StatusDead",
+         icon: "systems/Alternityd100/icons/conditions/dead3.png",
+         img: "systems/Alternityd100/icons/conditions/dead3.png",
          modifiers: [],
          tooltip: "<strong>Dead</strong><br><br>This is the End"
       },
       {
-         "id": "dying",
-         "label": "EFFECT.StatusDying",
-         "icon": "systems/Alternityd100/icons/conditions/dying3.png"
+         id: "dying",
+         name : "d100A.EFFECT.StatusDying",
+         label: "d100A.EFFECT.StatusDying",
+         img: "systems/Alternityd100/icons/conditions/dying3.png",
+         icon: "systems/Alternityd100/icons/conditions/dying3.png",
+         modifiers: [],
+         tooltip: "<strong>Dead</strong><br><br>This is the End"
       },
 
       {
-         "id": "knockedout",
-         "label": "EFFECT.StatusKnockedOut",
-         "icon": "systems/Alternityd100/icons/conditions/ko.png"
+         id: "knockedout",
+         name : "d100A.EFFECT.StatusKnockedOut",
+         label: "d100A.EFFECT.StatusKnockedOut",
+         img: "systems/Alternityd100/icons/conditions/ko.png",
+         icon: "systems/Alternityd100/icons/conditions/ko.png",
+         modifiers: [],
+         tooltip: "<strong>Dead</strong><br><br>This is the End"
       },
       {
-         "id": "suppressed",
-         "label": "EFFECT.StatusSuppressed",
-         "icon": "systems/Alternityd100/icons/conditions/suppressed.png"
+         id: "suppressed",
+         name : "d100A.EFFECT.StatusSuppressed",
+         label: "d100A.EFFECT.StatusSuppressed",
+         img: "systems/Alternityd100/icons/conditions/suppressed.png",
+         icon: "systems/Alternityd100/icons/conditions/suppressed.png",
+         modifiers: [],
+         tooltip: "<strong>Dead</strong><br><br>This is the End"
       },
       {
-         "id": "run",
-         "label": "EFFECT.StatusRunning",
-         "icon": "systems/Alternityd100/icons/conditions/run2.png",
+         id: "run",
+         name : "d100A.EFFECT.StatusRunning",
+         label: "d100A.EFFECT.StatusRunning",
+         img: "systems/Alternityd100/icons/conditions/run2.png",
+         icon: "systems/Alternityd100/icons/conditions/run2.png",
          modifiers: [],
          tooltip: "<strong>Running</strong><br><br>+2 Step Penalty"
       },
       {
-         "id": "sprint",
-         "label": "EFFECT.StatusSprinting",
-         "icon": "systems/Alternityd100/icons/conditions/sprint.png"
+         id: "sprint",
+         name : "d100A.EFFECT.StatusSprinting",
+         label: "d100A.EFFECT.StatusSprinting",
+         img: "systems/Alternityd100/icons/conditions/sprint.png",
+         icon: "systems/Alternityd100/icons/conditions/sprint.png",
+         modifiers: [],
+         tooltip: "<strong>Sprinting</strong><br><br>"
       },
       {
-         "id": "charging",
-         "label": "EFFECT.StatusCharging",
-         "icon": "systems/Alternityd100/icons/conditions/charge.png"
+         id: "charging",
+         name : "d100A.EFFECT.StatusCharging",
+         label: "d100A.EFFECT.StatusCharging",
+         img: "systems/Alternityd100/icons/conditions/charge.png",
+         icon: "systems/Alternityd100/icons/conditions/charge.png",
+         modifiers: [],
+         tooltip: "<strong>Sprinting</strong><br><br>"
       },
       {
-         "id": "glide",
-         "label": "EFFECT.StatusGliding",
-         "icon": "systems/Alternityd100/icons/conditions/glide.png"
+         id: "glide",
+         name : "d100A.EFFECT.StatusGliding",
+         label: "d100A.EFFECT.StatusGliding",
+         img: "systems/Alternityd100/icons/conditions/glide.png",
+         icon: "systems/Alternityd100/icons/conditions/glide.png",
+         modifiers: [],
+         tooltip: "<strong>Sprinting</strong><br><br>"
       },
       {
-         "id": "flying",
-         "label": "EFFECT.StatusFlying",
-         "icon": "systems/Alternityd100/icons/conditions/flying2.png"
+         id: "flying",
+         name : "d100A.EFFECT.StatusFlying",
+         label: "d100A.EFFECT.StatusFlying",
+         img: "systems/Alternityd100/icons/conditions/flying2.png",
+         icon: "systems/Alternityd100/icons/conditions/flying2.png",
+         modifiers: [],
+         tooltip: "<strong>Sprinting</strong><br><br>"
       },
       {
-         "id": "eswim",
-         "label": "EFFECT.StatusEasySwim",
-         "icon": "systems/Alternityd100/icons/conditions/eswim2.png"
+         id: "eswim",
+         name : "d100A.EFFECT.StatusEasySwim",
+         label: "d100A.EFFECT.StatusEasySwim",
+         img: "systems/Alternityd100/icons/conditions/eswim2.png",
+         icon: "systems/Alternityd100/icons/conditions/eswim2.png",
+         modifiers: [],
+         tooltip: "<strong>Sprinting</strong><br><br>"
       },
       {
-         "id": "swim",
-         "label": "EFFECT.StatusSwim",
-         "icon": "systems/Alternityd100/icons/conditions/swim3.png"
+         id: "swim",
+         name : "d100A.EFFECT.StatusSwim",
+         label: "d100A.EFFECT.StatusSwim",
+         img: "systems/Alternityd100/icons/conditions/swim3.png",
+         icon: "systems/Alternityd100/icons/conditions/swim3.png",
+         modifiers: [],
+         tooltip: "<strong>Sprinting</strong><br><br>"
       },
       {
-         "id": "aiming",
-         "label": "EFFECT.Aiming",
-         "icon": "systems/Alternityd100/icons/conditions/aiming.png"
+         id: "aiming",
+         name : "d100A.EFFECT.Aiming",
+         label: "d100A.EFFECT.Aiming",
+         img: "systems/Alternityd100/icons/conditions/aiming.png",
+         icon: "systems/Alternityd100/icons/conditions/aiming.png",
+         modifiers: [],
+         tooltip: "<strong>Sprinting</strong><br><br>"
       },
       {
-         "id": "prone",
-         "label": "EFFECT.StatusProne",
-         "icon": "systems/Alternityd100/icons/conditions/falling.png"
+         id: "prone",
+         name : "d100A.EFFECT.StatusProne",
+         label: "d100A.EFFECT.StatusProne",
+         img: "systems/Alternityd100/icons/conditions/falling.png",
+         icon: "systems/Alternityd100/icons/conditions/falling.png",
+         modifiers: [],
+         tooltip: "<strong>Sprinting</strong><br><br>"
       }, {
-         "id": "coverlight",
-         "label": "EFFECT.StatusCoverLight",
-         "icon": "systems/Alternityd100/icons/conditions/coverlight.png"
+         id: "coverlight",
+         name : "d100A.EFFECT.StatusCoverLight",
+         label: "d100A.EFFECT.StatusCoverLight",
+         img: "systems/Alternityd100/icons/conditions/coverlight.png",
+         icon: "systems/Alternityd100/icons/conditions/coverlight.png",
+         modifiers: [],
+         tooltip: "<strong>Sprinting</strong><br><br>"
       }, {
-         "id": "covermedium",
-         "label": "EFFECT.StatusCoverMedium",
-         "icon": "systems/Alternityd100/icons/conditions/covermedium.png"
+         id: "covermedium",
+         name : "d100A.EFFECT.StatusCoverMedium",
+         label: "d100A.EFFECT.StatusCoverMedium",
+         img: "systems/Alternityd100/icons/conditions/covermedium.png",
+         icon: "systems/Alternityd100/icons/conditions/covermedium.png",
+         modifiers: [],
+         tooltip: "<strong>Sprinting</strong><br><br>"
       }, {
-         "id": "coverheavy",
-         "label": "EFFECT.StatusCoverHeavy",
-         "icon": "systems/Alternityd100/icons/conditions/coverheavy.png"
+         id: "coverheavy",
+         name : "d100A.EFFECT.StatusCoverHeavy",
+         label: "d100A.EFFECT.StatusCoverHeavy",
+         img: "systems/Alternityd100/icons/conditions/coverheavy.png",
+         icon: "systems/Alternityd100/icons/conditions/coverheavy.png",
+         modifiers: [],
+         tooltip: "<strong>Sprinting</strong><br><br>"
       },
       {
-         "id": "dodgecri",
-         "label": "EFFECT.StatusDodgeCri",
-         "icon": "systems/Alternityd100/icons/conditions/dodge_04.webp"
+         id: "dodgecri",
+         name : "d100A.EFFECT.StatusDodgeCri",
+         label: "d100A.EFFECT.StatusDodgeCri",
+         img: "systems/Alternityd100/icons/conditions/dodge_04.webp",
+         icon: "systems/Alternityd100/icons/conditions/dodge_04.webp",
+         modifiers: [],
+         tooltip: "<strong>Sprinting</strong><br><br>"
       },
       {
-         "id": "dodgeord",
-         "label": "EFFECT.StatusDodgeOrd",
-         "icon": "systems/Alternityd100/icons/conditions/dodge_02.webp"
+         id: "dodgeord",
+         name : "d100A.EFFECT.StatusDodgeOrd",
+         label: "d100A.EFFECT.StatusDodgeOrd",
+         img: "systems/Alternityd100/icons/conditions/dodge_02.webp",
+         icon: "systems/Alternityd100/icons/conditions/dodge_02.webp",
+         modifiers: [],
+         tooltip: "<strong>Sprinting</strong><br><br>"
       }, {
-         "id": "dodgegoo",
-         "label": "EFFECT.StatusDodgeGoo",
-         "icon": "systems/Alternityd100/icons/conditions/dodge_01.webp"
+         id: "dodgegoo",
+         name : "d100A.EFFECT.StatusDodgeGoo",
+         label: "d100A.EFFECT.StatusDodgeGoo",
+         img: "systems/Alternityd100/icons/conditions/dodge_01.webp",
+         icon: "systems/Alternityd100/icons/conditions/dodge_01.webp",
+         modifiers: [],
+         tooltip: "<strong>Sprinting</strong><br><br>"
       }, {
-         "id": "dodgeama",
-         "label": "EFFECT.StatusDodgeAma",
-         "icon": "systems/Alternityd100/icons/conditions/dodge_03.webp"
+         id: "dodgeama",
+         name : "d100A.EFFECT.StatusDodgeAma",
+         label: "d100A.EFFECT.StatusDodgeAma",
+         img: "systems/Alternityd100/icons/conditions/dodge_03.webp",
+         icon: "systems/Alternityd100/icons/conditions/dodge_03.webp",
+         modifiers: [],
+         tooltip: "<strong>Sprinting</strong><br><br>"
       },
 
 

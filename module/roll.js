@@ -29,7 +29,7 @@ export class RollPF extends Roll {
       const isOperator = term instanceof OperatorTerm;
 
       // Combine a non-operator term with prior StringTerm
-      if (!isOperator && prior instanceof StringTerm) {
+      if (!isOperator && prior instanceof foundry.dice.terms.StringTerm) {
         prior.term += term.total;
         foundry.utils.mergeObject(prior.options, term.options);
         return terms;
@@ -37,14 +37,14 @@ export class RollPF extends Roll {
 
       // Attach string terms as flavor texts to numeric terms, if appropriate
       const priorNumeric = prior instanceof NumericTerm;
-      if (prior && priorNumeric && term instanceof StringTerm && term.term.match(/\[(.+)\]/)) {
+      if (prior && priorNumeric && term instanceof foundry.dice.terms.StringTerm && term.term.match(/\[(.+)\]/)) {
         prior.options.flavor = RegExp.$1;
         return terms;
       }
 
       // Combine StringTerm with a prior non-operator term
       const priorOperator = prior instanceof OperatorTerm;
-      if (prior && !priorOperator && term instanceof StringTerm) {
+      if (prior && !priorOperator && term instanceof foundry.dice.terms.StringTerm) {
         term.term = String(prior.total) + term.term;
         foundry.utils.mergeObject(term.options, prior.options);
         terms[terms.length - 1] = term;
@@ -58,7 +58,7 @@ export class RollPF extends Roll {
 
     // Convert remaining String terms to a RollTerm which can be evaluated
     simplified = simplified.map((term) => {
-      if (!(term instanceof StringTerm)) return term;
+      if (!(term instanceof foundry.dice.terms.StringTerm)) return term;
       const t = this._classifyStringTerm(term.formula, { intermediate: false });
       t.options = term.options;
       return t;
@@ -115,7 +115,7 @@ export class RollPF extends Roll {
           const args = this._splitMathArgs(term);
           terms.push(new MathTerm({ fn, terms: args, options }));
         } else {
-          if (fn) terms.push(new StringTerm({ term: fn }));
+          if (fn) terms.push(new foundry.dice.terms.StringTerm({ term: fn }));
           terms.push(new ParentheticalTerm({ term, options }));
         }
         return terms;

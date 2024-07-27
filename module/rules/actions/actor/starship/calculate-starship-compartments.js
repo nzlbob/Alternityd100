@@ -11,10 +11,10 @@ export default function (engine) {
         const shipFrame = fact.items.find(x => x.type === "starshipFrame")
         
         // frame.system
-        let itemData = duplicate(shipFrame.system)
+        let itemData = foundry.utils.duplicate(shipFrame.system)
         //let itemData = shipFrame.system
       //  console.log( "Frame", itemData)
-      const compartments = /*itemData.compartment? itemData.compartment:*/ duplicate(d100A.compartmentData)
+      const compartments = /*itemData.compartment? itemData.compartment:*/ foundry.utils.duplicate(d100A.compartmentData)
       //  const compartments = itemData.compartment
         data.compartment.compartments = {}
 
@@ -56,7 +56,7 @@ export default function (engine) {
              /*   if(tempcomp.durability? false : true ){
                     console.log( "mnbvbn",  tempcomp)
                     
-                    tempcomp.durability = duplicate(d100A.compartmentDurability) ;
+                    tempcomp.durability = foundry.utils.duplicate(d100A.compartmentDurability) ;
                     if (tempcomp.durability.value){
                         tempcomp.durability.mor.value =  tempcomp.durability.value
                         tempcomp.durability.wou.value =  tempcomp.durability.value*2

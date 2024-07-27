@@ -15,7 +15,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
      * @returns {Object}         The modified data object with the modifiers data object added.
      */
     _ensureHasModifiers(data, prop = null) {
-        if (!hasProperty(data, "modifiers")) {
+        if (!foundry.utils.hasProperty(data, "modifiers")) {
             //console.log(`Starfinder | ${this.name} does not have the modifiers data object, attempting to create them...`);
             data.modifiers = [];
         }
@@ -92,7 +92,7 @@ console.log("MODIFIERS", data)
      * @param {String} id The id for the modifier to edit
      */
     editModifier(id) {
-        const modifiers = duplicate(this.system.modifiers);
+        const modifiers = foundry.utils.duplicate(this.system.modifiers);
         const modifier = modifiers.find(mod => mod._id === id);
 
         new d100AModifierApplication(modifier, this).render(true);

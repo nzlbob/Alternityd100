@@ -2,7 +2,7 @@ export default function (engine) {
     engine.closures.add("calculateVehiclePassengers", (fact, context) => {
         const data = fact.actor.system;
 
-        data.crew = mergeObject(data.crew ?? {}, {
+        data.crew = foundry.utils.mergeObject(data.crew ?? {}, {
             complement: {
                 limit: 0,
                 actorIds: []

@@ -245,7 +245,7 @@ export const sizeDieExt = function (origCount, origSides, targetSize = "M", init
   // Get initial die type
   const mediumDie = `${origCount}d${origSides}`;
   const mediumDieMax = origCount * origSides;
-  let c = duplicate(CONFIG.PF1.sizeDie);
+  let c = foundry.utils.duplicate(CONFIG.PF1.sizeDie);
   {
     if (c.indexOf(mediumDie) === -1) {
       c = c.map((d) => {
@@ -493,7 +493,7 @@ export const mergeObjectExt = function (
   const depth = _d + 1;
 
   // Maybe copy the original data at depth 0
-  if (!inplace && _d === 0) original = duplicate(original);
+  if (!inplace && _d === 0) original = foundry.utils.duplicate(original);
 
   // Enforce object expansion at depth 0
   if (_d === 0 && Object.keys(original).some((k) => /\./.test(k)))
@@ -574,8 +574,8 @@ export const mergeObjectExt = function (
 
 export const naturalSort = function (arr, propertyKey = "") {
   return arr.sort((a, b) => {
-    const propA = propertyKey ? getProperty(a, propertyKey) : a;
-    const propB = propertyKey ? getProperty(b, propertyKey) : b;
+    const propA = propertyKey ? foundry.utils.getProperty(a, propertyKey) : a;
+    const propB = propertyKey ? foundry.utils.getProperty(b, propertyKey) : b;
     return new Intl.Collator(game.settings.get("core", "language"), { numeric: true }).compare(propA, propB);
   });
 };
@@ -666,7 +666,7 @@ export const colorToInt = function (color) {
  * @returns {object.<string, BuffTargetItem>} The resulting array of buff targets.
  */
 export const getBuffTargets = function (actor, type = "buffs") {
-  const buffTargets = duplicate(
+  const buffTargets = foundry.utils.duplicate(
     {
       buffs: CONFIG.PF1.buffTargets,
       contextNotes: CONFIG.PF1.contextNoteTargets,
@@ -704,7 +704,7 @@ export const getBuffTargetDictionary = function (actor, type = "buffs") {
   const buffTargets = getBuffTargets(actor, type);
 
   // Assemble initial categories and items
-  const targetCategories = duplicate(
+  const targetCategories = foundry.utils.duplicate(
     {
       buffs: CONFIG.PF1.buffTargetCategories,
       contextNotes: CONFIG.PF1.contextNoteCategories,
@@ -749,7 +749,7 @@ export const getBuffTargetDictionary = function (actor, type = "buffs") {
  */
 export const sortArrayByName = function (inputArr) {
   const n = inputArr.length;
-  inputArr = duplicate(inputArr).map((o) => {
+  inputArr = foundry.utils.duplicate(inputArr).map((o) => {
     o.name = o.name.toLocaleLowerCase();
     return o;
   });

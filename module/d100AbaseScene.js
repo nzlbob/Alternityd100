@@ -141,7 +141,7 @@ export class d100ABaseScene extends Document {
      * Migration to inner grid schema.
      * @deprecated since v10
      */
-    mergeObject(shims, {
+    foundry.utils.mergeObject(shims, {
       gridType: "grid.type",
       gridColor: "grid.color",
       gridAlpha: "grid.alpha",
@@ -152,7 +152,7 @@ export class d100ABaseScene extends Document {
      * Migration to TextureData.
      * @deprecated since v10
      */
-    mergeObject(shims, {
+    foundry.utils.mergeObject(shims, {
       img: "background.src",
       shiftX: "background.offsetX",
       shiftY: "background.offsetY"

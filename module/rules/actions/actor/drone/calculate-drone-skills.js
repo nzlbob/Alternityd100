@@ -20,7 +20,7 @@ export default function (engine) {
             if (abilityMod !== 0) {
                 let tooltip = game.i18n.format("SFRPG.SkillModifierTooltip", {
                     type: "Ability Score",
-                    mod: abilityMod.signedString(),
+                    mod: abilityMod.toString(),
                     source: SFRPG.abilities[skill.ability]
                 });
 

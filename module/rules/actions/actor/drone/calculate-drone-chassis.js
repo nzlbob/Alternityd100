@@ -15,7 +15,7 @@ export default function (engine) {
             const chassisData = activeChassis.system;
 
             data.traits.size = SFRPG.actorSizes[chassisData.size];
-            data.attributes.speed = mergeObject(data.attributes.speed, chassisData.speed, {overwrite: true});
+            data.attributes.speed = foundry.utils.mergeObject(data.attributes.speed, chassisData.speed, {overwrite: true});
             data.attributes.speed.special = "";
 
             let droneLevel = chassisData.levels;
@@ -29,7 +29,7 @@ export default function (engine) {
                 rolledMods: [],
                 tooltip: [game.i18n.format("SFRPG.BABTooltip", {
                     class: activeChassis.name,
-                    bonus: SFRPG.droneBABBonusPerLevel[droneLevel - 1].signedString()
+                    bonus: SFRPG.droneBABBonusPerLevel[droneLevel - 1].toString()
                 })]
             };
 

@@ -4,7 +4,7 @@ export default function (engine) {
         const profession = fact.profession;
 /*
         data.spells.profession = [];
-        const casterData = duplicate(data.spells);
+        const casterData = foundry.utils.duplicate(data.spells);
 
         const computeSpellsPerDay = (spellLevel, classData, keyAbilityMod) => {
             let totalSpells = 0;
@@ -65,7 +65,7 @@ export default function (engine) {
             }
         }
 
-        data.spells = mergeObject(data.spells, casterData);
+        data.spells = foundry.utils.mergeObject(data.spells, casterData);
 */
         return fact;
     });

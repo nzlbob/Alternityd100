@@ -18,7 +18,7 @@ export class ItemCollectionSheet extends DocumentSheet {
 
     static get defaultOptions() {
         const defaultOptions = super.defaultOptions;
-        return mergeObject(defaultOptions, {
+        return foundry.utils.mergeObject(defaultOptions, {
             classes: defaultOptions.classes.concat(['sfrpg', 'actor', 'sheet', 'npc']),
             height: 720,
             width: 720,
@@ -90,7 +90,7 @@ console.log("HERE--",html)
 
         const tokenData = this.document.getFlag("sfrpg", "itemCollection");
 
-        const items = duplicate(tokenData.items);
+        const items = foundry.utils.duplicate(tokenData.items);
         for (const item of items) {
             item.img = item.img || DEFAULT_TOKEN;
 
@@ -290,7 +290,7 @@ console.log("HERE--",html)
     }
     
     getChatData(itemData, htmlOptions) {
-        const data = duplicate(itemData.data);
+        const data = foundry.utils.duplicate(itemData.data);
         const labels = itemData.labels || {};
 
         // Rich text description
@@ -339,7 +339,7 @@ console.log("HERE--",html)
      */
     _onEditImage(event) {
       const attr = event.currentTarget.dataset.edit;
-      const current = getProperty(this.document.data, attr);
+      const current = foundry.utils.getProperty(this.document.data, attr);
       new FilePicker({
         type: "image",
         current: current,

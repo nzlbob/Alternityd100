@@ -21,9 +21,9 @@ export default function (engine) {
 
             const maxDex = Math.min(data.abilities.dex.mod, maxArmorDex, maxShieldDex);
             const maxDexTooltip = game.i18n.format("SFRPG.ACTooltipMaxDex", { 
-                maxDex: maxDex.signedString(), 
-                armorMax: armorData?.armor.dex?.signedString() ?? game.i18n.localize("SFRPG.Items.Unlimited"),
-                shieldMax: shieldMinDex?.data.dex?.signedString() ?? game.i18n.localize("SFRPG.Items.Unlimited")
+                maxDex: maxDex.toString(), 
+                armorMax: armorData?.armor.dex?.toString() ?? game.i18n.localize("SFRPG.Items.Unlimited"),
+                shieldMax: shieldMinDex?.data.dex?.toString() ?? game.i18n.localize("SFRPG.Items.Unlimited")
             });
 
             // AC bonuses
@@ -64,19 +64,19 @@ export default function (engine) {
             eac.value = 10 + eacMod;
             kac.value = 10 + kacMod;
             
-            if (armor) eac.tooltip.push(game.i18n.format("SFRPG.ACTooltipArmorACMod", { armor: armorEac.signedString(), name: armor.name }));
-            if (shields) shields.forEach(shield => eac.tooltip.push(game.i18n.format("SFRPG.ACTooltipShieldACMod", { shield: (shield.system.bonus.wielded || 0).signedString(), name: shield.name })));
+            if (armor) eac.tooltip.push(game.i18n.format("SFRPG.ACTooltipArmorACMod", { armor: armorEac.toString(), name: armor.name }));
+            if (shields) shields.forEach(shield => eac.tooltip.push(game.i18n.format("SFRPG.ACTooltipShieldACMod", { shield: (shield.system.bonus.wielded || 0).toString(), name: shield.name })));
             eac.tooltip.push(maxDexTooltip);
 
-            if (armor) kac.tooltip.push(game.i18n.format("SFRPG.ACTooltipArmorACMod", { armor: armorKac.signedString(), name: armor.name }));
-            if (shields) shields.forEach(shield => kac.tooltip.push(game.i18n.format("SFRPG.ACTooltipShieldACMod", { shield: (shield.system.bonus.wielded || 0).signedString(), name: shield.name })));
+            if (armor) kac.tooltip.push(game.i18n.format("SFRPG.ACTooltipArmorACMod", { armor: armorKac.toString(), name: armor.name }));
+            if (shields) shields.forEach(shield => kac.tooltip.push(game.i18n.format("SFRPG.ACTooltipShieldACMod", { shield: (shield.system.bonus.wielded || 0).toString(), name: shield.name })));
             kac.tooltip.push(maxDexTooltip);
         } else {
             eac.value = 10 + data.abilities.dex.mod;
             kac.value = 10 + data.abilities.dex.mod;
 
-            eac.tooltip.push(game.i18n.format("SFRPG.ACTooltipMaxDex", { maxDex: data.abilities.dex.mod.signedString() }));
-            kac.tooltip.push(game.i18n.format("SFRPG.ACTooltipMaxDex", { maxDex: data.abilities.dex.mod.signedString() }));
+            eac.tooltip.push(game.i18n.format("SFRPG.ACTooltipMaxDex", { maxDex: data.abilities.dex.mod.toString() }));
+            kac.tooltip.push(game.i18n.format("SFRPG.ACTooltipMaxDex", { maxDex: data.abilities.dex.mod.toString() }));
         }
 */
         return fact;

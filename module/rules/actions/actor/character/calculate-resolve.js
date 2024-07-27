@@ -37,7 +37,7 @@ data.attributes.mor.penalty = Math.max(mp, 0);
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
                     type: bonus.type.capitalize(),
-                    mod: computedBonus.signedString(),
+                    mod: computedBonus.toString(),
                     source: bonus.name
                 }));
             }

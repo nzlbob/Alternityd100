@@ -4,7 +4,7 @@ export class ItemScriptCall {
   static create(data, parent) {
     const result = new this();
 
-    result.data = mergeObject(this.defaultData, data);
+    result.data = foundry.utils.mergeObject(this.defaultData, data);
     result.parent = parent;
 
     return result;

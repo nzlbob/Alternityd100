@@ -714,7 +714,7 @@ resetNPCCrew() {
     } else sklName = CONFIG.PF1.skills[skillId];
   
 
-  const result = duplicate(skl);
+  const result = foundry.utils.duplicate(skl);
   result.id = skillId;
   result.name = sklName;
   result.bonus = skl.steps; // deprecated; backwards compatibility
@@ -1122,7 +1122,7 @@ return A
         });
     }
 
-    const spellbookNotes = getProperty(
+    const spellbookNotes = foundry.utils.getProperty(
       this.data,
       `data.attributes.spells.spellbooks.${spellbookKey}.concentrationNotes`
     );
@@ -1145,7 +1145,7 @@ return A
         });
     }
 
-    const spellbookNotes = getProperty(this.data, `data.attributes.spells.spellbooks.${spellbookKey}.clNotes`);
+    const spellbookNotes = foundry.utils.getProperty(this.data, `data.attributes.spells.spellbooks.${spellbookKey}.clNotes`);
     if (spellbookNotes.length) {
       result.push({ notes: spellbookNotes.split(/[\n\r]+/), item: null });
     }

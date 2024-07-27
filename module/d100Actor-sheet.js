@@ -30,7 +30,7 @@ export class d100ActorSheet extends ActorSheetSFRPG {
 }
   
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
         scrollY: [
             ".tab.attributes",
             ".inventory .inventory-list",
@@ -448,7 +448,7 @@ async processDroppedData(event, parsedDragData) {
                 if (targetContainer) {
                     let newContents = [];
                     if (targetContainer.system.container?.contents) {
-                        newContents = duplicate(targetContainer.system.container?.contents || []);
+                        newContents = foundry.utils.duplicate(targetContainer.system.container?.contents || []);
                     }
 
                     const preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, addedItem) || 0;
@@ -506,7 +506,7 @@ async processDroppedData(event, parsedDragData) {
     console.log(header,event)
     let type = header.dataset.type;
     if (!type || type.includes(",")) {
-        let types = duplicate(SFRPG.itemTypes);
+        let types = foundry.utils.duplicate(SFRPG.itemTypes);
         if (type) {
             let supportedTypes = type.split(',');
             for (let key of Object.keys(types)) {
@@ -534,7 +534,7 @@ async processDroppedData(event, parsedDragData) {
                     callback: html => {
                         const form = html[0].querySelector("form");
                         let formDataExtended = new FormDataExtended(form);
-                        mergeObject(createData, formDataExtended.toObject());
+                        foundry.utils.mergeObject(createData, formDataExtended.toObject());
                         if (!createData.name) {
                             createData.name = game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Name");
                         }
@@ -553,7 +553,7 @@ async processDroppedData(event, parsedDragData) {
     const itemData = {
         name: `New ${type.capitalize()}`,
         type: type,
-        data: duplicate(header.dataset)
+        data: foundry.utils.duplicate(header.dataset)
     };
     delete itemData.data['type'];
 
@@ -831,7 +831,7 @@ async _onItemSplit(event) {
     const update = { "quantity": bigStack };
     await actorHelper.updateItem(item.id, update);
 
-    const itemData = duplicate(item.data);
+    const itemData = foundry.utils.duplicate(item.data);
     itemData.id = null;
     itemData.data.quantity = smallStack;
     itemData.effects = [];

@@ -20,16 +20,16 @@ export default function (engine) {
                 return 0;
             }
 
-            let computedBonus = 0;
-            try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
-                computedBonus = roll.total;
-            } catch {}
+            let computedBonus = bonus.modifier;
+            //  try {
+                 // const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                 // computedBonus = roll.total;
+           //   } catch {}
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
                     type: bonus.type.capitalize(),
-                    mod: computedBonus.signedString(),
+                    mod: computedBonus.toString(),
                     source: bonus.name
                 }));
             }
@@ -41,7 +41,7 @@ export default function (engine) {
         let max = Number.isNaN(strength) ? 0 : strength;
 
         tooltip.push(game.i18n.format("SFRPG.ActorSheet.Inventory.Encumbrance.EncumbranceBaseTooltip", {
-            base: strength.signedString()
+            base: strength.toString()
         }));
         
         // Iterate through any modifiers that affect encumbrance

@@ -13,7 +13,7 @@ import { computeCompoundBulkForItem } from "../actor-inventory-utils.js"
 export class d100AActorSheetNPC extends d100ActorSheet {
     static get defaultOptions() {
         const options = super.defaultOptions;
-        mergeObject(options, {
+        foundry.utils.mergeObject(options, {
             classes: options.classes.concat(["Alternityd100", "sheet", "actor", 'npc']),
             width: 720,
             height: 765
@@ -49,7 +49,7 @@ console.log("HERE--",html)
        context.shorthand = !!game.settings.get("Alternityd100", "macroShorthand");
    
        //const isOwner = this.document.isOwner;
-       const data2 = duplicate(this.actor.system);
+       const data2 = foundry.utils.duplicate(this.actor.system);
       
        data2.attributes = context.document.system.attributes;
        //console.log(this,context)

@@ -20,7 +20,7 @@ export default class d100AModifierApplication extends FormApplication {
     static get defaultOptions() {
         let options = super.defaultOptions;
 
-        return mergeObject(options, {
+        return foundry.utils.mergeObject(options, {
             id: 'modifier-app',
             classes: ['Alternityd100', 'modifier-app'],
             template: "systems/Alternityd100/templates/apps/d100Amodifier-app.html",
@@ -266,13 +266,13 @@ console.log("HERE--",html)
     }
 
     async _updateModifierData(formData) {
-        const modifiers = duplicate(this.actor.system.modifiers);
+        const modifiers = foundry.utils.duplicate(this.actor.system.modifiers);
         const modifier = modifiers.find(mod => mod._id === this.modifier._id);
 
         const roll = Roll.create(formData['modifier'], this.owningActor?.system || this.actor.system);
         modifier.max = roll.evaluate({maximize: true}).total;
 
-        mergeObject(modifier, formData);
+        foundry.utils.mergeObject(modifier, formData);
         
         return this.actor.update({'system.modifiers': modifiers});
     }

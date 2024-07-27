@@ -46,14 +46,17 @@ export default function (engine) {
                 return 0;
             }
 
-            const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
-            const computedBonus = roll.total;
+            let computedBonus = bonus.modifier;
+            //  try {
+                 // const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                 // computedBonus = roll.total;
+           //   } catch {}
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
                     speed: SFRPG.speeds[speedKey],
                     type: bonus.type.capitalize(),
-                    mod: computedBonus.signedString(),
+                    mod: computedBonus.toString(),
                     source: bonus.name
                 }));
             }
@@ -68,7 +71,7 @@ export default function (engine) {
             speed.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Modifiers.Tooltips.Speed", {
                 speed: game.i18n.localize("SFRPG.ActorSheet.Attributes.Speed.Types.All"),
                 type: SFRPG.modifierTypes["armor"],
-                mod: armorSpeed.signedString(),
+                mod: armorSpeed.toString(),
                 source: fact.armor.name
             }));
         }

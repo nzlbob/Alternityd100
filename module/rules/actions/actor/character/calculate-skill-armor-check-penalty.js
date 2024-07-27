@@ -44,7 +44,7 @@ export default function (engine) {
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
                     type: bonus.type.capitalize(),
-                    mod: computedBonus.signedString(),
+                    mod: computedBonus.toString(),
                     source: bonus.name
                 }));
             }
@@ -90,7 +90,7 @@ export default function (engine) {
 
                     skill.tooltip.push(game.i18n.format("SFRPG.ACPTooltip", {
                         type: "Armor",
-                        mod: acp.signedString(),
+                        mod: acp.toString(),
                         source: fact.armor?.data.name
                     }));
                 }
@@ -107,7 +107,7 @@ export default function (engine) {
 
                             skill.tooltip.push(game.i18n.format("SFRPG.ACPTooltip", {
                                 type: "Shield",
-                                mod: acp.signedString(),
+                                mod: acp.toString(),
                                 source: shield.name
                             }));
                         }

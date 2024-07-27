@@ -14,7 +14,7 @@ export default function (engine) {
             data.attributes.computer.value = computerData.modifier;
             data.attributes.computer.tooltip.push(
                 game.i18n.format("SFRPG.StarshipSheet.Modifiers.ComputerBonus", {
-                    mod: computerData.modifier.signedString(),
+                    mod: computerData.modifier.toString(),
                     source: computers[0].name
                 })
             );

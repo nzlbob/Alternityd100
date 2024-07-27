@@ -1,7 +1,7 @@
 export class ActorSheetFlags extends DocumentSheet {
     static get defaultOptions() {
         const options = super.defaultOptions;
-        return mergeObject(options, {
+        return foundry.utils.mergeObject(options, {
             id: "actor-flags",
             classes: ["sfrpg"],
             template: "systems/Alternityd100/templates/apps/actor-flags.html",
@@ -25,7 +25,7 @@ export class ActorSheetFlags extends DocumentSheet {
         const flags = {};
         for (let [k, v] of Object.entries(CONFIG.SFRPG.characterFlags)) {
             if (!flags.hasOwnProperty(v.section)) flags[v.section] = {};
-            let flag = duplicate(v);
+            let flag = foundry.utils.duplicate(v);
             flag.type = v.type.name;
             flag.isCheckbox = v.type === Boolean;
             flag.isSelect = v.hasOwnProperty('choices');

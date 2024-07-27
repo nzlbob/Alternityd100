@@ -89,28 +89,28 @@ export default function (engine) {
             skill.mod = abilityMod + skill.ranks + (hasRanks ? classSkill : 0) + skill.misc + modFromPerk + modFromFlaw + modFromAchievement;
 
             if (hasRanks) {
-                skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipSkillRanks", {ranks: (skill.ranks - skill.min).signedString()}));
+                skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipSkillRanks", {ranks: (skill.ranks - skill.min).toString()}));
                 
                 if (classSkill === 3) {
-                    skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipTrainedClassSkill", {mod: classSkill.signedString()}));
+                    skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipTrainedClassSkill", {mod: classSkill.toString()}));
                 }
             }
 
             if (modFromPerk !== 0) {
-                skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipPerkMod", {mod: modFromPerk.signedString()}));
+                skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipPerkMod", {mod: modFromPerk.toString()}));
             }
 
             if (modFromFlaw !== 0) {
-                skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipFlawMod", {mod: modFromFlaw.signedString()}));
+                skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipFlawMod", {mod: modFromFlaw.toString()}));
             }
                         if (modFromAchievement !== 0) {
-                skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipAchievementMod", {mod: modFromAchievement.signedString()}));
+                skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipAchievementMod", {mod: modFromAchievement.toString()}));
             }
 
-            skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipAbilityMod", {abilityMod: abilityMod.signedString(), abilityAbbr: skill.ability.capitalize()}));
+            skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipAbilityMod", {abilityMod: abilityMod.toString(), abilityAbbr: skill.ability.capitalize()}));
 
             if (skill.misc !== 0) {
-                skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipMiscMod", {mod: skill.misc.signedString()}));
+                skill.tooltip.push(game.i18n.format("SFRPG.SkillTooltipMiscMod", {mod: skill.misc.toString()}));
             }
         }
 */

@@ -96,15 +96,9 @@
                         {{/if}}
                       <!--  <img src="systems/Alternityd100/icons/roles/on.png" alt="Girl in a jacket" width="20" height="20">  -->
                     <div>
-                    <select class="value-equipmentStatus" style="color:rgb(175, 215, 223)" name="system.system.status" data-item-id="{{system._id}}">
-                        
-                        {{#select system.system.status}}
-                        {{#each ../../../d100Aconfig.equipmentStatus as |status statusKey|}} 
-
-
-                        <option value="{{statusKey}}" style="background-color: black;">{{status}}</option>
-                        {{/each}}
-                        {{/select}}
+                    <select class="value-equipmentStatus" style="background-color: black;color:rgb(175, 215, 223)" name="system.system.status" data-item-id="{{system._id}}">
+                        {{ selectOptions ../../../d100Aconfig.equipmentStatus selected=system.system.status }}
+                       
                         </select> 
                         
                         

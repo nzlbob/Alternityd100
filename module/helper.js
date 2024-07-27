@@ -3,7 +3,7 @@ import { ATTRIBUTE_TYPES } from "./constants.js";
 export class EntitySheetHelper {
 
   static getAttributeData(data) {
-    console.log("sheetData", data, data.attributes)
+   // console.log("sheetData", data, data.attributes)
     // Determine attributeuteute type.
     for ( let attr of Object.values(data.attributes) ) {
 

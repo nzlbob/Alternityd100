@@ -200,7 +200,7 @@ export class Diced100 {
 
       if (item ? item.isAoE : false) {
         // Determine size
-        let dist = getProperty(item, "system.blastArea.long");
+        let dist = foundry.utils.getProperty(item, "system.blastArea.long");
         //dist = 10
         //  if (typeof dist === "string") {
         //    dist = RollPF.safeRoll(getProperty(this.data, "data.measureTemplate.size"), rollData).total;
@@ -210,7 +210,7 @@ export class Diced100 {
         //console.log(dist)
         // Create data object
         const templateOptions = {
-          //type: getProperty(this.data, "data.measureTemplate.type"),
+          //type: foundry.utils.getProperty(this.data, "data.measureTemplate.type"),
           type: "circle",
           distance: dist
           //texture: PIXI.Texture.from('systems/Alternityd100/icons/conditions/asleep.png')
@@ -219,10 +219,10 @@ export class Diced100 {
 
 
         //  if (getProperty(this.data, "data.measureTemplate.overrideColor")) {
-        //    templateOptions.color = getProperty(this.data, "data.measureTemplate.customColor");
+        //    templateOptions.color = foundry.utils.getProperty(this.data, "data.measureTemplate.customColor");
         //  }
         //  if (getProperty(this.data, "data.measureTemplate.overrideTexture")) {
-        //    templateOptions.texture = getProperty(this.data, "data.measureTemplate.customTexture");
+        //    templateOptions.texture = foundry.utils.getProperty(this.data, "data.measureTemplate.customTexture");
         //  }
 
         /**
@@ -415,7 +415,7 @@ export class Diced100 {
         }
 
         //flavor = originalFlavor;
-        const curParts = duplicate(parts);
+        const curParts = foundry.utils.duplicate(parts);
         let totalbonus = 0;
         // Don't include situational bonus unless it is defined
         //sitBonus = stepbonus;
@@ -475,12 +475,12 @@ export class Diced100 {
 
           /*** For the first roll, roll the d20 as well as the bonus dice */
           if (a == 0) {
-            targetData[0].attroll = await Roll.create(dice.concat(d100stepdie(targetData[0].attackbonus + parseInt(sitBonus)))).evaluate({ async: true });
+            targetData[0].attroll = await Roll.create(dice.concat(d100stepdie(targetData[0].attackbonus + parseInt(sitBonus)))).evaluate();
           }
 
           /*** For the second rolls, roll the d20 as well as the bonus dice */
           else {
-            targetData[a].attroll = await Roll.create(targetData[0].attroll.terms[0].results[0].result + d100stepdie(targetData[a].attackbonus + parseInt(sitBonus))).evaluate({ async: true });
+            targetData[a].attroll = await Roll.create(targetData[0].attroll.terms[0].results[0].result + d100stepdie(targetData[a].attackbonus + parseInt(sitBonus))).evaluate();
 
           }
           //console.log(targetData[a],targetData[a].attackbonus,targetData[a].attroll)
@@ -535,7 +535,7 @@ export class Diced100 {
         if (chatTemplate) {
           // Create roll template data
           const d20 = targetData[0].attroll.terms[0];
-          const rollData = mergeObject(
+          const rollData = foundry.utils.mergeObject(
             {
               rollSkill: rollSkill,
               user: game.user.id,
@@ -566,7 +566,7 @@ export class Diced100 {
 
           const chatData = {
             user: game.user.id,
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+            type: 0,   // CONST.CHAT_MESSAGE_TYPES.ROLL,
             sound: noSound ? null : a === 0 ? CONFIG.sounds.dice : null,
             speaker: speaker,
             content: await renderTemplate(chatTemplate, rollData),
@@ -576,7 +576,7 @@ export class Diced100 {
             "flags.pf1.noRollRender": true,
 
           };
-          if (subject) setProperty(chatData, "flags.pf1.subject", subject);
+          if (subject) foundry.utils.setProperty(chatData, "flags.pf1.subject", subject);
 
           // Send message
           rolled = true;
@@ -886,7 +886,7 @@ export class Diced100 {
 
 
       // Determine size
-      let dist = getProperty(item, "system.blastArea.long");
+      let dist = foundry.utils.getProperty(item, "system.blastArea.long");
       //dist = 10
       //  if (typeof dist === "string") {
       //    dist = RollPF.safeRoll(getProperty(this.data, "data.measureTemplate.size"), rollData).total;
@@ -895,11 +895,11 @@ export class Diced100 {
       // dist = convertDistance(dist)[0];
       //console.log(dist)
       // Create data object
-      const Aoetype = getProperty(item, "system.blastShape")
+      const Aoetype = foundry.utils.getProperty(item, "system.blastShape")
       console.log(dist)
       console.log(Aoetype, item.system.blastWidth)
       const templateOptions = {
-        //type: getProperty(this.data, "data.measureTemplate.type"),
+        //type: foundry.utils.getProperty(this.data, "data.measureTemplate.type"),
         type: Aoetype,
         distance: dist,
         angle: item.system.blastWidth,
@@ -910,10 +910,10 @@ export class Diced100 {
 
 
       //  if (getProperty(this.data, "data.measureTemplate.overrideColor")) {
-      //    templateOptions.color = getProperty(this.data, "data.measureTemplate.customColor");
+      //    templateOptions.color = foundry.utils.getProperty(this.data, "data.measureTemplate.customColor");
       //  }
       //  if (getProperty(this.data, "data.measureTemplate.overrideTexture")) {
-      //    templateOptions.texture = getProperty(this.data, "data.measureTemplate.customTexture");
+      //    templateOptions.texture = foundry.utils.getProperty(this.data, "data.measureTemplate.customTexture");
       //  }
 
       /**
@@ -1039,7 +1039,7 @@ export class Diced100 {
       }
 
       //flavor = originalFlavor;
-      const curParts = duplicate(parts);
+      const curParts = foundry.utils.duplicate(parts);
       let totalbonus = 0;
       // Don't include situational bonus unless it is defined
       //sitBonus = stepbonus;
@@ -1236,7 +1236,7 @@ export class Diced100 {
       if (chatTemplate) {
         // Create roll template data
         const d20 = target.attroll.terms[0];
-        const rollData = mergeObject(
+        const rollData = foundry.utils.mergeObject(
           {
             target: target,
             rollSkill: rollSkill,
@@ -1523,7 +1523,7 @@ export class Diced100 {
       //  dSteps = form ? form.find('[name="dstep"]').val() : dSteps;
       for (let a = 0; a < 1 + extraRolls.length; a++) {
         flavor = originalFlavor;
-        const curParts = duplicate(parts);
+        const curParts = foundry.utils.duplicate(parts);
         let totalbonus = 0;
         // Don't include situational bonus unless it is defined
         data.bonus = form ? form.find('[name="dstep"]').val() : 0;
@@ -1548,7 +1548,7 @@ export class Diced100 {
 
         // Execute the roll
         // const roll = await Roll.create(curParts.join(" "), d100stepdie(stepbonus)).evaluate({ async: true });
-        const roll = await Roll.create(dice.concat(d100stepdie(totalbonus))).evaluate({ async: true });
+        const roll = await Roll.create(dice.concat(d100stepdie(totalbonus))).evaluate();
         // determin degree of sucess or failure
 
         if (roll.total > ordinary) { degree = "Failure" };
@@ -1558,7 +1558,7 @@ export class Diced100 {
         if (roll.terms[0].results[0].result > fumble) { degree = "Critical Failure" };
         //if (roll.terms[0].results[0].result == 1) {degree = "Critical Success"};
 
-        //console.log( roll,roll.terms[0].results[0].result, " OGA"   ,    ordinary,  good, amazing)
+        console.log(roll, roll.terms[0].results[0].result, " OGA", ordinary, good, amazing)
 
 
 
@@ -1566,9 +1566,9 @@ export class Diced100 {
         if (chatTemplate) {
           // Create roll template data
           const d20 = roll.terms[0];
-          const rollData = mergeObject(
+          const rollData = foundry.utils.mergeObject(
             {
-              user: game.user.id,
+              author: game.user.id,
               formula: roll.formula,
               tooltip: await roll.getTooltip(),
               total: roll.total,
@@ -1589,8 +1589,8 @@ export class Diced100 {
 
           // Create chat data
           const chatData = {
-            user: game.user.id,
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+            author: game.user.id,
+            style: CONST.CHAT_MESSAGE_STYLES.ROLL,
             sound: noSound ? null : a === 0 ? CONFIG.sounds.dice : null,
             speaker: speaker,
             content: await renderTemplate(chatTemplate, rollData),
@@ -1607,8 +1607,10 @@ export class Diced100 {
           // Send message
           rolled = true;
           //console.log("Message", CONST.CHAT_MESSAGE_TYPES.ROLL,"subject.ordinary ", subject.ordinary)
-          if (chatMessage) return { message: await ChatMessagePF.create(chatData), roll: rollData };
-        } else {
+          if (chatMessage) return { message: await ChatMessagePF.create(chatData), rollData: rollData, roll:roll };
+        } 
+        
+        else {
           rolled = true;
           if (chatMessage) {
             const msgData = {
@@ -1621,10 +1623,12 @@ export class Diced100 {
             };
             if (subject) setProperty(msgData, "flags.pf1.subject", subject);
 
-            await roll.toMessage(msgData);
+             await roll.toMessage(msgData);
+            //console.log(roll, rollb)
           }
         }
-        return roll;
+        console.log(roll)
+        return {message:"",roll: roll};
       }
     };
 
@@ -1743,9 +1747,9 @@ export class Diced100 {
     const actorData = actor.system
     //console.log(data,damageResults )
     //console.log(data.damage.ord.dice )
-    damageResults.ord.damage = await Roll.create(data.damage.ord.dice, actorData).evaluate({ async: false });
-    damageResults.goo.damage = await Roll.create(data.damage.goo.dice, actorData).evaluate({ async: false });
-    damageResults.ama.damage = await Roll.create(data.damage.ama.dice, actorData).evaluate({ async: false });
+    damageResults.ord.damage = await Roll.create(data.damage.ord.dice, actorData).evaluate();
+    damageResults.goo.damage = await Roll.create(data.damage.goo.dice, actorData).evaluate();
+    damageResults.ama.damage = await Roll.create(data.damage.ama.dice, actorData).evaluate();
 
     console.log("*****************************************", damageResults, data)
     return damageResults;
@@ -1935,7 +1939,7 @@ degraded Damage
       // Convert the roll to a chat message
       if (chatTemplate) {
         // Create roll template data
-        const rollData = mergeObject(
+        const rollData = foundry.utils.mergeObject(
           {
             user: game.user._id,
             formula: rollOrd.formula,

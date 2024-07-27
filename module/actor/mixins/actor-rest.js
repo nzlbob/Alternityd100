@@ -149,7 +149,7 @@ export const ActorRestMixin = (superclass) => class extends superclass {
      * @return {Promise}        A Promise which resolves once the long rest workflow has completed
      */
     async longRest({ dialog = true, chat = true } = {}) {
-        const data = duplicate(this.system);
+        const data = foundry.utils.duplicate(this.system);
         const updateData = {};
 
         if (dialog) {

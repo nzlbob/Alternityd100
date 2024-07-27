@@ -45,7 +45,7 @@ console.log(conditionName,enabled )
                     const entry = compendium.index.find(e => e.name.toLowerCase() === conditionName.toLowerCase());
                     if (entry) {
                         const entity = await compendium.getDocument(entry._id);
-                        const itemData = duplicate(entity.data);
+                        const itemData = foundry.utils.duplicate(entity.data);
 
                         const promise = this.createEmbeddedDocuments("Item", [itemData]);
                         promise.then((createdItems) => {

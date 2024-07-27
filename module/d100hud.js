@@ -103,7 +103,7 @@ object.document.bar2.attribute
       isVehicle:this.object.actor.type == "vehicle",
       speed: this.object.actor.system.attributes.speed?.value,
       accel: this.object.actor.system.attributes.accel?.value, 
-      lightAngle: this.object.light.data.rotation
+      lightAngle: 0 //this.object.light.data.rotation
     });
     data.statusEffects =this._getStatusEffectChoices(data);
   //  console.log("getData",data,"\nThis\n", this,"\noptions\n",options,"\nCONFIG\n",CONFIG,"\n\nCONFIG.statusEffects \n ",CONFIG.d100A.statusEffects,"\nactor\n",this.object.actor,"\neffects\n",this.object.actor.effects)
@@ -118,7 +118,7 @@ object.document.bar2.attribute
    * @private
    */
 
-  _getStatusEffectChoices() {
+  _xxxgetStatusEffectChoices() {
     const token = this.object;
 
     // Get statuses which are active for the token actor
@@ -156,7 +156,7 @@ object.document.bar2.attribute
       const isOverlay = !!status.overlay || token.document.overlayEffect === src;
       obj[src] = {
         id: e.id ?? "",
-        title: e.label ? game.i18n.localize("d100A." + e.label) : null,
+        title: e.label ? game.i18n.localize(e.label) : null,
         src,
         isActive,
         isOverlay,
@@ -416,7 +416,7 @@ console.log(this.object.document.update({[input.name]: isDelta ? current + value
     CONFIG.d100A.statusEffects.find(e => e.id === img.dataset.statusId) :
       img.getAttribute("src");
       
-      let conditions = duplicate(this.object.actor.system.conditions)
+      let conditions = foundry.utils.duplicate(this.object.actor.system.conditions)
       conditions[effect.id]=!conditions[effect.id]
 
      await this.object.actor.setCondition(effect.id, conditions[effect.id]) 

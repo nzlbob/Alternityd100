@@ -23,7 +23,7 @@ export default function (engine) {
             data.attributes.systems = {};
         }
         
-        data.attributes.systems = mergeObject(data.attributes.systems, {
+        data.attributes.systems = foundry.utils.mergeObject(data.attributes.systems, {
             lifeSupport: {
                 value: "nominal",
                 affectedRoles: {

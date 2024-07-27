@@ -91,7 +91,7 @@ export default function (engine) {
             //   console.log(abilityMods)
             const baseMod = d100resmod(abilityValue);
             //const baseMod = Math.floor((abilityValue - 10) / 2);
-            //ability.modifierTooltip.push(game.i18n.format("SFRPG.AbilityModifierBase", { mod: baseMod.signedString() }));
+            //ability.modifierTooltip.push(game.i18n.format("SFRPG.AbilityModifierBase", { mod: baseMod.toString() }));
 
             let mod = Object.entries(abilityMods).reduce((sum, mod) => {
                 if (mod[1] === null || mod[1].length < 1) return sum;
@@ -113,7 +113,7 @@ export default function (engine) {
             if (ability.damage) {
                 let damage = -Math.floor(Math.abs(ability.damage) / 2);
                 resistanceModifier += damage;
-                ability.modifierTooltip.push(game.i18n.format("SFRPG.AbilityDamageTooltip", { mod: damage.signedString() }));
+                ability.modifierTooltip.push(game.i18n.format("SFRPG.AbilityDamageTooltip", { mod: damage.toString() }));
             }
             ability.resModBonus = mod
             ability.resModValue = resistanceModifier + Skillmod[abl];

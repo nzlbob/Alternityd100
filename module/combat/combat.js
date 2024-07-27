@@ -282,7 +282,7 @@ export class Combatd100A extends Combat {
         const players = game.users.players;
         const settings = game.settings.get("core", Combat.CONFIG_SETTING);
         const turns = this.combatants.contents.sort(sortMethod === "asc" ? this._sortCombatantsAsc : this._sortCombatants);
-        this.turn = Math.clamped(this.turn, Combatd100A.HiddenTurn, turns.length - 1);
+        this.turn = Math.clamp(this.turn, Combatd100A.HiddenTurn, turns.length - 1);
 
         return this.turns = turns;
     }
@@ -909,7 +909,7 @@ export class Combatd100A extends Combat {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
@@ -952,7 +952,7 @@ export class Combatd100A extends Combat {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
@@ -1000,7 +1000,7 @@ export class Combatd100A extends Combat {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
@@ -1092,7 +1092,7 @@ export class Combatd100A extends Combat {
         const phases = this.getPhases();
         const subPhases = this.getSubPhases();
         // console.log("\nnextTurn:",thisTurn,thisSubPhase,thisPhase,thisRound)//1
-        let nextTurn = duplicate(thisTurn)
+        let nextTurn = foundry.utils.duplicate(thisTurn)
         if (thisTurn.newround) nextTurn.turn = 0
         do {
             // console.log("\n !nextTurn.newround",!nextTurn.newround)
@@ -1291,10 +1291,10 @@ export class Combatd100A extends Combat {
 
             });
 
-            const actionRoll = fullactionRoll.message
-            console.log("\nDiced100.actionRoll({\n", actionRoll)
-
-
+            const actionRoll = fullactionRoll.roll
+            console.log("\nDiced100.actionRoll({\n", actionRoll,fullactionRoll)
+            console.log("\noptions.chatMessage\n", options.chatMessage)
+/*
             if (options.chatMessage) {
                 if (!actionRoll) {
                     continue;
@@ -1306,7 +1306,8 @@ export class Combatd100A extends Combat {
                 if (actionRoll.rolls[0].dice[0].total == 1) degree = "amazing";
                 updates.push({ _id: id, initiative: actionRoll.rolls[0].total, flags: { degree: degree, canAct: false } });
             }
-            if (!options.chatMessage) {
+  */
+            if (true) {
                 if (!actionRoll) {
                     continue;
                 }
@@ -1390,7 +1391,7 @@ export class Combatd100A extends Combat {
             updates.push({ _id: id, initiative: roll.total });
 
             // Construct chat message data
-            let messageData = mergeObject({
+            let messageData = foundry.utils.mergeObject({
                 speaker: {
                     scene: game.scenes.current?.id,
                     actor: combatant.actor ? combatant.actor.id : null,

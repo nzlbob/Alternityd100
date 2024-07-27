@@ -1,6 +1,6 @@
 <form class="flexcol {{cssClass}}" autocomplete="off">
 
-{{console this}}
+ <!-- [[console this}}  --> 
     {{!-- Sheet Header --}}
     <header class="sheet-header" style="font-family: serpentine" >
     <table class="hptable">
@@ -331,11 +331,13 @@
     <div class="divTableRow">
         <div class="divTableCell"style="text-align:right">Gender:</div>
         <!--<div class="divTableCell"><input style="width: fit-content;text-align:left" type="text" name="daxta.details.gender" value="{{systemData.details.gender}}"/></div>-->
-                    <select  class="selectrace"  name="system.details.gender"  data-type="String">
-                {{#select systemData.details.gender}}
-                {{#each systemData.charoptions.gender as |gender key|}}
-                <option  value="{{key}}">{{gender.label}}</option> {{/each}} {{/select}}
+
+
+                <select name="system.details.gender">
+                    {{ selectOptions systemData.charoptions.gender selected=systemData.details.gender blank="" }}
                 </select>
+                    
+
         </div>
 
     <div class="divTableRow">

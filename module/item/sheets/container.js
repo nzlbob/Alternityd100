@@ -18,7 +18,7 @@ export class ItemSheetPF_Container extends ItemSheetPF {
   }
 
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       width: 800,
       classes: ["pf1", "sheet", "item"],
       scrollY: ["section.inventory-body"],
@@ -59,8 +59,8 @@ export class ItemSheetPF_Container extends ItemSheetPF {
       i.data.showUnidentifiedData = i.showUnidentifiedData;
       if (i.showUnidentifiedData)
         i.data.name =
-          getProperty(i.data, "data.unidentified.name") || getProperty(i.data, "data.identifiedName") || i.data.name;
-      else i.data.name = getProperty(i.data, "data.identifiedName") || i.data.name;
+          foundry.utils.getProperty(i.data, "data.unidentified.name") || foundry.utils.getProperty(i.data, "data.identifiedName") || i.data.name;
+      else i.data.name = foundry.utils.getProperty(i.data, "data.identifiedName") || i.data.name;
       return i.data;
     });
     data.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
@@ -101,7 +101,7 @@ export class ItemSheetPF_Container extends ItemSheetPF {
             name: "data.unidentified.basePrice",
             fakeName: true,
             label: game.i18n.localize("PF1.UnidentifiedPriceShort"),
-            value: getProperty(data.item.data, "data.unidentified.price"),
+            value: foundry.utils.getProperty(data.item.data, "data.unidentified.price"),
             id: "data-unidentifiedBasePrice",
           }
         );
@@ -112,7 +112,7 @@ export class ItemSheetPF_Container extends ItemSheetPF {
             name: "data.unidentified.basePrice",
             fakeName: true,
             label: game.i18n.localize("PF1.Price"),
-            value: getProperty(data.item, "data.unidentified.price"),
+            value: foundry.utils.getProperty(data.item, "data.unidentified.price"),
             id: "data-basePrice",
           });
         } else {
@@ -133,11 +133,11 @@ export class ItemSheetPF_Container extends ItemSheetPF {
         label: game.i18n.localize("PF1.HPShort"),
         value: {
           name: "data.hp.value",
-          value: getProperty(data.item.data, "data.hp.value"),
+          value: foundry.utils.getProperty(data.item.data, "data.hp.value"),
         },
         max: {
           name: "data.hp.max",
-          value: getProperty(data.item.data, "data.hp.max"),
+          value: foundry.utils.getProperty(data.item.data, "data.hp.max"),
         },
       });
 
@@ -146,7 +146,7 @@ export class ItemSheetPF_Container extends ItemSheetPF {
         isNumber: true,
         label: game.i18n.localize("PF1.Hardness"),
         name: "data.hardness",
-        value: getProperty(data.item.data, "data.hardness"),
+        value: foundry.utils.getProperty(data.item.data, "data.hardness"),
       });
 
       // Add carried flag
@@ -272,8 +272,8 @@ export class ItemSheetPF_Container extends ItemSheetPF {
       item.isCharged = ["day", "week", "charges"].includes(getProperty(item, "data.uses.per"));
       item.price = item.data.identified === false ? item.data.unidentified.price : item.data.price;
 
-      const itemQuantity = getProperty(item, "data.quantity") != null ? getProperty(item, "data.quantity") : 1;
-      const itemCharges = getProperty(item, "data.uses.value") != null ? getProperty(item, "data.uses.value") : 1;
+      const itemQuantity = foundry.utils.getProperty(item, "data.quantity") != null ? foundry.utils.getProperty(item, "data.quantity") : 1;
+      const itemCharges = foundry.utils.getProperty(item, "data.uses.value") != null ? foundry.utils.getProperty(item, "data.uses.value") : 1;
       item.empty = itemQuantity <= 0 || (item.isCharged && itemCharges <= 0);
       arr.push(item);
       return arr;
@@ -357,7 +357,7 @@ console.log("HERE--",html)
     const itemData = {
       name: `New ${typeName.capitalize()}`,
       type: type,
-      data: duplicate(header.dataset),
+      data: foundry.utils.duplicate(header.dataset),
     };
     delete itemData.data["type"];
     return this.item.createContainerContent(itemData);
@@ -497,7 +497,7 @@ console.log("container")
     }
 
     const item = await ItemPF.fromDropData(data);
-    const itemData = duplicate(item.data);
+    const itemData = foundry.utils.duplicate(item.data);
 
     // Sort item
     if (data.containerId === this.item.id) return this._onSortItem(event, itemData);
@@ -547,7 +547,7 @@ console.log("container")
 
     const itemId = $(a).parents(".item").attr("data-item-id");
     const item = this.item.getContainerContent(itemId);
-    const data = duplicate(item.data);
+    const data = foundry.utils.duplicate(item.data);
 
     delete data._id;
     data.name = `${data.name} (Copy)`;
@@ -561,7 +561,7 @@ console.log("container")
     const itemId = $(event.currentTarget).parents(".item").attr("data-item-id");
     const item = this.item.getContainerContent(itemId);
 
-    const curQuantity = getProperty(item.data, "data.quantity") || 0;
+    const curQuantity = foundry.utils.getProperty(item.data, "data.quantity") || 0;
     const newQuantity = Math.max(0, curQuantity + add);
     return item.update({ "data.quantity": newQuantity });
   }
@@ -629,7 +629,7 @@ console.log("container")
   async _updateItems() {
     const promises = [];
 
-    const updates = duplicate(this._itemUpdates);
+    const updates = foundry.utils.duplicate(this._itemUpdates);
     this._itemUpdates = [];
 
     for (const data of updates) {

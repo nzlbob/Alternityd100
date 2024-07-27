@@ -22,16 +22,16 @@ export default function (engine) {
                 return 0;
             }
 
-            let computedBonus = 0;
-            try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({ maximize: true });
-                computedBonus = roll.total;
-            } catch { }
+            let computedBonus = bonus.modifier;
+            //  try {
+                 // const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                 // computedBonus = roll.total;
+           //   } catch {}
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
                     type: bonus.type.capitalize(),
-                    mod: computedBonus.signedString(),
+                    mod: computedBonus.toString(),
                     source: bonus.name
                 }));
             }
@@ -68,7 +68,7 @@ export default function (engine) {
             skill.step = skills.step + parseInt(mofifier.modifier, 10)
             skill.stepdie = d100stepdie(skill.step);
             skilltooltips.push( {                 
-                mod: parseInt(mofifier.modifier, 10).signedString(),
+                mod: parseInt(mofifier.modifier, 10).toString(),
                 source: mofifier.name
             })
         }
@@ -119,7 +119,7 @@ export default function (engine) {
             for (let modIM of filteredIMortal) {
                 IM -= parseInt(modIM.modifier)
                 console.log(modIM, modIM.modifier, parseInt(modIM.modifier), IM)
-                // init.step.tooltip.push(game.i18n.format("<br>Ignore Mortal: " + (0-parseInt(modIM.modifier)).signedString())) 
+                // init.step.tooltip.push(game.i18n.format("<br>Ignore Mortal: " + (0-parseInt(modIM.modifier)).toString())) 
 
             }
 
@@ -133,7 +133,7 @@ export default function (engine) {
         for (let modIM of filteredBonus) {
             skillBonus += parseInt(modIM.modifier)
             console.log(modIM, modIM.modifier, parseInt(modIM.modifier))
-            // init.step.tooltip.push(game.i18n.format("<br>Ignore Mortal: " + (0-parseInt(modIM.modifier)).signedString())) 
+            // init.step.tooltip.push(game.i18n.format("<br>Ignore Mortal: " + (0-parseInt(modIM.modifier)).toString())) 
 
         }
 

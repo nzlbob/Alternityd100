@@ -131,7 +131,7 @@ console.log(dataset)
 let itemData = {
     name: walteritem[vno+startItem].Name,
     type: "weapon",
-    data: duplicate(dataset)
+    data: foundry.utils.duplicate(dataset)
 };
 
 let newItem = await actor.createEmbeddedDocuments("Item", [itemData])

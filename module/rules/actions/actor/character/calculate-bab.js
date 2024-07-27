@@ -3,7 +3,7 @@ export default function (engine) {
       /*  const data = fact.actor.system;
         const classes = fact.classes;
         
-        data.attributes.baseAttackBonus = mergeObject(data.attributes.baseAttackBonus, {
+        data.attributes.baseAttackBonus = foundry.utils.mergeObject(data.attributes.baseAttackBonus, {
             value: 0,
             rolledMods: [],
             tooltip: []
@@ -27,7 +27,7 @@ export default function (engine) {
 
             data.attributes.baseAttackBonus.tooltip.push(game.i18n.format("SFRPG.BABTooltip", {
                 class: cls.name,
-                bonus: mod.signedString()
+                bonus: mod.toString()
             }));
 
             data.attributes.baseAttackBonus.value += mod;

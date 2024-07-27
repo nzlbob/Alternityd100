@@ -5,7 +5,7 @@ export default function (engine) {
 /*
         cmd.value = 8 + kac.value;
         cmd.tooltip.push(game.i18n.localize("SFRPG.CMDBaseTooltip"));
-        cmd.tooltip.push(game.i18n.format("SFRPG.CMDKACModTooltip", { kac: kac.value.signedString() }));
+        cmd.tooltip.push(game.i18n.format("SFRPG.CMDKACModTooltip", { kac: kac.value.toString() }));
 */
         return fact;
     });

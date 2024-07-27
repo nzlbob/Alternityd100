@@ -46,7 +46,7 @@ export class ItemSheetSFRPG extends ItemSheet {
     /* -------------------------------------------- */
 
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
             width: 715,
             height: 600,
             classes: ["Alternityd100", "sheet", "item"],
@@ -352,8 +352,8 @@ export class ItemSheetSFRPG extends ItemSheet {
     async _computeSavingThrowValue(itemLevel, formula) {
         try {
             const rollData = {
-                owner: this.item.actor ? duplicate(this.item.actor.system) : { abilities: { dex: { mod: 0 } } },
-                item: duplicate(this.item.system),
+                owner: this.item.actor ? foundry.utils.duplicate(this.item.actor.system) : { abilities: { dex: { mod: 0 } } },
+                item: foundry.utils.duplicate(this.item.system),
                 itemLevel: itemLevel
             };
             if (!rollData.owner.abilities?.dex?.mod) {
@@ -466,19 +466,19 @@ export class ItemSheetSFRPG extends ItemSheet {
         } else if (item.type === "shield") {
             // Add max dexterity modifier
             if (item.dex) props.push({
-                name: game.i18n.format("SFRPG.Items.Shield.Dex", { dex: item.dex.signedString() }),
+                name: game.i18n.format("SFRPG.Items.Shield.Dex", { dex: item.dex.toString() }),
                 tooltip: null
             });
             // Add armor check penalty
             if (item.acp) props.push({
-                name: game.i18n.format("SFRPG.Items.Shield.ACP", { acp: item.acp.signedString() }),
+                name: game.i18n.format("SFRPG.Items.Shield.ACP", { acp: item.acp.toString() }),
                 tooltip: null
             });
 
             const wieldedBonus = item.proficient ? (item.bonus.wielded || 0) : 0;
             const alignedBonus = item.proficient ? (item.bonus.aligned || 0) : 0;
             props.push({
-                name: game.i18n.format("SFRPG.Items.Shield.ShieldBonus", { wielded: wieldedBonus.signedString(), aligned: alignedBonus.signedString() }),
+                name: game.i18n.format("SFRPG.Items.Shield.ShieldBonus", { wielded: wieldedBonus.toString(), aligned: alignedBonus.toString() }),
                 tooltip: null
             });
         }
@@ -738,7 +738,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const header = event.currentTarget;
         let type = header.dataset.type;
         if (!type || type.includes(",")) {
-            let types = duplicate(SFRPG.itemTypes);
+            let types = foundry.utils.duplicate(SFRPG.itemTypes);
             if (type) {
                 let supportedTypes = type.split(',');
                 for (let key of Object.keys(types)) {
@@ -766,7 +766,7 @@ export class ItemSheetSFRPG extends ItemSheet {
                         callback: html => {
                             const form = html[0].querySelector("form");
                             let formDataExtended = new FormDataExtended(form);
-                            mergeObject(createData, formDataExtended.toObject());
+                            foundry.utils.mergeObject(createData, formDataExtended.toObject());
                             if (!createData.name) {
                                 createData.name = game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Name");
                             }
@@ -785,7 +785,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const itemData = {
             name: `New ${type.capitalize()}`,
             type: type,
-            data: duplicate(header.dataset)
+            data: foundry.utils.duplicate(header.dataset)
         };
         delete itemData.data['type'];
 
@@ -846,7 +846,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("delete-ability-adjustment")) {
             await this._onSubmit(event);
             const li = a.closest(".ability-adjustment-part");
-            const abilityMods = duplicate(this.item.system.abilityMods);
+            const abilityMods = foundry.utils.duplicate(this.item.system.abilityMods);
             abilityMods.parts.splice(Number(li.dataset.abilityAdjustment), 1);
             return this.item.update({
                 "system.abilityMods.parts": abilityMods.parts
@@ -894,7 +894,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("delete-damage")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const li = a.closest(".damage-part");
-            const damage = duplicate(this.item.system.damage);
+            const damage = foundry.utils.duplicate(this.item.system.damage);
             damage.parts.splice(Number(li.dataset.damagePart), 1);
             return this.item.update({
                 "system.damage.parts": damage.parts
@@ -916,7 +916,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("delete-critical-damage")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const li = a.closest(".damage-part");
-            const criticalDamage = duplicate(this.item.system.critical);
+            const criticalDamage = foundry.utils.duplicate(this.item.system.critical);
             criticalDamage.parts.splice(Number(li.dataset.criticalPart), 1);
             return this.item.update({
                 "data.critical.parts": criticalDamage.parts
@@ -1001,7 +1001,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
 
-        const modifiers = duplicate(this.item.system.modifiers);
+        const modifiers = foundry.utils.duplicate(this.item.system.modifiers);
         const modifier = modifiers.find(mod => mod._id === modifierId);
         modifier.enabled = !modifier.enabled;
         console.log("hello", modifier, modifiers, modifier.enabled)
@@ -1013,7 +1013,7 @@ export class ItemSheetSFRPG extends ItemSheet {
     async _onAddStorage(event) {
         event.preventDefault();
 
-        let storage = duplicate(this.item.system.container.storage);
+        let storage = foundry.utils.duplicate(this.item.system.container.storage);
         storage.push({
             type: "bulk",
             subtype: "",
@@ -1033,7 +1033,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         let li = $(event.currentTarget).parents(".storage-slot");
         const slotIndex = li.attr("data-slot-index");
 
-        let storage = duplicate(this.item.system.container.storage);
+        let storage = foundry.utils.duplicate(this.item.system.container.storage);
         storage.splice(slotIndex, 1);
         await this.item.update({
             "data.container.storage": storage
@@ -1047,7 +1047,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         let li = $(event.currentTarget).parents(".storage-slot");
         const slotIndex = li.attr("data-slot-index");
 
-        let storage = duplicate(this.item.system.container.storage);
+        let storage = foundry.utils.duplicate(this.item.system.container.storage);
         storage[slotIndex].type = event.currentTarget.value;
         if (storage[slotIndex].type === "bulk") {
             storage[slotIndex].subtype = "";
@@ -1067,7 +1067,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         let li = $(event.currentTarget).parents(".storage-slot");
         const slotIndex = li.attr("data-slot-index");
 
-        let storage = duplicate(this.item.system.container.storage);
+        let storage = foundry.utils.duplicate(this.item.system.container.storage);
         storage[slotIndex].subtype = event.currentTarget.value;
         await this.item.update({
             "data.container.storage": storage
@@ -1083,7 +1083,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         const inputNumber = Number(event.currentTarget.value);
         if (!Number.isNaN(inputNumber)) {
-            let storage = duplicate(this.item.system.container.storage);
+            let storage = foundry.utils.duplicate(this.item.system.container.storage);
             storage[slotIndex].amount = inputNumber;
             await this.item.update({
                 "data.container.storage": storage
@@ -1098,7 +1098,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         let li = $(event.currentTarget).parents(".storage-slot");
         const slotIndex = li.attr("data-slot-index");
 
-        let storage = duplicate(this.item.system.container.storage);
+        let storage = foundry.utils.duplicate(this.item.system.container.storage);
         storage[slotIndex].weightProperty = event.currentTarget.value;
         await this.item.update({
             "data.container.storage": storage
@@ -1115,7 +1115,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const itemType = event.currentTarget.name;
         const enabled = event.currentTarget.checked;
 
-        let storage = duplicate(this.item.system.container.storage);
+        let storage = foundry.utils.duplicate(this.item.system.container.storage);
         if (enabled) {
             if (!storage[slotIndex].acceptsType.includes(itemType)) {
                 storage[slotIndex].acceptsType.push(itemType);
@@ -1137,7 +1137,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const toggleSize = event.currentTarget.name;
         const enabled = event.currentTarget.checked;
 
-        let supportedSizes = duplicate(this.item.system.supportedSizes);
+        let supportedSizes = foundry.utils.duplicate(this.item.system.supportedSizes);
         if (enabled && !supportedSizes.includes(toggleSize)) {
             supportedSizes.push(toggleSize);
         } else if (!enabled && supportedSizes.includes(toggleSize)) {
@@ -1156,7 +1156,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         let li = $(event.currentTarget).parents(".storage-slot");
         const slotIndex = li.attr("data-slot-index");
 
-        let storage = duplicate(this.item.system.container.storage);
+        let storage = foundry.utils.duplicate(this.item.system.container.storage);
         storage[slotIndex].affectsEncumbrance = event.currentTarget.checked;
         await this.item.update({
             "data.container.storage": storage
@@ -1171,7 +1171,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         // Add new visualization rule
         if (a.classList.contains("add-visualization")) {
             await this._onSubmit(event); // Submit any unsaved changes
-            const visualization = duplicate(this.item.system.combatTracker.visualization);
+            const visualization = foundry.utils.duplicate(this.item.system.combatTracker.visualization);
             return this.item.update({
                 "data.combatTracker.visualization": visualization.concat([
                     { mode: "eq", value: 0, title: this.item.name, image: this.item.img }
@@ -1183,7 +1183,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("delete-visualization")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const li = a.closest(".visualization-part");
-            const visualization = duplicate(this.item.system.combatTracker.visualization);
+            const visualization = foundry.utils.duplicate(this.item.system.combatTracker.visualization);
             visualization.splice(Number(li.dataset.index), 1);
             return this.item.update({
                 "data.combatTracker.visualization": visualization
@@ -1198,7 +1198,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const parent = $(event.currentTarget).parents(".visualization-part");
         const visualizationIndex = $(parent).attr("data-index");
 
-        const visualization = duplicate(this.item.system.combatTracker.visualization);
+        const visualization = foundry.utils.duplicate(this.item.system.combatTracker.visualization);
         const currentImage = visualization[visualizationIndex].image || this.item.img;
 
         const attr = event.currentTarget.dataset.edit;
@@ -1224,7 +1224,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const parent = $(event.currentTarget).parents(".visualization-part");
         const visualizationIndex = $(parent).attr("data-index");
 
-        const visualization = duplicate(this.item.system.combatTracker.visualization);
+        const visualization = foundry.utils.duplicate(this.item.system.combatTracker.visualization);
         visualization[visualizationIndex].mode = event.currentTarget.value;
 
         return this.item.update({
@@ -1239,7 +1239,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const parent = $(event.currentTarget).parents(".visualization-part");
         const visualizationIndex = $(parent).attr("data-index");
 
-        const visualization = duplicate(this.item.system.combatTracker.visualization);
+        const visualization = foundry.utils.duplicate(this.item.system.combatTracker.visualization);
         visualization[visualizationIndex].value = Number(event.currentTarget.value);
         if (Number.isNaN(visualization[visualizationIndex].value)) {
             visualization[visualizationIndex].value = 0;
@@ -1257,7 +1257,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const parent = $(event.currentTarget).parents(".visualization-part");
         const visualizationIndex = $(parent).attr("data-index");
 
-        const visualization = duplicate(this.item.system.combatTracker.visualization);
+        const visualization = foundry.utils.duplicate(this.item.system.combatTracker.visualization);
         visualization[visualizationIndex].title = event.currentTarget.value;
 
         return this.item.update({
@@ -1305,7 +1305,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
     async _onDrop(event) {
         event.preventDefault();
-        let a = duplicate(event.dataTransfer)
+        let a = foundry.utils.duplicate(event.dataTransfer)
         // console.log("This did Something", event)
         const dragData = event.dataTransfer.getData('text/plain');
         //console.log("dragData", dragData)
@@ -1401,7 +1401,7 @@ export class ItemSheetSFRPG extends ItemSheet {
                 }
         
                 if (acceptedItems.length > 0) {
-                    const acceptedItemData = duplicate(data);
+                    const acceptedItemData = foundry.utils.duplicate(data);
                     acceptedItemData.items = acceptedItems;
                     await this.processDroppedData(event, data);
                 }
@@ -1450,7 +1450,7 @@ export class ItemSheetSFRPG extends ItemSheet {
             itemData.name = item.name
         }
         //console.log(itemData)
-        let dup = duplicate(item)
+        let dup = foundry.utils.duplicate(item)
 
         //console.log(dup)
         return dup;

@@ -316,11 +316,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 /**    console.log( "itemData.compartments?", itemData.compartments? true : false )
                  if (itemData.compartments? true : false )  { delete itemData.compartments; console.log("Old Compartments deleted")};
                  if  (/*itemData.compartment? false : true ) {
-                     itemData.compartment={"size": basesize, "compartments" : duplicate(d100A.compartments[basesize]) }; 
+                     itemData.compartment={"size": basesize, "compartments" : foundry.utils.duplicate(d100A.compartments[basesize]) }; 
                                   
                  };   
                  if  (itemData.compartment.size != basesize) {
-                     itemData.compartment={"size": basesize, "compartments" : duplicate(d100A.compartments[basesize]) };              
+                     itemData.compartment={"size": basesize, "compartments" : foundry.utils.duplicate(d100A.compartments[basesize]) };              
                  }; 
 
            */
@@ -505,7 +505,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         };
 
         if (this.type === "spell") {
-            let descriptionText = duplicate(templateData.data.description.short || templateData.data.description.value);
+            let descriptionText = foundry.utils.duplicate(templateData.data.description.short || templateData.data.description.value);
             if (descriptionText?.length > 0) {
                 // Alter description by removing non-eligble level tags.
                 const levelTags = [
@@ -607,7 +607,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     /* -------------------------------------------- */
 
     async getChatData(htmlOptions) {
-        const data = duplicate(this.system);
+        const data = foundry.utils.duplicate(this.system);
         const labels = this.labels;
 
         // Rich text description
@@ -858,9 +858,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         props.push(
             { name: game.i18n.localize("SFRPG.Items.Shield.Shield"), tooltip: null },
-            { name: game.i18n.format("SFRPG.Items.Shield.AcMaxDex", { maxDex: (data.dex || 0).signedString() }), tooltip: null },
-            { name: game.i18n.format("SFRPG.Items.Shield.ArmorCheck", { acp: (data.acp || 0).signedString() }), tooltip: null },
-            { name: game.i18n.format("SFRPG.Items.Shield.Bonuses", { wielded: wieldedBonus.signedString(), aligned: alignedBonus.signedString() }), tooltip: null },
+            { name: game.i18n.format("SFRPG.Items.Shield.AcMaxDex", { maxDex: (data.dex || 0).toString() }), tooltip: null },
+            { name: game.i18n.format("SFRPG.Items.Shield.ArmorCheck", { acp: (data.acp || 0).toString() }), tooltip: null },
+            { name: game.i18n.format("SFRPG.Items.Shield.Bonuses", { wielded: wieldedBonus.toString(), aligned: alignedBonus.toString() }), tooltip: null },
             data.proficient ? { name: game.i18n.localize("SFRPG.Items.Proficient"), tooltip: null } : { name: game.i18n.localize("SFRPG.Items.NotProficient"), tooltip: null }
         );
     }
@@ -970,7 +970,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const actorData = this.actor.system;
         const actorArray = this.actor.getActiveTokens(true, true);
         let actorToken = actorArray[0]
-        const rollData = duplicate(actorData);
+        const rollData = foundry.utils.duplicate(actorData);
         let template = "systems/Alternityd100/templates/dialogs/attack-dialog.hbs";
         let parts = [];
         let targetData = [];
@@ -1287,7 +1287,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         //if ( this.data.type === "weapon" ) crit = this.actor.getFlag("sfrpg", "weaponCriticalThreshold") || 20;
 
         // Define Roll Data
-        const rollData = duplicate(actorData);
+        const rollData = foundry.utils.duplicate(actorData);
 
         // Add hasSave to roll
 
@@ -2030,7 +2030,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             return;
         }
 
-        const itemData = duplicate(this.system);
+        const itemData = foundry.utils.duplicate(this.system);
         const targets = true;
         let shotsfired = 1;
         //console.log("---ThisCLOSe1",this.system.actionType)
@@ -2379,7 +2379,7 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
         }, 0);
 
         // Define Roll Data
-        const rollData = mergeObject(duplicate(actorData), {
+        const rollData = foundry.utils.mergeObject(duplicate(actorData), {
             item: itemData,
             //mod: actorData.abilities[abl].mod
         });
@@ -2994,7 +2994,7 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
         console.log("button.dataset", button.dataset)
         console.log("targetToken", targetToken)
         console.log("actor", actor)
-        const myupdate = duplicate(actor.system.attributes);
+        const myupdate = foundry.utils.duplicate(actor.system.attributes);
         myupdate.stu.pending -= stun
         myupdate.wou.pending -= wound
         myupdate.mor.pending -= mortal
@@ -3250,7 +3250,7 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
 
         // Adjust item to level, if required
         if (typeof (message.data.flags.level) !== 'undefined' && message.data.flags.level !== item.system.level) {
-            const newItemData = duplicate(item.data);
+            const newItemData = foundry.utils.duplicate(item.data);
             newitemData.level = message.data.flags.level;
 
             item = new ItemSFRPG(newItemData, { parent: item.parent });
@@ -3463,7 +3463,7 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
      * @param {String} id The id for the modifier to edit
      */
     editModifier(id) {
-        const modifiers = duplicate(this.system.modifiers);
+        const modifiers = foundry.utils.duplicate(this.system.modifiers);
         const modifier = modifiers.find(mod => mod._id === id);
 
         new d100AModifierApplication(modifier, this, {}, this.actor).render(true);

@@ -3,7 +3,7 @@ import { ActorSheetSFRPG } from "./base.js";
 export class d100AActorSheetVehicle extends ActorSheetSFRPG {
 
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
             classes: ["Alternityd100", "sheet", "actor", "vehicle"],
             width: 600,
             height: 685
@@ -259,7 +259,7 @@ console.log("HERE--",html)
             itemData = item.data;
         }
 
-        return duplicate(itemData);
+        return foundry.utils.duplicate(itemData);
     }
 
 
@@ -276,7 +276,7 @@ console.log("HERE--",html)
 
         if (!data.id) return false;
 
-        const hangarBay = duplicate(this.actor.system.hangarBay);
+        const hangarBay = foundry.utils.duplicate(this.actor.system.hangarBay);
 
         if (hangarBay.limit === -1 || hangarBay.actorIds.length < hangarBay.limit) {
             hangarBay.actorIds.push(data.id);
@@ -305,7 +305,7 @@ console.log("HERE--",html)
         const targetRole = event.target.dataset.role;
         if (!targetRole || !data.id) return false;
 
-        const crew = duplicate(this.actor.system.crew);
+        const crew = foundry.utils.duplicate(this.actor.system.crew);
         const crewRole = crew[targetRole];
         const oldRole = this.actor.getCrewRoleForActor(data.id);
 
@@ -386,7 +386,7 @@ console.log("HERE--",html)
             return null;
         }
 
-        const hangarData = duplicate(this.actor.system.hangarBay);
+        const hangarData = foundry.utils.duplicate(this.actor.system.hangarBay);
         hangarData.actorIds = hangarData.actorIds.filter(x => x !== actorId);
         await this.actor.update({
             "data.hangarBay": hangarData

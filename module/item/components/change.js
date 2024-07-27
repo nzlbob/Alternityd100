@@ -5,7 +5,7 @@ export class ItemChange {
   static create(data, parent) {
     const result = new this();
 
-    result.data = mergeObject(this.defaultData, data);
+    result.data = foundry.utils.mergeObject(this.defaultData, data);
     result.parent = parent;
     result.updateTime = new Date();
 
@@ -129,7 +129,7 @@ export class ItemChange {
         const modifierChanger = t != null ? t.match(/^data\.abilities\.([a-zA-Z0-9]+)\.(?:total|penalty|base)$/) : null;
         const isModifierChanger = modifierChanger != null;
         const abilityTarget = modifierChanger?.[1];
-        const ability = isModifierChanger ? duplicate(rollData.abilities[abilityTarget]) : null;
+        const ability = isModifierChanger ? foundry.utils.duplicate(rollData.abilities[abilityTarget]) : null;
 
         let value = 0;
         if (this.formula) {
@@ -158,7 +158,7 @@ export class ItemChange {
         switch (operator) {
           case "add":
             {
-              const base = getProperty(actor.data, t);
+              const base = foundry.utils.getProperty(actor.data, t);
               if (typeof base === "number") {
                 if (CONFIG.PF1.stackingBonusModifiers.indexOf(this.modifier) !== -1) {
                   setProperty(actor.data, t, base + value);
@@ -241,7 +241,7 @@ export class ItemChange {
           setProperty(
             actor.data,
             `data.abilities.${abilityTarget}.mod`,
-            getProperty(actor.data, `data.abilities.${abilityTarget}.mod`) - (prevMod - mod)
+            foundry.utils.getProperty(actor.data, `data.abilities.${abilityTarget}.mod`) - (prevMod - mod)
           );
         }
       }

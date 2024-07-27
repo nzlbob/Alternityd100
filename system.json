@@ -2,11 +2,11 @@
   "name": "Alternityd100",
   "title": "Alternity by d100",
   "description": "This is a draft implementation of the Alternity RPG Rules (c) 1998 TSR Inc. There are lots of features yet to implement. Work is continuing",
-  "version": "0.534",
+  "version": "0.535",
   "compatibility": {
     "minimum": 11,
-    "verified": "11.313",
-    "maximum": 11
+    "verified": "12",
+    "maximum": 12
   },
   "authors": [
     {
@@ -82,8 +82,10 @@
       "path": "lang/en.json"
     }
   ],
-  "gridDistance": 2,
-  "gridUnits": "m",
+  "grid": {
+    "distance": 2,
+    "units": "m"
+  },
   "primaryTokenAttribute": "stun",
   "secondaryTokenAttribute": "wound",
   "url": "https://github.com/nzlbob/Alternityd100",

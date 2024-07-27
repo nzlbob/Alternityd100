@@ -275,7 +275,7 @@ export class Combatd100A extends Combat {
         const players = game.users.players;
         const settings = game.settings.get("core", Combat.CONFIG_SETTING);
         const turns = this.combatants.contents.sort(sortMethod === "asc" ? this._sortCombatantsAsc : this._sortCombatants);
-        this.turn = Math.clamped(this.turn, Combatd100A.HiddenTurn, turns.length - 1);
+        this.turn = Math.clamp(this.turn, Combatd100A.HiddenTurn, turns.length - 1);
 
         return this.turns = turns;
     }
@@ -1079,7 +1079,7 @@ export class Combatd100A extends Combat {
         const phases = this.getPhases();
         const subPhases = this.getSubPhases();
         // console.log("\nnextTurn:",thisTurn,thisSubPhase,thisPhase,thisRound)//1
-        let nextTurn = duplicate(thisTurn)
+        let nextTurn = foundry.utils.duplicate(thisTurn)
         if (thisTurn.newround) nextTurn.turn = 0
         do {
             // console.log("\n !nextTurn.newround",!nextTurn.newround)
@@ -1377,7 +1377,7 @@ export class Combatd100A extends Combat {
             updates.push({ _id: id, initiative: roll.total });
 
             // Construct chat message data
-            let messageData = mergeObject({
+            let messageData = foundry.utils.mergeObject({
                 speaker: {
                     scene: game.scenes.current?.id,
                     actor: combatant.actor ? combatant.actor.id : null,

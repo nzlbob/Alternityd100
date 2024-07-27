@@ -28,7 +28,7 @@ export default function (engine) {
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
                     type: bonus.type.capitalize(),
-                    mod: computedBonus.signedString(),
+                    mod: computedBonus.toString(),
                     source: bonus.name
                 }));
             }
@@ -57,7 +57,7 @@ export default function (engine) {
             //const base = Math.floor((abilityValue - 10) / 2);
             //const base = d100resmod(abilityValue)
 
-            ability.modifierTooltip.push(game.i18n.format("SFRPG.AbilityModifierBase", { mod: base.signedString() }));
+            ability.modifierTooltip.push(game.i18n.format("SFRPG.AbilityModifierBase", { mod: base.toString() }));
 
             let mod = Object.entries(abilityMods).reduce((sum, mod) => {
                 if (mod[1] === null || mod[1].length < 1) return sum;
@@ -78,7 +78,7 @@ export default function (engine) {
             if (ability.damage) {
                 let damage = -Math.floor(Math.abs(ability.damage) / 2);
                 abilityModifier += damage;
-                ability.modifierTooltip.push(game.i18n.format("SFRPG.AbilityDamageTooltip", { mod: damage.signedString() }));
+                ability.modifierTooltip.push(game.i18n.format("SFRPG.AbilityDamageTooltip", { mod: damage.toString() }));
             }
 
             ability.mod = abilityModifier;

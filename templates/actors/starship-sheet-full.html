@@ -897,11 +897,8 @@
                     </label>
                     {{#if system.crew.useNPCCrew}}
                     <select name="system.crew.npcCrewQuality">
-                        {{#select system.crew.npcCrewQuality}}
-                        {{#each config.npcCrewQualities as |status statusKey|}}
-                        <option value="{{statusKey}}">{{status}}</option>
-                        {{/each}}
-                        {{/select}}
+                        {{ selectOptions config.npcCrewQualities selected=system.crew.npcCrewQuality }}
+                       
                     </select>
                     {{/if}}
 

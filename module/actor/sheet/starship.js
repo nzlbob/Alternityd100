@@ -18,7 +18,7 @@ export class d100AActorSheetStarship extends ActorSheetSFRPG {
 
     static get defaultOptions() {
         const options = super.defaultOptions;
-        mergeObject(options, {
+        foundry.utils.mergeObject(options, {
             //classes: ["sfrpg", "sheet", "actor", "starship"],
             classes: ["Alternityd100", "sheet", "actor", 'starship'],
             width: 700,
@@ -666,7 +666,7 @@ let score = ""
             "data.crew": newCrew
         });
 
-        let cleanflags = duplicate(this.actor.flags);
+        let cleanflags = foundry.utils.duplicate(this.actor.flags);
         delete cleanflags.sfrpg.shipsCrew;
 
         await this.actor.update({
@@ -1153,7 +1153,7 @@ for (let A of contents.contents ){
     console.log( event.target.value)
     console.log( actiontype,category,position)
 
-    let temp = duplicate(this.actor.system.frame.system.compartment)
+    let temp = foundry.utils.duplicate(this.actor.system.frame.system.compartment)
         let path = "system.compartment"
         temp[position].value = value
         //temp[position].value = value
@@ -1295,7 +1295,7 @@ for (let A of contents.contents ){
             }
 
             if (acceptedItems.length > 0) {
-                const acceptedItemData = duplicate(data);
+                const acceptedItemData = foundry.utils.duplicate(data);
                 acceptedItemData.items = acceptedItems;
                 await this.processDroppedData(event, data);
             }
@@ -1382,7 +1382,7 @@ console.log(data,"data")
           // itemData.name = item.name
        }
  //console.log(itemData)
-       let dup = duplicate(itemData)
+       let dup = foundry.utils.duplicate(itemData)
 
  //console.log(dup)
        return dup;
@@ -1529,7 +1529,7 @@ console.log(data,"data")
             return;
         }
 
-        const crewData = duplicate(this.actor.system.crew);
+        const crewData = foundry.utils.duplicate(this.actor.system.crew);
         crewData.npcData[roleId].skills[skillId] = {
             isTrainedOnly: false,
             hasArmorCheckPenalty: false,
@@ -1689,7 +1689,7 @@ console.log(attribute,roleId,event,parsedValue)
             }
         );
 
-        const currentSystem = duplicate(this.actor.system.attributes.systems[affectedSystem]);
+        const currentSystem = foundry.utils.duplicate(this.actor.system.attributes.systems[affectedSystem]);
         currentSystem.affectedRoles = {
             captain: results.result.captain === options[1],
             pilot: results.result.pilot === options[1],

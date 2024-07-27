@@ -25,7 +25,7 @@ export async function loadLauncherOrdnance(rawItemDataa,launchersheet,loadAll, t
     
 
     let tip = ""
-        let rawItemData = duplicate(rawItemDataa);
+        let rawItemData = foundry.utils.duplicate(rawItemDataa);
 
 
   //console.log("Launcher", rawItemDataa, rawItemData);
@@ -76,7 +76,7 @@ export async function loadLauncherOrdnance(rawItemDataa,launchersheet,loadAll, t
         return itemToAdd;
     }
 
-    const newItemData = duplicate(itemToAdd);
+    const newItemData = foundry.utils.duplicate(itemToAdd);
     newItemData.data.quantity = quantity;
 
     let desiredParent = null;
@@ -95,7 +95,7 @@ export async function loadLauncherOrdnance(rawItemDataa,launchersheet,loadAll, t
     let addedItem = null;
     if (targetActor.isToken) {
         const created = await Entity.prototype.createEmbeddedDocuments.call(targetActor.actor, "Item", [newItemData], {temporary: true});
-        const items = duplicate(targetActor.actor.data.items).concat(created instanceof Array ? created : [created]);
+        const items = foundry.utils.duplicate(targetActor.actor.data.items).concat(created instanceof Array ? created : [created]);
         await targetActor.token.update({"actorData.items": items}, {});
         addedItem = targetActor.getItem(created._id);
     } else {
@@ -104,7 +104,7 @@ export async function loadLauncherOrdnance(rawItemDataa,launchersheet,loadAll, t
     }
 
     if (desiredParent) {
-        let newContents = duplicate(desiredParent.system.container.contents || []);
+        let newContents = foundry.utils.duplicate(desiredParent.system.container.contents || []);
         newContents.push({id: addedItem._id, index: targetItemStorageIndex || 0});
         await targetActor.updateItem(desiredParent._id, {"data.container.contents": newContents});
     }
@@ -164,7 +164,7 @@ export async function removeItemFromActorAsync(sourceActor, itemToRemove, quanti
      * disableDeductAmmo: Setting this to true will prevent ammo being deducted if applicable.
      */
  export async function rollStarshipLauncherAttack(item,options,targetData,actorToken) {
-  let ordnance = duplicate(item.system.ordnance[0])
+  let ordnance = foundry.utils.duplicate(item.system.ordnance[0])
   let locx = actorToken.x + 100;
   let locy = actorToken.y + 100;
   let missile ={};
@@ -238,7 +238,7 @@ if (itemsFiltered.length==0){
    
    //console.log("\n--------Missile Token---------",a.data.rotation,RandB.bearing)
    //a.update( {"data.rotation" : RandB.bearing})
-    a.actor.update({"system.targetData" : duplicate(targetData[0])})
+    a.actor.update({"system.targetData" : foundry.utils.duplicate(targetData[0])})
    // a.render();
    // console.log("\n--------Missile Token---------",a,targetData[0].range,RandB,a.data.rotation)
     //a.refresh

@@ -53,7 +53,7 @@ export class ChatAttack {
 
   get critRange() {
     if (this.item.system.broken) return 20;
-    return getProperty(this.item, "system.ability.critRange") || 20;
+    return foundry.utils.getProperty(this.item, "system.ability.critRange") || 20;
   }
 
   /**
@@ -70,8 +70,8 @@ export class ChatAttack {
     }
 
     this.item = item;
-    this.rollData = mergeObject(duplicate(this.item.getRollData()), this._rollData);
-    this.attackType = getProperty(item.data, "data.attackType") ?? "";
+    this.rollData = foundry.utils.mergeObject(duplicate(this.item.getRollData()), this._rollData);
+    this.attackType = foundry.utils.getProperty(item.data, "data.attackType") ?? "";
 
     this.setRollData();
   }
@@ -89,7 +89,7 @@ export class ChatAttack {
     // Determine ability multiplier
     if (data.item.ability.damageMult != null) data.ablMult = data.item.ability.damageMult;
     // Lower ability multiplier for secondary attacks
-    if (this.attackType === "natural" && this.primaryAttack === false && getProperty(data.ablMult > 0)) {
+    if (this.attackType === "natural" && this.primaryAttack === false && foundry.utils.getProperty(data.ablMult > 0)) {
       data.ablMult = 0.5;
     }
   }
@@ -233,7 +233,7 @@ export class ChatAttack {
     let data = this.damage;
     if (critical === true) data = this.critDamage;
 
-    const rollData = duplicate(this.rollData);
+    const rollData = foundry.utils.duplicate(this.rollData);
     // Enforce critical multiplier
     rollData.critCount = 0;
 

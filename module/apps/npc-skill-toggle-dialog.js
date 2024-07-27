@@ -13,7 +13,7 @@ export class NpcSkillToggleDialog extends Dialog {
 
     static get defaultOptions() {
         const defaultOptions = super.defaultOptions;
-        return mergeObject(defaultOptions, {
+        return foundry.utils.mergeObject(defaultOptions, {
             width: 560
         });
     }

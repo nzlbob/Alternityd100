@@ -69,14 +69,14 @@ export default function (engine) {
                    
     
                 
-                    //data.attributes.ftl.tooltip.push(`${engine.name}: ${engineData.accel.five.signedString()}`);
+                    //data.attributes.ftl.tooltip.push(`${engine.name}: ${engineData.accel.five.toString()}`);
                 
                
                 // data.attributes.speed.value += engineData.speed;
-               // data.attributes.speed.tooltip.push(`${engine.name}: ${engineData.speed.signedString()}`);
+               // data.attributes.speed.tooltip.push(`${engine.name}: ${engineData.speed.toString()}`);
 
                // data.attributes.pilotingBonus.value += engineData.pilotingModifier;
-               // data.attributes.pilotingBonus.tooltip.push(`${engine.name}: ${engineData.pilotingModifier.signedString()}`);
+               // data.attributes.pilotingBonus.tooltip.push(`${engine.name}: ${engineData.pilotingModifier.toString()}`);
             } 
            
 
@@ -88,31 +88,31 @@ export default function (engine) {
             }
             else if (enginesize < 10 ) {
                 data.attributes.accel.value += engineData.accel.five;
-                data.attributes.accel.tooltip.push(`${engine.name}: ${engineData.accel.five.signedString()}`);
+                data.attributes.accel.tooltip.push(`${engine.name}: ${engineData.accel.five.toString()}`);
             }
             else if (enginesize < 15 ) {
                 data.attributes.accel.value += engineData.accel.ten;
-                data.attributes.accel.tooltip.push(`${engine.name}: ${engineData.accel.ten.signedString()}`);
+                data.attributes.accel.tooltip.push(`${engine.name}: ${engineData.accel.ten.toString()}`);
             }
             else if (enginesize < 20 ) {
                 data.attributes.accel.value += engineData.accel.fifteen;
-                data.attributes.accel.tooltip.push(`${engine.name}: ${engineData.accel.fifteen.signedString()}`);
+                data.attributes.accel.tooltip.push(`${engine.name}: ${engineData.accel.fifteen.toString()}`);
             }
             else if (enginesize < 30 ) {
                 data.attributes.accel.value += engineData.accel.twenty;
-                data.attributes.accel.tooltip.push(`${engine.name}: ${engineData.accel.twenty.signedString()}`);
+                data.attributes.accel.tooltip.push(`${engine.name}: ${engineData.accel.twenty.toString()}`);
             }
             else if (enginesize < 40 ) {
                 data.attributes.accel.value += engineData.accel.thirty;
-                data.attributes.accel.tooltip.push(`${engine.name}: ${engineData.accel.thirty.signedString()}`);
+                data.attributes.accel.tooltip.push(`${engine.name}: ${engineData.accel.thirty.toString()}`);
             }
             else if (enginesize < 50 ) {
                 data.attributes.accel.value += engineData.accel.forty;
-                data.attributes.accel.tooltip.push(`${engine.name}: ${engineData.accel.forty.signedString()}`);
+                data.attributes.accel.tooltip.push(`${engine.name}: ${engineData.accel.forty.toString()}`);
             }
             else  {
                 data.attributes.accel.value += engineData.accel.fifty;
-                data.attributes.accel.tooltip.push(`${engine.name}: ${engineData.accel.fifty.signedString()}`);
+                data.attributes.accel.tooltip.push(`${engine.name}: ${engineData.accel.fifty.toString()}`);
             }
         }
             

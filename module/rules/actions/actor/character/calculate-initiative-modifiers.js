@@ -103,7 +103,7 @@ if(perkData?.acb) {
 
 const modFromPerk = perkMod ?? 0;
 if(modFromPerk) {
-    init.step.tooltip.push(game.i18n.format("SFRPG.AbilityScorePerkTooltip", { mod: modFromPerk.signedString() }));
+    init.step.tooltip.push(game.i18n.format("SFRPG.AbilityScorePerkTooltip", { mod: modFromPerk.toString() }));
 }
 
 
@@ -112,7 +112,7 @@ let mortalDamage = 0
 if (data.attributes.mor.value<data.attributes.mor.max){
    mortalDamage = data.attributes.mor.max - data.attributes.mor.value
 
-    init.step.tooltip.push(game.i18n.format("Mortal Damage: " + mortalDamage.signedString())) 
+    init.step.tooltip.push(game.i18n.format("Mortal Damage: " + mortalDamage.toString())) 
 }
 const filteredIMortal = modifiers.filter(mod => {     
     return mod.enabled  && [SFRPGEffectType.IGNORE_MORTAL].includes(mod.effectType);
@@ -122,7 +122,7 @@ let IM = 0
 for ( let modIM of filteredIMortal){
 IM -=  parseInt(modIM.modifier)
 //console.log (modIM,modIM.modifier,parseInt(modIM.modifier),IM)
-init.step.tooltip.push(game.i18n.format("<br>Ignore Mortal: " + (0-parseInt(modIM.modifier)).signedString())) 
+init.step.tooltip.push(game.i18n.format("<br>Ignore Mortal: " + (0-parseInt(modIM.modifier)).toString())) 
 
 }
 

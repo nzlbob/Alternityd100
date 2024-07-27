@@ -11,7 +11,7 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
     //export class d100AActorSheetCharacter extends ActorSheetSFRPG {
     static get defaultOptions() {
         const options = super.defaultOptions;
-        mergeObject(options, {
+        foundry.utils.mergeObject(options, {
             classes: ["Alternityd100", "sheet", "actor", 'character'],
             //classes: ["Alternityd100", "sheet", "actor", 'character'],
             width: 750,
@@ -37,7 +37,7 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
         context.shorthand = !!game.settings.get("Alternityd100", "macroShorthand");
 
         //const isOwner = this.document.isOwner;
-        const data2 = duplicate(this.actor.system);
+        const data2 = foundry.utils.duplicate(this.actor.system);
 
         data2.attributes = context.document.system.attributes;
         //console.log(this,context)
@@ -551,7 +551,7 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
 
-        const modifiers = duplicate(this.actor.system.modifiers);
+        const modifiers = foundry.utils.duplicate(this.actor.system.modifiers);
         const modifier = modifiers.find(mod => mod._id === modifierId);
         modifier.enabled = !modifier.enabled;
 

@@ -2,7 +2,7 @@ export default function (engine) {
     engine.closures.add("calculateStarshipCrew", (fact, context) => {
         const data = fact.actor.system;
 
-        data.crew = mergeObject(data.crew, {
+        data.crew = foundry.utils.mergeObject(data.crew, {
             captain: {
                 limit: 1,
                 actorIds: []
@@ -70,7 +70,7 @@ export default function (engine) {
         data.crew.gunner.limit = -1,
 //["captain", "pilot", "copilot", "sensors" , "communications", "engineer", "damageControl", "defences",  "gunner", "scienceOfficer",  "navigation","chiefMate", "magicOfficer", "openCrew", "minorCrew"];
         /** Ensure NPC data is properly populated. */
-        data.crew.npcData = mergeObject(data.crew.npcData, {
+        data.crew.npcData = foundry.utils.mergeObject(data.crew.npcData, {
             captain: {
                 active:null,
                 number:null,

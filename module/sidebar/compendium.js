@@ -2,7 +2,7 @@ import { CompendiumBrowser } from "../apps/compendium-browser.js";
 
 export class CompendiumDirectoryPF extends CompendiumDirectory {
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       template: "systems/pf1/templates/sidebar/compendium.hbs",
     });
   }
@@ -13,7 +13,7 @@ export class CompendiumDirectoryPF extends CompendiumDirectory {
     for (const p of Object.values(data.packs)) {
       for (const pack of p.packs) {
         const config = game.settings.get("core", "compendiumConfiguration")[pack.collection];
-        const disabled = getProperty(config, "pf1.disabled") === true;
+        const disabled = foundry.utils.getProperty(config, "pf1.disabled") === true;
         setProperty(pack, "pf1.disabled", disabled);
       }
     }

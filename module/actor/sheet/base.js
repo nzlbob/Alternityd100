@@ -32,7 +32,7 @@ export class ActorSheetSFRPG extends ActorSheet {
     }
 
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
             scrollY: [
                 ".tab.attributes",
                 ".inventory .inventory-list",
@@ -63,7 +63,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const data = {
             document: context.document,
             actor: this.object,
-            system: duplicate(this.object.system),
+            system: foundry.utils.duplicate(this.object.system),
             isOwner: isOwner,
             isGM: game.user.isGM,
             limited: this.object.limited,
@@ -90,7 +90,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         data.filters = this._filters;
 
         if (!data.system?.details?.biography?.fullBodyImage) {
-            this.actor.system = mergeObject(this.actor.system, {
+            this.actor.system = foundry.utils.mergeObject(this.actor.system, {
                 details: {
                     biography: {
                         fullBodyImage: "systems/Alternityd100/images/mystery-body.png"
@@ -417,8 +417,8 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         let leftover = 0
 
-        const attributes = { stu: duplicate(systemData.attributes.stu), wou: duplicate(systemData.attributes.wou), mor: duplicate(systemData.attributes.mor) }
-        if (actor.isSpaceActor) attributes.cri = duplicate(systemData.attributes.cri)
+        const attributes = { stu: foundry.utils.duplicate(systemData.attributes.stu), wou: foundry.utils.duplicate(systemData.attributes.wou), mor: foundry.utils.duplicate(systemData.attributes.mor) }
+        if (actor.isSpaceActor) attributes.cri = foundry.utils.duplicate(systemData.attributes.cri)
         for (const [k, o] of Object.entries(attributes)) {
             o.value += o.pending + leftover
             o.value = Math.min(o.value, o.max)
@@ -478,7 +478,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         //This updates the ship durability
         if (category == "total") {
             let curval = this.actor.system.attributes[id].value
-            let newval = duplicate(this.actor.system.attributes[id])
+            let newval = foundry.utils.duplicate(this.actor.system.attributes[id])
 
             if (actiontype == "total-inc" && !pending) {
                 newval.value = parseInt(position) + 1;
@@ -508,7 +508,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         if (category == "compart") {
             const item = this.actor.items.get(this.actor.system.frame.id);
-            let temp = duplicate(item.system.compartment)
+            let temp = foundry.utils.duplicate(item.system.compartment)
             //let path = "system.compartment"
             console.log("Temp", temp, "\n Stu - ", temp.F.durability.stu.value, "\n Wou - ", temp[location].durability[dur].value)
             if (actiontype == "inc") {
@@ -674,7 +674,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const header = event.currentTarget;
         let type = header.dataset.type;
         if (!type || type.includes(",")) {
-            let types = duplicate(SFRPG.itemTypes);
+            let types = foundry.utils.duplicate(SFRPG.itemTypes);
             if (type) {
                 let supportedTypes = type.split(',');
                 console.log("supportedTypes", type, supportedTypes)
@@ -704,7 +704,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                         callback: html => {
                             const form = html[0].querySelector("form");
                             let formDataExtended = new FormDataExtended(form);
-                            mergeObject(createData, formDataExtended.toObject());
+                            foundry.utils.mergeObject(createData, formDataExtended.toObject());
                             if (!createData.name) {
                                 createData.name = game.i18n.format("SFRPG.NPCSheet.Interface.CreateItem.Name");
                             }
@@ -723,7 +723,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const itemData = {
             name: `New ${type.capitalize()}`,
             type: type,
-            data: duplicate(header.dataset)
+            data: foundry.utils.duplicate(header.dataset)
         };
         delete itemData.data['type'];
 
@@ -1055,7 +1055,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const update = { "quantity": bigStack };
         await actorHelper.updateItem(item.id, update);
 
-        const itemData = duplicate(item.data);
+        const itemData = foundry.utils.duplicate(item.data);
         itemData.id = null;
         itemData.data.quantity = smallStack;
         itemData.effects = [];
@@ -1361,7 +1361,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                 if (targetContainer) {
                     let newContents = [];
                     if (targetContainer.system.container?.contents) {
-                        newContents = duplicate(targetContainer.system.container?.contents || []);
+                        newContents = foundry.utils.duplicate(targetContainer.system.container?.contents || []);
                     }
 
                     const preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, addedItem) || 0;
@@ -1554,7 +1554,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                     if (targetContainer) {
                         let newContents = [];
                         if (targetContainer.system.container?.contents) {
-                            newContents = duplicate(targetContainer.system.container?.contents || []);
+                            newContents = foundry.utils.duplicate(targetContainer.system.container?.contents || []);
                         }
 
                         const preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, addedItem) || 0;
@@ -1680,7 +1680,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         const targetRole = event.target.dataset.role;
         if (!targetRole || !data.id) return false;
 
-        const crew = duplicate(this.actor.system.crew);
+        const crew = foundry.utils.duplicate(this.actor.system.crew);
         const crewRole = crew[targetRole];
         const oldRole = this.actor.getCrewRoleForActor(data.id);
         console.log("this.actor.system.crew", this.actor.system.crew)

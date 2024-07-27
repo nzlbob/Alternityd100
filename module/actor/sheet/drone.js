@@ -4,7 +4,7 @@ import { SFRPG } from "../../config.js";
 export class d100AActorSheetDrone extends ActorSheetSFRPG {
     static get defaultOptions() {
         const options = super.defaultOptions;
-        mergeObject(options, {
+        foundry.utils.mergeObject(options, {
             classes: ['Alternityd100', 'sheet', 'actor', 'drone'],
             width: 715,
             //height: 830
@@ -308,7 +308,7 @@ console.log("HERE--",html)
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
 
-        const modifiers = duplicate(this.actor.system.modifiers);
+        const modifiers = foundry.utils.duplicate(this.actor.system.modifiers);
         const modifier = modifiers.find(mod => mod._id === modifierId);
         modifier.enabled = !modifier.enabled;
 

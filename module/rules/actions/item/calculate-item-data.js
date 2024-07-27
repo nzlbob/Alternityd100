@@ -82,7 +82,7 @@ export default function (engine) {
            // console.log("Whats my Item - ", item.system.range.short,item.system.range.short != actor.system.abilities.str.value)
             if (item.system.range.short != actor.system.abilities.str.value)
             {
-                let newRange = duplicate(item.system.range)
+                let newRange = foundry.utils.duplicate(item.system.range)
              //   console.log("Whats my newRange - ", newRange)
                 newRange.short = actor.system.abilities.str.value
                 newRange.medium = actor.system.abilities.str.value *2

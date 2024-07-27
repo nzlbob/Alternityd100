@@ -3,7 +3,7 @@ export default function (engine) {
         const data = fact.actor.system;
 
         // Ensures that all vehicles have hangar bays
-        data.attributes = mergeObject(data.attributes ?? {}, {
+        data.attributes = foundry.utils.mergeObject(data.attributes ?? {}, {
             controlSkill: "pil"
         }, {overwrite: false});
 

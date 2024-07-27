@@ -70,13 +70,13 @@ export const showAttackReach = function (token, attack) {
   const rollData = attack.getRollData();
 
   // Determine whether reach
-  const rangeKey = getProperty(attack.data, "data.range.units");
+  const rangeKey = foundry.utils.getProperty(attack.data, "data.range.units");
   if (!["melee", "touch", "reach", "ft", "close", "medium"].includes(rangeKey)) return;
   const isReach = rangeKey === "reach";
   const range = rollData.range;
 
   // Determine minimum range
-  const minRangeKey = getProperty(attack.data, "data.range.minUnits");
+  const minRangeKey = foundry.utils.getProperty(attack.data, "data.range.minUnits");
   let minRange = null;
   if (["melee", "touch"].includes(minRangeKey)) minRange = range.melee;
   if (minRangeKey === "reach") minRange = range.reach;
@@ -106,7 +106,7 @@ export const showAttackReach = function (token, attack) {
         (canvas.dimensions.height / canvas.dimensions.size) * canvas.dimensions.distance
       ) + convertDistance(r)[0]
     );
-    const rangeIncrements = getProperty(attack.data, "data.range.maxIncrements") || 1;
+    const rangeIncrements = foundry.utils.getProperty(attack.data, "data.range.maxIncrements") || 1;
     for (let a = 1; a < rangeIncrements; a++) {
       if ((a + 1) * convertDistance(r)[0] <= maxSquareRange) {
         squares.extra.push(getReachSquares(token, (a + 1) * r, a * r, null, { useReachRule }));
@@ -164,7 +164,7 @@ export const addReachCallback = async function (data, html) {
   const results = [];
 
   // Don't do anything under certain circumstances
-  const itemId = getProperty(data, "flags.pf1.metadata.item");
+  const itemId = foundry.utils.getProperty(data, "flags.pf1.metadata.item");
   if (!itemId) return results;
 
   const tokenUuid = html.find(".chat-card")[0]?.dataset?.tokenUuid;

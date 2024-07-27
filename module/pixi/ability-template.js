@@ -130,7 +130,7 @@ if (type == "cone"){ }
       handlers.lc = async (event) => {
         handlers.rc(event, false);
 
-        const newdoc = await duplicate(this.document)
+        const newdoc = await foundry.utils.duplicate(this.document)
         console.log(canvas.scene.templates,"\n This- \n",this.document,"\n newdoc \n",newdoc, this.document.direction )
         newdoc.x = thisx;
         newdoc.y = thisy;

@@ -66,14 +66,14 @@ export default function (engine) {
             };
         }
 /*
-        data.currency = mergeObject(data.currency || {}, {
+        data.currency = foundry.utils.mergeObject(data.currency || {}, {
             upb: 0
         }, {overwrite: false});
 
         // If galactic trade is enabled, allow starship sheets to track unspent BPs. 
         const isGalacticTradeEnabled = game.settings.get('Alternityd100', 'enableGalacticTrade');
         if (isGalacticTradeEnabled) {
-            data.currency = mergeObject(data.currency, {
+            data.currency = foundry.utils.mergeObject(data.currency, {
                 bp: 0
             }, {overwrite: false});
         } else if (data.currency?.bp !== null) {
@@ -202,7 +202,7 @@ export default function (engine) {
                 + frame.data.weaponMounts.turret.lightSlots + frame.data.weaponMounts.turret.heavySlots + frame.data.weaponMounts.turret.capitalSlots;
 
             data.attributes.turn.value = maneuverabilityMap[data.attributes.maneuverability].turn;
-            data.attributes.turn.tooltip.push(`${data.details.frame}: ${data.attributes.turn.value.signedString()}`);
+            data.attributes.turn.tooltip.push(`${data.details.frame}: ${data.attributes.turn.value.toString()}`);
 */
 
         }

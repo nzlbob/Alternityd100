@@ -204,7 +204,10 @@ Hooks.once("init", function() {
  
   // Define custom Entity classes
   //CONST.DEFAULT_TOKEN = "systems/Alternityd100/icons/conditions/dead_02.webp"
-  CONFIG.statusEffects[0].icon = "systems/Alternityd100/icons/conditions/dead_02.webp";
+  CONFIG.statusEffects[0].img = "systems/Alternityd100/icons/conditions/dead_02.webp";
+  CONFIG.statusEffects = d100A.statusEffects
+
+
   CONFIG.controlIcons.defeated = "icons/svg/padlock.svg";
   CONFIG.controlIcons.doorOpen = "systems/Alternityd100/icons/items/door_02_open.webp";
   CONFIG.controlIcons.doorClosed = "systems/Alternityd100/icons/items/door_02.webp";
@@ -1163,7 +1166,7 @@ console.log("\nA",a)
       if (!up) game.pf1.tooltip.lock.new = false;
     };
   }
-
+/*
   // Patch StringTerm
   StringTerm.prototype.evaluate = function (options = {}) {
     const result = parseRollStringVariable(this.term);
@@ -1194,7 +1197,7 @@ console.log("\nA",a)
   ParentheticalTerm.CLOSE_REGEXP = new RegExp(`\\)${RollTerm.FLAVOR_REGEXP_STRING}?`, "g");
   OperatorTerm.REGEXP = /(?:&&|\|\||\*\*|\+|-|\*|\/|\\%|\||:|\?)|(?<![a-z])[!=<>]+/g;
   OperatorTerm.OPERATORS.push("\\%", "!", "?", ":", "=", "<", ">", "==", "===", "<=", ">=", "??", "||", "&&", "**");
-
+*/
   // Add secondary indexing to compendium collections
   {
     const origFunc = CompendiumCollection.prototype.getIndex;
@@ -1304,7 +1307,9 @@ function PatchCore() {
   }
 
   // Patch StringTerm
-  StringTerm.prototype.evaluate = function (options = {}) {
+  
+  
+  foundry.dice.terms.StringTerm.prototype.evaluate = function (options = {}) {
     console.log(this)
     const result = parseRollStringVariable(this.term);
     if (typeof result === "string") {
@@ -1322,7 +1327,7 @@ function PatchCore() {
   };
 
   // Patch NumericTerm
-  NumericTerm.prototype.getTooltipData = function () {
+  foundry.dice.terms.NumericTerm.prototype.getTooltipData = function () {
     return {
       formula: this.expression,
       total: this.total,
@@ -1331,10 +1336,12 @@ function PatchCore() {
   };
 
   // Patch ParentheticalTerm and allowed operators
+
+  /*
   ParentheticalTerm.CLOSE_REGEXP = new RegExp(`\\)${RollTerm.FLAVOR_REGEXP_STRING}?`, "g");
   OperatorTerm.REGEXP = /(?:&&|\|\||\*\*|\+|-|\*|\/|\\%|\||:|\?)|(?<![a-z])[!=<>]+/g;
   OperatorTerm.OPERATORS.push("\\%", "!", "?", ":", "=", "<", ">", "==", "===", "<=", ">=", "??", "||", "&&", "**");
-
+*/
   // Add secondary indexing to compendium collections
   {
     const origFunc = CompendiumCollection.prototype.getIndex;

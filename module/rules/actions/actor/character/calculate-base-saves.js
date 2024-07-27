@@ -20,17 +20,17 @@ export default function (engine) {
             fortSave += classData.fort === "slow" ? slowSave : fastSave;
             fort.tooltip.push(game.i18n.format("SFRPG.SaveClassModTooltip", {
                 class: cls.name,
-                mod: classData.fort === "slow" ? slowSave.signedString() : fastSave.signedString()
+                mod: classData.fort === "slow" ? slowSave.toString() : fastSave.toString()
             }));
             refSave += classData.ref === "slow" ? slowSave : fastSave;
             reflex.tooltip.push(game.i18n.format("SFRPG.SaveClassModTooltip", {
                 class: cls.name,
-                mod: classData.ref === "slow" ? slowSave.signedString() : fastSave.signedString()
+                mod: classData.ref === "slow" ? slowSave.toString() : fastSave.toString()
             }));
             willSave += classData.will === "slow" ? slowSave : fastSave;
             will.tooltip.push(game.i18n.format("SFRPG.SaveClassModTooltip", {
                 class: cls.name,
-                mod: classData.will === "slow" ? slowSave.signedString() : fastSave.signedString()
+                mod: classData.will === "slow" ? slowSave.toString() : fastSave.toString()
             }));
         }
 
@@ -40,17 +40,17 @@ export default function (engine) {
 
         fort.tooltip.push(game.i18n.format("SFRPG.SaveAbilityModTooltip", {
             ability: "Con",
-            mod: data.abilities.con.mod.signedString()
+            mod: data.abilities.con.mod.toString()
         }));
 
         reflex.tooltip.push(game.i18n.format("SFRPG.SaveAbilityModTooltip", {
             ability: "Dex",
-            mod: data.abilities.dex.mod.signedString()
+            mod: data.abilities.dex.mod.toString()
         }));
 
         will.tooltip.push(game.i18n.format("SFRPG.SaveAbilityModTooltip", {
             ability: "Wis",
-            mod: data.abilities.wis.mod.signedString()
+            mod: data.abilities.wis.mod.toString()
         }));
 */
         return fact;

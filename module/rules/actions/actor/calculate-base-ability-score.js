@@ -21,16 +21,17 @@ export default function (engine) {
                 return 0;
             }
 
-            let computedBonus = 0;
-            try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
-                computedBonus = roll.total;
-            } catch {}
+            let computedBonus = bonus.modifier;
+            //  try {
+                 // const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                 // computedBonus = roll.total;
+           //   } catch {}
 
+            console.log (computedBonus,fact)
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
                     type: bonus.type.capitalize(),
-                    mod: computedBonus.signedString(),
+                    mod: computedBonus.toString(),
                     source: bonus.name
                 }));
             }
@@ -91,25 +92,25 @@ export default function (engine) {
 
             let score = ability.base ? ability.base : 0;
             
-            ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreBaseTooltip", { mod: score.signedString() }));
+            ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreBaseTooltip", { mod: score.toString() }));
 
             const modFromPerk = perkMod[abl] ?? 0;
             if(modFromPerk) {
-                ability.tooltip.push(game.i18n.format("SFRPG.AbilityScorePerkTooltip", { mod: modFromPerk.signedString() }));
+                ability.tooltip.push(game.i18n.format("SFRPG.AbilityScorePerkTooltip", { mod: modFromPerk.toString() }));
             }
 
             const modFromFlaw = flawMod[abl] ?? 0;
             if(modFromFlaw) {
-                ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreFlawTooltip", { mod: modFromFlaw.signedString() }));
+                ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreFlawTooltip", { mod: modFromFlaw.toString() }));
             }
             const modFromAchievement = achievementMod[abl] ?? 0;
             if(modFromAchievement) {
-                ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreAchievementTooltip", { mod: modFromAchievement.signedString() }));
+                ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreAchievementTooltip", { mod: modFromAchievement.toString() }));
             }
 /*
             const modFromRace = racesMod[abl] ?? 0;
             if(modFromRace) {
-                ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreRaceTooltip", { mod: modFromRace.signedString() }));
+                ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreRaceTooltip", { mod: modFromRace.toString() }));
             }
 */
             let intermediateScore = score + modFromPerk + modFromFlaw + modFromAchievement //+  modFromRace;
@@ -125,19 +126,19 @@ export default function (engine) {
 
             const raisedByASI = intermediateScore - (score + modFromPerk + modFromFlaw + modFromAchievement /*+ modFromRace*/);
             if(raisedByASI) {
-                ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreIncreaseTooltip", { mod: raisedByASI.signedString() }));
+                ability.tooltip.push(game.i18n.format("SFRPG.AbilityScoreIncreaseTooltip", { mod: raisedByASI.toString() }));
             }
 
             if (ability.userPenalty) {
                 let userPenalty = -Math.abs(ability.userPenalty);
                 score += userPenalty;
-                ability.tooltip.push(game.i18n.format("SFRPG.AbilityPenaltyTooltip", { mod: userPenalty.signedString() }));
+                ability.tooltip.push(game.i18n.format("SFRPG.AbilityPenaltyTooltip", { mod: userPenalty.toString() }));
             }
 
             if (ability.drain) {
                 let drain = -Math.abs(ability.drain);
                 score += drain;
-                ability.tooltip.push(game.i18n.format("SFRPG.AbilityDrainTooltip", { mod: drain.signedString() }));
+                ability.tooltip.push(game.i18n.format("SFRPG.AbilityDrainTooltip", { mod: drain.toString() }));
             }
 
             let bonus = Object.entries(abilityMods).reduce((sum, mod) => {

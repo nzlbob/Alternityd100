@@ -11,28 +11,28 @@ export default function(engine) {
         }
 /**
         // Set up base values. 
-        const forwardAC = duplicate(data.quadrants.forward.ac);
+        const forwardAC = foundry.utils.duplicate(data.quadrants.forward.ac);
         data.quadrants.forward.ac = {
             value: 10,
             misc: (forwardAC?.misc || 0),
             tooltip: [game?.i18n ? game.i18n.localize("SFRPG.StarshipSheet.Modifiers.Base") : 'Base: 10']
         };
 
-        const portAC = duplicate(data.quadrants.port.ac);
+        const portAC = foundry.utils.duplicate(data.quadrants.port.ac);
         data.quadrants.port.ac = {
             value: 10,
             misc: (portAC?.misc || 0),
             tooltip: [game?.i18n ? game.i18n.localize("SFRPG.StarshipSheet.Modifiers.Base") : 'Base: 10']
         };
 
-        const starboardAC = duplicate(data.quadrants.starboard.ac);
+        const starboardAC = foundry.utils.duplicate(data.quadrants.starboard.ac);
         data.quadrants.starboard.ac = {
             value: 10,
             misc: (starboardAC?.misc || 0),
             tooltip: [game?.i18n ? game.i18n.localize("SFRPG.StarshipSheet.Modifiers.Base") : 'Base: 10']
         };
 
-        const aftAC = duplicate(data.quadrants.aft.ac);
+        const aftAC = foundry.utils.duplicate(data.quadrants.aft.ac);
         data.quadrants.aft.ac = {
             value: 10,
             misc: (aftAC?.misc || 0),
