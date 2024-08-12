@@ -465,11 +465,7 @@
                         <div class="form-group" data-tooltip="{{localize 'd100A.availabilitytooltip' }}">
                             <label>{{ localize "d100A.availability" }}</label>
                             <select name="system.details.availability">
-                                {{#select system.details.availability}}
-                                {{#each d100Aconfig.availability as |name type|}}
-                                <option value="{{type}}">{{name}}</option>
-                                {{/each}}
-                                {{/select}}
+                                {{ selectOptions d100Aconfig.availability selected=system.details.availability blank="" }}
                             </select>
                         </div>
 

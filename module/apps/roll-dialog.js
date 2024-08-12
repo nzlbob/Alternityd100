@@ -161,13 +161,13 @@ console.log("HERE--",html)
                 const containerModifiers = foundry.utils.duplicate(item.system.modifiers);
                 const modifierToUpdate = containerModifiers.find(x => x._id === modifier._id);
                 modifierToUpdate.enabled = modifier.enabled;
-                await item.update({ "data.modifiers": containerModifiers });
+                await item.update({ "system.modifiers": containerModifiers });
             } else {
                 // Update modifier by ID in actor
                 const containerModifiers = foundry.utils.duplicate(actor.system.modifiers);
                 const modifierToUpdate = containerModifiers.find(x => x._id === modifier._id);
                 modifierToUpdate.enabled = modifier.enabled;
-                await actor.update({ "data.modifiers": containerModifiers });
+                await actor.update({ "system.modifiers": containerModifiers });
             }
         }
     }

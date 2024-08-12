@@ -90,7 +90,7 @@ export class Combatd100A extends Combat {
 
 
     async _onCreate(data = {}, options = {}, userId = {}) {
-
+        console.log(data, options, userId, this)
         super._onCreate(data, options, userId);
 
         //console.log(this.scene.isStarship)
@@ -118,10 +118,10 @@ export class Combatd100A extends Combat {
         await this.activate({ render: true });
     }
 
-    async _onCreateDescendantDocuments(type, documents, result, options, userId) {
-        await super._onCreateDescendantDocuments(type, documents, result, options, userId);
+    async _onCreateDescendantDocuments(type, collection, documents, result, options, userId) {
+        await super._onCreateDescendantDocuments(type, collection, documents, result, options, userId);
         //   const current = this.combatant;
-        //   console.log(this,type, documents, result, options, userId,current)
+        console.log("\nthis ", this, "\ntype ", type, "\ncollection", collection, "\ndocuments ", documents, "\nresult", result, "\noptions", options, "\nuserId ", userId)
         console.log("\n_onCreateEmbeddedDocuments\n")
 
         /* This did nothing
@@ -143,26 +143,32 @@ export class Combatd100A extends Combat {
                        await this.updateEmbeddedDocuments("Combatant", updates);
                    
         */
-        const updates = this.combatants.map(c => {
+       //This needs to be incorporated otherwise some of the the actions.total gets lost
+        
+       /*
+       const updates = this.combatants.map(c => {
             let crewRole = "";
-            /* if (this.flags.sfrpg.combatType == "starship" ){
-                 
-                 crewRole = c.token.actor.findCrewJob(c.actorID) 
-             }     
-          */
-            console.log("-----------THIS ONCE!!!------------THIS ONCE!!!-----------------THIS ONCE!!!---------------------THIS ONCE!!!")
+
             return {
                 _id: c.id,
-                flags: { actions: { total: c.apr, remaining: c.apr }, delayed: null },
-                actions: { total: c.apr },
-                //  initiative: null,
-                //  flags: {degree: null, canAct:false,crewRole : crewRole}
+                flags: {
+                    actions: {
+                        total: c.apr,
+                        remaining: c.apr
+                    },
+                    delayed: null
+
+                }
 
             }
         });
-        console.log("updates", updates)
-        await this.updateEmbeddedDocuments("Combatant", updates);
-        console.log(this)
+        
+       // console.log("updates", updates)
+     
+       await this.updateEmbeddedDocuments("Combatant", updates);
+       
+       */
+       console.log(this)
 
         //this.collections.
 
@@ -180,12 +186,12 @@ export class Combatd100A extends Combat {
     async _onUpdateDescendantDocuments(name, documents, result, options, userId) {
         super._onUpdateDescendantDocuments(name, documents, result, options, userId)
         //   const current = this.combatant;
-        // console.log(this,name, documents, result, options, userId, current)
-
-        console.log("\n_onUpdateEmbeddedDocuments\n")
+         console.log(this,name, documents, result, options, userId)
+//czvzdfsdgsdfg
+        console.log("\_onUpdateDescendantDocuments\n")
         //this.collections.
 
-        //  Hooks.callAll("renderCombatTracker");
+       //   Hooks.callAll("renderCombatTracker");
         //   FOUNDRY 37225 combat.createEmbeddedDocuments("Combatant", createData);
 
 
@@ -226,10 +232,11 @@ export class Combatd100A extends Combat {
         if (eventData.isNewPhase) {
             if (this.round.resetInitiative) {
                 const updates = this.combatants.map(c => {
+                    const apr = c.apr
                     return {
                         _id: c.id,
                         initiative: null,
-                        flags: { degree: null, canAct: false, delayed: null, actions: { total: c.apr, remaining: c.apr } }
+                        flags: { degree: null, canAct: false, delayed: null, actions: { total: apr, remaining: apr } }
                     }
                 });
                 console.log("updates", updates)
@@ -275,7 +282,7 @@ export class Combatd100A extends Combat {
         const players = game.users.players;
         const settings = game.settings.get("core", Combat.CONFIG_SETTING);
         const turns = this.combatants.contents.sort(sortMethod === "asc" ? this._sortCombatantsAsc : this._sortCombatants);
-        this.turn = Math.clamp(this.turn, Combatd100A.HiddenTurn, turns.length - 1);
+        this.turn = Math.clamped(this.turn, Combatd100A.HiddenTurn, turns.length - 1);
 
         return this.turns = turns;
     }
@@ -473,7 +480,7 @@ export class Combatd100A extends Combat {
             const updates = [{
                 _id: oldCombatant.id,
 
-                flags: { canAct: !(remaining < 0), actions: { total: oldCombatant.apr, remaining: remaining }, dragRuler: { passedWaypoints: [], trackedRound: (this.round - 2) } }
+                flags: { canAct: !(remaining < 0), actions: { total: await oldCombatant.apr, remaining: remaining }, dragRuler: { passedWaypoints: [], trackedRound: (this.round - 2) } }
 
             }];
             console.log("updates", updates)
@@ -517,7 +524,7 @@ export class Combatd100A extends Combat {
         //   if(!(this.turn == null)) 
 
 
-        // if (nextPhase!=this.flags.sfrpg.phase) await this.setActiveCombatants(true);
+         if (nextPhase!=this.flags.sfrpg.phase) await this.setActiveCombatants(true);
 
         console.log("\nnextTurn:", nextTurn, nextSubPhase, nextPhase, nextRound)//1
 
@@ -748,12 +755,13 @@ export class Combatd100A extends Combat {
             for (let c of this.combatants) {
                 console.log(c)
                 let flagdown = false
-                let newflagdown = await c.actor.sheet._onApplyPendingDamage()
+                
                 let downround = 0
 
                 // This stuff check if the actor is stunned out and what round she was stunned
 
                 if ((this.flags.sfrpg.combatType == "normal")) {
+                    let newflagdown = await c.actor.sheet._onApplyPendingDamage()
                     if (c.flags.downround == "-") {
                         if (newflagdown) {
                             flagdown = true
@@ -765,6 +773,11 @@ export class Combatd100A extends Combat {
                         flagdown = true
                     }
 
+
+                }
+
+                if ((this.flags.sfrpg.combatType == "starship")) {
+                    await c.token.actor.sheet._onApplyPendingDamage()
 
                 }
                 //         _id: c.id,
@@ -1075,11 +1088,11 @@ export class Combatd100A extends Combat {
     async getIndexOfFirstValidCombatant(thisTurn) {
 
         thisTurn.maintainCombat = true;
-        await this.setActiveCombatants(thisTurn)
+        //this.setActiveCombatants(thisTurn)
         const phases = this.getPhases();
         const subPhases = this.getSubPhases();
         // console.log("\nnextTurn:",thisTurn,thisSubPhase,thisPhase,thisRound)//1
-        let nextTurn = foundry.utils.duplicate(thisTurn)
+        let nextTurn = duplicate(thisTurn)
         if (thisTurn.newround) nextTurn.turn = 0
         do {
             // console.log("\n !nextTurn.newround",!nextTurn.newround)
@@ -1277,24 +1290,23 @@ export class Combatd100A extends Combat {
                 fastForward: true
 
             });
-            
-            const actionRoll = fullactionRoll.roll
-            console.log("\nDiced100.actionRoll({\n", actionRoll,"\nDiced100.fullactionRoll({\n", fullactionRoll)
 
-/*
+            const actionRoll = fullactionRoll.message
+            console.log("\nDiced100.actionRoll({\n", actionRoll)
+
+
             if (options.chatMessage) {
                 if (!actionRoll) {
                     continue;
                 }
                 let degree = "marginal"
-                if (actionRoll.total <= actionCheck.ordinary) degree = "ordinary";
-                if (actionRoll.total <= actionCheck.good) degree = "good";
-                if (actionRoll.total <= actionCheck.amazing) degree = "amazing";
-                if (actionRoll.dice[0].total == 1) degree = "amazing";
+                if (actionRoll.rolls[0].total <= actionCheck.ordinary) degree = "ordinary";
+                if (actionRoll.rolls[0].total <= actionCheck.good) degree = "good";
+                if (actionRoll.rolls[0].total <= actionCheck.amazing) degree = "amazing";
+                if (actionRoll.rolls[0].dice[0].total == 1) degree = "amazing";
                 updates.push({ _id: id, initiative: actionRoll.rolls[0].total, flags: { degree: degree, canAct: false } });
             }
             if (!options.chatMessage) {
-                */
                 if (!actionRoll) {
                     continue;
                 }
@@ -1307,7 +1319,7 @@ export class Combatd100A extends Combat {
                 if (combatant.actor.system.type == "ordnance") {
                     initiative = 0, degree = "amazing"
 
-         //       }
+                }
                 updates.push({ _id: id, initiative: initiative, flags: { degree: degree, canAct: false } });
             }
 
@@ -1378,7 +1390,7 @@ export class Combatd100A extends Combat {
             updates.push({ _id: id, initiative: roll.total });
 
             // Construct chat message data
-            let messageData = foundry.utils.mergeObject({
+            let messageData = mergeObject({
                 speaker: {
                     scene: game.scenes.current?.id,
                     actor: combatant.actor ? combatant.actor.id : null,

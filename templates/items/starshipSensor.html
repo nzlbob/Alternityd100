@@ -28,12 +28,8 @@
             <div class="form-group">
             <label>{{ localize "d100A.Items.Weapon.PL" }}</label>
             <select name="system.progressLevel">
-            {{#select itemData.progressLevel}}
-            {{#each d100Aconfig.progressLevel as |name type|}}
-            <option value="{{type}}">{{name}}</option>
-            {{/each}}
-            {{/select}}
-            </select>
+                {{ selectOptions d100Aconfig.progressLevel selected=itemData.progressLevel blank="" }}
+              </select>
             </div>
 
             <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipSensor.Tech" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipSensor.TechTooltip" }}">

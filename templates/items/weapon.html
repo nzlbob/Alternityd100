@@ -37,24 +37,16 @@
               {{!-- Weapon Source --}}
               <div class="form-group">
                 <label>{{ localize "d100A.pubnSource" }}</label>
-                <select name="system.pubnsource">
-                  {{#select itemData.pubnsource}}
-                  {{#each d100Aconfig.pubnsource as |name type|}}
-                  <option value="{{type}}">{{name}}</option>
-                  {{/each}}
-                  {{/select}}
+                <select name="system.attributes.pubnsource">
+                  {{ selectOptions d100Aconfig.pubnsource selected=itemData.attributes.pubnsource blank="" }}
                 </select>
               </div>
 
               {{!-- Weapon Manufacturer --}}
               <div class="form-group">
                 <label>{{ localize "d100A.manufacturer" }}</label>
-                <select name="system.manufacturer">
-                  {{#select itemData.manufacturer}}
-                  {{#each d100Aconfig.manufacturers as |name type|}}
-                  <option value="{{type}}">{{name}}</option>
-                  {{/each}}
-                  {{/select}}
+                <select name="system.attributes.manufacturer">
+                  {{ selectOptions d100Aconfig.manufacturers selected=itemData.attributes.manufacturer blank="" }}
                 </select>
               </div>
 
@@ -62,11 +54,7 @@
               <div class="form-group">
                 <label>{{ localize "SFRPG.Items.Weapon.Type" }}</label>
                 <select name="system.weaponType">
-                  {{#select itemData.weaponType}}
-                  {{#each d100Aconfig.weaponTypes as |name type|}}
-                  <option value="{{type}}">{{name}}</option>
-                  {{/each}}
-                  {{/select}}
+                  {{ selectOptions d100Aconfig.weaponTypes selected=itemData.weaponType blank="" }}
                 </select>
               </div>
 
@@ -75,12 +63,7 @@
               <div class="form-group">
                 <label>{{ localize "d100A.skill" }}</label>
                 <select name="system.skill">
-                  <option value="" style="color: darkcyan;" >Select Skill</option>
-                  {{#select itemData.skill}}
-                  {{#each allowableSkills as |name type|}}
-                  <option value="{{type}}">{{localize name}}</option>
-                  {{/each}}
-                  {{/select}}
+                  {{ selectOptions allowableSkills selected=itemData.skill blank="" }}
                 </select>
               </div>
 
@@ -89,13 +72,9 @@
               <div class="form-group">
                 <label>{{ localize "d100A.Items.Weapon.PL" }}</label>
                 <select name="system.progressLevel">
-                  {{#select itemData.progressLevel}}
-                  {{#each d100Aconfig.progressLevel as |name type|}}
-                  <option value="{{type}}">{{name}}</option>
-                  {{/each}}
-                  {{/select}}
+                  {{ selectOptions d100Aconfig.progressLevel selected=itemData.progressLevel blank="" }}
                 </select>
-              </div>
+             </div>
 
               {{!-- Weapon Actions --}}
               <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.actionsTooltip" }}">
@@ -122,12 +101,7 @@
                 <label>{{ localize "SFRPG.Items.Ammunition.AmmunitionType" }}</label>
                 <div class="form-fields">
                   <select name="system.ammunitionType">
-                    {{#select itemData.ammunitionType}}
-                    <option value="">{{ localize "SFRPG.Items.Ammunition.Type.None" }}</option>
-                    {{#each config.ammunitionTypes as |ammunition type|}}
-                    <option value="{{type}}">{{ammunition}}</option>
-                    {{/each}}
-                    {{/select}}
+                    {{ selectOptions config.ammunitionTypes selected=itemData.ammunitionType blank="None" }}
                   </select>
                 </div>
               </div>
@@ -160,12 +134,7 @@
               <div class="form-group" data-tooltip="{{localize 'd100A.availabilitytooltip' }}">
                 <label>{{ localize "d100A.availability" }}</label>
                 <select name="system.availability">
-                 
-                  {{#select itemData.availability}}
-                  {{#each d100Aconfig.availability as |name type|}}
-                  <option value="{{type}}">{{name}}</option>
-                  {{/each}}
-                  {{/select}}
+                  {{ selectOptions d100Aconfig.availability selected=itemData.availability blank="" }}
                 </select>
               </div>
 
@@ -236,12 +205,7 @@
               <div class="form-group" data-tooltip="{{localize 'd100A.Items.Weapon.blastShapeTooltip' }}">
                 <label>{{ localize "d100A.Items.Weapon.blastShape" }}</label>
                 <select name="system.blastShape">
-                 
-                  {{#select itemData.blastShape}}
-                  {{#each d100Aconfig.blastShapes as |name type|}}
-                  <option value="{{type}}">{{name}}</option>
-                  {{/each}}
-                  {{/select}}
+                  {{ selectOptions d100Aconfig.blastShapes selected=itemData.blastShape blank="" }}
                 </select>
 
                 <div class="form-fields">
@@ -271,11 +235,7 @@
 
                 <label>{{ localize "d100A.Items.Weapon.typename" }}</label>
                 <select name="system.damage.type">
-                  {{#select itemData.damage.type}}
-                  {{#each d100Aconfig.damagetype as |name type|}}
-                  <option value="{{type}}">{{name}}</option>
-                  {{/each}}
-                  {{/select}}
+                  {{ selectOptions d100Aconfig.damagetype selected=itemData.damage.type blank="" }}
                 </select>
               </div>
 
@@ -284,11 +244,7 @@
 
                 <label>{{ localize "d100A.Items.Weapon.firepowername" }}</label>
                 <select name="system.firepower">
-                  {{#select itemData.firepower}}
-                  {{#each d100Aconfig.firepower as |name type|}}
-                  <option value="{{type}}">{{name}}</option>
-                  {{/each}}
-                  {{/select}}
+                  {{ selectOptions d100Aconfig.firepower selected=itemData.firepower blank="" }}
                 </select>
               </div>
 
@@ -301,11 +257,7 @@
                   value="{{itemData.damage.ord.dice}}" data-dtype="String" placeholder="0" />/
 
                 <select name="system.damage.ord.type">
-                  {{#select itemData.damage.ord.type}}
-                  {{#each d100Aconfig.damageQ as |name type2|}}
-                  <option value="{{type2}}">{{name}}</option>
-                  {{/each}}
-                  {{/select}}
+                  {{ selectOptions d100Aconfig.damageQ selected=itemData.damage.ord.type blank="" }}
                 </select>
               </div>
               {{!-- Weapon Damage Good --}}
@@ -316,11 +268,7 @@
                   value="{{itemData.damage.goo.dice}}" data-dtype="String" placeholder="0" />/
 
                 <select name="system.damage.goo.type">
-                  {{#select itemData.damage.goo.type}}
-                  {{#each d100Aconfig.damageQ as |name type2|}}
-                  <option value="{{type2}}">{{name}}</option>
-                  {{/each}}
-                  {{/select}}
+                  {{ selectOptions d100Aconfig.damageQ selected=itemData.damage.goo.type blank="" }}
                 </select>
               </div>
               {{!-- Weapon Damage Amazing --}}
@@ -331,11 +279,7 @@
                   value="{{itemData.damage.ama.dice}}" data-dtype="String" placeholder="0" />/
 
                 <select name="system.damage.ama.type">
-                  {{#select itemData.damage.ama.type}}
-                  {{#each d100Aconfig.damageQ as |name type2|}}
-                  <option value="{{type2}}">{{name}}</option>
-                  {{/each}}
-                  {{/select}}
+                  {{ selectOptions d100Aconfig.damageQ selected=itemData.damage.ama.type blank="" }}
                 </select>
               </div>
 
@@ -363,16 +307,7 @@
 
 
 
-      <h3 class="form-header">{{ localize "SFRPG.Items.Weapon.Attack" }}</h3>
 
-      {{!-- Item Action Template --}}
-      {{> "systems/Alternityd100/templates/items/parts/item-action.html"}}
-
-
-      <br />
-
-      {{> "systems/Alternityd100/templates/items/parts/container-details.html"
-      message="SFRPG.ItemSheet.Weapons.ContainerTooltip"}}
 
     </div>
 

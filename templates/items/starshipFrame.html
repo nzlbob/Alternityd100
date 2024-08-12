@@ -24,11 +24,8 @@
                 <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.Size" }}</label>
                 <div class="form-fields">
                     <select class="actor-size" name="system.size">
-                        {{#select itemData.size}}
-                        {{#each config.starshipSizes as |label size|}}
-                            <option value="{{size}}">{{label}}</option>
-                        {{/each}}
-                        {{/select}}
+                        {{ selectOptions config.starshipSizes selected=itemData.size blank="" }}
+
                     </select>
                 </div>
             </div>
@@ -36,11 +33,7 @@
                 <label>{{ localize "Hull Type" }}</label>
                 <div class="form-fields">
                     <select class="actor-size" name="system.hullType">
-                        {{#select itemData.hullType}}
-                        {{#each d100Aconfig.hullTypes as |label size|}}
-                            <option value="{{size}}">{{label.name}} ({{label.size}} / {{label.baseHullPoint}} BHP)</option>
-                        {{/each}}
-                        {{/select}}
+                        {{ selectOptions d100Aconfig.hullTypes selected=itemData.hullType blank="" }}
                     </select>
                 </div>
             </div>

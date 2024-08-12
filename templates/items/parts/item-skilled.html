@@ -8,11 +8,7 @@
         <label>{{ localize "Key Ability" }}</label>
         <div class="form-fields">
             <select name="system.skill">
-                {{#select itemData.skill}}
-                {{#each d100Aconfig.skills as |name skill|}}
-                <option value="{{skill}}">{{localize name}}</option>
-                {{/each}}
-                {{/select}}
+                {{ selectOptions d100Aconfig.skills selected=itemData.skill blank="" }}
             </select>
         </div>
     </div>
@@ -23,13 +19,9 @@
     <div class="form-group">
         <label>{{ localize "d100A.pubnSource" }}</label>
             <div class="form-fields">
-                <select name="system.pubnsource">
-                {{#select itemData.pubnsource}}
-                    {{#each d100Aconfig.pubnsource as |name type|}}
-                    <option value="{{type}}">{{name}}</option>
-                    {{/each}}
-                {{/select}}
-                </select>
+                <select name="system.attributes.pubnsource">
+                    {{ selectOptions d100Aconfig.pubnsource selected=itemData.attributes.pubnsource blank="" }}
+                  </select>
             </div>
     </div>
                 

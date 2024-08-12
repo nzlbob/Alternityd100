@@ -5057,7 +5057,12 @@
                     "value": "",
                     "unidentified": ""
                 },
-                "type": ""
+                "type": "",
+                "attributes": {
+                    "source": "",
+                    "pubnsource": "",
+                    "availability": "com"
+                }
             },
             "physicalItem": {
                 "quantity": 1,

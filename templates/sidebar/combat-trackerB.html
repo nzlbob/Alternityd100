@@ -35,7 +35,9 @@
 
             {{#if combatCount}}
             {{#if combat.round}}
-            <h3 class="encounter-title noborder">{{localize 'COMBAT.Round'}} {{combat.round}}</h3>
+            {{console "Com Track B 38"}}
+            {{console this}}
+            <h3 class="encounter-title noborder">{{localize 'COMBAT.Round'}} {{combat.current.round}}</h3>
             {{else}}
             <h3 class="encounter-title noborder">{{localize 'COMBAT.NotStarted'}}</h3>
             {{/if}}

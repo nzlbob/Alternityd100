@@ -22,12 +22,7 @@
                 <label>{{ localize "SFRPG.Items.Ammunition.AmmunitionType" }}</label>
                 <div class="form-fields">
                     <select name="system.ammunitionType">
-                        {{#select itemData.ammunitionType}}
-                        <option value="">{{ localize "SFRPG.Items.Ammunition.Type.None" }}</option>
-                        {{#each config.ammunitionTypes as |ammunition type|}}
-                        <option value="{{type}}">{{ammunition}}</option>
-                        {{/each}}
-                        {{/select}}
+                    {{ selectOptions config.ammunitionTypes selected=itemData.ammunitionType blank="None" }}
                     </select>
                 </div>
             </div>

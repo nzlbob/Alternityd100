@@ -70,7 +70,7 @@ export class ChatAttack {
     }
 
     this.item = item;
-    this.rollData = foundry.utils.mergeObject(duplicate(this.item.getRollData()), this._rollData);
+    this.rollData = foundry.utils.mergeObject(foundry.utils.duplicate(this.item.getRollData()), this._rollData);
     this.attackType = foundry.utils.getProperty(item.data, "data.attackType") ?? "";
 
     this.setRollData();

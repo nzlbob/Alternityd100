@@ -1590,7 +1590,7 @@ export class Diced100 {
           // Create chat data
           const chatData = {
             author: game.user.id,
-            style: CONST.CHAT_MESSAGE_STYLES.ROLL,
+           // style: CONST.CHAT_MESSAGE_STYLES.ROLL,
             sound: noSound ? null : a === 0 ? CONFIG.sounds.dice : null,
             speaker: speaker,
             content: await renderTemplate(chatTemplate, rollData),
@@ -1602,12 +1602,12 @@ export class Diced100 {
             "flags.pf1.noRollRender": true,
 
           };
-          if (subject) setProperty(chatData, "flags.pf1.subject", subject);
+          if (subject) foundry.utils.setProperty(chatData, "flags.pf1.subject", subject);
 
           // Send message
           rolled = true;
           //console.log("Message", CONST.CHAT_MESSAGE_TYPES.ROLL,"subject.ordinary ", subject.ordinary)
-          if (chatMessage) return { message: await ChatMessagePF.create(chatData), rollData: rollData, roll:roll };
+          if (chatMessage) return { message: await ChatMessage.create(chatData), rollData: rollData, roll:roll };
         } 
         
         else {
@@ -1631,6 +1631,8 @@ export class Diced100 {
         return {message:"",roll: roll};
       }
     };
+
+////***END OF THE INNER ROLL FUNCTION    */
 
     // Modify the roll and handle fast-forwarding
     parts = [dice].concat(parts);
@@ -1951,7 +1953,7 @@ degraded Damage
 
         // Create chat data
         const chatData = {
-          user: game.user._id,
+          author: game.user._id,
           type: CONST.CHAT_MESSAGE_TYPES.ROLL,
           sound: noSound ? null : CONFIG.sounds.dice,
           speaker: speaker,

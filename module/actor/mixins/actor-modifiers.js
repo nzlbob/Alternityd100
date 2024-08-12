@@ -41,7 +41,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
      * @param {String|null}   data.id            Override the randomly generated id with this.
      */
      async addModifier({
-        name = "", 
+        name = this.name, 
         modifier = 0, 
         type = SFRPGModifierTypes.UNTYPED, 
         modifierType = SFRPGModifierType.CONSTANT, 
@@ -54,9 +54,9 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
         condition = "",
         id = null
     } = {}) {
-        const data = this._ensureHasModifiers(duplicate(this.system));
+        const data = this._ensureHasModifiers(foundry.utils.duplicate(this.system));
         const modifiers = data.modifiers;
-
+        name = this.name
         modifiers.push(new SFRPGModifier({
             name,
             modifier,
@@ -71,7 +71,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
             condition,
             id
         }));
-console.log("MODIFIERS", data)
+console.log("MODIFIERS", data,this)
         await this.update({["system.modifiers"]: modifiers});
     }
 
@@ -83,7 +83,7 @@ console.log("MODIFIERS", data)
     async deleteModifier(id) {
         const modifiers = this.system.modifiers.filter(mod => mod._id !== id);
         
-        await this.update({"data.modifiers": modifiers});
+        await this.update({"system.modifiers": modifiers});
     }
 
     /**

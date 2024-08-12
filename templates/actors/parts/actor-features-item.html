@@ -33,16 +33,8 @@
 
                      
                    <select class="value-compt" name="item.system.location">
-
-            
-                        {{#select item.system.location}}
-                        {{#each actor.system.compartment.compartments as |status statusKey|}} 
-
-
-                        <option value="{{statusKey}}">{{status.name}}</option>
-                        {{/each}}
-                        {{/select}}
-                        </select>                  
+                        {{ selectOptions actor.system.compartment.compartments selected=item.system.location blank="" }}
+                    </select>                  
                     
          
                     

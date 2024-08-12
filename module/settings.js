@@ -76,6 +76,27 @@ game.settings.register("Alternityd100", "initCards", {
     config: true
   });
 
+  game.settings.register("Alternityd100", "combatType", {
+    name: "Combat tracker Type",
+    hint: "Type",
+    scope: "world",
+    config: true,
+    default: "original",
+    type: String,
+    choices: {
+        "original": "Original Program",
+        "new": "New program",
+        "vtt":"Baseline Foundary VTT",
+
+    },
+   // onChange: rule => {
+   //     if (canvas.initialized) {
+   //         canvas.grid.diagonalRule = rule;
+   //     }
+    //}
+}
+);
+
     game.settings.register("Alternityd100", "autoCollapseItemCards", {
         name: "SFRPG.Settings.AutoCollapseCard.Name",
         hint: "SFRPG.Settings.AutoCollapseCard.Hint",

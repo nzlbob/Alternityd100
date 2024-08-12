@@ -33,12 +33,8 @@
             <div class="form-group">
             <label>{{ localize "d100A.Items.Weapon.PL" }}</label>
             <select name="system.progressLevel">
-            {{#select itemData.progressLevel}}
-            {{#each d100Aconfig.progressLevel as |name type|}}
-            <option value="{{type}}">{{name}}</option>
-            {{/each}}
-            {{/select}}
-            </select>
+                {{ selectOptions d100Aconfig.progressLevel selected=itemData.progressLevel blank="" }}
+              </select>
             </div>
 
             {{!-- Weapon Type --}}
@@ -191,11 +187,7 @@
 
              <label>{{ localize "d100A.Items.Weapon.typename" }}</label>
              <select name="system.damage.type">
-             {{#select itemData.damage.type}}
-             {{#each d100Aconfig.damagetype as |name type|}}
-             <option value="{{type}}">{{name}}</option>
-             {{/each}}
-             {{/select}}
+                {{ selectOptions d100Aconfig.damagetype selected=itemData.damage.type blank="" }}
              </select>
             </div>    
          
@@ -204,11 +196,7 @@
 
                   <label>{{ localize "d100A.Items.Weapon.firepowername" }}</label>
                   <select name="system.firepower">
-                  {{#select itemData.firepower}}
-                  {{#each d100Aconfig.starshipFirepower as |name type|}}
-                  <option value="{{type}}">{{name}}</option>
-                  {{/each}}
-                  {{/select}}
+                    {{ selectOptions d100Aconfig.starshipFirepower selected=itemData.firepower blank="" }}
                   </select>
                 </div> 
 
@@ -220,11 +208,7 @@
                   <input type="text" style="text-align: center" name="system.damage.ord.dice" value="{{itemData.damage.ord.dice}}" data-dtype="String" placeholder="0"/>/
                   
                 <select name="system.damage.ord.type">
-                  {{#select itemData.damage.ord.type}}
-                  {{#each d100Aconfig.damageQ as |name type2|}}
-                  <option value="{{type2}}">{{name}}</option>
-                  {{/each}}
-                  {{/select}}
+                    {{ selectOptions d100Aconfig.damageQ selected=itemData.damage.ord.type blank="" }}
                   </select>
                 </div>     
                 {{!-- Weapon Damage Good --}}
@@ -234,11 +218,7 @@
                   <input type="text" style="text-align: center" name="system.damage.goo.dice" value="{{itemData.damage.goo.dice}}" data-dtype="String" placeholder="0"/>/
                   
                 <select name="system.damage.goo.type">
-                  {{#select itemData.damage.goo.type}}
-                  {{#each d100Aconfig.damageQ as |name type2|}}
-                  <option value="{{type2}}">{{name}}</option>
-                  {{/each}}
-                  {{/select}}
+                    {{ selectOptions d100Aconfig.damageQ selected=itemData.damage.goo.type blank="" }}
                   </select>
                 </div>  
                 {{!-- Weapon Damage Amazing --}}
@@ -248,11 +228,7 @@
                   <input type="text" style="text-align: center" name="system.damage.ama.dice" value="{{itemData.damage.ama.dice}}" data-dtype="String" placeholder="0"/>/
                   
                 <select name="system.damage.ama.type">
-                  {{#select itemData.damage.ama.type}}
-                  {{#each d100Aconfig.damageQ as |name type2|}}
-                  <option value="{{type2}}">{{name}}</option>
-                  {{/each}}
-                  {{/select}}
+                    {{ selectOptions d100Aconfig.damageQ selected=itemData.damage.ama.type blank="" }}
                   </select>
                 </div>  
 

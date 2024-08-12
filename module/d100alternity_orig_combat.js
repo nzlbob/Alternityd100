@@ -15,7 +15,7 @@ import { d100ActorSheet } from "./d100Actor-sheet.js";
 import { d100ATokenHUD } from "./d100hud.js"; 
 import { d100ATokenDoc } from "./d100TokenDoc.js";
 import { d100AToken } from "./d100Token.js";
-
+import { d100ACombatant } from "./d100Combatant.js";
 import { d100AActorSheetCharacter } from "./actor/sheet/character.js";
 import { d100AActorSheetCharacterSmall} from "./actor/sheet/character-small.js";
 import { d100AActorSheetNPC } from "./actor/sheet/npc.js";
@@ -33,7 +33,7 @@ import { createAlternityd100Macro } from "./macro.js";
 import { Diced100 } from "./dice.js";
 //import { RollPF , parseRollStringVariable} from "./roll.js";
 import { ItemSFRPG } from "./item/item.js";
-
+import { Combatd100A } from "./combat/combat.js";
 import { d100ASceneConfig } from "./d100ASceneConfig.js";
 import { d100AScene} from "./d100AScene.js";
 import { ItemSheetSFRPG } from "./item/sheet.js";
@@ -45,7 +45,7 @@ import SFRPGModifier from "../module/modifiers/modifier.js";
 import d100AModifierApplication from '../module/apps/modifier-app.js';
 import { ActorMovementConfig } from '../module/apps/movement-config.js';
 import { RPC } from "../module/rpc.js";
-
+import CounterManagement from "../module/classes/counter-management.js";
 import { initializeRemoteInventory, ActorItemHelper } from "../module/actor/actor-inventory-utils.js";
 import { d100A } from "./d100Aconfig.js";
 import { computeCompoundBulkForItem } from "../module/actor/actor-inventory-utils.js";
@@ -89,20 +89,7 @@ import {
  //import { getDefaultResources, registerSettings } from "./barbrawl/module/settings.js";
  //import { createOverrideData, prepareUpdate } from "./barbrawl/module/synchronization.js";
  //import { refreshBarVisibility } from "./barbrawl/module/api.js";
-
-
-
-  import { d100BCombatTracker } from './combat/combat-trackerB.js'
-  import { d100BCombat } from "./combat/combatB.js";
-  import { d100BCombatant } from "./combat/d100CombatantB.js";
-
-
-//  import CounterManagement from "../module/classes/counter-management.js";
-//  import { d100ACombatTracker,d100BCombatTracker } from './combat/combat-tracker.js'
-//  import { Combatd100A,d100BCombat } from "./combat/combat.js";
-//  import { d100ACombatant,d100BCombatant } from "./d100Combatant.js";
-
- 
+ import { d100ACombatTracker } from './combat/combat-tracker.js'
  //import {
  // DragRuler
 //} from "./move/move.js";
@@ -217,10 +204,7 @@ Hooks.once("init", function() {
  
   // Define custom Entity classes
   //CONST.DEFAULT_TOKEN = "systems/Alternityd100/icons/conditions/dead_02.webp"
-  CONFIG.statusEffects[0].img = "systems/Alternityd100/icons/conditions/dead_02.webp";
-  CONFIG.statusEffects = d100A.statusEffects
-
-
+  CONFIG.statusEffects[0].icon = "systems/Alternityd100/icons/conditions/dead_02.webp";
   CONFIG.controlIcons.defeated = "icons/svg/padlock.svg";
   CONFIG.controlIcons.doorOpen = "systems/Alternityd100/icons/items/door_02_open.webp";
   CONFIG.controlIcons.doorClosed = "systems/Alternityd100/icons/items/door_02.webp";
@@ -228,20 +212,12 @@ Hooks.once("init", function() {
   CONFIG.Item.documentClass = ItemSFRPG;
   CONFIG.Token.documentClass = d100ATokenDoc;
   CONFIG.Token.objectClass = d100AToken;
-
-
-
-
+  CONFIG.Combat.documentClass = Combatd100A;
   //CONFIG.MeasuredTemplate.objectClass = MeasuredTemplatePF;
   CONFIG.SFRPG = SFRPG;
   CONFIG.d100A = d100A;
-
-  
-
-
-
-
-
+  CONFIG.Combatant.documentClass = d100ACombatant;
+  CONFIG.ui.combat = d100ACombatTracker;
   CONFIG.Scene.documentClass = d100AScene;
 
   //CONFIG.fontFamilies.push("serpentine");
@@ -286,23 +262,6 @@ Hooks.once("init", function() {
 
 registerSystemRules(game.Alternityd100.engine);
 registerSystemSettings();
-
-const combatType = game.settings.get("Alternityd100", "combatType");
-
-//if (combatType == "original")  { 
-//  CONFIG.Combatant.documentClass = d100ACombatant;
-//  CONFIG.ui.combat = d100ACombatTracker;
-//  CONFIG.Combat.documentClass = Combatd100A;
-//}
-
-// if (combatType == "new") {
-  
-  CONFIG.Combatant.documentClass = d100BCombatant;
-  CONFIG.ui.combat = d100BCombatTracker;
-  CONFIG.Combat.documentClass = d100BCombat;
-//}
-
-
   //game.settings.get("sfrpg", "sfrpgTheme")
 if (true) {
        const logo = document.querySelector("#logo");
@@ -423,17 +382,8 @@ Hooks.once("setup", function () {
 
 
     console.log("Alternity by d100  | [SETUP] Initializing counter management");
-/*
-    const combatType = game.settings.get("Alternityd100", "combatType");
-    if (combatType == "original")  { 
-  */
- //  const counterManagement = new CounterManagement();
- //     counterManagement.setup();
-    
-  
-
-
-
+    const counterManagement = new CounterManagement();
+    counterManagement.setup();
 
     console.log("Alternity by d100  | [SETUP] Initializing RPC system");
     RPC.initialize();
@@ -664,28 +614,8 @@ export function handleOnDrop(event) {
 }
 
 
-Hooks.on("endTurnUpdate",(combat) => {
-  console.log("\n A", combat)
-            for (let c of combat.combatants) {
-                console.log(c)
-                c.token.actor.sheet._onApplyPendingDamage()
-            }
-  return false
-}
-);
 
 
-Hooks.on("combatTurn",(combat, updateData, updateOptions) => {
-  console.log("\n A", combat, updateData, updateOptions)
-
-  combat.update(updateData, updateOptions);
-          //  for (let c of combat.combatants) {
-           //     console.log(c)
-           //     c.token.actor.sheet._onApplyPendingDamage()
-           // }
-  return false
-}
-);
 
 /**
  * Macrobar hook.
@@ -1233,7 +1163,7 @@ console.log("\nA",a)
       if (!up) game.pf1.tooltip.lock.new = false;
     };
   }
-/*
+
   // Patch StringTerm
   StringTerm.prototype.evaluate = function (options = {}) {
     const result = parseRollStringVariable(this.term);
@@ -1264,7 +1194,7 @@ console.log("\nA",a)
   ParentheticalTerm.CLOSE_REGEXP = new RegExp(`\\)${RollTerm.FLAVOR_REGEXP_STRING}?`, "g");
   OperatorTerm.REGEXP = /(?:&&|\|\||\*\*|\+|-|\*|\/|\\%|\||:|\?)|(?<![a-z])[!=<>]+/g;
   OperatorTerm.OPERATORS.push("\\%", "!", "?", ":", "=", "<", ">", "==", "===", "<=", ">=", "??", "||", "&&", "**");
-*/
+
   // Add secondary indexing to compendium collections
   {
     const origFunc = CompendiumCollection.prototype.getIndex;
@@ -1374,9 +1304,7 @@ function PatchCore() {
   }
 
   // Patch StringTerm
-  
-  
-  foundry.dice.terms.StringTerm.prototype.evaluate = function (options = {}) {
+  StringTerm.prototype.evaluate = function (options = {}) {
     console.log(this)
     const result = parseRollStringVariable(this.term);
     if (typeof result === "string") {
@@ -1394,7 +1322,7 @@ function PatchCore() {
   };
 
   // Patch NumericTerm
-  foundry.dice.terms.NumericTerm.prototype.getTooltipData = function () {
+  NumericTerm.prototype.getTooltipData = function () {
     return {
       formula: this.expression,
       total: this.total,
@@ -1403,12 +1331,10 @@ function PatchCore() {
   };
 
   // Patch ParentheticalTerm and allowed operators
-
-  /*
   ParentheticalTerm.CLOSE_REGEXP = new RegExp(`\\)${RollTerm.FLAVOR_REGEXP_STRING}?`, "g");
   OperatorTerm.REGEXP = /(?:&&|\|\||\*\*|\+|-|\*|\/|\\%|\||:|\?)|(?<![a-z])[!=<>]+/g;
   OperatorTerm.OPERATORS.push("\\%", "!", "?", ":", "=", "<", ">", "==", "===", "<=", ">=", "??", "||", "&&", "**");
-*/
+
   // Add secondary indexing to compendium collections
   {
     const origFunc = CompendiumCollection.prototype.getIndex;

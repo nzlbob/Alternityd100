@@ -1350,7 +1350,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         } else {
             const sidebarItem = itemData;
 
-            const addedItemResult = await targetActor.createItem(duplicate(sidebarItem));
+            const addedItemResult = await targetActor.createItem(foundry.utils.duplicate(sidebarItem));
             if (addedItemResult.length > 0) {
                 const addedItem = targetActor.getItem(addedItemResult[0].id);
 
@@ -1547,7 +1547,7 @@ export class ActorSheetSFRPG extends ActorSheet {
                     }
                 }
 
-                const addedItemResult = await targetActor.createItem(duplicate(sidebarItem));
+                const addedItemResult = await targetActor.createItem(foundry.utils.duplicate(sidebarItem));
                 if (addedItemResult.length > 0) {
                     const addedItem = targetActor.getItem(addedItemResult[0].id);
 

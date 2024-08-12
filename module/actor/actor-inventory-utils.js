@@ -682,7 +682,7 @@ async function onItemDraggedToCollection(message) {
     if (data.pack) {
         const pack = game.packs.get(data.pack);
         const itemData = await pack.getDocument(data.draggedItemId);
-        newItems.push(duplicate(itemData));
+        newItems.push(foundry.utils.duplicate(itemData));
     } else if (data.source.tokenId || data.source.actorId) {
         // from another token
         const source = ActorItemHelper.FromObject(data.source);
@@ -719,7 +719,7 @@ async function onItemDraggedToCollection(message) {
         const sidebarItem = game.items.get(data.draggedItemId);
         if (sidebarItem) {
             const itemData = foundry.utils.duplicate(sidebarItem);
-            newItems.push(duplicate(itemData));
+            newItems.push(foundry.utils.duplicate(itemData));
         }
     }
 

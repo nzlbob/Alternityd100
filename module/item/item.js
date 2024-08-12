@@ -470,7 +470,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * @returns {Object}         The modified data object with the modifiers data object added.
      */
     _ensureHasModifiers(data, prop = null) {
-        if (!hasProperty(data, "modifiers")) {
+        if (!foundry.utils.hasProperty(data, "modifiers")) {
             //console.log(`Starfinder | ${this.name} does not have the modifiers data object, attempting to create them...`);
             data.modifiers = [];
         }
@@ -1259,7 +1259,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 rolledMods.push(bonus);
                 return;
             }
-            let computedBonus = bonus.modifier;
+            let computedBonus = parseInt(bonus.modifier, 10);
             parts.push({ score: computedBonus, explanation: bonus.name });
             return computedBonus;
         };
@@ -2359,7 +2359,7 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
             }
 
             //console.log(`Adding ${bonus.name} with ${bonus.modifier}`);
-            let computedBonus = bonus.modifier;
+            let computedBonus = parseInt(bonus.modifier, 10);
             parts.push({ formula: computedBonus, explanation: bonus.name });
             return computedBonus;
         };
@@ -2379,7 +2379,7 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
         }, 0);
 
         // Define Roll Data
-        const rollData = foundry.utils.mergeObject(duplicate(actorData), {
+        const rollData = foundry.utils.mergeObject(foundry.utils.duplicate(actorData), {
             item: itemData,
             //mod: actorData.abilities[abl].mod
         });
@@ -3410,6 +3410,7 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
      * @param {String|null}   data.id            Override the randomly generated id with this.
      */
     async addModifier({
+        
         name = "",
         modifier = 0,
         type = SFRPGModifierTypes.UNTYPED,
@@ -3423,9 +3424,10 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
         condition = "",
         id = null
     } = {}) {
-        const data = this._ensureHasModifiers(duplicate(this.system));
+        const data = this._ensureHasModifiers(foundry.utils.duplicate(this.system));
         const modifiers = data.modifiers;
-
+        //console.log(this)
+        name = this.name
         modifiers.push(new SFRPGModifier({
             name,
             modifier,
@@ -3441,9 +3443,9 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
             id
         }));
 
-        //console.log("Adding a modifier to the item","data.modifiers", modifiers);
+        console.log("Adding a modifier to the item","system.modifiers", modifiers,this);
 
-        await this.update({ ["data.modifiers"]: modifiers });
+        await this.update({ ["system.modifiers"]: modifiers });
     }
 
     /**
@@ -3454,7 +3456,7 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
     async deleteModifier(id) {
         const modifiers = this.system.modifiers.filter(mod => mod._id !== id);
 
-        await this.update({ "data.modifiers": modifiers });
+        await this.update({ "system.modifiers": modifiers });
     }
 
     /**

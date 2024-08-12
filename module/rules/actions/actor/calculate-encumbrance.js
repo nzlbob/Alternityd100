@@ -20,7 +20,7 @@ export default function (engine) {
                 return 0;
             }
 
-            let computedBonus = bonus.modifier;
+            let computedBonus = parseInt(bonus.modifier, 10);
             //  try {
                  // const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
                  // computedBonus = roll.total;

@@ -360,7 +360,7 @@ export class ItemSheetSFRPG extends ItemSheet {
                 rollData.owner.abilities = { dex: { mod: 0 } };
             }
             const saveRoll = Roll.create(formula, rollData);
-            return saveRoll.evaluate({ async: true });
+            return saveRoll.evaluateSync();
         } catch (err) {
             //console.log(err);
             return null;
@@ -507,7 +507,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         }
 
         // Action usage
-        if ((item.type !== "weapon") && item.activation && !isEmpty(item.activation)) {
+        if ((item.type !== "weapon") && item.activation && !foundry.utils.isEmpty(item.activation)) {
             props.push(
                 { name: labels.activation, tooltip: null },
                 { name: labels.range, tooltip: null },

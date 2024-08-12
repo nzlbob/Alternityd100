@@ -33,12 +33,8 @@
             <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipEngine.Size" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipEngine.SizeTooltip" }}">
                 <label>{{ localize "Progress Level" }}</label>
                 <select name="system.progressLevel">
-                    {{#select itemData.progressLevel}}
-                    {{#each d100Aconfig.progressLevel as |name type|}}
-                    <option value="{{type}}">{{localize name}}</option>
-                    {{/each}}
-                    {{/select}}
-                </select>
+                    {{ selectOptions d100Aconfig.progressLevel selected=itemData.progressLevel blank="" }}
+                  </select>
             </div>
 
             <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipEngine.Size" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipEngine.SizeTooltip" }}">

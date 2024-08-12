@@ -87,12 +87,9 @@
                     <div class="form-group">
                     <label>{{ localize "d100A.Items.Weapon.PL" }}</label>
                     <select name="system.PropProgressLevel">
-                    {{#select system.PropProgressLevel}}
-                    {{#each d100Aconfig.progressLevel as |name type|}}
-                    <option value="{{type}}">{{name}}</option>
-                    {{/each}}
-                    {{/select}}
-                    </select>
+                        {{ selectOptions d100Aconfig.progressLevel selected=itemData.PropProgressLevel blank="" }}
+                      </select>
+
                     </div>
                     {{!-- Propulsion Name --}}
                             
@@ -180,12 +177,8 @@
                     <div class="form-group">
                     <label>{{ localize "d100A.Items.Weapon.PL" }}</label>
                     <select name="system.progressLevel">
-                    {{#select system.progressLevel}}
-                    {{#each d100Aconfig.progressLevel as |name type|}}
-                    <option value="{{type}}">{{name}}</option>
-                    {{/each}}
-                    {{/select}}
-                    </select>
+                        {{ selectOptions d100Aconfig.progressLevel selected=itemData.progressLevel blank="" }}
+                      </select>
                     </div>
                    
                     {{!-- Warhead Name --}}
@@ -248,11 +241,7 @@
         
                           <label>{{ localize "d100A.Items.Weapon.firepowername" }}</label>
                           <select name="system.firepower">
-                          {{#select system.firepower}}
-                          {{#each d100Aconfig.starshipFirepower as |name type|}}
-                          <option value="{{type}}">{{name}}</option>
-                          {{/each}}
-                          {{/select}}
+                            {{ selectOptions d100Aconfig.firepower selected=itemData.firepower blank="" }}
                           </select>
                         </div> 
         
@@ -308,12 +297,8 @@
                      <div class="form-group">
                      <label>{{ localize "d100A.Items.Weapon.PL" }}</label>
                      <select name="system.guidanceProgressLevel">
-                     {{#select system.guidanceProgressLevel}}
-                     {{#each d100Aconfig.progressLevel as |name type|}}
-                     <option value="{{type}}">{{name}}</option>
-                     {{/each}}
-                     {{/select}}
-                     </select>
+                            {{ selectOptions d100Aconfig.progressLevel selected=itemData.guidanceProgressLevel blank="" }}
+                          </select>
                      </div>
                     
                      {{!-- Guidance Name --}}

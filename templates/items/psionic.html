@@ -74,14 +74,9 @@
                             {{!-- Weapon Source --}}
                             <div class="form-group">
                                 <label>{{ localize "d100A.pubnSource" }}</label>
-                                <select name="system.pubnsource">
-                                    {{#select itemData.pubnsource}}
-                                   
-                                    {{#each d100Aconfig.pubnsource as |name type|}}
-                                    <option value="{{type}}">{{name}}</option>
-                                    {{/each}}
-                                    {{/select}}
-                                </select>
+                                <select name="system.attributes.pubnsource">
+                                    {{ selectOptions d100Aconfig.pubnsource selected=itemData.attributes.pubnsource blank="" }}
+                                  </select>
                             </div>
 
 
@@ -203,11 +198,7 @@
                                 value="{{itemData.damage.ord.dice}}" data-dtype="String" placeholder="0" />/
               
                               <select name="system.damage.ord.type">
-                                {{#select itemData.damage.ord.type}}
-                                {{#each d100Aconfig.damageQ as |name type2|}}
-                                <option value="{{type2}}">{{name}}</option>
-                                {{/each}}
-                                {{/select}}
+                                {{ selectOptions d100Aconfig.damageQ selected=itemData.damage.ord.type blank="" }}
                               </select>
                             </div>
                             {{!-- Weapon Damage Good --}}
@@ -218,11 +209,7 @@
                                 value="{{itemData.damage.goo.dice}}" data-dtype="String" placeholder="0" />/
               
                               <select name="system.damage.goo.type">
-                                {{#select itemData.damage.goo.type}}
-                                {{#each d100Aconfig.damageQ as |name type2|}}
-                                <option value="{{type2}}">{{name}}</option>
-                                {{/each}}
-                                {{/select}}
+                                {{ selectOptions d100Aconfig.damageQ selected=itemData.damage.goo.type blank="" }}
                               </select>
                             </div>
                             {{!-- Weapon Damage Amazing --}}
@@ -233,11 +220,7 @@
                                 value="{{itemData.damage.ama.dice}}" data-dtype="String" placeholder="0" />/
               
                               <select name="system.damage.ama.type">
-                                {{#select itemData.damage.ama.type}}
-                                {{#each d100Aconfig.damageQ as |name type2|}}
-                                <option value="{{type2}}">{{name}}</option>
-                                {{/each}}
-                                {{/select}}
+                                {{ selectOptions d100Aconfig.damageQ selected=itemData.damage.goo.type blank="" }}
                               </select>
                             </div>
               

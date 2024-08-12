@@ -33,37 +33,25 @@
                             <div class="form-group">
                                 <label>{{ localize "d100A.pubnSource" }}</label>
                                 <select name="system.attributes.pubnsource">
-                                    {{#select itemData.attributes.pubnsource}}
-                                    {{#each d100Aconfig.pubnsource as |name type|}}
-                                    <option value="{{type}}">{{name}}</option>
-                                    {{/each}}
-                                    {{/select}}
-                                </select>
+                                    {{ selectOptions d100Aconfig.pubnsource selected=itemData.attributes.pubnsource blank="" }}
+                                  </select>
                             </div>
 
                             {{!-- Weapon Manufacturer --}}
                             <div class="form-group">
                                 <label>{{ localize "d100A.Items.manufacturer" }}</label>
                                 <select name="system.attributes.manufacturer">
-                                    {{#select itemData.attributes.manufacturer}}
-                                    <option value=""></option>
-                                    {{#each d100Aconfig.manufacturers as |name type|}}
-                                    <option value="{{type}}">{{name}}</option>
-                                    {{/each}}
-                                    {{/select}}
-                                </select>
+                                    {{ selectOptions d100Aconfig.manufacturers selected=itemData.attributes.manufacturer blank="" }}
+                                  </select>
                             </div>
 
                             {{!-- Weapon Progress Level --}}
                             <div class="form-group">
                                 <label>{{ localize "d100A.Items.Weapon.PL" }}</label>
                                 <select name="system.attributes.progressLevel">
-                                    {{#select itemData.attributes.progressLevel}}
-                                    {{#each d100Aconfig.progressLevel as |name type|}}
-                                    <option value="{{type}}">{{name}}</option>
-                                    {{/each}}
-                                    {{/select}}
-                                </select>
+
+                                        {{ selectOptions d100Aconfig.progressLevel selected=itemData.attributes.progressLevel blank="" }}
+                                      </select>
                             </div>
 
                             {{!-- Weapon Hide --}}
@@ -81,11 +69,8 @@
                             <div class="form-group" data-tooltip="{{localize 'd100A.availabilitytooltip' }}">
                                 <label>{{ localize "d100A.availability" }}</label>
                                 <select name="system.attributes.availability">
-                                    {{#select itemData.attributes.availability}}
-                                    {{#each d100Aconfig.availability as |name type|}}
-                                    <option value="{{type}}">{{name}}</option>
-                                    {{/each}}
-                                    {{/select}}
+                                    {{ selectOptions d100Aconfig.availability selected=system.attributes.availability blank="" }}
+
                                 </select>
                             </div>
 
@@ -121,11 +106,7 @@
 
                                 <label>{{ localize "d100A.Items.Type" }}</label>
                                 <select name="system.firepower">
-                                    {{#select itemData.firepower}}
-                                    {{#each d100Aconfig.firepower as |name type|}}
-                                    <option value="{{type}}">{{name}}</option>
-                                    {{/each}}
-                                    {{/select}}
+                                    {{ selectOptions d100Aconfig.firepower selected=itemData.firepower blank="" }}
                                 </select>
                             </div>
                             <hr>

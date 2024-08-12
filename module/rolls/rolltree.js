@@ -107,7 +107,7 @@ export default class RollTree {
     populate() {
         if (this.options.debug) {
       //console.log(`Resolving '${this.formula}'`);
-      //console.log(duplicate(this.contexts));
+      //console.log(foundry.utils.duplicate(this.contexts));
         }
         this.rootNode = new RollNode(this, this.formula, null, null, false, true);
         this.nodes = {};

@@ -412,11 +412,7 @@
                                             data-tooltip="{{localize 'd100A.availabilitytooltip' }}">
                                             <label>{{ localize "d100A.availability" }}</label>
                                             <select name="system.details.availability">
-                                                {{#select system.details.availability}}
-                                                {{#each d100Aconfig.availability as |name type|}}
-                                                <option value="{{type}}">{{name}}</option>
-                                                {{/each}}
-                                                {{/select}}
+                                                {{ selectOptions d100Aconfig.availability selected=system.details.availability blank="" }}
                                             </select>
                                         </div>
 
@@ -448,11 +444,7 @@
                                                 }}</label>
                                             <div class="form-fields">
                                                 <select name="system.attributes.cover">
-                                                    {{#select system.attributes.cover}}
-                                                    {{#each config.vehicleCoverTypes as |cover c|}}
-                                                    <option value="{{c}}">{{cover}}</option>
-                                                    {{/each}}
-                                                    {{/select}}
+                                                    {{ selectOptions config.vehicleCoverTypes selected=system.attributes.cover blank="" }}
                                                 </select>
                                             </div>
                                         </div>

@@ -51,13 +51,9 @@
             <div class="form-group">
                 <label>{{ localize "Book Source" }}</label>
                 <div class="form-fields">
-                    <select name="system.source">
-                        {{#select itemData.source}}
-                        {{#each d100Aconfig.pubnsource as |name type|}}
-                        <option value="{{type}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
+                    <select name="system.attributes.pubnsource">
+                        {{ selectOptions d100Aconfig.pubnsource selected=itemData.attributes.pubnsource blank="" }}
+                      </select>
                 </div>
             </div>
 

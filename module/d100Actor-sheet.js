@@ -441,7 +441,7 @@ async processDroppedData(event, parsedDragData) {
                 }
             }
 
-            const addedItemResult = await targetActor.createItem(duplicate(sidebarItem.data));
+            const addedItemResult = await targetActor.createItem(foundry.utils.duplicate(sidebarItem.data));
             if (addedItemResult.length > 0) {
                 const addedItem = targetActor.getItem(addedItemResult[0].id);
 
