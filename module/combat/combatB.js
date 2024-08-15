@@ -1,6 +1,6 @@
 import { Diced100 } from "../dice.js";
 import RollContext from "../rolls/rollcontext.js";
-
+import { d100ACombatantConfig } from "./combatant-config.js";
 /*
 The following hooks were added:
 "onBeginCombat", one argument, type object, contains all event data
@@ -154,28 +154,7 @@ export class d100BCombat extends Combat {
     this.roundB = 1
     this.action = 0
     this.turn = null
-    /**
-     * {d100A:{
-        actions: {
-          total: this.apr,
-          remaining: this.apr},
-        delayed: false,
-        degree: "",
-        canAct: false,
-        stunned: {
-          isStunned: false,
-          stunnedRound: -1,
-          stunDur: 0 }}}
-    }
-     * 
-     * 
-     */
-
-
     const updates = this.combatants.map(c => {
-
-
-
       return {
         _id: c.id,
         // initiative: null,
@@ -187,9 +166,9 @@ export class d100BCombat extends Combat {
             },
             delayed: false,
 
-            canAct: false,
+          
             stunned: {
-              isStunned: false,
+              isStunned: false, // This should be a look at the  get isInitStunned()
               stunnedRound: -1,
               stunDur: 0
             }
@@ -200,7 +179,7 @@ export class d100BCombat extends Combat {
       }
     });
     console.log("updates", updates)
-    await this.updateEmbeddedDocuments("Combatant", updates);
+    this.updateEmbeddedDocuments("Combatant", updates);
     console.log("this.combatants", this.combatants)
 
     //   Hooks.callAll("onBeginCombat", eventData);
@@ -211,10 +190,6 @@ export class d100BCombat extends Combat {
 
 
     //    await ui.combat._render(false)
-
-
-
-
     this._playCombatSound("startEncounter");
     const updateData = { round: 1, turn: null };
     Hooks.callAll("combatStart", this, updateData);
@@ -228,49 +203,97 @@ export class d100BCombat extends Combat {
       nextTurn: -1
     }
     let turn = this.turn ?? -1;
+    console.log("Turn ",turn)
     let skip = this.settings.skipDefeated;
     skip = true
 
     for (let [i, t] of this.turns.entries()) {
-      console.log("t ", t)
+      //  console.log("t ", t)
       if (i <= turn) continue;
       if (skip && t.isDefeated) continue;
-      if (!t.flags.d100A.canAct) continue;// Alt
+      if (!t.canAct) continue;// Alt
       if (t.isInitStunned) console.log("here");
       if (t.isInitStunned) continue;
       turnstatus.moreValidTurns = true // flag if this is a valid round
       turnstatus.nextTurn = i;
       break;
-
     }
-
-
     //if (nextTurn == -1)  // Means there are no more turns left this phase
-
     return turnstatus
+  }
+  async GMUpdate() {
+    const updateOptions = {};
+    const phases = this.getPhases();
+    const actions = this.getSubPhases();
+    let oldAction = this.action
+    let oldPhase = this.phase
+    let oldRound = this.roundB 
+    let newAction = this.action
+    let newPhase = this.phase
+    let newRound = this.roundB 
+    console.log("Details ", this.roundB,this.phase, this.action, this.turn,!this.turn)
+   
+    if ((!(this.round === 0)) && !this.turn) this.endOfAction = true
+    if ((!(this.round === 0)) && !!this.turn) this.inTurns = true
+
+   if (this.endOfAction){
+   // check Initiative  
+
+   //await this._handleUpdate(this.roundB, this.phase, this.action, 0);
+   console.log("Details ",  this.turn, this.action, this.phase, this.roundB, this.nextTurnStatus())
+   
+  
+   if (true /*!this.nextTurnStatus().moreValidTurns*/){
+    let loop = 0
+   do {
+    oldAction = newAction
+    oldPhase = newPhase
+    oldRound = newRound
+    newAction = (oldAction + 1) % actions.length
+    newPhase = (oldPhase + Math.floor((oldAction + 1) / actions.length)) % phases.length
+    newRound = (oldRound + Math.floor((oldPhase + 1) / phases.length))
+    await this._handleUpdate(newRound, newPhase, newAction );
+    //await this.setActiveCombatants()
+    console.log("Details ",  this.turn, this.action, this.phase, this.roundB, this.nextTurnStatus())
+    loop ++ ;
+  } while (!this.nextTurnStatus().moreValidTurns && (loop < 4));
+}
+
+    console.log("\nactions", newAction, newPhase, newRound)
+    // Jump to the GM Update
+
+    const advanceTime = CONFIG.time.turnTime;
+    updateOptions.advanceTime = advanceTime + CONFIG.time.roundTime;
+    updateOptions.direction = 1;
+    await this._handleUpdate(newRound, newPhase, newAction, this.nextTurnStatus().nextTurn, updateOptions);
+    //await this.setActiveCombatants()
+   // await this._handleUpdate(newRound, newPhase, newAction, this.nextTurnStatus().nextTurn, updateOptions);
+    //this.updateCombatantActors() 
+   }
+ 
+
+
 
   }
-
-
-
   async nextTurn() {
     console.log("hi ", this.turn, this.phase, this.action)
 
     /**
      * Is this the first turn? if so set all the combatant flags
     */
-  /*  if ((this.turn == null) && (this.phase = 0) && (this.action >= 0)) {
-      console.log("hi ")
-      await this.setActiveCombatants()
-      console.log(this.combatants)
-
-    }
-      */
+    /*  if ((this.turn == null) && (this.phase = 0) && (this.action >= 0)) {
+        console.log("hi ")
+        await this.setActiveCombatants()
+        console.log(this.combatants)
+  
+      }
+        */
     /************************************************************** */
 
     /** 
      *  Determine the turn Status are there more valid turns, and who is next   
      */
+
     const nextTurnStatus = this.nextTurnStatus()
     console.log("nextTurnStatus - ", nextTurnStatus)
     const updateOptions = {};
@@ -293,30 +316,13 @@ export class d100BCombat extends Combat {
      * first click will finishing the first players turn TURN = NULL
      * second click will be the end of phase / action update
      */
-if (this.turn > 0) {
-  await this._handleUpdate(this.roundB, this.phase, this.action, null, updateOptions);
-  return
+    
+   // if (this.turn > 0) {
+      await this._handleUpdate(this.roundB, this.phase, this.action, null, updateOptions);
+      return
 
-}
-    const phases = this.getPhases();
-    const actions = this.getSubPhases();
-
-    console.log("\nphases", phases)
-    console.log("\nactions", actions)
-
-    const newAction = (this.action + 1) % actions.length
-    const newPhase = (this.phase + Math.floor((this.action + 1) / actions.length) ) % phases.length
-    const newRound = (this.roundB + Math.floor((this.phase + 1) / phases.length) ) 
-    console.log("\nactions", actions, newAction, newPhase,newRound)
-    // Jump to the GM Update
-
-    const advanceTime = CONFIG.time.turnTime;
-    updateOptions.advanceTime = advanceTime + CONFIG.time.roundTime;
-    updateOptions.direction = 1;
-    await this._handleUpdate(newRound, newPhase, newAction, null, updateOptions);
-    await this.setActiveCombatants()
-
-    await this._handleUpdate(newRound, newPhase, newAction, null, updateOptions);
+  //  }
+    
     return
     // this.updateCombatantActors() 
     // Determine the next turn number
@@ -352,7 +358,7 @@ if (this.turn > 0) {
     const newround = nextAction * 10000 + nextPhase * 1000 + nextRound
     const update = {
       round: newround,
-      turn:nextTurn
+      turn: nextTurn
     };
     console.log("round ", newround)
 
@@ -453,12 +459,12 @@ if (this.turn > 0) {
     Hooks.callAll("onAfterUpdateCombat", eventData);
   }
 
- /**
-   * Get the current history state of the Combat encounter.
-   * @param {Combatant} [combatant]       The new active combatant
-   * @returns {CombatHistoryData}
-   * @protected
-   */
+  /**
+    * Get the current history state of the Combat encounter.
+    * @param {Combatant} [combatant]       The new active combatant
+    * @returns {CombatHistoryData}
+    * @protected
+    */
   _getCurrentState(combatant) {
     const round = this.round
     combatant ||= this.combatant;
@@ -728,7 +734,7 @@ if (this.turn > 0) {
     return nextTurn.maintainCombat;
   }
 
-  async setActiveCombatants() { //thisTurn
+  async xsetActiveCombatants() { //thisTurn
     let phase = this.phase
     //if (nextphase) (phase ++) % 4;
     console.log("\nPhase ", phase)

@@ -327,11 +327,12 @@ export function addModifier(bonus, data, item, localizationKey) {
             return 0;
         }
 
-        let computedBonus = parseInt(bonus.modifier, 10);
-      //  try {
-           // const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
-           // computedBonus = roll.total;
-     //   } catch {}
+        //let computedBonus = parseInt(bonus.modifier, 10);
+        let computedBonus = 0;
+        try {
+            const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({maximize: true});
+         computedBonus = roll.total;
+        } catch {}
 
         if (computedBonus !== 0 && localizationKey) {
             item.tooltip.push(game.i18n.format(localizationKey, {

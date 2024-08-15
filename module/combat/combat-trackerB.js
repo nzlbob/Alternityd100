@@ -15,18 +15,25 @@ export class d100BCombatTracker extends CombatTracker {
     let context = await super.getData();
 
 console.log("contect", context)
- 
+context.endOfAction = false
+context.notBegun = false
+context.inTurns = false
+
+if ((context.round === 0) && !context.turn) context.notBegun = true
+if ((!(context.round === 0)) && !context.turn) context.endOfAction = true
+if ((!(context.round === 0)) && !!context.turn) context.inTurns = true
+
 if  (["starship"].includes(context.combat?.flags?.d100A?.combatType)){
 for(let currentTurn of context.turns){
     const currentCombatant = context.combat.combatants.get(currentTurn.id)
     //  console.log( "currentCombatant", currentCombatant)
     currentTurn.crewmember = {"name" : currentCombatant.actor?.name || currentCombatant.npcActor?.name}
-    currentTurn.canAct = currentCombatant.flags.d100A.canAct 
+    currentTurn.canAct = currentCombatant.canAct 
     currentTurn.crewRole = currentCombatant.flags.d100A.crewRole 
     currentTurn.isPilot = false;
     currentTurn.image = "";
-    currentTurn.actions = currentCombatant.flags.d100A.actions
-
+    currentTurn.actions = currentCombatant.flags.d100A.actions.remaining
+    currentTurn.apr = currentCombatant.apr
       if (["Pilot","Copilot","pilot","copilot"].includes(currentTurn.crewRole)){
         currentTurn.isPilot = true
         currentTurn.image = "systems/Alternityd100/icons/roles/pilot.png"
@@ -43,8 +50,9 @@ if  (["normal"].includes(context.combat?.flags?.d100A?.combatType)){
       const currentCombatant = context.combat.combatants.get(currentTurn.id)
   //      console.log( "currentCombatant", currentCombatant)
       //currentTurn.crewmember = {"name" : currentCombatant.actor.name}
-      currentTurn.canAct = currentCombatant.flags.d100A.canAct
-      currentTurn.actions = currentCombatant.flags.d100A.actions
+      currentTurn.canAct = currentCombatant.canAct
+      currentTurn.actions = currentCombatant.flags.d100A.actions.remaining
+      currentTurn.apr = currentCombatant.apr
       currentTurn.down = !(currentCombatant.flags.d100A.downround == "-")
       currentTurn.downround = currentCombatant.flags.d100A.downround
      // currentTurn.currentCombatant = currentCombatant
@@ -103,12 +111,23 @@ if  (["normal"].includes(context.combat?.flags?.d100A?.combatType)){
     super.activateListeners(html);
     const tracker = html.find("#combat-tracker");
     const combatants = tracker.find(".combatant");
- console.log("Tracker", tracker)
+ //console.log("Tracker", tracker)
     // Create new Combat encounter
     html.find(".combat-controlx").click(ev => this._delayTurnx(ev));
 
+    html.find(".combat-control-update").click(ev => this._update(ev));
 
   }
+  async _update(event) {
+    const combat = this.viewed;
+    const btn = event.currentTarget;
+    const control = btn.dataset.control
+
+    await combat.GMUpdate()
+    console.log("Button",combat,btn,control)
+
+  }
+
 
   async _delayTurnx(event) {
     const combat = this.viewed;
@@ -277,6 +296,22 @@ console.log(btn)
     if ( !combatant.token.object.visible ) return ui.notifications.warn(game.i18n.localize("COMBAT.PingInvisibleToken"));
     await canvas.ping(combatant.token.object.center);
   }
+
+  /**
+   * Display a dialog which prompts the user to enter a new initiative value for a Combatant
+   * @param {jQuery} li
+   * @private
+   */
+  _onConfigureCombatant(li) {
+    const combatant = this.viewed.combatants.get(li.data("combatant-id"));
+    new CombatantConfig(combatant, {
+      top: Math.min(li[0].offsetTop, window.innerHeight - 350),
+      left: window.innerWidth - 720,
+      width: 400
+    }).render(true);
+  }
+
+
 
 }
 

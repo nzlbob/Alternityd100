@@ -60,8 +60,11 @@
             {{/if}}
         </div>
     </header>
-    {{console "CT61 - tracker"}}   
-    {{console this}}
+   
+   <!--
+    [{console "CT61 - tracker"}}   
+    [{console this}}
+    -->
     <ol id="combat-tracker" class="directory-list">
         {{#each turns}}
         <li class="combatant actor directory-item flexrow {{this.css}}" data-combatant-id="{{this.id}}">
@@ -74,8 +77,10 @@
                 <div class="combatant-controls flexrow">
                     
                     <a  class="combatant-control" >
-                    {{console "CT74 - turns"}}   
-                    {{console this}}
+                    <!--
+                    [{console "CT74 - turns"}}   
+                    [[console this]}
+                    -->
                     {{#if this.down}} 
                         <img class="combatant-control active" data-tooltip="Roll Stun recovery check: <br> Stunned Round {{this.downround}}" data-control="rollPhysire"src="systems/Alternityd100/icons/conditions/physical_resolve.webp"/>
                         {{/if}}
@@ -115,7 +120,7 @@
 <!--  console "------combat-tracker 100-----"}}
 console this-->
             <div class="token-resource">
-                <span class="resource">{{this.actions.remaining}}/{{this.actions.total}}</span>
+                <span class="resource">{{this.actions}}/{{this.apr}}</span>
             </div>
 
 
@@ -134,16 +139,36 @@ console this-->
     <nav id="combat-controls" class="directory-footer flexrow" data-tooltip-direction="UP">
     {{#if hasCombat}}
         {{#if user.isGM}}
-            {{#if round}}
+            {{#if inTurns}}
             <a class="combat-control" data-tooltip="COMBAT.RoundPrev" data-control="previousRound"><i class="fas fa-step-backward"></i></a>
             <a class="combat-control" data-tooltip="COMBAT.TurnPrev" data-control="previousTurn"><i class="fas fa-arrow-left"></i></a>
             <a class="combat-control center" data-control="endCombat">{{localize 'COMBAT.End'}}</a>
             <a class="combat-control" data-tooltip="Delay" data-control="delayTurn"><i class="fas fa-arrow-down"></i></a>
             <a class="combat-control" data-tooltip="COMBAT.TurnNext" data-control="nextTurn"><i class="fas fa-arrow-right"></i></a>
             <a class="combat-control" data-tooltip="COMBAT.RoundNext" data-control="nextRound"><i class="fas fa-step-forward"></i></a>
-            {{else}}
+            {{/if}}
+            {{#if notBegun}}
             <a class="combat-control center" data-control="startCombat">{{localize 'COMBAT.Begin'}}</a>
             {{/if}}
+            {{#if endOfAction}}
+            <a class="combat-control" data-tooltip="COMBAT.RoundPrev" data-control="previousRound"><i class="fas fa-step-backward"></i></a>
+            <a class="combat-control" data-tooltip="COMBAT.TurnPrev" data-control="previousTurn"><i class="fas fa-arrow-left"></i></a>
+            <a class="combat-control center" data-tooltip="End Combat" data-control="endCombat">{{localize 'End'}}</a>
+            <a class="combat-control-update" data-control="GMUpdate">{{localize 'Update'}}</a>
+            <a class="combat-control" data-tooltip="Delay" data-control="delayTurn"><i class="fas fa-arrow-down"></i></a>
+            <a class="combat-control" data-tooltip="COMBAT.TurnNext" data-control="nextTurn"><i class="fas fa-arrow-right"></i></a>
+            <a class="combat-control" data-tooltip="COMBAT.RoundNext" data-control="nextRound"><i class="fas fa-step-forward"></i></a>
+            {{/if}}
+            {{#if false}}
+            <a class="combat-control" data-tooltip="COMBAT.RoundPrev" data-control="previousRound"><i class="fas fa-step-backward"></i></a>
+            <a class="combat-control" data-tooltip="COMBAT.TurnPrev" data-control="previousTurn"><i class="fas fa-arrow-left"></i></a>
+            <a class="combat-control center" data-tooltip="End Combat" data-control="endCombat"><i class="fa-regular fa-circle-xmark"></i></a>
+            <a class="combat-control center" data-control="nextTurn"><i class="fas fa-pen-square"></i></a>
+            <a class="combat-control" data-tooltip="Delay" data-control="delayTurn"><i class="fas fa-arrow-down"></i></a>
+            <a class="combat-control" data-tooltip="COMBAT.TurnNext" data-control="nextTurn"><i class="fas fa-arrow-right"></i></a>
+            <a class="combat-control" data-tooltip="COMBAT.RoundNext" data-control="nextRound"><i class="fas fa-step-forward"></i></a>
+            {{/if}}
+
         {{else if control}}
         <a class="combat-control" data-tooltip="COMBAT.TurnPrev" data-control="previousTurn"><i class="fas fa-arrow-left"></i></a>
         <a class="combat-control center" data-control="nextTurn">{{localize 'COMBAT.TurnEnd'}}</a>

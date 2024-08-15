@@ -18,7 +18,7 @@ export class d100BCombatant extends Combatant {
     const effects = this.actor.effects.map(c => {
       if (c.name.includes("Knocked")) { return { round: c.duration.startRound, } }
     });
-    console.log(effects)
+   // console.log(effects)
     if (effects.length > 0) {
       // stunned PC's can only act on marginal round after being stunned
       const roundafter = !(this.combat.roundB == effects[0].round)
@@ -32,6 +32,21 @@ export class d100BCombatant extends Combatant {
     }
     return false
   }
+
+
+    get canAct(){
+      // console.log(c)
+      if (!this.combat) return false
+      const degree = this.initDegree
+      const phase = this.combat.phase
+      //if (c.flags.acted) return false;
+      if (degree == "") { console.log("init"); return true };
+      if (phase == 0 && ["amazing"].includes(degree)) return true
+      if (phase == 1 && ["amazing", "good"].includes(degree)) return true
+      if (phase == 2 && ["amazing", "good", "ordinary"].includes(degree)) return true
+      if (phase == 3 && ["amazing", "good", "ordinary", "marginal"].includes(degree)) return true
+      return false
+    }
 
   get initDegree() {
     const actionCheck = this.actor.system.attributes.actchk
@@ -58,11 +73,11 @@ export class d100BCombatant extends Combatant {
       this.flags = {
         d100A: {
           actions: {
-            total: this.apr,
+            
             remaining: this.apr
           },
           delayed: false,
-          canAct: false,
+      
           stunned: {
             isStunned: false,
             stunnedRound: -1,

@@ -26,11 +26,15 @@ export default function (engine) {
                 return 0;
             }
             
-            let computedBonus = parseInt(bonus.modifier, 10);
-            //  try {
-                 // const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
-                 // computedBonus = roll.total;
-           //   } catch {}
+           // let computedBonus = parseInt(bonus.modifier, 10);
+
+           let computedBonus = 0;
+           try {
+            const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({maximize: true});
+            computedBonus = roll.total;
+            console.log(roll,bonus.modifier,computedBonus )
+            } catch {}
+
            console.log(computedBonus,bonus,localizationKey)
             if (computedBonus !== 0 && localizationKey) {
                // console.log(item)
