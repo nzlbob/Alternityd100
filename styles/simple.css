@@ -103,6 +103,17 @@ form .form-group label {
   padding-top: 4px;
   font-size: 10px;
 }
+
+.combat-sidebar #combat-controls2 {
+  margin: 0;
+  border-top: 2px groove var(--color-border-dark-4);
+  padding-top: 4px;
+  font-size: 10px;
+  color: #520eaa;
+  background-color: #c00;
+
+}
+
 .combat-sidebar .combat-tracker-header h4
 {
   font-size: 14px;
@@ -116,7 +127,26 @@ form .form-group label {
 }
 
 .combat-sidebar #combat-controls a{
+  flex: 1;
+  font-size: var(--font-size-20);
+  text-align: center;
+  line-height: var(--sidebar-header-height);
   font-size: 14px;
+}
+
+.combat-sidebar #combat-controls2 a {
+  flex: 1;
+  font-size: var(--font-size-20);
+  text-align: center;
+  line-height: var(--sidebar-header-height);
+  font-size: 14px;
+}
+
+.combat-sidebar #combat-controls a.center {
+  flex: 3;
+}
+.combat-sidebar #combat-controls2 a.center {
+  flex: 3;
 }
 
 .Alternityd100 .window-content {

@@ -62,16 +62,15 @@ export class d100BCombat extends Combat {
    */
 
   _preCreate(data, options, user) {
+    const combatType =  this.scene.isStarship? "starship" :  "normal"
     const update = {
-
-      "flags.d100A.combatType": "normal",
-      "flags.d100A.lastuserAct": false,
-      "flags.d100A.isPiloted": false,
+      "flags.d100A.combatType": combatType,
+  //    "flags.d100A.lastuserAct": false,
+  //    "flags.d100A.isPiloted": false,
       "flags.d100A.counter": 0,
       "flags.d100A.phase": 0
-
-
     };
+    
 
     this.updateSource(update);
     return super._preCreate(data, options, user);
@@ -166,7 +165,7 @@ export class d100BCombat extends Combat {
             },
             delayed: false,
 
-          
+
             stunned: {
               isStunned: false, // This should be a look at the  get isInitStunned()
               stunnedRound: -1,
@@ -193,7 +192,20 @@ export class d100BCombat extends Combat {
     this._playCombatSound("startEncounter");
     const updateData = { round: 1, turn: null };
     Hooks.callAll("combatStart", this, updateData);
-    return this.update(updateData);
+    this.update(updateData);
+    const status = this.nextTurnStatus()
+
+    if (status.moreValidTurns){
+      werertwer
+      await this._handleUpdate(1, 0, 0, status.nextTurn);
+    }
+    else {
+      this.GMUpdate()
+
+    }
+
+
+
   }
 
   nextTurnStatus() {
@@ -203,12 +215,16 @@ export class d100BCombat extends Combat {
       nextTurn: -1
     }
     let turn = this.turn ?? -1;
-    console.log("Turn ",turn)
+    console.log("Turn ", turn)
     let skip = this.settings.skipDefeated;
     skip = true
-
+    console.log(this.getSubPhases())
+    const whoCanAct = this.getSubPhases()[this.action].whoCanAct
+    console.log(whoCanAct)
     for (let [i, t] of this.turns.entries()) {
-      //  console.log("t ", t)
+      console.log("t ",t.name, t, t.flags.crewRole)
+      if (whoCanAct.includes("all") ){
+      console.log("t ", t)
       if (i <= turn) continue;
       if (skip && t.isDefeated) continue;
       if (!t.canAct) continue;// Alt
@@ -217,6 +233,20 @@ export class d100BCombat extends Combat {
       turnstatus.moreValidTurns = true // flag if this is a valid round
       turnstatus.nextTurn = i;
       break;
+      }
+      else if (whoCanAct.includes(t.flags.crewRole))
+      {
+       
+        console.log("t ", t)
+        if (i <= turn) continue;
+        if (skip && t.isDefeated) continue;
+       // if (!t.canAct) continue;// Alt
+        if (t.isInitStunned) console.log("here");
+        if (t.isInitStunned) continue;
+        turnstatus.moreValidTurns = true // flag if this is a valid round
+        turnstatus.nextTurn = i;
+        break;
+        }
     }
     //if (nextTurn == -1)  // Means there are no more turns left this phase
     return turnstatus
@@ -227,131 +257,73 @@ export class d100BCombat extends Combat {
     const actions = this.getSubPhases();
     let oldAction = this.action
     let oldPhase = this.phase
-    let oldRound = this.roundB 
+    let oldRound = this.roundB
     let newAction = this.action
     let newPhase = this.phase
-    let newRound = this.roundB 
-    console.log("Details ", this.roundB,this.phase, this.action, this.turn,!this.turn)
-   
+    let newRound = this.roundB
+    console.log("Details ", this.roundB, this.phase, this.action, this.turn, !this.turn)
+
     if ((!(this.round === 0)) && !this.turn) this.endOfAction = true
     if ((!(this.round === 0)) && !!this.turn) this.inTurns = true
 
-   if (this.endOfAction){
-   // check Initiative  
+    if (this.endOfAction) {
+      // check Initiative  
 
-   //await this._handleUpdate(this.roundB, this.phase, this.action, 0);
-   console.log("Details ",  this.turn, this.action, this.phase, this.roundB, this.nextTurnStatus())
-   
-  
-   if (true /*!this.nextTurnStatus().moreValidTurns*/){
-    let loop = 0
-   do {
-    oldAction = newAction
-    oldPhase = newPhase
-    oldRound = newRound
-    newAction = (oldAction + 1) % actions.length
-    newPhase = (oldPhase + Math.floor((oldAction + 1) / actions.length)) % phases.length
-    newRound = (oldRound + Math.floor((oldPhase + 1) / phases.length))
-    await this._handleUpdate(newRound, newPhase, newAction );
-    //await this.setActiveCombatants()
-    console.log("Details ",  this.turn, this.action, this.phase, this.roundB, this.nextTurnStatus())
-    loop ++ ;
-  } while (!this.nextTurnStatus().moreValidTurns && (loop < 4));
-}
+      //await this._handleUpdate(this.roundB, this.phase, this.action, 0);
+      console.log("Details ", this.turn, this.action, this.phase, this.roundB, this.nextTurnStatus())
 
-    console.log("\nactions", newAction, newPhase, newRound)
-    // Jump to the GM Update
 
-    const advanceTime = CONFIG.time.turnTime;
-    updateOptions.advanceTime = advanceTime + CONFIG.time.roundTime;
-    updateOptions.direction = 1;
-    await this._handleUpdate(newRound, newPhase, newAction, this.nextTurnStatus().nextTurn, updateOptions);
-    //await this.setActiveCombatants()
-   // await this._handleUpdate(newRound, newPhase, newAction, this.nextTurnStatus().nextTurn, updateOptions);
-    //this.updateCombatantActors() 
-   }
- 
+      if (true /*!this.nextTurnStatus().moreValidTurns*/) {
+        let loop = 0
+        do {
+          oldAction = newAction
+          oldPhase = newPhase
+          oldRound = newRound
+          newAction = (oldAction + 1) % actions.length
+          newPhase = (oldPhase + Math.floor((oldAction + 1) / actions.length)) % phases.length
+          newRound = (oldRound + Math.floor((oldPhase + 1) / phases.length))
+          await this._handleUpdate(newRound, newPhase, newAction);
+          //await this.setActiveCombatants()
+          console.log("Details ", this.turn, this.action, this.phase, this.roundB, this.nextTurnStatus())
+          loop++;
+        } while (!this.nextTurnStatus().moreValidTurns && (loop < 4));
+      }
+
+      console.log("\nactions", newAction, newPhase, newRound)
+      // Jump to the GM Update
+
+      const advanceTime = CONFIG.time.turnTime;
+      updateOptions.advanceTime = advanceTime + CONFIG.time.roundTime;
+      updateOptions.direction = 1;
+      await this._handleUpdate(newRound, newPhase, newAction, this.nextTurnStatus().nextTurn, updateOptions);
+      //await this.setActiveCombatants()
+      // await this._handleUpdate(newRound, newPhase, newAction, this.nextTurnStatus().nextTurn, updateOptions);
+      //this.updateCombatantActors() 
+    }
+
 
 
 
   }
-  async nextTurn() {
+  async nextTurn(skip = false) {
     console.log("hi ", this.turn, this.phase, this.action)
-
-    /**
-     * Is this the first turn? if so set all the combatant flags
-    */
-    /*  if ((this.turn == null) && (this.phase = 0) && (this.action >= 0)) {
-        console.log("hi ")
-        await this.setActiveCombatants()
-        console.log(this.combatants)
-  
-      }
-        */
-    /************************************************************** */
-
-    /** 
-     *  Determine the turn Status are there more valid turns, and who is next   
-     */
-
+    const thisCombatantID = this.current.combatantId
     const nextTurnStatus = this.nextTurnStatus()
-    console.log("nextTurnStatus - ", nextTurnStatus)
+    const oldcombatant = game.combat.combatants.get(thisCombatantID);
+    console.log("nextTurnStatus - ", nextTurnStatus,oldcombatant)
     const updateOptions = {};
-    /**
-     * Run this if there are more valid turns this phase / action
-     */
+
+    if (!skip && !!oldcombatant) oldcombatant.actionsRemaining = oldcombatant.actionsRemaining - 1;
+
     if (nextTurnStatus.moreValidTurns) {
       const advanceTime = Math.max(this.turns.length - this.turn, 0) * CONFIG.time.turnTime;
       updateOptions.advanceTime = advanceTime + CONFIG.time.roundTime;
       updateOptions.direction = 1;
       await this._handleUpdate(this.roundB, this.phase, this.action, nextTurnStatus.nextTurn, updateOptions);
-      //this.updateCombatantActors() 
       return
     }
-
-    /************************************************************************* */
-
-    /***
-     * This is the last turn of the action phase. GM to click throu to do updates
-     * first click will finishing the first players turn TURN = NULL
-     * second click will be the end of phase / action update
-     */
-    
-   // if (this.turn > 0) {
-      await this._handleUpdate(this.roundB, this.phase, this.action, null, updateOptions);
-      return
-
-  //  }
-    
+    await this._handleUpdate(this.roundB, this.phase, this.action, null, updateOptions);
     return
-    // this.updateCombatantActors() 
-    // Determine the next turn number
-    let next = null;
-
-    //this.phase = this.phase + 1
-
-    // Maybe advance to the next round
-    //  let round = this.round;
-    if ((this.round === 0) || (next === null) || (next >= this.turns.length)) {
-      return this.nextRound();
-    }
-
-    //   this.phase = this.phase + 1
-    //    round = this.round;
-
-    //   const advanceTime = Math.max(this.turns.length - this.turn, 0) * CONFIG.time.turnTime;
-
-    //   updateOptions.advanceTime = advanceTime + CONFIG.time.roundTime;
-    //   updateOptions.direction = 1;
-
-    //  await this._handleUpdate(nextRound, nextPhase, nextTurn, updateOptions);
-
-    // Update the document, passing data through a hook first
-    // const updateData = { round, turn: next } //,flags:goB};// , flags:oldflags};
-
-    //Hooks.callAll("combatTurn", this, updateData, updateOptions);
-    //const a = await this.update(updateData, updateOptions);
-
   }
 
   async _handleUpdate(nextRound, nextPhase, nextAction, nextTurn, updateOptions = {}) {
@@ -361,72 +333,12 @@ export class d100BCombat extends Combat {
       turn: nextTurn
     };
     console.log("round ", newround)
-
+    Hooks.callAll("combatTurn", this, update, updateOptions);
     await this.update(update, updateOptions);
-
-    //  const phases = this.getPhases();
-    //  const currentPhase = phases[this.flags.sfrpg.phase];
-    //  const newPhase = phases[nextPhase];
-    /*
-      const eventData = {
-          combat: this,
-          isNewRound: nextRound !== this.round,
-          isNewPhase: nextRound !== this.round || nextPhase !== this.flags.sfrpg.phase,
-          isNewTurn: (nextRound !== this.round && phases[nextPhase].iterateTurns) || nextTurn !== this.turn,
-          oldTurn: this.turn,
-          newTurn: nextTurn,
-          oldRound: this.round,
-          newRound: nextRound,
-          oldPhase: currentPhase,
-          newPhase: newPhase,
-          oldCombatant: currentPhase.iterateTurns ? this.turns[this.turn] : null,
-          newCombatant: newPhase.iterateTurns ? this.turns[nextTurn] : null,
-          direction: updateOptions.direction || nextRound - this.round || nextTurn - this.turn
-      };
-    */
-    /*
-    
-      if (!eventData.isNewRound && !eventData.isNewPhase && !eventData.isNewTurn) {
-          return;
-      }
-    */
-    //  await this._notifyBeforeUpdate(eventData);
-
-    /*
-    
-      if (!newPhase.iterateTurns) {
-          nextTurn = CombatSFRPG.HiddenTurn;
-      }
-    */
-
-    // const updateOptions = { direction: 1, worldTime: { delta: CONFIG.time.turnTime } };
-    const updateData = {
-      round: nextRound,
-      // "flags.d100A.phase": nextPhase,
-      turn: nextTurn
-    };
-
-    //await this.update(update, updateOptions);
-
-    /*
-    if (eventData.isNewPhase) {
-        if (newPhase.resetInitiative) {
-            const updates = this.combatants.map(c => {
-                return {
-                    _id: c.id,
-                    initiative: null
-                };
-            });
-            await this.updateEmbeddedDocuments("Combatant", updates);
-        }
-    }
-  */
-    //  await this._notifyAfterUpdate(eventData);
-    // this._handleTimedEffects(eventData);
   }
 
   async _notifyBeforeUpdate(eventData) {
-    // console.log(["_notifyBeforeUpdate", eventData]);
+     console.log(["_notifyBeforeUpdate", eventData]);
     // console.log([isNewRound, isNewPhase, isNewTurn]);
     // console.log([this.round, this.flags.sfrpg.phase, this.turn]);
 
@@ -567,7 +479,7 @@ export class d100BCombat extends Combat {
     const speakerName = eventData.newCombatant.name;
     const actorID = eventData.newCombatant.actorId;
     let characterName = game.i18n.format(d100BCombat.chatCardsText.turn.headerName, { combatant: eventData.newCombatant.name })
-    if (eventData.combat.flags.sfrpg.combatType == "starship") {
+    if (eventData.combat.flags.d100A.combatType == "starship") {
       characterName = game.i18n.format(d100BCombat.chatCardsText.turn.headerName, { combatant: eventData.newCombatant.actor.name })
       localizedPhaseName = eventData.newCombatant.token.actor.findCrewJob(actorID)
       eventData.newPhase.description = ""
@@ -652,7 +564,7 @@ export class d100BCombat extends Combat {
     return this.getPhases()[this.phase || 0];
   }
   getCurrentSubPhase() {
-    return this.getSubPhases()[this.flags?.sfrpg?.subPhase || 0];
+    return this.getSubPhases()[this.action || 0];
   }
 
   hasCombatantsWithoutInitiative() {
@@ -664,7 +576,7 @@ export class d100BCombat extends Combat {
     return false;
   }
 
-  getIndexOfFirstUndefeatedCombatant() {
+  xxxxxgetIndexOfFirstUndefeatedCombatant() {
     let maintainCombat = false;
     for (let [index, combatant] of this.turns.entries()) {
       let activeStatus
@@ -684,7 +596,7 @@ export class d100BCombat extends Combat {
 
   }
 
-  async getIndexOfFirstValidCombatant(thisTurn) {
+  async xxxgetIndexOfFirstValidCombatant(thisTurn) {
     dowecomehere
     thisTurn.maintainCombat = true;
     await this.setActiveCombatants(thisTurn)
@@ -734,7 +646,7 @@ export class d100BCombat extends Combat {
     return nextTurn.maintainCombat;
   }
 
-  async xsetActiveCombatants() { //thisTurn
+  async xxxxsetActiveCombatants() { //thisTurn
     let phase = this.phase
     //if (nextphase) (phase ++) % 4;
     console.log("\nPhase ", phase)
@@ -771,7 +683,7 @@ export class d100BCombat extends Combat {
     await ui.combat._render(false)
 
   }
-  isThisActive(c, phase) {
+  xxxxxisThisActive(c, phase) {
     // console.log(c)
     const degree = c.initDegree
     //if (c.flags.acted) return false;
@@ -785,7 +697,7 @@ export class d100BCombat extends Combat {
 
   }
 
-  getIndexOfLastUndefeatedCombatant() {
+  xxxxxgetIndexOfLastUndefeatedCombatant() {
     const turnEntries = Array.from(new Set(this.turns.entries())).reverse();
     for (let [index, combatant] of turnEntries) {
       if (!combatant.defeated && combatant.active) {
@@ -796,7 +708,7 @@ export class d100BCombat extends Combat {
     return null;
   }
 
-  isEveryCombatantDefeated() {
+  xxxxxisEveryCombatantDefeated() {
     let A = this.getIndexOfFirstUndefeatedCombatant() === false;
 
     if (A) ui.notifications.error(game.i18n.format("He's dead, Dave. Everybody is dead. Everybody is dead, Dave."), { permanent: false });
@@ -806,7 +718,7 @@ export class d100BCombat extends Combat {
     return A
   }
 
-  _getInitiativeFormula(combatant) {
+  _xxxxgetInitiativeFormula(combatant) {
     //  console.log(combatant)
     if (this.getCombatType() === "starship") {
       return "1d20 + @skills.pil.mod"
@@ -838,7 +750,7 @@ export class d100BCombat extends Combat {
          title: game.i18n.format("SFRPG.Rolls.InitiativeRollFull", {name: combatant.actor.name})
      });*/
     const rollResult = await combatant.actor.rollActionCheck();
-    rollResult.roll.flags = { sfrpg: { finalFormula: rollResult.formula, actionCheck: actor.actioncheck } };
+    rollResult.roll.flags = { d100A: { finalFormula: rollResult.formula, actionCheck: actor.actioncheck } };
     return rollResult.roll;
   }
 
@@ -998,13 +910,13 @@ export class d100BCombat extends Combat {
 
 
 async function onConfigClicked(combat, direction) {
-  const combatType = combat.flags?.sfrpg?.combatType || "normal";
+  const combatType = combat.flags?.d100A?.combatType || "normal";
   const types = ["normal", "starship", "vehicleChase"];
   const indexOf = types.indexOf(combatType);
   const wrappedIndex = (types.length + indexOf + direction) % types.length;
 
   const update = {
-    "flags.sfrpg.combatType": types[wrappedIndex], "isSpace": combatType == "starship"
+    "flags.d100A.combatType": types[wrappedIndex], "isSpace": combatType == "starship"
   };
   await combat.update(update);
   console.log("combat ", combat)
@@ -1223,3 +1135,18 @@ d100BCombat.chatCardsText = {
 };
 
 
+/**
+    * Is this the first turn? if so set all the combatant flags
+   */
+/*  if ((this.turn == null) && (this.phase = 0) && (this.action >= 0)) {
+    console.log("hi ")
+    await this.setActiveCombatants()
+    console.log(this.combatants)
+ 
+  }
+    */
+/************************************************************** */
+
+/**
+ *  Determine the turn Status are there more valid turns, and who is next   
+ */

@@ -104,6 +104,7 @@ export default class CounterManagement {
 */
                 html.on('click', '.counter-token', function(event) {
                     event.preventDefault();
+                    dfg 
                     console.log("html.on('click', '.counter-token', function(event) {")
                     const counterToken = event.currentTarget;
                     const combatantId = counterToken.dataset.combatantId;

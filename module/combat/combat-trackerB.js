@@ -1,5 +1,8 @@
 
 // ui.combat combat.viewed
+
+import { d100ACombatantConfig } from "./combatant-config.js";
+
 export class d100BCombatTracker extends CombatTracker {
 	static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
@@ -20,8 +23,8 @@ context.notBegun = false
 context.inTurns = false
 
 if ((context.round === 0) && !context.turn) context.notBegun = true
-if ((!(context.round === 0)) && !context.turn) context.endOfAction = true
-if ((!(context.round === 0)) && !!context.turn) context.inTurns = true
+if ((!(context.round === 0)) && (context.turn === null)) context.endOfAction = true
+if ((!(context.round === 0)) && (!(context.turn === null))) context.inTurns = true
 
 if  (["starship"].includes(context.combat?.flags?.d100A?.combatType)){
 for(let currentTurn of context.turns){
@@ -113,7 +116,7 @@ if  (["normal"].includes(context.combat?.flags?.d100A?.combatType)){
     const combatants = tracker.find(".combatant");
  //console.log("Tracker", tracker)
     // Create new Combat encounter
-    html.find(".combat-controlx").click(ev => this._delayTurnx(ev));
+    html.find(".combat-control-skip").click(ev => this._delayTurn(ev));
 
     html.find(".combat-control-update").click(ev => this._update(ev));
 
@@ -129,7 +132,7 @@ if  (["normal"].includes(context.combat?.flags?.d100A?.combatType)){
   }
 
 
-  async _delayTurnx(event) {
+  async _delayTurn(event) {
     const combat = this.viewed;
     const btn = event.currentTarget;
 
@@ -137,7 +140,7 @@ if  (["normal"].includes(context.combat?.flags?.d100A?.combatType)){
 
     switch (btn.dataset.control) {
 
-      case "delayTurnx": await combat.delayTurn(btn.dataset.control)
+      case "delayTurn": await combat.nextTurn(true)
   }
   }
 
@@ -252,7 +255,7 @@ console.log(btn)
    * @return {Promise}      A Promise that resolves once the pan is complete
    * @private
    */
-  async _onCombatantMouseDown(event) {
+  async x_onCombatantMouseDown(event) {
     event.preventDefault();
 
     const li = event.currentTarget;
@@ -296,6 +299,57 @@ console.log(btn)
     if ( !combatant.token.object.visible ) return ui.notifications.warn(game.i18n.localize("COMBAT.PingInvisibleToken"));
     await canvas.ping(combatant.token.object.center);
   }
+/* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _contextMenu(html) {
+    ContextMenu.create(this, html, ".directory-item", this._getEntryContextOptions());
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the Combatant entry context options
+   * @returns {object[]}   The Combatant entry context options
+   * @private
+   */
+  _getEntryContextOptions() {
+    return [
+      {
+        name: "COMBAT.CombatantUpdate",
+        icon: '<i class="fas fa-edit"></i>',
+        callback: this._onConfigureCombatant.bind(this)
+      },
+      {
+        name: "COMBAT.CombatantClear",
+        icon: '<i class="fas fa-undo"></i>',
+        condition: li => {
+          const combatant = this.viewed.combatants.get(li.data("combatant-id"));
+          return Number.isNumeric(combatant?.initiative);
+        },
+        callback: li => {
+          const combatant = this.viewed.combatants.get(li.data("combatant-id"));
+          if ( combatant ) return combatant.update({initiative: null});
+        }
+      },
+      {
+        name: "COMBAT.CombatantReroll",
+        icon: '<i class="fas fa-dice-d20"></i>',
+        callback: li => {
+          const combatant = this.viewed.combatants.get(li.data("combatant-id"));
+          if ( combatant ) return this.viewed.rollInitiative([combatant.id]);
+        }
+      },
+      {
+        name: "COMBAT.CombatantRemove",
+        icon: '<i class="fas fa-trash"></i>',
+        callback: li => {
+          const combatant = this.viewed.combatants.get(li.data("combatant-id"));
+          if ( combatant ) return combatant.delete();
+        }
+      }
+    ];
+  }
 
   /**
    * Display a dialog which prompts the user to enter a new initiative value for a Combatant
@@ -303,8 +357,9 @@ console.log(btn)
    * @private
    */
   _onConfigureCombatant(li) {
+  
     const combatant = this.viewed.combatants.get(li.data("combatant-id"));
-    new CombatantConfig(combatant, {
+    new d100ACombatantConfig(combatant, {
       top: Math.min(li[0].offsetTop, window.innerHeight - 350),
       left: window.innerWidth - 720,
       width: 400

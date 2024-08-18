@@ -1,5 +1,6 @@
 import { d100NPCCrewStats } from "../../module/modifiers/d100mod.js";
 import { d100A } from "../d100Aconfig.js";
+import { roundToRoundB } from "../utilities.js";
 /**
  * Extend the base Actor document to support attributes and groups with a custom template creation dialog.
  * @extends {Actor}
@@ -16,12 +17,15 @@ export class d100BCombatant extends Combatant {
 
   get isInitStunned() {
     const effects = this.actor.effects.map(c => {
+      console.log(c)
       if (c.name.includes("Knocked")) { return { round: c.duration.startRound, } }
     });
-   // console.log(effects)
+    console.log(effects)
+if(!effects[0]) return false
+
     if (effects.length > 0) {
       // stunned PC's can only act on marginal round after being stunned
-      const roundafter = !(this.combat.roundB == effects[0].round)
+      const roundafter = !(this.combat.roundB == roundToRoundB(effects[0].round))
       console.log("roundafter ", roundafter)
       if ((this.combat.phase == 3) && this.flags.d100A.canAct /* this is for piloting*/ && roundafter){
         console.log("here")
@@ -32,7 +36,29 @@ export class d100BCombatant extends Combatant {
     }
     return false
   }
+resetActions(){
+ 
+    const update = foundry.utils.duplicate(this.flags)
+    update.d100A.actions.remaining = value
+    console.log(value, update)
+    const reply = this.update({flags:update});
+    console.log("\nreply", reply)
+  
 
+}
+
+  get actionsRemaining() {
+    return this.flags.d100A.actions.remaining
+
+  }
+
+  set actionsRemaining(value) {
+    const update = foundry.utils.duplicate(this.flags)
+    update.d100A.actions.remaining = value
+    console.log(value, update)
+    const reply = this.update({flags:update});
+    console.log("\nreply", reply)
+  }
 
     get canAct(){
       // console.log(c)
@@ -57,6 +83,8 @@ export class d100BCombatant extends Combatant {
     if (this.initiative <= actionCheck.ordinary) return "ordinary";
     return "marginal";
   }
+
+  //get crewRole() {}
 
   prepareDerivedData() {
     // Check for video source and save it if present

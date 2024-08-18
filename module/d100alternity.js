@@ -35,7 +35,7 @@ import { Diced100 } from "./dice.js";
 import { ItemSFRPG } from "./item/item.js";
 
 import { d100ASceneConfig } from "./d100ASceneConfig.js";
-import { d100ACombatantConfig } from "./combat/combatant-config.js";
+//import { d100ACombatantConfig } from "./combat/combatant-config.js";
 import { d100AScene} from "./d100AScene.js";
 import { ItemSheetSFRPG } from "./item/sheet.js";
 import { ItemCollectionSheet } from './apps/item-collection-sheet.js';
@@ -169,10 +169,12 @@ Hooks.once("init", function() {
       // Misc
       ActorSheetFlags,            
       d100AToken,
-      d100AModifierApplication,            
+      d100AModifierApplication,     
+     // d100ACombatantConfig       
       //TraitSelectorSFRPG
     },
     //d100Actor,
+ 
     d100AActorSheetCharacter,
     d100AActorSheetNPC,
     ItemSheetSFRPG,
@@ -190,7 +192,7 @@ Hooks.once("init", function() {
     d100AModifierApplication  ,
     ActorSheetFlags, 
     AbilityTemplate,
-    d100ACombatantConfig,
+    //d100ACombatantConfig,
     engine,
         // Namespace style
         Actor: {
@@ -229,6 +231,7 @@ Hooks.once("init", function() {
   CONFIG.Item.documentClass = ItemSFRPG;
   CONFIG.Token.documentClass = d100ATokenDoc;
   CONFIG.Token.objectClass = d100AToken;
+ 
   //CONFIG.Combatant.documentClass = d100ACombatantConfig;
 
 
@@ -244,7 +247,7 @@ Hooks.once("init", function() {
 
 
   CONFIG.Scene.documentClass = d100AScene;
-  CONFIG.Combatant.documentClass = d100ACombatantConfig;
+ // CONFIG.Combatant.documentClass = d100ACombatantConfig;
   //CONFIG.fontFamilies.push("serpentine");
   //CONFIG.defaultFontFamily = "serpentine";
 
@@ -283,7 +286,7 @@ Hooks.once("init", function() {
   Items.registerSheet("Alternityd100", ItemSheetSFRPG, { makeDefault: true });
   //TokenHUD.registerSheet("Alternityd100", d100Hud,       { types: ["TokenHUD"],       makeDefault: true });
   Scenes.registerSheet("Alternityd100", d100ASceneConfig, { makeDefault: true });
-  DocumentSheetConfig.registerSheet("Alternityd100", d100ACombatantConfig , { makeDefault: true });
+ // Combatant.registerSheet("Alternityd100", d100ACombatantConfig , { makeDefault: true });
 
 registerSystemRules(game.Alternityd100.engine);
 registerSystemSettings();

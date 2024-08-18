@@ -3,7 +3,7 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../..
 export default function (engine) {
     engine.closures.add("calculateHitpoints", (fact, context) => {
         const data = fact.actor.system;
-        console.log(fact,context)
+     //   console.log(fact,context)
        if(["character","npc"].includes(fact.actor.type)){
         data.attributes.mor.base = Math.ceil(data.abilities.con.value/2);
         data.attributes.wou.base = data.abilities.con.value;
@@ -32,10 +32,10 @@ export default function (engine) {
            try {
             const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({maximize: true});
             computedBonus = roll.total;
-            console.log(roll,bonus.modifier,computedBonus )
+   //         console.log(roll,bonus.modifier,computedBonus )
             } catch {}
 
-           console.log(computedBonus,bonus,localizationKey)
+      //     console.log(computedBonus,bonus,localizationKey)
             if (computedBonus !== 0 && localizationKey) {
                // console.log(item)
                 item.tooltip.push(game.i18n.format(localizationKey, {
@@ -52,7 +52,7 @@ export default function (engine) {
         let hpMaxMor = data.attributes.mor.base; 
         let hpMaxCri = 0
        
-        console.log("fact", fact,"\nData", data,"\n")
+     //   console.log("fact", fact,"\nData", data,"\n")
         if (fact.type == "starship"){
             //hpMaxCri = data.attributes.cri.base;
             if(fact.actor.system.frame.system){
@@ -107,7 +107,7 @@ export default function (engine) {
         });
        // console.log("filteredModifiers", filteredModifiers,context)
         filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context);
-        console.log ("\nfilteredModifiers\n", filteredModifiers)
+    //    console.log ("\nfilteredModifiers\n", filteredModifiers)
         
         //Stin
         
@@ -115,12 +115,12 @@ export default function (engine) {
 
         // These Calculations only work for untypes bonus's. As Alternity doesn't have bonus "types" it can probably be altered
         let bonusStu = Object.entries(filteredModifiers).reduce((sum, mod) => {
-            console.log("mod\n" ,mod,"\nmod 0\n" , mod[0],"\nmod 1\n" ,mod[1]) // (2) ['ability', null] 'ability' null
+         //   console.log("mod\n" ,mod,"\nmod 0\n" , mod[0],"\nmod 1\n" ,mod[1]) // (2) ['ability', null] 'ability' null
             if (mod[1] === null || mod[1].length < 1) return sum;
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
                 for (const bonus of mod[1]) {
-                    console.log("\nbonus\n" ,bonus)
+        //            console.log("\nbonus\n" ,bonus)
                     if(bonus.valueAffected == "stu") sum += addModifier(bonus, data, data.attributes.stu, "SFRPG.AbilityScoreBonusTooltip");
                 }
             } else {

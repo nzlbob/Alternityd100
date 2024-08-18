@@ -15,12 +15,15 @@ export class d100AToken extends Token {
     return this.document.rotation;
   }
 
+//  this does nothing now, gone to createCombatants d100TokenDoc
+
   /**
    * Add or remove the currently controlled Tokens from the active combat encounter
    * @param {Combat} [combat]    A specific combat encounter to which this Token should be added
    * @returns {Promise<Token>} The Token which initiated the toggle
    */
   async toggleCombat(state = true, combat = null, { token = null } = {}) {
+    console.log(this)
     if (!(this.actor.type == "starship")) {
       // Process each controlled token, as well as the reference token
       const tokens = this.layer.controlled.filter(t => t.inCombat !== state);
@@ -129,7 +132,7 @@ export class d100AToken extends Token {
    * @param {number} mode   The mode from CONST.TOKEN_DISPLAY_MODES
    * @returns {boolean}      Is the attribute viewable?
    */
-  _canViewMode(mode) {
+  _xxxxcanViewMode(mode) {
     if (mode === CONST.TOKEN_DISPLAY_MODES.NONE) return false;
     else if (mode === CONST.TOKEN_DISPLAY_MODES.ALWAYS) return true;
     else if (mode === CONST.TOKEN_DISPLAY_MODES.CONTROL) return this.controlled;

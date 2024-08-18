@@ -264,8 +264,8 @@ this.object.light.data.rotation = 90
         return this._onRotateClick(event);
      // case "config":
      //   return this._onTokenConfig(event);
-     // case "combat":
-     //   return this._onToggleCombat(event);
+      case "d100combat":
+        return this.onToggleCombat(event); // this changed in V12
      // case "target":
      //   return this._onToggleTarget(event);
      // case "effects":
@@ -346,12 +346,12 @@ console.log(this.object.document.update({[input.name]: isDelta ? current + value
   }
 
   /* -------------------------------------------- */
-
+//  this does nothing now, gone to createCombatants d100TokenDoc
   /**
    * Toggle Token combat state
    * @private
    */
-  async _onToggleCombat(event) {
+  async onToggleCombat(event) {
     event.preventDefault();
     await this.object.toggleCombat();
     console.log("combat",this)

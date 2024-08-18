@@ -17,6 +17,16 @@ export function raytodeg(ray) {
     return Math.floor(Math.normalizeDegrees(Math.toDegrees(ray.angle)+90) )
 }
 
+export function roundToRoundB(round){
+    const naction = Math.trunc(round / 10000)
+    const nphase = Math.trunc((round - (naction * 10000)) / 1000)
+    const nround = round - naction * 10000 - nphase * 1000
+    //const phase = this.round
+    return nround
+      
+
+}
+
 /**
  * Determine if a ray of terms contains a DiceTerm.
  * 
