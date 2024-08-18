@@ -15,8 +15,10 @@ export class d100AToken extends Token {
     return this.document.rotation;
   }
 
-//  this does nothing now, gone to createCombatants d100TokenDoc
-
+  //-----------------------------------------------------------------------------//
+  //  IN V12 this does nothing now, gone to createCombatants d100TokenDoc        //
+  //  However still used for alternity                                           //
+  //-----------------------------------------------------------------------------//
   /**
    * Add or remove the currently controlled Tokens from the active combat encounter
    * @param {Combat} [combat]    A specific combat encounter to which this Token should be added
@@ -45,7 +47,7 @@ export class d100AToken extends Token {
       if (state) {
         const createData = []
         for (let tokena of tokens) {
-          
+
           if (tokena.actor.type == "vehicle") {
             console.log(tokena)
             console.log(tokena.actor)
@@ -69,17 +71,17 @@ export class d100AToken extends Token {
           }
           if (tokena.actor.type == "character") {
             createData.push({
-            tokenId: tokena.id,
-            sceneId: tokena.scene.id,
-            actorId: tokena.document.actorId,
-            hidden: tokena.document.hidden
-          });
+              tokenId: tokena.id,
+              sceneId: tokena.scene.id,
+              actorId: tokena.document.actorId,
+              hidden: tokena.document.hidden
+            });
+          }
+
         }
-          
-        }
-       
-       
-       
+
+
+
         /* const createData = tokens.map(t => {
           return {
             tokenId: t.id,
@@ -211,7 +213,7 @@ export class d100AToken extends Token {
         if (tokena.actor.system.crew?.useNPCCrew) {
 
           for (let [ck, cv] of Object.entries(tokena.actor.system.crew.npcData)) {
-            // console.log(ck, cv,tokena)
+             console.log(ck, cv,tokena)
             //if (!["npcData","useNPCCrew"].includes(ck) )
             if (cv.active) {
               for (let i = 0; i < cv.number; i++) {

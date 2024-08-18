@@ -153,12 +153,15 @@ export class d100BCombat extends Combat {
     this.roundB = 1
     this.action = 0
     this.turn = null
+    
     const updates = this.combatants.map(c => {
+      const isNpcCrew = c.actor.isNpcCrew? true : false
       return {
         _id: c.id,
         // initiative: null,
         flags: {
           d100A: {
+            isNpcCrew : isNpcCrew,
             actions: {
               total: c.apr,
               remaining: c.apr
@@ -196,7 +199,7 @@ export class d100BCombat extends Combat {
     const status = this.nextTurnStatus()
 
     if (status.moreValidTurns){
-      werertwer
+      //werertwer
       await this._handleUpdate(1, 0, 0, status.nextTurn);
     }
     else {

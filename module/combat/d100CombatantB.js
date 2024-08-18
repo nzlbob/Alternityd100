@@ -84,7 +84,28 @@ resetActions(){
     return "marginal";
   }
 
-  //get crewRole() {}
+get isNpcCrew()
+
+{
+  const combat = this.parent
+  const isNPCCrew = this.token?.actor?.system?.crew?.useNPCCrew  //  console.log("combat",combat,combat.flags.sfrpg?.combatType,this,this.token.actor.type)
+  const crewed = ["vehicle", "starship","mount"].includes(this.token.actor.type) //!(combat.flags.d100A?.combatType == "starship")
+  if (crewed && isNPCCrew) return true
+  return false
+}
+
+  get crewRole() {
+    if (this.isNpcCrew)
+{
+ 
+
+
+}
+
+else {
+  return this.actor.getCrewRoleForActor()}
+
+  }
 
   prepareDerivedData() {
     // Check for video source and save it if present
@@ -99,6 +120,7 @@ resetActions(){
     if (!this.flags.d100A) {
       //console.log("*******************************************************")
       this.flags = {
+        npcCrew:false,
         d100A: {
           actions: {
             

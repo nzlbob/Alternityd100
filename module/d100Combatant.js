@@ -107,10 +107,11 @@ async rollInitiative(formula) {
 const crewman = {
   name:this.flags.crewRole+"-"+(this.flags.npcNo+1),
   effects:[],
-
+ isNpcCrew : true,
   system:{
     attributes:{
       actchk: this.getnpcdata().actchk
+      
     },
     skills : this.getnpcdata().skills
   },

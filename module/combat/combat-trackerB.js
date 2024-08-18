@@ -32,7 +32,7 @@ for(let currentTurn of context.turns){
     //  console.log( "currentCombatant", currentCombatant)
     currentTurn.crewmember = {"name" : currentCombatant.actor?.name || currentCombatant.npcActor?.name}
     currentTurn.canAct = currentCombatant.canAct 
-    currentTurn.crewRole = currentCombatant.flags.d100A.crewRole 
+    currentTurn.crewRole = currentCombatant.flags.crewRole 
     currentTurn.isPilot = false;
     currentTurn.image = "";
     currentTurn.actions = currentCombatant.flags.d100A.actions.remaining
@@ -61,7 +61,7 @@ if  (["normal"].includes(context.combat?.flags?.d100A?.combatType)){
      // currentTurn.currentCombatant = currentCombatant
       if (currentCombatant.token.actor.type == "vehicle"){
         currentTurn.crewmember = {"name" : currentCombatant.actor?.name || currentCombatant.npcActor?.name}
-        currentTurn.crewRole = currentCombatant.flags.d100A.crewRole 
+        currentTurn.crewRole = currentCombatant.flags.crewRole 
       }
       //currentTurn.crewRole = currentCombatant.flags.crewRole
       //currentTurn.isPilot = false;
