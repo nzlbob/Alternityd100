@@ -35,7 +35,7 @@ for(let currentTurn of context.turns){
     currentTurn.crewRole = currentCombatant.flags.crewRole 
     currentTurn.isPilot = false;
     currentTurn.image = "";
-    currentTurn.actions = currentCombatant.flags.d100A.actions.remaining
+    currentTurn.actions = currentCombatant.flags.d100A?.actions?.remaining
     currentTurn.apr = currentCombatant.apr
       if (["Pilot","Copilot","pilot","copilot"].includes(currentTurn.crewRole)){
         currentTurn.isPilot = true
@@ -54,14 +54,14 @@ if  (["normal"].includes(context.combat?.flags?.d100A?.combatType)){
   //      console.log( "currentCombatant", currentCombatant)
       //currentTurn.crewmember = {"name" : currentCombatant.actor.name}
       currentTurn.canAct = currentCombatant.canAct
-      currentTurn.actions = currentCombatant.flags.d100A.actions.remaining
+      currentTurn.actions = currentCombatant.flags?.d100A?.actions?.remaining
       currentTurn.apr = currentCombatant.apr
-      currentTurn.down = !(currentCombatant.flags.d100A.downround == "-")
-      currentTurn.downround = currentCombatant.flags.d100A.downround
+      currentTurn.down = !(currentCombatant.flags?.d100A?.downround == "-")
+      currentTurn.downround = currentCombatant.flags?.d100A?.downround
      // currentTurn.currentCombatant = currentCombatant
       if (currentCombatant.token.actor.type == "vehicle"){
         currentTurn.crewmember = {"name" : currentCombatant.actor?.name || currentCombatant.npcActor?.name}
-        currentTurn.crewRole = currentCombatant.flags.crewRole 
+        currentTurn.crewRole = currentCombatant.flags?.crewRole 
       }
       //currentTurn.crewRole = currentCombatant.flags.crewRole
       //currentTurn.isPilot = false;

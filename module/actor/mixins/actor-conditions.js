@@ -32,7 +32,7 @@ console.log(conditionName,enabled )
         // Reflect state on tokens
         const tokens = this.getActiveTokens(true);
         for (const token of tokens) {
-            await token.toggleEffect(d100A.statusEffectIconMapping[conditionName], {active: enabled});
+            await token.actor.toggleStatusEffect(d100A.statusEffectIconMapping[conditionName], {active: enabled});
         }
 
         // Update condition item

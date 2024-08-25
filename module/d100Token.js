@@ -240,7 +240,7 @@ export class d100AToken extends Token {
       }
 
 
-      console.log(createData)
+      console.log("createData",createData)
       let crewman = await combat.createEmbeddedDocuments("Combatant", createData);
       for (let a; a < createData.length; a++) {
 

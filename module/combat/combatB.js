@@ -62,15 +62,18 @@ export class d100BCombat extends Combat {
    */
 
   _preCreate(data, options, user) {
-    const combatType =  this.scene.isStarship? "starship" :  "normal"
+    const combatType = this.scene.isStarship ? "starship" : "normal"
     const update = {
       "flags.d100A.combatType": combatType,
-  //    "flags.d100A.lastuserAct": false,
-  //    "flags.d100A.isPiloted": false,
+      //    "flags.d100A.lastuserAct": false,
+      //    "flags.d100A.isPiloted": false,
       "flags.d100A.counter": 0,
-      "flags.d100A.phase": 0
+      "flags.d100A.phase": 0,
+      "flags.d100A.action": 0,
+      "flags.d100A.resetInit": false,
+
     };
-    
+
 
     this.updateSource(update);
     return super._preCreate(data, options, user);
@@ -147,21 +150,22 @@ export class d100BCombat extends Combat {
 
     const update = {
       "flags.d100A.combatType": this.getCombatType(),
+      "flags.d100A.firstAction": true
     };
     await this.update(update);
     this.phase = 0
     this.roundB = 1
     this.action = 0
     this.turn = null
-    
+
     const updates = this.combatants.map(c => {
-      const isNpcCrew = c.actor.isNpcCrew? true : false
+      const isNpcCrew = c.actor.isNpcCrew ? true : false
       return {
         _id: c.id,
         // initiative: null,
         flags: {
           d100A: {
-            isNpcCrew : isNpcCrew,
+            isNpcCrew: isNpcCrew,
             actions: {
               total: c.apr,
               remaining: c.apr
@@ -197,16 +201,16 @@ export class d100BCombat extends Combat {
     Hooks.callAll("combatStart", this, updateData);
     this.update(updateData);
     const status = this.nextTurnStatus()
-
-    if (status.moreValidTurns){
-      //werertwer
-      await this._handleUpdate(1, 0, 0, status.nextTurn);
-    }
-    else {
-      this.GMUpdate()
-
-    }
-
+    /*
+        if (status.moreValidTurns){
+          //werertwer
+          await this._handleUpdate(1, 0, 0, status.nextTurn);
+        }
+        else {
+          this.GMUpdate()
+    
+        }
+    */
 
 
   }
@@ -215,7 +219,9 @@ export class d100BCombat extends Combat {
     const turnstatus = {
       moreValidTurns: false,
       thisTurn: this.turn,
-      nextTurn: -1
+      nextTurn: null,
+      resetInitiative: false
+
     }
     let turn = this.turn ?? -1;
     console.log("Turn ", turn)
@@ -225,58 +231,107 @@ export class d100BCombat extends Combat {
     const whoCanAct = this.getSubPhases()[this.action].whoCanAct
     console.log(whoCanAct)
     for (let [i, t] of this.turns.entries()) {
-      console.log("t ",t.name, t, t.flags.crewRole)
-      if (whoCanAct.includes("all") ){
-      console.log("t ", t)
-      if (i <= turn) continue;
-      if (skip && t.isDefeated) continue;
-      if (!t.canAct) continue;// Alt
-      if (t.isInitStunned) console.log("here");
-      if (t.isInitStunned) continue;
-      turnstatus.moreValidTurns = true // flag if this is a valid round
-      turnstatus.nextTurn = i;
-      break;
-      }
-      else if (whoCanAct.includes(t.flags.crewRole))
-      {
-       
-        console.log("t ", t)
+      console.log("t ", t.name, t, t.flags.crewRole)
+      if (whoCanAct.includes("all")) {
+        console.log("t ", t, i, turn, i <= turn)
         if (i <= turn) continue;
         if (skip && t.isDefeated) continue;
-       // if (!t.canAct) continue;// Alt
+        if (!t.canAct) continue;// Alt
         if (t.isInitStunned) console.log("here");
         if (t.isInitStunned) continue;
         turnstatus.moreValidTurns = true // flag if this is a valid round
         turnstatus.nextTurn = i;
         break;
-        }
+      }
+      else if (whoCanAct.includes(t.flags.crewRole)) {
+
+        console.log("t ", t)
+        if (i <= turn) continue;
+        if (skip && t.isDefeated) continue;
+        // if (!t.canAct) continue;// Alt
+        if (t.isInitStunned) console.log("here");
+        if (t.isInitStunned) continue;
+        turnstatus.moreValidTurns = true // flag if this is a valid round
+        turnstatus.nextTurn = i;
+        break;
+      }
     }
+    // See if rest init
+    if (turnstatus.moreValidTurns == false) {
+      turnstatus.resetInitiative = this.getPhases()[this.phase].resetInitiative && this.getSubPhases()[this.action].resetInitiative
+
+    }
+
+
     //if (nextTurn == -1)  // Means there are no more turns left this phase
     return turnstatus
   }
   async GMUpdate() {
+
+    // when turn is null (last PC turn taken)  need to apply pending damage 
+    // if this is the last action / phase / turn = null and flag is down 
+    // increment to new round 
+    // clear init, 
+    // reset actions
+    // let peple roll init / change roles
+    // Raise a flag  
+    // if flag is raised 
+    // lower flag 
+    // roll any empty init 
     const updateOptions = {};
     const phases = this.getPhases();
     const actions = this.getSubPhases();
     let oldAction = this.action
     let oldPhase = this.phase
     let oldRound = this.roundB
-    let newAction = this.action
+    const origRound = oldRound
+    let newAction =  this.action
     let newPhase = this.phase
     let newRound = this.roundB
-    console.log("Details ", this.roundB, this.phase, this.action, this.turn, !this.turn)
+    let runFirstLoop = false
+  /*  if (this.flags.d100A.firstAction) {
+      runFirstLoop = true
+      const update = { "flags.d100A.firstAction": false };
+      this.update(update);
+    }*/
+    const resetTime = (oldAction == (actions.length -1))  && (oldPhase == (phases.length - 1))
+    runFirstLoop = (oldAction == 0)  && (oldPhase == 0) && this.flags.d100A.firstAction
+    
+    if (actions[oldAction].killActors) this.killActors()
 
-    if ((!(this.round === 0)) && !this.turn) this.endOfAction = true
-    if ((!(this.round === 0)) && !!this.turn) this.inTurns = true
+    /*console.log("resetTime",resetTime,runTime)
+   
+    let resetInit = false
+    const nextTurnStatus = this.nextTurnStatus()
+    console.log("nextTurnStatus", nextTurnStatus)
+       //this needs to run each new round otherwise it skips the first action
+    if (this.flags.d100A.firstAction) {
+      firstAction = true
+      const update = { "flags.d100A.firstAction": false };
+      await this.update(update);
+    }
+    if (this.flags.d100A.resetInit) {
+      resetInit = true
+      const update = { "flags.d100A.resetInit": false };
+      await this.update(update);
+    }*/
+    if (resetTime) {
+      this.resetActions()
+      await this._handleUpdate(this.roundB + 1 , 0, 0, null, {}, true);
+      return
 
-    if (this.endOfAction) {
+    }
+
+  //  if ((!(this.round === 0)) && !this.turn) this.endOfAction = true
+   // if ((!(this.round === 0)) && !!this.turn) this.inTurns = true
       // check Initiative  
-
       //await this._handleUpdate(this.roundB, this.phase, this.action, 0);
-      console.log("Details ", this.turn, this.action, this.phase, this.roundB, this.nextTurnStatus())
+      console.log("Details PhaseCalc", this.turn, this.action, this.phase, this.roundB, this.nextTurnStatus())
 
-
-      if (true /*!this.nextTurnStatus().moreValidTurns*/) {
+      if (runFirstLoop) {
+        newAction = -1
+      }
+      if (true) {
         let loop = 0
         do {
           oldAction = newAction
@@ -284,7 +339,9 @@ export class d100BCombat extends Combat {
           oldRound = newRound
           newAction = (oldAction + 1) % actions.length
           newPhase = (oldPhase + Math.floor((oldAction + 1) / actions.length)) % phases.length
-          newRound = (oldRound + Math.floor((oldPhase + 1) / phases.length))
+
+          newRound = (oldRound + Math.floor((oldPhase + (Math.floor((oldAction + 1) / actions.length))) / phases.length))
+          console.log("PhaseCalc", newRound, oldRound, newPhase, oldPhase, Math.floor((oldPhase + 1) / phases.length), phases.length)
           await this._handleUpdate(newRound, newPhase, newAction);
           //await this.setActiveCombatants()
           console.log("Details ", this.turn, this.action, this.phase, this.roundB, this.nextTurnStatus())
@@ -298,22 +355,51 @@ export class d100BCombat extends Combat {
       const advanceTime = CONFIG.time.turnTime;
       updateOptions.advanceTime = advanceTime + CONFIG.time.roundTime;
       updateOptions.direction = 1;
-      await this._handleUpdate(newRound, newPhase, newAction, this.nextTurnStatus().nextTurn, updateOptions);
+      await this._handleUpdate(newRound, newPhase, newAction, this.nextTurnStatus().nextTurn, updateOptions,false);
+
+      // If this is a new round 
+
+      console.log(!!(newRound - oldRound), newRound - oldRound, newRound, oldRound)
+      // if (!!(newRound-origRound)) this.resetActions()
+
       //await this.setActiveCombatants()
       // await this._handleUpdate(newRound, newPhase, newAction, this.nextTurnStatus().nextTurn, updateOptions);
       //this.updateCombatantActors() 
-    }
+    
 
 
 
 
   }
+
+  async resetActions() {
+    await this.resetAll()
+    const resetInit = this.flags.d100A.resetInit
+    const updates = this.combatants.map(c => {
+
+      return {
+        _id: c.id,
+        flags: { d100A: { actions: { remaining: c.apr } } },
+      }
+    });
+    console.log("updates", updates)
+    await this.updateEmbeddedDocuments("Combatant", updates);
+    console.log(this)
+    this._handleUpdate(this.roundB, this.phase, this.action, null, {},true );
+    console.log(this)
+
+
+  }
+
   async nextTurn(skip = false) {
+
+
     console.log("hi ", this.turn, this.phase, this.action)
     const thisCombatantID = this.current.combatantId
     const nextTurnStatus = this.nextTurnStatus()
+
     const oldcombatant = game.combat.combatants.get(thisCombatantID);
-    console.log("nextTurnStatus - ", nextTurnStatus,oldcombatant)
+    console.log("nextTurnStatus - ", nextTurnStatus, oldcombatant)
     const updateOptions = {};
 
     if (!skip && !!oldcombatant) oldcombatant.actionsRemaining = oldcombatant.actionsRemaining - 1;
@@ -322,26 +408,35 @@ export class d100BCombat extends Combat {
       const advanceTime = Math.max(this.turns.length - this.turn, 0) * CONFIG.time.turnTime;
       updateOptions.advanceTime = advanceTime + CONFIG.time.roundTime;
       updateOptions.direction = 1;
-      await this._handleUpdate(this.roundB, this.phase, this.action, nextTurnStatus.nextTurn, updateOptions);
+      await this._handleUpdate(this.roundB, this.phase, this.action, nextTurnStatus.nextTurn, updateOptions,this.flags.d100A.firstAction);
       return
     }
-    await this._handleUpdate(this.roundB, this.phase, this.action, null, updateOptions);
+
+
+
+    await this._handleUpdate(this.roundB, this.phase, this.action, nextTurnStatus.nextTurn, updateOptions,this.flags.d100A.firstAction);
     return
   }
 
-  async _handleUpdate(nextRound, nextPhase, nextAction, nextTurn, updateOptions = {}) {
+  async _handleUpdate(nextRound, nextPhase, nextAction, nextTurn, updateOptions = {}, firstAction = false) {
+    console.log("nextTurn ", nextTurn, firstAction)
     const newround = nextAction * 10000 + nextPhase * 1000 + nextRound
     const update = {
       round: newround,
-      turn: nextTurn
+      turn: nextTurn,
+      "flags.d100A.phase": nextPhase,
+      "flags.d100A.action": nextAction,
+      "flags.d100A.firstAction": firstAction,
     };
-    console.log("round ", newround)
+    console.log("round ", newround,firstAction)
+    console.log("update.turn ", update)
     Hooks.callAll("combatTurn", this, update, updateOptions);
     await this.update(update, updateOptions);
+    console.log("turn ", this)
   }
 
   async _notifyBeforeUpdate(eventData) {
-     console.log(["_notifyBeforeUpdate", eventData]);
+    console.log(["_notifyBeforeUpdate", eventData]);
     // console.log([isNewRound, isNewPhase, isNewTurn]);
     // console.log([this.round, this.flags.sfrpg.phase, this.turn]);
 
@@ -647,6 +742,19 @@ export class d100BCombat extends Combat {
     while (nextTurn.maintainCombat);
     //  console.log("\ngetIndexOfFirstUndefeatedCombatant()\n - maintainCombat - ", nextTurn.maintainCombat)
     return nextTurn.maintainCombat;
+  }
+
+  async killActors() {
+
+    for (let c of this.combatants) {
+      console.log(c)
+      let flagdown = false
+
+      let stunned = await c.token.actor.sheet._onApplyPendingDamage()
+      let downround = 0
+      console.log("newflagdown ", c.name, stunned)
+    }
+
   }
 
   async xxxxsetActiveCombatants() { //thisTurn
@@ -987,7 +1095,7 @@ d100BCombat.normalCombat = {
     {
       name: "SFRPG.Combat.Normal.Phases.1.Name",
       iterateTurns: true,
-      resetInitiative: true
+      resetInitiative: false
     },
     {
       name: "SFRPG.Combat.Normal.Phases.2.Name",
@@ -1002,7 +1110,7 @@ d100BCombat.normalCombat = {
     {
       name: "SFRPG.Combat.Normal.Phases.4.Name",
       iterateTurns: true,
-      resetInitiative: false
+      resetInitiative: true
     }
 
   ],
@@ -1014,7 +1122,8 @@ d100BCombat.normalCombat = {
       iterateTurns: true,
       resetInitiative: true,
       whoCanAct: ["all"],
-      piloting: false
+      piloting: false,
+      killActors: true
     }
   ]
 };
@@ -1027,7 +1136,7 @@ d100BCombat.starshipCombat = {
       name: "SFRPG.Combat.Starship.Phases.1.Name",
       description: "SFRPG.Combat.Starship.Phases.1.Description",
       iterateTurns: true,
-      resetInitiative: true
+      resetInitiative: false
     },
     {
       name: "SFRPG.Combat.Starship.Phases.2.Name",
@@ -1045,7 +1154,7 @@ d100BCombat.starshipCombat = {
       name: "SFRPG.Combat.Starship.Phases.4.Name",
       description: "SFRPG.Combat.Starship.Phases.4.Description",
       iterateTurns: true,
-      resetInitiative: false
+      resetInitiative: true
     }
   ],
   subPhases: [
@@ -1054,17 +1163,19 @@ d100BCombat.starshipCombat = {
       name: "SFRPG.Combat.Starship.SubPhases.1.Name",
       description: "SFRPG.Combat.Starship.SubPhases.1.Description",
       iterateTurns: true,
-      resetInitiative: true,
+      resetInitiative: false,
       whoCanAct: ["Pilot", "Copilot", "pilot", "copilot"],
-      piloting: true
+      piloting: true,
+      killActors: false
     },
     {
       name: "SFRPG.Combat.Starship.SubPhases.2.Name",
       description: "SFRPG.Combat.Starship.SubPhases.2.Description",
       iterateTurns: true,
-      resetInitiative: false,
+      resetInitiative: true,
       whoCanAct: ["all"],
-      piloting: false
+      piloting: false,
+      killActors: true
     }
   ]
 };
@@ -1098,7 +1209,7 @@ d100BCombat.vehicleChase = {
       name: "SFRPG.Combat.Starship.SubPhases.1.Name",
       description: "SFRPG.Combat.Starship.SubPhases.1.Description",
       iterateTurns: true,
-      resetInitiative: true,
+      resetInitiative: false,
       whoCanAct: ["Pilot", "Copilot", "pilot", "copilot"],
       piloting: true
     },
@@ -1106,7 +1217,7 @@ d100BCombat.vehicleChase = {
       name: "SFRPG.Combat.Starship.SubPhases.2.Name",
       description: "SFRPG.Combat.Starship.SubPhases.2.Description",
       iterateTurns: true,
-      resetInitiative: false,
+      resetInitiative: true,
       whoCanAct: ["all"],
       piloting: false
     }

@@ -113,29 +113,11 @@ else {
 
     // Assign image for combatant (undefined if the token src image is a video)
     this.img ||= (this._videoSrc ? undefined : (this.token?.texture.src || this.actor?.img));
-    this.name ||= this.token?.name || this.actor?.name || game.i18n.localize("COMBAT.UnknownCombatant");
+    this.name ||= this.token?.name || this.actor.name || game.i18n.localize("COMBAT.UnknownCombatant");
 
     this.updateResource();
 
-    if (!this.flags.d100A) {
-      //console.log("*******************************************************")
-      this.flags = {
-        npcCrew:false,
-        d100A: {
-          actions: {
-            
-            remaining: this.apr
-          },
-          delayed: false,
-      
-          stunned: {
-            isStunned: false,
-            stunnedRound: -1,
-            stunDur: 0
-          }
-        }
-      }
-    }
+
 
 
 
@@ -174,8 +156,10 @@ else {
 
   //npcCrew: true, npcJob:ck, npcNo:i 
   buildNPCCrewman() {
-
-    const crewman = {
+  const ship = this.token.actor
+    const crewman = 
+    {
+      ship: this.token.actor,
       name: this.flags.crewRole + "-" + (this.flags.npcNo + 1), // Give the dude a name
       effects: [],
 
@@ -205,6 +189,13 @@ else {
       getResourcesForCombatTracker() {
         const actorResources = []
         return actorResources;
+      },
+
+      getUserLevel() {
+        console.log(this,ship.getUserLevel() )
+       // return 0
+        return ship.getUserLevel()
+       // return 3;
       }
     }
 

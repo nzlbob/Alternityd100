@@ -1556,7 +1556,8 @@ Combatd100A.normalCombat = {
             iterateTurns: true,
             resetInitiative: true,
             whoCanAct: ["all"],
-            piloting: false
+            piloting: false,
+            updateActors : true
         }
     ]
 };
@@ -1598,7 +1599,8 @@ Combatd100A.starshipCombat = {
             iterateTurns: true,
             resetInitiative: true,
             whoCanAct: ["Pilot", "Copilot", "pilot", "copilot"],
-            piloting: true
+            piloting: true,
+            updateActors : false
         },
         {
             name: "SFRPG.Combat.Starship.SubPhases.2.Name",
@@ -1606,7 +1608,8 @@ Combatd100A.starshipCombat = {
             iterateTurns: true,
             resetInitiative: false,
             whoCanAct: ["all"],
-            piloting: false
+            piloting: false,
+            updateActors : false
         }
     ]
 };
