@@ -432,10 +432,12 @@ export class ActorSheetSFRPG extends ActorSheet {
         if (!actor.isSpaceActor) {
             let isKO = ((attributes.stu.value < 1) || (attributes.wou.value < 1))
             let isDead = (attributes.mor.value < 1)
-            await actor.setCondition("knockedout", isKO)
-
-            actor.update({ "system.attributes": attributes, "system.conditions.knockedout": isKO, "system.conditions.dead": isDead })
-            await actor.setCondition("dead", isDead)
+           // await actor.setCondition("knockedout", isKO)
+            actor.toggleStatusEffect("knockedout", {active:isKO,overlay:true})
+            actor.toggleStatusEffect("dead", {active:isDead,overlay:true})
+            actor.update({ "system.attributes": attributes })
+            //actor.update({ "system.attributes": attributes , "system.conditions.knockedout": isKO, "system.conditions.dead": isDead })
+           // await actor.setCondition("dead", isDead)
             //  (attributes.mor.value < 1) ? await actor.setCondition("dead", true) : await actor.setCondition("dead", false)
 
 

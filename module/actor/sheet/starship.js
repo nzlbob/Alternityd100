@@ -941,7 +941,7 @@ let score = ""
         //html.find('.crew-score').click(event => this._onActionRoll(event));
 
         html.find('.crew-delete').click(this._onRemoveFromCrew.bind(this));
-
+        html.find('.crew-combat').click(this._onCrewCombat.bind(this));
         let handler = ev => this._onDragCrewStart(ev);
         html.find('li.crew').each((i, li) => {
             li.setAttribute("draggable", true);
@@ -992,6 +992,38 @@ let score = ""
 
     }
     
+
+    _onCrewCombat(event) {
+
+       
+        const actorId = $(event.currentTarget).parents('.crew').data('actorId');
+        console.log("Hello",actorId, event)
+        const role = this.actor.getCrewRoleForActor(actorId)
+       const tokena = this.token
+        console.log("Hello",actorId,role)
+        console.log("Token",tokena)
+        const crewactor = game.actors.get(actorId);
+        //if (!["npcData","useNPCCrew"].includes(ck) )
+        console.log("Actor",crewactor)
+       
+
+
+            const createData = [{
+              tokenId: tokena.id,
+              sceneId: tokena.parent.id,
+              ship: tokena.actor,
+              actorId: crewactor.id,
+              hidden: false,
+              flags: { npcCrew: false, crewRole: role }
+            }];
+            
+            const combat = this.token.combatant.combat ?? game.combats.viewed;
+            const crewman = combat.createEmbeddedDocuments("Combatant", createData);
+           
+            //crewman[0].ship = createData[0].actor
+            console.log("crewman",crewman)
+    }
+
     async _onCrewActionRoll(event) {
         console.log("Ping")
         event.preventDefault();
@@ -1442,6 +1474,7 @@ console.log(data,"data")
         event.preventDefault();
 
         const actorId = $(event.currentTarget).parents('.crew').data('actorId');
+        console.log("Hello",actorId)
         this.actor.removeFromCrew(actorId);
     }
 

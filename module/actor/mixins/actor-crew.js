@@ -1,11 +1,13 @@
 export const ActorCrewMixin = (superclass) => class extends superclass {
     async removeFromCrew(actorId) {
+
         const role = this.getCrewRoleForActor(actorId);
+        console.log("role",role)
         if (role) {
             const crewData = foundry.utils.duplicate(this.system.crew);
             crewData[role].actorIds = crewData[role].actorIds.filter(x => x !== actorId);
             return this.update({
-                "data.crew": crewData
+                "system.crew": crewData
             });
         }
         return null;

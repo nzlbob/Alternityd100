@@ -244,7 +244,7 @@ export class d100AToken extends Token {
       let crewman = await combat.createEmbeddedDocuments("Combatant", createData);
       for (let a; a < createData.length; a++) {
 
-        crewman[a].ship = createData[a].actor
+       // crewman[a].ship = createData[a].actor
 
         /*  if (crewman[a].flags.npcCrew){
           crewman[a].npcActor = {name: "NPC-"+ crewman[a].flags.npcJob}

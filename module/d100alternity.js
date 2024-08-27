@@ -680,7 +680,7 @@ Hooks.on("endTurnUpdate",(combat) => {
 
 
 Hooks.on("combatTurn",(combat, updateData, updateOptions) => {
-  console.log("\n A", combat, updateData, updateOptions)
+//  console.log("\n A", combat, updateData, updateOptions)
 
   combat.update(updateData, updateOptions);
           //  for (let c of combat.combatants) {

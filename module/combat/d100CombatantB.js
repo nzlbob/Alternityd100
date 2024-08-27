@@ -6,6 +6,38 @@ import { roundToRoundB } from "../utilities.js";
  * @extends {Actor}
  */
 export class d100BCombatant extends Combatant {
+
+
+
+    /* -------------------------------------------- */
+
+    /**
+     * A boolean indicator for whether the current game User has ownership rights for this Document.
+     * Different Document types may have more specialized rules for what constitutes ownership.
+     * @type {boolean}
+     * @memberof ClientDocumentMixin#
+     */
+    get isOwner() {
+    //  console.log(game.user,)
+      return this.testUserPermission(game.user, "OWNER");
+
+
+
+  /* -------------------------------------------- */
+  /*  Methods                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+ /* testUserPermission(user, permission, {exact=false}={}) {
+    if ( user.isGM ) return true;
+    return this.actor?.canUserModify(user, "update") || false;
+  }
+*/
+
+
+    }
+
+
   /**
    * 
    * @param {*} data actorId defeated flags hidden img initiative name sceneId system tokenId type : "base" _id 
@@ -20,14 +52,14 @@ export class d100BCombatant extends Combatant {
       console.log(c)
       if (c.name.includes("Knocked")) { return { round: c.duration.startRound, } }
     });
-    console.log(effects)
+    console.log(this.name,this.actor,effects)
 if(!effects[0]) return false
 
     if (effects.length > 0) {
       // stunned PC's can only act on marginal round after being stunned
       const roundafter = !(this.combat.roundB == roundToRoundB(effects[0].round))
       console.log("roundafter ", roundafter)
-      if ((this.combat.phase == 3) && this.flags.d100A.canAct /* this is for piloting*/ && roundafter){
+      if ((this.combat.phase == 3) /*&& this.flags.d100A.canAct*/ /* this is for piloting*/ && roundafter){
         console.log("here")
         return false
       }
@@ -55,7 +87,7 @@ resetActions(){
   set actionsRemaining(value) {
     const update = foundry.utils.duplicate(this.flags)
     update.d100A.actions.remaining = value
-    console.log(value, update)
+   // console.log(value, update)
     const reply = this.update({flags:update});
     console.log("\nreply", reply)
   }
@@ -66,7 +98,7 @@ resetActions(){
       const degree = this.initDegree
       const phase = this.combat.phase
       //if (c.flags.acted) return false;
-      if (degree == "") { console.log("init"); return true };
+      if (degree == "")  return true ;
       if (phase == 0 && ["amazing"].includes(degree)) return true
       if (phase == 1 && ["amazing", "good"].includes(degree)) return true
       if (phase == 2 && ["amazing", "good", "ordinary"].includes(degree)) return true
@@ -174,7 +206,10 @@ else {
       defeated: false,
       statuses: new Set,
 
-      canUserModify(user) {
+      canUserModify(user,level) {
+       // canUserModify(user, "update")
+        return ship.canUserModify(user,level)
+
         return true
       },
 

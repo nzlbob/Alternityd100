@@ -62,6 +62,7 @@ export class d100BCombat extends Combat {
    */
 
   _preCreate(data, options, user) {
+    console.log(data)
     const combatType = this.scene.isStarship ? "starship" : "normal"
     const update = {
       "flags.d100A.combatType": combatType,
@@ -84,17 +85,10 @@ export class d100BCombat extends Combat {
   }
 
   set phase(value) {
-    const round = this.round
-    const eaction = Math.trunc(round / 10000)
-    const ephase = Math.trunc((round - (eaction * 10000)) / 1000)
-    const eround = round - eaction * 10000 - ephase * 1000
-    const newround = eaction * 10000 + value * 1000 + eround
-    const update = {
-      round: newround
-    };
-    console.log(value, round)
+
+    const update = { "flags.d100A.phase": value };
     this.update(update);
-    console.log(newround)
+    //   console.log(newround)
     return this._getCurrentState().phase
   }
 
@@ -103,39 +97,81 @@ export class d100BCombat extends Combat {
   }
 
   set roundB(value) {
-    const round = this.round
-    const eaction = Math.trunc(round / 10000)
-    const ephase = Math.trunc((round - (eaction * 10000)) / 1000)
-    const eround = round - eaction * 10000 - ephase * 1000
-    const newround = eaction * 10000 + ephase * 1000 + value
-    const update = {
-      round: newround
-    };
-    console.log(value, round)
+    const update = { "round": value };
     this.update(update);
-    console.log(newround)
-    return this._getCurrentState().phase
+    //  console.log(newround)
+    return this._getCurrentState().round
+  }
+  get action() {
+    return this._getCurrentState().action
+  }
+
+  get turnB() {
+    return this._getCurrentState().turn
+  }
+
+  set turnB(value) {
+    const update = { "turn": value };
+    this.update(update);
+    //  console.log(newround)
+    return this._getCurrentState().turn
   }
   get action() {
     return this._getCurrentState().action
   }
 
   set action(value) {
-    const round = this.round
-    const eaction = Math.trunc(round / 10000)
-    const ephase = Math.trunc((round - (eaction * 10000)) / 1000)
-    const eround = round - eaction * 10000 - ephase * 1000
-    const newround = value * 10000 + ephase * 1000 + eround
-    const update = {
-      round: newround
-    };
-    console.log(value, round)
+    const update = { "flags.d100A.action": value };
     this.update(update);
-    console.log(newround)
-    return this._getCurrentState().phase
+    // console.log(newround)
+    return this._getCurrentState().action
   }
 
+  /* -------------------------------------------- */
 
+  /**
+   * Rewind the combat to the previous turn
+   * @returns {Promise<Combat>}
+   */
+  async previousTurn() {
+    const actions = this.getSubPhases()
+    const numActions = actions.length
+    const phases = this.getPhases()
+    const numPhases = phases.length
+
+    if ((this.turn === 0)) {
+      this.turnB = null;
+      if (this.action == 1) return this.action = 0;
+      if (numActions === 1) {
+        if(this.phase>0){
+        this.phase = this.phase - 1
+        }
+        if(this.phase === 0){
+          this.phase = numPhases - 1
+          this.roundB = this.round - 1
+          }
+      return
+
+      }
+      if (numActions === 2){
+        this.action = 1
+        if(this.phase>0){
+          this.phase = this.phase - 1
+          }
+        
+      } 
+
+
+    }
+    if ((this.turn === null) && (this.round === 0) && (this.action === 0) && (this.phase === 0)) return this;
+    if (this.turn === null) {
+     this.turnB = this.combatants.size -1 
+      return;
+    }
+    this.turnB = this.turnB - 1
+
+
+  }
 
   /* -------------------------------------------- */
 
@@ -224,28 +260,29 @@ export class d100BCombat extends Combat {
 
     }
     let turn = this.turn ?? -1;
-    console.log("Turn ", turn)
+    //  console.log("Turn ", turn)
     let skip = this.settings.skipDefeated;
     skip = true
-    console.log(this.getSubPhases())
+    //   console.log(this.getSubPhases())
     const whoCanAct = this.getSubPhases()[this.action].whoCanAct
-    console.log(whoCanAct)
+    //   console.log(whoCanAct)
     for (let [i, t] of this.turns.entries()) {
-      console.log("t ", t.name, t, t.flags.crewRole)
+      //     console.log("t ", t.name, t, t.flags.crewRole)
       if (whoCanAct.includes("all")) {
-        console.log("t ", t, i, turn, i <= turn)
+        //        console.log("t ", t, i, turn, i <= turn)
         if (i <= turn) continue;
         if (skip && t.isDefeated) continue;
         if (!t.canAct) continue;// Alt
         if (t.isInitStunned) console.log("here");
         if (t.isInitStunned) continue;
+        if (t.flags.d100A.actions.remaining < 1) continue;
         turnstatus.moreValidTurns = true // flag if this is a valid round
         turnstatus.nextTurn = i;
         break;
       }
       else if (whoCanAct.includes(t.flags.crewRole)) {
 
-        console.log("t ", t)
+        //      console.log("t ", t)
         if (i <= turn) continue;
         if (skip && t.isDefeated) continue;
         // if (!t.canAct) continue;// Alt
@@ -285,18 +322,18 @@ export class d100BCombat extends Combat {
     let oldPhase = this.phase
     let oldRound = this.roundB
     const origRound = oldRound
-    let newAction =  this.action
+    let newAction = this.action
     let newPhase = this.phase
     let newRound = this.roundB
     let runFirstLoop = false
-  /*  if (this.flags.d100A.firstAction) {
-      runFirstLoop = true
-      const update = { "flags.d100A.firstAction": false };
-      this.update(update);
-    }*/
-    const resetTime = (oldAction == (actions.length -1))  && (oldPhase == (phases.length - 1))
-    runFirstLoop = (oldAction == 0)  && (oldPhase == 0) && this.flags.d100A.firstAction
-    
+    /*  if (this.flags.d100A.firstAction) {
+        runFirstLoop = true
+        const update = { "flags.d100A.firstAction": false };
+        this.update(update);
+      }*/
+    const resetTime = (oldAction == (actions.length - 1)) && (oldPhase == (phases.length - 1))
+    runFirstLoop = (oldAction == 0) && (oldPhase == 0) && this.flags.d100A.firstAction
+
     if (actions[oldAction].killActors) this.killActors()
 
     /*console.log("resetTime",resetTime,runTime)
@@ -317,55 +354,64 @@ export class d100BCombat extends Combat {
     }*/
     if (resetTime) {
       this.resetActions()
-      await this._handleUpdate(this.roundB + 1 , 0, 0, null, {}, true);
+      await this._handleUpdate(this.roundB + 1, 0, 0, null, {}, true);
       return
 
     }
 
-  //  if ((!(this.round === 0)) && !this.turn) this.endOfAction = true
-   // if ((!(this.round === 0)) && !!this.turn) this.inTurns = true
-      // check Initiative  
-      //await this._handleUpdate(this.roundB, this.phase, this.action, 0);
-      console.log("Details PhaseCalc", this.turn, this.action, this.phase, this.roundB, this.nextTurnStatus())
 
-      if (runFirstLoop) {
-        newAction = -1
-      }
-      if (true) {
-        let loop = 0
-        do {
-          oldAction = newAction
-          oldPhase = newPhase
-          oldRound = newRound
-          newAction = (oldAction + 1) % actions.length
-          newPhase = (oldPhase + Math.floor((oldAction + 1) / actions.length)) % phases.length
 
-          newRound = (oldRound + Math.floor((oldPhase + (Math.floor((oldAction + 1) / actions.length))) / phases.length))
-          console.log("PhaseCalc", newRound, oldRound, newPhase, oldPhase, Math.floor((oldPhase + 1) / phases.length), phases.length)
-          await this._handleUpdate(newRound, newPhase, newAction);
-          //await this.setActiveCombatants()
-          console.log("Details ", this.turn, this.action, this.phase, this.roundB, this.nextTurnStatus())
-          loop++;
-        } while (!this.nextTurnStatus().moreValidTurns && (loop < 4));
-      }
+    //  if ((!(this.round === 0)) && !this.turn) this.endOfAction = true
+    // if ((!(this.round === 0)) && !!this.turn) this.inTurns = true
+    // check Initiative  
+    //await this._handleUpdate(this.roundB, this.phase, this.action, 0);
+    //    console.log("Details PhaseCalc", this.turn, this.action, this.phase, this.roundB, this.nextTurnStatus())
 
-      console.log("\nactions", newAction, newPhase, newRound)
-      // Jump to the GM Update
+    if (runFirstLoop) {
+      await this.rollAll()
+      newAction = -1
+    }
+    if (true) {
+      let loop = 0
+      do {
+        oldAction = newAction
+        oldPhase = newPhase
+        oldRound = newRound
+        newAction = (oldAction + 1) % actions.length
+        newPhase = (oldPhase + Math.floor((oldAction + 1) / actions.length)) % phases.length
 
-      const advanceTime = CONFIG.time.turnTime;
-      updateOptions.advanceTime = advanceTime + CONFIG.time.roundTime;
-      updateOptions.direction = 1;
-      await this._handleUpdate(newRound, newPhase, newAction, this.nextTurnStatus().nextTurn, updateOptions,false);
+        newRound = (oldRound + Math.floor((oldPhase + (Math.floor((oldAction + 1) / actions.length))) / phases.length))
+        //      console.log("PhaseCalc", newRound, oldRound, newPhase, oldPhase, Math.floor((oldPhase + 1) / phases.length), phases.length)
+        await this._handleUpdate(newRound, newPhase, newAction);
+        if (newRound > oldRound) {
+          this.resetActions()
+          await this._handleUpdate(newRound, 0, 0, null, {}, true);
 
-      // If this is a new round 
+        }
 
-      console.log(!!(newRound - oldRound), newRound - oldRound, newRound, oldRound)
-      // if (!!(newRound-origRound)) this.resetActions()
+        //await this.setActiveCombatants()
+        //      console.log("Details ", this.turn, this.action, this.phase, this.roundB, this.nextTurnStatus())
+        loop++;
+      } while (!this.nextTurnStatus().moreValidTurns && (loop < 4) && (!(newRound > oldRound)));
+    }
 
-      //await this.setActiveCombatants()
-      // await this._handleUpdate(newRound, newPhase, newAction, this.nextTurnStatus().nextTurn, updateOptions);
-      //this.updateCombatantActors() 
-    
+    //   console.log("\nactions", newAction, newPhase, newRound)
+    // Jump to the GM Update
+
+    const advanceTime = CONFIG.time.turnTime;
+    updateOptions.advanceTime = advanceTime + CONFIG.time.roundTime;
+    updateOptions.direction = 1;
+    await this._handleUpdate(newRound, newPhase, newAction, this.nextTurnStatus().nextTurn, updateOptions, false);
+
+    // If this is a new round 
+
+    //   console.log(!!(newRound - oldRound), newRound - oldRound, newRound, oldRound)
+    // if (!!(newRound-origRound)) this.resetActions()
+
+    //await this.setActiveCombatants()
+    // await this._handleUpdate(newRound, newPhase, newAction, this.nextTurnStatus().nextTurn, updateOptions);
+    //this.updateCombatantActors() 
+
 
 
 
@@ -382,11 +428,11 @@ export class d100BCombat extends Combat {
         flags: { d100A: { actions: { remaining: c.apr } } },
       }
     });
-    console.log("updates", updates)
+    //  console.log("updates", updates)
     await this.updateEmbeddedDocuments("Combatant", updates);
-    console.log(this)
-    this._handleUpdate(this.roundB, this.phase, this.action, null, {},true );
-    console.log(this)
+    //  console.log(this)
+    this._handleUpdate(this.roundB, this.phase, this.action, null, {}, true);
+    //  console.log(this)
 
 
   }
@@ -394,12 +440,12 @@ export class d100BCombat extends Combat {
   async nextTurn(skip = false) {
 
 
-    console.log("hi ", this.turn, this.phase, this.action)
+    //   console.log("hi ", this.turn, this.phase, this.action)
     const thisCombatantID = this.current.combatantId
     const nextTurnStatus = this.nextTurnStatus()
 
     const oldcombatant = game.combat.combatants.get(thisCombatantID);
-    console.log("nextTurnStatus - ", nextTurnStatus, oldcombatant)
+    //  console.log("nextTurnStatus - ", nextTurnStatus, oldcombatant)
     const updateOptions = {};
 
     if (!skip && !!oldcombatant) oldcombatant.actionsRemaining = oldcombatant.actionsRemaining - 1;
@@ -408,35 +454,36 @@ export class d100BCombat extends Combat {
       const advanceTime = Math.max(this.turns.length - this.turn, 0) * CONFIG.time.turnTime;
       updateOptions.advanceTime = advanceTime + CONFIG.time.roundTime;
       updateOptions.direction = 1;
-      await this._handleUpdate(this.roundB, this.phase, this.action, nextTurnStatus.nextTurn, updateOptions,this.flags.d100A.firstAction);
+      await this._handleUpdate(this.roundB, this.phase, this.action, nextTurnStatus.nextTurn, updateOptions, this.flags.d100A.firstAction);
       return
     }
 
 
 
-    await this._handleUpdate(this.roundB, this.phase, this.action, nextTurnStatus.nextTurn, updateOptions,this.flags.d100A.firstAction);
+    await this._handleUpdate(this.roundB, this.phase, this.action, nextTurnStatus.nextTurn, updateOptions, this.flags.d100A.firstAction);
     return
   }
 
   async _handleUpdate(nextRound, nextPhase, nextAction, nextTurn, updateOptions = {}, firstAction = false) {
-    console.log("nextTurn ", nextTurn, firstAction)
-    const newround = nextAction * 10000 + nextPhase * 1000 + nextRound
+    //   console.log("nextTurn ", nextTurn, firstAction)
+    // const newround = nextAction * 10000 + nextPhase * 1000 + nextRound
     const update = {
-      round: newround,
+      round: nextRound,
       turn: nextTurn,
       "flags.d100A.phase": nextPhase,
       "flags.d100A.action": nextAction,
       "flags.d100A.firstAction": firstAction,
+
     };
-    console.log("round ", newround,firstAction)
-    console.log("update.turn ", update)
+    //   console.log("round ", newround,firstAction)
+    //   console.log("update.turn ", update)
     Hooks.callAll("combatTurn", this, update, updateOptions);
     await this.update(update, updateOptions);
-    console.log("turn ", this)
+    //   console.log("turn ", this)
   }
 
   async _notifyBeforeUpdate(eventData) {
-    console.log(["_notifyBeforeUpdate", eventData]);
+    //   console.log(["_notifyBeforeUpdate", eventData]);
     // console.log([isNewRound, isNewPhase, isNewTurn]);
     // console.log([this.round, this.flags.sfrpg.phase, this.turn]);
 
@@ -476,11 +523,12 @@ export class d100BCombat extends Combat {
     * @protected
     */
   _getCurrentState(combatant) {
+    console.log(this)
     const round = this.round
     combatant ||= this.combatant;
-    const naction = Math.trunc(round / 10000)
-    const nphase = Math.trunc((round - (naction * 10000)) / 1000)
-    const nround = round - naction * 10000 - nphase * 1000
+    const naction = this.flags?.d100A?.action || 0
+    const nphase = this.flags?.d100A?.phase || 0
+    const nround = round
     //const phase = this.round
     return {
       phase: nphase,
@@ -747,12 +795,12 @@ export class d100BCombat extends Combat {
   async killActors() {
 
     for (let c of this.combatants) {
-      console.log(c)
+      //      console.log(c)
       let flagdown = false
 
       let stunned = await c.token.actor.sheet._onApplyPendingDamage()
       let downround = 0
-      console.log("newflagdown ", c.name, stunned)
+      //    console.log("newflagdown ", c.name, stunned)
     }
 
   }

@@ -126,6 +126,8 @@ form .form-group label {
 
 }
 
+
+
 .combat-sidebar #combat-controls a{
   flex: 1;
   font-size: var(--font-size-20);
@@ -4966,7 +4968,7 @@ background: radial-gradient( #39879d ,#212c48  );
   flex: 0 0 45px;
 }
 .Alternityd100.sheet.actor.starship .crew-controls {
-  flex: 0 0 80px;
+  flex: 0 0 20px;
 }
 .Alternityd100.sheet.actor.starship .crew-settings {
   margin: 0 8px;

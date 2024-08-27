@@ -17,7 +17,7 @@ export class d100BCombatTracker extends CombatTracker {
   async getData() {
     let context = await super.getData();
 
-console.log("contect", context)
+//console.log("contect", context)
 context.endOfAction = false
 context.notBegun = false
 context.inTurns = false
