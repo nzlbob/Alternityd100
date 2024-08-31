@@ -3,7 +3,7 @@ import { SFRPG } from "../../../../config.js";
 export default function (engine) {
     engine.closures.add("calculateDroneSaves", (fact, context) => {
         const data = fact.actor.system;
-
+/*
         // We only care about the first chassis
         let activeChassis = null;
         for (const chassis of fact.chassis) {
@@ -29,7 +29,7 @@ export default function (engine) {
         data.attributes.fort.bonus += data.abilities.con.mod;
         data.attributes.reflex.bonus += data.abilities.dex.mod;
         data.attributes.will.bonus += data.abilities.wis.mod;
-
+*/
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });
 }

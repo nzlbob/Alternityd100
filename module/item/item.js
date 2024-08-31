@@ -172,7 +172,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             itemData.good =  Math.floor(itemData.base/2) ; 
             itemData.amazing =  Math.max(1,Math.floor(itemData.base/4)) 
 //console.log(actorData.abilities.per.value)
-            console.log("Here", itemData.base, actorData)
+      //      console.log("Here", itemData.base, actorData)
 
         }
 

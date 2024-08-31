@@ -4,6 +4,9 @@ export default function (engine) {
 
         data.attributes.accel.value = 0;
 
+        
+
+
         const engines = fact.items.filter(x => x.type === "starshipEngine");
         for (const engine of engines) {
             const engineData = engine.system;
@@ -117,7 +120,17 @@ export default function (engine) {
         }
             
         }
+        data.attributes.speed.walk.base = data.attributes.speed.value;
+        data.attributes.speed.walk.value = data.attributes.speed.walk.base + data.attributes.accel.value;
+        
+        data.attributes.maneuverability.value = data.attributes.maneuverability.base 
 
+        let manMod = 0-Math.floor((data.attributes.speed.value-1)/4)
+
+        if (manMod < 0) {
+             data.attributes.maneuverability.value += manMod 
+             data.attributes.maneuverability.tooltip.push("Speed ".concat(manMod)  )
+            }
         return fact;
     });
 

@@ -4822,6 +4822,12 @@
                 ]
             },
             "attributes": {
+                "maneuverability": {
+                    "base": 0,
+                    "value": 0,
+                    "temp": 0,
+                    "tooltip": []
+                },
                 "ECM": {
                     "radar": {
                         "base": 0,
@@ -6527,7 +6533,7 @@
             ],
             "size": "medium",
             "bhpCost": 0,
-            "maneuverability": "average",
+            "maneuverability": 0,
             "hitpoints": {
                 "base": 0,
                 "increment": 0

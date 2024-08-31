@@ -3,7 +3,7 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../..
 export default function (engine) {
     engine.closures.add("calculateDroneHitpoints", (fact, context) => {
         const data = fact.actor.system;
-
+/*
         const addModifier = (bonus, data, item, localizationKey) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {
                 if (item.rolledMods) {
@@ -58,7 +58,7 @@ export default function (engine) {
         hpMax += bonus;
 
         data.attributes.hp.max = hpMax;
-
+*/
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });
 }

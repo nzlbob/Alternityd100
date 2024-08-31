@@ -5,28 +5,20 @@ export default function (engine) {
         const data = fact.actor.system;
         const modifiers = fact.modifiers;
         const frames = fact.frames;
-       // console.log(fact)
-        /*
-        const maneuverabilityMap = {
-            "clumsy" : { pilotingBonus: -2, turn: 4 },
-            "poor"   : { pilotingBonus: -1, turn: 3 },
-            "average": { pilotingBonus: 0, turn: 2 },
-            "good"   : { pilotingBonus: 1, turn: 1 },
-            "perfect": { pilotingBonus: 2, turn: 0 }
-        };
 
-        const sizeModifierMap = {
-            "n/a": 0,
-            "tiny": 1,
-            "small": 2,
-            "medium": 3,
-            "large": 4,
-            "huge": 5,
-            "gargantuan": 6,
-            "colossal": 7,
-            "superColossal": 8
-        };
-*/
+        
+if (!( typeof data.attributes.maneuverability === 'object') || data.attributes.maneuverability === null) 
+{
+  //  data.attributes.maneuverability = null
+    data.attributes.maneuverability = {
+        "base": 0,
+        "value": 0,
+        "temp": 0,
+        "tooltip": []
+    }
+
+}
+      
 
 
         if (!data.crew) {
@@ -146,7 +138,7 @@ export default function (engine) {
 
             data.details.frame = "";
             data.details.size = "n/a";
-            data.attributes.maneuverability = 0;
+            data.attributes.maneuverability.base = 0;
             /*data.attributes.damageThreshold = {
                 value: 0,
             //    tooltip: []
@@ -167,10 +159,11 @@ export default function (engine) {
             const frame = frames[0];
 
             data.frame = frame;
-           // console.log(data.attributes)
+          //  console.log(data.attributes)
             data.details.frame = frame.name;
             data.details.size = frame.system.size;
-            data.attributes.maneuverability = frame.system.maneuverability;
+            if (!data.attributes.maneuverability) console.log(data)
+            data.attributes.maneuverability.base = frame.system.maneuverability;
             data.attributes.hullPoints.max = frame.system.hullPoints.total;
             data.attributes.hullPoints.base = frame.system.hullPoints.base;
             for (let v of Object.entries(data.attributes.ECM)){
@@ -307,7 +300,7 @@ export default function (engine) {
          * 
          * Calculate Financial Cost 
          */
-        console.log()
+    //    console.log()
         const formatterusd = new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD',

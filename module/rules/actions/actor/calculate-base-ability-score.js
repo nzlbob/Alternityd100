@@ -28,7 +28,7 @@ export default function (engine) {
                 computedBonus = roll.total;
                 } catch {}
 
-            console.log (computedBonus,fact)
+         //   console.log (computedBonus,fact)
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
                     type: bonus.type.capitalize(),

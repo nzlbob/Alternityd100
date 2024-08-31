@@ -4,11 +4,11 @@ export default function (engine) {
         const mods = fact.mods;
 
         data.attributes.arms = 0;
-        data.attributes.weaponMounts.melee.max = 0;
-        data.attributes.weaponMounts.ranged.max = 0;
-        data.attributes.armorSlots.current = 0;
-        data.attributes.armorSlots.max = 0;
-        data.traits.senses = "";
+      //  data.attributes.weaponMounts.melee.max = 0;
+      //  data.attributes.weaponMounts.ranged.max = 0;
+      //  data.attributes.armorSlots.current = 0;
+      //  data.attributes.armorSlots.max = 0;
+      //  data.traits.senses = "";
 
         // Process common mod properties
         for (let mod of mods) {

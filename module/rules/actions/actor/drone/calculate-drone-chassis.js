@@ -53,8 +53,8 @@ export default function (engine) {
             data.abilities.dex.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));
             data.abilities.con.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));
             data.abilities.int.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));
-            data.abilities.wis.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));
-            data.abilities.cha.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));
+            data.abilities.wil.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));
+            data.abilities.per.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));
 
             data.attributes.baseAttackBonus = {
                 value: 0,
@@ -64,6 +64,8 @@ export default function (engine) {
         }
 
         // Clear out skills, this and future closures will enable them again
+
+        /*
         let skillkeys = Object.keys(SFRPG.skills);
         for (let skill of skillkeys) {
             data.skills[skill].enabled = false;
@@ -72,7 +74,7 @@ export default function (engine) {
             data.skills[skill].mod = 0;
             data.skills[skill].tooltip = [];
         }
-
+*/
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });
 }

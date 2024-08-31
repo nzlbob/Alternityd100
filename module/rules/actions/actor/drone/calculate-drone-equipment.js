@@ -1,7 +1,7 @@
 export default function (engine) {
     engine.closures.add("calculateDroneEquipment", (fact, context) => {
         const data = fact.actor.system;
-
+/*
         data.attributes.armorSlots.current = 0;
         if (fact.armorUpgrades) {
             data.attributes.armorSlots.current = fact.armorUpgrades.length;
@@ -30,7 +30,7 @@ export default function (engine) {
                 }
             }
         }
-
+*/
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });
 }

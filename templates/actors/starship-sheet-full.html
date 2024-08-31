@@ -188,11 +188,21 @@
                             <td>{{system.attributes.hullPoints.value}}</td>
                             <td>{{system.attributes.hullPoints.max}}</td>
                         </tr>
-                        <tr data-tippy-content="laser-mass-psi-radar-thermal">
+                        <tr data-tippy-content="radar-laser-mass-thermal-psi">
                             <td>{{localize "ECM"}}</td>
-                            <td colspan="2"> {{#each system.attributes.ECM as |res|}}
-                                {{res.value}}
-                                {{/each}}
+                            <td colspan="2"> 
+                                <table>
+                                    {{#each system.attributes.ECM as |res name|}}
+                                    <td data-tooltip = "{{name}} <br>{{res.tooltip}}">
+                                        {{res.value}}
+                                    </td>
+                                    {{/each}}
+                                </table>
+                                
+                               
+                               <p > 
+                                
+                                
                             </td>
 
                         </tr>
@@ -241,9 +251,9 @@
                             </td>
                         </tr>
 
-                        <tr>
+                        <tr data-tooltip="{{system.attributes.maneuverability.tooltip}}">
                             <td>{{localize "Maneuver"}}</td>
-                            <td>{{system.attributes.maneuverability}}</td>
+                            <td>{{system.attributes.maneuverability.value}}</td>
 
                         </tr>
                         <tr>
