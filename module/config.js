@@ -23,8 +23,8 @@ SFRPG.abilities = {
     "dex": "SFRPG.AbilityDex",
     "con": "SFRPG.AbilityCon",
     "int": "SFRPG.AbilityInt",
-    "wis": "SFRPG.AbilityWis",
-    "cha": "SFRPG.AbilityCha"
+    "wil": "SFRPG.AbilityWil",
+    "per": "SFRPG.AbilityPer"
 };
 
 SFRPG.acpEffectingArmorType = {
@@ -1510,7 +1510,8 @@ SFRPG.speeds = {
     "run": "d100A.ActorSheet.Attributes.Speed.Types.run",
     "walk": "d100A.ActorSheet.Attributes.Speed.Types.walk",
     "easyswim": "d100A.ActorSheet.Attributes.Speed.Types.easyswim",
-    "glide": "d100A.ActorSheet.Attributes.Speed.Types.glide",
+    "swim": "d100A.ActorSheet.Attributes.Speed.Types.swim",
+ 
     "fly": "d100A.ActorSheet.Attributes.Speed.Types.fly" 
 };
 

@@ -523,7 +523,7 @@ export class d100BCombat extends Combat {
     * @protected
     */
   _getCurrentState(combatant) {
-    console.log(this)
+ //   console.log(this)
     const round = this.round
     combatant ||= this.combatant;
     const naction = this.flags?.d100A?.action || 0
@@ -793,13 +793,28 @@ export class d100BCombat extends Combat {
   }
 
   async killActors() {
+	// Check if we have entered a new round. If so, remove the currently stored path
+ // var result = game.modules.has("drag-ruler");
+  const result = game.modules.get("drag-ruler")?.active;
+//console.log("dragruler = ",result)
+/*
+	if (combat.round > combatant.flags.dragRuler.trackedRound) {
+		combatant.flags.dragRuler.passedWaypoints = [];
+		combatant.flags.dragRuler.trackedRound = combat.round;
+	}
+    */
+    for (let combatant of this.combatants) {
+          //  console.log(combatant.flags)
+     // let flagdown = false
+      if (result && combatant.flags.dragRuler) {
+        if (combatant.flags.dragRuler.passedWaypoints.length > 0 ){
 
-    for (let c of this.combatants) {
-      //      console.log(c)
-      let flagdown = false
-
-      let stunned = await c.token.actor.sheet._onApplyPendingDamage()
-      let downround = 0
+          combatant.update({"flags.dragRuler.passedWaypoints":[]})
+        }
+        
+      }
+      let stunned = await combatant.token.actor.sheet._onApplyPendingDamage()
+     // let downround = 0
       //    console.log("newflagdown ", c.name, stunned)
     }
 

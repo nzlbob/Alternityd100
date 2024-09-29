@@ -191,8 +191,8 @@ render(force, context={}) {
    // let data = actorData;
    // console.log("actorData-------------",this,this.system.attributes.speed.walk.base)
    
-
-
+actorData.attributes.actchk.tooltip = []
+actorData.attributes.actchk.step.tooltip = []
 
     //const flags = actorData.flags.boilerplate || {};
     

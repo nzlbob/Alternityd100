@@ -36,10 +36,10 @@
                 <tr>
                 <td>MIN</td><td>MAX</td><td>MIN</td><td>MAX</td><td>MIN</td><td>MAX</td><td>MIN</td><td>MAX</td><td>MIN</td><td>MAX</td><td>MIN</td><td>MAX</td></tr>
                 <tr>
-                    {{#each itemData.attributes as |attribute type| }}
+                    {{#each itemData.abilities as |ability type| }}
 
-                <td><input type="number" title="{{type}}" name="system.attributes.{{type}}.min" value="{{attribute.min}}" data-dtype="Number" /></td>
-                <td><input type="number" name="system.attributes.{{type}}.max" value="{{attribute.max}}" data-dtype="Number" /></td>
+                <td><input type="number" title="{{type}}" name="system.abilities.{{type}}.min" value="{{ability.min}}" data-dtype="Number" /></td>
+                <td><input type="number" name="system.abilities.{{type}}.max" value="{{ability.max}}" data-dtype="Number" /></td>
                 {{/each}}
             </tr>
                 

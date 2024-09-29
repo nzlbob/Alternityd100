@@ -6160,7 +6160,7 @@
             "size": "Medium",
             "type": "humanoid",
             "subtype": "",
-            "attributes": {
+            "abilities": {
                 "str": {
                     "min": 4,
                     "max": 14
@@ -6927,8 +6927,8 @@
                 "dex": 10,
                 "con": "-",
                 "int": 6,
-                "wis": 10,
-                "cha": 6
+                "wil": 10,
+                "per": 6
             },
             "abilityIncreaseStats": {
                 "first": "str",

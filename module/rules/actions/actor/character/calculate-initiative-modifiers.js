@@ -26,23 +26,23 @@ export default function (engine) {
             
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.INITIATIVE,SFRPGEffectType.ALL_ACTIONS].includes(mod.effectType);
         });
-      //  console.log( "------filteredMods------",  context, filteredMods)  // Looking for [1].valueAffected
+      //  console.log( fact.actor.name,"\n------filteredMods------",  context, filteredMods)  // Looking for [1].valueAffected
         const mods = context.parameters.stackModifiers.process(filteredMods, context);
-      //  console.log( "------Mods------",mods) // This is a bunch of array objects with the type of bonus. Alternity are all untyped
+     //   console.log( "------Mods------",mods) // This is a bunch of array objects with the type of bonus. Alternity are all untyped
 
         const mod = Object.entries(mods).reduce((prev, curr) => {
             if (curr[1] === null || curr[1].length < 1) return prev;
-
+           // console.log( "------prev = cur------",prev, curr)
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(curr[0])) {
                 for (const bonus of curr[1]) {
-                    if(bonus.valueAffected == "bonus")  prev += addModifier(bonus, data, init, "SFRPG.InitiativeModiferTooltip");
+                    if(bonus.valueAffected == "bonus")  prev += addModifier(bonus, data, init, "SFRPG.ActChkModiferTooltip");
                 }
             } else {
-                if(bonus.valueAffected == "bonus") prev += addModifier(curr[1], data, init, "SFRPG.InitiativeModiferTooltip");
+                if(bonus.valueAffected == "bonus") prev += addModifier(curr[1], data, init, "SFRPG.ActChkModiferTooltip");
             }
             return prev;
         }, 0);
-
+      //  console.log( "------Mods------",mod)
         const steps = Object.entries(mods).reduce((prev, curr) => {
             if (curr[1] === null || curr[1].length < 1) return prev;
 
@@ -51,14 +51,14 @@ export default function (engine) {
                     
                     
                     if((bonus.valueAffected == "steps") || (bonus.effectType=="all-actions") ) { 
-                        let a = addModifier(bonus, data, init.step, "SFRPG.InitiativeModiferTooltip")
+                        let a = addModifier(bonus, data, init.step, "SFRPG.ActChkModiferTooltip")
                 //        console.log("Hello" ,a ,bonus, data, init.step)
                         
                         prev += a //addModifier(bonus, data, init.step, "SFRPG.InitiativeModiferTooltip");
                 }
                 }
             } else {
-                if(bonus.valueAffected == "steps") prev += addModifier(curr[1], data, init.step, "SFRPG.InitiativeModiferTooltip");
+                if(bonus.valueAffected == "steps") prev += addModifier(curr[1], data, init.step, "SFRPG.ActChkModiferTooltip");
             }
             return prev;
         }, 0);

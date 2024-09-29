@@ -45,7 +45,7 @@ export default function (engine) {
 
             data.abilities.int.base = chassisData.abilityScores.int + (abilityIncreaseStats.includes("int") ? abilityIncreases : 0);
 
-            data.abilities.wis.base = chassisData.abilityScores.wis + (abilityIncreaseStats.includes("wis") ? abilityIncreases : 0);
+            data.abilities.wil.base = chassisData.abilityScores.wil + (abilityIncreaseStats.includes("wis") ? abilityIncreases : 0);
             
             data.abilities.cha.base = chassisData.abilityScores.cha + (abilityIncreaseStats.includes("cha") ? abilityIncreases : 0);
         } else {

@@ -176,6 +176,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         }
 
+        
 
         if (this.type == "starshipDefensiveCountermeasure") this.type = "starshipDefence"
         // console.log("C",C,"dtaa",data,"Actor",actorData)

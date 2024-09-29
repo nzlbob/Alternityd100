@@ -335,13 +335,14 @@ export function addModifier(bonus, data, item, localizationKey) {
         } catch {}
 
         if (computedBonus !== 0 && localizationKey) {
+           // item.tooltip = []
             item.tooltip.push(game.i18n.format(localizationKey, {
-                type: bonus.type.capitalize(),
+                type: "", //bonus.type.capitalize(),
                 mod: computedBonus.toString(),
                 source: bonus.name
             }));
         }
-        
+    //    console.log(item.tooltip)
         return computedBonus;
     };
   

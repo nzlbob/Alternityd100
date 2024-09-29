@@ -2,11 +2,11 @@
   "name": "Alternityd100",
   "title": "Alternity by d100",
   "description": "This is a draft implementation of the Alternity RPG Rules (c) 1998 TSR Inc. There are lots of features yet to implement. Work is continuing",
-  "version": "0.607",
+  "version": "0.608",
   "compatibility": {
-    "minimum": 11,
-    "verified": "11.315",
-    "maximum": 12
+    "minimum": "11",
+    "verified": "12",
+    "maximum": "12"
   },
   "authors": [
     {
@@ -91,5 +91,5 @@
   "url": "https://github.com/nzlbob/Alternityd100",
   "manifest": "https://raw.githubusercontent.com/nzlbob/Alternityd100/main/system.json",
   "download": "https://github.com/nzlbob/Alternityd100/archive/refs/heads/main.zip",
-  "license": "This isn't licenced, Lots of other peoples work was used in the creation of this VTT implemntation. A LOT of Starfinder is used, because for some reason Many features from Alternity (the Original) are used in Starfinder so it was easy to port across. Barbrawl was used as a basis for the token bars, I think I sole some code for token movement as well. All in all Alternity stands apon the shoulders of GIANTS!"
+  "license": "This isn't licenced, Lots of other peoples work was used in the creation of this VTT implemntation. A LOT of Starfinder is used, because for some reason Many features from Alternity (the Original) are used in Starfinder so it was easy to port across. All in all Alternity by the d100 Group stands upon the shoulders of GIANTS!"
 }

@@ -154,7 +154,7 @@
     "AbilityActivationTypesSpecial": "Special",
     "AbilityActivationTypesStandard": "S. Action",
     "AbilityActivationTypesSwift": "Swift Action",
-    "AbilityCha": "Charisma",
+    "AbilityPer": "Personality",
     "AbilityCon": "Constitution",
     "AbilityDamagePlaceholder": "DMG",
     "AbilityDamageTitle": "Ability Damage",
@@ -179,7 +179,7 @@
     "AbilityScoreAchievementTooltip": "Achievement: {mod}",
     "About": "About",
     "AbilityStr": "Strength",
-    "AbilityWis": "Wisdom",
+    "AbilityWil": "Willpower",
     "ACPTooltip": "Armor Check Penalty: {mod} ({source})",
     "ActionAbil": "Ability Test",
     "ActionHeal": "Healing",
@@ -364,7 +364,7 @@
                 "AllSkills": "All Skills",
                 "IgnoreMortal": "Ignore Mortal Penalty",
                 "AllAttackRolls": "All Attack Rolls",
-                "AllSpeeds": "All Speeds",
+                "AllSpeeds": "Base Speed (Dex+Str)",
                 "BAB": "BAB",
                 "BaseAttackBonus": "Base Attack Bonus",
                 "Encumbrance": "Encumbrance",
@@ -1031,7 +1031,8 @@
     "InitiativeLabel": "Action Check",
     "InitiativeLabelA": "Actions",
     "InitiativeModiferLabel": "Mod",
-    "InitiativeModiferTooltip": "{type} Bonus: {mod} ({source})",
+    "InitiativeModiferTooltip": "{type} I-Bonus: {mod} ({source})",
+    "ActChkModiferTooltip": "{mod} ({source})",
     "InvalidStarshipItem": "{name} is an invalid Item for a starship.",
     "Inventory": "Inventory",
     "InventoryAdd": "Add",
@@ -2992,6 +2993,8 @@
 },
 
 "d100A": {
+
+    "manufacturer":"Manufacturer",
 "attributes": {
     "str" : "Strength",
     "dex" : "Dexterity",

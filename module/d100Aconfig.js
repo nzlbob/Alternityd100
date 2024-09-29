@@ -2130,6 +2130,9 @@ d100A.modifierEffectTypes = {
     
     "ability-skills": "SFRPG.ModifierEffectTypeAbilitySkills",*/
    "ability-score": "SFRPG.ModifierEffectTypeAbilityScore",
+   "all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllSpeeds",
+   "specific-speed": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificSpeed",
+   //"multiply-all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.MultiplyAllSpeeds",
    /*"ability-check": "SFRPG.ModifierEffectTypeAbilityCheck",
    "ability-checks": "SFRPG.ModifierEffectTypeAbilityChecks",
    
