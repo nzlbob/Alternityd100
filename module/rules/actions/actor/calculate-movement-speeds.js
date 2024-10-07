@@ -11,25 +11,14 @@ export default function (engine) {
 
         //Combat Movement 
   
-  let strdex=data.abilities.str.value+data.abilities.dex.value;
+  let strdex= Math.max(data.abilities.str.value+data.abilities.dex.value,6);
 
-  if (strdex<8) {speed.sprint.base = 6};
-  if (strdex<33) {speed.sprint.base = Math.floor(strdex/2)*2};
-  if (strdex>32) {speed.sprint.base = 32};
+  //if (strdex<8) {speed.sprint.base = 6};
+  speed.sprint.base = Math.floor(strdex/2)*2
+  //if (strdex>32) {speed.sprint.base = 32};
 
 
-  //speed.fly.base = 100;
   
- // if (speed.sprint.base<8) {speed.run.base = 4;speed.walk.base = 2};
- // if (speed.sprint.base>7) {speed.run.base = speed.sprint.base -4;speed.walk.base = 2};
- // if (speed.sprint.base>15) {speed.run.base = speed.sprint.base -6;speed.walk.base = 4};
-// if (speed.sprint.base>19) {speed.run.base = speed.sprint.base -8};
- // if (speed.sprint.base>23) {speed.walk.base = 6};
- // if (speed.sprint.base>25) {speed.run.base = speed.sprint.base -10};
- // if (speed.sprint.base>29) {speed.walk.base = 8};
-
-
-        
 
 //look at this when doing Armor 
 
@@ -47,7 +36,7 @@ export default function (engine) {
             return (mod.enabled || mod.modifierType === "formula") && (mod.effectType === SFRPGEffectType.ALL_SPEEDS );
         });
         filteredBaseModifiers = context.parameters.stackModifiers.process(filteredBaseModifiers, context);
-        console.log("filteredBaseModifiers", filteredBaseModifiers)
+       // console.log("filteredBaseModifiers", filteredBaseModifiers)
         const bonus = Object.entries(filteredBaseModifiers).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
 
@@ -58,7 +47,7 @@ export default function (engine) {
             } else {
                 sum += addModifier(mod[1], data, speed, "SFRPG.ActorSheet.Modifiers.Tooltips.Speed", "sprint");
             }
-            console.log("addModifier", data, speed, mod)
+       //     console.log("addModifier", data, speed, mod)
             return sum;
         }, 0);
         const baseSprintValue = Number(speed.sprint.base);
@@ -69,9 +58,24 @@ export default function (engine) {
         
         speed.fly.base = speed.sprint.base*2;
         speed.glide.base = speed.sprint.base;
-         speed.walk.base = Math.floor(speed.sprint.base / 4);
-         speed.run.base = speed.walk.base * 3 ;
-         
+   //      speed.walk.base = Math.floor(speed.sprint.base / 4);
+   //      speed.run.base = speed.walk.base * 3 ;
+      
+           //speed.fly.base = 100;
+           const strdexup = Math.floor(strdex/2) * 2 + 1
+           speed.run.base = Math.floor( strdexup / 3) * 2 
+           speed.walk.base = Math.floor( strdexup / 8 + 0.125) * 2 
+
+ // if (speed.sprint.base<8) {speed.run.base = 4;speed.walk.base = 2};
+ //if (speed.sprint.base>7) {speed.run.base = speed.sprint.base -4;speed.walk.base = 2};
+ //if (speed.sprint.base>15) {speed.run.base = speed.sprint.base -6;speed.walk.base = 4};
+ //if (speed.sprint.base>19) {speed.run.base = speed.sprint.base -8};
+ //if (speed.sprint.base>23) {speed.walk.base = 6};
+ //if (speed.sprint.base>25) {speed.run.base = speed.sprint.base -10};
+ //if (speed.sprint.base>29) {speed.walk.base = 8};
+
+
+
        
          speed.swim.base = speed.walk.base;
          speed.easyswim.base = speed.walk.base/2;
@@ -89,7 +93,7 @@ export default function (engine) {
                 return (mod.enabled || mod.modifierType === "formula") && ( (mod.effectType === SFRPGEffectType.SPECIFIC_SPEED && mod.valueAffected === speedKey));
             });
             filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context);
-            console.log("filteredModifiers", filteredModifiers)
+          //  console.log("filteredModifiers", filteredModifiers)
             let filteredMultiplyModifiers = fact.modifiers.filter(mod => {
                 return (mod.enabled || mod.modifierType === "formula") && mod.effectType === SFRPGEffectType.MULTIPLY_ALL_SPEEDS;
             });
@@ -105,12 +109,12 @@ export default function (engine) {
                 } else {
                     sum += addModifier(mod[1], data, speed, "SFRPG.ActorSheet.Modifiers.Tooltips.Speed", speedKey);
                 }
-                console.log("addModifier", data, speed, speedKey,mod)
+              //  console.log("addModifier", data, speed, speedKey,mod)
                 return sum;
             }, 0);
 
             speed[speedKey].value = Math.max(0, baseValue + armorSpeed + bonus);
-            console.log("speedKey", speed[speedKey])
+       //     console.log("speedKey", speed[speedKey])
             for(const modifier of Object.values(filteredMultiplyModifiers)) {
                 if (!modifier || !modifier.length) {
                     continue;
@@ -151,7 +155,7 @@ export default function (engine) {
         }
 
         speed.glide.value = Math.floor(speed.fly.value / 2);
-        console.log("speedKey", speed)
+     //   console.log("speedKey", speed)
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] } );
 }

@@ -175,7 +175,8 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.placeholders = this.item.flags.placeholders || {};
 
         // Only physical items have hardness, hp, and their own saving throw when attacked.
-        if (data.isPhysicalItem) {
+        if (false) {
+        //if (data.isPhysicalItem) {
             if (itemData.attributes) {
                 const itemLevel = this.parseNumber(itemData.level, 1) + (itemData.attributes.customBuilt ? 2 : 0);
                 const sizeModifier = itemSizeArmorClassModifier[itemData.attributes.size];

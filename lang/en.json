@@ -2993,7 +2993,10 @@
 },
 
 "d100A": {
-
+"Tokenbar":{
+    "WEAPONS": "Weapons",
+    "COMBAT" : "Combat"
+},
     "manufacturer":"Manufacturer",
 "attributes": {
     "str" : "Strength",

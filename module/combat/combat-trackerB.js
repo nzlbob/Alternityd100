@@ -127,7 +127,7 @@ if  (["normal"].includes(context.combat?.flags?.d100A?.combatType)){
     const control = btn.dataset.control
 
     await combat.GMUpdate()
-    console.log("Button",combat,btn,control)
+  //  console.log("Button",combat,btn,control)
 
   }
 
@@ -136,7 +136,7 @@ if  (["normal"].includes(context.combat?.flags?.d100A?.combatType)){
     const combat = this.viewed;
     const btn = event.currentTarget;
 
-    console.log(btn.dataset.control)
+    // console.log(btn.dataset.control)
 
     switch (btn.dataset.control) {
 
@@ -157,13 +157,13 @@ if  (["normal"].includes(context.combat?.flags?.d100A?.combatType)){
     const li = btn.closest(".combatant");
     const combat = this.viewed;
     const c = combat.combatants.get(li.dataset.combatantId);
-console.log(btn)
+// console.log(btn)
     // Switch control action
     switch (btn.dataset.control) {
 
         // Toggle combatant visibility
       case "toggleHidden":
-        console.log("toggleHidden")
+        // console.log("toggleHidden")
         await c.update({hidden: !c.hidden});
         break
         
@@ -186,10 +186,10 @@ console.log(btn)
 
         case "rollPhysire":
          
-        console.log("Pinged",c)
+        // console.log("Pinged",c)
 
         const diceresults = await c.actor.rollSkill("physire")
-        console.log(diceresults.roll)
+        // console.log(diceresults.roll)
         const rollData = diceresults.roll
         let basedamage = -2
         if (rollData.degree == "Good") basedamage -= 2
@@ -243,7 +243,7 @@ console.log(btn)
         break
     }
     this.render(false)
-    console.log("Here")
+    // console.log("Here")
   }
 
 

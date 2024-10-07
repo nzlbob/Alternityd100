@@ -119,7 +119,7 @@ export default function (engine) {
 
             for (let modIM of filteredIMortal) {
                 IM -= parseInt(modIM.modifier)
-                console.log(modIM, modIM.modifier, parseInt(modIM.modifier), IM)
+                // console.log(modIM, modIM.modifier, parseInt(modIM.modifier), IM)
                 // init.step.tooltip.push(game.i18n.format("<br>Ignore Mortal: " + (0-parseInt(modIM.modifier)).toString())) 
 
             }
@@ -133,7 +133,7 @@ export default function (engine) {
     //    console.log(filteredBonus)
         for (let modIM of filteredBonus) {
             skillBonus += parseInt(modIM.modifier)
-            console.log(modIM, modIM.modifier, parseInt(modIM.modifier))
+            // console.log(modIM, modIM.modifier, parseInt(modIM.modifier))
             // init.step.tooltip.push(game.i18n.format("<br>Ignore Mortal: " + (0-parseInt(modIM.modifier)).toString())) 
 
         }

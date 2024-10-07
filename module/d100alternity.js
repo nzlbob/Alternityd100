@@ -388,6 +388,23 @@ if (true) {
     return value.slugify({strict: true});
   });
 
+  Handlebars.registerHelper('evaluate', function(value) {
+    console.log(value)
+
+    // crewMember = await game.Alternityd100.getActorFromUuid(i.uuid);
+    const actor = game.actors.get(value.container.actorId);
+
+    let computedBonus = 0;
+    let roll = null
+    try {
+        roll = Roll.create(value.modifier.toString(),actor.system).evaluateSync({maximize: true});
+     computedBonus = roll.total;
+    } catch {}
+
+    console.log(computedBonus,roll)
+    return computedBonus
+  });
+
   // Preload template partials
   preloadHandlebarsTemplates();
   //canvas.controdragRuler = new DragRuler();
@@ -508,6 +525,73 @@ Hooks.once("setup", function () {
 
 
 });
+
+Hooks.once("dragRuler.ready", (SpeedProvider) => {
+  class d100AAlternitySpeedProvider extends SpeedProvider {
+      get colors() {
+          return [
+              {id: "walk", default: 0x00FF00, name: "sfrpg.speeds.walk"},
+              {id: "dash", default: 0xFFFF00, name: "sfrpg.speeds.dash"},
+              {id: "run", default: 0xFF8000, name: "sfrpg.speeds.run"},
+
+          ]
+      }
+
+      getRanges(token) {
+          const actorType = token.actor.type;
+
+          if (actorType === "hazard") {
+              return [];
+          }
+
+          if (actorType === "starship") {
+            const driveSpeed = parseFloat(token.actor.system.attributes.speed.value);
+            const accel = parseFloat(token.actor.system.attributes.accel.value);
+            return [
+                {range: driveSpeed-accel, color: "unreachable"},
+                {range: driveSpeed+accel, color: "walk"},
+               
+            ];
+          }
+
+          if (actorType === "vehicle") {
+            
+              const driveSpeed = parseFloat(token.actor.system.attributes.speed.value);
+              const accel = parseFloat(token.actor.system.attributes.accel.value);
+              return [
+                  {range: driveSpeed-accel, color: "unreachable"},
+                  {range: driveSpeed+accel, color: "walk"},
+                 
+              ];
+          }
+
+          const mainMovement = token.actor.system.attributes.speed.mainMovement ?? "land";
+        //  const baseSpeed = token.actor.system.attributes.speed[mainMovement].value;
+        const statuses = token.actor.statuses
+          if(statuses.has("swim") || statuses.has("eswim") ){
+            return [
+            {range: token.actor.system.attributes.speed.easyswim.value, color: "walk"},
+            {range: token.actor.system.attributes.speed.swim.value, color: "run"}
+            ]
+          }
+          if(statuses.has("flying") || statuses.has("glide") ){
+            return [
+              {range: token.actor.system.attributes.speed.glide.value, color: "walk"},
+              {range: token.actor.system.attributes.speed.fly.value, color: "run"}
+              ]
+
+          }
+          return [
+              {range: token.actor.system.attributes.speed.walk.value, color: "walk"},
+              {range: token.actor.system.attributes.speed.run.value, color: "dash"},
+              {range: token.actor.system.attributes.speed.sprint.value, color: "run"}
+          ];
+      }
+  }
+  console.log("baseSpeed------")
+  dragRuler.registerSystem("Alternityd100", d100AAlternitySpeedProvider);
+})
+
 
 Hooks.once("ready", () => {
     console.log(`Alternity by d100  | [READY] Preparing system for operation`);
