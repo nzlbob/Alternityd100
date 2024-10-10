@@ -2995,7 +2995,16 @@
 "d100A": {
 "Tokenbar":{
     "WEAPONS": "Weapons",
-    "COMBAT" : "Combat"
+    "COMBAT" : "Combat",
+    "EQUIPMENT" : "Equipment",
+    "MEDICAL" : "Medical",
+    "SENSOR" : "Sensors",
+    "CON": "Constitution",
+    "INT": "Intelligence",
+    "WIL": "Willpower",
+    "PER": "Personality",
+    "PSIONIC": "Psionics"
+
 },
     "manufacturer":"Manufacturer",
 "attributes": {
