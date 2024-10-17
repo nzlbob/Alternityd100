@@ -78,6 +78,20 @@
 </div>
 {{/unless}}
 
+<div style="flex-wrap:wrap; display: flex; font-size: 13px; text-align: center; "  >
+
+    {{#each actor.system.compartment.compartments as |compartment| }}
+   
+{{#if compartment.overload}}
+<div style="width:24% ; margin: 2px; background-color: rgb(187, 94, 82); text-align: center; " > {{compartment.name}} <br> {{compartment.curHull}}/{{compartment.maxHull}} BHP</div>
+{{else}}
+<div style="width:24% ; margin: 2px; background-color: rgb(0, 255, 191); text-align: center;  " > {{compartment.name}} <br> {{compartment.curHull}}/{{compartment.maxHull}} BHP</div>
+
+{{/if}}
+
+{{/each}}
+
+</div>
 
 {{/if}}
 

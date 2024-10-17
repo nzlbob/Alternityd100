@@ -88,3 +88,4 @@ export class d100AModifier {
         this._id = id ?? generateUUID();
     }
 }
+

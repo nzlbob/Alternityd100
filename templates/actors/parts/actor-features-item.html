@@ -29,12 +29,16 @@
                     </div>
                     {{/if}}
                 </h4>
-                {{#if (and (not (eq item.type "starshipFrame")) (eq actor.type "starship"))}}
-
-                     
-                   <select class="value-compt" name="item.system.location">
-                        {{ selectOptions actor.system.compartment.compartments selected=item.system.location blank="" }}
-                    </select>                  
+                {{#if (and (not (or (eq item.type "starshipFrame") (eq item.type "starshipArmor"))) (eq actor.type "starship"))}}
+                <div>
+                    <label>{{item.system.bhpCost}} BHP</label>
+                </div>
+                <div>
+                    <select class="value-compt" name="item.system.location">
+                        {{ selectOptions actor.system.compartment.compartments valueAttr="location" labelAttr="name" selected=item.system.location blank="" }}
+                    </select>    
+                </div>   
+              
                     
          
                     

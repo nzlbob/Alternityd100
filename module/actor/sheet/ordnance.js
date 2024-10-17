@@ -71,7 +71,7 @@ console.log("HERE--",html)
 
     async _onAttackClicked(event) {
         event.preventDefault();
-
+console.log("Go")
         const name = game.i18n.format("SFRPG.HazardSheet.Rolls.Attack", {name: this.actor.name});
         return await this._performRoll(event, name, this.actor.system.attributes.baseAttackBonus.value, true);
     }

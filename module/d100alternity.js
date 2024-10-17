@@ -2,7 +2,7 @@
  * A simple and flexible system for world-building using an arbitrary collection of character and item attributes
  * Author: Atropos
  */
-
+import {d100AStatusEffects} from './modifiers/d100AStatusEffects.js'
 // Import Modules
 //import { SimpleActor } from "./actor.js";
 import { d100Actor } from "./d100actor.js";
@@ -220,8 +220,8 @@ Hooks.once("init", function() {
  
   // Define custom Entity classes
   //CONST.DEFAULT_TOKEN = "systems/Alternityd100/icons/conditions/dead_02.webp"
-  CONFIG.statusEffects[0].img = "systems/Alternityd100/icons/conditions/dead_02.webp";
-  CONFIG.statusEffects = d100A.statusEffects
+  //CONFIG.statusEffects[0].img = "systems/Alternityd100/icons/conditions/dead_02.webp";
+  CONFIG.statusEffects = d100AStatusEffects
 
 
   CONFIG.controlIcons.defeated = "icons/svg/padlock.svg";

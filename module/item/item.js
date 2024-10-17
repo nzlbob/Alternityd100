@@ -1326,7 +1326,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             // skl = rollData.skills[weaponskill]
             skl2 = "weapo"
         }
-        console.log("itemData.skill", skl)
+       // console.log("itemData.skill", skl)
+        if (!skl) return ui.notifications.warn("Skill "+ skl);
         let title = ""
         if (isSkill) title = /*game.settings.get('Alternityd100', 'useCustomChatCards') ? skill : */skl.label + " (" + itemData.fireMode + ") | " + item.name;
         else {
@@ -1412,7 +1413,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             }
             if (isStarshipweapon) {
 
-                targetedToken.resPenalty = -2
+               // targetedToken.resPenalty = -2
                 //token.actor.system.attributes.resistance
 
                 const targetResistance = targetedToken.token.actor.system.attributes.resistance
@@ -1500,23 +1501,41 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             Medium cover (+2 step penalty) indicates that the target is hiding behind material with good stopping power (heavy wood, brick, or mid- weight metal) or that less than one quarter of the target is exposed.
             Heavy cover f+3 step penalty) indicates that the target is hiding behind almost impenetrable material (steel or some other heavy metal, a bulkhead or vault door, or a solid stone wail) or that the target is almost completely hidden from view,
             */
+            console.log("targetedToken\n", targetedToken)
             targetedToken.covermod = 0
-            if (targetedToken.token.actor.system.conditions.coverlight) targetedToken.covermod = 1;
+            targetedToken.dodgemod = 0
+
+            targetedToken.token.actor.effects.forEach((effect) => {
+                console.log(effect)
+                targetedToken.dodgemod += effect.system.bonus.dodge
+                targetedToken.covermod += effect.system.bonus.cover
+                              
+                
+                effect.sheet.render()
+            }
+            )
+            
+              
+            
+
+            
+          /*  if (targetedToken.token.actor.system.conditions.coverlight) targetedToken.covermod = 1;
             if (targetedToken.token.actor.system.conditions.covermedium) targetedToken.covermod = 2;
             if (targetedToken.token.actor.system.conditions.coverheavy) targetedToken.covermod = 3;
-           
+           */
             //const status = targetedToken.token.statusEffects.find(element=> element.id = dead)
             //if (status,isActive) targetedToken.covermod = 1 
 
             /**********************
              * 6   Dodge Modifier
              *********************/
-            targetedToken.dodgemod = 0
+           
+/*
             if (targetedToken.token.actor.system.conditions.dodgecri) targetedToken.dodgemod = -2;
             if (targetedToken.token.actor.system.conditions.dodgeord) targetedToken.dodgemod = 1;
             if (targetedToken.token.actor.system.conditions.dodgegoo) targetedToken.dodgemod = 2;
             if (targetedToken.token.actor.system.conditions.dodgeama) targetedToken.dodgemod = 3;
-
+*/
 
             console.log(targetedToken)
             /* If he doesn l have a chance to get behind some cover, an opponent in a combat scene can declare that he J s dodging to make it more difficult for a hero to hit him. A dodge can be used against any attack, but it most often comes into play against ranged attacks, De pending on the success oi an Acrobatics-dodge skill check, the hero receives a +1, +2. or +3 penalty to his attack. De pending on the success oi an Acrobatics-dodge skill check, the hero re- ceives a +1, +2. or +3 penalty to his attack.

@@ -167,8 +167,8 @@
             <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.typeTooltip" }}">
 
              <label>{{ localize "d100A.Items.Weapon.typename" }}</label>
-             <select name="system.type">
-             {{#select itemData.type}}
+             <select name="system.damage.type">
+             {{#select itemData.damage.type}}
              {{#each d100Aconfig.damagetype as |name type|}}
              <option value="{{type}}">{{name}}</option>
              {{/each}}

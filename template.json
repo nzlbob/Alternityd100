@@ -4578,7 +4578,120 @@
                     },
                     "total": 0,
                     "tooltip": []
+                },
+                "availability": "com",
+                "ECM": {
+                    "radar": {
+                        "base": 0,
+                        "value": 0,
+                        "temp": 0,
+                        "tooltip": []
+                    },
+                    "laser": {
+                        "base": 0,
+                        "value": 0,
+                        "temp": 0,
+                        "tooltip": []
+                    },
+                    "mass": {
+                        "base": 0,
+                        "value": 0,
+                        "temp": 0,
+                        "tooltip": []
+                    },
+                    "thermal": {
+                        "base": 0,
+                        "value": 0,
+                        "temp": 0,
+                        "tooltip": []
+                    },
+                    "psi": {
+                        "base": 0,
+                        "value": 0,
+                        "temp": 0,
+                        "tooltip": []
+                    }
+                },
+                "hullPoints": {
+                    "tooltip": []
+                },
+                "power": {
+                    "tooltip": []
+                },
+                "ftl": {
+                    "tooltip": []
+                },
+                "cri": {
+                    "label": "Critical",
+                    "min": 0,
+                    "base": 1,
+                    "value": 8,
+                    "temp": 0,
+                    "tempmax": 100,
+                    "tooltip": [],
+                    "pending": 0
+                },
+                "stu": {
+                    "label": "Stun",
+                    "min": 0,
+                    "base": 10,
+                    "value": 10,
+                    "temp": 0,
+                    "tempmax": 100,
+                    "tooltip": [],
+                    "pending": 0
+                },
+                "wou": {
+                    "label": "Wounds",
+                    "min": 0,
+                    "base": 10,
+                    "value": 10,
+                    "temp": 0,
+                    "tempmax": 100,
+                    "tooltip": [],
+                    "pending": 0
+                },
+                "mor": {
+                    "label": "Mortal",
+                    "min": 0,
+                    "base": 5,
+                    "value": 5,
+                    "temp": 0,
+                    "tempmax": 100,
+                    "tooltip": [],
+                    "pending": 0
+                },
+                "accel": {
+                    "base": 0,
+                    "value": 0,
+                    "tooltip": []
+                },
+                "speed": {
+                    "max": 0,
+                    "min": 0,
+                    "base": 1,
+                    "value": 10,
+                    "temp": 0,
+                    "tempmax": 100,
+                    "tooltip": [],
+                    "pending": 0
+                },
+                "resistance": {
+                    "base": 0,
+                    "area": 0,
+                    "beam": 0,
+                    "bomb": 0,
+                    "mine": 0,
+                    "missile": 0,
+                    "projectile": 0,
+                    "special": 0,
+                    "torpedo": 0,
+                    "tooltip": []
                 }
+            
+           
+           
+           
             },
             "groups": {}
         },

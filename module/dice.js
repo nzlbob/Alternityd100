@@ -663,7 +663,7 @@ export class Diced100 {
     //}
 
     for (let target of targetData) {
-
+      console.log("Target\n",target)
       if (!target.resPenalty) target.resPenalty = 0;
       target.resistance = targetData ? (target.resPenalty > -1) ? "+" + target.resPenalty.toString() : target.resPenalty.toString() : "+0"
       console.log("****Resistance*****", target.resistance)
