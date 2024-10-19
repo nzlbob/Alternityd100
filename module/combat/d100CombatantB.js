@@ -130,8 +130,9 @@ export class d100BCombatant extends Combatant {
   }
 
   get initDegree() {
-    const actionCheck = this.actor.system.attributes.actchk
-    if (this.actor.system.type == "ordnance") return "amazing";
+    console.log(this)
+    const actionCheck = this.actor? this.actor.system.attributes.actchk : 20
+    if (this.actor?.system.type == "ordnance") return "amazing";
     if (this.initiative === null) return ""
     if (this.initiative <= actionCheck.amazing) return "amazing";
     if (this.initiative <= actionCheck.good) return "good";
@@ -196,7 +197,7 @@ export class d100BCombatant extends Combatant {
   }
 
   get apr() {
-    return this.actor.system.attributes.actchk.apr
+    return this.actor? this.actor.system.attributes.actchk.apr : 2
 
   }
 

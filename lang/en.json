@@ -2962,6 +2962,20 @@
         "WillSave": "Will"
     },
     "d100A": {
+
+        "starshipFirepowerExtra" : {
+            "abbr": {
+               "good": "G",
+               "small": "A",
+               "light": "L",
+               "medium": "M",
+               "heavy": "H",
+               "super": "S"
+            }
+        },
+
+
+
         "Tokenbar": {
             "WEAPONS": "Weapons",
             "COMBAT": "Combat",

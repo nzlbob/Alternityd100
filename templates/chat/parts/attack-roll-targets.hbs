@@ -86,15 +86,36 @@
         <button data-action="applyDamage" data-dmgtype="{{t.dmgtype.ama}}" data-targetId="{{t._id}}" data-firepower="{{t.firepower}}" data-type="{{t.type}}" data-value="{{t.dmgresult.ama.damage.total}}" title="{{t.dmgresult.ama.damage.formula}}" >{{t.dmgresult.ama.damage.total}}</button>
 
       </div>
-
+ {{#if token.actor.isSpaceActor}}
       {{!-- Saving Throws2 --}}
       <div class="saving-throws2" data-gm-sensitive-uuid="{{t.token.uuid}}">
                 <div class="normal" data-action="applyDamage" data-firepowerN ="{{firepowerN}}" data-type="Ordinary" data-value="01" title="{{localize "Ordinary"}}">
           
+          <span class="value">{{localize t.dmgtype.ord}} ({{t.type}})({{localize (append "d100A.starshipFirepowerExtra.abbr." t.firepower)}})</span>
+        </div>
+
+                <div class="normal" data-action="applyDamage" data-firepowerN ="{{firepowerN}}" data-type="Good" data-value="02" title="{{localize "Good"}}">
+
+        
+          <span class="value">{{localize t.dmgtype.goo}} ({{t.type}})({{localize (append "d100A.starshipFirepowerExtra.abbr." t.firepower)}})</span>
+        </div>
+                <div class="normal" data-action="applyDamage" data-firepowerN ="{{firepowerN}}" data-type="Amazing" data-value="03" title="{{localize "Amazing"}}">
+          
+          <span class="value"> {{localize  t.dmgtype.ama }} ({{t.type}})({{localize (append "d100A.starshipFirepowerExtra.abbr." t.firepower)}})</span>
+        </div>
+
+      </div>
+{{else}}
+
+<div class="saving-throws2" data-gm-sensitive-uuid="{{t.token.uuid}}">
+                <div class="normal" data-action="applyDamage" data-firepowerN ="{{firepowerN}}" data-type="Ordinary" data-value="01" title="{{localize "Ordinary"}}">
+          
           <span class="value">{{localize t.dmgtype.ord}} ({{t.type}})({{t.firepower}})</span>
         </div>
+
                 <div class="normal" data-action="applyDamage" data-firepowerN ="{{firepowerN}}" data-type="Good" data-value="02" title="{{localize "Good"}}">
-          
+
+        
           <span class="value">{{localize t.dmgtype.goo}} ({{t.type}})({{t.firepower}})</span>
         </div>
                 <div class="normal" data-action="applyDamage" data-firepowerN ="{{firepowerN}}" data-type="Amazing" data-value="03" title="{{localize "Amazing"}}">
@@ -104,6 +125,7 @@
 
       </div>
 
+{{/if}}
 
 
     </div>
