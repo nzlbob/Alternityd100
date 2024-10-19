@@ -95,8 +95,76 @@ export function getRangeCat(targetedToken,item) {
     return "long"
     
     
+       
+
+    return null;
+}
+
+export function rollNPC(skill,ship,options,actionId) {
+
+   console.log ( skill,ship,options,actionId)
+
+ //   actorData.actors[0] ? actorData.actors[0].rollSkill(skill, options) : ui.notifications.error(`No Crew in Station`);
+    const action = compendium.getDocument(actionId)
+    const actorData = ship.system
+     // this.actor.useSpell(item, {configureDialog: !event.shiftKey});
+     console.log (action)
+    const psionic =  item.type == "psionic"
+     options.skillflavour = "Hello"
+     options.stepflavour = "+0"
+    let parts = []
+    let dice=null
+    
+    let rollData = {}
+    let skillId = item.name
+    
+    
+    
+    let title = psionic? item.name + item.psionScore :  item.name + ": " + item.system.skill //was skl.name
+    let ordinary = psionic? item.ordinary : actorData.skills[item.system.skill].base
+    let good = psionic? item.good : actorData.skills[item.system.skill].good
+    let amazing = psionic? item.amazing : actorData.skills[item.system.skill].amazing 
+    let stepbonus = psionic? 0 : actorData.skills[item.system.skill].step 
+    options.nosound = false
+    let hasDegreeText = true
+    let degreeText = item.system.degreeText
+    const props = {header:"something",value:"2.jghf",extra:"fsfdg"};
+    let flavor = item.isSkilled?  actorData.skills[item.system.skill].label + " using" : ""
+    
+    flavor += (" " + item.name + ". ")
+    
+     let A =  Diced100.skillRoll({
+      event: options.event,
+      fastForward: !(options.skipDialog === true),
+      staticRoll: options.staticRoll,
+      parts,
+      stepbonus,
+      stepflavor:options.stepflavor,
+      skillflavor: options.skillflavor,
+      ordinary: ordinary,
+      good: good,
+      amazing: amazing,
+      dice: options.dice,
+      data: rollData,
+      subject: { skill: skillId },
+      title: title,
+      flavor : flavor,
+      speaker: ChatMessage.getSpeaker({ actor: this }),
+      chatTemplate: "systems/Alternityd100/templates/chat/roll-ext.hbs",
+      chatTemplateData: { hasProperties: props.length > 0, properties: props },
+      chatMessage: "Hello" + options.chatMessage,
+      noSound: options.noSound,
+      compendiumEntry: null,
+      hasDegreeText,
+      degreeText
+    });
+    
+    console.log("\nDiced100.skillRoll({\n", A)
+    let rollresult = {}
+    return A
     
     
 
-    return null;
+
+
 }

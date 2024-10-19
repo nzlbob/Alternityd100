@@ -1688,7 +1688,10 @@ export class ActorSheetSFRPG extends ActorSheet {
         console.log("this.actor.system.crew", this.actor.system.crew)
         console.log("oldRole", oldRole)
         console.log("crewRole", crewRole)
-
+        if (crewRole.limit < -1){
+            ui.notifications.error("Too many",crewRole.limit,targetRole )
+            crewRole.limit =-1
+        }
         if (crewRole.limit === -1 || crewRole.actorIds.length < crewRole.limit) {
             crewRole.actorIds.push(data.id);
 

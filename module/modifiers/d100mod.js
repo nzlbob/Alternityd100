@@ -145,7 +145,7 @@ crack:{
 }
 
 function getstat(effectivity){
-    let skillNames = ["systeop","spaceve","comma","leade","defen","space","leade","senso","juryr","weapo","engin","inspi","repai","driveas","systeas"]
+    let skillNames = ["systeop","spaceve","commu","leade","defen","space","leade","senso","juryr","weapo","engin","inspi","repai","driveas","systeas"]
     let skillLevels = {
         green: {
             base : 10, good : 5,amazing: 2,step:0

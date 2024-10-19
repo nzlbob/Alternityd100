@@ -177,7 +177,7 @@ export class Diced100 {
       if (isStarshipweapon) {
         activegunner = validgunner[operator]
 
-
+        if (!activegunner)return ui.notifications.warn("No Gunners");
         //console.log(activegunner.name)
 
         flavor = "Gunner-" + activegunner.name;

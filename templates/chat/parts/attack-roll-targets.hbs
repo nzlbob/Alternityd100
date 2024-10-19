@@ -79,7 +79,7 @@
       {{!-- AC --}}
       <div class="ac" data-tooltip-direction="UP" data-gm-sensitive-uuid="{{t.token.uuid}}">
 
-{{console "Roll - Targets 54"}}
+{{console "Roll - Targets 82"}}
 {{console t}}
         <button data-action="applyDamage" data-dmgtype="{{t.dmgtype.ord}}"   data-targetId="{{t._id}}" data-firepower="{{t.firepower}}" data-type="{{t.type}}" data-value="{{t.dmgresult.ord.damage.total}}" data-tooltip="{{t.dmgresult.ord.damage.formula}}"  >{{t.dmgresult.ord.damage.total}}</button>
         <button data-action="applyDamage" data-dmgtype="{{t.dmgtype.goo}}" data-targetId="{{t._id}}" data-firepower="{{t.firepower}}" data-type="{{t.type}}" data-value="{{t.dmgresult.goo.damage.total}}" title="{{t.dmgresult.goo.damage.formula}}" >{{t.dmgresult.goo.damage.total}}</button>
@@ -107,7 +107,12 @@
 
 
     </div>
-   {{#if actor.isSpaceActor}}
+<!--
+console "Roll - Targets 111"
+console this
+console token.actor.isSpaceActor   
+   -->
+   {{#if token.actor.isSpaceActor}}
     <div class="HitLoc" data-gm-sensitive-uuid="{{t.token.uuid}}">
     <button data-action="rollHitLoc" data-aspect="{{t.aspect}}" data-atttokenid = "{{../atttokenid}}" data-targetid="{{t._id}}" data-firepower="{{t.firepower}}" data-type="{{t.type}}" data-value="{{t.dmgresult.ama.damage.total}}" data-tooltip-direction="UP" data-tooltip="<p>System damage is possible any time one of the following occurs:</p><p>• The target suffers mortal or critical damage.</p><p>• The target marks off its last stun or wound box.</p><p>• The attacker achieves an Amazing success with her attack and at least 1 point of primary damage penetrates the target's armor.</p>" > System Damage </button>
 </div>

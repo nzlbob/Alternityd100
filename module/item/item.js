@@ -277,8 +277,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             //let basesize ="";
             // Calculate number of compartments
             if (game.settings.get("Alternityd100", "starshipCompartments") == "warships") {
-                if (itemData.size == "small" && itemData.hullPoints.size <= 20) itemData.basesize = "small2";
-                else if (itemData.size == "small" && itemData.hullPoints.size > 20) itemData.basesize = "small4"
+                if (itemData.size == "small" && itemData.hullPoints.total <= 20) itemData.basesize = "small2";
+                else if (itemData.size == "small" && itemData.hullPoints.total > 20) itemData.basesize = "small4"
                 else itemData.basesize = itemData.size;
 
 
