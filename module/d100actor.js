@@ -702,7 +702,7 @@ resetNPCCrew() {
   //  isSubSkill = skillParts[1] === "subSkills" && skillParts.length === 3;
     skl = this.system.skills[skillId];
     //skl = this.system.skills.str.armorop
-    console.log("getSkillInfo(skillId)", skillId, skl, this.system.skills.str.armorop.label)  
+    console.log("getSkillInfo(skillId)", skillId, skl)  
 
     
 
@@ -796,7 +796,7 @@ rollSkill(
   if (allowed === false) return;
 
 
-console.log(d100NPCCrewStats(this.system.crew.npcCrewQuality))
+ // console.log(d100NPCCrewStats(this.system.crew.npcCrewQuality))
   const skl = this.type=="starship"? d100NPCCrewStats(this.system.crew.npcCrewQuality).skills[skillId]: this.getSkillInfo(skillId);
 if (this.type=="starship"){
   let name = d100A.skills[skillId]; 

@@ -2,162 +2,224 @@
     <div class="sturtus flexcol">
 
     </div>
-{{#if isUseWarshipsOptions}}
+    {{#if isUseWarshipsOptions}}
     <div class="divTable crewTable">
         <div class="divTableHeading">
-        <div class="divTableRow">
-        <div class="divTableHead"><button style="height: 30px;"  class="clickapplydamge" data-tooltip-direction="UP" data-tooltip="Apply Temp Damage" >TYPE</button></div>
-        <div class="divTableHead">DAMAGE STATUS</div>
+            <div class="divTableRow">
+                <div class="divTableHead"><button style="height: 30px;" class="clickapplydamge"
+                        data-tooltip-direction="UP" data-tooltip="Apply Temp Damage">TYPE</button></div>
+                <div class="divTableHead">DAMAGE STATUS</div>
 
-        </div>
+            </div>
         </div>
         <div class="divTableBody">
-        {{#each status.durability as |category id|}}
+            {{#each status.durability as |category id|}}
 
-        <div class="divTableRow">
-        {{#if (eq id "stu") }}<div class="divTableCell">{{ localize "d100A.stun"}}</div> {{/if}}
-        {{#if (eq id "wou") }}<div class="divTableCell">{{ localize "d100A.wound"}}</div> {{/if}}
-        {{#if (eq id "mor") }}<div class="divTableCell">{{ localize "d100A.mortal"}}</div> {{/if}}
-        {{#if (eq id "cri") }}<div class="divTableCell">{{ localize "d100A.critical"}}</div> {{/if}}
-        <div class="divTableCell">
-            {{#each category.good as |position|}}
-            <img class="clickgood" src="{{../../status.image.good}}" title="{{position.title}}" data-position={{position.value}} data-type="total-dec" data-id={{id}} data-category="total" height="15" width="15" />
+            <div class="divTableRow">
+                {{#if (eq id "stu") }}<div class="divTableCell">{{ localize "d100A.stun"}}</div> {{/if}}
+                {{#if (eq id "wou") }}<div class="divTableCell">{{ localize "d100A.wound"}}</div> {{/if}}
+                {{#if (eq id "mor") }}<div class="divTableCell">{{ localize "d100A.mortal"}}</div> {{/if}}
+                {{#if (eq id "cri") }}<div class="divTableCell">{{ localize "d100A.critical"}}</div> {{/if}}
+                <div class="divTableCell">
+                    {{#each category.good as |position|}}
+                    <img class="clickgood" src="{{../../status.image.good}}" title="{{position.title}}"
+                        data-position={{position.value}} data-type="total-dec" data-id={{id}} data-category="total"
+                        height="15" width="15" />
+                    {{/each}}
+                    {{#each category.pend as |position|}}
+                    <img class="clickgood" src="{{../../status.image.pend}}" title="{{position.title}}"
+                        data-position={{position.value}} data-type="total-dec" data-id={{id}} data-category="total"
+                        height="15" width="15" />
+                    {{/each}}
+                    {{#each category.bad as |position|}}
+                    <img class="clickgood" src="{{../../status.image.bad}}" title="{{position.title}}"
+                        data-position={{position.value}} data-type="total-inc" data-id={{id}} data-category="total"
+                        height="15" width="15" />
+                    {{/each}}
+                </div>
+            </div>
             {{/each}}
-            {{#each category.pend as |position|}}
-            <img class="clickgood" src="{{../../status.image.pend}}" title="{{position.title}}" data-position={{position.value}} data-type="total-dec" data-id={{id}} data-category="total" height="15" width="15" />
-            {{/each}}
-            {{#each category.bad as |position|}}
-            <img class="clickgood" src="{{../../status.image.bad}}"  title="{{position.title}}" data-position={{position.value}} data-type="total-inc" data-id={{id}} data-category="total" height="15" width="15" />
-            {{/each}}                    
-        </div>
-        </div>
-        {{/each}}
 
 
         </div>
-        </div>
-        {{/if}}
+    </div>
+    {{/if}}
 
-        <table class="statusTable_3">
-            <tbody>
-                <tr>
-                    <td  style=" color: black; border: 0px; background-color: #eef8f8; border-color: #eef8f8; height: 1cm ; width: 33%;" >
+    <table class="statusTable_3">
+        <tbody>
+            <tr>
+                <td
+                    style=" color: black; border: 0px; background-color: #eef8f8; border-color: #eef8f8; height: 1cm ; width: 33%;">
                     System Damage
-                    </td>
-                    <td  style=" color: black; border: 0px; background-color: #eef8f8; border-color: #eef8f8; height: 1cm ; width: 33%;" ></td>
-                    <td  style=" color: black; border: 0px; background-color: #eef8f8; border-color: #eef8f8; height: 1cm ; width: 33%;" ></td>
-                </tr>
-                {{console "Starship-status 50"}} {{console this}} {{console compartTable}} 
-        {{#each compartTable as |row rnum|}}
+                </td>
+                <td
+                    style=" color: black; border: 0px; background-color: #eef8f8; border-color: #eef8f8; height: 1cm ; width: 33%;">
+                </td>
+                <td
+                    style=" color: black; border: 0px; background-color: #eef8f8; border-color: #eef8f8; height: 1cm ; width: 33%;">
+                </td>
+            </tr>
+            {{console "Starship-status 50"}} {{console this}} {{console compartTable}}
+            {{#each compartTable as |row rnum|}}
 
 
-    <tr>
-        {{#each row as |col cpt|}}
-            {{#if col.isBlank }}
-            <td  style="border: 0px; background-color: #eef8f8; border-color: #eef8f8; height: 2cm ; width: 33%;" ></td>
-            {{else}}
-            <td  style="background-color: #e1f3f3 ;">
-                
-                {{#if  col.overload}}
-                <h3 data-tooltip ="{{col.curHull}}/{{col.maxHull}}" data-tooltip-direction="UP" style="text-align: center ; background-color: #fcac5d " >{{col.name}}</h3>
+            <tr>
+                {{#each row as |col cpt|}}
+                {{#if col.isBlank }}
+                <td style="border: 0px; background-color: #eef8f8; border-color: #eef8f8; height: 2cm ; width: 33%;">
+                </td>
                 {{else}}
-                <h3 data-tooltip ="{{col.curHull}}/{{col.maxHull}}" data-tooltip-direction="UP" style="text-align: center" >{{col.name}}</h3>
-                
-                <button data-row = "{{rnum}}" data-name = "{{col.name}}" data-col = "{{cpt}}"data-location = "{{col.location}}" class="systdamagebutton">System Damage Locn.</button>
-                <button data-row = "{{rnum}}" data-name = "{{col.name}}" data-col = "{{cpt}}"data-location = "{{col.location}}" class="damagecheckbutton">Damage Check</button>
-                
-                {{/if}}
-                
-                {{#unless ../../isUseWarshipsOptions}}
-                
-                {{#each col.durability as |type dur|}}
+                <td style="background-color: #e1f3f3 ;">
+
+                    {{#if col.overload}}
+                    <h3 data-tooltip="{{col.curHull}}/{{col.maxHull}}" data-tooltip-direction="UP"
+                        style="text-align: center ; background-color: #fcac5d ">{{col.name}}</h3>
+                    {{else}}
+                    <h3 data-tooltip="{{col.curHull}}/{{col.maxHull}}" data-tooltip-direction="UP"
+                        style="text-align: center">{{col.name}}</h3>
+
+                    <button data-row="{{rnum}}" data-name="{{col.name}}" data-col="{{cpt}}"
+                        data-location="{{col.location}}" class="systdamagebutton">System Damage Locn.</button>
+                    <button data-row="{{rnum}}" data-name="{{col.name}}" data-col="{{cpt}}"
+                        data-location="{{col.location}}" class="damagecheckbutton">Damage Check</button>
+
+                    {{/if}}
+
+                    {{#unless ../../isUseWarshipsOptions}}
+
+                    {{#each col.durability as |type dur|}}
                     {{type.name}}
 
 
-                    
-                        {{#each type.good as |position|}}
-                        <img class="clickgood" src="{{col.image.good}}" title="{{position}}" data-position="{{position}}" data-location="{{col.location}}" data-dur="{{dur}}" data-type="dec" data-category="compart" height="14" width="14" />
-                        {{/each}}
 
-                        {{#each type.bad as |position|}}
-                        <img class="clickgood" src="{{col.image.bad}}" title="{{position}}" data-position="{{position}}" data-location="{{col.location}}" data-dur="{{dur}}" data-type="inc" data-category="compart" height="14" width="14" />              
-                        {{/each}} <br/>
-                    
-                
-                {{/each}} 
-                {{/unless}} 
+                    {{#each type.good as |position|}}
+                    <img class="clickgood" src="{{col.image.good}}" title="{{position}}" data-position="{{position}}"
+                        data-location="{{col.location}}" data-dur="{{dur}}" data-type="dec" data-category="compart"
+                        height="14" width="14" />
+                    {{/each}}
+
+                    {{#each type.bad as |position|}}
+                    <img class="clickgood" src="{{col.image.bad}}" title="{{position}}" data-position="{{position}}"
+                        data-location="{{col.location}}" data-dur="{{dur}}" data-type="inc" data-category="compart"
+                        height="14" width="14" />
+                    {{/each}} <br />
 
 
-                {{#each col.systems as |system|}}
-                {{#if system.system.isPowered}} 
-                <li class="item flexrow" style="background-color: black;" > <div class="clickonoff" data-tooltip-direction="UP" data-tooltip="Power Off" data-item-id="{{system._id}}" style="color:rgb(161, 223, 218)" >{{system.name}} </div> 
-                      {{else}}
-                      <li class="item flexrow" style="background-color: black;"> <div class="clickonoff" data-tooltip-direction="UP" data-tooltip="Power On" data-item-id="{{system._id}}" style="color:  rgb(253, 0, 51)" >{{system.name}} </div> 
+                    {{/each}}
+                    {{/unless}}
+
+
+                    {{#each col.systems as |system|}}
+                    {{#if system.system.isPowered}}
+
+                    {{#if system.system.overPowered}}
+                    <li class="item flexrow" style="background-color: black;">
+                        <div class="clickonoff" data-tooltip-direction="UP" data-tooltip="Power Off"
+                            data-item-id="{{system._id}}" style="color:rgb(221, 65, 65)">{{system.name}} </div>
+                        <i style="color:rgb(221, 65, 65)" data-tooltip="Normal" data-item-id="{{system._id}}" id="clickoverload"
+                            class="fas fa-bolt ; clickoverload"></i>
+
+                        {{else}}
+                    <li class="item flexrow" style="background-color: black;">
+                        <div class="clickonoff" data-tooltip-direction="UP" data-tooltip="Power Off"
+                            data-item-id="{{system._id}}" style="color:rgb(148, 219, 213)">{{system.name}} </div>
+                        <i style="color:rgb(148, 219, 213)" data-tooltip="Over Power" data-item-id="{{system._id}}"
+                            id="clickoverload" class="fas fa-bolt ; clickoverload"></i>
                         {{/if}}
-                      <!--  <img src="systems/Alternityd100/icons/roles/on.png" alt="Girl in a jacket" width="20" height="20">  -->
-                    <div>
-                    <select class="value-equipmentStatus" style="background-color: black;color:rgb(175, 215, 223)" name="system.system.status" data-item-id="{{system._id}}">
-                        {{ selectOptions ../../../d100Aconfig.equipmentStatus selected=system.system.status }}
-                       
-                        </select> 
-                        
-                        
 
-                {{/each}}
-            </div>
+
+                        {{else}}
+                    <li class="item flexrow" style="background-color: black;">
+                        <div class="clickonoff" data-tooltip-direction="UP" data-tooltip="Power On"
+                            data-item-id="{{system._id}}" style="color:  rgb(112, 112, 112)">{{system.name}} </div>
+                        <i style="color:rgb(112, 112, 112)" data-item-id="{{system._id}}" id="clickoverload" class="fas fa-bolt ; clickoverload"></i>
+                        {{/if}}
+                        <!--  <img src="systems/Alternityd100/icons/roles/on.png" alt="Girl in a jacket" width="20" height="20">  -->
+                        <div>
+                            <select class="value-equipmentStatus"
+                                style="background-color: black;color:rgb(148, 219, 213)" name="system.system.status"
+                                data-item-id="{{system._id}}">
+                                {{ selectOptions ../../../d100Aconfig.equipmentStatus selected=system.system.status }}
+
+                            </select>
+
+
+
+                            {{/each}}
+                        </div>
                     </li>
-            </td>
-            {{/if}}
-        {{/each}}
-        
-    </tr>
-    {{/each}}
+                </td>
+                {{/if}}
+                {{/each}}
 
-    </tbody>
+            </tr>
+            {{/each}}
+
+        </tbody>
 
 
     </table>
-    <div class="divTableHead"><h3>Checking for System Damage</h3>
+    <div class="divTableHead">
+        <h3>Checking for System Damage</h3>
         <p> System damage is possible any time one of the following occurs:</p>
-         <li> The target suffers mortal or critical damage.</li>
-         <li>The target marks off its last stun or wound box</li>
-         <li>The attacker achieves an Amazing success with her attack and at least 1 point of primary damage penetrates the target's armor.</li>
-         <p>If same hit qualifies for system damage on multiple counts (for example, a hit for mortal damage with enough secondary damage to exhaust the target's wound track), it's still just one hit for purposes of system damage.</p>
-        
-         
-<h3>How Many Checks per Hit?</h3>
-<p>Some hits may cause damage checks for multiple systems in the same zone. The default answer is always at least one check against the first item in the damage order.</p>
-<li>One item is checked per 2 points of primary critical damage inflicted.</li>
-<li>One item is checked per 3 points of primary mortal damage.</li>
-<li>One item is checked for any other kind of system damage hit.</li>
-<p>Note that the number of hits inflicted is determined after upgrading or downgrading for firepower and the effects of armor are taken into account For example, if a fusion beam hit inflicts 7 points of critical damage but the target's armor stops 4 of these, the zone affected must check against the first 3 items on the damage order. (Of course, the ship also marks off 3 points of critical damage, plus secondary damage of 3 mortals, wounds, and stuns.) </p>
-
-<h3>Degraded, Knocked Out, and Destroyed</h3>
-<p>Many of the following results indicate that a system is "degraded," "knocked out/' or "destroyed." Refer to the appropriate entry for more information.</p>
-<p> <b> Degraded: </b>Some special effects apply to this entry. Check the description of the result in the following section. A degraded system that is degraded a second time is knocked out.</p>
-<p> <b>Knocked Out: </b>The system has been knocked off-line by damage. Flowever, its possible to make some minor repairs or adjustments and get it running again, negating the result n the damage control phase, the commander may have her crew attempt to repair a system that is out and bring it back on-line. If a knocked-out system is knocked out a second time, it's destroyed.</p>
-<p> <b>Destroyed: </b>The system has been destroyed. It can't be repaired in the course of this battle. Strike the item off of the damage order for this zone— it no longer counts as a potential hit location.</p>
-<h3>System Effects</h3>
-
-<p>The effects of damage to each type of ship system are summed up below. Note that these effects apply for pur poses of the basic game; more detailed effects are covered in the next chapter.</p>
-<p>Many of these effects call for a damage check to determine if one result occurs or another. A damage check is simply a crew check, modified by any damage control systems the ship possesses.</p>
+        <li> The target suffers mortal or critical damage.</li>
+        <li>The target marks off its last stun or wound box</li>
+        <li>The attacker achieves an Amazing success with her attack and at least 1 point of primary damage penetrates
+            the target's armor.</li>
+        <p>If same hit qualifies for system damage on multiple counts (for example, a hit for mortal damage with enough
+            secondary damage to exhaust the target's wound track), it's still just one hit for purposes of system
+            damage.</p>
 
 
+        <h3>How Many Checks per Hit?</h3>
+        <p>Some hits may cause damage checks for multiple systems in the same zone. The default answer is always at
+            least one check against the first item in the damage order.</p>
+        <li>One item is checked per 2 points of primary critical damage inflicted.</li>
+        <li>One item is checked per 3 points of primary mortal damage.</li>
+        <li>One item is checked for any other kind of system damage hit.</li>
+        <p>Note that the number of hits inflicted is determined after upgrading or downgrading for firepower and the
+            effects of armor are taken into account For example, if a fusion beam hit inflicts 7 points of critical
+            damage but the target's armor stops 4 of these, the zone affected must check against the first 3 items on
+            the damage order. (Of course, the ship also marks off 3 points of critical damage, plus secondary damage of
+            3 mortals, wounds, and stuns.) </p>
+
+        <h3>Degraded, Knocked Out, and Destroyed</h3>
+        <p>Many of the following results indicate that a system is "degraded," "knocked out/' or "destroyed." Refer to
+            the appropriate entry for more information.</p>
+        <p> <b> Degraded: </b>Some special effects apply to this entry. Check the description of the result in the
+            following section. A degraded system that is degraded a second time is knocked out.</p>
+        <p> <b>Knocked Out: </b>The system has been knocked off-line by damage. Flowever, its possible to make some
+            minor repairs or adjustments and get it running again, negating the result n the damage control phase, the
+            commander may have her crew attempt to repair a system that is out and bring it back on-line. If a
+            knocked-out system is knocked out a second time, it's destroyed.</p>
+        <p> <b>Destroyed: </b>The system has been destroyed. It can't be repaired in the course of this battle. Strike
+            the item off of the damage order for this zone— it no longer counts as a potential hit location.</p>
+        <h3>System Effects</h3>
+
+        <p>The effects of damage to each type of ship system are summed up below. Note that these effects apply for pur
+            poses of the basic game; more detailed effects are covered in the next chapter.</p>
+        <p>Many of these effects call for a damage check to determine if one result occurs or another. A damage check is
+            simply a crew check, modified by any damage control systems the ship possesses.</p>
 
 
 
-                {{console d100Aconfig.starshipSystemDamage}}
-                {{console "***********STATUS 131***************"}}
-                
-                {{#each d100Aconfig.starshipSystemDamage as |DType|}}
-                <li data-tooltip-direction= "UP">
-                {{DType.name}}  - <span  data-tooltip="{{DType.system.damagelevel.stun}}"> Stun </span> <span  data-tooltip="{{DType.system.damagelevel.wound}}"> Wound </span> <span  data-tooltip="{{DType.system.damagelevel.mortal}}"> Mortal </span> <span  data-tooltip="{{DType.system.damagelevel.critical}}"> Critical </span>  
-            </li>
-                {{/each}}
-            
-            
-    
+
+
+        {{console d100Aconfig.starshipSystemDamage}}
+        {{console "***********STATUS 131***************"}}
+
+        {{#each d100Aconfig.starshipSystemDamage as |DType|}}
+        <li data-tooltip-direction="UP">
+            {{DType.name}} - <span data-tooltip="{{DType.system.damagelevel.stun}}"> Stun </span> <span
+                data-tooltip="{{DType.system.damagelevel.wound}}"> Wound </span> <span
+                data-tooltip="{{DType.system.damagelevel.mortal}}"> Mortal </span> <span
+                data-tooltip="{{DType.system.damagelevel.critical}}"> Critical </span>
+        </li>
+        {{/each}}
+
+
+
 
     </div>
 
-</div> 
+</div>

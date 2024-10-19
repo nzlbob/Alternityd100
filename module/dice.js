@@ -493,16 +493,17 @@ export class Diced100 {
           //if (targetData[a].attroll.terms[0].total == 1) {targetData[a].degree = "Critical Success"};
 
 
-          if (isStarshipweapon) {
+        //  if (isStarshipweapon) {
             //console.log("----------------",)
-            targetData[a].firepower = d100A.starshipFirepowerExtra.abbr[actor.system.details.toughness.firepower];
-            targetData[a].firepowerN = d100A.starshipFirepowerExtra.val[actor.system.details.toughness.firepower];
+       //     targetData[a].firepower = d100A.starshipFirepowerExtra.abbr[actor.system.details.toughness.firepower];
+       //     targetData[a].firepowerN = d100A.starshipFirepowerExtra.val[actor.system.details.toughness.firepower];
             //console.log("----------------",targetData[a].firepower,targetData[a].firepowerN)
 
-          }
-          if (!isStarshipweapon) {
-            targetData[a].firepower = item.system.firepower;
-          }
+      //    }
+       //   if (!isStarshipweapon) {
+      //      targetData[a].firepower = item.system.firepower;
+      //    }
+          targetData[a].firepower = item.system.firepower;
 
           targetData[a].type = item.system.damage.type;
           targetData[a].flavor += "\nDice: " + targetData[a].attroll.formula
@@ -2102,10 +2103,10 @@ function calculateDamage(data, key, armor, defendroll) {
 
   let shipToughness = d100A.starshipFirepowerExtra.abbr[data.contrActor.system.frame?.system?.toughness] || "G"
   if (data.contrActor.isSpaceActor) {
-    //console.log(d100A.firepowerRating,data.firepower,armor, shipToughness,dmgtype)
-    dmgtype = d100A.firepowerRating[data.firepower][shipToughness][dmgtype]
+    console.log(d100A.firepowerRating,data.firepower,armor, shipToughness,dmgtype)
+    dmgtype = d100A.firepowerRating[d100A.starshipFirepowerExtra.abbr[data.firepower]][shipToughness][dmgtype]
     if (!dmgtype) alteredDamage = 0;
-    if (dmgtype) alteredDamage = data.damage * d100A.firepowerMultiplier[data.firepower][shipToughness][data.dmgtype];
+    if (dmgtype) alteredDamage = data.damage * d100A.firepowerMultiplier[d100A.starshipFirepowerExtra.abbr[data.firepower]][shipToughness][data.dmgtype];
 
 
   } console.log(dmgtype, alteredDamage, defendroll.total)

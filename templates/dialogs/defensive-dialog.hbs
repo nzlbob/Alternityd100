@@ -63,13 +63,13 @@
     {{#if tokenData.isSpaceActor }}
       <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.firepowerTooltip" }}">
       <label>{{ localize "d100A.Items.Firepower" }}</label>
-      <select style="font-family: serpentine;" name="firepower">
-      {{#select firepower}}
-        {{#each d100A.starshipFirepowerDial as |name firepower|}} 
-          <option style="font-family: serpentine;" value="{{firepower}}">{{name}}</option>
-        {{/each}}
-      {{/select}}
-      </select>
+      {{console this}}
+
+<select name="firepower">
+  {{selectOptions d100A.starshipFirepower selected=firepower localize=true }}
+</select>
+
+
       </div>  
     {{/if}}
   </th>

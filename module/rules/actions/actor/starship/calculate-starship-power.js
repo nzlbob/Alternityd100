@@ -20,10 +20,14 @@ export default function (engine) {
             const componentData = component.system;
 
             const excludedComponents = ["starshipFrame", "starshipPowerCore"];
+            let pcu = 0
+            componentData.overPowered? pcu = componentData.pcu * 2 : pcu = componentData.pcu
+
+
             if (!excludedComponents.includes(component.type)) {
-                if (componentData.pcu && componentData.isPowered) {
-                    let power = componentData.pcu;
-                    if (componentData.isPCUPerBHP) power = componentData.pcu * componentData.bhpCost;
+                if (pcu && componentData.isPowered) {
+                    let power = pcu;
+                    if (componentData.isPCUPerBHP) power = pcu * componentData.bhpCost;
 
 
                     data.attributes.power.value += power;

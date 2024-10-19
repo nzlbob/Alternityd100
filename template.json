@@ -5300,6 +5300,7 @@
                 "pcu": 0,
                 "isPowered": true,
                 "pwrPerBHP": 0,
+                "overPowered": false,
                 "isPCUPerBHP": false,
                 "bhpCost": 0,
                 "location":"F",

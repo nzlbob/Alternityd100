@@ -2659,6 +2659,7 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
         //console.log("----onChatCardAction-------------",event,tokenId,sceneId,tokenData)
         //let value = defenceData.value
         const template = "systems/Alternityd100/templates/dialogs/defensive-dialog.hbs";
+        
         let dialogData = {
             //formula: defenceData.value,
             damage: defenceData.value,

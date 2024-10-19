@@ -178,7 +178,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        {{console "starship-sheet-full.html 180"}}
+                        {{console this}}
+                        <tr {{#if powerOverload}} style="background-color: #ff0000;" {{/if}}>
                             <td>{{localize "SFRPG.StarshipSheet.Header.PCU"}}</td>
                             <td>{{system.attributes.power.value}}</td>
                             <td>{{system.attributes.power.max}}</td>

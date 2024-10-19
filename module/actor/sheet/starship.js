@@ -61,8 +61,9 @@ export class d100AActorSheetStarship extends ActorSheetSFRPG {
 
         //data.compartTable = "<td style=\"border: 0px; background-color: #eef8f8; border-color: #eef8f8; \" ></td><td>cell2_2</td><td style=\"border: 0px; background-color: #eef8f8; border-color: #eef8f8; \" ></td>"
         //data.compartTable = "<td>cell1_3</td><td>cell2_3</td><td>cell3_3</td></tr>"
-
+        data.powerOverload = this.powerOverload
         return data;
+
     }
 
     /**
@@ -984,10 +985,49 @@ export class d100AActorSheetStarship extends ActorSheetSFRPG {
         html.find('.value-equipmentStatus').change(event => this._onChangeStatus(event));
         html.find('.setCompartmentDur').change(event => this._onChangesetCompartmentDur(event));
         html.find('.clickonoff').click(event => this._onOnOff(event));
+        html.find('.clickoverload').click(event => this._toggleOverload(event));
+
+    }
+    _toggleOverload(event) {
+        console.log("HERE--", event)
+        // _onItemRollAttack(event,attackType) {
+        //     event.preventDefault();
+        const itemId = event.currentTarget.dataset.itemId;
+        const item = this.actor.items.get(itemId);
+        console.log("User Targets", item,itemId);
+        //console.log( event.target.value)
+if (!item.system.isPowered){
+
+    item.update({ "system.overPowered": false })
+
+}
+else {
+
+    if (item.system.pcu > 0) item.update({ "system.overPowered": !item.system.overPowered });
+
+}
+
+
+      
+        //console.log("User Targets", item,itemId);
+
+        //    attackType = item.system.fireMode;
+        // console.log("event",event)
+        //    return item.rollAttack({event: event, attackType: attackType});
+        //  }
 
 
     }
 
+get powerOverload()
+
+{
+
+if (this.actor.system.attributes.power.value > this.actor.system.attributes.power.max) return true
+
+return false
+
+}
 
     _onCrewCombat(event) {
 
@@ -1070,6 +1110,7 @@ export class d100AActorSheetStarship extends ActorSheetSFRPG {
     }
 
 
+
     async _onOnOff(event) {
 
 
@@ -1080,8 +1121,12 @@ export class d100AActorSheetStarship extends ActorSheetSFRPG {
         const item = this.actor.items.get(itemId);
         //console.log("User Targets", item,itemId);
         //console.log( event.target.value)
-
-        item.update({ "system.isPowered": !item.system.isPowered })
+        if(item.system.isPowered ) {
+        item.update({ "system.overPowered": false,  "system.isPowered": false })
+        }
+        else {
+        item.update({ "system.isPowered": true })
+        }
         //console.log("User Targets", item,itemId);
 
         //    attackType = item.system.fireMode;
