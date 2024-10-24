@@ -1,7 +1,7 @@
 import { Diced100 } from "../../dice.js";
 import RollContext from "../../rolls/rollcontext.js";
 import { ActorSheetSFRPG } from "./base.js";
-
+import { SFRPG } from "../../config.js"
 export class d100AActorSheetOrdnance extends ActorSheetSFRPG {
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
@@ -14,6 +14,44 @@ export class d100AActorSheetOrdnance extends ActorSheetSFRPG {
     get template() {
         if (!game.user.isGM && this.actor.limited) return "systems/Alternityd100/templates/actors/ordnance-sheet-limited.html";
         return "systems/Alternityd100/templates/actors/ordnance-sheet-full.html";
+    }
+
+    async getData() {
+        const data = super.getData();
+
+        const inventory = {
+            ordnanceWarhead: { label: game.i18n.format(SFRPG.itemTypes["ordnanceWarhead"]), items: [], dataset: { type: "ordnanceWarhead" }, allowAdd: true },
+            ordnanceGuidance: { label: game.i18n.format(SFRPG.itemTypes["ordnanceGuidance"]), items: [], dataset: { type: "ordnanceGuidance" }, allowAdd: true },
+            ordnancePropulsion: { label: game.i18n.format(SFRPG.itemTypes["ordnancePropulsion"]), items: [], dataset: { type: "ordnancePropulsion" }, allowAdd: true },
+            everythingelse: { label: game.i18n.format(SFRPG.itemTypes["everythingelse"]), items: [], dataset: { type: "everythingelse" }, allowAdd: false } 
+
+
+        };
+
+        console.log(this.object.items)
+        for (let [k, item] of Object.entries(this.object.items.contents)) {
+            console.log(item,item.type)
+            console.log(item.type.startsWith("starship"))
+            if (inventory[item.type]) { inventory[item.type].items.push({ item: item }); continue }
+            if (item.type.startsWith("starship")) { inventory.starshipstuff.items.push({ item: item }); continue }
+            inventory.everythingelse.items.push({ item: item });
+
+
+
+
+
+
+        }
+
+        console.log(data)
+        // Enrich text editors
+     //   data.enrichedDescription = await TextEditor.enrichHTML(this.actor.system.details.biography.value, { async: true });
+
+
+
+        data.inventory = Object.values(inventory);
+
+        return data;
     }
 
     activateListeners(html) {
@@ -70,9 +108,14 @@ console.log("HERE--",html)
     }
 
     async _onAttackClicked(event) {
-        event.preventDefault();
+       // event.preventDefault();
+
+
 console.log("Go")
         const name = game.i18n.format("SFRPG.HazardSheet.Rolls.Attack", {name: this.actor.name});
+
+
+        
         return await this._performRoll(event, name, this.actor.system.attributes.baseAttackBonus.value, true);
     }
 

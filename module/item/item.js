@@ -41,6 +41,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
     get hasAttack() {
         if (this.type === "starshipWeapon") return true;
+        if (this.type === "ordnanceWarhead") return true;
         if (["meleeW"].includes(this.system.weaponType)) { this.system.actionType = "mwak" }
         if (["rangedW", "explos", "heavyW"].includes(this.system.weaponType)) { this.system.actionType = "rwak" }
         if ((["psionic"].includes(this.system.type))&& (["ranged"].includes(this.system.psiEffectType))) { this.system.actionType = "rsak" }
@@ -61,8 +62,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         return false
     }
     get hasDamage() {
-        if (this.type === "starshipWeapon") return true;
-        //console.log(this)
+        if (["starshipWeapon","ordnanceWarhead"].includes(this.type)) return true;
+        console.log(this)
         const orddice = !!(this.system.damage?.ord?.dice && this.system.damage?.ord?.type)
         const weaponthing = ["weapon", "shield","psionic"].includes(this.type)
         const a = ["weapon", "shield","psionic"].includes(this.type) ? orddice && (weaponthing || this.system.equipped) : false;
@@ -1301,8 +1302,14 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         console.log("rollData", rollData, actorData,itemData)
         let weaponskill = rollData.item.skill;
-        const isSkill = !(["starship"].includes(actorData.type));
-        const isStarshipweapon = (["starship"].includes(actorData.type));
+        const isSkill = !(["starship","ordnance"].includes(actorData.type));
+        const isStarshipweapon = (["starship","ordnance"].includes(actorData.type));
+        if(["ordnance"].includes(actorData.type)){
+          //  rollData.skills = rollData.launchedFrom.system.skills
+          //  rollData.crew = rollData.launchedFrom.system.crew
+
+
+        }
 
         var skl = {};
         var skl2 = {};
@@ -1317,6 +1324,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             itemData.amazing =  Math.max(1,Math.floor(itemData.base/4)) 
 
            }
+
+           console.log("rollData", weaponskill,)
            if (!(itemData.type == "psionic")) {
             skl = rollData.skills[weaponskill]
             skl2 = weaponskill
@@ -1808,6 +1817,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                     }
                 })
                 if (newscan) {
+                    console.log(token)
                     const newscanz = {
                         token: { name: token.name, id: token.id },
                         //this.id = generateUUID()

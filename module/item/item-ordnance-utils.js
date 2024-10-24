@@ -163,10 +163,20 @@ export async function removeItemFromActorAsync(sourceActor, itemToRemove, quanti
      * disableDamageAfterAttack: If the system setting "Roll damage with attack" is enabled, setting this flag to true will disable this behavior.
      * disableDeductAmmo: Setting this to true will prevent ammo being deducted if applicable.
      */
- export async function rollStarshipLauncherAttack(item,options,targetData,actorToken) {
+ export async function rollStarshipLauncherAttack(item,options,targetData,actorToken,weapo) {
   let ordnance = foundry.utils.duplicate(item.system.ordnance[0])
-  let locx = actorToken.x + 100;
-  let locy = actorToken.y + 100;
+const dir = Math.floor(Math.random() * 6);
+const serno = Math.floor(Math.random() * 6);
+let locx = actorToken.x;
+let locy = actorToken.y;
+if(dir === 0){locx += 87.5 ; locy -= 50  }
+if(dir === 1){locx += 0 ; locy -= 100  }
+if(dir === 2){locx -= 87.5 ; locy -= 50  }
+if(dir === 3){locx -= 87.5 ; locy += 50  }
+if(dir === 4){locx += 0 ; locy += 100  }
+if(dir === 5){locx += 87.5 ; locy += 50  }
+  console.log (actorToken)
+
   let missile ={};
   unloadLauncherOrdnance(0,item);
   const itemsFiltered = game.actors.filter(el => {
@@ -174,14 +184,18 @@ export async function removeItemFromActorAsync(sourceActor, itemToRemove, quanti
    console.log("not",el.name,el.id,ordnance)
     return el.system.itemId? el.system.itemId == ordnance._id : false;
   });
-  //console.log("\n Missile----",missile,ordnance,itemsFiltered)
+  console.log("\n Missile----",item)
+
+
 if (itemsFiltered.length==0){
    missile = await d100Actor.create({
-      name: ordnance.name,
+      name: ordnance.name + "-" + randomID(3),
       type: "ordnance",
       img: ordnance.img,
       system:ordnance.system,
+      weapo: {},
       id:randomID(16),
+      prototypeToken : {appendNumber : true}
     });
     missile.system.itemId = ordnance._id;
     //console.log("\n Missile----",missile)
@@ -190,24 +204,30 @@ if (itemsFiltered.length==0){
   //console.log("\n Missile----",missile)
   }
   console.log("_rollStarshipLauncherAttack\n",ordnance,item,missile)
-  /*
-  var attributes = Object.keys(ordnance.system)
-    //console.log(attributes)
-    for (var i=0;i<attributes.length;i++){
-      if ( !missile.system.hasOwnProperty(attributes[i] ) ) {
+  
+const newItemData = {
+  "name" : ordnance.system.warName || "Warhead",
+  "type" : "ordnanceWarhead" ,
+  "system.type" : "ordnanceWarhead",
+"system.damage" : ordnance.system.damage,
+"system.range" : ordnance.system.range,
+"system.firepower" : ordnance.system.firepower,
+"system.firepowerN" : ordnance.system.firepowerN,
+"system.skill" : "weapo",
+"system.tech" : ordnance.system.warTech,
+"system.accur" : ordnance.system.warAccur,
+"system.progressLevel" : ordnance.system.warTech,
+"system.weaponType": "ordnance",
 
-        //console.log(attributes[i] ,ordnance.data[attributes[i]]);  
-          if ( !["id","_id"].includes( attributes[i]) ) {
-      //console.log(attributes[i] ,ordnance.data[attributes[i]]  )
-      missile.system[attributes[i]] = ordnance.system[attributes[i]]
-      }
-//5wojbj5jdzy7z1n6
-    }
-  }
 
 
-  */
-    console.log("_rollStarshipLauncherAttack\n",ordnance,item,missile)
+}
+
+const result = await missile.createEmbeddedDocuments("Item", [newItemData]);
+const addedItem = missile.items.get(result._id);
+
+  
+    console.log("_rollStarshipLauncherAttack\n",ordnance,item,missile,addedItem)
 
 
 
@@ -217,11 +237,21 @@ if (itemsFiltered.length==0){
       hidden: false,
       actorLink: false,
       scale:0.25,
+      //name: missile.name + randomID(2)
       //_id:randomID(16),
   });
     canvas.scene.activate();
     const cls = getDocumentClass("Token");
     let a = await cls.create(td, {parent: canvas.scene});
+
+
+
+
+    a.actor.update({"name" : td.name, "system.launchedFrom" : item.actor, "system.crew" : item.actor.system.crew, "system.skills" :item.actor.system.skills})
+
+    // item.actor.system.crew.useNPCCrew  actor.system.crew.npcCrewQuality item.actor
+
+
     console.log("_rollStarshipLauncherAttack",td, missile,game.scenes.current,a,cls)
     //missile.delete;
    const targetToken = targetData[0].token
@@ -238,7 +268,7 @@ if (itemsFiltered.length==0){
    
    //console.log("\n--------Missile Token---------",a.data.rotation,RandB.bearing)
    //a.update( {"data.rotation" : RandB.bearing})
-    a.actor.update({"system.targetData" : foundry.utils.duplicate(targetData[0])})
+    a.actor.update({"system.targetData" : targetData[0]})
    // a.render();
    // console.log("\n--------Missile Token---------",a,targetData[0].range,RandB,a.data.rotation)
     //a.refresh

@@ -738,12 +738,12 @@
                                         {{#if (eq item.system.sensorType "psionic")}} <td
                                             style="width:8% ;color:hwb(133 0% 0%)">P</td> {{/if}}
 
-                                        {{#if item.system.mount.arc.zero}} <td style="width:12% ;color:hwb(129 0% 0%)">Z
+                                        {{#if item.system.range.long}} <td style="font-size: 12px;   width:12% ;color:hwb(129 0% 0%)">{{item.system.range.long}}
                                         </td> {{/if}}
-                                        {{#if (not item.system.mount.arc.zero)}} <td
-                                            style="width:12% ;color:hwb(0 36% 63%)">Z</td> {{/if}}
+                                        {{#if (not item.system.range.long)}} <td
+                                            style="font-size: 12px;width:12% ;color:hwb(0 36% 63%)">-</td> {{/if}}
 
-
+                                           
                                         {{#if item.system.mount.arc.front}} <td style="width:8% ;color:hwb(129 0% 0%)">F
                                         </td> {{/if}}
                                         {{#if (not item.system.mount.arc.front)}} <td

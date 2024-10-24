@@ -5054,7 +5054,7 @@
     "Item": {
         "types": [
             "achievement",
-            "actorResource",
+            
             "ammunition",
             "equipment",
             "clothing",
@@ -5077,7 +5077,7 @@
             "survival",
             "technological",
             "weapon",
-            "weaponAccessory",
+
             "vehicleAttack",
             "vehicleSystem",
             "starshipAblativeArmor",
@@ -5097,23 +5097,24 @@
             "starshipShield",
             "starshipSystemDamage",
             "starshipWeapon",
-            "archetypes",
-            "asi",
-            "chassis",
+           
             "class",
-            "hybrid",
+
             "goods",
-            "spell",
-            "upgrade",
-            "fusion",
+
+           
             "magic",
-            "mod",
+
             "starshipDefensiveCountermeasure",
-            "starshipDriftEngine",
+
             "starshipExpansionBay",
             "starshipFortifiedHull",
             "starshipReinforcedBulkhead",
-            "starshipSecuritySystem"
+            "starshipSecuritySystem",
+            "ordnancePropulsion",
+            "ordnanceWarhead",
+            "ordnanceGuidance"
+
         ],
         "templates": {
             "skilledItem": {
@@ -5289,6 +5290,41 @@
                 "modifiers": []
             },
             "starshipComponent": {
+                "attributes": {
+                    "blank": false
+                },
+                "status": "normal",
+                "cost": 0,
+                "price": 0,
+                "pricePerBHP": 0,
+                "costMultipliedBySize": false,
+                "pcu": 0,
+                "isPowered": true,
+                "pwrPerBHP": 0,
+                "overPowered": false,
+                "isPCUPerBHP": false,
+                "bhpCost": 0,
+                "location":"F",
+                "progressLevel": "pl0",
+                "targetLockBonus": {
+                    "radar": {
+                        "value": 0
+                    },
+                    "laser": {
+                        "value": 0
+                    },
+                    "mass": {
+                        "value": 0
+                    },
+                    "thermal": {
+                        "value": 0
+                    },
+                    "psi": {
+                        "value": 0
+                    }
+                }
+            },
+            "ordnanceComponent": {
                 "attributes": {
                     "blank": false
                 },
@@ -6761,7 +6797,7 @@
                 "physicalItem"
             ],
             "class": "light",
-            "weaponType": "direct",
+            "weaponType": "ordnance",
             "speed": 0,
             "attackBonus": 0,
             "ordnanceType": "",
@@ -7004,6 +7040,141 @@
                 "isOpen": true
             }
         },
+        "ordnanceWarhead": {
+            "templates": [
+                "ordnanceComponent",
+                "itemDescription",
+                "modifiers"
+            ],
+            "ordnance": [],
+            "class": "light",
+            "weaponType": "ordnance",
+            "speed": 0,
+            "attackBonus": 0,
+            "ordnanceType": "",
+            "special": {},
+            "mount": {
+                "mounted": false,
+                "arc": "",
+                "type": "unmounted"
+            },
+            "capacity": {
+                "value": null,
+                "max": null,
+                "sreload": false
+            },
+            "damage": {
+                "type": "LI",
+                "ord": {
+                    "dice": "",
+                    "type": ""
+                },
+                "goo": {
+                    "dice": "",
+                    "type": ""
+                },
+                "ama": {
+                    "dice": "",
+                    "type": ""
+                }
+            },
+            "weaponCategory": "uncategorized",
+            "progressLevel": "pl0",
+            "actions": "3",
+            "clipSize": "10",
+            "clipCost": "10",
+            "hide": "0",
+            "mass": "1",
+            "Cost": "100",
+            "skill": "weapo",
+            "accur": "1",
+            "mode": {
+                "fire": true,
+                "burst": true,
+                "auto": true,
+                "battery": true
+            },
+            "range": {
+                "short": "10",
+                "medium": "20",
+                "long": "40"
+            },
+            "firepower": "O",
+            "firepowerN": 1,
+            "properties": {},
+            "proficient": true,
+            "container": {
+                "contents": [],
+                "storage": [
+                    {
+                        "type": "slot",
+                        "subtype": "fusion",
+                        "amount": 0,
+                        "acceptsType": [
+                            "fusion"
+                        ],
+                        "affectsEncumbrance": true,
+                        "weightProperty": "level"
+                    }
+                ],
+                "isOpen": true
+            }
+        },
+"ordnanceGuidance": {
+            "templates": [
+                "ordnanceComponent",
+                "itemDescription",
+                "modifiers"
+            ],
+            "modifier": 0,
+            "range": {
+                "short": 10,
+                "medium": 20,
+                "long": 40
+            },
+            "sensorType": "",
+            "sensorMode": "",
+            "skill": "senso",
+            "targetingStep": 0,
+            "allowTargeting": false,
+            "arcMax": 1,
+            "scanTargets": [],
+            "mount": {
+                "arc": {
+                    "front": false,
+                    "stbd": false,
+                    "aft": false,
+                    "port": false
+                }
+            }
+        },
+
+        "ordnancePropulsion": {
+            "templates": [
+                "ordnanceComponent",
+                "itemDescription",
+                "modifiers"
+            ],
+            "supportedSize": "",
+            "speed": 0,
+            "pilotingModifier": 0,
+            "isFTL": false,
+            "ftlRange": "",
+            "ftlDuration": "",
+            "ftlCooldown": "",
+            "isEnabled": true,
+            "accel": {
+                "five": 0,
+                "ten": 0,
+                "fifteen": 0,
+                "twenty": 0,
+                "thirty": 0,
+                "forty": 0,
+                "fifty": 0
+            }
+        },
+
+
         "chassis": {
             "templates": [
                 "itemDescription",

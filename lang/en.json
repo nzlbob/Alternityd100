@@ -93,7 +93,7 @@
             "starshipsystemdamage": "Starship System Damage",
             "starshipSystemDamage": "Starship System Damage",
             "starshipablativearmor": "Starship Ablative Armor",
-            "starshipaAlativeArmor": "Starship Ablative Armor",
+            "starshipAblativeArmor": "Starship Ablative Armor",
             "starshipaction": "Starship Action",
             "starshipAction": "Starship Action",
             "starshiparmor": "Starship Armor",
@@ -127,7 +127,13 @@
             "starshipengine": "Starship Engine",
             "starshipEngine": "Starship Engine",
             "starshipweapon": "Starship Weapon",
-            "starshipWeapon": "Starship Weapon"
+            "starshipWeapon": "Starship Weapon",
+            "ordnancePropulsion": "Ordnance Propulsion",
+            "ordnanceWarhead": "Ordnance Warhead",
+            "ordnanceGuidance": "Ordnance Guidance",
+            "ordnancepropulsion": "Ordnance Propulsion",
+            "ordnancewarhead": "Ordnance Warhead",
+            "ordnanceguidance": "Ordnance Guidance"
         }
     },
     "SFRPG": {
@@ -1097,6 +1103,9 @@
             },
             "Categories": {
                 "everythingelse": "Everything Else",
+                "ordnancePropulsion": "Ordnance Propulsion",
+                "ordnanceWarhead": "Ordnance Warhead",
+                "ordnanceGuidance": "Ordnance Guidance",
                 "starshipstuff": "Starship Equipment",
                 "AbilityScoreIncrease": "Ability Score Increases",
                 "Archetypes": "Archetypes",
@@ -2103,7 +2112,7 @@
                 "Captain": "Captain",
                 "Engineer": "Engineer",
                 "Engineers": "Engineers",
-                "Gunners": "Gunners",
+                "Gunner": "Weapons",
                 "Passengers": "Passengers",
                 "Pilot": "Pilot",
                 "Copilot": "Copilot",
@@ -2338,7 +2347,7 @@
                 "CrewLimitReached": "You have reached the maximum amount of crew allowed for the role of '{targetRole}'.",
                 "CrewSetting": "Crew setting",
                 "Engineers": "Engineering",
-                "Gunners": "Weapons",
+                "Gunner": "Weapons",
                 "Header": "Starship Crew",
                 "IsNPCCrew": "Is NPC crew",
                 "MagicOfficers": "Magic Officers",

@@ -36,6 +36,7 @@
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
         <a class="item" data-tab="details">{{ localize "SFRPG.Details" }}</a>
+        <a class="item" data-tab="inventory">{{ localize "Design" }}</a>
     </nav>
 
 
@@ -347,7 +348,13 @@
         
                 </div>
         
-        
+                {{!-- Inventory Tab --}}
+
+                <div class="tab inventory flexcol" data-group="primary" data-tab="inventory">
+                    {{> "systems/Alternityd100/templates/actors/parts/actor-inventory.html" sections=inventory}}
+    
+    
+                </div>
         
             </section>
 </form>

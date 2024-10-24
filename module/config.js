@@ -947,7 +947,7 @@ SFRPG.starshipRoles = {
     "damageControl"  : "SFRPG.ShipSystems.StarshipRoles.DamageControl",
     "defences"  :   "SFRPG.ShipSystems.StarshipRoles.Defences",
     "engineer"      : "SFRPG.ShipSystems.StarshipRoles.Engineer",
-    "gunner"        : "SFRPG.ShipSystems.StarshipRoles.Gunners",
+    "gunner"        : "SFRPG.ShipSystems.StarshipRoles.Gunner",
     "sensors"  : "SFRPG.ShipSystems.StarshipRoles.Sensors"
 
 
@@ -1404,6 +1404,11 @@ SFRPG.capacityUsagePer = {
 SFRPG.itemTypes = {
     "starshipstuff":"SFRPG.Items.Categories.starshipstuff",
     "everythingelse":"SFRPG.Items.Categories.everythingelse",
+"ordnanceWarhead":"SFRPG.Items.Categories.ordnanceWarhead",
+"ordnanceGuidance":"SFRPG.Items.Categories.ordnanceGuidance",
+"ordnancePropulsion":"SFRPG.Items.Categories.ordnancePropulsion",
+
+
     "clothing": "SFRPG.Items.Categories.Clothing",  
     "communication":"SFRPG.Items.Categories.Communication",
     "computer":"SFRPG.Items.Categories.Computer",

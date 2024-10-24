@@ -624,11 +624,13 @@ export class Diced100 {
     //Create data for Valid Gunners dropdown for 
     // Cater for the WEPO skill not being known untill the dialog is closed
     let validgunner = [];
-
+console.log(actor)
     if (isStarshipweapon) {
       // Normal Crew
       if (!actor.system.crew.useNPCCrew) {
         for (let selectactor of actor.system.crew.gunner.actors) {
+          console.log(actor,selectactor)
+          if (!selectactor.id) selectactor = game.actors.get(selectactor._id);
           if (selectactor.isOwner) {
             validgunner.push(selectactor)
           }
@@ -1328,6 +1330,8 @@ export class Diced100 {
 
     if (isStarshipweapon) {
       for (let selectactor of actor.system.crew.gunner.actors) {
+
+        if (!selectactor.id) selectactor = await game.actors.get(selectactor._id);
         if (selectactor.isOwner) {
           validgunner.push(selectactor)
         }

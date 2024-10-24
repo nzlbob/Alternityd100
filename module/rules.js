@@ -274,7 +274,8 @@ export default function (engine) {
                     { closure: "calculateActorResources", stackModifiers: "stackModifiers" },
                     { closure: "calculateBaseAbilityScore", stackModifiers: "stackModifiers" },
                     { closure: "calculateBaseAbilityModifier", stackModifiers: "stackModifiers" },
-                    
+                    "calculateInitiative",
+                    {closure: "calculateInitiativeModifiers", stackModifiers: "stackModifiers" },
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
                     { closure: "calculateHitpoints", stackModifiers: "stackModifiers" },

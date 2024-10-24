@@ -5,7 +5,7 @@ import { ChoiceDialog } from "../../apps/choice-dialog.js";
 import { d100A } from "../../d100Aconfig.js";
  import { rollNPC } from "../../utilities.js";
 import { targetResModData, d100NPCCrewStats } from "../../modifiers/d100mod.js";
-
+import { getRangeCat, radtodeg, degtorad, raytodeg, inArc, generateUUID } from "../../utilities.js"
 import { moveItemBetweenActorsAsync, getFirstAcceptableStorageIndex, ActorItemHelper, containsItems } from "../actor-inventory-utils.js";
 /**
  * An Actor sheet for a starship in the SFRPG system.
@@ -220,7 +220,7 @@ export class d100AActorSheetStarship extends ActorSheetSFRPG {
             sensors: { skill: [], shortlabel: game.i18n.format("SFRPG.StarshipSheet.Crew.Sensors"), label: game.i18n.format("SFRPG.StarshipSheet.Crew.Sensors") + " " + game.i18n.format("SFRPG.StarshipSheet.Crew.AssignedCount", { "current": sensorsActors.length, "max": crewData.sensors.limit > -1 ? crewData.sensors.limit : localizedNoLimit }), actors: sensorsActors, dataset: { type: "shipsCrew", role: "sensors" } },
 
 
-            gunner: { skill: [], shortlabel: game.i18n.format("SFRPG.StarshipSheet.Crew.Gunners"), label: game.i18n.format("SFRPG.StarshipSheet.Crew.Gunners") + " " + game.i18n.format("SFRPG.StarshipSheet.Crew.AssignedCount", { "current": gunnerActors.length, "max": crewData.gunner.limit > -1 ? crewData.gunner.limit : localizedNoLimit }), actors: gunnerActors, dataset: { type: "shipsCrew", role: "gunner" } },
+            gunner: { skill: [], shortlabel: game.i18n.format("SFRPG.StarshipSheet.Crew.Gunner"), label: game.i18n.format("SFRPG.StarshipSheet.Crew.Gunner") + " " + game.i18n.format("SFRPG.StarshipSheet.Crew.AssignedCount", { "current": gunnerActors.length, "max": crewData.gunner.limit > -1 ? crewData.gunner.limit : localizedNoLimit }), actors: gunnerActors, dataset: { type: "shipsCrew", role: "gunner" } },
             //    scienceOfficers: { skill: [],shortlabel: game.i18n.format("SFRPG.StarshipSheet.Crew.ScienceOfficers"), label: game.i18n.format("SFRPG.StarshipSheet.Crew.ScienceOfficers") + " " + game.i18n.format("SFRPG.StarshipSheet.Crew.AssignedCount", {"current": scienceOfficerActors.length, "max": crewData.scienceOfficer.limit > -1 ? crewData.scienceOfficer.limit : localizedNoLimit}), actors: scienceOfficerActors, dataset: { type: "shipsCrew", role: "scienceOfficer" }},
             //   chiefMates: { skill: [],shortlabel: game.i18n.format("SFRPG.StarshipSheet.Crew.ChiefMates"), label: game.i18n.format("SFRPG.StarshipSheet.Crew.ChiefMates") + " " + game.i18n.format("SFRPG.StarshipSheet.Crew.AssignedCount", {"current": chiefMateActors.length, "max": crewData.chiefMate.limit > -1 ? crewData.chiefMate.limit : localizedNoLimit}), actors: chiefMateActors, dataset: { type: "shipsCrew", role: "chiefMate" }},
             //   magicOfficers: { skill: [],shortlabel: game.i18n.format("SFRPG.StarshipSheet.Crew.MagicOfficers"),label: game.i18n.format("SFRPG.StarshipSheet.Crew.MagicOfficers") + " " + game.i18n.format("SFRPG.StarshipSheet.Crew.AssignedCount", {"current": magicOfficerActors.length, "max": crewData.magicOfficer.limit > -1 ? crewData.magicOfficer.limit : localizedNoLimit}), actors: magicOfficerActors, dataset: { type: "shipsCrew", role: "magicOfficer" }},
@@ -415,7 +415,7 @@ export class d100AActorSheetStarship extends ActorSheetSFRPG {
             defences: { skill: [], shortlabel: game.i18n.format("SFRPG.StarshipSheet.Crew.Defences"), label: game.i18n.format("SFRPG.StarshipSheet.Crew.Defences") + " " + game.i18n.format("SFRPG.StarshipSheet.Crew.AssignedCount", { "current": defencesActors.length, "max": crewData.defences.limit > -1 ? crewData.defences.limit : localizedNoLimit }), actors: defencesActors, dataset: { type: "shipsCrew", role: "defences" } },
             engineer: { skill: [], shortlabel: game.i18n.format("SFRPG.StarshipSheet.Crew.Engineers"), label: game.i18n.format("SFRPG.StarshipSheet.Crew.Engineers") + " " + game.i18n.format("SFRPG.StarshipSheet.Crew.AssignedCount", { "current": engineerActors.length, "max": crewData.engineer.limit > -1 ? crewData.engineer.limit : localizedNoLimit }), actors: engineerActors, dataset: { type: "shipsCrew", role: "engineer" } },
             sensors: { skill: [], shortlabel: game.i18n.format("SFRPG.StarshipSheet.Crew.Sensors"), label: game.i18n.format("SFRPG.StarshipSheet.Crew.Sensors") + " " + game.i18n.format("SFRPG.StarshipSheet.Crew.AssignedCount", { "current": sensorsActors.length, "max": crewData.sensors.limit > -1 ? crewData.sensors.limit : localizedNoLimit }), actors: sensorsActors, dataset: { type: "shipsCrew", role: "sensors" } },
-            gunner: { skill: [], shortlabel: game.i18n.format("SFRPG.StarshipSheet.Crew.Gunners"), label: game.i18n.format("SFRPG.StarshipSheet.Crew.Gunners") + " " + game.i18n.format("SFRPG.StarshipSheet.Crew.AssignedCount", { "current": gunnerActors.length, "max": crewData.gunner.limit > -1 ? crewData.gunner.limit : localizedNoLimit }), actors: gunnerActors, dataset: { type: "shipsCrew", role: "gunner" } },
+            gunner: { skill: [], shortlabel: game.i18n.format("SFRPG.StarshipSheet.Crew.Gunner"), label: game.i18n.format("SFRPG.StarshipSheet.Crew.Gunner") + " " + game.i18n.format("SFRPG.StarshipSheet.Crew.AssignedCount", { "current": gunnerActors.length, "max": crewData.gunner.limit > -1 ? crewData.gunner.limit : localizedNoLimit }), actors: gunnerActors, dataset: { type: "shipsCrew", role: "gunner" } },
 
         };
 
@@ -1210,16 +1210,127 @@ return false
 
     async _onscanRefresh(event) {
         const action = event.currentTarget.dataset.scan
+        
+        const actorArray = await this.actor.getActiveTokens();//true, true);
+        const actorToken = actorArray[0]
+        const actor = this.actor
+        const actorData = actor.system;
         console.log(action)
         if (action == "clear") {
 
             console.log(this.actor.system.scanTargets)
 
             let newArray = []
-            this.actor.update({ "system.scanTargets": newArray })
+           return this.actor.update({ "system.scanTargets": newArray })
 
 
         }
+
+        const targetTokens = game.scenes.viewed.tokens.filter(x => {
+            return true
+        })
+        let maxRange = 0
+        const allsensors = this.actor.items.filter(x => {
+            if (x.hasScan && x.system.isPowered) {
+                maxRange = Math.max(x.system.range.long, maxRange)
+                return true
+            }
+            return false
+        })
+
+
+        // roll through the targets on the map update the contacts - check later to turn them into Targets
+        const validScanTargets = []
+        for (let token of targetTokens) {
+            //   console.log(token,actorToken)
+            if (!(token.id == actorToken.id)) {
+                let newscan = true
+                actorData.scanTargets.forEach(target => {
+                    //   console.log("ID",target,target.token.id, token.id,target.token.id == token.id)
+                    if (target.token.id == token.id) {
+
+                        // delete target.token
+                    //    delete target.token
+                     //   target.token = { name: token.name, id: token.id, x: token.object.center.x, y: token.object.center.y }
+                    //    target.size = token.actor.system.frame?.system.size || "tiny",
+                    //        target.scanRes = token.actor.system.attributes.ECM,
+
+
+                            validScanTargets.push(target)
+                        newscan = false
+                        //     console.log(target)
+                    }
+                })
+                if (newscan) {
+                    console.log(token)
+                    const newscanz = {
+                        token: { name: token.name, id: token.id },
+                        //this.id = generateUUID()
+                        hullType: token.actor.system.frame ? token.actor.system.frame.system.hullType : token.actor.system.type,
+                        size: token.actor.system.frame?.system.size || "tiny",
+                        scanRes: token.actor.system.attributes.ECM,
+                        name: token.name,
+                        sensors: [], //new Set(),
+                        attackMod: 9,
+                        aquired: false
+                    }
+                    validScanTargets.push(newscanz)
+                }
+            }
+        }
+
+        for (const scan of validScanTargets) {
+            console.log(actorToken)
+
+            scan.range = Math.ceil((canvas.grid.measureDistance({ x: actorToken.center.x, y: actorToken.center.y }, { x: scan.token.x, y: scan.token.y })));
+            scan.ray = new Ray({ x: actorToken.center.x, y: actorToken.center.y }, { x: scan.token.x, y: scan.token.y })
+            scan.angle = raytodeg(scan.ray);
+            scan.collisions = await CONFIG.Canvas.polygonBackends["sight"].testCollision(scan.ray.A, scan.ray.B, { mode: "any", type: "sight" })
+
+
+           const scanAll = true
+
+            if (scanAll) {
+                // for (const scan of validScanTargets) {
+                // console.log(scan,allsensors,validScanTargets)
+                // cycle through the sensors and update the sensors that can see the target. 
+                delete scan.sensors
+                scan.sensors = []
+                for (let scanner of allsensors) {
+                    //scan.contactScan(scanner,sensorOperator,actorToken)
+
+                    // console.log (scan.sensors.has(scanner))
+                    //this.remove("scanners")
+
+                    //if(scan.sensors.has(scanner)) scan.sensors.delete(scanner);
+                    if ((scan.range <= scanner.system.range.long) &&
+                        (inArc(raytodeg(scan.ray), scanner, actorToken))
+                    ) {
+                        scan.sensors.push({ id: scanner.id, attBonus: scanner.system.targetingStep })
+                    }
+
+                    console.log(scan, scanner)
+
+                    // const validTarget = await scanResult(validScan)
+                    //if (validTarget){ validTargets.push(validTarget)
+                    //console.log(scanner)
+
+                }
+                // console.log(scan.aquired && (!scan.sensors.length))
+                // console.log("\nScan",scan.aquired ,scan.sensors.length)
+                if (scan.aquired && (!scan.sensors.length)) scan.aquired = false;
+   
+
+ 
+            }
+
+
+
+
+        }
+        let x = await actor.update({ "system.scanTargets": validScanTargets })
+        console.log(actor, validScanTargets, x ? x : "no X")
+
 
 
 
