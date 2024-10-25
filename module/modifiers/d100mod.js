@@ -255,12 +255,114 @@ export function attackModData(a, b, c) {
         ' "long": 2 }' +
         '}}'
 
+    text = {
+        rangedW: {
+            primira: {
+                short: -1,
+                medium: 1,
+                long: 2
+            },
+            bow: {
+                short: -1,
+                medium: 1,
+                long: 2
+            },
+            cross: {
+                short: -1,
+                medium: 1,
+                long: 2
+            },
+            flint: {
+                short: -1,
+                medium: 1,
+                long: 2
+            },
+            throw: {
+                short: -1,
+                medium: 1,
+                long: 2
+            },
+            sling: {
+                short: -1,
+                medium: 1,
+                long: 2
+            },
+            areaeff: {
+                short: 0,
+                medium: 0,
+                long: 0
+            },
+            pisto: {
+                short: -1,
+                medium: 1,
+                long: 3
+            },
+            rifle: {
+                short: -1,
+                medium: 0,
+                long: 1
+            },
+            smg: {
+                short: -1,
+                medium: 1,
+                long: 3
+            }
+        },
+        heavyW: {
+            direcfi: {
+                short: -1,
+                medium: 0,
+                long: 1
+            },
+            indirfi: {
+                short: 2,
+                medium: -2,
+                long: 0
+            }
+        },
+        projectile: {
+            weapo: {
+                short: 0,
+                medium: 1,
+                long: 2
+            }
+        },
+        ordnance: {
+            weapo: {
+                short: 0,
+                medium: 0,
+                long: 0
+            }
+        },
+        missile: {
+            weapo: {
+                short: 0,
+                medium: 0,
+                long: 0
+            }
+        },
+        direct: {
+            weapo: {
+                short: 0,
+                medium: 0,
+                long: 0
+            }
+        },
+        beam: {
+            weapo: {
+                short: 0,
+                medium: 1,
+                long: 2
+            }
+        }
+
+    }
 
     // console.log (text)
     //const attackModData = attackModTable; 
-    var attackModData = JSON.parse(text);
+    var attackModData = text //JSON.parse(text);
     console.log(attackModData, a, b, c)
-    
+
     // attackModData = {"meleeW":{"unarmat":0},}
 
 

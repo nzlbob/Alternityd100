@@ -1428,7 +1428,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 const targetResistance = targetedToken.token.actor.system.attributes.resistance
                 console.log("targettedToken", targetedToken, targetResistance, itemData.weaponType,this)
                 
-                if (itemData.weaponType == "ordnance"){
+
+                // need to alter this to set correct ornance type. looks at items starship properties not the ordnance properties
+                // defaults to beam attack
+
+                if (itemData.weaponType == "missile"){
                     targetedToken.resPenalty = targetResistance[this.parent.system.ammunitionType] + targetResistance.base
                 }
                 else{

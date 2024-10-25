@@ -206,6 +206,7 @@ if (itemsFiltered.length==0){
   console.log("_rollStarshipLauncherAttack\n",ordnance,item,missile)
   
 const newItemData = {
+  "img": ordnance.img,
   "name" : ordnance.system.warName || "Warhead",
   "type" : "ordnanceWarhead" ,
   "system.type" : "ordnanceWarhead",
@@ -215,9 +216,9 @@ const newItemData = {
 "system.firepowerN" : ordnance.system.firepowerN,
 "system.skill" : "weapo",
 "system.tech" : ordnance.system.warTech,
-"system.accur" : ordnance.system.warAccur,
+"system.accur" : ordnance.system.warAccur + ordnance.system.propAcc + ordnance.system.guidanceAccur,
 "system.progressLevel" : ordnance.system.warTech,
-"system.weaponType": "ordnance",
+"system.weaponType": ordnance.system.ammunitionType || "missile",
 
 
 
