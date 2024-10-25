@@ -1426,8 +1426,16 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 //token.actor.system.attributes.resistance
 
                 const targetResistance = targetedToken.token.actor.system.attributes.resistance
-                console.log("targettedToken", targetedToken, targetResistance, itemData.weaponType)
-                targetedToken.resPenalty = targetResistance[itemData.weaponType] + targetResistance.base
+                console.log("targettedToken", targetedToken, targetResistance, itemData.weaponType,this)
+                
+                if (itemData.weaponType == "ordnance"){
+                    targetedToken.resPenalty = targetResistance[this.parent.system.ammunitionType] + targetResistance.base
+                }
+                else{
+                    targetedToken.resPenalty = targetResistance[itemData.weaponType] + targetResistance.base
+                }
+                
+               // targetedToken.resPenalty = targetResistance[itemData.weaponType] + targetResistance.base
 
                 //targettedToken
                 console.log("targetResModData", targetedToken.resPenalty, targetResistance[itemData.weaponType], targetResistance.base);

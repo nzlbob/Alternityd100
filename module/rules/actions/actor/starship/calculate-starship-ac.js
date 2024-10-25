@@ -1,3 +1,5 @@
+import { SFRPG } from "../../../../config.js";
+
 export default function(engine) {
     engine.closures.add("calculateStarshipArmorClass", (fact, context) => {
         const data = fact.actor.system;
@@ -84,9 +86,10 @@ if (hullItem){
  * 
  * 
  */
+
         const damageControlItems = fact.items.filter(x => x.type === "starshipDefence");
-        let damageControlItem = null;
-        let damageControlItemData = null;
+       // let damageControlItem = null;
+       // let damageControlItemData = null;
         data.attributes.damageControl.base = 0
         data.attributes.damageControl.value = 0
         data.attributes.damageControl.tooltip = "Base = 0"
@@ -98,7 +101,11 @@ if (hullItem){
            data.attributes.damageControl.tooltip += "<p>" + damageControlItem.name +": " + damageControlItem.system.damageControl + "</p>"
             }
 
-            
+            for (let [k,v] of Object.entries(SFRPG.starshipWeaponTypes)){
+
+                data.attributes.resistance[k] = 0
+                
+            }
             
            
             for (const damageControlItem of damageControlItems ){
