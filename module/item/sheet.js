@@ -718,7 +718,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         //attackType = item.data.fireMode;
         //console.log("event",event)
         if (loadType == "loadOne") {
-            loadLauncherOrdnance(item.data, this);
+            loadLauncherOrdnance(item.system, this);
             return;
         }
         if (loadType == "loadAll") {

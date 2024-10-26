@@ -1147,13 +1147,13 @@ return false
         const npcCrewQuality = npcCrew ? actorData.crew.npcCrewQuality : ""
 
 
-
+      //  actorData[role].active? this.actor.rollSkill(skill, options) : ui.notifications.error(`No Crew in Station`);
 
         const npcSkill = d100NPCCrewStats(npcCrewQuality)
 
         let skillflavor = actorData.attributes.damageControl.tooltip
         let stepflavor = "Damage Check" //"Hit " + systemDmg.name
-        const sensorOperator = npcCrew ? actor : actorData.crew.defences.actors[0]
+        const sensorOperator = npcCrew ? this.actor : actorData.crew.defences.actors[0]
         const skillId = "defen"
         let defenSkill = npcCrew ? npcSkill.skills[skillId] : sensorOperator.system.skills[skillId]
         let stepbonus = defenSkill.step + actorData.attributes.damageControl.value//+ rangesteps -  targetRes
