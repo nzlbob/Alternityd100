@@ -544,7 +544,7 @@ Hooks.once("dragRuler.ready", (SpeedProvider) => {
               return [];
           }
 
-          if (actorType === "starship") {
+          if ( ["starship","ordnance"].includes(actorType)) {
             const driveSpeed = parseFloat(token.actor.system.attributes.speed.value);
             const accel = parseFloat(token.actor.system.attributes.accel.value);
             return [

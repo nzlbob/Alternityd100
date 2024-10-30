@@ -4666,6 +4666,11 @@
                     "value": 0,
                     "tooltip": []
                 },
+                "duration": {
+                    "base": 0,
+                    "value": 0,
+                    "tooltip": []
+                },
                 "speed": {
                     "max": 0,
                     "min": 0,
@@ -6819,7 +6824,7 @@
             "warhead": 1,
             "warwarhead": 1,
             "end": 1,
-            "accel": 1,
+            "basicAcceleration": 1,
             "special": {},
             "mount": {
                 "mounted": false,
@@ -7164,13 +7169,14 @@
             "ftlCooldown": "",
             "isEnabled": true,
             "accel": {
-                "five": 0,
-                "ten": 0,
-                "fifteen": 0,
-                "twenty": 0,
-                "thirty": 0,
-                "forty": 0,
-                "fifty": 0
+                "base": 0,
+                "value": 0,
+                "tooltip": []
+            },
+            "duration": {
+                "base": 0,
+                "value": 0,
+                "tooltip": []
             }
         },
 
