@@ -63,7 +63,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     }
     get hasDamage() {
         if (["starshipWeapon","ordnanceWarhead"].includes(this.type)) return true;
-        console.log(this)
+       // console.log(this)
         const orddice = !!(this.system.damage?.ord?.dice && this.system.damage?.ord?.type)
         const weaponthing = ["weapon", "shield","psionic"].includes(this.type)
         const a = ["weapon", "shield","psionic"].includes(this.type) ? orddice && (weaponthing || this.system.equipped) : false;
@@ -1830,6 +1830,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 })
                 if (newscan) {
                     console.log(token)
+                    if(!token.actor){ui.notifications.warn("Token "+token.name +" has no valid actor")}
                     const newscanz = {
                         token: { name: token.name, id: token.id },
                         //this.id = generateUUID()
@@ -1983,7 +1984,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                         //scan1.roll = scan1.rolls[0]    
                         scan1.sensorOperator = sensorOperator
                         scan1.skill = npcCrew ? npcSkill.skills[skillId] : sensorOperator.system.skills[skillId]
-                        console.log(scan1)
+                      //  console.log(scan1)
                         if (scan1.roll.total > scan1.skill.base) { scan1.degree = null };
                         if (scan1.roll.total <= scan1.skill.base) { scan1.degree = "short" };
                         if (scan1.roll.total <= scan1.skill.good) { scan1.degree = "medium" };
