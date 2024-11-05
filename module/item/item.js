@@ -960,7 +960,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     async rollAttack(options = {}) {
         if (this.isAoE) this.rollAoEAttack(options)
         if (!this.isAoE) this.rollNormalAttack(options)
-
+console.log(options)
 
     }
 
@@ -1683,6 +1683,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const props = ["something", "2.jghf"];
         let options2 = { event: null, skipDialog: false, staticRoll: null, chatMessage: true, noSound: false, dice: "1d20" }
 
+
+
         //Prelim method for attack base skill + Target resistance Penalty + Range + Accuracy 
 
         for (let a = 0; a < numberOfAttacks; a++) {
@@ -1747,8 +1749,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             compendiumEntry: null,
             isStarshipweapon: isStarshipweapon,
             skl: skl,
-            actorToken: actorToken
+            actorToken: actorToken,
 
+            degreeText:this.system.degreeText,
+            hasDegreeText:this.degreeText? true : false
 
         });
 

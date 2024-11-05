@@ -813,7 +813,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const type = event.currentTarget.closest('.item').dataset.type
-        console.log(type, itemId)
+        
         if (type == "token") {
             let Atoken = findTokenById(itemId)
             Atoken.setTarget()
@@ -821,7 +821,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         }
 
         const item = this.actor.items.get(itemId);
-
+        console.log(itemId,"\n",item)
         if (item.system.type === "psionic") {
             return this.actor.rollSkillObject(item, { event: event, skipDialog: !event.shiftKey });
         }

@@ -960,14 +960,23 @@ let dice=null
 
 let rollData = {}
 let skillId = item.name
+let psionstepbonus = 0
+if (psionic){
+  
+  item.system.isBroad? psionstepbonus += 1 : psionstepbonus += 0
+  psionstepbonus += item.system.step
 
+  if((!item.system.isBroad) && (!item.system.untrained) && (item.system.rank < 1) )
+  ui.notifications.warn( item.name + " may not be used untrained")
+
+}
 
 
 let title = psionic? item.name + item.psionScore :  item.name + ": " + item.system.skill //was skl.name
 let ordinary = psionic? item.ordinary : actorData.skills[item.system.skill].base
 let good = psionic? item.good : actorData.skills[item.system.skill].good
 let amazing = psionic? item.amazing : actorData.skills[item.system.skill].amazing 
-let stepbonus = psionic? 0 : actorData.skills[item.system.skill].step 
+let stepbonus = psionic?  psionstepbonus : actorData.skills[item.system.skill].step 
 options.nosound = false
 let hasDegreeText = true
 let degreeText = item.system.degreeText

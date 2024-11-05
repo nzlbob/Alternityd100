@@ -75,8 +75,9 @@
                             <div class="form-group">
                                 <label>{{ localize "d100A.pubnSource" }}</label>
                                 <select name="system.attributes.pubnsource">
-                                    {{ selectOptions d100Aconfig.pubnsource selected=itemData.attributes.pubnsource blank="" }}
-                                  </select>
+                                    {{ selectOptions d100Aconfig.pubnsource selected=itemData.attributes.pubnsource
+                                    blank="" }}
+                                </select>
                             </div>
 
 
@@ -93,7 +94,23 @@
                                     </select>
                                 </div>
                             </div>
+                            {{!-- Type--}}
+                            <div class="form-group">
 
+                                <div class="form-fields">
+                                    <input type="checkbox" name="system.isBroad" {{checked itemData.isBroad}} />
+                                    <label>{{ localize "Broad" }}</label>
+
+
+                                </div>
+
+                                <div class="form-fields">
+                                    <input type="checkbox" name="system.untrained" {{checked itemData.untrained}} /> {{
+                                    localize "Use Untrained" }}
+
+
+                                </div>
+                            </div>
 
                             {{!-- Ranks--}}
                             <div class="form-group">
@@ -104,7 +121,15 @@
 
                                 </div>
                             </div>
+                            {{!-- steps--}}
+                            <div class="form-group">
+                                <label>{{ localize "Steps" }}</label>
+                                <div class="form-fields">
+                                    <input class="ranks" type="number" name="system.step" value="{{itemData.step}}" />
 
+
+                                </div>
+                            </div>
 
 
                             {{!-- Cost--}}
@@ -116,6 +141,8 @@
 
                                 </div>
                             </div>
+
+
 
 
                         </div>
@@ -144,88 +171,94 @@
 
 
                             {{!-- Weapon Range --}}
-                            <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.rangeTooltip" }}">
-                              <label>{{ localize "d100A.Items.Weapon.rangename" }}</label>
-                              <div class="form-group weapon-properties" style="font-size: 12px; text-align: center; ">
+                            <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.rangeTooltip"
+                                }}">
+                                <label>{{ localize "d100A.Items.Weapon.rangename" }}</label>
+                                <div class="form-group weapon-properties" style="font-size: 12px; text-align: center; ">
 
-                                <input type="text" style="text-align: center" name="system.range.short"
-                                  value="{{itemData.range.short}}" data-dtype="Number" placeholder="0" />/
-                                <input type="text" style="text-align: center" name="system.range.medium"
-                                  value="{{itemData.range.medium}}" data-dtype="Number" placeholder="0" />/
-                                <input type="text" style="text-align: center" name="system.range.long" value="{{itemData.range.long}}"
-                                  data-dtype="Number" placeholder="0" />
+                                    <input type="text" style="text-align: center" name="system.range.short"
+                                        value="{{itemData.range.short}}" data-dtype="Number" placeholder="0" />/
+                                    <input type="text" style="text-align: center" name="system.range.medium"
+                                        value="{{itemData.range.medium}}" data-dtype="Number" placeholder="0" />/
+                                    <input type="text" style="text-align: center" name="system.range.long"
+                                        value="{{itemData.range.long}}" data-dtype="Number" placeholder="0" />
 
-                              </div>
+                                </div>
                             </div>
 
                             {{!-- Weapon Range Mod--}}
-                            <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.rangeTooltip" }}">
-                              <label>{{ localize "Skill Range Mod" }}</label>
-                              <div class="form-group weapon-properties" style="font-size: 12px; text-align: center; ">
+                            <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.rangeTooltip"
+                                }}">
+                                <label>{{ localize "Skill Range Mod" }}</label>
+                                <div class="form-group weapon-properties" style="font-size: 12px; text-align: center; ">
 
-                                <input type="text" style="text-align: center" name="system.rangeMod.short"
-                                  value="{{itemData.rangeMod.short}}" data-dtype="Number" placeholder="0" />/
-                                <input type="text" style="text-align: center" name="system.rangeMod.medium"
-                                  value="{{itemData.rangeMod.medium}}" data-dtype="Number" placeholder="0" />/
-                                <input type="text" style="text-align: center" name="system.rangeMod.long" value="{{itemData.rangeMod.long}}"
-                                  data-dtype="Number" placeholder="0" />
+                                    <input type="text" style="text-align: center" name="system.rangeMod.short"
+                                        value="{{itemData.rangeMod.short}}" data-dtype="Number" placeholder="0" />/
+                                    <input type="text" style="text-align: center" name="system.rangeMod.medium"
+                                        value="{{itemData.rangeMod.medium}}" data-dtype="Number" placeholder="0" />/
+                                    <input type="text" style="text-align: center" name="system.rangeMod.long"
+                                        value="{{itemData.rangeMod.long}}" data-dtype="Number" placeholder="0" />
 
-                              </div>
-                            </div>    
-              
+                                </div>
+                            </div>
+
                             {{!-- Weapon Blast --}}
                             {{#if isAoE }}
-                            <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.blastAreaTooltip" }}">
-                              <label>{{ localize "Blast Area" }}</label>
-                              <div class="form-group weapon-properties" style="font-size: 12px; text-align: center; ">
-                                <input type="text" style="text-align: center" name="system.blastArea.short"
-                                  value="{{itemData.blastArea.short}}" data-dtype="Number" placeholder="0" />/
-                                <input type="text" style="text-align: center" name="system.blastArea.medium"
-                                  value="{{itemData.blastArea.medium}}" data-dtype="Number" placeholder="0" />/
-                                <input type="text" style="text-align: center" name="system.blastArea.long"
-                                  value="{{itemData.blastArea.long}}" data-dtype="Number" placeholder="0" />
-                              </div>
+                            <div class="form-group" data-tippy-content="{{ localize "
+                                d100A.Items.Weapon.blastAreaTooltip" }}">
+                                <label>{{ localize "Blast Area" }}</label>
+                                <div class="form-group weapon-properties" style="font-size: 12px; text-align: center; ">
+                                    <input type="text" style="text-align: center" name="system.blastArea.short"
+                                        value="{{itemData.blastArea.short}}" data-dtype="Number" placeholder="0" />/
+                                    <input type="text" style="text-align: center" name="system.blastArea.medium"
+                                        value="{{itemData.blastArea.medium}}" data-dtype="Number" placeholder="0" />/
+                                    <input type="text" style="text-align: center" name="system.blastArea.long"
+                                        value="{{itemData.blastArea.long}}" data-dtype="Number" placeholder="0" />
+                                </div>
                             </div>
-              
+
                             {{/if}}
-              
+
 
                             {{!-- Weapon Damage O --}}
-                            <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.damageTooltip" }}">
-              
-                              <label>{{ localize "d100A.Items.Weapon.damageo" }}</label>
-                              <input type="text" style="text-align: center" name="system.damage.ord.dice"
-                                value="{{itemData.damage.ord.dice}}" data-dtype="String" placeholder="0" />/
-              
-                              <select name="system.damage.ord.type">
-                                {{ selectOptions d100Aconfig.damageQ selected=itemData.damage.ord.type blank="" }}
-                              </select>
+                            <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.damageTooltip"
+                                }}">
+
+                                <label>{{ localize "d100A.Items.Weapon.damageo" }}</label>
+                                <input type="text" style="text-align: center" name="system.damage.ord.dice"
+                                    value="{{itemData.damage.ord.dice}}" data-dtype="String" placeholder="0" />/
+
+                                <select name="system.damage.ord.type">
+                                    {{ selectOptions d100Aconfig.damageQ selected=itemData.damage.ord.type blank="" }}
+                                </select>
                             </div>
                             {{!-- Weapon Damage Good --}}
-                            <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.damageTooltip" }}">
-              
-                              <label>{{ localize "d100A.Items.Weapon.damageg" }}</label>
-                              <input type="text" style="text-align: center" name="system.damage.goo.dice"
-                                value="{{itemData.damage.goo.dice}}" data-dtype="String" placeholder="0" />/
-              
-                              <select name="system.damage.goo.type">
-                                {{ selectOptions d100Aconfig.damageQ selected=itemData.damage.goo.type blank="" }}
-                              </select>
+                            <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.damageTooltip"
+                                }}">
+
+                                <label>{{ localize "d100A.Items.Weapon.damageg" }}</label>
+                                <input type="text" style="text-align: center" name="system.damage.goo.dice"
+                                    value="{{itemData.damage.goo.dice}}" data-dtype="String" placeholder="0" />/
+
+                                <select name="system.damage.goo.type">
+                                    {{ selectOptions d100Aconfig.damageQ selected=itemData.damage.goo.type blank="" }}
+                                </select>
                             </div>
                             {{!-- Weapon Damage Amazing --}}
-                            <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.damageTooltip" }}">
-              
-                              <label>{{ localize "d100A.Items.Weapon.damagea" }}</label>
-                              <input type="text" style="text-align: center" name="system.damage.ama.dice"
-                                value="{{itemData.damage.ama.dice}}" data-dtype="String" placeholder="0" />/
-              
-                              <select name="system.damage.ama.type">
-                                {{ selectOptions d100Aconfig.damageQ selected=itemData.damage.goo.type blank="" }}
-                              </select>
+                            <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.damageTooltip"
+                                }}">
+
+                                <label>{{ localize "d100A.Items.Weapon.damagea" }}</label>
+                                <input type="text" style="text-align: center" name="system.damage.ama.dice"
+                                    value="{{itemData.damage.ama.dice}}" data-dtype="String" placeholder="0" />/
+
+                                <select name="system.damage.ama.type">
+                                    {{ selectOptions d100Aconfig.damageQ selected=itemData.damage.goo.type blank="" }}
+                                </select>
                             </div>
-              
-              
-              
+
+
+
                         </div>
 
 

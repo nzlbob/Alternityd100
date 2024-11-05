@@ -80,8 +80,8 @@ export class Diced100 {
     activegunner,
     skl,
     useMeasureTemplate,
-    actorToken
-
+    actorToken,
+    degreeText
   }) {
     /*
        console.log( 
@@ -557,7 +557,9 @@ export class Diced100 {
               targetData: targetData,
               useMeasureTemplate: useMeasureTemplate,
               stepbonus: stepbonus,
-              atttokenid: actorToken.id
+              atttokenid: actorToken.id,
+              degreeText:degreeText,
+              hasDegreeText: degreeText? true : false
 
             },
             chatTemplateData || {}
