@@ -9,14 +9,16 @@ export class d100BCombatant extends Combatant {
 
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
-
+  //  console.log("Here i Amm   ")
     // console.log(duplicate(this.actor))
-    // console.log("data, options, userId",data, options, userId)
-
+//     console.log("data, options, userId",data, options, userId)
+/*
     data.flags.d100A = {
       actions: {
         remaining: this.apr,
+        //
         total: this.apr,
+        //
         actedThisPhase:false
       },
       isNpcCrew: null,
@@ -25,9 +27,24 @@ export class d100BCombatant extends Combatant {
         stunDur: 0,
         stunnedRound: -1
       }
-    }
+    }*/
+  const  update = {"d100A" : {
+      actions: {
+        remaining: this.apr,
+        //
+        total: this.apr,
+        //
+        actedThisPhase:false
+      },
+      isNpcCrew: null,
+      stunned: {
+        isStunned: false,
+        stunDur: 0,
+        stunnedRound: -1
+      }
+    }}
 
-
+this.updateSource({"flags":update})
 
 
 
@@ -170,8 +187,9 @@ export class d100BCombatant extends Combatant {
     this.img ||= (this._videoSrc ? undefined : (this.token?.texture.src || this.actor?.img));
     this.name ||= this.token?.name || this.actor.name || game.i18n.localize("COMBAT.UnknownCombatant");
 
+
     this.updateResource();
-    this
+    
 
 
 
