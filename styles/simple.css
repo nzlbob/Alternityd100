@@ -1496,6 +1496,15 @@ background: radial-gradient( #39879d ,#212c48  );
 #combat li.combatant .combatant-control-counter {
   padding-left: 8px;
 }
+
+#combat li.combatant .combatant-control .active {
+  opacity: 0.2;
+}
+
+#combat li.combatant .combatant-control .inactive {
+  opacity: 0.8;
+}
+
 .counter-token > img {
   display: inline-block;
   width: 20px !important;

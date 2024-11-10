@@ -806,6 +806,14 @@ export class d100BCombat extends Combat {
     for (let combatant of this.combatants) {
           //  console.log(combatant.flags)
      // let flagdown = false
+
+if (combatant.flags.d100A.actions.actedThisPhase) {
+
+  combatant.update({"flags.d100A.actions.actedThisPhase": false })
+
+}
+
+
       if (result && combatant.flags.dragRuler) {
         if (combatant.flags.dragRuler.passedWaypoints.length > 0 ){
 
@@ -814,6 +822,8 @@ export class d100BCombat extends Combat {
         
       }
       let stunned = await combatant.token.actor.sheet._onApplyPendingDamage()
+
+
      // let downround = 0
       //    console.log("newflagdown ", c.name, stunned)
     }

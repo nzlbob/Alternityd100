@@ -16,7 +16,8 @@ export class d100BCombatant extends Combatant {
     data.flags.d100A = {
       actions: {
         remaining: this.apr,
-        total: this.apr
+        total: this.apr,
+        actedThisPhase:false
       },
       isNpcCrew: null,
       stunned: {
@@ -120,7 +121,7 @@ export class d100BCombatant extends Combatant {
     if (!this.combat) return false
     const degree = this.initDegree
     const phase = this.combat.phase
-    //if (c.flags.acted) return false;
+    if (this.flags.d100A.actions.actedThisPhase) return false;
     if (degree == "") return true;
     if (phase == 0 && ["amazing"].includes(degree)) return true
     if (phase == 1 && ["amazing", "good"].includes(degree)) return true

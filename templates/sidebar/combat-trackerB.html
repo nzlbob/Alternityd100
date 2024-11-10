@@ -83,8 +83,9 @@
 
                     <a class="combatant-control">
                         <!--
-                    [{console "CT74 - turns"}}   
-                    [[console this]}
+                    {{console "CT74 - turns"}}   
+                    {{console this}}
+
                     -->
                         {{#if this.down}}
                         <img class="combatant-control active"
@@ -99,7 +100,15 @@
                         {{/if}}
 
                     </a>
-
+                    <a  class="combatant-control" >
+                        {{#if actedThisPhase}} 
+                            <img class="combatant-control active" data-tooltip="End my Turn: <br> Stunned Round {{this.downround}}" data-control="actedThisPhase"src="systems/Alternityd100/icons/conditions/endturn.webp"/>
+                            {{/if}}
+                            {{#if (not actedThisPhase) }} 
+                            <img class="combatant-control inactive" data-tooltip="had my turn" data-control="actedThisPhase"src="systems/Alternityd100/icons/conditions/endturn.webp"/>
+                            {{/if}}
+    
+                        </a>
                     {{#if this.isPilot}}
                     <a class="combatant-control active">
 

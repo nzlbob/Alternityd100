@@ -32,6 +32,7 @@ for(let currentTurn of context.turns){
     //  console.log( "currentCombatant", currentCombatant)
     currentTurn.crewmember = {"name" : currentCombatant.actor?.name || currentCombatant.npcActor?.name}
     currentTurn.canAct = currentCombatant.canAct 
+    currentTurn.actedThisPhase = currentCombatant.flags?.d100A?.actions?.actedThisPhase
     currentTurn.crewRole = currentCombatant.flags.crewRole 
     currentTurn.isPilot = false;
     currentTurn.image = "";
@@ -58,6 +59,7 @@ if  (["normal"].includes(context.combat?.flags?.d100A?.combatType)){
       currentTurn.apr = currentCombatant.apr
       currentTurn.down = !(currentCombatant.flags?.d100A?.downround == "-")
       currentTurn.downround = currentCombatant.flags?.d100A?.downround
+      currentTurn.actedThisPhase = currentCombatant.flags?.d100A?.actions?.actedThisPhase
      // currentTurn.currentCombatant = currentCombatant
       if (currentCombatant.token.actor.type == "vehicle"){
         currentTurn.crewmember = {"name" : currentCombatant.actor?.name || currentCombatant.npcActor?.name}
@@ -182,7 +184,16 @@ if  (["normal"].includes(context.combat?.flags?.d100A?.combatType)){
       case "pingCombatant":
         return this._onPingCombatant(c);
 
+        case "actedThisPhase":
+      let actionRemaining = c.flags.d100A.actions.remaining
+        c.flags.d100A.actions.actedThisPhase?  actionRemaining+=1 :actionRemaining-=1
+        const update = {
+          "flags.d100A.actions.actedThisPhase": !c.flags.d100A.actions.actedThisPhase,
+          "flags.d100A.actions.remaining": actionRemaining
 
+        }
+      c.update(update)
+        return console.log("Here",c)
 
         case "rollPhysire":
          

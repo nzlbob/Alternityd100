@@ -83,6 +83,17 @@
 
                     </a>
 
+                    <a  class="combatant-control" >
+                        {{#if this.down}} 
+                            <img class="combatant-control active" data-tooltip="Roll Stun recovery check: <br> Stunned Round {{this.downround}}" data-control="rollPhysire"src="systems/Alternityd100/icons/conditions/physical_resolve.webp"/>
+                            {{/if}}
+                            {{#if (not this.down) }} 
+                            <img class="combatant-control inactive" data-tooltip="Roll Stun recovery check" data-control="rollPhysire"src="systems/Alternityd100/icons/conditions/physical_resolve.webp"/>
+                            {{/if}}
+    
+                        </a>
+
+                    
                     {{#if this.isPilot}}
                     <a  class="combatant-control active"  >
                     
