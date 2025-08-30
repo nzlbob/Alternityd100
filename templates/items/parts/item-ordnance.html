@@ -1,0 +1,87 @@
+
+<div class="tab details" data-group="primary" data-tab="ordnance">
+    <h4 class="section-header">Launcher Load</h4>
+
+
+    
+
+
+    <table class="LauncherTable">
+      <!--  <tfoot>
+        <tr>
+        <td colspan="6">
+        <div class="links"><a href="#">&laquo;</a> <a class="active" href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">&raquo;</a></div>
+        </td>
+        </tr>
+        </tfoot>
+        -->
+        <tbody>
+            {{#each launcherarray as |row|  }}
+            <tr>
+                {{#each row as |tube| }}
+                <td class=" launchercell "data-ordn="{{tube.ordn}}" {{createTippy title=tube.load.name subtitle=tube.load.system.description.short tooltips=tube.load.system.tooltip}} >
+                    <div class="item-name flexrow "data-ordn="{{tube.ordn}}" >
+                        <div class="item-image" style="background-image: url({{tube.load.img}})"></div> 
+                        <div class="flexcol" >
+                            <div class="item-name" style = "font-size: 8px;" ></div> {{tube.load.name}} 
+                        </div>
+                         <a class="fas fa-trash"></a> 
+                                                </div>
+                    </div>
+                </td>
+                {{/each}}
+            </tr>
+            {{/each}}
+
+        </tbody>
+
+
+       
+        </table>
+
+
+
+<h4 class="section-header">Ships Stores</h4>
+
+
+{{#if actor}}
+
+<ol class="inventory-list">
+
+    <li class="inventory-header flexrow">
+        <h3 class="item-name flexrow">Ordnance</h3>
+
+
+        <div class="ordnance-detail item-uses">{{localize "Sz/War"}}</div>
+        <div class="ordnance-detail item-uses">{{localize "Acc"}}</div>
+        <div class="ordnance-detail item-uses">{{localize "FPwr"}}</div>
+        <div class="ordnance-detail item-action">{{localize "Move"}}</div>
+
+        
+        <div class="item-controls">
+    
+            <a style="flex-basis:45px" class="item-control ordnance-create" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Create"}}" data-type="starshipOrdnance">
+                <i class="fas fa-plus"></i> {{localize "SFRPG.InventoryAdd"}}
+            </a>
+        
+        </div>
+    
+    </li>
+
+    <ol class="item-list">
+       
+    {{#each actor.itemTypes.starshipOrdnance as |item iid|}}
+
+        {{#if (eq ../this.itemData.weaponType item.system.ammunitionType)}}
+
+              {{> "systems/Alternityd100/templates/items/parts/item-ordnance-item.html" ../this  item=item children=item.system.contents itemData=itemData}}
+        {{/if}}
+    {{/each}}
+    </ol>
+
+</ol>
+{{else}}
+**Warning**
+Loading live ordnance to an unfitted launcher may result in injury or death. 
+{{/if}}
+</div>

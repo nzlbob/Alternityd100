@@ -1,0 +1,47 @@
+{"crew": {
+    "captain": {
+        "actorIds": [],
+        "actors": [],
+        "limit": 0
+    },
+    "pilot": {
+        "actorIds": [],
+        "actors": [],
+        "limit": 1
+    },
+    "copilot": {
+        "actorIds": [],
+        "actors": [],
+        "limit": 1
+    },
+    "communications": {
+        "actorIds": [],
+        "actors": [],
+        "limit": 0
+    },
+    "damageControl": {
+        "actorIds": [],
+        "actors": [],
+        "limit": 0
+    },
+    "defences": {
+        "actorIds": [],
+        "actors": [],
+        "limit": 0
+    },
+    "engineer": {
+        "actorIds": [],
+        "actors": [],
+        "limit": 0
+    },
+    "sensors": {
+        "actorIds": [],
+        "actors": [],
+        "limit": 1
+    },
+    "gunner": {
+        "actorIds": [],
+        "actors": [],
+        "limit": 0
+    }
+}}

@@ -1,0 +1,161 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+
+    {{> "systems/Alternityd100/templates/items/parts/item-header.html"}}
+
+
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SFRPG.Details" }}</a>
+        <a class="item" data-tab="modifiers">{{ localize "SFRPG.Modifiers" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+        {{!-- Description Tab --}}
+        {{> "systems/Alternityd100/templates/items/parts/item-description.html" hideProperties=true}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+
+            <h3 class="form-header">{{ localize "SFRPG.Items.Perk.Details" }}</h3>
+
+<table>
+        <tr>
+        <td width="50%" style="text-align:top;">
+        <table>
+            <thead>
+            <tr>
+           <th>Adjustment</th>
+           <th width="40%">Attribute</th>
+           <th width="50px">Value</th>
+        </tr>
+    </thead>
+        <tbody>
+        <tr>
+ 
+            <div class="form-group">
+                <td>
+                <label>{{ localize "SFRPG.Items.Perk.AbilityAdjustment" }}</label>
+                 </td>
+                <div class="form-fields">
+                    <td>
+                    <select name="system.abilityMod.ability">
+                        {{#select itemData.abilityMod.ability}}
+                        <option value=""></option>
+                        {{#each d100Aconfig.abilities as |ability key|}}
+                        <option value="{{key}}">{{ability}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </td>
+                <td>
+                    <input type="text" name="system.abilityMod.mod" value="{{itemData.abilityMod.mod}}" data-dtype="Number" />        
+                </td>            
+                </div>
+            </div>
+        </tr>
+        <tr>
+            <div class="form-group">
+                <td>
+                <label>{{ localize "SFRPG.Items.Perk.Skill" }}</label>
+            </td>
+            <td>
+                <select name="system.skill">
+                    {{#select itemData.skill}}
+                    <option value="{{skl}}"></option>
+                    {{#each config.skills as |skill skl|}}
+                    <option value="{{skl}}">{{skill}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </td>
+            </div>
+
+        </tr>
+        <tr>
+            <div class="form-group">
+            <td>
+                <label>{{ localize "d100A.feature.acb" }}</label>
+            </td>
+        <td></td>
+        <td>
+                <input type="text" name="system.acb" value="{{itemData.acb}}" data-dtype="Number" />  
+        </td>
+            </div>
+        </tr>
+ 
+        
+        
+        
+        </table> 
+        </td>
+        <td style="text-align:top;vertical-align:top">
+        <table>
+
+                <thead>
+                    <tr>
+                        <th>Adjustment</th>
+                        <th width="40%">Attribute</th>
+                        <th width="50px">Value</th>
+                     </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+
+                            <div class="form-group">
+                            <td>
+                                <label>{{ localize "d100A.feature.costp" }}</label>
+                            </td>
+                        <td></td>
+                        <td>
+                                <input type="text" name="system.xpcost" value="{{itemData.xpcost}}" data-dtype="Number" />  
+                        </td>
+                            </div>
+                        </tr>
+                    <tr>
+                        <td>
+                            <label>{{ localize " " }}</label>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>{{ localize " " }}</label>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>{{ localize " " }}</label>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </tbody>
+
+
+
+        </table>
+        </td>
+        </tr>
+        
+</table>            
+            
+        </div>
+
+        {{!-- Modifiers Tab --}}
+        {{> "systems/Alternityd100/templates/items/parts/item-modifiers.html"}}
+    </section>
+</form>

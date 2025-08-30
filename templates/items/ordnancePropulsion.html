@@ -1,0 +1,149 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    {{> "systems/Alternityd100/templates/items/parts/item-header.html"}}
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SFRPG.Details" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        {{> "systems/Alternityd100/templates/items/parts/item-description.html"}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+
+            {{!-- Common component data --}}
+            {{> "systems/Alternityd100/templates/items/parts/starship-component.html" this}}
+
+            <h4 class="section-header first">{{ localize "SFRPG.ItemSheet.StarshipEngine.Header" }}</h4>
+            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipEngine.FTL" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipEngine.FTLTooltip" }}">
+                <label>{{ localize "SFRPG.ItemSheet.StarshipEngine.FTL" }}</label>
+                <div class="form-fields">
+                    <label class="checkbox">
+                        <input type="checkbox" name="system.isFTL" {{checked itemData.isFTL}}/> {{ localize "SFRPG.ItemSheet.StarshipEngine.IsFTL" }}
+                    </label>
+                </div>
+            </div>
+            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipEngine.Size" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipEngine.SizeTooltip" }}">
+                <label>{{ localize "Progress Level" }}</label>
+                <select name="system.progressLevel">
+                    {{ selectOptions d100Aconfig.progressLevel selected=itemData.progressLevel blank="" }}
+                  </select>
+            </div>
+
+            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipEngine.Size" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipEngine.SizeTooltip" }}">
+                <label>{{ localize "Tech" }}</label>
+                    <td><input type="text" name="system.tech" value="{{itemData.tech}}" data-dtype="Text" placeholder="-" /></td>
+            </div>
+
+            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipEngine.Size" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipEngine.SizeTooltip" }}">
+                <label>{{ localize "Minimum Size" }}</label>
+                    <td><input type="text" name="system.supportedSize" value="{{itemData.supportedSize}}" data-dtype="Number" placeholder="0" /></td>
+            </div>
+
+            {{#if itemData.isFTL}}
+
+            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipEngine.Size" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipEngine.SizeTooltip" }}">
+                <label>{{ localize "FTL Distance" }}</label>
+                    <td><input type="text" name="system.ftlRange" value="{{itemData.ftlRange}}" data-dtype="Text" placeholder="0 ly" /></td>
+            </div>
+            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipEngine.Size" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipEngine.SizeTooltip" }}">
+                <label>{{ localize "FTL Duration" }}</label>
+                    <td><input type="text" name="system.ftlDuration" value="{{itemData.ftlDuration}}" data-dtype="Text" placeholder="0" /></td>
+            </div>
+            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipEngine.Size" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipEngine.SizeTooltip" }}">
+                <label>{{ localize "Cooldown Time" }}</label>
+                    <td><input type="text" name="system.ftlCooldown" value="{{itemData.ftlCooldown}}" data-dtype="Text" placeholder="0" /></td>
+            </div>
+
+            {{/if}}
+
+            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipEngine.Speed" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipEngine.SpeedTooltip" }}">
+                {{#unless itemData.isFTL}} 
+                <label>{{ localize "Accel Rating" }}</label> 
+   
+                
+            
+                <div class="form-fields">
+                        <table class="blueTable">
+                        <thead>
+                        <tr>
+                        <th>5%</th><th>10%</th><th>15%</th><th>20%</th><th>30%</th><th>40%</th><th>50%</th>
+                        </tr> </thead><tfoot>
+                        <tr>
+                        <td colspan="7">
+
+                        </td>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        <tr>
+                        
+                        <td><input type="text" name="system.accel.five" value="{{itemData.accel.five}}" data-dtype="Number" placeholder="0" /></td>
+                        <td><input type="text" name="system.accel.ten" value="{{itemData.accel.ten}}" data-dtype="Number" placeholder="0" /></td>
+                        <td><input type="text" name="system.accel.fifteen" value="{{itemData.accel.fifteen}}" data-dtype="Number" placeholder="0" /></td>
+                        <td><input type="text" name="system.accel.twenty" value="{{itemData.accel.twenty}}" data-dtype="Number" placeholder="0" /></td>
+                        <td><input type="text" name="system.accel.thirty" value="{{itemData.accel.thirty}}" data-dtype="Number" placeholder="0" /></td>
+                        <td><input type="text" name="system.accel.forty" value="{{itemData.accel.forty}}" data-dtype="Number" placeholder="0" /></td>
+                        <td><input type="text" name="system.accel.fifty" value="{{itemData.accel.fifty}}" data-dtype="Number" placeholder="0" /></td>
+                       
+                        
+                        </tr>
+
+                        </tbody>
+                        </table>
+               
+               
+               
+               
+                </div>
+           
+                {{/unless}}
+           
+           
+            </div>
+
+            <h4 class="section-header first">{{ localize "ECM Noise Output(+) / Attenuation(-)"  }}</h4>
+
+            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonusTooltip" }}">
+                <label>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }} Radar </label>
+                <div class="form-fields">
+                    <input type="text" name="system.targetLockBonus.radar.value" value="{{itemData.targetLockBonus.radar.value}}" data-dtype="Number" placeholder="0" />
+                </div>
+            </div>
+            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonusTooltip" }}">
+                <label>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }} Laser </label>
+                <div class="form-fields">
+                    <input type="text" name="system.targetLockBonus.laser.value" value="{{itemData.targetLockBonus.laser.value}}" data-dtype="Number" placeholder="0" />
+                </div>
+            </div>
+            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonusTooltip" }}">
+                <label>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }} Mass </label>
+                <div class="form-fields">
+                    <input type="text" name="system.targetLockBonus.mass.value" value="{{itemData.targetLockBonus.mass.value}}" data-dtype="Number" placeholder="0" />
+                </div>
+            </div>
+            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonusTooltip" }}">
+                <label>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }} Thermal / IR </label>
+                <div class="form-fields">
+                    <input type="text" name="system.targetLockBonus.thermal.value" value="{{itemData.targetLockBonus.thermal.value}}" data-dtype="Number" placeholder="0" />
+                </div>
+            </div>
+            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonusTooltip" }}">
+                <label>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }} Psionic Radiation </label>
+                <div class="form-fields">
+                    <input type="text" name="system.targetLockBonus.psi.value" value="{{itemData.targetLockBonus.psi.value}}" data-dtype="Number" placeholder="0" />
+                </div>
+            </div>
+
+
+        </div>
+
+    </section>
+</form>

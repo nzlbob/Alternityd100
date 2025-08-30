@@ -1,0 +1,381 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img" />
+
+        <div class="header-details flexrow">
+            <div class="header-background flexrow">
+                <h1 class="charname" style="flex: auto;">
+                    <input name="name" type="text" value="{{item.name}}" data-tippy-content="{{ localize "
+                        SFRPG.ItemSheet.Header.ItemNameTooltip" }}" placeholder="{{ localize "
+                        SFRPG.ItemSheet.Header.ItemName" }}" />
+                </h1>
+                <div class="item-subtitle">
+                    <h4 data-tippy-content="Item Type" class="item-type">{{itemType}}</h4>
+                    <span data-tippy-content="Item Status" class="item-status">{{itemStatus}}</span>
+                </div>
+            </div>
+
+            {{!-- Item Summary --}}
+            <ul class="summary flexrow">
+                {{#if category.enabled}}
+                <li class="short" data-tippy-content="{{localize category.tooltip}}">
+                    <label>{{localize category.value}}</label>
+                </li>
+                {{/if}}
+                <li class="wide" data-tippy-content="{{ localize " SFRPG.ItemSheet.Header.SourceTooltip" }}">
+                    <input type="text" name="system.source" value="{{itemData.source}}" placeholder="{{ localize "
+                        SFRPG.ItemSheet.Header.Source" }}" />
+                </li>
+            </ul>
+
+            {{!-- Header Attributes --}}
+            <ul class="summary flexrow">
+                <li>
+                    {{localize labels.level}}
+                </li>
+                <li>
+                    {{localize labels.school}}
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SFRPG.Details" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        {{> "systems/Alternityd100/templates/items/parts/item-description.html"}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+            <h3 class="form-header">{{ localize "SFRPG.Items.Spell.Details" }}</h3>
+
+
+            <div class="divTable blueTable2">
+                <div class="divTableBody">
+                    <div class="divTableRow">
+                        <div class="divTableCell">
+
+
+
+                            <div style="justify-content: center;" class="form-group">
+                                <h3 class="form-header"> Basics </h3>
+
+                            </div>
+
+                            {{!-- Weapon Source --}}
+                            <div class="form-group">
+                                <label>{{ localize "d100A.pubnSource" }}</label>
+                                <select name="system.attributes.pubnsource">
+                                    {{ selectOptions d100Aconfig.pubnsource selected=itemData.attributes.pubnsource
+                                    blank="" }}
+                                </select>
+                            </div>
+
+
+                            {{!-- Psion Ability --}}
+                            <div class="form-group">
+                                <label>{{ localize "Key Ability" }}</label>
+                                <div class="form-fields">
+                                    <select name="system.ability">
+                                        {{#select itemData.ability}}
+                                        {{#each d100Aconfig.psionAbility as |name sch|}}
+                                        <option value="{{sch}}">{{localize name}}</option>
+                                        {{/each}}
+                                        {{/select}}
+                                    </select>
+                                </div>
+                            </div>
+                            {{!-- Type--}}
+                            <div class="form-group">
+
+                                <div class="form-fields">
+                                    <input type="checkbox" name="system.isBroad" {{checked itemData.isBroad}} />
+                                    <label>{{ localize "Broad" }}</label>
+
+
+                                </div>
+
+                                <div class="form-fields">
+                                    <input type="checkbox" name="system.untrained" {{checked itemData.untrained}} /> {{
+                                    localize "Use Untrained" }}
+
+
+                                </div>
+                            </div>
+
+                            {{!-- Ranks--}}
+                            <div class="form-group">
+                                <label>{{ localize "Ranks" }}</label>
+                                <div class="form-fields">
+                                    <input class="ranks" type="number" name="system.rank" value="{{itemData.rank}}" />
+
+
+                                </div>
+                            </div>
+                            {{!-- steps--}}
+                            <div class="form-group">
+                                <label>{{ localize "Steps" }}</label>
+                                <div class="form-fields">
+                                    <input class="ranks" type="number" name="system.step" value="{{itemData.step}}" />
+
+
+                                </div>
+                            </div>
+
+
+                            {{!-- Cost--}}
+                            <div class="form-group">
+                                <label>{{ localize "Skill Cost" }}</label>
+                                <div class="form-fields">
+                                    <input type="number" name="system.baseCost" value="{{itemData.baseCost}}" />
+
+
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                        <div class="divTableCell">
+
+
+
+                            <div style="justify-content: center;" class="form-group">
+                                <h3 class="form-header"> Usage </h3>
+                            </div>
+
+                            {{!-- Psion Attack Type --}}
+                            <div class="form-group">
+                                <label>{{ localize "Effect Type" }}</label>
+                                <div class="form-fields">
+                                    <select name="system.psiEffectType">
+                                        {{#select itemData.psiEffectType}}
+                                        <option value="">None</option>
+                                        {{#each d100Aconfig.psionicEffectType as |name sch|}}
+                                        <option value="{{sch}}">{{localize name}}</option>
+                                        {{/each}}
+                                        {{/select}}
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            {{!-- Weapon Range --}}
+                            <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.rangeTooltip"
+                                }}">
+                                <label>{{ localize "d100A.Items.Weapon.rangename" }}</label>
+                                <div class="form-group weapon-properties" style="font-size: 12px; text-align: center; ">
+
+                                    <input type="text" style="text-align: center" name="system.range.short"
+                                        value="{{itemData.range.short}}" data-dtype="Number" placeholder="0" />/
+                                    <input type="text" style="text-align: center" name="system.range.medium"
+                                        value="{{itemData.range.medium}}" data-dtype="Number" placeholder="0" />/
+                                    <input type="text" style="text-align: center" name="system.range.long"
+                                        value="{{itemData.range.long}}" data-dtype="Number" placeholder="0" />
+
+                                </div>
+                            </div>
+
+                            {{!-- Weapon Range Mod--}}
+                            <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.rangeTooltip"
+                                }}">
+                                <label>{{ localize "Skill Range Mod" }}</label>
+                                <div class="form-group weapon-properties" style="font-size: 12px; text-align: center; ">
+
+                                    <input type="text" style="text-align: center" name="system.rangeMod.short"
+                                        value="{{itemData.rangeMod.short}}" data-dtype="Number" placeholder="0" />/
+                                    <input type="text" style="text-align: center" name="system.rangeMod.medium"
+                                        value="{{itemData.rangeMod.medium}}" data-dtype="Number" placeholder="0" />/
+                                    <input type="text" style="text-align: center" name="system.rangeMod.long"
+                                        value="{{itemData.rangeMod.long}}" data-dtype="Number" placeholder="0" />
+
+                                </div>
+                            </div>
+
+                            {{!-- Weapon Blast --}}
+                            {{#if isAoE }}
+                            <div class="form-group" data-tippy-content="{{ localize "
+                                d100A.Items.Weapon.blastAreaTooltip" }}">
+                                <label>{{ localize "Blast Area" }}</label>
+                                <div class="form-group weapon-properties" style="font-size: 12px; text-align: center; ">
+                                    <input type="text" style="text-align: center" name="system.blastArea.short"
+                                        value="{{itemData.blastArea.short}}" data-dtype="Number" placeholder="0" />/
+                                    <input type="text" style="text-align: center" name="system.blastArea.medium"
+                                        value="{{itemData.blastArea.medium}}" data-dtype="Number" placeholder="0" />/
+                                    <input type="text" style="text-align: center" name="system.blastArea.long"
+                                        value="{{itemData.blastArea.long}}" data-dtype="Number" placeholder="0" />
+                                </div>
+                            </div>
+
+                            {{/if}}
+
+
+                            {{!-- Weapon Damage O --}}
+                            <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.damageTooltip"
+                                }}">
+
+                                <label>{{ localize "d100A.Items.Weapon.damageo" }}</label>
+                                <input type="text" style="text-align: center" name="system.damage.ord.dice"
+                                    value="{{itemData.damage.ord.dice}}" data-dtype="String" placeholder="0" />/
+
+                                <select name="system.damage.ord.type">
+                                    {{ selectOptions d100Aconfig.damageQ selected=itemData.damage.ord.type blank="" }}
+                                </select>
+                            </div>
+                            {{!-- Weapon Damage Good --}}
+                            <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.damageTooltip"
+                                }}">
+
+                                <label>{{ localize "d100A.Items.Weapon.damageg" }}</label>
+                                <input type="text" style="text-align: center" name="system.damage.goo.dice"
+                                    value="{{itemData.damage.goo.dice}}" data-dtype="String" placeholder="0" />/
+
+                                <select name="system.damage.goo.type">
+                                    {{ selectOptions d100Aconfig.damageQ selected=itemData.damage.goo.type blank="" }}
+                                </select>
+                            </div>
+                            {{!-- Weapon Damage Amazing --}}
+                            <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.damageTooltip"
+                                }}">
+
+                                <label>{{ localize "d100A.Items.Weapon.damagea" }}</label>
+                                <input type="text" style="text-align: center" name="system.damage.ama.dice"
+                                    value="{{itemData.damage.ama.dice}}" data-dtype="String" placeholder="0" />/
+
+                                <select name="system.damage.ama.type">
+                                    {{ selectOptions d100Aconfig.damageQ selected=itemData.damage.goo.type blank="" }}
+                                </select>
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+
+            <div class="form-group" data-tooltip="{{ localize " Effect on a Critical Failure" }}">
+                <label>{{ localize "Critical Failure" }}</label>
+                <div class="form-fields">
+                    <textarea rows="4" cols="50" name="system.degreeText.critical"
+                        placeholder="Enter text">{{itemData.degreeText.critical}}</textarea>
+                </div>
+            </div>
+
+            <div class="form-group" data-tooltip="{{ localize " Effect on a Failure" }}">
+                <label>{{ localize "Marginal Failure" }}</label>
+                <div class="form-fields">
+                    <textarea rows="4" cols="50" name="system.degreeText.failure"
+                        placeholder="Enter text">{{itemData.degreeText.failure}}</textarea>
+                </div>
+            </div>
+
+            <div class="form-group" data-tooltip="{{ localize " Effect on a Ordinary Success" }}">
+                <label>{{ localize "Ordinary Success" }}</label>
+                <div class="form-fields">
+                    <textarea rows="4" cols="50" name="system.degreeText.ordinary"
+                        placeholder="Enter text">{{itemData.degreeText.ordinary}}</textarea>
+                </div>
+            </div>
+
+            <div class="form-group" data-tooltip="{{ localize " Effect on a Good Success" }}">
+                <label>{{ localize "Good Success" }}</label>
+                <div class="form-fields">
+                    <textarea rows="4" cols="50" name="system.degreeText.good"
+                        placeholder="Enter text">{{itemData.degreeText.good}}</textarea>
+                </div>
+            </div>
+
+            <div class="form-group" data-tooltip="{{ localize " Effect on a Amazing Success" }}">
+                <label>{{ localize "Amazing Success" }}</label>
+                <div class="form-fields">
+                    <textarea rows="4" cols="50" name="system.degreeText.amazing"
+                        placeholder="Enter text">{{itemData.degreeText.amazing}}</textarea>
+                </div>
+            </div>
+
+
+            <!--
+            {{!-- Spell Components --}}
+            <div class="spell-components form-group">
+                <label>{{ localize "SFRPG.Items.Spell.Properties" }}</label>
+                <div class="form-fields">
+                    <label class="checkbox">
+                        <input type="checkbox" name="system.sr" {{checked itemData.sr}}/> {{ localize "SFRPG.Items.Spell.Resistance" }}
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" name="system.dismissible" {{checked itemData.dismissible}}/> {{ localize "SFRPG.Items.Spell.Dismissible" }}
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" name="system.concentration" {{checked itemData.concentration}}/> {{ localize "SFRPG.Items.Spell.Concentration" }}
+                    </label>
+                </div>
+            </div>
+
+            {{!-- Material Components --}}
+            <div class="form-group">
+                <label>{{ localize "SFRPG.Items.Spell.SpellcastingMaterials" }}</label>
+                <div class="form-fields">
+                    <input class="materials" type="text" name="system.materials.value" value="{{itemData.materials.value}}"/>
+                    {{#if itemData.materials.value}}
+                    <div class="spell-materials flexrow">
+                        <label>{{ localize "SFRPG.Items.Spell.Supply" }}</label>
+                        <input type="text" name="system.materials.supply" value="{{itemData.materials.supply}}" data-dtype="Number" Placeholder="0"/>
+                        <label>{{ localize "SFRPG.Items.Spell.Cost" }}</label>
+                        <input type="text" name="system.materials.cost" value="{{itemData.materials.cost}}" data-dtype="Number" Placeholder="0"/>
+                        <label>{{ localize "SFRPG.Items.Spell.Consumed" }}</label>
+                        <input type="checkbox" name="system.materials.consumed" {{checked itemData.materials.consumed}}/>
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+
+            {{!-- Preparation Mode --}}
+            <div class="form-group input-select">
+                <label>{{ localize "SFRPG.Items.Spell.PreparationMode" }}</label>
+                <div class="form-fields">
+                    <label class="checkbox">
+                        <input type="checkbox" name="system.preparation.prepared" {{checked itemData.preparation.prepared}}/> {{ localize "SFRPG.Items.Spell.Prepared" }}
+                    </label>
+                    <span>&nbsp;</span>
+                    <select name="system.preparation.mode">
+                        {{#select itemData.preparation.mode}}
+                        <option value=""></option>
+                        {{#each config.spellPreparationModes as |name key|}}
+                        <option value="{{key}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+
+            <h3 class="form-header">{{ localize "SFRPG.Items.Spell.Casting" }}</h3>
+
+            {{!-- Item Activation Template --}}
+            {{> "systems/Alternityd100/templates/items/parts/item-activation.html"}}
+
+            <h3 class="form-header">{{ localize "SFRPG.Items.Spell.Effects" }}</h3>
+
+            {{!-- Item Action Template --}}
+            {{> "systems/Alternityd100/templates/items/parts/item-action.html"}}
+            -->
+        </div>
+    </section>
+</form>

@@ -1,0 +1,105 @@
+<form class="flexcol {{cssClass}}" autocomplete="off">
+
+    {{console this}}
+    {{!-- Sheet Header --}}
+    <header class="sheet-header header2" style="font-family: serpentine">
+        <table class="hptable">
+
+            <tbody>
+                <tr>
+                    <td style="color: aquamarine;width: 30%; "  >
+                        Small Sheet
+                    </td>
+                    <td style="color: aquamarine;" class = "clickpingtoken">
+                        Ping Token: {{options.token.name}}
+                    </td>
+                </tr>
+                <tr>
+
+                    <td colspan="3">
+
+
+                        <div class="divTable crewTable">
+
+                            <div class="divTableBody">
+
+                                {{#each status.durability as |category id|}}
+
+                                <div class="divTableRow">
+                                    {{#if (eq id "stu") }}<div class="divTableCell" data-tooltip="{{ localize "
+                                        d100A.DamageTypeTooltip.Stun" }}">{{ localize "d100A.stun"}}</div> {{/if}}
+                                    {{#if (eq id "wou") }}<div class="divTableCell" data-tooltip="{{ localize "
+                                        d100A.DamageTypeTooltip.Wound" }}">{{ localize "d100A.wound"}}</div> {{/if}}
+                                    {{#if (eq id "mor") }}<div class="divTableCell" data-tooltip="{{ localize "
+                                        d100A.DamageTypeTooltip.Mortal" }}">{{ localize "d100A.mortal"}}</div> {{/if}}
+
+                                    <div class="divTableCell">
+                                        {{#each category.good as |position|}}
+                                        <img class="clickgood" src="{{../../status.image.good}}"
+                                            title="{{position.title}}" data-position={{position.value}}
+                                            data-type="total-dec" data-id={{id}} data-category="total" height="15"
+                                            width="15" />
+                                        {{/each}}
+                                        {{#each category.pend as |position|}}
+                                        <img class="clickgood" src="{{../../status.image.pend}}"
+                                            title="{{position.title}}" data-position={{position.value}}
+                                            data-type="total-inc" data-id={{id}} data-category="total" height="15"
+                                            width="15" />
+                                        {{/each}}
+                                        {{#each category.bad as |position|}}
+                                        <img class="clickgood" src="{{../../status.image.bad}}"
+                                            title="{{position.title}}" data-position={{position.value}}
+                                            data-type="total-inc" data-id={{id}} data-category="total" height="15"
+                                            width="15" />
+                                        {{/each}}
+
+                                    </div>
+                                </div>
+                                {{/each}}
+
+
+                            </div>
+                        </div>
+
+                    </td>
+
+
+                </tr>
+
+
+            </tbody>
+        </table>
+    </header>
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+
+        <a class="item" data-tab="inventory">Inventory</a>
+        <a class="item" data-tab="modifiers">{{localize "SFRPG.Modifiers"}}</a>
+        <a class="item" data-tab="psionics">{{ localize "Psionics" }}</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+
+
+        {{!-- Inventory Tab --}}
+
+        <div class="tab inventory flexcol" data-group="primary" data-tab="inventory">
+            {{> "systems/Alternityd100/templates/actors/parts/actor-inventory.html" sections=inventory}}
+
+
+        </div>
+
+        {{!-- Modifiers Tab --}}
+        <div class="tab modifers flexcol" data-group="primary" data-tab="modifiers">
+            {{> "systems/Alternityd100/templates/actors/parts/actor-modifiers.html" sections=modifiers}}
+        </div>
+
+        {{!-- Psionics Tab --}}
+        <div class="tab psionics flexcol" data-group="primary" data-tab="psionics">
+            {{> "systems/Alternityd100/templates/actors/parts/actor-psionic.html"}}
+        </div>
+
+
+    </section>
+</form>

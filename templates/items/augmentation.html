@@ -1,0 +1,147 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    {{> "systems/Alternityd100/templates/items/parts/item-header.html"}}
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SFRPG.Details" }}</a>
+        <a class="item" data-tab="modifiers">{{ localize "SFRPG.Modifiers" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+        {{> "systems/Alternityd100/templates/items/parts/item-description.html"}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+
+            <h3 class="form-header">{{ localize "SFRPG.Items.Augmentation.Details" }}</h3>
+
+            <div class="divTable blueTable2">
+                <div class="divTableBody">
+                    <div class="divTableRow">
+                        <div class="divTableCell">
+
+
+
+                            <div style="justify-content: center;" class="form-group">
+                                <h3 class="form-header"> Basics </h3>
+                            </div>
+                            {{!-- Weapon Source --}}
+                            <div class="form-group">
+                                <label>{{ localize "d100A.pubnSource" }}</label>
+                                <select name="system.attributes.pubnsource">
+                                    {{ selectOptions d100Aconfig.pubnsource selected=itemData.attributes.pubnsource blank="" }}
+                                  </select>
+                            </div>
+
+                            {{!-- Weapon Manufacturer --}}
+                            <div class="form-group">
+                                <label>{{ localize "d100A.Items.manufacturer" }}</label>
+                                <select name="system.attributes.manufacturer">
+                                    {{ selectOptions d100Aconfig.manufacturers selected=itemData.attributes.manufacturer blank="" }}
+                                  </select>
+                            </div>
+
+                            {{!-- Weapon Progress Level --}}
+                            <div class="form-group">
+                                <label>{{ localize "d100A.Items.Weapon.PL" }}</label>
+                                <select name="system.attributes.progressLevel">
+
+                                        {{ selectOptions d100Aconfig.progressLevel selected=itemData.attributes.progressLevel blank="" }}
+                                      </select>
+                            </div>
+
+                            {{!-- Weapon Hide --}}
+                            <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.hideTooltip"
+                                }}">
+                                <label>{{ localize "d100A.Items.Weapon.hide" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" style="text-align: center; size: 20 px; " name="system.hide"
+                                        value="{{itemData.hide}}" data-dtype="Number" placeholder="0" />
+                                </div>
+                            </div>
+
+
+                            {{!-- Weapon Availability --}}
+                            <div class="form-group" data-tooltip="{{localize 'd100A.availabilitytooltip' }}">
+                                <label>{{ localize "d100A.availability" }}</label>
+                                <select name="system.attributes.availability">
+                                    {{ selectOptions d100Aconfig.availability selected=system.attributes.availability blank="" }}
+
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="divTableCell">
+
+
+
+                            <div style="justify-content: center;" class="form-group">
+                                <h3 class="form-header"> Usage </h3>
+                            </div>
+
+                            {{> "systems/Alternityd100/templates/items/parts/item-status.html"}}
+
+                            {{!-- Weapon Base Skill --}}
+                            <div class="form-group">
+                                <label>{{ localize "d100A.skill" }}</label>
+                                <select name="system.skill">
+                                    {{#select itemData.skill}}
+                                    <option value=""></option>
+                                    {{#each d100Aconfig.skills as |name type|}}
+                                    <option value="{{type}}">{{name}}</option>
+                                    {{/each}}
+                                    {{/select}}
+                                </select>
+                            </div>
+
+
+
+                            {{!-- Armor type --}}
+                            <div class="form-group" data-tippy-content="{{ localize "
+                                d100A.Items.Weapon.firepowerTooltip" }}">
+
+                                <label>{{ localize "d100A.Items.Type" }}</label>
+                                <select name="system.firepower">
+                                    {{ selectOptions d100Aconfig.firepower selected=itemData.firepower blank="" }}
+                                </select>
+                            </div>
+                            <hr>
+
+
+
+
+
+
+
+
+
+
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+        {{!-- Modifiers Tab --}}
+        {{> "systems/Alternityd100/templates/items/parts/item-modifiers.html"}}
+    </section>
+</form>

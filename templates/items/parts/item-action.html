@@ -1,0 +1,71 @@
+
+{{#if itemData.actionType}}
+
+
+{{!-- Attack Roll Bonus --}}
+{{#if hasAttackRoll }}
+<div class="form-group">
+    <label>{{ localize "SFRPG.Items.Action.AttackRollBonus" }}</label>
+    <div class="form-fields">
+        <input type="text" name="system.attackBonus" value="{{itemData.attackBonus}}" data-dtype="Number"/>
+    </div>
+</div>
+{{/if}}
+
+{{!-- Damage Formula --}}
+<h4 class="damage-header">
+    {{#unless isHealing }}{{ localize "SFRPG.Items.Action.DamageFormula" }}{{ else }}{{ localize "SFRPG.Items.Action.HealingFormula" }}{{/unless}}
+    <a class="damage-control add-damage"><i class="fas fa-plus"></i></a>
+</h4>
+<ol class="damage-parts form-group">
+    {{#each itemData.damage.parts as |part i| }}
+    <li class="damage-part flexcol" data-damage-part="{{i}}">
+        <div class="damage-part-formula form-group flexrow">
+            <input type="text" name="system.damage.parts.{{i}}.formula" value="{{lookup this "formula"}}"/>
+            <a class="damage-control delete-damage"><i class="fas fa-minus"></i></a>
+        </div>
+        <div class="damage-part-type form-group stacked">
+            <div class="form-group form-group-stacked">
+                <label>{{localize "Energy Damage"}}</label>
+                {{#each ../config.energyDamageTypes as |name type|}}
+                <label class="checkbox">
+                    <input type="checkbox" name="system.damage.parts.{{i}}.types.{{type}}" {{checked (lookup (lookup (lookup ../../itemData.damage.parts i) "types") type)}} />{{name}}
+                </label>
+                {{/each}}
+            </div>
+            <div class="form-group form-group-stacked">
+                <label>{{localize "Kinetic Damage"}}</label>
+                {{#each ../config.kineticDamageTypes as |name type|}}
+                <label class="checkbox">
+                    <input type="checkbox" name="system.damage.parts.{{i}}.types.{{type}}" {{checked (lookup (lookup (lookup ../../itemData.damage.parts i) "types") type)}} />{{name}}
+                </label>
+                {{/each}}
+            </div>
+            <div class="form-group form-group-stacked">
+                <label>{{localize "SFRPG.HealingTypesHealing"}}</label>
+                <label class="checkbox">
+                    <input type="checkbox" name="system.damage.parts.{{i}}.types.healing" {{checked (lookup (lookup (lookup ../itemData.damage.parts i) "types") "healing")}} />{{localize "SFRPG.HealingTypesHealing"}}
+                </label>
+            </div>
+        </div>
+        <div class="damage-part-operator form-group flexrow" data-tippy-content="When an item or ablity does multiple types of damage, this will determine if both damage types apply, or if only one or the other apply.">
+            <label>{{localize "Damage Operator"}}</label>
+            <select name="system.damage.parts.{{i}}.operator">
+                {{#select (lookup this "operator")}}
+                <option value=""></option>
+                <option value="and">{{localize "And"}}</option>
+                <option value="or">{{localize "Or"}}</option>
+                {{/select}}
+            </select>
+        </div>
+    </li>
+    {{/each}}
+</ol>
+
+
+{{!-- Chat Message Flavor --}}
+<div class="form-group stacked">
+    <label>{{ localize "SFRPG.Items.Action.ChatMessageFlavor" }}</label>
+    <input type="text" name="system.chatFlavor" value="{{itemData.chatFlavor}}"/>
+</div>
+{{/if}}

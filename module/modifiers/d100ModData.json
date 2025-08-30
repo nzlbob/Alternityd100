@@ -1,0 +1,27 @@
+{ "rangedW": {
+   "primative": {
+        "short": -1 ,
+         "medium": 1 ,
+         "long": 2 },
+    "pistol": {
+         "short": -1 , "medium": 1 ,
+         "long": 3 },      
+    "rifle": {
+         "short": -1 ,
+         "medium": 0 ,
+         "long": 1 },   
+    "smg": {
+         "short": -1 ,
+         "medium": 1 ,
+         "long": 3 }   
+    },
+ "heavyW":{ 
+    "direct": {
+         "short": -1 ,
+         "medium": 1 ,
+         "long": 1 },
+    "indirect": {
+         "short": 5 ,
+         "medium": -2 ,
+         "long": 0 }    
+    }}
