@@ -1,4 +1,4 @@
-import { SFRPG } from "./config.js";
+import { d100A } from "./d100Aconfig.js";
 
 export const registerSystemSettings = function () {
    
@@ -47,6 +47,50 @@ export const registerSystemSettings = function () {
         //}
     }
     );
+
+    game.settings.register("Alternityd100", "spaceWaypointMovement", {
+        name: "Space Movement: Waypoints",
+        hint: "Use stepped waypoint movement with ruler visualization for space movement (starships/ordnance) instead of instant position updates.",
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean
+    });
+
+    game.settings.register("Alternityd100", "spaceSpeedFromLastMove", {
+        name: "Space Speed From Last Move",
+        hint: "User setting: after a token moves, optionally copy its measured move distance into actor.system.attributes.speed.value for starships, ordnance, or both.",
+        scope: "client",
+        config: true,
+        default: "disabled",
+        type: String,
+        choices: {
+            "disabled": "Disabled",
+            "starship": "Starships Only",
+            "ordnance": "Ordnance Only",
+            "both": "Starships and Ordnance"
+        }
+    });
+
+    game.settings.register("Alternityd100", "navComputerRelativistic", {
+        name: "Nav Computer: Relativistic",
+        hint: "If enabled, Nav Computer time is calculated using a relativistic constant-proper-acceleration model and displays both Universal time and Ship time.",
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean
+    });
+
+    // Ordnance migration: store the single base ordnance actor id (one per world).
+    // Hidden setting (not shown in Configure Settings UI) so worlds can be migrated without extra UX.
+    game.settings.register("Alternityd100", "ordnanceBaseActorId", {
+        name: "Ordnance Base Actor Id",
+        hint: "Internal setting used by Alternityd100 to spawn fired ordnance tokens from a single base actor.",
+        scope: "world",
+        config: false,
+        default: "",
+        type: String
+    });
 /*
     game.settings.register("Alternityd100", "disableExperienceTracking", {
         name: "SFRPG.Settings.ExperienceTracking.Name",
@@ -157,7 +201,11 @@ game.settings.register("Alternityd100", "initCards", {
         type: Boolean
     });
 
-    for (let combatType of SFRPG.combatTypes) {
+    const combatTypes = Array.isArray(d100A?.combatTypes) && d100A.combatTypes.length
+        ? d100A.combatTypes
+        : ["original", "new", "vtt"];
+
+    for (const combatType of combatTypes) {
         const capitalizedCombatType = combatType[0].toUpperCase() + combatType.slice(1);
         game.settings.register("Alternityd100", `${combatType}ChatCards`, {
             name: `SFRPG.Settings.CombatCards.${capitalizedCombatType}Name`,

@@ -1,4 +1,4 @@
-<form class="{{cssClass}} flexcol" autocomplete="off">
+<div class="sheet-root {{cssClass}} flexcol">
     {{console "starshipAction"}}
     {{console this}}
     {{!-- Item Sheet Header --}}
@@ -18,58 +18,61 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h3 class="form-header">{{localize "Damage Types"}}</h3>
+            <h3 class="form-header">{{ localize "SFRPG.Details" }}</h3>
+            <div class="divTable starship-item-details-table">
+                <div class="divTableBody">
+                    <div class="divTableRow">
+                        <div class="divTableCell">
+                            <h4 class="form-header">{{localize "Damage Types"}}</h4>
 
-            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.BonusHullPointsTooltip" }}">
-                <label>{{ localize "Order" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.order" value="{{itemData.order}}" data-dtype="Number" />
+                            <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.BonusHullPointsTooltip" }}">
+                                <label>{{ localize "Order" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.order" value="{{itemData.order}}" data-dtype="Number" />
+                                </div>
+                            </div>
+
+                            <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.HullPointsTooltip" }}">
+                                <label>{{ localize "Stun Effect" }}</label>
+                                <div class="form-fields">
+                                    <textarea rows="4" cols="60" name="system.damagelevel.stun" placeholder="Enter text">{{itemData.damagelevel.stun}}</textarea>
+
+                                   <!-- <input type="text" name="system.damagelevel.stun" value="{{itemData.damagelevel.stun}}" data-dtype="text" /> -->
+                                </div>
+                            </div>
+                            <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.HullPointsTooltip" }}">
+                                <label>{{ localize "Wound Effect" }}</label>
+                                <div class="form-fields">
+                                    <textarea rows="4" cols="60" name="system.damagelevel.wound" placeholder="Enter text">{{itemData.damagelevel.wound}}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.HullPointsTooltip" }}">
+                                <label>{{ localize "Mortal Effect" }}</label>
+                                <div class="form-fields">
+                                    <textarea rows="4" cols="60" name="system.damagelevel.mortal" placeholder="Enter text">{{itemData.damagelevel.mortal}}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.HullPointsTooltip" }}">
+                                <label>{{ localize "Critical Effect" }}</label>
+                                <div class="form-fields">
+                                    <textarea rows="4" cols="60" name="system.damagelevel.critical" placeholder="Enter text">{{itemData.damagelevel.critical}}</textarea>
+                                </div>
+                            </div>
+
+                            {{!-- Source --}}
+                            <div class="form-group">
+                                <label>{{ localize "Book Source" }}</label>
+                                <div class="form-fields">
+                                    <select name="system.attributes.pubnsource">
+                                        {{ selectOptions d100Aconfig.pubnsource selected=itemData.attributes.pubnsource blank="" }}
+                                      </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.HullPointsTooltip" }}">
-                <label>{{ localize "Stun Effect" }}</label>
-                <div class="form-fields">
-                    <textarea rows="4" cols="60" name="system.damagelevel.stun"  placeholder="Enter text">{{itemData.damagelevel.stun}}</textarea>
-                    
-                   <!-- <input type="text" name="system.damagelevel.stun" value="{{itemData.damagelevel.stun}}" data-dtype="text" /> -->
-                </div>
-            </div>
-            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.HullPointsTooltip" }}">
-                <label>{{ localize "Wound Effect" }}</label>
-                <div class="form-fields">
-                    
-                    <textarea rows="4" cols="60" name="system.damagelevel.wound"  placeholder="Enter text">{{itemData.damagelevel.wound}}</textarea>
-                   
-                </div>
-            </div>
-            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.HullPointsTooltip" }}">
-                <label>{{ localize "Mortal Effect" }}</label>
-                <div class="form-fields">
-                    <textarea rows="4" cols="60" name="system.damagelevel.mortal"  placeholder="Enter text">{{itemData.damagelevel.mortal}}</textarea>
-                </div>
-            </div>
-            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.HullPointsTooltip" }}">
-                <label>{{ localize "Critical Effect" }}</label>
-                <div class="form-fields">
-                    <textarea rows="4" cols="60" name="system.damagelevel.critical"  placeholder="Enter text">{{itemData.damagelevel.critical}}</textarea>
-                </div>
-            </div>
-
-
-
-
-            {{!-- Source --}}
-            <div class="form-group">
-                <label>{{ localize "Book Source" }}</label>
-                <div class="form-fields">
-                    <select name="system.attributes.pubnsource">
-                        {{ selectOptions d100Aconfig.pubnsource selected=itemData.attributes.pubnsource blank="" }}
-                      </select>
-                </div>
-            </div>
-
-
-</div>
     </section>
-</form>
+</div>

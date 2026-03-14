@@ -1,5 +1,5 @@
 import { ItemBrowserSFRPG } from './item-browser.js';
-import { SFRPG } from "../config.js"
+import { d100A } from "../d100Aconfig.js";
 
 const starshipComponentTypes = {
     "starshipAblativeArmor": "SFRPG.Items.Categories.StarshipAblativeArmors",
@@ -123,14 +123,14 @@ class StarshipBrowserSFRPG extends ItemBrowserSFRPG {
         if ((this.filters?.starshipComponentTypes?.activeFilters || []).includes("starshipWeapon")) {
             filters.starshipWeaponTypes = {
                 label: game.i18n.format("SFRPG.Browsers.StarshipBrowser.WeaponType"),
-                content: SFRPG.starshipWeaponTypes,
+                content: d100A.starshipWeaponTypes,
                 filter: (element, filters) => { return this._filterWeaponType(element, filters); },
                 activeFilters: this.filters.starshipWeaponTypes?.activeFilters || []
             }
 
             filters.starshipWeaponClass = {
                 label: game.i18n.format("SFRPG.Browsers.StarshipBrowser.WeaponClass"),
-                content: SFRPG.starshipWeaponClass,
+                content: d100A.starshipWeaponClass,
                 filter: (element, filters) => { return this._filterWeaponClass(element, filters); },
                 activeFilters: this.filters.starshipWeaponClass?.activeFilters || []
             }
@@ -215,7 +215,8 @@ class StarshipBrowserSFRPG extends ItemBrowserSFRPG {
                 this.forceReload = true;
             }
         }, {
-            width: '300px'
+            width: '300px',
+            classes: ["Alternityd100"]
         });
         d.render(true);
     }

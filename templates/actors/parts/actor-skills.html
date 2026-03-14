@@ -1,17 +1,17 @@
 <div class="tab skills" data-group="primary" data-tab="skills">
-    <div class="divTable blueTable" style="width: 100%x;">
+    <div class="divTable blueTable skills-summary-table">
         <div class="divTableBody">
             <div class="divTableRow">
-                <div class="divTableCell" style="width: 30%; text-align: center;">
+                <div class="divTableCell skills-summary-cell">
 
                     Broad Skill Points: {{systemData.details.usedbroadskillpoints}} /
                     {{systemData.details.broadskillpoints}}
                 </div>
-                <div class="divTableCell" style="width: 30%;text-align: center;">
+                <div class="divTableCell skills-summary-cell">
                     Skill Points:{{systemData.details.usedskillpoints}} / {{systemData.details.skillpoints}}
                 </div>
 
-                <div class="divTableCell" style="width: 30%;text-align: center;">
+                <div class="divTableCell skills-summary-cell">
                     <label>{{localize "Show All"}}</label>
                     <input class="squaredcheck" type="checkbox" name="system.skillpoints.showAllSkills" {{checked
                         systemData.skillpoints.showAllSkills}} />
@@ -26,16 +26,16 @@
 
 
 
-    <div class="divTable blueTable" style="width: 100%x;">
+    <div class="divTable blueTable skills-table">
         <div class="divTableBody">
             <div class="divTableRow">
-                <div class="divTableCell" style="width: 30%;">
+                <div class="divTableCell skills-col">
 
                     <!-- FIRST Column -->
 
                     <!-- the skills should be in their own tables -->
 
-                    <div class="divTable blueTable" style="width: 100%;">
+                    <div class="divTable blueTable skills-inner-table">
                         <div class="divTableBody">
 
                             <div class="divTableRow">
@@ -44,11 +44,10 @@
 
 Source: How to Indent in HTML? (Simple Guide) - Dopinger (https://blog.dopinger.com/how-to-indent-in-html-simple-guide)-->
 
-                                <div class="divTableCell" style="text-align:left;font-size: 100%;height:80%; ">
-                                    <h4 style="text-align: center;"> STR-DEX-CON </h4>
+                                <div class="divTableCell skills-group">
+                           
 
-                                    <h4 class=" attribute-button rollable-attribute" data-attr="str" style="text-align: center;">
-                                        STRENGTH </h4>
+                                    <h4 class="attribute-button rollable-attribute skills-attribute-header" data-attr="str">STRENGTH</h4>
                                     {{#each systemData.skills as |skill s|}}
 
 
@@ -57,29 +56,25 @@ Source: How to Indent in HTML? (Simple Guide) - Dopinger (https://blog.dopinger.
                                     {{#if (eq skill.ability "str")}}
                                     <div class="skilldrag" data-skill="{{s}}" 
                                         data-actorid="{{../actor.id}}">
-                                        <input data-tooltip="{{localize (append "d100A.SkillDescriptions." s) }}" {{#if skill.type}} {{#if skill.untrained}} 
-                                            style="width:50% ;text-align:left;font-size: 70%;height:50%; text-indent: 10px "
-                                            {{else}}
-                                            style="width:50% ;text-align:left;font-size: 70%;height:50%;color: rgb(0, 95, 87);text-indent: 10px "
-                                            {{/if}} {{else}}
-                                            style="width:50% ;text-align:left;font-size: 75%;height:50%; font-family: serpentine-bold; "
-                                            {{/if}} {{#if skill.customname}} {{else}} disabled="true" {{/if}}
+                                        <input
+                                            data-tooltip="{{localize (append "d100A.SkillDescriptions." s) }}"
+                                            class="skills-skill-name {{#if skill.type}}{{#if skill.untrained}}skills-skill-name--untrained{{else}}skills-skill-name--trained{{/if}}{{else}}skills-skill-name--base{{/if}}"
+                                            {{#if skill.customname}}{{else}} disabled="true" {{/if}}
                                             name="system.skills.{{s}}.label" value="{{skill.label}}" type="Text" />
 
-                                        <input style="width:15px ;text-align:left;font-size: 70%;height:60%" {{#if
-                                            skill.type}} {{else}} disabled="true" {{/if}} type="number"
+                                        <input {{#if skill.type}} {{else}} disabled="true" {{/if}} type="number"
                                             class="skill-ranks" title="Skill Ranks" name="system.skills.{{s}}.ranks"
-                                            value="{{skill.ranks}}" />
+                                            value="{{skill.ranks}}" min="0" max="99" inputmode="numeric" />
 
 
-                                        <span style=" font-size: 70%;" class="attributes rollable-skill "
+                                        <span class="attributes rollable-skill skills-roll"
                                             data-skillId={{s}} data-step={{skill.step}}
                                             data-roll="1d20{{skill.stepdie}}"
                                             data-label="{{skill.label}}">[{{skill.base}},{{skill.good}},{{skill.amazing}}]
                                             {{skill.stepdie}}</span>
 
                                         {{#if ../systemData.skillpoints.showAllSkills }}
-                                        <input style="width:10px ;height:10px" class="squaredcheck" type="checkbox"
+                                        <input class="squaredcheck skills-show-checkbox" type="checkbox"
                                             name="system.skills.{{s}}.show" {{checked skill.show}} />
                                         {{/if}}
                                     </div>
@@ -90,8 +85,7 @@ Source: How to Indent in HTML? (Simple Guide) - Dopinger (https://blog.dopinger.
 
                                     {{/each}}
 
-                                    <h4 class=" attribute-button rollable-attribute" data-attr="dex" style="text-align: center;">
-                                        DEXTERITY</h4>
+                                    <h4 class="attribute-button rollable-attribute skills-attribute-header" data-attr="dex">DEXTERITY</h4>
 
                                     {{#each systemData.skills as |skill s|}}
 
@@ -102,28 +96,24 @@ Source: How to Indent in HTML? (Simple Guide) - Dopinger (https://blog.dopinger.
 
                                     <div class="skilldrag" data-skill="{{s}}" 
                                         data-actorid="{{../actor.id}}">
-                                        <input data-tooltip="{{localize (append "d100A.SkillDescriptions." s) }}" {{#if skill.type}} {{#if skill.untrained}}
-                                            style="width:50% ;text-align:left;font-size: 70%;height:50%; text-indent: 10px "
-                                            {{else}}
-                                            style="width:50% ;text-align:left;font-size: 70%;height:50%;color: rgb(0, 95, 87);text-indent: 10px "
-                                            {{/if}} {{else}}
-                                            style="width:50% ;text-align:left;font-size: 75%;height:50%; font-family: serpentine-bold; "
-                                            {{/if}} {{#if skill.customname}} {{else}} disabled="true" {{/if}}
+                                        <input
+                                            data-tooltip="{{localize (append "d100A.SkillDescriptions." s) }}"
+                                            class="skills-skill-name {{#if skill.type}}{{#if skill.untrained}}skills-skill-name--untrained{{else}}skills-skill-name--trained{{/if}}{{else}}skills-skill-name--base{{/if}}"
+                                            {{#if skill.customname}}{{else}} disabled="true" {{/if}}
                                             name="system.skills.{{s}}.label" value="{{skill.label}}" type="Text" />
 
-                                        <input  style="width:15px ;text-align:left;font-size: 70%;height:60%" {{#if
-                                            skill.type}} {{else}} disabled="true" {{/if}} type="number"
+                                        <input {{#if skill.type}} {{else}} disabled="true" {{/if}} type="number"
                                             class="skill-ranks" title="Skill Ranks" name="system.skills.{{s}}.ranks"
-                                            value="{{skill.ranks}}" />
+                                            value="{{skill.ranks}}" min="0" max="99" inputmode="numeric" />
 
 
-                                        <span style="font-size: 70%;" class=" rollable-skill" data-skillId={{s}}
+                                        <span class="rollable-skill skills-roll" data-skillId={{s}}
                                             data-step={{skill.step}} data-roll="1d20{{skill.stepdie}}"
                                             data-label="{{skill.label}}">[{{skill.base}},{{skill.good}},{{skill.amazing}}]
                                             {{skill.stepdie}}</span>
 
                                         {{#if ../systemData.skillpoints.showAllSkills }}
-                                        <input style="width:10px ;height:10px" class="squaredcheck" type="checkbox"
+                                        <input class="squaredcheck skills-show-checkbox" type="checkbox"
                                             name="system.skills.{{s}}.show" {{checked skill.show}} />
                                         {{/if}}
                                     </div>
@@ -134,8 +124,7 @@ Source: How to Indent in HTML? (Simple Guide) - Dopinger (https://blog.dopinger.
 
                                     {{/each}}
 
-                                    <h4 class=" attribute-button rollable-attribute" data-attr="con" style="text-align: center;">
-                                        CONSTITUTION </h4>
+                                    <h4 class="attribute-button rollable-attribute skills-attribute-header" data-attr="con">CONSTITUTION</h4>
                                     {{#each systemData.skills as |skill s|}}
 
 
@@ -143,28 +132,24 @@ Source: How to Indent in HTML? (Simple Guide) - Dopinger (https://blog.dopinger.
                                     {{#if (eq skill.ability "con")}}
                                     <div class="skilldrag" data-skill="{{s}}" 
                                         data-actorid="{{../actor.id}}">
-                                        <input data-tooltip="{{localize (append "d100A.SkillDescriptions." s) }}" {{#if skill.type}} {{#if skill.untrained}}
-                                            style="width:50% ;text-align:left;font-size: 70%;height:50%; text-indent: 10px "
-                                            {{else}}
-                                            style="width:50% ;text-align:left;font-size: 70%;height:50%;color: rgb(0, 95, 87);text-indent: 10px "
-                                            {{/if}} {{else}}
-                                            style="width:50% ;text-align:left;font-size: 75%;height:50%; font-family: serpentine-bold; "
-                                            {{/if}} {{#if skill.customname}} {{else}} disabled="true" {{/if}}
+                                        <input
+                                            data-tooltip="{{localize (append "d100A.SkillDescriptions." s) }}"
+                                            class="skills-skill-name {{#if skill.type}}{{#if skill.untrained}}skills-skill-name--untrained{{else}}skills-skill-name--trained{{/if}}{{else}}skills-skill-name--base{{/if}}"
+                                            {{#if skill.customname}}{{else}} disabled="true" {{/if}}
                                             name="system.skills.{{s}}.label" value="{{skill.label}}" type="Text" />
 
-                                        <input style="width:15px ;text-align:left;font-size: 70%;height:60%" {{#if
-                                            skill.type}} {{else}} disabled="true" {{/if}} type="number"
+                                        <input {{#if skill.type}} {{else}} disabled="true" {{/if}} type="number"
                                             class="skill-ranks" title="Skill Ranks" name="system.skills.{{s}}.ranks"
-                                            value="{{skill.ranks}}" />
+                                            value="{{skill.ranks}}" min="0" max="99" inputmode="numeric" />
 
 
-                                        <span style="font-size: 70%;" class=" rollable-skill" data-skillId={{s}}
+                                        <span class="rollable-skill skills-roll" data-skillId={{s}}
                                             data-step={{skill.step}} data-roll="1d20{{skill.stepdie}}"
                                             data-label="{{skill.label}}">[{{skill.base}},{{skill.good}},{{skill.amazing}}]
                                             {{skill.stepdie}}</span>
 
                                         {{#if ../systemData.skillpoints.showAllSkills }}
-                                        <input style="width:10px ;height:10px" class="squaredcheck" type="checkbox"
+                                        <input class="squaredcheck skills-show-checkbox" type="checkbox"
                                             name="system.skills.{{s}}.show" {{checked skill.show}} />
                                         {{/if}}
                                     </div>
@@ -183,43 +168,38 @@ Source: How to Indent in HTML? (Simple Guide) - Dopinger (https://blog.dopinger.
                 </div>
 
                 <!-- Second Column -->
-                <div class="divTableCell" style="width: 30%;">
-                    <div class="divTable blueTable" style="width: 100%;">
+                <div class="divTableCell skills-col">
+                    <div class="divTable blueTable skills-inner-table">
                         <div class="divTableBody">
 
                             <div class="divTableRow">
 
                                 <div class="divTableCell">
 
-                                    <h4 class=" attribute-button rollable-attribute" data-attr="int" style="text-align: center;">
-                                        INTELLIGENCE </h4>
+                                    <h4 class="attribute-button rollable-attribute skills-attribute-header" data-attr="int">INTELLIGENCE</h4>
                                     {{#each systemData.skills as |skill s|}}
                                     {{#if (or skill.show ../systemData.skillpoints.showAllSkills )}}
                                     {{#if (eq skill.ability "int")}}
                                     <div class="skilldrag" data-skill="{{s}}" 
                                         data-actorid="{{../actor.id}}">
-                                        <input data-tooltip="{{localize (append "d100A.SkillDescriptions." s) }}" {{#if skill.type}} {{#if skill.untrained}}
-                                            style="width:50% ;text-align:left;font-size: 70%;height:50%; text-indent: 10px "
-                                            {{else}}
-                                            style="width:50% ;text-align:left;font-size: 70%;height:50%;color: rgb(0, 95, 87);text-indent: 10px "
-                                            {{/if}} {{else}}
-                                            style="width:50% ;text-align:left;font-size: 75%;height:50%; font-family: serpentine-bold; "
-                                            {{/if}} {{#if skill.customname}} {{else}} disabled="true" {{/if}}
+                                        <input
+                                            data-tooltip="{{localize (append "d100A.SkillDescriptions." s) }}"
+                                            class="skills-skill-name {{#if skill.type}}{{#if skill.untrained}}skills-skill-name--untrained{{else}}skills-skill-name--trained{{/if}}{{else}}skills-skill-name--base{{/if}}"
+                                            {{#if skill.customname}}{{else}} disabled="true" {{/if}}
                                             name="system.skills.{{s}}.label" value="{{skill.label}}" type="Text" />
 
-                                        <input style="width:15px ;text-align:left;font-size: 70%;height:60%" {{#if
-                                            skill.type}} {{else}} disabled="true" {{/if}} type="number"
+                                        <input {{#if skill.type}} {{else}} disabled="true" {{/if}} type="number"
                                             class="skill-ranks" title="Skill Ranks" name="system.skills.{{s}}.ranks"
-                                            value="{{skill.ranks}}" />
+                                            value="{{skill.ranks}}" min="0" max="99" inputmode="numeric" />
 
 
-                                        <span style="font-size: 70%;" class=" rollable-skill" data-skillId={{s}}
+                                        <span class="rollable-skill skills-roll" data-skillId={{s}}
                                             data-step={{skill.step}} data-roll="1d20{{skill.stepdie}}"
                                             data-label="{{skill.label}}">[{{skill.base}},{{skill.good}},{{skill.amazing}}]
                                             {{skill.stepdie}}</span>
 
                                         {{#if ../systemData.skillpoints.showAllSkills }}
-                                        <input style="width:10px ;height:10px" class="squaredcheck" type="checkbox"
+                                        <input class="squaredcheck skills-show-checkbox" type="checkbox"
                                             name="system.skills.{{s}}.show" {{checked skill.show}} />
                                         {{/if}}
                                     </div>
@@ -237,48 +217,43 @@ Source: How to Indent in HTML? (Simple Guide) - Dopinger (https://blog.dopinger.
                     </div>
                 </div>
 
-                <div class="divTableCell" style="width: 30%;">
+                <div class="divTableCell skills-col">
 
                     <!-- FIRST Column -->
 
-                    <div class="divTable blueTable" style="width: 100%;">
+                    <div class="divTable blueTable skills-inner-table">
                         <div class="divTableBody">
 
                             <div class="divTableRow">
 
 
 
-                                <div class="divTableCell" style="text-align:left;font-size: 100%;height:70%">
-                                    <h4 style="text-align: center;"> WIL-PER </h4>
-                                    <h4 class=" attribute-button rollable-attribute" data-attr="wil" style="text-align: center;"> WILL
-                                    </h4>
+                                <div class="divTableCell skills-group">
+
+                                    <h4 class="attribute-button rollable-attribute skills-attribute-header" data-attr="wil">WILL</h4>
                                     {{#each systemData.skills as |skill s|}}
                                     {{#if (or skill.show ../systemData.skillpoints.showAllSkills )}}
                                     {{#if (eq skill.ability "wil")}}
                                     <div class="skilldrag" data-skill="{{s}}" 
                                         data-actorid="{{../actor.id}}">
-                                        <input data-tooltip="{{localize (append "d100A.SkillDescriptions." s) }}" {{#if skill.type}} {{#if skill.untrained}}
-                                            style="width:50% ;text-align:left;font-size: 70%;height:50%; text-indent: 10px "
-                                            {{else}}
-                                            style="width:50% ;text-align:left;font-size: 70%;height:50%;color: rgb(0, 95, 87);text-indent: 10px "
-                                            {{/if}} {{else}}
-                                            style="width:50% ;text-align:left;font-size: 75%;height:50%; font-family: serpentine-bold; "
-                                            {{/if}} {{#if skill.customname}} {{else}} disabled="true" {{/if}}
+                                        <input
+                                            data-tooltip="{{localize (append "d100A.SkillDescriptions." s) }}"
+                                            class="skills-skill-name {{#if skill.type}}{{#if skill.untrained}}skills-skill-name--untrained{{else}}skills-skill-name--trained{{/if}}{{else}}skills-skill-name--base{{/if}}"
+                                            {{#if skill.customname}}{{else}} disabled="true" {{/if}}
                                             name="system.skills.{{s}}.label" value="{{skill.label}}" type="Text" />
 
-                                        <input style="width:15px ;text-align:left;font-size: 70%;height:60%" {{#if
-                                            skill.type}} {{else}} disabled="true" {{/if}} type="number"
+                                        <input {{#if skill.type}} {{else}} disabled="true" {{/if}} type="number"
                                             class="skill-ranks" title="Skill Ranks" name="system.skills.{{s}}.ranks"
-                                            value="{{skill.ranks}}" />
+                                            value="{{skill.ranks}}" min="0" max="99" inputmode="numeric" />
 
 
-                                        <span style="font-size: 70%;" class=" rollable-skill" data-skillId={{s}}
+                                        <span class="rollable-skill skills-roll" data-skillId={{s}}
                                             data-step={{skill.step}} data-roll="1d20{{skill.stepdie}}"
                                             data-label="{{skill.label}}">[{{skill.base}},{{skill.good}},{{skill.amazing}}]
                                             {{skill.stepdie}}</span>
 
                                         {{#if ../systemData.skillpoints.showAllSkills }}
-                                        <input style="width:10px ;height:10px" class="squaredcheck" type="checkbox"
+                                        <input class="squaredcheck skills-show-checkbox" type="checkbox"
                                             name="system.skills.{{s}}.show" {{checked skill.show}} />
                                         {{/if}}
                                     </div>
@@ -287,36 +262,31 @@ Source: How to Indent in HTML? (Simple Guide) - Dopinger (https://blog.dopinger.
 
                                     {{/each}}
 
-                                    <h4 class=" attribute-button rollable-attribute" data-attr="per" style="text-align: center;">
-                                        PERSONALITY</h4>
+                                    <h4 class="attribute-button rollable-attribute skills-attribute-header" data-attr="per">PERSONALITY</h4>
 
                                     {{#each systemData.skills as |skill s|}}
                                     {{#if (or skill.show ../systemData.skillpoints.showAllSkills )}}
                                     {{#if (eq skill.ability "per")}}
                                     <div class="skilldrag" data-skill="{{s}}" 
                                         data-actorid="{{../actor.id}}">
-                                        <input data-tooltip="{{localize (append "d100A.SkillDescriptions." s) }}" {{#if skill.type}} {{#if skill.untrained}}
-                                            style="width:50% ;text-align:left;font-size: 70%;height:50%; text-indent: 10px "
-                                            {{else}}
-                                            style="width:50% ;text-align:left;font-size: 70%;height:50%;color: rgb(0, 95, 87);text-indent: 10px "
-                                            {{/if}} {{else}}
-                                            style="width:50% ;text-align:left;font-size: 75%;height:50%; font-family: serpentine-bold; "
-                                            {{/if}} {{#if skill.customname}} {{else}} disabled="true" {{/if}}
+                                        <input
+                                            data-tooltip="{{localize (append "d100A.SkillDescriptions." s) }}"
+                                            class="skills-skill-name {{#if skill.type}}{{#if skill.untrained}}skills-skill-name--untrained{{else}}skills-skill-name--trained{{/if}}{{else}}skills-skill-name--base{{/if}}"
+                                            {{#if skill.customname}}{{else}} disabled="true" {{/if}}
                                             name="system.skills.{{s}}.label" value="{{skill.label}}" type="Text" />
 
-                                        <input style="width:15px ;text-align:left;font-size: 70%;height:60%" {{#if
-                                            skill.type}} {{else}} disabled="true" {{/if}} type="number"
+                                        <input {{#if skill.type}} {{else}} disabled="true" {{/if}} type="number"
                                             class="skill-ranks" title="Skill Ranks" name="system.skills.{{s}}.ranks"
-                                            value="{{skill.ranks}}" />
+                                            value="{{skill.ranks}}" min="0" max="99" inputmode="numeric" />
 
 
-                                        <span style="font-size: 70%;" class=" rollable-skill" data-skillId={{s}}
+                                        <span class="rollable-skill skills-roll" data-skillId={{s}}
                                             data-step={{skill.step}} data-roll="1d20{{skill.stepdie}}"
                                             data-label="{{skill.label}}">[{{skill.base}},{{skill.good}},{{skill.amazing}}]
                                             {{skill.stepdie}}</span>
 
                                         {{#if ../systemData.skillpoints.showAllSkills }}
-                                        <input style="width:10px ;height:10px" class="squaredcheck" type="checkbox"
+                                        <input class="squaredcheck skills-show-checkbox" type="checkbox"
                                             name="system.skills.{{s}}.show" {{checked skill.show}} />
                                         {{/if}}
                                     </div>

@@ -1,5 +1,5 @@
 import { ItemBrowserSFRPG } from './item-browser.js';
-import { SFRPG } from "../config.js"
+import { d100A } from "../d100Aconfig.js";
 
 const equipmentTypes = {
     "ammunition"   : "SFRPG.Items.Categories.Ammunition",
@@ -80,14 +80,14 @@ class EquipmentBrowserSFRPG extends ItemBrowserSFRPG {
         if ((this.filters?.equipmentTypes?.activeFilters || []).includes("weapon")) {
             filters.weaponTypes = {
                 label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.WeaponType"),
-                content: CONFIG.SFRPG.weaponTypes,
+                content: CONFIG.d100A?.weaponTypes || d100A.weaponTypes,
                 filter: (element, filters) => { return this._filterWeaponType(element, filters); },
                 activeFilters: this.filters.weaponTypes?.activeFilters || []
             }
 
             filters.weaponCategories = {
                 label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.WeaponCategories"),
-                content: CONFIG.SFRPG.weaponCategories,
+                content: CONFIG.d100A?.weaponCategories || d100A.weaponCategories,
                 filter: (element, filters) => { return this._filterWeaponCategory(element, filters); },
                 activeFilters: this.filters.weaponCategories?.activeFilters || []
             }
@@ -96,7 +96,7 @@ class EquipmentBrowserSFRPG extends ItemBrowserSFRPG {
         if ((this.filters?.equipmentTypes?.activeFilters || []).includes("equipment")) {
             filters.armorTypes = {
                 label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.EquipmentType"),
-                content: CONFIG.SFRPG.armorTypes,
+                content: CONFIG.d100A?.armorTypes || d100A.armorTypes,
                 filter: (element, filters) => { return this._filterArmorType(element, filters); },
                 activeFilters: this.filters.armorTypes?.activeFilters || []
             }
@@ -183,7 +183,8 @@ class EquipmentBrowserSFRPG extends ItemBrowserSFRPG {
                 this.forceReload = true;
             }
         }, {
-            width: '300px'
+            width: '300px',
+            classes: ["Alternityd100"]
         });
         d.render(true);
     }

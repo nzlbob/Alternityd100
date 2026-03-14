@@ -29,6 +29,7 @@ d100AStatusEffects.push(
         icon: "systems/Alternityd100/icons/conditions/dead3.png",
         img: "systems/Alternityd100/icons/conditions/dead3.png",
         modifiers: [],
+        group: "mortality",
         hud: { actorTypes: ["character", "npc"] },
         system: {
             bonus: {
@@ -49,6 +50,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/dying3.png",
         icon: "systems/Alternityd100/icons/conditions/dying3.png",
         modifiers: [],
+           group: "mortality",
         hud: { actorTypes: ["character", "npc"] },
         system: {
             bonus: {
@@ -69,6 +71,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/ko.png",
         icon: "systems/Alternityd100/icons/conditions/ko.png",
         modifiers: [],
+        group: "consciousness",
         hud: { actorTypes: ["character", "npc"] },
         system: {
             bonus: {
@@ -89,6 +92,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/suppressed.png",
         icon: "systems/Alternityd100/icons/conditions/suppressed.png",
         modifiers: [],
+        group: "suppression",
         hud: { actorTypes: ["character", "npc"] },
         system: {
             bonus: {
@@ -108,6 +112,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/run2.png",
         icon: "systems/Alternityd100/icons/conditions/run2.png",
         modifiers: [],
+        group: "movement",
         hud: { actorTypes: ["character", "npc"] },
         system: {
             bonus: {
@@ -127,6 +132,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/sprint.png",
         icon: "systems/Alternityd100/icons/conditions/sprint.png",
         modifiers: [],
+        group: "movement",
         hud: { actorTypes: ["character", "npc"] },
         system: {
             bonus: {
@@ -146,6 +152,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/charge.png",
         icon: "systems/Alternityd100/icons/conditions/charge.png",
         modifiers: [],
+        group: "attack",
         hud: { actorTypes: ["character", "npc"] },
         system: {
             bonus: {
@@ -155,7 +162,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>Sprinting</strong><br><br>"
+            tooltip: "<strong>Charging</strong><br><br>"
         }
     },
     {
@@ -165,6 +172,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/glide.png",
         icon: "systems/Alternityd100/icons/conditions/glide.png",
         modifiers: [],
+        group: "movement",
         hud: { actorTypes: ["character", "npc"] },
         system: {
             bonus: {
@@ -174,7 +182,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>Sprinting</strong><br><br>"
+            tooltip: "<strong>Gliding</strong><br><br>"
         }
     },
     {
@@ -184,6 +192,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/flying2.png",
         icon: "systems/Alternityd100/icons/conditions/flying2.png",
         modifiers: [],
+        group: "movement",
         hud: { actorTypes: ["character", "npc"] },
         system: {
             bonus: {
@@ -193,7 +202,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>Sprinting</strong><br><br>"
+            tooltip: "<strong>Flying</strong><br><br>"
         }
     },
     {
@@ -203,6 +212,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/eswim2.png",
         icon: "systems/Alternityd100/icons/conditions/eswim2.png",
         modifiers: [],
+        group: "movement",
         hud: { actorTypes: ["character", "npc"] },
         system: {
             bonus: {
@@ -212,7 +222,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>Sprinting</strong><br><br>"
+            tooltip: "<strong>Easy Swim</strong><br><br>"
         }
     },
     {
@@ -222,6 +232,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/swim3.png",
         icon: "systems/Alternityd100/icons/conditions/swim3.png",
         modifiers: [],
+        group: "movement",
         hud: { actorTypes: ["character", "npc"] },
         system: {
             bonus: {
@@ -231,7 +242,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>Sprinting</strong><br><br>"
+            tooltip: "<strong>Swimming</strong><br><br>"
         }
     },
     {
@@ -241,6 +252,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/aiming.png",
         icon: "systems/Alternityd100/icons/conditions/aiming.png",
         modifiers: [],
+        group: "attack",
         hud: { actorTypes: ["character", "npc"] },
         system: {
             bonus: {
@@ -260,6 +272,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/falling.png",
         icon: "systems/Alternityd100/icons/conditions/falling.png",
         modifiers: [],
+        group: "cover",
         hud: { actorTypes: ["character", "npc"] },
         system: {
             bonus: {
@@ -269,7 +282,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>prone</strong><br><br>"
+            tooltip: "<strong>Prone</strong><br><br>"
         }
     }, {
     id: "coverlight",
@@ -278,6 +291,7 @@ d100AStatusEffects.push(
     img: "systems/Alternityd100/icons/conditions/coverlight.png",
     icon: "systems/Alternityd100/icons/conditions/coverlight.png",
     modifiers: [],
+    group: "cover",
     hud: { actorTypes: ["character", "npc"] },
     system: {
         bonus: {
@@ -287,7 +301,7 @@ d100AStatusEffects.push(
             str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
             resistanceBase: {},
         },
-        tooltip: "<strong>Sprinting</strong><br><br>"
+        tooltip: "<strong>Light Cover</strong><br><br>"
     }
 }, {
     id: "covermedium",
@@ -296,6 +310,7 @@ d100AStatusEffects.push(
     img: "systems/Alternityd100/icons/conditions/covermedium.png",
     icon: "systems/Alternityd100/icons/conditions/covermedium.png",
     modifiers: [],
+    group: "cover",
     hud: { actorTypes: ["character", "npc"] },
     system: {
         bonus: {
@@ -305,7 +320,7 @@ d100AStatusEffects.push(
             str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
             resistanceBase: {},
         },
-        tooltip: "<strong>Sprinting (+3 to actions)</strong><br><br>"
+        tooltip: "<strong>Medium Cover</strong><br><br>"
     }
 }, {
     id: "coverheavy",
@@ -314,6 +329,7 @@ d100AStatusEffects.push(
     img: "systems/Alternityd100/icons/conditions/coverheavy.png",
     icon: "systems/Alternityd100/icons/conditions/coverheavy.png",
     modifiers: [],
+    group: "cover",
     hud: { actorTypes: ["character", "npc"] },
     system: {
         bonus: {
@@ -323,7 +339,7 @@ d100AStatusEffects.push(
             str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
             resistanceBase: {},
         },
-        tooltip: "<strong>Sprinting</strong><br><br>"
+        tooltip: "<strong>Heavy Cover</strong><br><br>"
     }
 },
     {
@@ -333,6 +349,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/dodge_04.webp",
         icon: "systems/Alternityd100/icons/conditions/dodge_04.webp",
         modifiers: [],
+        group: "dodging",
         hud: { actorTypes: ["character", "npc"] },
         system: {
             bonus: {
@@ -342,7 +359,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>Sprinting</strong><br><br>"
+            tooltip: "<strong>Dodge Critical</strong><br><br>"
         }
     },
     {
@@ -352,6 +369,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/dodge_02.webp",
         icon: "systems/Alternityd100/icons/conditions/dodge_02.webp",
         modifiers: [],
+            group: "dodging",
         hud: { actorTypes: ["character", "npc"] },
         system: {
             bonus: {
@@ -361,7 +379,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>Sprinting</strong><br><br>"
+            tooltip: "<strong>Dodge Ordinary</strong><br><br>"
         }
     },
     {
@@ -371,6 +389,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/dodge_01.webp",
         icon: "systems/Alternityd100/icons/conditions/dodge_01.webp",
         modifiers: [],
+        group: "dodging",
         hud: { actorTypes: ["character", "npc"] },
         system: {
             actortype: ["actor", "npc"],
@@ -379,7 +398,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>Sprinting</strong><br><br>"
+            tooltip: "<strong>Dodge Good</strong><br><br>"
         }
     },
     {
@@ -389,6 +408,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/dodge_03.webp",
         icon: "systems/Alternityd100/icons/conditions/dodge_03.webp",
         modifiers: [],
+        group: "dodging",
         hud: { actorTypes: ["character", "npc"] },
         system: {
             bonus: { dodge: 3, cover: 0, actions: 0, ranged: 0 },
@@ -396,7 +416,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>Sprinting</strong><br><br>"
+            tooltip: "<strong>Dodge Amazing</strong><br><br>"
         }
     },
     {
@@ -406,6 +426,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/dodge_02.webp",
         icon: "systems/Alternityd100/icons/conditions/dodge_02.webp",
         modifiers: [],
+        group: "jinking",
         hud: { actorTypes: ["starship", "vehicle"] },
         system: {
        
@@ -414,7 +435,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>Sprinting</strong><br><br>"
+            tooltip: "<strong>Jinking Ordinary</strong><br><br>"
         }
     }
     ,
@@ -425,6 +446,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/dodge_01.webp",
         icon: "systems/Alternityd100/icons/conditions/dodge_01.webp",
         modifiers: [],
+        group: "jinking",
         hud: { actorTypes: ["starship", "vehicle"] },
         system: {
        
@@ -433,7 +455,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>Sprinting</strong><br><br>"
+            tooltip: "<strong>Jinking Good</strong><br><br>"
         }
     },
     {
@@ -443,6 +465,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/dodge_03.webp",
         icon: "systems/Alternityd100/icons/conditions/dodge_03.webp",
         modifiers: [],
+        group: "jinking",
         hud: { actorTypes: ["starship", "vehicle"] },
         system: {
        
@@ -451,7 +474,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>Sprinting</strong><br><br>"
+            tooltip: "<strong>Jinking Amazing</strong><br><br>"
         }
     },
     {
@@ -461,6 +484,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/dodge_04.webp",
         icon: "systems/Alternityd100/icons/conditions/dodge_04.webp",
         modifiers: [],
+        group: "jinking",
         hud: { actorTypes:  ["starship", "vehicle"]  },
         system: {
             bonus: {
@@ -470,7 +494,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>Sprinting</strong><br><br>"
+            tooltip: "<strong>Jinking Critical</strong><br><br>"
         }
     },
     {
@@ -480,6 +504,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/jam_01.webp",
         icon: "systems/Alternityd100/icons/conditions/jam_01.webp",
         modifiers: [],
+        group: "sensorjamming",
         hud: { actorTypes: ["starship", "vehicle"] },
         system: {
        
@@ -489,7 +514,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>Sprinting</strong><br><br>"
+            tooltip: "<strong>Sensor Jamming Ordinary</strong><br><br>"
         }
     }
     ,
@@ -500,6 +525,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/jam_02.webp",
         icon: "systems/Alternityd100/icons/conditions/jam_02.webp",
         modifiers: [],
+        group: "sensorjamming",
         hud: { actorTypes: ["starship", "vehicle"] },
         system: {
        
@@ -508,7 +534,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>Sprinting</strong><br><br>"
+            tooltip: "<strong>Sensor Jamming Good</strong><br><br>"
         }
     },
     {
@@ -518,6 +544,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/jam_03.webp",
         icon: "systems/Alternityd100/icons/conditions/jam_03.webp",
         modifiers: [],
+        group: "sensorjamming",
         hud: { actorTypes: ["starship", "vehicle"] },
         system: {
        
@@ -526,7 +553,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>Sprinting</strong><br><br>"
+            tooltip: "<strong>Sensor Jamming Amazing</strong><br><br>"
         }
     },
     {
@@ -536,6 +563,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/jam_bonus.webp",
         icon: "systems/Alternityd100/icons/conditions/jam_bonus.webp",
         modifiers: [],
+        group: "sensorjamming",
         hud: { actorTypes:  ["starship", "vehicle"]  },
         system: {
             bonus: {
@@ -544,7 +572,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>Sprinting</strong><br><br>"
+            tooltip: "<strong>Sensor Jamming Critical</strong><br><br>"
         }
     },
     {
@@ -554,6 +582,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/weaponjam_01.webp",
         icon: "systems/Alternityd100/icons/conditions/weaponjam_01.webp",
         modifiers: [],
+        group: "weaponjamming",
         hud: { actorTypes: ["ordnance"] },
         system: {
        
@@ -562,7 +591,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>Sprinting</strong><br><br>"
+            tooltip: "<strong>Weapon Jamming Ordinary</strong><br><br>"
         }
     }
     ,
@@ -573,6 +602,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/weaponjam_02.webp",
         icon: "systems/Alternityd100/icons/conditions/weaponjam_02.webp",
         modifiers: [],
+        group: "weaponjamming",
         hud: { actorTypes: ["ordnance"] },
         system: {
        
@@ -581,7 +611,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>Sprinting</strong><br><br>"
+            tooltip: "<strong>Weapon Jamming Good</strong><br><br>"
         }
     },
     {
@@ -591,6 +621,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/weaponjam_03.webp",
         icon: "systems/Alternityd100/icons/conditions/weaponjam_03.webp",
         modifiers: [],
+        group: "weaponjamming",
         hud: { actorTypes: ["ordnance"] },
         system: {
        
@@ -599,7 +630,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>Sprinting</strong><br><br>"
+            tooltip: "<strong>Weapon Jamming Amazing</strong><br><br>"
         }
     },
     {
@@ -609,6 +640,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/weaponjam_fail.webp",
         icon: "systems/Alternityd100/icons/conditions/weaponjam_fail.webp",
         modifiers: [],
+        group: "weaponjamming",
         hud: { actorTypes:  ["ordnance"]  },
         system: {
             bonus: {
@@ -618,7 +650,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>Sprinting</strong><br><br>"
+            tooltip: "<strong>Weapon Jamming Critical</strong><br><br>"
         }
     },
     {
@@ -628,6 +660,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/jam_bonus.webp",
         icon: "systems/Alternityd100/icons/conditions/jam_bonus.webp",
         modifiers: [],
+        group: "eccmjamming",
         hud: { actorTypes: ["starship", "vehicle"] },
         system: {
        
@@ -636,7 +669,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>Sprinting</strong><br><br>"
+            tooltip: "<strong>ECCM Jamming Ordinary</strong><br><br>"
         }
     }
     ,
@@ -647,6 +680,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/dodge_01.webp",
         icon: "systems/Alternityd100/icons/conditions/dodge_01.webp",
         modifiers: [],
+        group: "eccmjamming",
         hud: { actorTypes: ["starship", "vehicle"] },
         system: {
        
@@ -655,7 +689,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>Sprinting</strong><br><br>"
+            tooltip: "<strong>ECCM Jamming Good</strong><br><br>"
         }
     },
     {
@@ -665,6 +699,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/dodge_03.webp",
         icon: "systems/Alternityd100/icons/conditions/dodge_03.webp",
         modifiers: [],
+        group: "eccmjamming",
         hud: { actorTypes: ["starship", "vehicle"] },
         system: {
        
@@ -673,7 +708,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>Sprinting</strong><br><br>"
+            tooltip: "<strong>ECCM Jamming Amazing</strong><br><br>"
         }
     },
     {
@@ -683,6 +718,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/dodge_04.webp",
         icon: "systems/Alternityd100/icons/conditions/dodge_04.webp",
         modifiers: [],
+        group: "eccmjamming",
         hud: { actorTypes:  ["starship", "vehicle"]  },
         system: {
             bonus: {
@@ -692,7 +728,7 @@ d100AStatusEffects.push(
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
             },
-            tooltip: "<strong>Sprinting</strong><br><br>"
+            tooltip: "<strong>ECCM Jamming Critical</strong><br><br>"
         }
     }
 

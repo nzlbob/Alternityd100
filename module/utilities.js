@@ -17,6 +17,36 @@ export function raytodeg(ray) {
     return Math.floor(Math.normalizeDegrees(Math.toDegrees(ray.angle)+90) )
 }
 
+/**
+ * Measure distance between two points using the active Scene grid configuration.
+ *
+ * In Foundry VTT v13, use BaseGrid#measurePath. This returns distance in Scene distance units.
+ *
+ * @param {{x:number,y:number}|object} a   A Point-like object
+ * @param {{x:number,y:number}|object} b   A Point-like object
+ * @param {{euclidean?: boolean}} [options]
+ * @returns {number} Distance in Scene distance units
+ */
+export function measureDistance(a, b, { euclidean = false } = {}) {
+    const grid = canvas?.grid;
+    if (!grid) return 0;
+
+    // Foundry v13
+    if (typeof grid.measurePath === "function") {
+        const result = grid.measurePath([a, b]);
+        const distance = euclidean ? result.euclidean : result.distance;
+        return Number.isFinite(distance) ? distance : 0;
+    }
+
+    // Fallback for older APIs
+    if (typeof grid.measureDistance === "function") {
+        const distance = grid.measureDistance(a, b);
+        return Number.isFinite(distance) ? distance : 0;
+    }
+
+    return 0;
+}
+
 export function roundToRoundB(round){
     const naction = Math.trunc(round / 10000)
     const nphase = Math.trunc((round - (naction * 10000)) / 1000)
@@ -36,24 +66,34 @@ export function roundToRoundB(round){
  */
 
 export function inArc(angle,item, token){
-    console.log(Math.normalizeDegrees(365),angle,item,token)
-    const arcAngle = Math.normalizeDegrees(angle-token.rotation)
-     console.log(arcAngle,token.rotation)
+    const normalizeDegrees = (deg) => {
+        const d = Number.isFinite(deg) ? deg : 0;
+        if (typeof Math.normalizeDegrees === "function") return Math.normalizeDegrees(d);
+        if (foundry?.utils?.normalizeDegrees) return foundry.utils.normalizeDegrees(d);
+        return ((d % 360) + 360) % 360;
+    };
+
+    const heading = Number(token?.document?.d100ARotation ?? token?.d100ARotation ?? token?.rotation ?? 0);
+    // Existing arc thresholds assume: 180° = front, 0° = aft.
+    // `angle` is a compass bearing (0° = north), so apply a 180° offset.
+    const arcAngle = normalizeDegrees(angle - heading + 180);
     if (item.system.mount.arc.front) {
        // console.log(arcAngle)
-        if ((arcAngle>300) || (arcAngle<60))return true
+          if ((arcAngle>120) && (arcAngle<240))return true
+
     }
     if (item.system.mount.arc.aft) {
        // console.log(arcAngle)
-        if ((arcAngle>120) && (arcAngle<240))return true
+              if ((arcAngle>300) || (arcAngle<60))return true
     }
     if (item.system.mount.arc.port) {
        // console.log(arcAngle)
-        if ((arcAngle>239) && (arcAngle<301))return true
+        if ((arcAngle>59) && (arcAngle<121))return true
     }
     if (item.system.mount.arc.stbd) {
        // console.log(arcAngle)
-        if ((arcAngle>59) && (arcAngle<121))return true
+         if ((arcAngle>239) && (arcAngle<301))return true
+      
     }
 
 

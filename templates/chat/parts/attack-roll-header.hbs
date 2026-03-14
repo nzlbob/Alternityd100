@@ -1,18 +1,10 @@
-<header class="card-header flexrow"data-actor-id="{{actor._id}}" data-item-id="{{item._id}}" {{#if tokenUuid}}data-token-uuid="{{tokenUuid}}"{{/if}}>
-  {{console "Attack Roll Header.hbs"}}
-  {{console "ïtem"}}{{console item}}
-  {{console "targets"}}{{console targetData}}
-  {{console "Name"}}  {{console targetData.0.Name}}
-  {{console "targetData"}}   {{console targetData}}
-  {{console "stepbonus"}}  {{console stepbonus}}
-  {{console "degree"}}  {{console degree}}
-  {{console "Skill"}}  {{console rollSkill}}
-  <img src="{{item.img}}" title="{{item.name}}" width="36" height="36"/>
-  {{#if item.name}}<h4 class="item-name">{{item.name}}
-      <br> {{flavor}} </br>
-       {{stepflavor}}
-  </h4>{{/if}}
-
+<header class="card-header flexrow" data-actor-id="{{actor._id}}" data-item-id="{{item._id}}" {{#if tokenUuid}}data-token-uuid="{{tokenUuid}}"{{/if}}>
+  <img class="item-image" src="{{item.img}}" data-tooltip="{{item.name}}" />
+  <div class="item-info">
+    {{#if item.name}}<div class="item-name">{{item.name}}</div>{{/if}}
+    {{#if flavor}}<div class="item-flavor">{{flavor}}</div>{{/if}}
+    {{#if stepflavor}}<div class="item-stepflavor">{{stepflavor}}</div>{{/if}}
+  </div>
 </header>
 
 <div class="card-content">

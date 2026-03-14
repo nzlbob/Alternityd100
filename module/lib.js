@@ -613,7 +613,7 @@ export const createConsumableSpellDialog = function (itemData, { allowSpell = tr
       default: "potion",
     };
     if (!allowSpell) delete dialogData.buttons.spell;
-    new Dialog(dialogData, { classes: ["dialog", "pf1", "create-pharmaceutical"] }).render(true);
+    new Dialog(dialogData, { classes: ["dialog", "pf1", "create-pharmaceutical", "Alternityd100"] }).render(true);
   });
 };
 
@@ -922,7 +922,7 @@ export function createInlineFormula(_match, _command, formula, closing, label, .
  * @param root0.entities
  */
 export function enrichHTMLUnrolled(content, { rollData, secrets, rolls, documents } = {}) {
-  let pcontent = TextEditor.enrichHTML(content, { secrets, rolls, documents, rollData });
+  let pcontent = foundry.applications.ux.TextEditor.implementation.enrichHTML(content, { secrets, rolls, documents, rollData });
 
   if (!rolls) {
     const html = document.createElement("div");

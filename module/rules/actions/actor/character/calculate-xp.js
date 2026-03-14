@@ -1,6 +1,6 @@
 export default function (engine) {
     const getLevelExp = (level) => {
-        const levels = CONFIG.SFRPG.CHARACTER_EXP_LEVELS;
+        const levels = CONFIG.d100A.CHARACTER_EXP_LEVELS;
         return levels[Math.min(level, levels.length - 1)];
     };
 

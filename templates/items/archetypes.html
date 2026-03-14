@@ -1,30 +1,7 @@
-<form class="{{cssClass}} flexcol" autocomplete="off">
+<div class="sheet-root {{cssClass}} flexcol">
     <h2 style="background-color: crimson; font-size: 30px;"> NOT IMPLEMENTED DO NOT USE </h2>
     {{!-- Item Sheet Header --}}
-    <header class="sheet-header flexrow">
-        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img"/>
-
-        <div class="header-details flexrow">
-            <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.ItemName" }}"/>
-            </h1>
-
-            <div class="item-subtitle">
-
-                <h4 class="item-type">{{itemType}}</h4>
-                <span class="item-status">{{itemStatus}}</span>
-            </div>
-
-            <ul class="summary">
-                <li>
-                    <input type="text" name="system.requirements" value="{{itemData.requirements}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Requirements" }}"/>
-                </li>
-                <li>
-                    <input type="text" name="system.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
-                </li>
-            </ul>
-        </div>
-    </header>
+    {{> "systems/Alternityd100/templates/items/parts/item-header.html"}}
 
     {{!-- Item Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
@@ -40,14 +17,20 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-
             <h3 class="form-header">{{localize "SFRPG.ArchetypesAlternateClassFeatures"}}</h3>
-            
-            {{!-- Granted alternate abilities --}}
-            <p class="notification warning">{{localize "SFRPG.ComingSoon"}}</p>
+            <div class="divTable blueTable2">
+                <div class="divTableBody">
+                    <div class="divTableRow">
+                        <div class="divTableCell">
+                            {{!-- Granted alternate abilities --}}
+                            <p class="notification warning">{{localize "SFRPG.ComingSoon"}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         {{!-- Modifiers Tab --}}
         {{> "systems/Alternityd100/templates/items/parts/item-modifiers.html"}}
     </section>
-</form>
+</div>

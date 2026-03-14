@@ -4,7 +4,7 @@
  * @param {Scene} object                    The Scene Document which is being configured
  * @param {DocumentSheetOptions} [options]  Application configuration options.
  */
-export class d100ASceneConfig extends SceneConfig {
+export class d100ASceneConfig extends foundry.applications.sheets.SceneConfig {
 
     /** @inheritdoc */
     static get defaultOptions() {
@@ -29,9 +29,16 @@ export class d100ASceneConfig extends SceneConfig {
       starship: "Starship Combat Scene (hex)"
     }
 
-    console.log(context,("scenetype" in context.data))
+    // Simple ownership default selector used by our custom scene config template.
+    // Values are numeric role levels; labels are localization keys.
+    context.ownershipDefaults = {
+      0: "SCENES.AccessibilityGM",
+      2: "SCENES.AccessibilityAll"
+    };
+
+  //  console.log(context,("scenetype" in context.data))
     if (context.document.isStarship) context.data.sceneType = "starship"
-    console.log(this)
+ //   console.log(this)
     return context;
 
   }
@@ -41,14 +48,14 @@ export class d100ASceneConfig extends SceneConfig {
   /** @override */
   async _updateObject(event, formData) {
 
-console.log(formData)
+////console.log(formData)
 
     const scene = this.document;
     //Set Starship sheet mandatory defaults
-    console.log(formData)
+    ////console.log(formData)
     if ( formData.sceneType === "starship" )
     {
-      console.log("starship")
+      ////console.log("starship")
       formData["grid.units"] = "Mm";
       formData["grid.type"] = 4;
       formData["grid.distance"] = 1;
@@ -114,7 +121,8 @@ console.log(formData)
     if ( ["width", "height", "padding", "grid.size", ...textureChange].some(k => k in changes) ) {
       const confirm = await Dialog.confirm({
         title: game.i18n.localize("SCENES.DimensionChangeTitle"),
-        content: `<p>${game.i18n.localize("SCENES.DimensionChangeWarning")}</p>`
+        content: `<p>${game.i18n.localize("SCENES.DimensionChangeWarning")}</p>`,
+        options: { classes: ["Alternityd100"] }
       });
       if ( !confirm ) return;
     }
@@ -129,7 +137,7 @@ console.log(formData)
   async close(options={}) {
     console.log(this)
 
-    this._resetScenePreview();
+    //this._resetScenePreview();
     return super.close(options);
   }
 

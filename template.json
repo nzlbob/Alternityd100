@@ -4568,7 +4568,7 @@
                     "ordinary": 0,
                     "good": 0,
                     "amazing": 0,
-                    "apr": 0,
+                    "apr": 4,
                     "die": "",
                     "step": {
                         "base": 0,
@@ -4674,8 +4674,8 @@
                 "speed": {
                     "max": 0,
                     "min": 0,
-                    "base": 1,
-                    "value": 10,
+                    "base": 0,
+                    "value": 0,
                     "temp": 0,
                     "tempmax": 100,
                     "tooltip": [],
@@ -4691,12 +4691,18 @@
                     "projectile": 0,
                     "special": 0,
                     "torpedo": 0,
-                    "tooltip": []
+                    "tooltip": {
+                     "base": "",
+                        "area": "",
+                        "beam": "",
+                        "bomb": "",
+                        "mine": "",
+                        "missile": "",
+                        "projectile": "",
+                        "special": "",
+                        "torpedo": ""
+                    }
                 }
-            
-           
-           
-           
             },
             "groups": {}
         },
@@ -4887,7 +4893,17 @@
                     "projectile": 0,
                     "special": 0,
                     "torpedo": 0,
-                    "tooltip": []
+                                        "tooltip": {
+                     "base": "",
+                        "area": "",
+                        "beam": "",
+                        "bomb": "",
+                        "mine": "",
+                        "missile": "",
+                        "projectile": "",
+                        "special": "",
+                        "torpedo": ""
+                    }
                 }
             },
             "groups": {}
@@ -4899,7 +4915,6 @@
                 "conditions",
                 "counterClassesManagement"
             ],
-            
             "conditions": {
                 "coverlight": false,
                 "covermedium": false,
@@ -4910,6 +4925,7 @@
                 "dodgeama": false
             },
             "details": {
+                "ruleNotes": "@UUID[Compendium.alt_core.home-rules.JournalEntry.5PUJoNJ7HMj3wawn.JournalEntryPage.5ZnHU4Ld3ma4nkJD]{Starship Manoeuvres}<br>@UUID[Compendium.alt_core.home-rules.JournalEntry.5PUJoNJ7HMj3wawn.JournalEntryPage.NCKWY4taFyWxTta9]{Starship Systems Damage}",
                 "role": "civilian",
                 "toughness": {
                     "firepowerN": 0,
@@ -4944,6 +4960,7 @@
                     "base": 0,
                     "value": 0,
                     "temp": 0,
+                    "piloting": 0,
                     "tooltip": []
                 },
                 "ECM": {
@@ -5050,7 +5067,17 @@
                     "projectile": 0,
                     "special": 0,
                     "torpedo": 0,
-                    "tooltip": []
+                                        "tooltip": {
+                        "base": "",
+                        "area": "",
+                        "beam": "",
+                        "bomb": "",
+                        "mine": "",
+                        "missile": "",
+                        "projectile": "",
+                        "special": "",
+                        "torpedo": ""
+                    }
                 }
             },
             "groups": {}
@@ -5059,7 +5086,6 @@
     "Item": {
         "types": [
             "achievement",
-            
             "ammunition",
             "equipment",
             "clothing",
@@ -5082,7 +5108,6 @@
             "survival",
             "technological",
             "weapon",
-
             "vehicleAttack",
             "vehicleSystem",
             "starshipAblativeArmor",
@@ -5102,16 +5127,10 @@
             "starshipShield",
             "starshipSystemDamage",
             "starshipWeapon",
-           
             "class",
-
             "goods",
-
-           
             "magic",
-
             "starshipDefensiveCountermeasure",
-
             "starshipExpansionBay",
             "starshipFortifiedHull",
             "starshipReinforcedBulkhead",
@@ -5119,7 +5138,6 @@
             "ordnancePropulsion",
             "ordnanceWarhead",
             "ordnanceGuidance"
-
         ],
         "templates": {
             "skilledItem": {
@@ -5304,12 +5322,13 @@
                 "pricePerBHP": 0,
                 "costMultipliedBySize": false,
                 "pcu": 0,
+                "pcuBonus": 0,
                 "isPowered": true,
                 "pwrPerBHP": 0,
                 "overPowered": false,
                 "isPCUPerBHP": false,
                 "bhpCost": 0,
-                "location":"F",
+                "location": "F",
                 "progressLevel": "pl0",
                 "targetLockBonus": {
                     "radar": {
@@ -5339,12 +5358,13 @@
                 "pricePerBHP": 0,
                 "costMultipliedBySize": false,
                 "pcu": 0,
+                "pcuBonus": 0,
                 "isPowered": true,
                 "pwrPerBHP": 0,
                 "overPowered": false,
                 "isPCUPerBHP": false,
                 "bhpCost": 0,
-                "location":"F",
+                "location": "F",
                 "progressLevel": "pl0",
                 "targetLockBonus": {
                     "radar": {
@@ -6694,11 +6714,12 @@
                 "increment": 0
             },
             "numCompartments": 2,
+            "zones": 0,
+            "zoneLimit": 0,
             "durability": 0,
             "damageThreshold": {
                 "base": 0
             },
-            "hullType": "small",
             "hullPoints": {
                 "base": 24,
                 "bonus": 0,
@@ -6912,8 +6933,8 @@
                 "medium": 20,
                 "long": 40
             },
-            "sensorType": "",
-            "sensorMode": "",
+            "sensorType": "radar",
+            "sensorMode": "active",
             "skill": "senso",
             "targetingStep": 0,
             "allowTargeting": false,
@@ -7051,6 +7072,7 @@
                 "itemDescription",
                 "modifiers"
             ],
+            "warheadSize": 1,
             "ordnance": [],
             "class": "light",
             "weaponType": "ordnance",
@@ -7092,7 +7114,7 @@
             "mass": "1",
             "Cost": "100",
             "skill": "weapo",
-            "accur": "1",
+            "accuracy": 0,
             "mode": {
                 "fire": true,
                 "burst": true,
@@ -7125,7 +7147,7 @@
                 "isOpen": true
             }
         },
-"ordnanceGuidance": {
+        "ordnanceGuidance": {
             "templates": [
                 "ordnanceComponent",
                 "itemDescription",
@@ -7137,8 +7159,9 @@
                 "medium": 20,
                 "long": 40
             },
-            "sensorType": "",
-            "sensorMode": "",
+            "accuracy": 0,
+            "sensorType": "radar",
+            "sensorMode": "active",
             "skill": "senso",
             "targetingStep": 0,
             "allowTargeting": false,
@@ -7153,34 +7176,23 @@
                 }
             }
         },
-
         "ordnancePropulsion": {
             "templates": [
                 "ordnanceComponent",
                 "itemDescription",
                 "modifiers"
             ],
-            "supportedSize": "",
-            "speed": 0,
-            "pilotingModifier": 0,
-            "isFTL": false,
-            "ftlRange": "",
-            "ftlDuration": "",
-            "ftlCooldown": "",
+            "accuracy": 0,
+            "warheadSize": 1,
+            "size": 1,
             "isEnabled": true,
             "accel": {
-                "base": 0,
-                "value": 0,
-                "tooltip": []
+                "base": 0
             },
             "duration": {
-                "base": 0,
-                "value": 0,
-                "tooltip": []
+                "base": 0
             }
         },
-
-
         "chassis": {
             "templates": [
                 "itemDescription",

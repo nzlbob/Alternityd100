@@ -53,7 +53,7 @@ export default class d100AModifierApplication extends FormApplication {
             options: this.options,
             editable: this.isEditable,
             cssClass: this.actor.isOwner ? "editable": "locked",
-            config: CONFIG.SFRPG,
+            config: CONFIG.d100A,
             d100Aconfig: CONFIG.d100A
         };
 console.log(data)
@@ -89,14 +89,14 @@ console.log("HERE--",html)
                 case SFRPGEffectType.ABILITY_CHECK:
                     target.prop('disabled', false);
                     target.find('option').remove();
-                    for (const ability of Object.entries(CONFIG.SFRPG.abilities)) {
+                    for (const ability of Object.entries(CONFIG.d100A.abilities)) {
                         target.append(`<option value="${ability[0]}">${ability[1]}</option>`);
                     }
                     break;
                 case SFRPGEffectType.AC:
                     target.prop('disabled', false);
                     target.find('option').remove();
-                //    for (const armorClass of Object.entries(CONFIG.SFRPG.modifierArmorClassAffectedValues)) {
+                //    for (const armorClass of Object.entries(CONFIG.d100A.modifierArmorClassAffectedValues)) {
                     for (const armorClass of Object.entries(CONFIG.d100A.modifierResistanceAffectedValues)) {
                        // d100Aconfig.modifierResistanceAffectedValues
                         target.append(`<option value="${armorClass[0]}">${armorClass[1]}</option>`)
@@ -128,7 +128,7 @@ console.log("HERE--",html)
                 case SFRPGEffectType.ACP:
                     target.prop('disabled', false);
                     target.find('option').remove();
-                    for (const acp of Object.entries(CONFIG.SFRPG.acpEffectingArmorType)) {
+                    for (const acp of Object.entries(CONFIG.d100A.acpEffectingArmorType)) {
                         target.append(`<option value="${acp[0]}">${acp[1]}</option>`);
                     }
                     break;
@@ -138,7 +138,7 @@ console.log("HERE--",html)
 
                     target.append(`<option value="highest">${game.i18n.localize("SFRPG.ModifierSaveHighest")}</option>`);
                     target.append(`<option value="lowest">${game.i18n.localize("SFRPG.ModifierSaveLowest")}</option>`);
-                    for (const saves of Object.entries(CONFIG.SFRPG.saves)) {
+                    for (const saves of Object.entries(CONFIG.d100A.saves)) {
                         target.append(`<option value="${saves[0]}">${saves[1]}</option>`);
                     }
                     break;
@@ -146,7 +146,7 @@ console.log("HERE--",html)
                 case SFRPGEffectType.SKILL_RANKS:
                     target.prop('disabled', false);
                     target.find('option').remove();
-                    for (const skills of Object.entries(CONFIG.SFRPG.skills)) {
+                    for (const skills of Object.entries(CONFIG.d100A.skills)) {
                         target.append(`<option value="${skills[0]}">${skills[1]}</option>`);
                     }
                     break;
@@ -154,7 +154,7 @@ console.log("HERE--",html)
                 case SFRPGEffectType.WEAPON_DAMAGE:
                     target.prop('disabled', false);
                     target.find('option').remove();
-                    for (const weapons of Object.entries(CONFIG.SFRPG.weaponTypes)) {
+                    for (const weapons of Object.entries(CONFIG.d100A.weaponTypes)) {
                         target.append(`<option value="${weapons[0]}">${weapons[1]}</option>`);
                     }
                     break;
@@ -162,7 +162,7 @@ console.log("HERE--",html)
                 case SFRPGEffectType.WEAPON_PROPERTY_DAMAGE:
                     target.prop('disabled', false);
                     target.find('option').remove();
-                    for (const weapons of Object.entries(CONFIG.SFRPG.weaponProperties)) {
+                    for (const weapons of Object.entries(CONFIG.d100A.weaponProperties)) {
                         target.append(`<option value="${weapons[0]}">${weapons[1]}</option>`);
                     }
                     break;
@@ -170,7 +170,7 @@ console.log("HERE--",html)
                     target.prop('disabled', false);
                     target.find('option').remove();
 
-                    for (const speeds of Object.entries(CONFIG.SFRPG.speeds)) {
+                    for (const speeds of Object.entries(CONFIG.d100A.speeds)) {
                         target.append(`<option value="${speeds[0]}">${speeds[1]}</option>`);
                     }
                     break;
@@ -230,10 +230,10 @@ console.log("HERE--",html)
                 valueAffectedElement.prop('disabled', true);
                 break;
         }
-
+/*
         if (this._tooltips === null) {
-            this._tooltips = tippy.delegate(`#${this.id}`, {
-                target: '[data-tippy-content]',
+            this._tooltips = xippy.delegate(`#${this.id}`, {
+                target: '[data-xippy-content]',
                 allowHTML: true,
                 arrow: false,
                 placement: 'top-start',
@@ -241,6 +241,7 @@ console.log("HERE--",html)
                 delay: [800, null]
             });
         }
+        */
     }
 
     async close(...args) {

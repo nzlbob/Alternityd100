@@ -1,5 +1,6 @@
-import { SFRPG } from "../../config.js"
 import { d100A } from "../../d100Aconfig.js"
+
+const SFRPG = d100A;
 export const ActorConditionsMixin = (superclass) => class extends superclass {
     hasCondition(conditionName) {
         if (!d100A.statusEffectIconMapping[conditionName]) {

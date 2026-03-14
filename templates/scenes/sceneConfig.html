@@ -33,10 +33,7 @@
                     <input type="checkbox" name="navigation" {{checked data.navigation}}/>
                 </label>
                 <select name="ownership.default" data-dtype="Number">
-                {{#select data.ownership.default}}
-                    <option value="0">{{localize "SCENES.AccessibilityGM"}}</option>
-                    <option value="2">{{localize "SCENES.AccessibilityAll"}}</option>
-                {{/select}}
+                    {{ selectOptions ownershipDefaults selected=data.ownership.default localize=true }}
                 </select>
             </div>
         </div>

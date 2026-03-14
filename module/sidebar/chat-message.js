@@ -1,6 +1,7 @@
 export class ChatMessagePF extends ChatMessage {
   get isRoll() {
-    return this.data.type === CONST.CHAT_MESSAGE_TYPES.ROLL || this.getFlag("pf1", "noRollRender");
+    const rollCount = this.rolls?.length ?? this._source?.rolls?.length ?? 0;
+    return rollCount > 0 || this.getFlag("pf1", "noRollRender");
   }
 
   /**
@@ -40,7 +41,7 @@ export const customRolls = function (message, speaker, rollData) {
         const total = roll.total;
 
         return (async () => {
-          const content = await renderTemplate("systems/Alternityd100/templates/chat/simple-damage.hbs", {
+          const content = await foundry.applications.handlebars.renderTemplate("systems/Alternityd100/templates/chat/simple-damage.hbs", {
             tokenId: tokenUuid,
             isHealing: type === "HEAL" || type === "H",
             roll: {
@@ -51,8 +52,7 @@ export const customRolls = function (message, speaker, rollData) {
             },
           });
           const chatOptions = {
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-            roll: roll,
+            rolls: [roll],
             flavor,
             speaker: speaker,
             rollMode: game.settings.get("core", "rollMode"),

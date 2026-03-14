@@ -46,7 +46,7 @@
 
 
         {{!-- Weapon Hide --}}
-        <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.hideTooltip" }}">
+        <div class="form-group" data-tooltip="{{ localize "d100A.Items.Weapon.hideTooltip" }}">
           <label>{{ localize "d100A.Items.Weapon.hide" }}</label>
           <div class="form-fields">
               <input type="text" style="text-align: center; size: 20 px; " name="system.hide" value="{{itemData.hide}}" data-dtype="Number" placeholder="0"/>
@@ -94,7 +94,7 @@
 
              {{!-- Action Penalty --}}
             
-            <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.accTooltip" }}">
+            <div class="form-group" data-tooltip="{{ localize "d100A.Items.Weapon.accTooltip" }}">
                 <label>{{ localize "d100A.Items.ActionPenalty" }} - Use Modifiers Tab</label>
                <!-- <div class="form-fields">
                     <input type="text" style="text-align: center; size: 20 px; " name="system.armor.cp" value="{{itemData.armor.cp}}" data-dtype="Number" placeholder="0"/>
@@ -104,7 +104,7 @@
             
                  
                         {{!-- Armor type --}}
-                        <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.firepowerTooltip" }}">
+                        <div class="form-group" data-tooltip="{{ localize "d100A.Items.Weapon.firepowerTooltip" }}">
 
                           <label>{{ localize "d100A.Items.Type" }}</label>
                           <select name="system.firepower">
@@ -114,14 +114,14 @@
                         <hr>
                         <label>{{ localize "d100A.Items.defence" }}</label>
                         {{!-- Armor LI --}}
-                        <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.damageTooltip" }}">
+                        <div class="form-group" data-tooltip="{{ localize "d100A.Items.Weapon.damageTooltip" }}">
                           
                           <label>{{ localize "LI" }}</label>
                           <input type="text" style="text-align: center" name="system.armor.LI" value="{{itemData.armor.LI}}" data-dtype="String" placeholder="0"/>
                           
                         </div>     
                         {{!-- Armor LI --}}
-                        <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.damageTooltip" }}">
+                        <div class="form-group" data-tooltip="{{ localize "d100A.Items.Weapon.damageTooltip" }}">
 
                           <label>{{ localize "HI" }}</label>
                           <input type="text" style="text-align: center" name="system.armor.HI" value="{{itemData.armor.HI}}" data-dtype="String" placeholder="0"/>
@@ -129,7 +129,7 @@
                        
                         </div>  
                         {{!-- Armor EN --}}
-                        <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.damageTooltip" }}">
+                        <div class="form-group" data-tooltip="{{ localize "d100A.Items.Weapon.damageTooltip" }}">
 
                           <label>{{ localize "d100A.EN" }}</label>
                           <input type="text" style="text-align: center" name="system.armor.EN" value="{{itemData.armor.EN}}" data-dtype="String" placeholder="0"/>

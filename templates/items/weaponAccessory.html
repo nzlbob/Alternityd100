@@ -1,4 +1,4 @@
-<form class="{{cssClass}} flexcol" autocomplete="off">
+<div class="sheet-root {{cssClass}} flexcol">
 
     {{!-- Item Sheet Header --}}
     {{> "systems/Alternityd100/templates/items/parts/item-header.html"}}
@@ -15,37 +15,41 @@
         {{> "systems/Alternityd100/templates/items/parts/item-description.html"}}
 
         <div class="tab details" data-tab="details" data-group="primary">
+            <h3 class="form-header">{{ localize "SFRPG.Details" }}</h3>
+            <div class="divTable blueTable2">
+                <div class="divTableBody">
+                    <div class="divTableRow">
+                        <div class="divTableCell">
+                            {{!-- Supported Types --}}
+                            <h3 class="form-header first">{{ localize "SFRPG.ItemSheet.WeaponAccessory.SupportedTypes" }}</h3>
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.ItemSheet.WeaponAccessory.SupportedTypes" }}</label>
+                                <div class="form-fields">
+                                    <select name="system.weaponType">
+                                        {{ selectOptions d100Aconfig.weaponAccessoriesSupportedTypes selected=itemData.weaponType localize=true }}
+                                    </select>
+                                </div>
+                            </div>
 
-            {{!-- Supported Types --}}
-            <h3 class="form-header first">{{ localize "SFRPG.ItemSheet.WeaponAccessory.SupportedTypes" }}</h3>
-            <div class="form-group">
-                <label>{{ localize "SFRPG.ItemSheet.WeaponAccessory.SupportedTypes" }}</label>
-                <div class="form-fields">
-                    <select name="system.weaponType">
-                        {{#select itemData.weaponType}}
-                        {{#each config.weaponAccessoriesSupportedTypes as |name type|}}
-                        <option value="{{type}}">{{localize name}}</option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
+                            <br />
+
+                            {{> "systems/Alternityd100/templates/items/parts/item-capacity.html"}}
+
+                            <br />
+
+                            {{> "systems/Alternityd100/templates/items/parts/physical-item-details.html"}}
+
+                            <br />
+
+                            {{> "systems/Alternityd100/templates/items/parts/container-details.html" message="SFRPG.ItemSheet.Weapons.ContainerTooltip"}}
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <br />
-
-            {{> "systems/Alternityd100/templates/items/parts/item-capacity.html"}}
-
-            <br />
-
-            {{> "systems/Alternityd100/templates/items/parts/physical-item-details.html"}}
-
-            <br />
-
-            {{> "systems/Alternityd100/templates/items/parts/container-details.html" message="SFRPG.ItemSheet.Weapons.ContainerTooltip"}}
         </div>
 
         {{!-- Modifiers Tab --}}
         {{> "systems/Alternityd100/templates/items/parts/item-modifiers.html"}}
 
     </section>
-</form>
+</div>

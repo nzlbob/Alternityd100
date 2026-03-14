@@ -223,11 +223,11 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         };
 
         const template = `systems/Alternityd100/templates/chat/item-action-card.html`;
-        const renderPromise = renderTemplate(template, templateData);
+        const renderPromise = foundry.applications.handlebars.renderTemplate(template, templateData);
         renderPromise.then((html) => {
             // Create the chat message
             const chatData = {
-                type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+                style: CONST.CHAT_MESSAGE_STYLES.OTHER,
                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                 content: html
             };

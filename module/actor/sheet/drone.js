@@ -1,28 +1,21 @@
-import { ActorSheetSFRPG } from "./base.js"
-import { SFRPG } from "../../config.js";
+//import { ActorSheetSFRPG } from "./base.js"
+import { d100A as SFRPG } from "../../d100Aconfig.js";
+import { d100ActorSheet } from "../../d100Actor-sheet.js";
 
-export class d100AActorSheetDrone extends ActorSheetSFRPG {
-    static get defaultOptions() {
-        const options = super.defaultOptions;
-        foundry.utils.mergeObject(options, {
-            classes: ['Alternityd100', 'sheet', 'actor', 'drone'],
-            width: 715,
-            //height: 830
+export class d100AActorSheetDrone extends d100ActorSheet {
+    static get DEFAULT_OPTIONS() {
+        const base = super.DEFAULT_OPTIONS;
+        return foundry.utils.mergeObject(base, {
+            position: { width: 715 },
+            window: { contentClasses: [...base.window.contentClasses, 'drone'] }
         });
-
-        return options;
     }
+    static PARTS = {
+      form: { template: 'systems/Alternityd100/templates/actors/drone-sheet.html' }
+    };
 
-    get template() {
-        const path = "systems/Alternityd100/templates/actors/";
-        if (!game.user.isGM && this.actor.limited) return path + "limited-sheet.html";
-        return path + "drone-sheet.html";
-    }
-
-    getData() {
-        const sheetData = super.getData();
-
-        return sheetData;
+    _prepareContext(options) {
+        return super._prepareContext(options);
     }
 
     /**
@@ -240,20 +233,39 @@ export class d100AActorSheetDrone extends ActorSheetSFRPG {
      * 
      * @param {JQuery} html The prepared HTML object ready to be rendered into the DOM
      */
+    _onRender(context, options) {
+        super._onRender?.(context, options);
+
+        if (!this.isEditable) return;
+
+        const root = this.element;
+        if (!root) return;
+
+        root.querySelectorAll('.reload').forEach((el) => {
+            el.addEventListener('click', this._onReloadWeapon.bind(this));
+        });
+        root.querySelectorAll('.repair').forEach((el) => {
+            el.addEventListener('click', this._onRepair.bind(this));
+        });
+        root.querySelectorAll('.modifier-create').forEach((el) => {
+            el.addEventListener('click', this._onModifierCreate.bind(this));
+        });
+        root.querySelectorAll('.modifier-edit').forEach((el) => {
+            el.addEventListener('click', this._onModifierEdit.bind(this));
+        });
+        root.querySelectorAll('.modifier-delete').forEach((el) => {
+            el.addEventListener('click', this._onModifierDelete.bind(this));
+        });
+        root.querySelectorAll('.modifier-toggle').forEach((el) => {
+            el.addEventListener('click', this._onToggleModifierEnabled.bind(this));
+        });
+    }
+
     activateListeners(html) {
-console.log("HERE--",html)
-        super.activateListeners(html);
-
-        if (!this.options.editable) return;
-
-        //html.find('.toggle-prepared').click(this._onPrepareItem.bind(this));
-        html.find('.reload').click(this._onReloadWeapon.bind(this));
-
-        html.find('.repair').click(this._onRepair.bind(this));
-        html.find('.modifier-create').click(this._onModifierCreate.bind(this));
-        html.find('.modifier-edit').click(this._onModifierEdit.bind(this));
-        html.find('.modifier-delete').click(this._onModifierDelete.bind(this));
-        html.find('.modifier-toggle').click(this._onToggleModifierEnabled.bind(this));
+        // AppV2 no longer uses this; listeners are bound in _onRender.
+        ui.notifications?.warn?.(
+            "d100AActorSheetDrone.activateListeners called - use _onRender(context, options) for AppV2."
+        );
     }
 
     /**
@@ -263,11 +275,10 @@ console.log("HERE--",html)
      */
     _onModifierCreate(event) {
         event.preventDefault();
-        const target = $(event.currentTarget);
-
+        const subtab = event.currentTarget?.dataset?.subtab;
         this.actor.addModifier({
             name: "New Modifier",
-            subtab: target.data('subtab')
+            subtab: subtab
         });
     }
 
@@ -278,8 +289,8 @@ console.log("HERE--",html)
      */
     async _onModifierDelete(event) {
         event.preventDefault();
-        const target = $(event.currentTarget);
-        const modifierId = target.closest('.item.modifier').data('modifierId');
+        const modifierId = event.currentTarget?.closest('.item.modifier')?.dataset?.modifierId;
+        if (!modifierId) return;
         
         await this.actor.deleteModifier(modifierId);
     }
@@ -291,9 +302,8 @@ console.log("HERE--",html)
      */
     _onModifierEdit(event) {
         event.preventDefault();
-
-        const target = $(event.currentTarget);
-        const modifierId = target.closest('.item.modifier').data('modifierId');
+        const modifierId = event.currentTarget?.closest('.item.modifier')?.dataset?.modifierId;
+        if (!modifierId) return;
 
         this.actor.editModifier(modifierId);
     }
@@ -305,11 +315,12 @@ console.log("HERE--",html)
      */
     async _onToggleModifierEnabled(event) {
         event.preventDefault();
-        const target = $(event.currentTarget);
-        const modifierId = target.closest('.item.modifier').data('modifierId');
+        const modifierId = event.currentTarget?.closest('.item.modifier')?.dataset?.modifierId;
+        if (!modifierId) return;
 
         const modifiers = foundry.utils.duplicate(this.actor.system.modifiers);
         const modifier = modifiers.find(mod => mod._id === modifierId);
+        if (!modifier) return;
         modifier.enabled = !modifier.enabled;
 
         await this.actor.update({'system.modifiers': modifiers});

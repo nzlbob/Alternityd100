@@ -4,24 +4,25 @@ import { ItemCapacityMixin } from "./mixins/item-capacity.js";
 import { AbilityTemplate } from "../pixi/ability-template.js";
 import { Diced100 } from "../dice.js";
 import RollContext from "../rolls/rollcontext.js";
-import { SFRPG } from "../config.js";
 import { SFRPGModifierType, SFRPGModifierTypes, SFRPGEffectType } from "../modifiers/types.js";
 import SFRPGModifier from "../modifiers/modifier.js";
 import d100AModifier from "../modifiers/modifier.js";
 import d100AModifierApplication from "../apps/modifier-app.js";
 import StackModifiers from "../rules/closures/stack-modifiers.js";
 import { d100A } from "../d100Aconfig.js"
+import { DefenceRollDialogV2 } from "../apps/defence-roll-dialog-v2.js";
+import { HitLocationAdjustDialogV2 } from "../apps/hit-location-adjust-dialog-v2.js";
 //import { TargetsTable } from "../../lib-targeting/src/TargetsTable.js";
 //import { NPCTargeting } from "../../lib-targeting/src/NPCTargeting.js";
 import { attackModData, d100stepdie } from "../modifiers/d100mod.js";
 import { targetResModData, d100NPCCrewStats } from "../modifiers/d100mod.js";
 import { d100Actor } from "../d100actor.js";
 import { rollStarshipLauncherAttack } from "./item-ordnance-utils.js"
-import { getRangeCat, radtodeg, degtorad, raytodeg, inArc, generateUUID } from "../utilities.js"
+import { getRangeCat, radtodeg, degtorad, raytodeg, inArc, generateUUID, measureDistance } from "../utilities.js"
 
 //import {d100stepdie } from "../modifiers/d100mod.js";
-export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityMixin) {
-    // export class ItemSFRPG extends (Item) {    
+export class Itemd100A extends Mix(Item).with(ItemActivationMixin, ItemCapacityMixin) {
+    // export class Itemd100A extends (Item) {    
 
     /* -------------------------------------------- */
     /*  Item Properties                             */
@@ -160,7 +161,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     prepareData() {
         super.prepareData();
-        const C = CONFIG.SFRPG;
+        const C = CONFIG.d100A;
         const labels = {};
         const item = this;
         const itemData = item.system;
@@ -414,7 +415,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             if (typeof area.value === 'number' && area.value === 0) area.value = null;
             if (["none"].includes(area.units)) area.units = null;
 
-            labels.area = [area.value, C.distanceUnits[area.units] || null, C.spellAreaShapes[area.shape], C.spellAreaEffects[area.effect]].filterJoin(" ");
+            labels.area = [
+                area.value,
+                C.distanceUnits?.[area.units] ?? null,
+                C.spellAreaShapes?.[area.shape] ?? null,
+                C.spellAreaEffects?.[area.effect] ?? null
+            ].filterJoin(" ");
 
             // Range Label
             let rng = itemData.range || {};
@@ -422,7 +428,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 rng.value = null;
             }
             if (["none"].includes(rng.units)) rng.units = null;
-            labels.range = [rng.value, C.distanceUnits[rng.units] || null].filterJoin(" ");
+            labels.range = [rng.value, C.distanceUnits?.[rng.units] ?? null].filterJoin(" ");
 
             // Duration Label
             let dur = itemData.duration || {};
@@ -585,12 +591,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Render the chat card template
         const templateType = ["tool", "pharmaceutical"].includes(this.type) ? this.type : "item";
         const template = `systems/Alternityd100/templates/chat/${templateType}-card.html`;
-        const html = await renderTemplate(template, templateData);
+        const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
 
         // Basic chat message data
         const chatData = {
-            user: game.user.id,
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            author: game.user.id,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             content: html,
             speaker: token ? ChatMessage.getSpeaker({ token: token }) : ChatMessage.getSpeaker({ actor: this.actor })
         };
@@ -613,7 +619,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const labels = this.labels;
 
         // Rich text description
-        data.description.value = await TextEditor.enrichHTML(data.description.value, htmlOptions);
+        data.description.value = await foundry.applications.ux.TextEditor.implementation.enrichHTML(data.description.value, htmlOptions);
 
         // Item type specific properties
         const props = [];
@@ -704,7 +710,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     _equipmentChatData(data, labels, props) {
         props.push(
-            { name: CONFIG.SFRPG.armorTypes[data.armor.type], tooltip: null },
+            { name: CONFIG.d100A.armorTypes[data.armor.type], tooltip: null },
             { name: labels.eac || null, tooltip: null },
             { name: labels.kac || null, tooltip: null }
         );
@@ -720,7 +726,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         props.push(
             { name: CONFIG.d100A.weaponTypes[data.weaponType], tooltip: null },
             ...Object.entries(data.properties).filter(e => e[1] === true)
-                .map(e => ({ name: CONFIG.SFRPG.weaponProperties[e[0]], tooltip: CONFIG.SFRPG.weaponPropertiesTooltips[e[0]] })
+                .map(e => ({ name: CONFIG.d100A.weaponProperties[e[0]], tooltip: CONFIG.d100A.weaponPropertiesTooltips[e[0]] })
                 )
         );
     }
@@ -733,7 +739,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     _consumableChatData(data, labels, props) {
         props.push(
-            { name: CONFIG.SFRPG.consumableTypes[data.consumableType], tooltip: null },
+            { name: CONFIG.d100A.consumableTypes[data.consumableType], tooltip: null },
             { name: this.getRemainingUses() + "/" + this.getMaxUses() + " Charges", tooltip: null }
         );
         data.hasCharges = this.getRemainingUses() >= 0;
@@ -806,7 +812,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (data.armorType === 'any') {
             armorType = "Any"
         } else {
-            armorType = CONFIG.SFRPG.armorTypes[data.armorType];
+            armorType = CONFIG.d100A.armorTypes[data.armorType];
         }
 
         props.push(
@@ -819,8 +825,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     _augmentationChatData(data, labels, props) {
         props.push(
             { name: "Augmentation", tooltip: null },
-            data.type ? { name: CONFIG.SFRPG.augmentationTypes[data.type], tooltip: null } : null,
-            data.system ? { name: CONFIG.SFRPG.augmentationSytems[data.system], tooltip: null } : null
+            data.type ? { name: CONFIG.d100A.augmentationTypes[data.type], tooltip: null } : null,
+            data.system ? { name: CONFIG.d100A.augmentationSytems[data.system], tooltip: null } : null
         );
     }
 
@@ -840,9 +846,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     _starshipWeaponChatData(data, labels, props) {
         props.push(
             { name: "Starship Weapon", tooltip: null },
-            data.weaponType ? { name: CONFIG.SFRPG.starshipWeaponTypes[data.weaponType], tooltip: null } : null,
-            data.class ? { name: CONFIG.SFRPG.starshipWeaponClass[data.class], tooltip: null } : null,
-            data.range ? { name: CONFIG.SFRPG.starshipWeaponRanges[data.range], tooltip: null } : null,
+            data.weaponType ? { name: CONFIG.d100A.starshipWeaponTypes[data.weaponType], tooltip: null } : null,
+            data.class ? { name: CONFIG.d100A.starshipWeaponClass[data.class], tooltip: null } : null,
+            data.range ? { name: CONFIG.d100A.starshipWeaponRanges[data.range], tooltip: null } : null,
             data.mount.mounted ? { name: game.i18n.localize("SFRPG.Items.ShipWeapon.Mounted"), tooltip: null } : { name: game.i18n.localize("SFRPG.Items.ShipWeapon.NotMounted"), tooltip: null },
             data.speed > 0 ? { name: game.i18n.format("SFRPG.Items.ShipWeapon.Speed", { speed: data.speed }), tooltip: null } : null
         );
@@ -897,22 +903,22 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     _perkChatData(data, labels, props) {
         props.push(
             { name: "Perk", tooltip: null },
-            data.abilityMod.ability ? { name: `Ability ${CONFIG.SFRPG.abilities[data.abilityMod.ability]}`, tooltip: null } : null,
-            data.skill ? { name: `Skill ${CONFIG.SFRPG.skills[data.skill]}`, tooltip: null } : null
+            data.abilityMod.ability ? { name: `Ability ${CONFIG.d100A.abilities[data.abilityMod.ability]}`, tooltip: null } : null,
+            data.skill ? { name: `Skill ${CONFIG.d100A.skills[data.skill]}`, tooltip: null } : null
         );
     }
     _flawChatData(data, labels, props) {
         props.push(
             { name: "Flaw", tooltip: null },
-            data.abilityMod.ability ? { name: `Ability ${CONFIG.SFRPG.abilities[data.abilityMod.ability]}`, tooltip: null } : null,
-            data.skill ? { name: `Skill ${CONFIG.SFRPG.skills[data.skill]}`, tooltip: null } : null
+            data.abilityMod.ability ? { name: `Ability ${CONFIG.d100A.abilities[data.abilityMod.ability]}`, tooltip: null } : null,
+            data.skill ? { name: `Skill ${CONFIG.d100A.skills[data.skill]}`, tooltip: null } : null
         );
     }
     _achievementChatData(data, labels, props) {
         props.push(
             { name: "Achievement", tooltip: null },
-            data.abilityMod.ability ? { name: `Ability ${CONFIG.SFRPG.abilities[data.abilityMod.ability]}`, tooltip: null } : null,
-            data.skill ? { name: `Skill ${CONFIG.SFRPG.skills[data.skill]}`, tooltip: null } : null
+            data.abilityMod.ability ? { name: `Ability ${CONFIG.d100A.abilities[data.abilityMod.ability]}`, tooltip: null } : null,
+            data.skill ? { name: `Skill ${CONFIG.d100A.skills[data.skill]}`, tooltip: null } : null
         );
     }
 
@@ -1171,17 +1177,17 @@ console.log(options)
             targettedActor[x] = game.actors.get(target.document.actorId);
             targetData[x] = {};
             targetData[x].Name = target.name;
-            console.log("targetData[x].Name", targetData[x].Name);
+         //   console.log("targetData[x].Name", targetData[x].Name);
             //targetData[x].distance = Math.ceil(Math.round(canvas.grid.measureDistance({x: actorToken.x, y: actorToken.y}, {x: target.x, y: target.y}),2));
-            let tempdistx = canvas.grid.measureDistance({ x: actorToken.x, y: actorToken.y }, { x: target.x, y: target.y })
+            let tempdistx = measureDistance({ x: actorToken.x, y: actorToken.y }, { x: target.x, y: target.y })
             let tempdisty = actorToken.elevation - target.document.elevation
             const tempdistxy = ((tempdistx ** 2) + (tempdisty ** 2)) ** 0.5
 
 
-            console.log("Dist", tempdistx, tempdisty, tempdistx ** 2, tempdisty ** 2)
-            console.log("Range", tempdistxy)
+         //   console.log("Dist", tempdistx, tempdisty, tempdistx ** 2, tempdisty ** 2)
+         //   console.log("Range", tempdistxy)
             let tempdist = tempdistxy.toFixed(1)
-            console.log("Range", tempdist)
+         //   console.log("Range", tempdist)
             tempdist = Math.ceil(tempdist)
             // console.log("Range",tempdist)
             //console.log("Range",Math.ceil(Math.round(canvas.grid.measureDistance({x: actorToken.x, y: actorToken.y}, {x: target.x, y: target.y})),1) )
@@ -1205,7 +1211,7 @@ console.log(options)
         }
 
         let targetflavor = " Targets:(" + numberOfActiveTargets + ") "
-        console.log(targetData, targetData[0].Name)
+      //  console.log(targetData, targetData[0].Name)
 
         /*****************************************
          * Spin off for Starship Launchers
@@ -1796,6 +1802,8 @@ console.log(options)
             return false
         })
 
+        const warnedInvalidSensorTypes = new Set();
+
         if (!actorToken) NoTokenWarn()
 
         if (!this.hasScan) {
@@ -1833,12 +1841,11 @@ console.log(options)
                     }
                 })
                 if (newscan) {
-                    console.log(token)
+                    // console.log(token)
                     if(!token.actor){ui.notifications.warn("Token "+token.name +" has no valid actor")}
                     const newscanz = {
-                        token: { name: token.name, id: token.id },
+                        token: { name: token.name, id: token.id, x: token.object.center.x, y: token.object.center.y },
                         //this.id = generateUUID()
-                        hullType: token.actor.system.frame ? token.actor.system.frame.system.hullType : token.actor.system.type,
                         size: token.actor.system.frame?.system.size || "tiny",
                         scanRes: token.actor.system.attributes.ECM,
                         name: token.name,
@@ -1852,11 +1859,13 @@ console.log(options)
         }
 
         for (const scan of validScanTargets) {
-            console.log(actorToken)
+            // console.log(actorToken)
 
-            scan.range = Math.ceil((canvas.grid.measureDistance({ x: actorToken.center.x, y: actorToken.center.y }, { x: scan.token.x, y: scan.token.y })));
-            scan.ray = new Ray({ x: actorToken.center.x, y: actorToken.center.y }, { x: scan.token.x, y: scan.token.y })
+           // scan.range = Math.ceil((canvas.grid.measureDistance({ x: actorToken.center.x, y: actorToken.center.y }, { x: scan.token.x, y: scan.token.y })));
+            scan.ray = new foundry.canvas.geometry.Ray({ x: actorToken.center.x, y: actorToken.center.y }, { x: scan.token.x, y: scan.token.y })
             scan.angle = raytodeg(scan.ray);
+            scan.range = Math.ceil(measureDistance(scan.ray.A, scan.ray.B));
+            console.log("Scan Ray:", scan.ray, "Angle:", scan.angle, "Range:", scan.range)
             scan.collisions = await CONFIG.Canvas.polygonBackends["sight"].testCollision(scan.ray.A, scan.ray.B, { mode: "any", type: "sight" })
 
 
@@ -1963,11 +1972,24 @@ console.log(options)
 
                         // Target Resistance
 
-                        const targetRes = scan.scanRes[sensorData.system.sensorType].value
+                        const sensorType = sensorData?.system?.sensorType;
+                        const isValidSensorType = sensorType && (sensorType in (d100A?.starshipSensorTypes ?? {}));
+                        if (sensorType && !isValidSensorType && !warnedInvalidSensorTypes.has(sensor.id)) {
+                            warnedInvalidSensorTypes.add(sensor.id);
+                            ui?.notifications?.warn?.(
+                                `Sensor "${sensorData?.name ?? sensor.id}" has invalid sensor type "${sensorType}". Set sensor mode/type on the item sheet.`,
+                                { permanent: false }
+                            );
+                        }
+
+                        const rawRes = isValidSensorType ? scan?.scanRes?.[sensorType] : undefined;
+                        const targetRes = Number(
+                            (rawRes && typeof rawRes === "object" ? rawRes.value : rawRes) ?? 0
+                        ) || 0;
 
                         // Add it all up
-                        let stepbonus = scanSkill.step + rangesteps - targetRes
-                        console.log(scanSkill.step, rangesteps, targetRes, scan)
+                        let stepbonus = scanSkill.step + rangesteps + targetRes
+                        // console.log(scanSkill.step, rangesteps, targetRes, scan)
                         // Build the tooltip
                         let skillflavor = "Skill: " + "System Operation - Sensors"
                         skillflavor += "<br>Skill Step: " + scanSkill.step
@@ -1976,7 +1998,7 @@ console.log(options)
                         skillflavor += "<br>Fire Mode: "
                         skillflavor += "<br>Movement: "
                         skillflavor += "<br>Range Mod: " + rangesteps
-                        skillflavor += "<br>Scan Resistance: " + (0 - targetRes)
+                        skillflavor += "<br>Scan Resistance: " + ( targetRes)
                         skillflavor += "<br>Cover Mod: "
                         skillflavor += "<br>Dodging Mod: "
                         // console.log("Scan ",scan,sensor)
@@ -2685,8 +2707,6 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
         console.log("----rollDefence-------------", "\n Action ", defenceData, "\n item ", item) //, "\n Value ",defenceData.value, "\n card ", "\n Actor \n ",defenceData.actor)
         //console.log("----onChatCardAction-------------",event,tokenId,sceneId,tokenData)
         //let value = defenceData.value
-        const template = "systems/Alternityd100/templates/dialogs/defensive-dialog.hbs";
-        
         let dialogData = {
             //formula: defenceData.value,
             damage: defenceData.value,
@@ -2706,33 +2726,13 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
 
         };
 
-
-        const html = await renderTemplate(template, dialogData);
-
-
-        let d = new Dialog({
+        const selection = await DefenceRollDialogV2.prompt({
             title: "Defensive - " + defenceData.actor.name,
-            template: "systems/Alternityd100/templates/chat/roll-dialog.hbs",
-            content: html,
-            buttons: {
-                one: {
-                    icon: '<i class="fas fa-check"></i>',
-                    label: "Defend",
-                    callback: (html) => this.rollDefence2(dialogData, html),
-                    //callback: (html) => resolve((roll = _roll(parts, staticRoll != null ? staticRoll : -1, html))),
-                },
-                two: {
-                    icon: '<i class="fas fa-times"></i>',
-                    label: "Cancel",
-                    callback: () => console.log("Chose Two")
-                }
-            },
-            default: "two",
-            onChange: html => console.log(),
-            render: html => console.log(),
-            close: html => console.log(),
+            ...dialogData
         });
-        d.render(true);
+
+        if (!selection || selection.cancelled) return null;
+        return this.rollDefence2(dialogData, selection);
 
 
 
@@ -2762,10 +2762,11 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
      */
     async rollDefence2(dialogData, form) {
 
-        dialogData.firepower = form ? form.find('[name="firepower"]').val() : 0;
-        dialogData.type = form ? form.find('[name="type"]').val() : 0;
-        dialogData.dmgtype = form ? form.find('[name="dmgtype"]').val() : 0;
-        dialogData.damage = form ? parseInt(form.find('[name="damage"]').val()) : 0;
+        dialogData.firepower = form ? form.firepower : 0;
+        dialogData.type = form ? form.type : 0;
+        dialogData.dmgtype = form ? form.dmgtype : 0;
+        dialogData.damage = form ? parseInt(form.damage) : 0;
+        dialogData.rollMode = form ? form.rollMode : dialogData.rollMode;
 
 
 
@@ -2787,7 +2788,14 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
 
             onClose: (roll, formula, finalFormula, isCritical) => {
                 if (roll) {
-                    Hooks.callAll("damageRolled", { actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: { base: formula, final: finalFormula }, rollMetadata: options?.rollMetadata });
+                    Hooks.callAll("damageRolled", {
+                        actor: this.actor,
+                        item: this,
+                        roll: roll,
+                        isCritical: isCritical,
+                        formula: { base: formula, final: finalFormula },
+                        rollMetadata: dialogData?.defenceData?.rollMetadata
+                    });
                 }
             }
         });
@@ -2799,22 +2807,28 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
 
     _postDefendMessage(rollData) {
 
+        const itemFirepowerToughnessMap = {
+            O: "Ordinary",
+            G: "Good",
+            A: "Amazing"
+        }
         // Render the chat card template
         const templateData = {
             actor: this.actor,
             item: this,
             tokenId: this.actor.token?.id,
             action: "Defends",
-            rollData: rollData
+            rollData: rollData,
+            toughnessMap: this.actor.system.isSpaceActor ? CONFIG.d100A?.toughness : itemFirepowerToughnessMap
 
         };
         //console.log(rollData)
         const template = `systems/Alternityd100/templates/chat/item-defend-card.html`;
-        const renderPromise = renderTemplate(template, templateData);
+        const renderPromise = foundry.applications.handlebars.renderTemplate(template, templateData);
         renderPromise.then((html) => {
             // Create the chat message
             const chatData = {
-                type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+                style: CONST.CHAT_MESSAGE_STYLES.OTHER,
                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                 content: html,
                 sound: true ? CONFIG.sounds.dice : null,
@@ -2863,8 +2877,7 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             content: content,
             rollMode: game.settings.get("core", "rollMode"),
-            roll: rollResult.roll,
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+            rolls: [rollResult.roll],
             sound: CONFIG.sounds.dice
         });
     }
@@ -2930,18 +2943,17 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
 
         // Roll the check
         const rollObject = Roll.create("1d6");
-        const roll = await rollObject.evaluate({ async: true });
+        const roll = await rollObject.evaluate();
         const success = roll.total >= parseInt(data.recharge.value);
 
         // Display a Chat Message
         const rollMode = game.settings.get("core", "rollMode");
         const chatData = {
-            user: game.user.id,
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+            author: game.user.id,
             flavor: `${this.name} recharge check - ${success ? "success!" : "failure!"}`,
             whisper: (["gmroll", "blindroll"].includes(rollMode)) ? ChatMessage.getWhisperRecipients("GM") : null,
             blind: rollMode === "blindroll",
-            roll: roll,
+            rolls: [roll],
             speaker: ChatMessage.getSpeaker({
                 actor: this.actor,
                 alias: this.actor.name
@@ -2958,11 +2970,12 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
 
     findHitLocation(actorToken, target) {
         console.log(actorToken, target.object)
-        const ray = new Ray({ x: actorToken.object.center.x, y: actorToken.object.center.y }, { x: target.object.center.x, y: target.object.center.y })
+        const ray = new foundry.canvas.geometry.Ray({ x: actorToken.object.center.x, y: actorToken.object.center.y }, { x: target.object.center.x, y: target.object.center.y })
         const angle = raytodeg(ray) + 180;
 
         var aspect
-        const arcAngle = Math.normalizeDegrees(angle - target.rotation)
+        const heading = Number(target?.document?.d100ARotation ?? target?.d100ARotation ?? target?.rotation ?? 0);
+        const arcAngle = Math.normalizeDegrees(angle - heading)
         //   if (item.system.mount.arc.front) {
         // console.log(arcAngle)
         if ((arcAngle > 300) || (arcAngle < 60)) aspect = "fwd"
@@ -3063,31 +3076,15 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
 
     static async _onRollHitLocation2(event) {
 
-
-        console.log(parseInt(game.settings.get("Alternityd100", "starshipHitLocLen")), game.settings.get("Alternityd100", "starshipHitLocLen"))
-
-
-
-
-        let SAA = new Promise((resolve) => {
-            const buttonz = {}
-            for (let numbut = 0; numbut <= game.settings.get("Alternityd100", "starshipHitLocLen"); numbut++) {
-                buttonz[numbut] = { label: "±" + numbut, callback: () => resolve(this._onRollHitLocation(event, numbut)) }
-            }
-            const dialogData = {
-                title: game.i18n.localize("Hit Location Adjustment"),//.format(itemData.name),
-                content: game.i18n.localize("Adjustment to random compartment hit location"),//.format(itemData.name),
-                buttons: buttonz,
-                close: () => {
-                    resolve(false);
-                },
-                default: 0,
-            };
-            // if (!allowSpell) delete dialogData.buttons.spell;
-            new Dialog(dialogData, { classes: ["dialog", "pf1", "create-pharmaceutical"] }).render(true);
+        const max = Number(game.settings.get("Alternityd100", "starshipHitLocLen")) || 0;
+        const result = await HitLocationAdjustDialogV2.prompt({
+            title: game.i18n.localize("Hit Location Adjustment"),
+            content: game.i18n.localize("Adjustment to random compartment hit location"),
+            max
         });
 
-        console.log(SAA)
+        if (!result || result.cancelled) return false;
+        return this._onRollHitLocation(event, result.value);
 
     }
 
@@ -3095,16 +3092,16 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
 
     static async _onRollHitLocation(event, numbut) {
         const button = event.currentTarget;
-        const tokenId = button.dataset.targetid;
+        const tokenId = button.dataset.targetid ?? button.dataset.targetId;
         const atttokenid = button.dataset.atttokenid;
         const aspect = button.dataset.aspect;
         const targetToken = await findTokenById(tokenId)
         const attackingToken = findTokenById(atttokenid)
         const token = null  //this.actor.token;
         const targetSize = targetToken.actor.system.frame.system.basesize
-        console.log(d100A.hitLocation, targetToken, targetToken.actor.system.details, numbut)
+        console.log("hitloc",d100A.hitLocation, targetToken, targetToken.actor.system.details, numbut)
         const die = d100A.hitLocation[targetSize].die
-        const roll = await Roll.create('1d' + die).evaluate({ async: true });
+        const roll = await Roll.create('1d' + die).evaluate();
 
 
         let location = "F"
@@ -3152,13 +3149,13 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
         const templateType = ["tool", "pharmaceutical"].includes(this.type) ? this.type : "item";
         //const template = `systems/Alternityd100/templates/chat/${templateType}-card.html`;
         const template = `systems/Alternityd100/templates/chat/roll-hitLoc.hbs`;
-        const html = await renderTemplate(template, templateData);
+        const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
         let a = 0
         console.log(ChatMessage.getSpeaker({ token: attackingToken }))
         // Basic chat message data
         const chatData = {
-            user: game.user.id,
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            author: game.user.id,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             content: html,
             speaker: targetToken ? ChatMessage.getSpeaker({ token: targetToken }) : ChatMessage.getSpeaker({ actor: this.actor }),
             sound: a === 0 ? CONFIG.sounds.dice : null,
@@ -3194,23 +3191,30 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
         //console.log(this.system)
         //
         //console.log("\n----rollDefence-------------\n",event)
-        event.preventDefault();
+        event?.preventDefault?.();
         // Extract card data
-        const button = event.currentTarget;
-        const applytoSelected = event.altKey
-        const defenceData = {}
-        const card = button.closest(".chat-card");
-        const messageId = card.closest(".message").dataset.messageId;
-        const message = game.messages.get(messageId);
+        const button = event?.currentTarget ?? event?.target;
+        if (!button) return;
+
+        const applytoSelected = !!event?.altKey;
+        const defenceData = {};
+
+        // Some chat messages in this system don't wrap content in a ".chat-card".
+        // Fall back to the chat message element to resolve messageId.
+        const card = button.closest?.(".chat-card") ?? null;
+        const messageElem = button.closest?.("li.chat-message, .chat-message, .message") ?? null;
+        const messageId = messageElem?.dataset?.messageId;
+        const message = messageId ? game.messages.get(messageId) : null;
+
         const action = button.dataset.action;
         const type = button.dataset.type;
         const value = button.dataset.value;
         console.log("\n----tokenData-------------\n", button.dataset)
 
 
-        let tokenId = button.dataset.targetid;
-        if (applytoSelected) tokenId = game.canvas.tokens.controlled[0].id
-        let sceneId = card.dataset.sceneId;
+    let tokenId = button.dataset.targetid ?? button.dataset.targetId;
+    if (applytoSelected) tokenId = game.canvas.tokens.controlled?.[0]?.id;
+    const sceneId = card?.dataset?.sceneId ?? messageElem?.dataset?.sceneId;
         const tokenData = findTokenById(tokenId)
         const actorB = tokenData.actor
         const actorData = actorB.actorData
@@ -3239,7 +3243,7 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
         //console.log("\n----armor-------------\n",armor[0], game.items,armor)
         let item = armor[0];
         //console.log("\n----armor-------------\n",item)
-        const chatCardActor = this._getChatCardActor(card);
+        const chatCardActor = card ? this._getChatCardActor(card) : null;
         let contrActor = canvas.tokens.controlled;
         if (!event.shiftKey) {
             defenceData.actor = actorB
@@ -3270,13 +3274,17 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
     /* -------------------------------------------- */
 
     static async _onChatCardAction(event) {
-        event.preventDefault();
+        event?.preventDefault?.();
         //console.log("----onChatCardAction-------------",event)
         // Extract card data
-        const button = event.currentTarget;
-        const card = button.closest(".chat-card");
-        const messageId = card.closest(".message").dataset.messageId;
-        const message = game.messages.get(messageId);
+        const button = event?.currentTarget ?? event?.target;
+        if (!button) return;
+
+        const card = button.closest?.(".chat-card") ?? null;
+        const messageElem = button.closest?.("li.chat-message, .chat-message, .message") ?? null;
+        const messageId = messageElem?.dataset?.messageId;
+        const message = messageId ? game.messages.get(messageId) : null;
+        if (!message) return;
         const action = button.dataset.action;
         const type = button.dataset.type;
         const value = button.dataset.value;
@@ -3288,7 +3296,7 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
         if (!(isTargetted || game.user.isGM || message.isAuthor)) return;
 
         // Get the Actor from a synthetic Token
-        const chatCardActor = this._getChatCardActor(card);
+        const chatCardActor = card ? this._getChatCardActor(card) : null;
         if (!chatCardActor) return;
 
         button.disabled = true;
@@ -3301,7 +3309,7 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
             const newItemData = foundry.utils.duplicate(item.data);
             newitemData.level = message.data.flags.level;
 
-            item = new ItemSFRPG(newItemData, { parent: item.parent });
+            item = new Itemd100A(newItemData, { parent: item.parent });
 
             // Run automation to ensure save DCs are correct.
             item.prepareData();
@@ -3358,9 +3366,14 @@ The Gamemasfer Guide contains more Information on the toughness ratings of vario
      */
     static _onChatCardToggleContent(event) {
         event.preventDefault();
-        const header = event.currentTarget;
-        const card = header.closest(".chat-card");
+        const header = event?.currentTarget ?? event?.target;
+        if (!header) return;
+
+        const card = header.closest?.(".chat-card");
+        if (!card) return;
+
         const content = card.querySelector(".card-content");
+        if (!content) return;
         content.style.display = content.style.display === "none" ? "block" : "none";
 
         // Update chat popout size
@@ -3599,7 +3612,7 @@ export function findTokenByActorId(ActorId) {
     return getCanvas().tokens?.placeables.find((t) => t.actor.id == ActorId);
 }
 export function getCanvas() {
-    if (!(canvas instanceof Canvas) || !canvas.ready) {
+    if (!(canvas instanceof foundry.canvas.Canvas) || !canvas.ready) {
         throw new Error('Canvas Is Not Initialized');
     }
     return canvas;
@@ -3616,7 +3629,7 @@ class scanTarget {
     constructor(token) {
         this.token = token
         this.id = generateUUID()
-        this.hullType = token.actor.system.frame.system.hullType
+        this.size = token.actor.system.frame?.system.size || "tiny"
         this.name = token.name
         this.sensors = new Set()
         this.aquired = false

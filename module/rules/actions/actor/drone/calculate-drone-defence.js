@@ -1,4 +1,4 @@
-import { SFRPG } from "../../../../config.js";
+import { d100A as SFRPG } from "../../../../d100Aconfig.js";
 
 export default function (engine) {
     engine.closures.add("calculateDronedefence", (fact, context) => {

@@ -1,11 +1,11 @@
-import { SFRPG } from "../../../../config.js";
+import { d100A as SFRPG } from "../../../../d100Aconfig.js";
 
 export default function(engine) {
     engine.closures.add("calculateStarshipArmorClass", (fact, context) => {
         const data = fact.actor.system;
 
         const pilot = (data.crew?.pilot?.actors) ? data.crew?.pilot?.actors[0] : null;
-        const sizeMod = CONFIG.SFRPG.starshipSizeMod[data.details.size] || 0;
+        const sizeMod = CONFIG.d100A.starshipSizeMod[data.details.size] || 0;
 
         let pilotingRanks = pilot?.system?.skills?.pil?.ranks || 0;
         if (data.crew.useNPCCrew) {
@@ -71,8 +71,8 @@ export default function(engine) {
 
 
 const hullItem = fact.items.filter(x => x.type === "starshipFrame");
-
-if (hullItem){
+//console.log("Hull", hullItem)
+if (hullItem[0]){
 
     data.details.toughness.firepower = hullItem[0].system.toughness 
     data.details.toughness.firepowerN = hullItem[0].system.firepowerN;
@@ -93,13 +93,25 @@ if (hullItem){
         data.attributes.damageControl.base = 0
         data.attributes.damageControl.value = 0
         data.attributes.damageControl.tooltip = "Base = 0"
-        data.attributes.resistance.base = data.frame?.system.target || 0
-        data.attributes.resistance.tooltip = "<p>" + (data.frame?.name || "Hull")   +": " + data.attributes.resistance.base + "</p>"
+        data.attributes.resistance.base = data.frame?.system?.target || 0
+        data.attributes.resistance.tooltip = {}
+        data.attributes.resistance.tooltip.base = ""
+         data.attributes.resistance.tooltip.area = ""
+            data.attributes.resistance.tooltip.beam = ""
+            data.attributes.resistance.tooltip.bomb = ""
+            data.attributes.resistance.tooltip.mine = ""
+            data.attributes.resistance.tooltip.missile = ""
+            data.attributes.resistance.tooltip.projectile = ""
+            data.attributes.resistance.tooltip.special = ""
+            data.attributes.resistance.tooltip.torpedo = ""
+        data.attributes.resistance.tooltip.base += "<p>Base: " + (data.frame?.name || "Hull")   +" Res: " + data.attributes.resistance.base + "</p>"
         for (const damageControlItem of damageControlItems ){
-            data.attributes.damageControl.value += damageControlItem.system.damageControl? damageControlItem.system.damageControl : 0
+                     if (damageControlItem.system.damageControl){ 
+            data.attributes.damageControl.value += damageControlItem.system.damageControl
            // ECMItem.system.targetLockBonus[key]?  console.log(key,value,ECMItem) :  console.log("No",key,ECMItem)
-           data.attributes.damageControl.tooltip += "<p>" + damageControlItem.name +": " + damageControlItem.system.damageControl + "</p>"
-            }
+           data.attributes.damageControl.tooltip +="<p>" + damageControlItem.name +": " + damageControlItem.system.damageControl + "</p>"
+                     }  
+        }
 
             for (let [k,v] of Object.entries(SFRPG.starshipWeaponTypes)){
 
@@ -107,25 +119,34 @@ if (hullItem){
                 
             }
             
+
+
+
            
             for (const damageControlItem of damageControlItems ){
                 for (let [k,v] of Object.entries(damageControlItem.system.resistance)){
 
                     data.attributes.resistance[k] += v.value || 0
-    
+   // console.log(k,v) 
                     // ECMItem.system.targetLockBonus[key]?  console.log(key,value,ECMItem) :  console.log("No",key,ECMItem)
                     if (v.value ){
-                    data.attributes.resistance.tooltip += "<p>" + damageControlItem.name +": " +  game.i18n.localize("SFRPG.ShipSystems.starshipWeaponTypes." + k) +": " + v.value + "</p>"
-                    }
-
+                    data.attributes.resistance.tooltip.base += "<p>" + damageControlItem.name +": " +  game.i18n.localize("SFRPG.ShipSystems.starshipWeaponTypes." + k) +": " + v.value + "</p>";
+                    data.attributes.resistance.tooltip[k] += "<p>" + damageControlItem.name +": " +  game.i18n.localize("SFRPG.ShipSystems.starshipWeaponTypes." + k) +": " + v.value + "</p>"
                 }
 
-
-
-
+                }
  
                 }
-    
+         //       console.log("Resistance",data.attributes.resistance.tooltip)
+
+data.attributes.resistance.tooltip.area = "<p>Area Resistance: " + (data.attributes.resistance.base + data.attributes.resistance.area) + "</p>" + data.attributes.resistance.tooltip.area 
+data.attributes.resistance.tooltip.beam = "<p>Beam Resistance: " + (data.attributes.resistance.base + data.attributes.resistance.beam) + "</p>" + data.attributes.resistance.tooltip.beam
+data.attributes.resistance.tooltip.bomb = "<p>Bomb Resistance: " + (data.attributes.resistance.base + data.attributes.resistance.bomb) + "</p>" + data.attributes.resistance.tooltip.bomb
+data.attributes.resistance.tooltip.mine = "<p>Mine Resistance: " + (data.attributes.resistance.base + data.attributes.resistance.mine) + "</p>" + data.attributes.resistance.tooltip.mine
+data.attributes.resistance.tooltip.missile = "<p>Missile Resistance: " + (data.attributes.resistance.base + data.attributes.resistance.missile) + "</p>" + data.attributes.resistance.tooltip.missile
+data.attributes.resistance.tooltip.projectile = "<p>Projectile Resistance: " + (data.attributes.resistance.base + data.attributes.resistance.projectile) + "</p>" + data.attributes.resistance.tooltip.projectile
+data.attributes.resistance.tooltip.special = "<p>Special Resistance: " + (data.attributes.resistance.base + data.attributes.resistance.special) + "</p>" + data.attributes.resistance.tooltip.special
+data.attributes.resistance.tooltip.torpedo = "<p>Torpedo Resistance: " + (data.attributes.resistance.base + data.attributes.resistance.torpedo) + "</p>" + data.attributes.resistance.tooltip.torpedo
 
 
 
@@ -154,15 +175,16 @@ if (hullItem){
             value.value = value.base
             //console.log(key,value)
             
-            value.tooltip = "Base: " + value.base
+            value.tooltip = "" //"Base: " + value.base
             for (const ECMItem of ECMItems ){
 
-            
-            value.value += ECMItem.system.targetLockBonus[key].value? ECMItem.system.targetLockBonus[key].value : 0
+            if(ECMItem.system.targetLockBonus[key].value){
+            value.value += ECMItem.system.targetLockBonus[key].value 
 
           //  ECMItem.system.targetLockBonus[key]?  console.log(key,value,ECMItem) :  console.log("No",key,ECMItem)
             value.tooltip += "<p>" + ECMItem.name +": " + ECMItem.system.targetLockBonus[key]?.value + "</p>"
-            }
+            }   
+        }
         }
 
 /***

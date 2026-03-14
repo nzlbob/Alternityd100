@@ -23,9 +23,10 @@ import { d100Actor } from "./d100actor.js";
 import { d100ItemSheet } from "./d100item-sheet.js";
 //import { SimpleActorSheet } from "./actor-sheet.js";
 import { d100ActorSheet } from "./d100Actor-sheet.js";
-import { d100ATokenHUD } from "./d100hud.js"; 
+import { d100ATokenHUD } from "./d100TokenHud.js"; 
 import { d100ATokenDoc } from "./d100TokenDoc.js";
 import { d100AToken } from "./d100Token.js";
+import { d100ATokenRuler } from "./d100TokenRuler.js";
 
 import { d100AActorSheetCharacter } from "./actor/sheet/character.js";
 import { d100AActorSheetCharacterSmall} from "./actor/sheet/character-small.js";
@@ -43,15 +44,15 @@ import { preloadHandlebarsTemplates } from "./templates.js";
 import { createAlternityd100Macro } from "./macro.js";
 import { Diced100 } from "./dice.js";
 //import { RollPF , parseRollStringVariable} from "./roll.js";
-import { ItemSFRPG } from "./item/item.js";
+import { Itemd100A } from "./item/item.js";
 
 import { d100ASceneConfig } from "./d100ASceneConfig.js";
 //import { d100ACombatantConfig } from "./combat/combatant-config.js";
 import { d100AScene} from "./d100AScene.js";
-import { ItemSheetSFRPG } from "./item/sheet.js";
+import { ItemSheetd100A } from "./item/d100ItemSheet.js";
 import { ItemCollectionSheet } from './apps/item-collection-sheet.js';
 import { ItemDeletionDialog } from './apps/item-deletion-dialog.js';
-import { SFRPG } from "./config.js";
+// SFRPG config has been migrated into d100Aconfig.js
 import { SFRPGModifierTypes, SFRPGModifierType, SFRPGEffectType } from "../module/modifiers/types.js";
 import SFRPGModifier from "../module/modifiers/modifier.js";
 import d100AModifierApplication from '../module/apps/modifier-app.js';
@@ -104,9 +105,9 @@ import {
 
 
 
-  import { d100BCombatTracker } from './combat/combat-trackerB.js'
-  import { d100BCombat } from "./combat/combatB.js";
-  import { d100BCombatant } from "./combat/d100CombatantB.js";
+  import { d100CombatTracker } from './combat/d100combat-tracker.js'
+  import { d100Combat } from "./combat/d100combat.js";
+  import { d100Combatant } from "./combat/d100Combatant.js";
 
 
 //  import CounterManagement from "../module/classes/counter-management.js";
@@ -136,6 +137,69 @@ Hooks.once("init", function() {
   console.log(`Initializing Alternityd100 System`,game.i18n.localize("ACTOR.TypeCharacter"));
 //  CONST.USER_PERMISSIONS.TOKEN_DELETE.defaultRole = 1
 
+  // Defensive: some legacy templates can call {{selectOptions}} with null/undefined.
+  // Foundry's built-in helper throws (Object.entries(null)), which aborts sheet rendering.
+  // We wrap it to return an empty string instead, and log a warning to help locate the culprit.
+  try {
+    const originalSelectOptions = Handlebars?.helpers?.selectOptions;
+    if (originalSelectOptions && !originalSelectOptions.__alternityd100_wrapped) {
+      const wrapped = function (choices, options) {
+        if (choices === null || choices === undefined) {
+          console.warn("Alternityd100 | selectOptions received null/undefined choices", {
+            context: this,
+            options
+          });
+          return "";
+        }
+        return originalSelectOptions.call(this, choices, options);
+      };
+      wrapped.__alternityd100_wrapped = true;
+      Handlebars.registerHelper("selectOptions", wrapped);
+    }
+  } catch (err) {
+    console.warn("Alternityd100 | Failed to wrap selectOptions helper", err);
+  }
+
+  // Battery Fire support (assignment is tracked via actor flags in `flags.Alternityd100.batteries`).
+  // When the battery leader attacks, attached weapons also consume capacity/ammo.
+  Hooks.on("attackRolled", async ({ actor, item }) => {
+    try {
+      if (!actor || !item) return;
+      if (actor.type !== "starship") return;
+      if ((item.type !== "starshipWeapon") && (item.system?.type !== "starshipWeapon")) return;
+      if (item.system?.fireMode !== "battery") return;
+
+      const rawBatteries = actor.getFlag?.("Alternityd100", "batteries");
+      const batteries = Array.isArray(rawBatteries)
+        ? rawBatteries.map(g => Array.isArray(g) ? g.filter(Boolean) : [])
+        : [];
+
+      let leaderGroup = null;
+      for (const group of batteries) {
+        if (!Array.isArray(group) || group.length === 0) continue;
+        if (group[0] === item.id) {
+          leaderGroup = group;
+          break;
+        }
+      }
+
+      // Only the leader consumes for the group.
+      if (!leaderGroup) return;
+
+      const memberIds = leaderGroup.slice(1);
+      for (const memberId of memberIds) {
+        const member = actor.items?.get?.(memberId);
+        if (!member) continue;
+        // Spend ammo/capacity once per member weapon.
+        if (typeof member.consumeCapacity === "function") {
+          await member.consumeCapacity(1);
+        }
+      }
+    } catch (err) {
+      console.warn("Alternityd100 | Battery ammo consumption failed", err);
+    }
+  });
+
   const engine =  new Engine();
 //await engine.reset()
 
@@ -157,15 +221,15 @@ Hooks.once("init", function() {
     applications: {
       // Actor Sheets
       /*ActorSheetSFRPG,
-      ActorSheetSFRPGCharacter,
-      ActorSheetSFRPGDrone,
-      ActorSheetSFRPGHazard,
-      ActorSheetSFRPGNPC,
-      ActorSheetSFRPGStarship,
-      ActorSheetSFRPGVehicle,*/
+      //ActorSheetSFRPGCharacter,
+      //ActorSheetSFRPGDrone,
+      //ActorSheetSFRPGHazard,
+     // ActorSheetSFRPGNPC,
+      //ActorSheetSFRPGStarship,
+      //ActorSheetSFRPGVehicle,*/
       // Item Sheets
       /*ItemCollectionSheet,
-      ItemSheetSFRPG,      */      
+      ItemSheetd100A,      */      
       // Dialogs
       ActorMovementConfig,
       /*AddEditSkillDialog,
@@ -188,13 +252,13 @@ Hooks.once("init", function() {
  
     d100AActorSheetCharacter,
     d100AActorSheetNPC,
-    ItemSheetSFRPG,
+    ItemSheetd100A,
     //C0001 DragRuler,
     //TokenHUD,
     ItemCollectionSheet,
     ItemDeletionDialog,
     createAlternityd100Macro,
-    config: SFRPG,
+    config: d100A,
     d100Aconfig: d100A,
     ActorMovementConfig,
     SFRPGModifier,
@@ -239,16 +303,254 @@ Hooks.once("init", function() {
   CONFIG.controlIcons.doorOpen = "systems/Alternityd100/icons/items/door_02_open.webp";
   CONFIG.controlIcons.doorClosed = "systems/Alternityd100/icons/items/door_02.webp";
   CONFIG.Actor.documentClass = d100Actor;
-  CONFIG.Item.documentClass = ItemSFRPG;
+  CONFIG.Item.documentClass = Itemd100A;
   CONFIG.Token.documentClass = d100ATokenDoc;
   CONFIG.Token.objectClass = d100AToken;
+  CONFIG.Token.rulerClass = d100ATokenRuler;
+
+  // Movement actions (v13): keep Foundry's standard actions, but define Alternity-specific behavior.
+  // In particular:
+  // - crawl: 25% of land speeds  -> cost multiplier 4x
+  // - burrow: 10% of land speeds -> cost multiplier 10x
+  try {
+    const actions = CONFIG?.Token?.movement?.actions;
+    if (actions?.crawl) {
+      actions.crawl.getCostFunction = () => (cost) => cost * 4;
+    }
+    if (actions?.burrow) {
+      actions.burrow.getCostFunction = () => (cost) => cost * 10;
+    }
+
+    // Limit selectable movement actions by actor type.
+    // - Vehicles: drive (walk), fly, swim
+    // - Starships/ordnance: none (movement action palette not needed)
+    if (actions) {
+      const restrictedVehicleActions = new Set(["walk", "fly", "swim"]);
+      for (const [id, cfg] of Object.entries(actions)) {
+        if (!cfg || cfg.__alternityd100_canSelectWrapped) continue;
+        const original = typeof cfg.canSelect === "function" ? cfg.canSelect : (() => true);
+        cfg.canSelect = (tokenLike) => {
+          const actorType = tokenLike?.actor?.type;
+          if (["starship", "ordnance"].includes(actorType)) return false;
+          if (actorType === "vehicle") return restrictedVehicleActions.has(id);
+          return original(tokenLike);
+        };
+        cfg.__alternityd100_canSelectWrapped = true;
+      }
+    }
+
+    // Ensure default remains the core "walk" action.
+    if (CONFIG?.Token?.movement) CONFIG.Token.movement.defaultAction = "walk";
+  } catch (err) {
+    console.warn("Alternityd100 | Failed to adjust CONFIG.Token.movement.actions", err);
+  }
+
+  // Combat movement (visual + status automation)
+  // Only when:
+  // - Token is in combat
+  // - Token movement action is "walk" (land)
+  // After a move completes:
+  // - If moved distance exceeds walk: apply "run" status
+  // - If moved distance exceeds run: apply "sprint" status
+  // - Otherwise: remove run/sprint
+  const _combatMoveProcessing = new Set();
+
+  const _isTokenInCombat = (tokenDoc) => {
+    const tokenObj = tokenDoc?.object;
+    if (typeof tokenObj?.inCombat === "boolean") return tokenObj.inCombat;
+
+    const combat = game?.combat;
+    const combatants = combat?.combatants;
+    if (!combat || !combatants) return false;
+    const sceneId = tokenDoc?.parent?.id ?? canvas?.scene?.id;
+    const tokenId = tokenDoc?.id;
+    return combatants.some((c) => c?.sceneId === sceneId && c?.tokenId === tokenId);
+  };
+
+  const _measureTokenMoveDistance = (tokenDoc, fromPosition, toPosition) => {
+    if (!tokenDoc || !fromPosition || !toPosition) return 0;
+
+    try {
+      // Prefer the token-aware v13 movement measurement API.
+      const result = tokenDoc.measureMovementPath([
+        {
+          x: Number(fromPosition.x) || 0,
+          y: Number(fromPosition.y) || 0,
+          elevation: Number(fromPosition.elevation ?? tokenDoc.elevation) || 0
+        },
+        {
+          x: Number(toPosition.x) || 0,
+          y: Number(toPosition.y) || 0,
+          elevation: Number(toPosition.elevation ?? tokenDoc.elevation) || 0
+        }
+      ]);
+
+      const directDistance = Number(result?.distance);
+      if (Number.isFinite(directDistance)) return directDistance;
+
+      const lastWaypointDistance = Number(result?.waypoints?.at?.(-1)?.distance);
+      if (Number.isFinite(lastWaypointDistance)) return lastWaypointDistance;
+    } catch (err) {
+      console.warn("Alternityd100 | TokenDocument.measureMovementPath failed, falling back to grid measurement", err);
+    }
+
+    try {
+      const origin = tokenDoc.getCenterPoint({ x: Number(fromPosition.x) || 0, y: Number(fromPosition.y) || 0 });
+      const dest = tokenDoc.getCenterPoint({ x: Number(toPosition.x) || 0, y: Number(toPosition.y) || 0 });
+      const measured = canvas.grid.measurePath([origin, dest]);
+      return Number(measured?.distance ?? 0);
+    } catch (err) {
+      console.warn("Alternityd100 | Grid measurement fallback failed", err);
+    }
+
+    return 0;
+  };
+
+  const _getMovementRouteKey = (tokenDoc) => tokenDoc?.uuid ?? `${tokenDoc?.parent?.id ?? ""}.${tokenDoc?.id ?? ""}`;
+
+  const _getMovementHistoryDistance = (movement) => {
+    const totalHistoryDistance = Number(movement?.history?.distance);
+    if (Number.isFinite(totalHistoryDistance) && totalHistoryDistance > 0) return totalHistoryDistance;
+
+    const recordedDistance = Number(movement?.history?.recorded?.distance);
+    const unrecordedDistance = Number(movement?.history?.unrecorded?.distance);
+    const normalizedRecordedDistance = Number.isFinite(recordedDistance) ? recordedDistance : 0;
+    const normalizedUnrecordedDistance = Number.isFinite(unrecordedDistance) ? unrecordedDistance : 0;
+    const combinedDistance = normalizedRecordedDistance + normalizedUnrecordedDistance;
+
+    return combinedDistance > 0 ? combinedDistance : 0;
+  };
+
+  const _getMovedDistanceFromOperation = (tokenDoc, movement) => {
+    const passedDistance = Number(movement?.passed?.distance);
+    const normalizedPassedDistance = Number.isFinite(passedDistance) ? passedDistance : 0;
+    const historyDistance = _getMovementHistoryDistance(movement);
+
+    if ((historyDistance + normalizedPassedDistance) > 0) {
+      return historyDistance + normalizedPassedDistance;
+    }
+
+    if (normalizedPassedDistance > 0) return normalizedPassedDistance;
+
+    const waypoints = [];
+    const origin = movement?.origin;
+    if (origin) {
+      waypoints.push({
+        x: Number(origin.x) || 0,
+        y: Number(origin.y) || 0,
+        elevation: Number(origin.elevation ?? tokenDoc?.elevation) || 0
+      });
+    }
+
+    for (const waypoint of movement?.passed?.waypoints ?? []) {
+      waypoints.push({
+        x: Number(waypoint?.x) || 0,
+        y: Number(waypoint?.y) || 0,
+        elevation: Number(waypoint?.elevation ?? tokenDoc?.elevation) || 0
+      });
+    }
+
+    const destination = movement?.destination;
+    if (destination) {
+      const destinationPoint = {
+        x: Number(destination.x) || 0,
+        y: Number(destination.y) || 0,
+        elevation: Number(destination.elevation ?? tokenDoc?.elevation) || 0
+      };
+
+      const lastWaypoint = waypoints.at(-1);
+      if (!lastWaypoint || (lastWaypoint.x !== destinationPoint.x) || (lastWaypoint.y !== destinationPoint.y)
+        || (Number(lastWaypoint.elevation ?? 0) !== destinationPoint.elevation)) {
+        waypoints.push(destinationPoint);
+      }
+    }
+
+    if (waypoints.length >= 2) {
+      try {
+        const result = tokenDoc.measureMovementPath(waypoints);
+        const measuredDistance = Number(result?.distance);
+        if (Number.isFinite(measuredDistance) && measuredDistance > 0) return measuredDistance;
+      } catch (err) {
+        console.warn("Alternityd100 | Failed to re-measure token movement operation", err);
+      }
+    }
+
+    if (origin && destination) return _measureTokenMoveDistance(tokenDoc, origin, destination);
+    return 0;
+  };
+
+
+  const _shouldSyncSpaceSpeedFromMove = (actorType) => {
+    const setting = game?.settings?.get?.("Alternityd100", "spaceSpeedFromLastMove");
+    if (setting === "both") return ["starship", "ordnance"].includes(actorType);
+    if (setting === "starship") return actorType === "starship";
+    if (setting === "ordnance") return actorType === "ordnance";
+    return false;
+  };
+
+  Hooks.on("moveToken", async (tokenDoc, movement, _operation, user) => {
+    if (!canvas?.ready) return;
+    if (!tokenDoc?.actor) return;
+
+    // Client-scoped setting: only the user whose action caused the token move should process it.
+    if (user?.id && (game?.user?.id !== user.id)) return;
+
+    const actor = tokenDoc.actor;
+    const actorType = actor?.type;
+    if (!actorType) return;
+
+    const key = _getMovementRouteKey(tokenDoc);
+    const remainingDistance = Number(movement?.pending?.distance ?? 0);
+    if (Number.isFinite(remainingDistance) && remainingDistance > 0) return;
+
+    const moved = _getMovedDistanceFromOperation(tokenDoc, movement);
+    if (!Number.isFinite(moved) || moved <= 0) return;
+
+    if (_shouldSyncSpaceSpeedFromMove(actorType)) {
+      const currentSpeed = Number(actor.system?.attributes?.speed?.value);
+      if (currentSpeed !== moved) {
+        try {
+          await actor.update({ ["system.attributes.speed.value"]: moved });
+        } catch (err) {
+          console.warn("Alternityd100 | Failed to sync space speed from last move", err);
+        }
+      }
+    }
+
+    // Only apply for land movement action.
+    const action = tokenDoc.movementAction ?? CONFIG?.Token?.movement?.defaultAction;
+    if (action !== "walk") return;
+
+    // Only apply in combat.
+    if (!_isTokenInCombat(tokenDoc)) return;
+
+    // Avoid recursion when toggling effects.
+    if (_combatMoveProcessing.has(key)) return;
+    if (!actorType || ["starship", "vehicle", "ordnance", "hazard"].includes(actorType)) return;
+
+    const speeds = actor.system?.attributes?.speed;
+    const walk = Number(speeds?.walk?.value);
+    const run = Number(speeds?.run?.value);
+    if (!Number.isFinite(walk) || !Number.isFinite(run)) return;
+
+    _combatMoveProcessing.add(key);
+    try {
+      const shouldSprint = moved > run;
+      const shouldRun = (moved > walk) && !shouldSprint;
+      await actor.toggleStatusEffect("run", { active: shouldRun, overlay: false });
+      await actor.toggleStatusEffect("sprint", { active: shouldSprint, overlay: false });
+    } catch (err) {
+      console.warn("Alternityd100 | Combat movement status update failed", err);
+    } finally {
+      _combatMoveProcessing.delete(key);
+    }
+  });
  
   //CONFIG.Combatant.documentClass = d100ACombatantConfig;
 
 
 
   //CONFIG.MeasuredTemplate.objectClass = MeasuredTemplatePF;
-  CONFIG.SFRPG = SFRPG;
   CONFIG.d100A = d100A;
 
   
@@ -279,24 +581,89 @@ Hooks.once("init", function() {
 
 
 
-  // Register sheet application classes
-  Actors.unregisterSheet("core", ActorSheet);
-  //Actors.registerSheet("Alternityd100", SimpleActorSheet, { makeDefault: false });
-  //Actors.registerSheet("Alternityd100", d100ActorSheet, { makeDefault: true });
-  Actors.registerSheet("Alternityd100", d100AActorSheetCharacter, { types: ["character"], makeDefault: true });
-  Actors.registerSheet("Alternityd100", d100AActorSheetCharacterSmall, { types: ["character"], makeDefault: false });
-  Actors.registerSheet("Alternityd100", d100AActorSheetStarship , { types: ["starship"], makeDefault: true });
-  Actors.registerSheet("Alternityd100", d100AActorSheetVehicle, { types: ["vehicle"], makeDefault: true });
-  Actors.registerSheet("Alternityd100", d100AActorSheetDrone,     { types: ["drone"],     makeDefault: true });
-  Actors.registerSheet("Alternityd100", d100AActorSheetHazard,    { types: ["hazard"],    makeDefault: true });
-  Actors.registerSheet("Alternityd100", d100AActorSheetOrdnance,    { types: ["ordnance"],    makeDefault: true });
-  Actors.registerSheet("Alternityd100", d100AActorSheetNPC,       { types: ["npc"],       makeDefault: false });
+  // Register sheet application classes (v13+)
+  foundry.applications.apps.DocumentSheetConfig.registerSheet(Actor, "Alternityd100", d100AActorSheetCharacter, { types: ["character"], makeDefault: true });
+  foundry.applications.apps.DocumentSheetConfig.registerSheet(Actor, "Alternityd100", d100AActorSheetCharacterSmall, { types: ["character"], makeDefault: false });
+  foundry.applications.apps.DocumentSheetConfig.registerSheet(Actor, "Alternityd100", d100AActorSheetStarship, { types: ["starship"], makeDefault: true });
+  foundry.applications.apps.DocumentSheetConfig.registerSheet(Actor, "Alternityd100", d100AActorSheetVehicle, { types: ["vehicle"], makeDefault: true });
+  foundry.applications.apps.DocumentSheetConfig.registerSheet(Actor, "Alternityd100", d100AActorSheetDrone, { types: ["drone"], makeDefault: true });
+  foundry.applications.apps.DocumentSheetConfig.registerSheet(Actor, "Alternityd100", d100AActorSheetHazard, { types: ["hazard"], makeDefault: true });
+  foundry.applications.apps.DocumentSheetConfig.registerSheet(Actor, "Alternityd100", d100AActorSheetOrdnance, { types: ["ordnance"], makeDefault: true });
+  foundry.applications.apps.DocumentSheetConfig.registerSheet(Actor, "Alternityd100", d100AActorSheetNPC, { types: ["npc"], makeDefault: false });
   //Actors.registerSheet("sfrpg", d100AActorSheetStarship,  { types: ["starship"],  makeDefault: true });
   //Actors.registerSheet("sfrpg", ActorSheetSFRPGVehicle,   { types: ["vehicle"],   makeDefault: true });
-  Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("Alternityd100", ItemSheetSFRPG, { makeDefault: true });
+  // Register per-type item sheets so each Item type uses its matching template.
+  // Foundry v13 expects part templates to be string paths (not functions), so we generate a small subclass per type.
+  const makeTypedItemSheet = (template) => class extends ItemSheetd100A {
+    static PARTS = { form: { template } };
+  };
+
+  const itemTypes = [
+    "achievement",
+    "ammunition",
+    "equipment",
+    "clothing",
+    "communication",
+    "computer",
+    "container",
+    "augmentation",
+    "feat",
+    "flaw",
+    "medical",
+    "miscellaneous",
+    "perk",
+    "pharmaceutical",
+    "profession",
+    "professional",
+    "psionic",
+    "race",
+    "sensor",
+    "shield",
+    "survival",
+    "technological",
+    "weapon",
+    "vehicleAttack",
+    "vehicleSystem",
+    "starshipAblativeArmor",
+    "starshipAction",
+    "starshipArmor",
+    "starshipCommunications",
+    "starshipComputer",
+    "starshipCrewQuarter",
+    "starshipDefence",
+    "starshipElectronicCountermeasure",
+    "starshipEngine",
+    "starshipFrame",
+    "starshipOrdnance",
+    "starshipOtherSystem",
+    "starshipPowerCore",
+    "starshipSensor",
+    "starshipShield",
+    "starshipSystemDamage",
+    "starshipWeapon",
+    "goods",
+    "magic",
+    "starshipExpansionBay",
+    "starshipFortifiedHull",
+    "starshipReinforcedBulkhead",
+    "starshipSecuritySystem",
+    "ordnancePropulsion",
+    "ordnanceWarhead",
+    "ordnanceGuidance"
+  ];
+
+  for (const type of itemTypes) {
+    const template = `systems/Alternityd100/templates/items/${type}.html`;
+    foundry.applications.apps.DocumentSheetConfig.registerSheet(Item, "Alternityd100", makeTypedItemSheet(template), {
+      types: [type],
+      makeDefault: true
+    });
+  }
+
+  // Fallback sheet: uses templates/items/generic.html
+  foundry.applications.apps.DocumentSheetConfig.registerSheet(Item, "Alternityd100", ItemSheetd100A, { makeDefault: false });
   //TokenHUD.registerSheet("Alternityd100", d100Hud,       { types: ["TokenHUD"],       makeDefault: true });
-  Scenes.registerSheet("Alternityd100", d100ASceneConfig, { makeDefault: true });
+  foundry.applications.apps.DocumentSheetConfig.registerSheet(Scene, "Alternityd100", d100ASceneConfig, { makeDefault: true });
  // Combatant.registerSheet("Alternityd100", d100ACombatantConfig , { makeDefault: true });
 
 registerSystemRules(game.Alternityd100.engine);
@@ -312,9 +679,9 @@ const combatType = game.settings.get("Alternityd100", "combatType");
 
 // if (combatType == "new") {
   
-  CONFIG.Combatant.documentClass = d100BCombatant;
-  CONFIG.ui.combat = d100BCombatTracker;
-  CONFIG.Combat.documentClass = d100BCombat;
+  CONFIG.Combatant.documentClass = d100Combatant;
+  CONFIG.ui.combat = d100CombatTracker;
+  CONFIG.Combat.documentClass = d100Combat;
 //}
 
 
@@ -332,6 +699,24 @@ if (true) {
        r.style.setProperty("--color-shadow-primary", "#0EAAAA");//#00a0ff
        r.style.setProperty("--color-shadow-highlight", "#0EAAAA");  //#00a0ff
        r.style.setProperty("--sfrpg-theme-blue", "#235683");
+
+       // Foundry UI sizing: make the hotbar slots/buttons smaller.
+       // Important: Foundry defines --hotbar-size on #hotbar, so setting it on :root will NOT override it.
+       // We inject a CSS rule which targets #hotbar directly.
+       const HOTBAR_SIZE_PX = "40px";
+       const styleId = "alternityd100-hotbar-size";
+       if (!document.getElementById(styleId)) {
+         const style = document.createElement("style");
+         style.id = styleId;
+         style.textContent = `#hotbar { --hotbar-size: ${HOTBAR_SIZE_PX}; }`;
+         document.head?.appendChild(style);
+       }
+
+       // Fallback: ensure the rendered hotbar element has the property too.
+       Hooks.on("renderHotbar", (_app, html) => {
+         const element = html?.[0] ?? html;
+         element?.style?.setProperty("--hotbar-size", HOTBAR_SIZE_PX);
+       });
    }
    console.log("Starfinder | [INIT] Registering sheets");
 
@@ -387,8 +772,9 @@ if (true) {
     CONFIG.Combat.initiative.formula = formula;
   }
 
-  // Patch Core Functions
-  PatchCore();
+  // Initialize chat command and inline-roll handlers (hook-based)
+  setupChatHooks();
+  setupInlineRollHooks();
 
 
 
@@ -451,7 +837,7 @@ Hooks.once("setup", function () {
 
   //extendBarRenderer;
     //console.log(`Alternity by d100  | [SETUP] Setting up Alternity by d100  System subsystems`);
-    //console.log("SFRPG",CONFIG.SFRPG)
+    //console.log("d100A",CONFIG.d100A)
 
 
     console.log("Alternity by d100  | [SETUP] Initializing counter management");
@@ -486,31 +872,23 @@ Hooks.once("setup", function () {
             "modifierArmorClassAffectedValues", "capacityUsagePer", "spellLevels", "armorTypes", "spellAreaEffects",
             "weaponSpecial", "weaponCriticalHitEffects", "featTypes", "allowedClasses", "consumableTypes", "maneuverability", "toughness",
             "starshipWeaponTypes", "starshipWeaponClass", "starshipWeaponProperties", "starshipArcs", "starshipWeaponRanges",
-            "starshipRoles", "vehicleTypes", "vehicleCoverTypes", "containableTypes", "starshipSystemStatus", "speeds",
+            "starshipRoles", "starshipRoleNames", "vehicleTypes", "vehicleCoverTypes", "containableTypes", "starshipSystemStatus", "speeds",
             "damageTypeOperators", "flightManeuverability", "npcCrewQualities"
         ];
     
         const d100toLocalize = ["abilities","conditionTypes", "weaponTypes","progressLevel","pubnsource","availability","skills","damagetype", "firepower", "damageQ","psionAbility",/*"starshipSensorModes","starshipSensorTypes",*/
         "modifierEffectTypes","modifierHitPointsAffectedValues","feature","mountTypes","ordnanceTypes","starshipFirepower","starshipFirepowerDial", "modifierResistanceAffectedValues" ,"coverType","movementType", "dodgeType" ];
 
-        for (let o of toLocalize) {
-            
-            CONFIG.SFRPG[o] = Object.entries(CONFIG.SFRPG[o]).reduce((obj, e) => {
-                obj[e[0]] = game.i18n.localize(e[1]);
-    
-                return obj;
-            }, {});
-       
-        }
+        const allToLocalize = [...new Set([...toLocalize, ...d100toLocalize])];
 
-        for (let o of d100toLocalize) {
-            
-            CONFIG.d100A[o] = Object.entries(CONFIG.d100A[o]).reduce((obj, e) => {
-                obj[e[0]] = game.i18n.localize(e[1]);
-    
-                return obj;
-            }, {});
-       
+        for (const o of allToLocalize) {
+          const source = CONFIG.d100A?.[o];
+          if (!source) continue;
+
+          CONFIG.d100A[o] = Object.entries(source).reduce((obj, e) => {
+            obj[e[0]] = game.i18n.localize(e[1]);
+            return obj;
+          }, {});
         }
     
     
@@ -518,9 +896,9 @@ Hooks.once("setup", function () {
         //  "labels", labels,  
          // "Itemdata" ,itemData,
          // "Item" , item,  
-         // "CONFIG-NEW", CONFIG.SFRPG.weaponProperties, 
+           // "CONFIG-NEW", CONFIG.d100A.weaponProperties, 
          // "Object Ent", Object.entries(itemData.properties),
-        //  "AEON" ,CONFIG.SFRPG.weaponPropertiesAeon
+          //  "AEON" ,CONFIG.d100A.weaponPropertiesAeon
   //      )
     
         console.log("Alternity by d100  | [SETUP] Configuring rules engine");
@@ -694,7 +1072,93 @@ Hooks.once("ready", () => {
 //  }
 
 
+
 });
+
+// send messages to SCX-9 only when triggered
+Hooks.on("createChatMessage", async (msg) => {
+
+  // --- PRIMARY GM CHECK (prevents duplicate replies) ---
+  try {
+    const activeGMs = game?.users?.filter?.(u => u?.active && u?.isGM) ?? [];
+    const isPrimaryGM = activeGMs.length
+      ? (activeGMs[0]?.id === game?.user?.id)
+      : Boolean(game?.user?.isGM);
+    if (!isPrimaryGM) return;
+  } catch {
+    return; // fail closed
+  }
+
+  const rawContent = String(msg?.content ?? "").trim();
+  if (!rawContent) return;
+
+  // --- IGNORE SCX-9's OWN MESSAGES ---
+  if (msg?.speaker?.alias === "SCX-9") return;
+
+  // --- CLEAN HTML TO PLAIN TEXT ---
+  let plainContent = rawContent;
+  try {
+    const doc = new DOMParser().parseFromString(rawContent, "text/html");
+    plainContent = String(doc?.body?.textContent ?? rawContent).trim();
+  } catch {
+    // keep rawContent
+  }
+
+  const lower = plainContent.toLowerCase();
+
+  // --- TRIGGER FOR ACTIVE RESPONSE ---
+  const triggers = ["@scx", "@smeghead", "@orac", "@codex"];
+  const shouldRespond = triggers.some(t => lower.includes(t));
+
+  // --- IF NO TRIGGER, STOP HERE ---
+  if (!shouldRespond) return;
+
+  // --- ACTIVE RESPONSE PROMPT ---
+  const responsePrompt = `
+You are SCX-9 “Stellar Codex”, a neutral, analytical, continuity-preserving rules and lore engine for the Alternity/StarDrive universe.
+
+You NEVER roleplay as another character.
+You NEVER adopt another persona.
+You NEVER generate fiction unless explicitly asked.
+You ALWAYS respond concisely, factually, and in your established tone.
+
+Respond to the following message:
+"""
+${plainContent}
+"""
+`;
+
+  try {
+    const res = await fetch("http://127.0.0.1:5005/completion", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        prompt: responsePrompt,
+        max_tokens: 200,
+        temperature: 0.7
+      })
+    });
+
+    const data = await res.json();
+    const reply = data?.content || data?.choices?.[0]?.text || "[No response]";
+
+    ChatMessage.create({
+      speaker: { alias: "SCX-9" },
+      content: `<b>SCX-9:</b> ${reply}`
+    });
+
+  } catch (err) {
+    console.error("SCX-9 response error:", err);
+    ChatMessage.create({
+      speaker: { alias: "SCX-9" },
+      content: `<b>SCX-9 Error:</b> ${err?.message ?? err}`
+    });
+  }
+});
+
+
+
+
 
  function migrateOldContainers() {
     const promises = [];
@@ -815,10 +1279,11 @@ Hooks.on("hotbarDrop",(bar, data, slot) => {
         game.user.assignHotbarMacro(i,t)}(t,o),!1}))
 
 */
-//Hooks.on("renderChatLog", (app, html, data) => ItemSFRPG.chatListeners(html));
-Hooks.on("renderChatMessage", (_, html) => ItemSFRPG.chatListeners(html));
+//Hooks.on("renderChatLog", (app, html, data) => Itemd100A.chatListeners(html));
+// v13+: renderChatMessage is deprecated in favor of renderChatMessageHTML (HTMLElement).
+Hooks.on("renderChatMessageHTML", (_message, html) => Itemd100A.chatListeners($(html)));
 //Hooks.on("renderChatMessage", (_, html) => d100ActorSheet.chatListeners(html)); 
-//Hooks.on("renderChatMessage", (app, html, data) => ItemSFRPG.chatListeners(html));
+//Hooks.on("renderChatMessage", (app, html, data) => Itemd100A.chatListeners(html));
 
 /**
  * Adds the actor template context menu.
@@ -1015,19 +1480,17 @@ export { ChatAttack } from "./misc/chat-attack.js";
  * @returns {Promise}
  */
  async function createItemMacro(item, slot) {
- kjhgjkhg
   const command = `game.sfrpg.rollItemMacro("${item.name}");`;
-  let macro = game.macros.entities.find(m => (m.name === item.name) && (m.command === command));
+  let macro = game.macros.find(m => (m.name === item.name) && (m.command === command));
   if (!macro) {
-      macro = await Macro.create({
-          name: item.name,
-          type: "script",
-          img: item.img,
-          command: command,
-          flags: {"sfrpg.itemMacro": true}
-      }, {displaySheet: false});
+    macro = await Macro.create({
+      name: item.name,
+      type: "script",
+      img: item.img,
+      command,
+      flags: { "sfrpg.itemMacro": true }
+    }, { displaySheet: false });
   }
-  console.log(macro)
   game.user.assignHotbarMacro(macro, slot);
 }
 
@@ -1198,7 +1661,7 @@ function setupHandlebars() {
       if ( button && editable ) editor.append($('<a class="editor-edit"><i class="fas fa-edit"></i></a>'));
       return new Handlebars.SafeString(editor[0].outerHTML);
   });
-
+/*
   Handlebars.registerHelper('createTippy', function (options) {
     
       const title = options.hash['title'];
@@ -1256,309 +1719,48 @@ function setupHandlebars() {
 
       return new Handlebars.SafeString(html);
   });
+  */
   Handlebars.registerHelper("json-string", (e2) => new Handlebars.SafeString(escape(JSON.stringify(e2))))
   
   Handlebars.registerHelper("enrich", (content, options) => {
-    let a= enrichthis(content, options)
-  
-console.log("\nA",a)
-    return a
-    const owner = Boolean(options.hash["owner"]);
-   const rollData = options.hash["rollData"];
-   
-   const newstring = TextEditor.enrichHTML( { secrets: owner, rollData })
-   console.log(content,options,rollData,newstring)
-    return new Handlebars.SafeString(newstring);
-  });
-
-   function enrichthis(content, options){
     const owner = Boolean(options.hash["owner"]);
     const rollData = options.hash["rollData"];
-    
-    const newstring = TextEditor.enrichHTML( { secrets: owner,async:true, rollData })
-    console.log(content,options,rollData,newstring)
-     return new Handlebars.SafeString(newstring);
+    const html = TextEditor.enrichHTML(content || "", { documents: true, rolls: true, secrets: owner, rollData });
+    return new Handlebars.SafeString(html);
+  });
 
+}
 
-  }
+function setupChatHooks() {
+  Hooks.on("chatMessage", (log, message, chatData) => {
+    const match = message.match(/^\/(\w+)(?: +([^#]+))(?:#(.+))?/);
+    const type = match?.[1];
+    if (!type) return;
+    if (["HEAL", "H", "DAMAGE", "D"].includes(type.toUpperCase())) {
+      const cMsg = CONFIG.ChatMessage.documentClass;
+      const speaker = cMsg.getSpeaker();
+      const actor = cMsg.getSpeakerActor(speaker);
+      const rollData = actor ? actor.getRollData() : {};
+      if (typeof customRolls === "function") customRolls(message, speaker, rollData);
+      return false; // prevent default handling
+    }
+  });
+}
 
-   function PatchCore() {
-  // Add inline support for extra /commands
-  {
-    const origParse = ChatLog.parse;
-    ChatLog.parse = function (message) {
-      const match = message.match(/^\/(\w+)(?: +([^#]+))(?:#(.+))?/),
-        type = match?.[1];
-      if (["HEAL", "H", "DAMAGE", "D"].includes(type?.toUpperCase())) {
-        match[2] = match[0].slice(1);
-        return ["custom", match];
-      } else return origParse.call(this, message);
-    };
-
-    const origClick = TextEditor._onClickInlineRoll;
-    TextEditor._onClickInlineRoll = function (event) {
+function setupInlineRollHooks() {
+  // v13+: renderChatMessageHTML passes an HTMLElement.
+  Hooks.on("renderChatMessageHTML", (message, html) => {
+    const $html = $(html);
+    $html.on("click", "a.inline-roll.custom", (event) => {
       event.preventDefault();
       const a = event.currentTarget;
-      if (!a.classList.contains("custom")) return origClick.call(this, event);
-
       const chatMessage = `/${a.dataset.formula}`;
       const cMsg = CONFIG.ChatMessage.documentClass;
       const speaker = cMsg.getSpeaker();
       const actor = cMsg.getSpeakerActor(speaker);
-      let rollData = actor ? actor.getRollData() : {};
-
-      const sheet = a.closest(".sheet");
-      if (sheet) {
-        const app = ui.windows[sheet.dataset.appid];
-        if (["Actor", "Item"].includes(app?.document.documentName)) rollData = app.object.getRollData();
-      }
-      return customRolls(chatMessage, speaker, rollData);
-    };
-
-    // Fix for race condition
-    if ($._data($("body").get(0), "events")?.click?.find((o) => o.selector === "a.inline-roll")) {
-      $("body").off("click", "a.inline-roll", origClick);
-      $("body").on("click", "a.inline-roll", TextEditor._onClickInlineRoll);
-    }
-  }
-
-  // Change tooltip showing on alt
-  {
-    const fn = KeyboardManager.prototype._onAlt;
-    KeyboardManager.prototype._onAlt = function (event, up, modifiers) {
-      if (!game.pf1.tooltip) return;
-      if (!up) game.pf1.tooltip.lock.new = true;
-      fn.call(this, event, up, modifiers);
-      if (!up) game.pf1.tooltip.lock.new = false;
-    };
-  }
-/*
-  // Patch StringTerm
-  StringTerm.prototype.evaluate = function (options = {}) {
-    const result = parseRollStringVariable(this.term);
-    if (typeof result === "string") {
-      const src = `with (sandbox) { return ${this.term}; }`;
-      try {
-        const evalFn = new Function("sandbox", src);
-        this._total = evalFn(RollPF.MATH_PROXY);
-      } catch (err) {
-        err.message = `Failed to evaluate: '${this.term}'\n${err.message}`;
-        throw err;
-      }
-    } else {
-      this._total = result;
-    }
-  };
-
-  // Patch NumericTerm
-  NumericTerm.prototype.getTooltipData = function () {
-    return {
-      formula: this.expression,
-      total: this.total,
-      flavor: this.flavor,
-    };
-  };
-
-  // Patch ParentheticalTerm and allowed operators
-  ParentheticalTerm.CLOSE_REGEXP = new RegExp(`\\)${RollTerm.FLAVOR_REGEXP_STRING}?`, "g");
-  OperatorTerm.REGEXP = /(?:&&|\|\||\*\*|\+|-|\*|\/|\\%|\||:|\?)|(?<![a-z])[!=<>]+/g;
-  OperatorTerm.OPERATORS.push("\\%", "!", "?", ":", "=", "<", ">", "==", "===", "<=", ">=", "??", "||", "&&", "**");
-*/
-  // Add secondary indexing to compendium collections
-  {
-    const origFunc = CompendiumCollection.prototype.getIndex;
-    CompendiumCollection.prototype.getIndex = async function ({ fields } = {}) {
-      const index = await origFunc.call(this, { fields });
-      this.fuzzyIndex = sortArrayByName([...index]);
-      return this.index;
-    };
-  }
-
-  // Document link attribute stuffing
-  {
-    const origFunc = TextEditor._createContentLink;
-    TextEditor._createContentLink = function (match, type, target, name) {
-      const a = origFunc.call(this, match, type, target, name);
-      if (name?.indexOf("::") > -1) {
-        const args = name.split("::"),
-          label = args.pop();
-        if (args.length) {
-          args.forEach((o) => {
-            let [key, value] = o.split(/(?<!\\):/);
-            if (!(key && value)) {
-              value = key;
-              key = "extra";
-            }
-            switch (key) {
-              case "icon":
-                a.firstChild.className = "fas fa-" + value;
-                break;
-              case "class":
-                a.classList.add(...value.split(" "));
-                break;
-              default:
-                a.setAttribute("data-" + key, value);
-            }
-          });
-          a.lastChild.textContent = label;
-        }
-      }
-      return a;
-    };
-  }
-
-  // Remove warnings for conflicting uneditable system bindings
-  {
-    const origFunc = KeybindingsConfig.prototype._detectConflictingActions;
-    KeybindingsConfig.prototype._detectConflictingActions = function (actionId, action, binding) {
-      // Uneditable System bindings are never wrong, they can never conflict with something
-      if (actionId.startsWith("pf1.") && action.uneditable.includes(binding)) return [];
-
-      return origFunc.call(this, actionId, action, binding);
-    };
-  }
+      const rollData = actor ? actor.getRollData() : {};
+      if (typeof customRolls === "function") customRolls(chatMessage, speaker, rollData);
+    });
+  });
 }
-
-
-}
-function PatchCore() {
-  // Add inline support for extra /commands
-  {
-    const origParse = ChatLog.parse;
-    ChatLog.parse = function (message) {
-      const match = message.match(/^\/(\w+)(?: +([^#]+))(?:#(.+))?/),
-        type = match?.[1];
-      if (["HEAL", "H", "DAMAGE", "D"].includes(type?.toUpperCase())) {
-        match[2] = match[0].slice(1);
-        return ["custom", match];
-      } else return origParse.call(this, message);
-    };
-
-    const origClick = TextEditor._onClickInlineRoll;
-    TextEditor._onClickInlineRoll = function (event) {
-      event.preventDefault();
-      const a = event.currentTarget;
-      if (!a.classList.contains("custom")) return origClick.call(this, event);
-
-      const chatMessage = `/${a.dataset.formula}`;
-      const cMsg = CONFIG.ChatMessage.documentClass;
-      const speaker = cMsg.getSpeaker();
-      const actor = cMsg.getSpeakerActor(speaker);
-      let rollData = actor ? actor.getRollData() : {};
-
-      const sheet = a.closest(".sheet");
-      if (sheet) {
-        const app = ui.windows[sheet.dataset.appid];
-        if (["Actor", "Item"].includes(app?.document.documentName)) rollData = app.object.getRollData();
-      }
-      return customRolls(chatMessage, speaker, rollData);
-    };
-
-    // Fix for race condition
-    if ($._data($("body").get(0), "events")?.click?.find((o) => o.selector === "a.inline-roll")) {
-      $("body").off("click", "a.inline-roll", origClick);
-      $("body").on("click", "a.inline-roll", TextEditor._onClickInlineRoll);
-    }
-  }
-
-  // Change tooltip showing on alt
-  {
-    const fn = KeyboardManager.prototype._onAlt;
-    KeyboardManager.prototype._onAlt = function (event, up, modifiers) {
-      if (!game.pf1.tooltip) return;
-      if (!up) game.pf1.tooltip.lock.new = true;
-      fn.call(this, event, up, modifiers);
-      if (!up) game.pf1.tooltip.lock.new = false;
-    };
-  }
-
-  // Patch StringTerm
-  
-  
-  foundry.dice.terms.StringTerm.prototype.evaluate = function (options = {}) {
-    console.log(this)
-    const result = parseRollStringVariable(this.term);
-    if (typeof result === "string") {
-      const src = `with (sandbox) { return ${this.term}; }`;
-      try {
-        const evalFn = new Function("sandbox", src);
-        this._total = evalFn(RollPF.MATH_PROXY);
-      } catch (err) {
-        err.message = `Failed to evaluate: '${this.term}'\n${err.message}`;
-        throw err;
-      }
-    } else {
-      this._total = result;
-    }
-  };
-
-  // Patch NumericTerm
-  foundry.dice.terms.NumericTerm.prototype.getTooltipData = function () {
-    return {
-      formula: this.expression,
-      total: this.total,
-      flavor: this.flavor,
-    };
-  };
-
-  // Patch ParentheticalTerm and allowed operators
-
-  /*
-  ParentheticalTerm.CLOSE_REGEXP = new RegExp(`\\)${RollTerm.FLAVOR_REGEXP_STRING}?`, "g");
-  OperatorTerm.REGEXP = /(?:&&|\|\||\*\*|\+|-|\*|\/|\\%|\||:|\?)|(?<![a-z])[!=<>]+/g;
-  OperatorTerm.OPERATORS.push("\\%", "!", "?", ":", "=", "<", ">", "==", "===", "<=", ">=", "??", "||", "&&", "**");
-*/
-  // Add secondary indexing to compendium collections
-  {
-    const origFunc = CompendiumCollection.prototype.getIndex;
-    CompendiumCollection.prototype.getIndex = async function ({ fields } = {}) {
-      const index = await origFunc.call(this, { fields });
-      this.fuzzyIndex = sortArrayByName([...index]);
-      return this.index;
-    };
-  }
-
-  // Document link attribute stuffing
-  {
-    const origFunc = TextEditor._createContentLink;
-    TextEditor._createContentLink = function (match, type, target, name) {
-      const a = origFunc.call(this, match, type, target, name);
-      if (name?.indexOf("::") > -1) {
-        const args = name.split("::"),
-          label = args.pop();
-        if (args.length) {
-          args.forEach((o) => {
-            let [key, value] = o.split(/(?<!\\):/);
-            if (!(key && value)) {
-              value = key;
-              key = "extra";
-            }
-            switch (key) {
-              case "icon":
-                a.firstChild.className = "fas fa-" + value;
-                break;
-              case "class":
-                a.classList.add(...value.split(" "));
-                break;
-              default:
-                a.setAttribute("data-" + key, value);
-            }
-          });
-          a.lastChild.textContent = label;
-        }
-      }
-      return a;
-    };
-  }
-
-  // Remove warnings for conflicting uneditable system bindings
-  {
-    const origFunc = KeybindingsConfig.prototype._detectConflictingActions;
-    KeybindingsConfig.prototype._detectConflictingActions = function (actionId, action, binding) {
-      // Uneditable System bindings are never wrong, they can never conflict with something
-      if (actionId.startsWith("pf1.") && action.uneditable.includes(binding)) return [];
-
-      return origFunc.call(this, actionId, action, binding);
-    };
-  }
-}
+// Legacy monkey patches removed in favor of hook-based handlers.

@@ -2,9 +2,9 @@ export class RollPF extends Roll {
   static safeRoll(formula, data = {}, context, options = { suppressError: false }) {
     let roll;
     try {
-      roll = this.create(formula, data).evaluate({ async: false });
+      roll = this.create(formula, data).evaluateSync();
     } catch (err) {
-      roll = this.create("0", data).evaluate({ async: false });
+      roll = this.create("0", data).evaluateSync();
       roll.err = err;
     }
     if (roll.warning) roll.err = Error("This formula had a value replaced with null.");
@@ -148,7 +148,7 @@ export class RollPF extends Roll {
       }
       return cur;
     }, []);
-    return renderTemplate("systems/pf1/templates/dice/tooltip.hbs", { parts, numericParts });
+    return foundry.applications.handlebars.renderTemplate("systems/pf1/templates/dice/tooltip.hbs", { parts, numericParts });
   }
 }
 

@@ -41,7 +41,7 @@
 
         <ol class="properties-list">
             {{#each itemProperties}}
-            <li {{#if this.tooltip}} data-tippy-content="{{ this.tooltip }}"{{/if}}>{{ this.name }}</li>
+            <li {{#if this.tooltip}} data-tooltip="{{ this.tooltip }}"{{/if}}>{{ this.name }}</li>
             {{/each}}
         </ol>
     </div>
@@ -49,37 +49,43 @@
 
     <div class="flexcol" style="height: 100%;">
         <nav class="sheet-subnavigation descTabs" data-group="descriptionTabs">
-            <a class="item active{{#if itemData.description.value}} highlight{{/if}}" data-tab="description">{{localize "SFRPG.Description"}}</a>
-            <a class="item {{#if itemData.description.short}} highlight{{/if}}" data-tab="descriptionShort">{{localize "SFRPG.DescriptionShort"}}</a>
+            <a class="item active{{#if itemData.description.value}} highlight{{/if}}" data-tab="description" data-group="descriptionTabs">{{localize "SFRPG.Description"}}</a>
+            <a class="item {{#if itemData.description.short}} highlight{{/if}}" data-tab="descriptionShort" data-group="descriptionTabs">{{localize "SFRPG.DescriptionShort"}}</a>
             {{#if isGM}}
-            <a class="item{{#if itemData.description.gmNotes}} highlight{{/if}}" data-tab="gmNotes">{{localize "SFRPG.ActorSheet.Biography.TabGM"}} {{#if itemData.description.gmNotes}} (!){{/if}}</a>
+            <a class="item{{#if itemData.description.gmNotes}} highlight{{/if}}" data-tab="gmNotes" data-group="descriptionTabs">{{localize "SFRPG.ActorSheet.Biography.TabGM"}} {{#if itemData.description.gmNotes}} (!){{/if}}</a>
             {{/if}}
         </nav>
 
         <section class="desc-body">
-            <div class="tab flexrow" data-group="descriptionTabs" data-tab="description">
+            <div class="tab active" data-group="descriptionTabs" data-tab="description">
                 {{editor
                     enrichedDescription
                     target="system.description.value"
                     button=true
+                    owner=owner
                     editable=editable
+                    engine="prosemirror"
                 }}
             </div>
-            <div class="tab flexrow" data-group="descriptionTabs" data-tab="descriptionShort">
+            <div class="tab" data-group="descriptionTabs" data-tab="descriptionShort">
                 {{editor
                     enrichedShortDescription
                     target="system.description.short"
                     button=true
+                    owner=owner
                     editable=editable
+                    engine="prosemirror"
                 }}
             </div>
             {{#if isGM}}
-            <div class="tab flexrow" data-group="descriptionTabs" data-tab="gmNotes">
+            <div class="tab" data-group="descriptionTabs" data-tab="gmNotes">
                 {{editor
                     enrichedGMNotes
                     target="system.description.gmNotes"
                     button=true
+                    owner=owner
                     editable=editable
+                    engine="prosemirror"
                 }}
             </div>
             {{/if}}

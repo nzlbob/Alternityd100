@@ -1,0 +1,64 @@
+<section class="d100a-defence-dialog">
+  <div class="form-group">
+    <label style="font-size: 125%">Damage: {{damage}} {{localize defenceData.dmgtype}} ({{type}}) ({{firepower}})</label>
+  </div>
+
+  <div class="form-group">
+    <label>Damage</label>
+    <input type="text" name="damage" value="{{damage}}" />
+  </div>
+
+  <div class="form-group" data-tooltip='{{ localize "d100A.Items.Weapon.firepowerTooltip" }}'>
+    <label>{{ localize "d100A.Items.Type" }}</label>
+    <select name="type">
+      {{selectOptions d100A.damagetype selected=type}}
+    </select>
+  </div>
+
+  <div class="form-group" data-tooltip='{{ localize "d100A.Items.Weapon.dmgtypeTooltip" }}'>
+    <label>{{ localize "d100A.Items.dmgtype" }}</label>
+    <select name="dmgtype">
+      {{selectOptions d100A.damageQ selected=dmgtype}}
+    </select>
+  </div>
+
+  {{#if (not tokenData.isSpaceActor) }}
+    <div class="form-group" data-tooltip='{{ localize "d100A.Items.Weapon.firepowerTooltip" }}'>
+      <label>{{ localize "d100A.Items.Firepower" }}</label>
+      <select name="firepower">
+        {{selectOptions d100A.firepower selected=firepower}}
+      </select>
+    </div>
+  {{/if}}
+
+  {{#if tokenData.isSpaceActor }}
+    <div class="form-group" data-tooltip='{{ localize "d100A.Items.Weapon.firepowerTooltip" }}'>
+      <label>{{ localize "d100A.Items.Firepower" }}</label>
+      <select name="firepower">
+        {{selectOptions d100A.starshipFirepower selected=firepower localize=true}}
+      </select>
+    </div>
+  {{/if}}
+
+  <ol>
+    {{#each defenceData.armor as |armor index|}}
+      <li>{{armor.name}}</li>
+    {{/each}}
+  </ol>
+
+  <div class="form-group">
+    <label>RollMode</label>
+    <select name="rollMode">
+      {{selectOptions rollModes selected=rollMode localize=true}}
+    </select>
+  </div>
+
+  <div class="d100a-defence-dialog__buttons">
+    <button type="button" class="d100a-defence-dialog__defend" data-action="defend">
+      <i class="fas fa-check"></i> Defend
+    </button>
+    <button type="button" class="d100a-defence-dialog__cancel" data-action="cancel">
+      <i class="fas fa-times"></i> Cancel
+    </button>
+  </div>
+</section>

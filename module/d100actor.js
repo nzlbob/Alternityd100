@@ -1,8 +1,9 @@
 import { EntitySheetHelper } from "./helper.js";
 import { getSkipActionPrompt } from "./settings.js";
 import { Diced100 } from "./dice.js";
-import { SFRPG } from "./config.js"
 import { d100A } from "./d100Aconfig.js"
+
+const SFRPG = d100A;
 //import { DiceSFRPG } from "../dice.js";
 //import RollContext from "../rolls/rollcontext.js";
 import { Mix } from "./utils/custom-mixer.js";
@@ -20,8 +21,8 @@ import { d100resmod,d100NPCCrewStats } from "../module/modifiers/d100mod.js";
 //import { NpcSkillToggleDialog } from "../apps/npc-skill-toggle-dialog.js";
 
 //import { } from "./crew-update.js"
-import { ItemSheetSFRPG } from "./item/sheet.js";
-import { ItemSFRPG } from "./item/item.js";
+import { ItemSheetd100A } from "./item/d100ItemSheet.js";
+import { Itemd100A } from "./item/item.js";
 import { hasDiceTerms } from "./utilities.js";
 import { skillStepdieData } from "./modifiers/d100mod.js";
 import { ActorInventoryMixin } from "./actor/mixins/actor-inventory.js";
@@ -130,7 +131,7 @@ render(force, context={}) {
     /** Clear out deleted item sheets. */
     const keysToDelete = [];
     for (const [appId, app] of Object.entries(this.apps)) {
-        if (app instanceof ItemSheetSFRPG) {
+        if (app instanceof ItemSheetd100A) {
             const item = app.object;
             if (!this.items.find(x => x.id === item.id)) {
                 keysToDelete.push(appId);
@@ -451,11 +452,16 @@ resetNPCCrew() {
   
   }
 
+
+
+
+
+
 /**
  * Prepare NPC type specific data.
  */
  _prepareNpcData(actorData) {
-  //console.log(this)
+ // console.log(this, actorData)
   
   if (this.type !== 'npc') return;
 
@@ -744,7 +750,7 @@ let result = {}
     console.warn(msg);
     return ui.notifications.warn(msg);
   }
-  result.roll = await Roll.create(dice.concat(d100stepdie(totalbonus))).evaluate({ async: true });
+  result.roll = await Roll.create(dice.concat(d100stepdie(totalbonus))).evaluate();
   //.evaluate({ async: true })
 console.log("\n\n\n\n------------------\n\n\n\n",result.roll)
 return result
@@ -771,7 +777,7 @@ findCrewJob(characterId){
   //console.log(crew, characterId)
   for (let[key,job] of Object.entries(crew)){
  //  console.log(key)
-    if (job.actorIds?.includes(characterId)) return game.i18n.localize(SFRPG.starshipRoleNames[key])
+    if (job.actorIds?.includes(characterId)) return CONFIG.d100A.starshipRoleNames?.[key] ?? key
 
 
   }
@@ -1223,7 +1229,9 @@ return A
               }
       
               /** Add remaining roles if available. */
-              const crewMates = ["copilot", "communications","damageControl","defences", "gunner", "engineer", "sensors","chiefMate", "magicOfficer", "passenger", "scienceOfficer", "minorCrew", "openCrew"];
+             // const crewMates = ["copilot", "communications","damageControl","defences", "gunner", "engineer", "sensors","chiefMate", "magicOfficer", "passenger", "scienceOfficer", "minorCrew", "openCrew"];
+             const crewMates = ["copilot", "communications","damageControl","defences", "gunner", "engineer", "sensors"];
+             
               const allCrewMates = ["minorCrew", "openCrew"];
               for (const crewType of crewMates) {
                   let crewCount = 1;
@@ -1292,16 +1300,17 @@ console.log(this,rollData)
         item: this,
         tokenId: this.token?.id,
         action: "Heals",
-        rollData: rollData
+      rollData: rollData,
+      toughnessMap: CONFIG.d100A?.toughness
 
     };
     //console.log(rollData)
     const template = `systems/Alternityd100/templates/chat/item-defend-card.html`;
-    const renderPromise = renderTemplate(template, templateData);
+    const renderPromise = foundry.applications.handlebars.renderTemplate(template, templateData);
     renderPromise.then((html) => {
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+          style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             content: html,
             sound: true ? CONFIG.sounds.dice : null,

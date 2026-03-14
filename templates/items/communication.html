@@ -1,4 +1,4 @@
-<form class="{{cssClass}} flexcol" autocomplete="off">
+<div class="sheet-root {{cssClass}} flexcol">
 
     {{!-- Item Sheet Header --}}
     {{> "systems/Alternityd100/templates/items/parts/item-header.html"}}
@@ -19,15 +19,23 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
             <h3 class="form-header">{{ localize "Communications" }}</h3>
-            {{> "systems/Alternityd100/templates/items/parts/item-status.html"}}
+            <div class="divTable blueTable2">
+                <div class="divTableBody">
+                    <div class="divTableRow">
+                        <div class="divTableCell">
+                            {{> "systems/Alternityd100/templates/items/parts/item-status.html"}}
            
-            {{#if isSkilled}}
-            {{> "systems/Alternityd100/templates/items/parts/item-skilled.html"}}
-            {{/if}}
+                            {{#if isSkilled}}
+                            {{> "systems/Alternityd100/templates/items/parts/item-skilled.html"}}
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         {{!-- Modifiers Tab --}}
         {{> "systems/Alternityd100/templates/items/parts/item-modifiers.html"}}
         
     </section>
-</form>
+</div>

@@ -1,0 +1,65 @@
+// ===============================
+// UUID Link Builder for v13+
+// Generates links for:
+//  - All Journal Entries
+//  - All Journal Pages
+//  - Compendium Journals (optional)
+// Copies result to clipboard
+// ===============================
+
+async function buildUUIDLinks() {
+  let output = `# Foundry UUID Index\n\n`;
+
+  // -------------------------------
+  // WORLD JOURNAL ENTRIES + PAGES
+  // -------------------------------
+  output += `## World Journal Entries\n\n`;
+
+  for (const entry of game.journal) {
+    output += `### @UUID[${entry.uuid}]{${entry.name}}\n`;
+
+    for (const page of entry.pages.contents) {
+      output += `- @UUID[${page.uuid}]{${page.name}}\n`;
+    }
+
+    output += `\n`;
+  }
+
+  // -------------------------------
+  // COMPENDIUM JOURNAL ENTRIES
+  // -------------------------------
+  output += `## Compendium Journal Entries\n\n`;
+
+  const journalPacks = game.packs.filter(p => p.documentName === "JournalEntry");
+
+  for (const pack of journalPacks) {
+    output += `### ${pack.metadata.label}\n`;
+
+    const docs = await pack.getDocuments();
+
+    for (const doc of docs) {
+      output += `- @UUID[${doc.uuid}]{${doc.name}}\n`;
+
+      // Pages inside compendium journals
+      for (const page of doc.pages.contents) {
+        output += `  - @UUID[${page.uuid}]{${page.name}}\n`;
+      }
+    }
+
+    output += `\n`;
+  }
+
+  // -------------------------------
+  // OUTPUT + CLIPBOARD
+  // -------------------------------
+  console.log(output);
+
+  try {
+    await navigator.clipboard.writeText(output);
+    ui.notifications.info("UUID index copied to clipboard.");
+  } catch (err) {
+    ui.notifications.warn("Could not copy to clipboard. Check browser permissions.");
+  }
+}
+
+buildUUIDLinks();

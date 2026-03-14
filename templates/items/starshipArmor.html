@@ -1,4 +1,4 @@
-<form class="{{cssClass}} flexcol" autocomplete="off">
+<div class="sheet-root {{cssClass}} flexcol">
 
     {{!-- Item Sheet Header --}}
     {{> "systems/Alternityd100/templates/items/parts/item-header.html"}}
@@ -17,57 +17,62 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
+            <h3 class="form-header">{{ localize "SFRPG.Details" }}</h3>
+            <div class="divTable starship-item-details-table">
+                <div class="divTableBody">
+                    <div class="divTableRow">
+                        <div class="divTableCell">
+                            {{!-- Common component data --}}
+                            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.Cost" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.CostTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipComponent.Cost" }} (%)</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.bhpCost" value="{{itemData.bhpCost}}" data-dtype="Number" placeholder="0"/>
+                                </div>
+                            </div>
+                            <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.PriceTooltip" }}">
+                                <label>{{ localize "Base Price" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.price" value="{{itemData.price}}" data-dtype="Number" />
+                                </div>
+                            </div>
+                            <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.PriceTooltip" }}">
+                                <label>{{ localize "Price per BHP" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.pricePerBHP" value="{{itemData.pricePerBHP}}" data-dtype="Number" />
+                                </div>
+                            </div>
 
-            {{!-- Common component data --}}
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.Cost" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.CostTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipComponent.Cost" }} (%)</label>
-                <div class="form-fields">
-                    <input type="text" name="system.bhpCost" value="{{itemData.bhpCost}}" data-dtype="Number" placeholder="0"/>
+                            <h4 class="section-header first">{{ localize "d100A.Items.defence" }}</h4>
+
+                            {{!-- Armor LI --}}
+                            <div class="form-group" data-tooltip="{{ localize "d100A.Items.Weapon.damageTooltip" }}">
+                              
+                              <label>{{ localize "LI" }}</label>
+                              <input type="text" style="text-align: center" name="system.armor.LI" value="{{itemData.armor.LI}}" data-dtype="String" placeholder="0"/>
+                              
+                            </div>     
+                            {{!-- Armor LI --}}
+                            <div class="form-group" data-tooltip="{{ localize "d100A.Items.Weapon.damageTooltip" }}">
+
+                              <label>{{ localize "HI" }}</label>
+                              <input type="text" style="text-align: center" name="system.armor.HI" value="{{itemData.armor.HI}}" data-dtype="String" placeholder="0"/>
+                              
+                           
+                            </div>  
+                            {{!-- Armor EN --}}
+                            <div class="form-group" data-tooltip="{{ localize "d100A.Items.Weapon.damageTooltip" }}">
+
+                              <label>{{ localize "d100A.EN" }}</label>
+                              <input type="text" style="text-align: center" name="system.armor.EN" value="{{itemData.armor.EN}}" data-dtype="String" placeholder="0"/>
+                              
+                            
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.PriceTooltip" }}">
-                <label>{{ localize "Base Price" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.price" value="{{itemData.price}}" data-dtype="Number" />
-                </div>
-            </div>
-            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.PriceTooltip" }}">
-                <label>{{ localize "Price per BHP" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.pricePerBHP" value="{{itemData.pricePerBHP}}" data-dtype="Number" />
-                </div>
-            </div>
-
-            
-
-            <h4 class="section-header first">{{ localize "d100A.Items.defence" }}</h4>
-
-           
-            {{!-- Armor LI --}}
-            <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.damageTooltip" }}">
-              
-              <label>{{ localize "LI" }}</label>
-              <input type="text" style="text-align: center" name="system.armor.LI" value="{{itemData.armor.LI}}" data-dtype="String" placeholder="0"/>
-              
-            </div>     
-            {{!-- Armor LI --}}
-            <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.damageTooltip" }}">
-
-              <label>{{ localize "HI" }}</label>
-              <input type="text" style="text-align: center" name="system.armor.HI" value="{{itemData.armor.HI}}" data-dtype="String" placeholder="0"/>
-              
-           
-            </div>  
-            {{!-- Armor EN --}}
-            <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.damageTooltip" }}">
-
-              <label>{{ localize "d100A.EN" }}</label>
-              <input type="text" style="text-align: center" name="system.armor.EN" value="{{itemData.armor.EN}}" data-dtype="String" placeholder="0"/>
-              
-            
-            </div>  
 
         </div>
 
     </section>
-</form>
+</div>

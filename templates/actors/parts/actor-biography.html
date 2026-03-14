@@ -1,41 +1,41 @@
 <div class="flexcol bio-properties">
-    <div class="form-group singleFlex" data-tippy-content="{{localize 'SFRPG.ActorSheet.Biography.ImageTooltip'}}">
+    <div class="form-group singleFlex" data-tooltip="{{localize 'SFRPG.ActorSheet.Biography.ImageTooltip'}}">
         <label>Full body image</label>
     </div>
     <img class="avatar" src="{{system.details.biography.fullBodyImage}}" title="{{actor.name}}&#10;{{localize 'SFRPG.ActorSheet.Biography.ImageTooltip'}}" data-edit="system.details.biography.fullBodyImage" width="200" height="250" />
 
     {{#unless hideVitals}}
-    <div class="form-group stacked doubleFlex" data-tippy-content="<strong>{{localize 'SFRPG.ActorSheet.Biography.DateOfBirth'}}</strong><br>@details.biography.dateOfBirth">
+    <div class="form-group stacked doubleFlex" data-tooltip="<strong>{{localize 'SFRPG.ActorSheet.Biography.DateOfBirth'}}</strong><br>@details.biography.dateOfBirth">
         <label class="singleLine">{{localize "SFRPG.ActorSheet.Biography.DateOfBirth"}}</label>
         <input class="singleLine" type="text" name="system.details.biography.dateOfBirth" value="{{system.details.biography.dateOfBirth}}" data-dtype="String" placeholder="{{localize 'SFRPG.ActorSheet.Biography.DateOfBirthPlaceholder'}}" />
     </div>
-    <div class="form-group singleFlex" data-tippy-content="<strong>{{localize 'SFRPG.ActorSheet.Biography.Age'}}</strong><br>@details.biography.age">
+    <div class="form-group singleFlex" data-tooltip="<strong>{{localize 'SFRPG.ActorSheet.Biography.Age'}}</strong><br>@details.biography.age">
         <label>{{localize "SFRPG.ActorSheet.Biography.Age"}}</label>
         <div class="form-fields">
             <input type="text" name="system.details.biography.age" value="{{system.details.biography.age}}" data-dtype="Number" placeholder="{{localize 'SFRPG.ActorSheet.Biography.AgePlaceholder'}}" />
         </div>
     </div>
-    <div class="form-group singleFlex" data-tippy-content="<strong>{{localize 'SFRPG.ActorSheet.Biography.Height'}}</strong><br>@details.biography.height">
+    <div class="form-group singleFlex" data-tooltip="<strong>{{localize 'SFRPG.ActorSheet.Biography.Height'}}</strong><br>@details.biography.height">
         <label>{{localize "SFRPG.ActorSheet.Biography.Height"}}</label>
         <div class="form-fields">
             <input type="text" name="system.details.biography.height" value="{{system.details.biography.height}}" data-dtype="String" placeholder="{{localize 'SFRPG.ActorSheet.Biography.HeightPlaceholder'}}" />
         </div>
     </div>
-    <div class="form-group singleFlex" data-tippy-content="<strong>{{localize 'SFRPG.ActorSheet.Biography.Weight'}}</strong><br>@details.biography.weight">
+    <div class="form-group singleFlex" data-tooltip="<strong>{{localize 'SFRPG.ActorSheet.Biography.Weight'}}</strong><br>@details.biography.weight">
         <label>{{localize "SFRPG.ActorSheet.Biography.Weight"}}</label>
         <div class="form-fields">
             <input type="text" name="system.details.biography.weight" value="{{system.details.biography.weight}}" data-dtype="String" placeholder="{{localize 'SFRPG.ActorSheet.Biography.WeightPlaceholder'}}" />
         </div>
     </div>
     {{/unless}}
-    <div class="form-group singleFlex" data-tippy-content="<strong>{{localize 'SFRPG.ActorSheet.Biography.OtherVisuals'}}</strong><br>@details.biography.otherVisuals">
+    <div class="form-group singleFlex" data-tooltip="<strong>{{localize 'SFRPG.ActorSheet.Biography.OtherVisuals'}}</strong><br>@details.biography.otherVisuals">
         <label>{{localize "SFRPG.ActorSheet.Biography.OtherVisuals"}}</label>
     </div>
 
     <textarea name="system.details.biography.otherVisuals">{{system.details.biography.otherVisuals}}</textarea>
 </div>
 
-<div class="flexcol">
+<div class="flexcol bio-main">
     <nav class="sheet-subnavigation biotabs" data-group="biographyTabs">
         <a class="item active{{#if system.details.biography.value}} highlight{{/if}}" data-tab="biography">{{localize "SFRPG.ActorSheet.Biography.TabBio"}}</a>
         {{#if isNPC}}
@@ -47,18 +47,20 @@
     </nav>
 
     <section class="bio-body">
-        <div class="tab flexrow" data-group="biographyTabs" data-tab="biography">
+        <div class="tab" data-group="biographyTabs" data-tab="biography">
             {{editor
                 enrichedBiography
                 target="system.details.biography.value"
                 button=true
+                owner=isOwner
                 editable=editable
+                engine="prosemirror"
             }}
         </div>
         <div class="tab" data-group="biographyTabs" data-tab="ecology">
             <div class="flexrow">
                 <div class="flexcol">
-                    <div class="form-group ecology" data-tippy-content="<strong>{{localize 'SFRPG.Environment'}}</strong><br/>@system.details.biography.environment">
+                    <div class="form-group ecology" data-tooltip="<strong>{{localize 'SFRPG.Environment'}}</strong><br/>@system.details.biography.environment">
                         <label>{{localize 'SFRPG.Environment'}}</label>
                         <input type="text" name="system.details.environment" value="{{system.details.environment}}" placeholder="{{localize "SFRPG.Any"}}"/>
                     </div>
@@ -66,7 +68,7 @@
             </div>
             <div class="flexrow">
                 <div class="flexcol">
-                    <div class="form-group ecology" data-tippy-content="<strong>{{localize 'SFRPG.Organization'}}</strong><br/>@system.details.biography.organization">
+                    <div class="form-group ecology" data-tooltip="<strong>{{localize 'SFRPG.Organization'}}</strong><br/>@system.details.biography.organization">
                         <label>{{localize 'SFRPG.Organization'}}</label>
                         <input type="text" name="system.details.organization" value="{{system.details.organization}}" placeholder="{{localize "SFRPG.Any"}}"/>
                     </div>
@@ -74,12 +76,14 @@
             </div>
         </div>
         {{#if isGM}}
-        <div class="tab flexrow" data-group="biographyTabs" data-tab="gmNotes">
+        <div class="tab" data-group="biographyTabs" data-tab="gmNotes">
             {{editor
                 enrichedGMNotes
                 target="system.details.biography.gmNotes"
                 button=true
+                owner=isOwner
                 editable=editable
+                engine="prosemirror"
             }}
         </div>
         {{/if}}

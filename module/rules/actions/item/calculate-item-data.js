@@ -54,7 +54,7 @@ export default function (engine) {
                     });
             
                     rollPromise.then(rollResult => {
-                        const returnValue = `DC ${rollResult.roll.total || ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
+                        const returnValue = `DC ${rollResult.roll.total || ""} ${CONFIG.d100A.saves[save.type]} ${CONFIG.d100A.saveDescriptors[save.descriptor]}`;
                         item.labels.save = returnValue;
                     });
 

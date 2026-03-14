@@ -198,7 +198,7 @@ export class EntitySheetHelper {
       // Create the roll and the corresponding message
       let r = new Roll(formula, rollData);
       return r.toMessage({
-        user: game.user.id,
+        author: game.user.id,
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
         flavor: `${chatLabel}`
       });
@@ -408,7 +408,7 @@ export class EntitySheetHelper {
           label: game.i18n.localize("No"),
         }
       }
-    }).render(true);
+    }, { classes: ["Alternityd100"] }).render(true);
   }
 
   /* -------------------------------------------- */
@@ -557,8 +557,11 @@ console.log("Attibutes", attributes)
 console.log("types---", templates, documentName, types, collection)
 
 
+    if (!(options?.classes instanceof Array)) options.classes = [];
+    if (!options.classes.includes("Alternityd100")) options.classes.push("Alternityd100");
+
     // Render the entity creation form
-    const html = await renderTemplate(`templates/sidebar/entity-create.html`, {
+    const html = await foundry.applications.handlebars.renderTemplate(`templates/sidebar/entity-create.html`, {
       name: data.name || game.i18n.format("ENTITY.New", {entity: label}),
       folder: data.folder,
       folders: folders,

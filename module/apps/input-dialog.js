@@ -82,7 +82,7 @@ console.log("HERE--",html)
             InputDialog.values[key].value = InputDialog.values[key].placeholder;
         }
 
-        const html = await renderTemplate("systems/Alternityd100/templates/apps/input-dialog.html", {
+        const html = await foundry.applications.handlebars.renderTemplate("systems/Alternityd100/templates/apps/input-dialog.html", {
             message: message,
             inputs: inputData
         });

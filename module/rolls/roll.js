@@ -75,6 +75,6 @@ export default class SFRPGRoll extends Roll {
         };
     
         // Render the roll display template
-        return renderTemplate(chatOptions.template, chatData);
+        return foundry.applications.handlebars.renderTemplate(chatOptions.template, chatData);
     }
 }

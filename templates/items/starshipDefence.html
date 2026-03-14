@@ -1,4 +1,4 @@
-<form class="{{cssClass}} flexcol" autocomplete="off">
+<div class="sheet-root {{cssClass}} flexcol">
 
     {{!-- Item Sheet Header --}}
     {{> "systems/Alternityd100/templates/items/parts/item-header.html"}}
@@ -17,67 +17,81 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
+            <h3 class="form-header">{{ localize "SFRPG.Details" }}</h3>
+            <div class="divTable starship-item-details-table">
+                <div class="divTableBody">
+                    <div class="divTableRow">
+                        <div class="divTableCell starship-item-details-common">
+                            {{> "systems/Alternityd100/templates/items/parts/starship-component-common.html" this}}
+                        </div>
+                        <div class="divTableCell starship-item-details-specific">
+                            <h4 class="section-header first">{{ localize (append "TYPES.Item." item.type) }} Properties</h4>
 
-            {{!-- Common component data --}}
-            {{> "systems/Alternityd100/templates/items/parts/starship-component.html" this}}
+                            <h4 class="section-header first"data-tooltip="<p>Works like Resistance modifiers in other systems. A positive number (+2) adds a +2 step penalty, while a negative number (-2) adds a -2 step bonus to enemy scan checks.</p>">{{ localize "Damage Check: Penalty(-) / Bonus(+)"  }}</h4>
 
-            <h4 class="section-header first">{{ localize "SFRPG.ItemSheet.StarshipDefence.Header" }}</h4>
+                            <div class="form-group" data-tooltip="<b> While all ships are equipped with some damage control provisions, this system represents a sophisticated and complete approach to compensating for damage. It includes redundant systems, casualty control modes for major machinery, extra compartmentation, repair materials, and advanced monitoring systems throughout the ship.</b>">
+                                <label> Damage Control </label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.damageControl" value="{{itemData.damageControl}}" data-dtype="Number" placeholder="0" />
+                                </div>
+                            </div>
 
-            <h4 class="section-header first">{{ localize "Damage Check: Penalty(+) / Bonus(-)"  }}</h4>
+                            <div class="ecm-noise-table">
+                            <h4 class="section-header first">{{ localize "ECM Noise: Output(+) / Attenuation(-)"  }}</h4>
 
-            <div class="form-group" data-tooltip="<b> While all ships are equipped with some damage control provisions, this system represents a sophisticated and complete approach to compensating for damage. It includes redundant systems, casualty control modes for major machinery, extra compartmentation, repair materials, and advanced monitoring systems throughout the ship.</b>">
-                <label> Damage Control </label>
-                <div class="form-fields">
-                    <input type="text" name="system.damageControl" value="{{itemData.damageControl}}" data-dtype="Number" placeholder="0" />
+                            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonusTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }} Radar </label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.targetLockBonus.radar.value" value="{{itemData.targetLockBonus.radar.value}}" data-dtype="Number" placeholder="0" />
+                                </div>
+                            </div>
+                            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonusTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }} Laser </label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.targetLockBonus.laser.value" value="{{itemData.targetLockBonus.laser.value}}" data-dtype="Number" placeholder="0" />
+                                </div>
+                            </div>
+                            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonusTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }} Mass </label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.targetLockBonus.mass.value" value="{{itemData.targetLockBonus.mass.value}}" data-dtype="Number" placeholder="0" />
+                                </div>
+                            </div>
+                            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonusTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }} Thermal / IR </label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.targetLockBonus.thermal.value" value="{{itemData.targetLockBonus.thermal.value}}" data-dtype="Number" placeholder="0" />
+                                </div>
+                            </div>
+                            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonusTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }} Psionic Radiation </label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.targetLockBonus.psi.value" value="{{itemData.targetLockBonus.psi.value}}" data-dtype="Number" placeholder="0" />
+                                </div>
+                            </div>
+
+                            </div>
+
+                            <div class="ship-resistance-mod-table">
+                            <h4 class="section-header first" data-tooltip="{{ localize 'SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonusTooltip' }}">{{ localize "Ships Resistance Modifier: Bonus(+) / Penalty(-)"  }}</h4>
+                     
+                            {{#each itemData.resistance as |type key|}}
+                                
+                                <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonusTooltip" }}">
+                                    <label>{{ localize "RES MOD " }} {{ localize (append "SFRPG.ShipSystems.starshipWeaponTypes." key) }} </label>
+                                <div class="form-fields">
+                                <input type="text" name="system.resistance.{{key}}.value" value="{{type.value}}" data-dtype="Number" placeholder="0" />
+                           
+                                 </div>
+                            </div>
+
+                            {{/each}}
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <h4 class="section-header first">{{ localize "ECM Noise: Output(+) / Attenuation(-)"  }}</h4>
-
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonusTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }} Radar </label>
-                <div class="form-fields">
-                    <input type="text" name="system.targetLockBonus.radar.value" value="{{itemData.targetLockBonus.radar.value}}" data-dtype="Number" placeholder="0" />
-                </div>
-            </div>
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonusTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }} Laser </label>
-                <div class="form-fields">
-                    <input type="text" name="system.targetLockBonus.laser.value" value="{{itemData.targetLockBonus.laser.value}}" data-dtype="Number" placeholder="0" />
-                </div>
-            </div>
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonusTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }} Mass </label>
-                <div class="form-fields">
-                    <input type="text" name="system.targetLockBonus.mass.value" value="{{itemData.targetLockBonus.mass.value}}" data-dtype="Number" placeholder="0" />
-                </div>
-            </div>
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonusTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }} Thermal / IR </label>
-                <div class="form-fields">
-                    <input type="text" name="system.targetLockBonus.thermal.value" value="{{itemData.targetLockBonus.thermal.value}}" data-dtype="Number" placeholder="0" />
-                </div>
-            </div>
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonusTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }} Psionic Radiation </label>
-                <div class="form-fields">
-                    <input type="text" name="system.targetLockBonus.psi.value" value="{{itemData.targetLockBonus.psi.value}}" data-dtype="Number" placeholder="0" />
-                </div>
-            </div>
-
-            <h4 class="section-header first">{{ localize "Attack Resistance Modifier: Bonus(+) / Penalty(-)"  }}</h4>
-     
-    {{#each itemData.resistance as |type key|}}
-        
-        <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipElectronicCountermeasure.TargetLockBonusTooltip" }}">
-            <label>{{ localize "RES MOD " }} {{ localize (append "SFRPG.ShipSystems.starshipWeaponTypes." key) }} </label>
-        <div class="form-fields">
-        <input type="text" name="system.resistance.{{key}}.value" value="{{type.value}}" data-dtype="Number" placeholder="0" />
-   
-         </div>
-</div>
-
-{{/each}}
 
 
             
@@ -89,9 +103,5 @@
 
         </div>
 
-
-
-        </div>
-
     </section>
-</form>
+</div>

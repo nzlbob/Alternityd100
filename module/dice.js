@@ -4,9 +4,11 @@ import { AbilityTemplate } from "./pixi/ability-template.js";
 import { findTokenById } from "./item/item.js";
 import { d100A } from "./d100Aconfig.js"
 import { attackModData } from "./modifiers/d100mod.js";
+import { RollDialogV2 } from "./apps/roll-dialog-v2.js";
+import { AttackRollDialogV2 } from "./apps/attack-roll-dialog-v2.js";
 //import { getRangeCat } from "./utilities.js"
 import { d100NPCCrewStats } from "../module/modifiers/d100mod.js";
-import { getRangeCat, radtodeg, degtorad, raytodeg, inArc, generateUUID } from "./utilities.js"
+import { getRangeCat, radtodeg, degtorad, raytodeg, inArc, generateUUID, measureDistance } from "./utilities.js"
 export const formulaHasDice = function (formula) {
   return formula.match(/[0-9)][dD]/) || formula.match(/[dD][0-9(]/);
 };
@@ -135,41 +137,34 @@ export class Diced100 {
     let AoEdistance = 0
 
     // Inner roll function
-    const _roll = async (parts, setRoll, form) => {
+    const _roll = async (parts, setRoll, dialogSelection) => {
 
 
       const originalFlavor = flavor;
 
-      let operator = form ? form.find('[name="operator"]').val() : 0;
-      let sitBonus = form ? form.find('[name="dstep"]').val() : 0;
+      let operator = dialogSelection?.operator ?? 0;
+      let sitBonus = dialogSelection?.dstep ?? 0;
       // Attacker based Modifiers
-      let dialogMovement = form ? form.find('[name="movement"]').val() : 0;
-      let dialogRange = []
-      let dialogResistance = []
-      let dialogCover = []
-      let dialogDodge = []
+      let dialogMovement = dialogSelection?.movement ?? 0;
+      let dialogRange = [];
+      let dialogResistance = [];
+      let dialogCover = [];
+      let dialogDodge = [];
 
       // Target based Modifiers
-      for (let a = 0; a < 5; a++) {
-        let thisrange = form ? form.find('[name="range' + a + '"]').val() : 0;
-        thisrange ? dialogRange.push(thisrange) : a = 5
-        let thisres = form ? form.find('[name="resistance' + a + '"]').val() : 0;
-        thisres ? dialogResistance.push(thisres) : a = 5
-        let thiscover = form ? form.find('[name="cover' + a + '"]').val() : 0;
-        thiscover ? dialogCover.push(thiscover) : a = 5
-        let thisdodge = form ? form.find('[name="dodge' + a + '"]').val() : 0;
-        thisdodge ? dialogDodge.push(thisdodge) : a = 5
-
-        console.log("dialogRange", dialogRange)
-        console.log("dialogResistance", dialogResistance)
-        console.log("dialogCover", dialogCover)
-        console.log("dialogDodge", dialogDodge)
+      const targetSelections = dialogSelection?.targets ?? [];
+      for (let i = 0; i < targetSelections.length; i++) {
+        const t = targetSelections[i] ?? {};
+        if (t.range) dialogRange.push(t.range);
+        if (t.resistance) dialogResistance.push(t.resistance);
+        if (t.cover) dialogCover.push(t.cover);
+        if (t.dodge) dialogDodge.push(t.dodge);
       }
       // let dialogResistance =  form ? form.find('[name="resistance"]').val() :0;
       // let dialogCover =  form ? form.find('[name="cover"]').val() :0;
       // let dialogDodge =  form ? form.find('[name="dodge"]').val() :0;
 
-      rollMode = form ? form.find('[name="rollMode"]').val() : rollMode;
+      rollMode = dialogSelection?.rollMode ?? rollMode;
 
 
       //console.log ("*******operator******",/*operator,parts, setRoll, form,dialogRange,*/dialogResistance/*,this*/)
@@ -253,7 +248,7 @@ export class Diced100 {
         }
 
         //console.log(AoETemplate)
-        AoEdistance = Math.ceil((canvas.grid.measureDistance({ x: actorToken.object.center.x, y: actorToken.object.center.y }, { x: AoETemplate[0].x, y: AoETemplate[0].y })));
+        AoEdistance = Math.ceil((measureDistance({ x: actorToken.object.center.x, y: actorToken.object.center.y }, { x: AoETemplate[0].x, y: AoETemplate[0].y })));
         await AoETemplate[0].update({ "x": 5250, "y": 8820 })
 
         targetData[0].distance = AoEdistance
@@ -266,7 +261,7 @@ export class Diced100 {
 
 
           //console.log("x",Math.ceil(canvas.grid.measureDistance({x: AoETemplate[0].x, y: AoETemplate[0].y}, {x: token.x, y: token.y})))
-          if (Math.ceil(canvas.grid.measureDistance({ x: AoETemplate[0].x, y: AoETemplate[0].y }, { x: token.x, y: token.y })) < 6) {
+          if (Math.ceil(measureDistance({ x: AoETemplate[0].x, y: AoETemplate[0].y }, { x: token.x, y: token.y })) < 6) {
             targetData.push(token)
           }
 
@@ -301,7 +296,7 @@ export class Diced100 {
         //console.log("Target",x+1," ", targetName,target,actorToken);
         
             targetResModData.Name = targetName;
-            targetResModData.distance = Math.ceil((canvas.grid.measureDistance({x: actorToken.x, y: actorToken.y}, {x: target.x, y: target.y})));
+            targetResModData.distance = Math.ceil((measureDistance({x: actorToken.x, y: actorToken.y}, {x: target.x, y: target.y})));
              
             ResModData.dex = target.actor.system.abilities.dex.mod;
             ResModData.str = target.actor.system.abilities.str.mod;
@@ -362,19 +357,19 @@ export class Diced100 {
           + parseInt(currentTarget.covermod)
           + parseInt(currentTarget.dodgemod)
 
-        currentTarget.flavor = "\nSkill: " + skl.label
-        currentTarget.flavor += "\nSkill Step: " + stepbonus
-        currentTarget.flavor += "\nSituation: " + sitBonus
-        currentTarget.flavor += "\nAccuracy: " + currentTarget.accur
-        currentTarget.flavor += "\nFire Mode: " + currentTarget.AWAModeMod
-        currentTarget.flavor += "\nMovement: " + dialogMovement //currentTarget.movementmod
-        currentTarget.flavor += "\nRange Mod: " + currentTarget.rangemod
-        currentTarget.flavor += "\nRes Mod: " + currentTarget.resPenalty
-        currentTarget.flavor += "\nCover Mod: " + currentTarget.covermod
-        currentTarget.flavor += "\nDodging Mod: " + currentTarget.dodgemod
+        currentTarget.flavor = "Skill: " + skl.label
+        currentTarget.flavor += "<br>Skill Step: " + stepbonus
+        currentTarget.flavor += "<br>Situation: " + sitBonus
+        currentTarget.flavor += "<br>Accuracy: " + currentTarget.accur
+        currentTarget.flavor += "<br>Fire Mode: " + currentTarget.AWAModeMod
+        currentTarget.flavor += "<br>Movement: " + dialogMovement //currentTarget.movementmod
+        currentTarget.flavor += "<br>Range Mod: " + currentTarget.rangemod
+        currentTarget.flavor += "<br>Res Mod: " + currentTarget.resPenalty
+        currentTarget.flavor += "<br>Cover Mod: " + currentTarget.covermod
+        currentTarget.flavor += "<br>Dodging Mod: " + currentTarget.dodgemod + "<br>"
 
         //currentTarget.attackbonus = stepbonus + currentTarget.resPenalty + currentTarget.rangemod + currentTarget.accur
-        console.log(
+       /* console.log(
           "\n attackbonus", currentTarget.attackbonus,
           "\n skillStep", stepbonus,
           "\n accur", currentTarget.accur,
@@ -387,7 +382,7 @@ export class Diced100 {
           "\n Movement", //currentTarget.movementmod, 
           "\n Load", //currentTarget.loadmod, 
         )
-
+*/
         //console.log("AWAModeMod", currentTarget);
       }
 
@@ -396,9 +391,9 @@ export class Diced100 {
         if (isStarshipweapon) {
 
           skl.label = "System Operation - Weapons"
-          targetData[a].flavor = "\nSkill: " + "System Operation - Weapons"
-          targetData[a].flavor += "\nSkill Step: " + stepbonus
-          targetData[a].flavor += "\nAccuracy: " + targetData[a].accur
+          targetData[a].flavor = "Skill: " + "System Operation - Weapons"
+          targetData[a].flavor += "<br>Skill Step: " + stepbonus
+          targetData[a].flavor += "<br>Accuracy: " + targetData[a].accur
 
           /**
            * 
@@ -406,11 +401,11 @@ export class Diced100 {
            * 
            */
 
-          targetData[a].flavor += "\nFire Mode: " + targetData[a].AWAModeMod
-          targetData[a].flavor += "\nRange Mod: " + targetData[a].rangemod
-          targetData[a].flavor += "\nRes Mode: " + targetData[a].resPenalty
-          targetData[a].flavor += "\nCover Mod: " + targetData[a].covermod
-          targetData[a].flavor += "\nDodging Mod: " + targetData[a].dodgemod
+          targetData[a].flavor += "<br>Fire Mode: " + targetData[a].AWAModeMod
+          targetData[a].flavor += "<br>Range Mod: " + targetData[a].rangemod
+          targetData[a].flavor += "<br>Res Mode: " + targetData[a].resPenalty
+          targetData[a].flavor += "<br>Cover Mod: " + targetData[a].covermod
+          targetData[a].flavor += "<br>Jinking Mod: " + targetData[a].dodgemod + "<br>"
           //console.log("AWAModeMod", targetData[a]);
         }
 
@@ -533,6 +528,9 @@ export class Diced100 {
         // Convert the roll to a chat message
         // ---------THESE ARE THE VARIABLES READ BY THE CHAT DATA
 
+        const roll = targetData?.[0]?.attroll;
+        if (!roll) return null;
+
         if (chatTemplate) {
           // Create roll template data
           const d20 = targetData[0].attroll.terms[0];
@@ -568,13 +566,12 @@ export class Diced100 {
           // Create chat data
 
           const chatData = {
-            user: game.user.id,
-            type: 0,   // CONST.CHAT_MESSAGE_TYPES.ROLL,
+            author: game.user.id,
             sound: noSound ? null : a === 0 ? CONFIG.sounds.dice : null,
             speaker: speaker,
-            content: await renderTemplate(chatTemplate, rollData),
+            content: await foundry.applications.handlebars.renderTemplate(chatTemplate, rollData),
             rollMode: rollMode,
-            roll: targetData[0].attroll.toJSON(),
+            rolls: [targetData[0].attroll],
             degree: degree,//subject.ordinary ,
             "flags.pf1.noRollRender": true,
 
@@ -668,64 +665,44 @@ console.log(actor)
     //}
 
     for (let target of targetData) {
-      console.log("Target\n",target)
+   //   console.log("Target\n",target)
       if (!target.resPenalty) target.resPenalty = 0;
       target.resistance = targetData ? (target.resPenalty > -1) ? "+" + target.resPenalty.toString() : target.resPenalty.toString() : "+0"
-      console.log("****Resistance*****", target.resistance)
+  //    console.log("****Resistance*****", target.resistance)
       target.cover = targetData ? (target.covermod > -1) ? "+" + target.covermod.toString() : target.covermod.toString() : "+0"
-      console.log("****covermod*****", target.cover)
+   ////   console.log("****covermod*****", target.cover)
       target.dodge = targetData ? (target.dodgemod > -1) ? "+" + target.dodgemod.toString() : target.dodgemod.toString() : "+0"
-      console.log("****covermod*****", target.dodge)
+    //  console.log("****covermod*****", target.dodge)
     }
-    // Render modal dialog
-    template = template || "systems/Alternityd100/templates/chat/roll-dialog.hbs";
-    const dialogData = {
-      rollSkill: rollSkill,
-      formula: formula,
-      data: data,
-      rollMode: rollMode,
+    const operatorOptions = {};
+    for (let i = 0; i < validgunner.length; i++) operatorOptions[String(i)] = validgunner[i]?.name ?? `Gunner ${i + 1}`;
+
+    const selection = await AttackRollDialogV2.prompt({
+      title,
+      formula,
+      rollMode,
       rollModes: CONFIG.Dice.rollModes,
-      step: "0 steps Average",
-      isStarshipweapon: isStarshipweapon,
-      validgunner: validgunner,
-      d100A: d100A,
-      item: item,
-      targetData: targetData,
-      range: targetData ? targetData[0].rangecat : null,
-      skl: skl,
-      // targetData? targetData[0].resPenalty || 0 : 0
-
-    };
-    //console.log("dialogData",dialogData)
-    const html = await renderTemplate(template, dialogData);
-
-    let roll;
-    return new Promise((resolve) => {
-      if (!(dialogOptions.classes instanceof Array)) dialogOptions.classes = [];
-      dialogOptions.classes.push("dialog", "pf1", "die-roll");
-
-      new Dialog(
-        {
-          title: title,
-          content: html,
-          buttons: {
-
-            normal: {
-              label: "Roll",
-              class: "form-group",
-              callback: (html) => resolve((roll = _roll(parts, staticRoll != null ? staticRoll : -1, html))),
-            },
-
-          },
-          default: "normal",
-          close: (html) => {
-            if (onClose) onClose(html, parts, data);
-            resolve(rolled ? roll : false);
-          },
-        },
-        dialogOptions
-      ).render(true);
+      difficultySteps,
+      dstep: "0",
+      isStarshipweapon,
+      validgunner,
+      operatorOptions,
+      operator: 0,
+      d100A,
+      item,
+      targetData,
+      skl
     });
+
+    if (selection?.cancelled) {
+      if (onClose) onClose(null, formula, formula);
+      return false;
+    }
+
+    const result = await _roll(parts, staticRoll != null ? staticRoll : -1, selection);
+    const finalRoll = targetData?.[0]?.attroll ?? null;
+    if (onClose) onClose(finalRoll, formula, finalRoll?.formula ?? formula);
+    return rolled ? result : false;
   }
 
   /**
@@ -852,16 +829,17 @@ console.log(actor)
     let AoEdistance = 0
     var AoETemplate
     // Inner roll function
-    const _roll = async (parts, setRoll, form) => {
+    const _roll = async (parts, setRoll, dialogSelection) => {
 
 
       const originalFlavor = flavor;
-      rollMode = form ? form.find('[name="rollMode"]').val() : rollMode;
-      let operator = form ? form.find('[name="operator"]').val() : 0;
-      let dialogRange = form ? form.find('[name="range"]').val() : 0;
-      let dialogResistance = form ? form.find('[name="resistance"]').val() : 0;
-      let dialogCover = form ? form.find('[name="cover"]').val() : 0;
-      let dialogMovement = form ? form.find('[name="movement"]').val() : 0;
+      rollMode = dialogSelection?.rollMode ?? rollMode;
+      let operator = dialogSelection?.operator ?? 0;
+      let dialogMovement = dialogSelection?.movement ?? 0;
+
+      const targetSelection = dialogSelection?.targets?.[0] ?? {};
+      let dialogResistance = targetSelection.resistance ?? 0;
+      let dialogCover = targetSelection.cover ?? 0;
 
       //console.log ("*******operator******",operator,parts, setRoll, form,dialogRange,dialogResistance,this)
       //  dSteps = form ? form.find('[name="dstep"]').val() : dSteps;
@@ -949,7 +927,7 @@ console.log(actor)
       }
 
       //console.log(AoETemplate)
-      AoEdistance = Math.ceil((canvas.grid.measureDistance({ x: actorToken.object.center.x, y: actorToken.object.center.y }, { x: AoETemplate[0].x, y: AoETemplate[0].y })));
+      AoEdistance = Math.ceil((measureDistance({ x: actorToken.object.center.x, y: actorToken.object.center.y }, { x: AoETemplate[0].x, y: AoETemplate[0].y })));
 
 
 
@@ -1008,28 +986,21 @@ console.log(actor)
         + parseInt(target.covermod)
 
 
-      target.flavor = "\nSkill: " + skl.label
-      target.flavor += "\nSkill Step: " + stepbonus
-      target.flavor += "\nAccuracy: " + target.accur
-      target.flavor += "\nMovement Mod: " + target.movementmod
-      //target.flavor += "\nFire Mode: " + target.AWAModeMod
-      target.flavor += "\nRange Mod: " + target.rangemod
-      target.flavor += "\nRes Mod: " + target.resPenalty
-      target.flavor += "\nCover Mod: " + target.covermod
-
-
-
-
-
-
-
+      target.flavor = "Skill: " + skl.label
+      target.flavor += "<br>Skill Step: " + stepbonus
+      target.flavor += "<br>Accuracy: " + target.accur
+      target.flavor += "<br>Movement Mod: " + target.movementmod
+      //target.flavor += "<br>Fire Mode: " + target.AWAModeMod
+      target.flavor += "<br>Range Mod: " + target.rangemod
+      target.flavor += "<br>Res Mod: " + target.resPenalty
+      target.flavor += "<br>Cover Mod: " + target.covermod
 
       if (isStarshipweapon) {
 
         skl.label = "System Operation - Weapons"
-        target.flavor = "\nSkill: " + "System Operation - Weapons"
-        target.flavor += "\nSkill Step: " + stepbonus
-        target.flavor += "\nAccuracy: " + target.accur
+        target.flavor = "Skill: " + "System Operation - Weapons"
+        target.flavor += "<br>Skill Step: " + stepbonus
+        target.flavor += "<br>Accuracy: " + target.accur
 
         /**
         * 
@@ -1037,9 +1008,9 @@ console.log(actor)
         * 
         */
 
-        target.flavor += "\nFire Mode: " //+ AWAModeMod[a]
-        target.flavor += "\nRange Mod: " + target.rangemod
-        target.flavor += "\nRes Mode: " + target.resPenalty
+        target.flavor += "<br>Fire Mode: " //+ AWAModeMod[a]
+        target.flavor += "<br>Range Mod: " + target.rangemod
+        target.flavor += "<br>Res Mode: " + target.resPenalty + "<br>"
         //console.log("AWAModeMod", target);
       }
 
@@ -1048,7 +1019,7 @@ console.log(actor)
       let totalbonus = 0;
       // Don't include situational bonus unless it is defined
       //sitBonus = stepbonus;
-      let sitBonus = form ? form.find('[name="dstep"]').val() : 0;
+      let sitBonus = dialogSelection?.dstep ?? 0;
       //sitBonus =0;
 
       if (!sitBonus && curParts.indexOf("@bonus") !== -1) curParts.pop();
@@ -1066,7 +1037,7 @@ console.log(actor)
 
       /*** For the first roll, roll the d20 as well as the bonus dice */
 
-      target.attroll = await Roll.create(dice.concat(d100stepdie(target.attackbonus + parseInt(sitBonus)))).evaluate({ async: true });
+      target.attroll = await Roll.create(dice.concat(d100stepdie(target.attackbonus + parseInt(sitBonus)))).evaluate();
 
 
       /*** For the second rolls, roll the d20 as well as the bonus dice */
@@ -1131,7 +1102,7 @@ console.log(actor)
         actorToken.y
       xloc
       yloc
-      let ray = new Ray({ x: actorToken.object.center.x, y: actorToken.object.center.y }, { x: xloc, y: yloc })
+      let ray = new foundry.canvas.geometry.Ray({ x: actorToken.object.center.x, y: actorToken.object.center.y }, { x: xloc, y: yloc })
 
       //CONST.WALL_RESTRICTION_TYPES.includes(config.type)
       //let coll = await canvas.walls.checkCollision(ray,{mode:"closest",type:"move"}) Deprecated since Version 11
@@ -1172,6 +1143,9 @@ console.log(actor)
       //Make the Attack  flavor Text
       // Convert the roll to a chat message
       // ---------THESE ARE THE VARIABLES READ BY THE CHAT DATA
+
+      const roll = target?.attroll;
+      if (!roll) return null;
       // Cycle thru tokens, see if we hit
       let fulltargetData = []
       for (let token of game.scenes.current.tokens) {
@@ -1179,7 +1153,7 @@ console.log(actor)
 
         if (this.withinReach(AoETemplate, token, dist, item.system.blastWidth)) {
           console.log(token.name)
-          const blastdist = Math.ceil(canvas.grid.measureDistance({ x: AoETemplate[0].x, y: AoETemplate[0].y }, { x: token.object.center.x, y: token.object.center.y }))
+          const blastdist = Math.ceil(measureDistance({ x: AoETemplate[0].x, y: AoETemplate[0].y }, { x: token.object.center.x, y: token.object.center.y }))
           let rangecat
           if (blastdist <= item.system.blastArea.long) rangecat = "Long";
           if (blastdist <= item.system.blastArea.medium) rangecat = "Medium";
@@ -1210,7 +1184,7 @@ console.log(actor)
 
       targetData = fulltargetData.filter(function (target) {
 
-        let ray = new Ray({ x: target.token.object.center.x, y: target.token.object.center.y }, { x: xloc, y: yloc })
+        let ray = new foundry.canvas.geometry.Ray({ x: target.token.object.center.x, y: target.token.object.center.y }, { x: xloc, y: yloc })
         //console.log(ray)
 
         /***
@@ -1271,13 +1245,12 @@ console.log(actor)
         // Create chat data
 
         const chatData = {
-          user: game.user.id,
-          type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+          author: game.user.id,
           sound: noSound ? null : true ? CONFIG.sounds.dice : null,
           speaker: speaker,
-          content: await renderTemplate(chatTemplate, rollData),
+          content: await foundry.applications.handlebars.renderTemplate(chatTemplate, rollData),
           rollMode: rollMode,
-          roll: target.attroll.toJSON(),
+          rolls: [target.attroll],
           degree: degree,//subject.ordinary ,
           "flags.pf1.noRollRender": true,
 
@@ -1296,7 +1269,7 @@ console.log(actor)
             flavor: flavor,
             targetflavor: targetflavor,
             rollMode: rollMode,
-            sound: a === 0 ? CONFIG.sounds.dice : null,
+            sound: noSound ? null : CONFIG.sounds.dice,
           };
           if (subject) setProperty(msgData, "flags.pf1.subject", subject);
 
@@ -1350,67 +1323,80 @@ console.log(actor)
     // targetData[0].resPenalty = 0;
     const resistance = "+0" // targetData? (targetData[0].resPenalty>-1)? "+" + targetData[0].resPenalty.toString() : "-"+targetData[0].resPenalty.toString()  : "+0"
     console.log(resistance)
-    // Render modal dialog
-    template = template || "systems/Alternityd100/templates/chat/roll-dialog.hbs";
-    const dialogData = {
-      rollSkill: rollSkill,
-      formula: formula,
-      data: data,
-      rollMode: rollMode,
-      rollModes: CONFIG.Dice.rollModes,
-      step: "0 steps Average",
-      isStarshipweapon: isStarshipweapon,
-      validgunner: validgunner,
-      d100A: d100A,
-      item: item,
-      targetData: targetData,
-      range: target.rangecat,
-      skl: skl,
-      //cover : 
-      resistance: resistance // targetData? targetData[0].resPenalty || 0 : 0
 
+    const difficultySteps = {
+      "-5": "-5 steps No Sweat",
+      "-4": "-4 steps Cakewalk",
+      "-3": "-3 steps Extremely Easy",
+      "-2": "-2 steps Very Easy",
+      "-1": "-1 steps Easy",
+      "0": "0 steps Average",
+      "1": "+1 steps Tough",
+      "2": "+2 steps Hard",
+      "3": "+3 steps Challenging",
+      "4": "+4 steps Formidable",
+      "5": "+5 steps Grueling",
+      "6": "+6 steps Gargantuan",
+      "7": "+7 steps Leroy Jenkins"
     };
-    //console.log("dialogData",dialogData)
-    const html = await renderTemplate(template, dialogData);
 
-    let roll;
-    return new Promise((resolve) => {
-      if (!(dialogOptions.classes instanceof Array)) dialogOptions.classes = [];
-      dialogOptions.classes.push("dialog", "pf1", "die-roll");
+    const operatorOptions = {};
+    for (let i = 0; i < validgunner.length; i++) {
+      const actor = validgunner[i];
+      if (!actor) continue;
+      const weapo = actor.system?.skills?.weapo;
+      operatorOptions[i] = weapo
+        ? `${actor.name} (${weapo.base}/${weapo.good}/${weapo.amazing}) ${weapo.stepdie}`
+        : actor.name;
+    }
 
-      new Dialog(
-        {
-          title: title,
-          content: html,
-          buttons: {
+    // Build a single-row target list for the dialog (the aimed point / primary target).
+    const aimTarget = {
+      ...(target ?? {}),
+      Name: target?.Name ?? target?.name ?? "Target",
+      resistance: target?.resistance ?? resistance,
+      cover: target?.cover ?? "+0",
+      dodge: target?.dodge ?? "+0",
+      rangecat: target?.rangecat ?? "Short"
+    };
 
-            normal: {
-              label: "Roll",
-              class: "form-group",
-              callback: (html) => resolve((roll = _roll(parts, staticRoll != null ? staticRoll : -1, html))),
-            },
-
-          },
-          default: "normal",
-          close: (html) => {
-            if (onClose) onClose(html, parts, data);
-            resolve(rolled ? roll : false);
-          },
-        },
-        dialogOptions
-      ).render(true);
+    const selection = await AttackRollDialogV2.prompt({
+      title,
+      formula,
+      rollMode,
+      rollModes: CONFIG.Dice.rollModes,
+      difficultySteps,
+      dstep: "0",
+      isStarshipweapon,
+      validgunner,
+      operatorOptions,
+      operator: 0,
+      d100A,
+      item,
+      targetData: [aimTarget],
+      skl
     });
+
+    if (selection?.cancelled) {
+      if (onClose) onClose(null, formula, formula);
+      return false;
+    }
+
+    const result = await _roll(parts, staticRoll != null ? staticRoll : -1, selection);
+    const finalRoll = target?.attroll ?? null;
+    if (onClose) onClose(finalRoll, formula, finalRoll?.formula ?? formula);
+    return rolled ? result : false;
   }
 
   static withinReach(AoETemplate, token, dist, width) {
     console.log("AoETemplate\n ", AoETemplate, token)
-    const range = Math.ceil(canvas.grid.measureDistance({ x: AoETemplate[0].x, y: AoETemplate[0].y }, { x: token.object.center.x, y: token.object.center.y })) <= dist
+    const range = Math.ceil(measureDistance({ x: AoETemplate[0].x, y: AoETemplate[0].y }, { x: token.object.center.x, y: token.object.center.y })) <= dist
     if (AoETemplate[0].t == "circle") {
       return range
     }
     if (AoETemplate[0].t == "cone") {
 
-      let ray = new Ray({ x: AoETemplate[0].x, y: AoETemplate[0].y }, { x: token.object.center.x, y: token.object.center.y })
+      let ray = new foundry.canvas.geometry.Ray({ x: AoETemplate[0].x, y: AoETemplate[0].y }, { x: token.object.center.x, y: token.object.center.y })
       // let length = canvas.grid.measureDistances(ray)
 
       let tokenangle = (raytodeg(ray) + 270) % 360;
@@ -1426,7 +1412,7 @@ console.log(actor)
     }
 
     if (AoETemplate[0].t == "ray") {
-      let ray = new Ray({ x: AoETemplate[0].x, y: AoETemplate[0].y }, { x: token.object.center.x, y: token.object.center.y })
+      let ray = new foundry.canvas.geometry.Ray({ x: AoETemplate[0].x, y: AoETemplate[0].y }, { x: token.object.center.x, y: token.object.center.y })
       // let length = canvas.grid.measureDistances(ray)
       let tokenangle = raytodeg(ray) + 270;
       let effectangle = (AoETemplate[0].direction > 270) ? AoETemplate[0].direction : AoETemplate[0].direction + 360
@@ -1436,7 +1422,7 @@ console.log(actor)
 
       // const inAoE = Math.abs(effectangle - tokenangle) < coneangle 
 
-      const offset = Math.abs(Math.tan(degtorad(Math.abs(effectangle - tokenangle))) * Math.ceil(canvas.grid.measureDistance({ x: AoETemplate[0].x, y: AoETemplate[0].y }, { x: token.object.center.x, y: token.object.center.y })))
+      const offset = Math.abs(Math.tan(degtorad(Math.abs(effectangle - tokenangle))) * Math.ceil(measureDistance({ x: AoETemplate[0].x, y: AoETemplate[0].y }, { x: token.object.center.x, y: token.object.center.y })))
       const inAoE = (offset < (width / 2)) && (Math.abs(effectangle - tokenangle) < 90)
 
       const bearing = true
@@ -1524,16 +1510,16 @@ console.log(actor)
     let degree = 0;
 
     // Inner roll function
-    const _roll = async (parts, setRoll, form) => {
+    const _roll = async (parts, setRoll, dialogSelection) => {
       const originalFlavor = flavor;
-      rollMode = form ? form.find('[name="rollMode"]').val() : rollMode;
+      rollMode = dialogSelection?.rollMode ?? rollMode;
       //  dSteps = form ? form.find('[name="dstep"]').val() : dSteps;
       for (let a = 0; a < 1 + extraRolls.length; a++) {
         flavor = originalFlavor;
         const curParts = foundry.utils.duplicate(parts);
         let totalbonus = 0;
         // Don't include situational bonus unless it is defined
-        data.bonus = form ? form.find('[name="dstep"]').val() : 0;
+        data.bonus = dialogSelection?.dstep ?? 0;
         if (!data.bonus && curParts.indexOf("@bonus") !== -1) curParts.pop();
         //console.log("Data Bonus", data.bonus, " stepbonus", stepbonus)
         // Extra roll specifics
@@ -1600,7 +1586,7 @@ console.log(actor)
            // style: CONST.CHAT_MESSAGE_STYLES.ROLL,
             sound: noSound ? null : a === 0 ? CONFIG.sounds.dice : null,
             speaker: speaker,
-            content: await renderTemplate(chatTemplate, rollData),
+            content: await foundry.applications.handlebars.renderTemplate(chatTemplate, rollData),
             rollMode: rollMode,
             stepflavor: stepflavor,
             roll: roll.toJSON(),
@@ -1651,61 +1637,24 @@ console.log(actor)
 
 
 
-    // Render modal dialog
-    template = template || "systems/Alternityd100/templates/chat/roll-dialog.hbs";
-    const dialogData = {
-      formula: dice.concat(d100stepdie(stepbonus)),
-      data: data,
+    const selection = await RollDialogV2.prompt({
+      title: title,
       stepflavor: stepflavor,
-      rollMode: rollMode,
+      formula: dice.concat(d100stepdie(stepbonus)),
+      rollMode,
       rollModes: CONFIG.Dice.rollModes,
-      step: "0 steps Average",
-      /*steps: [
-      "-5 steps No Sweat",
-      "-4 steps Cakewalk", 
-      "-3 steps Extremely Easy", 
-      "-2 steps Very Easy", 
-      "-1 steps Easy", 
-      "0 steps Average", 
-      "+1 steps Tough", 
-      "+2 steps Hard", 
-      "+3 steps Challenging", 
-      "+4 steps Formidable", 
-      "+5 steps Grueling", 
-      "+6 steps Gargantuan", 
-      "+7 steps Leroy Jenkins"],
-*/
-
-    };
-    const html = await renderTemplate(template, dialogData);
-
-    let roll;
-    return new Promise((resolve) => {
-      if (!(dialogOptions.classes instanceof Array)) dialogOptions.classes = [];
-      dialogOptions.classes.push("dialog", "pf1", "die-roll");
-
-      new Dialog(
-        {
-          title: title,
-          content: html,
-          buttons: {
-
-            normal: {
-              label: "Roll",
-              class: "form-group",
-              callback: (html) => resolve((roll = _roll(parts, staticRoll != null ? staticRoll : -1, html))),
-            },
-
-          },
-          default: "normal",
-          close: (html) => {
-            if (onClose) onClose(html, parts, data);
-            resolve(rolled ? roll : false);
-          },
-        },
-        dialogOptions
-      ).render(true);
+      difficultySteps,
+      dstep: "0"
     });
+
+    if (selection?.cancelled) {
+      if (onClose) onClose(null, parts, data);
+      return false;
+    }
+
+    const result = await _roll(parts, staticRoll != null ? staticRoll : -1, selection);
+    if (onClose) onClose(null, parts, data);
+    return rolled ? result : false;
   }
 
 
@@ -1760,7 +1709,7 @@ console.log(actor)
     damageResults.goo.damage = await Roll.create(data.damage.goo.dice, actorData).evaluate();
     damageResults.ama.damage = await Roll.create(data.damage.ama.dice, actorData).evaluate();
 
-    console.log("*****************************************", damageResults, data)
+  //  console.log("*****************************************", damageResults, data)
     return damageResults;
   }
 
@@ -1844,7 +1793,7 @@ degraded Damage
 
     for (let [key, armor] of Object.entries(data.defenceData.armor)) {
       defence[key] = {}
-      defence[key].roll = await Roll.create(armor.system.armor[data.type]).evaluate({ async: true });
+      defence[key].roll = await Roll.create(armor.system.armor[data.type]).evaluate();
       //if (bestdefence < defend[key].total) 
       defence[key].damage = calculateDamage(data, key, armor, defence[key].roll);
       defence[key].armor = armor
@@ -1932,8 +1881,7 @@ degraded Damage
       chatTemplate = chatTemplate || "systems/Alternityd100/templates/chat/simple-damage.hbs";
       var rolldice = data.damage.ord.dice; //+ "+" + parts.join("+")
       const rollOrd = Roll.create(rolldice, data);
-      //console.log(data)+
-      aetyertyety
+      //console.log(data)
       //console.log("Roll Data" ,  rollContext,"\nParts\n",parts,"\nRoll\n",rollOrd.terms,parts.join("+"),"\nChat\n",chatTemplate,"\nrolldice\n" ,rolldice)
       /* if (crit === true) {
          const mult = data.item.ability.critMult || 2;
@@ -1943,7 +1891,7 @@ degraded Damage
          flavor = `${flavor} (Critical)`;
        }
  */
-      await rollOrd.evaluate({ async: true });
+      await rollOrd.evaluate();
 
       // Convert the roll to a chat message
       if (chatTemplate) {
@@ -1961,13 +1909,12 @@ degraded Damage
         // Create chat data
         const chatData = {
           author: game.user._id,
-          type: CONST.CHAT_MESSAGE_TYPES.ROLL,
           sound: noSound ? null : CONFIG.sounds.dice,
           speaker: speaker,
           flavor: flavor,
           rollMode: rollMode,
-          roll: rollOrd,
-          content: await renderTemplate(chatTemplate, rollData),
+          rolls: [rollOrd],
+          content: await foundry.applications.handlebars.renderTemplate(chatTemplate, rollData),
           useCustomContent: true,
         };
         setProperty(chatData, "flags.pf1.subject.core", "damage");
@@ -2011,14 +1958,16 @@ degraded Damage
       data: data,
       rollMode: rollMode,
       rollModes: CONFIG.Dice.rollModes,
+      difficultySteps: difficultySteps,
+      dstep: "0",
     };
-    const html = await renderTemplate(template, dialogData);
+    const html = await foundry.applications.handlebars.renderTemplate(template, dialogData);
 
     // Render modal dialog
     let roll;
     return new Promise((resolve) => {
       if (!(dialogOptions.classes instanceof Array)) dialogOptions.classes = [];
-      dialogOptions.classes.push("dialog", "pf1", "damage-roll");
+      dialogOptions.classes.push("dialog", "pf1", "damage-roll", "Alternityd100");
 
       new Dialog(
         {
@@ -2062,6 +2011,23 @@ degraded Damage
 
 
 }
+
+// Shared option map for the generic roll dialog.
+const difficultySteps = {
+  "-5": "-5 steps No Sweat",
+  "-4": "-4 steps Cakewalk",
+  "-3": "-3 steps Extremely Easy",
+  "-2": "-2 steps Very Easy",
+  "-1": "-1 steps Easy",
+  "0": "0 steps Average",
+  "1": "+1 steps Tough",
+  "2": "+2 steps Hard",
+  "3": "+3 steps Challenging",
+  "4": "+4 steps Formidable",
+  "5": "+5 steps Grueling",
+  "6": "+6 steps Gargantuan",
+  "7": "+7 steps Leroy Jenkins"
+};
 function setSelectedIndex(s, i) {
   s.options[i - 1].selected = true;
   return;
@@ -2069,7 +2035,32 @@ function setSelectedIndex(s, i) {
 
 function calculateDamage(data, key, armor, defendroll) {
   var dmgtype = data.dmgtype
-  var damage = { stu: 0, wou: 0, mor: 0 };
+  const damage = { 
+    stu: {base: 0, value:0}, 
+    wou: {base: 0, value:0}, 
+    mor: {base: 0, value:0},
+    cri: {base: 0, value:0},
+
+  };
+
+if (data.dmgtype === "stu") damage.stu.base = data.damage;
+if (data.dmgtype === "wou") 
+  {damage.wou.base = data.damage;
+    damage.stu.base = Math.floor(Math.max(0, (data.damage) / 2)) ;
+  }
+    if (data.dmgtype === "mor") 
+      {damage.mor.base = data.damage;
+    damage.stu.base = Math.floor(Math.max(0, (data.damage) / 2)) ;
+    damage.wou.base = Math.floor(Math.max(0, (data.damage) / 2)) ;
+  }
+if (data.dmgtype === "cri") 
+  {damage.cri.base = data.damage;
+    damage.stu.base = Math.floor(Math.max(0, (data.damage) / 2)) ;
+    damage.wou.base = Math.floor(Math.max(0, (data.damage) / 2)) ;
+    damage.mor.base = Math.floor(Math.max(0, (data.damage) / 2)) ;
+
+  }
+
   let alteredDamage = data.damage
   console.log("\nData\n", data, "\key\n", key, "\narmor\n", armor, "\ndefendroll\n", defendroll)
 
@@ -2121,21 +2112,25 @@ function calculateDamage(data, key, armor, defendroll) {
 
   //https://archive.org/details/MyRpgCollection/Alternity_Players_Handbook/page/n53/mode/1up
 
-  if (dmgtype === "stu") damage.stu = Math.max(0, alteredDamage - damageReduced);
-  if (dmgtype === "wou") {
-    damage.stu = Math.floor(Math.max(0, (alteredDamage) / 2))
-    damage.wou = Math.max(0, alteredDamage - damageReduced);
+  if (dmgtype === "stu") {
+    damage.stu.value = Math.max(0, alteredDamage - damageReduced);
+  
+  }
+    if (dmgtype === "wou") {
+    damage.stu.value = Math.floor(Math.max(0, (alteredDamage) / 2))
+    damage.wou.value = Math.max(0, alteredDamage - damageReduced);
+
   };
   if (dmgtype === "mor") {
-    damage.stu = Math.floor(Math.max(0, (alteredDamage) / 2));
-    damage.wou = Math.floor(Math.max(0, (alteredDamage) / 2));
-    damage.mor = Math.max(0, alteredDamage - damageReduced);
+    damage.stu.value = Math.floor(Math.max(0, (alteredDamage) / 2));
+    damage.wou.value = Math.floor(Math.max(0, (alteredDamage) / 2));
+    damage.mor.value = Math.max(0, alteredDamage - damageReduced);
   };
   if (dmgtype === "cri") {
-    damage.stu = Math.floor(Math.max(0, (alteredDamage) / 2));
-    damage.wou = Math.floor(Math.max(0, (alteredDamage) / 2));
-    damage.mor = Math.floor(Math.max(0, (alteredDamage) / 2));
-    damage.cri = Math.max(0, alteredDamage - damageReduced);
+    damage.stu.value = Math.floor(Math.max(0, (alteredDamage) / 2));
+    damage.wou.value = Math.floor(Math.max(0, (alteredDamage) / 2));
+    damage.mor.value = Math.floor(Math.max(0, (alteredDamage) / 2));
+    damage.cri.value = Math.max(0, alteredDamage - damageReduced);
   };
 
 

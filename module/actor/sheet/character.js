@@ -1,37 +1,30 @@
-import { SFRPG } from "../../config.js"
+import { d100A as SFRPG } from "../../d100Aconfig.js"
 import { d100ActorSheet } from "../../d100Actor-sheet.js";
 import { computeCompoundBulkForItem } from "../actor-inventory-utils.js"
 import { EntitySheetHelper } from "../../helper.js";
-import { ActorSheetSFRPG } from "./base.js";
+//import { ActorSheetSFRPG } from "./base.js";
 import { ATTRIBUTE_TYPES } from "../../constants.js";
 
 
 let DEFAULT_TOKEN = "systems/Alternityd100/images/mystery-body.png"
 export class d100AActorSheetCharacter extends d100ActorSheet {
     //export class d100AActorSheetCharacter extends ActorSheetSFRPG {
-    static get defaultOptions() {
-        const options = super.defaultOptions;
-        foundry.utils.mergeObject(options, {
-            classes: ["Alternityd100", "sheet", "actor", 'character'],
-            //classes: ["Alternityd100", "sheet", "actor", 'character'],
-            width: 750,
-            height: 600,
-            //tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "inventory"}],
-            scrollY: [".biography", ".items", ".attributes", ".skills", ".inventory"],
-            dragDrop: [{ dragSelector: ".item-list .item", dropSelector: null }]
+    static get DEFAULT_OPTIONS() {
+        const base = super.DEFAULT_OPTIONS;
+        return foundry.utils.mergeObject(base, {
+            position: { width: 850, height: 600 },
+
+            window: { contentClasses: [...base.window.contentClasses, 'character'] }
         });
-
-        return options;
     }
-
-    get template() {
-        const path = "systems/Alternityd100/templates/actors/";
-        //  if (!game.user.isGM && this.actor.limited) return path + "limited-sheet.html";
-        return path + "character-sheet.html";
-    }
-
-    async getData() {
-        const context = super.getData();
+    
+static PARTS = {
+  form: {
+    template: 'systems/Alternityd100/templates/actors/character-sheet.html'
+  }
+}
+    async _prepareContext(options) {
+        const context = await super._prepareContext(options);
         const isOwner = this.document.isOwner;
         //EntitySheetHelper.getAttributeData(context.data);
         context.shorthand = !!game.settings.get("Alternityd100", "macroShorthand");
@@ -57,7 +50,7 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
         context.isDrone = this.object.type === 'drone';
         context.isNPC = this.object.type === 'npc';
         context.isHazard = this.object.type === 'hazard';
-        context.config = CONFIG.SFRPG;
+        context.config = CONFIG.d100A;
         context.d100Aconfig = CONFIG.d100A;
         context.shorthand = !!game.settings.get("Alternityd100", "macroShorthand");
         context.systemData = context.document.system;
@@ -84,10 +77,10 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
         // Not sure if this does anything
 
         EntitySheetHelper.getAttributeData(data2);
-        this._prepareItems(context);
+        // _prepareItems is already called by the base class during context prep
 
-        context.enrichedBiography = await TextEditor.enrichHTML(this.object.system.details.biography.value, { async: true });
-        context.enrichedGMNotes = await TextEditor.enrichHTML(this.object.system.details.biography.gmNotes, { async: true });
+        context.enrichedBiography = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.object.system.details.biography.value, { async: true });
+        context.enrichedGMNotes = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.object.system.details.biography.gmNotes, { async: true });
         /*
                 data3.status = {}
                 data3.status = {"durability":{"stu":{"good":[],"bad":[]},"wou":{"good":[],"bad":[]},"mor":{"good":[],"bad":[]}}}
@@ -468,21 +461,27 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
      * 
      * @param {JQuery} html The prepared HTML object ready to be rendered into the DOM
      */
+    _onRender(context, options) {
+        super._onRender?.(context, options);
+
+        if (!this.isEditable) return;
+
+        const root = this.element;
+        if (!root) return;
+
+        root.querySelectorAll('.toggle-prepared').forEach((el) => {
+            el.addEventListener('click', this._onPrepareItem.bind(this));
+        });
+        root.querySelectorAll('.reload').forEach((el) => {
+            el.addEventListener('click', this._onReloadWeapon.bind(this));
+        });
+    }
+
     activateListeners(html) {
-        //console.log("HERE--",html)
-        super.activateListeners(html);
-
-        if (!this.options.editable) return;
-
-        html.find('.toggle-prepared').click(this._onPrepareItem.bind(this));
-        html.find('.reload').on('click', this._onReloadWeapon.bind(this));
-
-        //html.find('.short-rest').on('click', this._onShortRest.bind(this));
-        //html.find('.long-rest').on('click', this._onLongRest.bind(this));
-        html.find('.modifier-create').on('click', this._onModifierCreate.bind(this));
-        html.find('.modifier-edit').on('click', this._onModifierEdit.bind(this));
-        html.find('.modifier-delete').on('click', this._onModifierDelete.bind(this));
-        html.find('.modifier-toggle').on('click', this._onToggleModifierEnabled.bind(this));
+        // AppV2 no longer uses this; listeners are bound in _onRender.
+        ui.notifications?.warn?.(
+            "d100AActorSheetCharacter.activateListeners called - use _onRender(context, options) for AppV2."
+        );
     }
 
 
@@ -499,64 +498,7 @@ export class d100AActorSheetCharacter extends d100ActorSheet {
         }
     }
 
-    /**
-     * Add a modifer to this actor.
-     * 
-     * @param {Event} event The originating click event
-     */
-    _onModifierCreate(event) {
-        event.preventDefault();
-        const target = $(event.currentTarget);
 
-        this.actor.addModifier({
-            name: "New Modifier",
-            subtab: target.data('subtab')
-        });
-    }
-
-    /**
-     * Delete a modifier from the actor.
-     * 
-     * @param {Event} event The originating click event
-     */
-    async _onModifierDelete(event) {
-        event.preventDefault();
-        const target = $(event.currentTarget);
-        const modifierId = target.closest('.item.modifier').data('modifierId');
-
-        await this.actor.deleteModifier(modifierId);
-    }
-
-    /**
-     * Edit a modifier for an actor.
-     * 
-     * @param {Event} event The orginating click event
-     */
-    _onModifierEdit(event) {
-        event.preventDefault();
-
-        const target = $(event.currentTarget);
-        const modifierId = target.closest('.item.modifier').data('modifierId');
-
-        this.actor.editModifier(modifierId);
-    }
-
-    /**
-     * Toggle a modifier to be enabled or disabled.
-     * 
-     * @param {Event} event The originating click event
-     */
-    async _onToggleModifierEnabled(event) {
-        event.preventDefault();
-        const target = $(event.currentTarget);
-        const modifierId = target.closest('.item.modifier').data('modifierId');
-
-        const modifiers = foundry.utils.duplicate(this.actor.system.modifiers);
-        const modifier = modifiers.find(mod => mod._id === modifierId);
-        modifier.enabled = !modifier.enabled;
-
-        await this.actor.update({ 'system.modifiers': modifiers });
-    }
 
     /**
      * Handle toggling the prepared status of an Owned Itme within the Actor

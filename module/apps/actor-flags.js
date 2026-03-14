@@ -23,7 +23,7 @@ export class ActorSheetFlags extends DocumentSheet {
 
     _getFlags() {
         const flags = {};
-        for (let [k, v] of Object.entries(CONFIG.SFRPG.characterFlags)) {
+        for (let [k, v] of Object.entries(CONFIG.d100A.characterFlags)) {
             if (!flags.hasOwnProperty(v.section)) flags[v.section] = {};
             let flag = foundry.utils.duplicate(v);
             flag.type = v.type.name;
@@ -32,7 +32,6 @@ export class ActorSheetFlags extends DocumentSheet {
             flag.value = this.document.getFlag("sfrpg", k);
             flags[v.section][k] = flag;
         }
-console.log("GETFLAGs", flag)
         return flags;
     }
 
@@ -40,7 +39,7 @@ console.log("GETFLAGs", flag)
         const actor = this.object;
 
         const updateData = {};
-        for (let [k, v] of Object.entries(CONFIG.SFRPG.characterFlags)) {
+        for (let [k, v] of Object.entries(CONFIG.d100A.characterFlags)) {
             if ([undefined, null, "", false].includes(formData[k])) updateData[`-=${k}`] = null;
             else if ((v.type === Number) && (formData[k] === 0)) updateData[`-=${k}`] = null;
             else updateData[k] = formData[k];

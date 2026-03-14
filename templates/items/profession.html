@@ -1,27 +1,7 @@
-<form class="{{cssClass}} flexcol" autocomplete="off">
+<div class="sheet-root {{cssClass}} flexcol">
    <!-- <h2 style="background-color: crimson; font-size: 30px;"> NOT IMPLEMENTED DO NOT USE </h2>-->
     {{!-- Item Sheet Header --}}
-    <header class="sheet-header flexrow">
-        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img" />
-
-        <div class="header-details flexrow">
-            <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="Item Name" />
-            </h1>
-
-            <div class="item-subtitle">
-
-                <h4 class="item-type">{{itemType}}</h4>
-                <span class="item-status">{{itemStatus}}</span>
-            </div>
-
-            <ul class="summary">
-                <li>
-                    <input type="text" name="system.source" value="{{itemData.source}}" placeholder="Source" />
-                </li>
-            </ul>
-        </div>
-    </header>
+    {{> "systems/Alternityd100/templates/items/parts/item-header.html"}}
 
     {{!-- Item Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
@@ -39,17 +19,19 @@
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
 
+            <h3 class="form-header">{{ localize "SFRPG.Details" }}</h3>
+            <div class="divTable blueTable2">
+                <div class="divTableBody">
+                    <div class="divTableRow">
+                        <div class="divTableCell">
+
             {{!-- Class Levels --}}
 
             <div class="form-group">
                 <label>{{localize "Primary / Secondary "}}</label>
                 <div class="form-fields">
                     <select name="system.bab">
-                        {{#select itemData.bab}}
-                        {{#each config.babProgression as |name val|}}
-                        <option value="{{val}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
+                        {{selectOptions d100Aconfig.babProgression selected=itemData.bab}}
                     </select>
                 </div>
             </div>
@@ -58,11 +40,7 @@
                 <label>{{localize "SFRPG.ClassFortSaveProgression"}}</label>
                 <div class="form-fields">
                     <select name="system.fort">
-                        {{#select itemData.fort}}
-                        {{#each config.saveProgression as |name val|}}
-                        <option value="{{val}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
+                        {{selectOptions d100Aconfig.saveProgression selected=itemData.fort}}
                     </select>
                 </div>
             </div>
@@ -71,11 +49,7 @@
                 <label>{{localize "SFRPG.ClassReflexSaveProgression"}}</label>
                 <div class="form-fields">
                     <select name="system.ref">
-                        {{#select itemData.ref}}
-                        {{#each config.saveProgression as |name val|}}
-                        <option value="{{val}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
+                        {{selectOptions d100Aconfig.saveProgression selected=itemData.ref}}
                     </select>
                 </div>
             </div>
@@ -84,11 +58,7 @@
                 <label>{{localize "SFRPG.ClassWillSaveProgression"}}</label>
                 <div class="form-fields">
                     <select name="system.will">
-                        {{#select itemData.will}}
-                        {{#each config.saveProgression as |name val|}}
-                        <option value="{{val}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
+                        {{selectOptions d100Aconfig.saveProgression selected=itemData.will}}
                     </select>
                 </div>
             </div>
@@ -97,11 +67,7 @@
                 <label>{{localize "SFRPG.ClassKeyAbilityScore"}}</label>
                 <div class="form-fields">
                     <select name="system.kas">
-                        {{#select itemData.kas}}
-                        {{#each config.abilities as |name val|}}
-                        <option value="{{val}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
+                        {{selectOptions d100Aconfig.abilities selected=itemData.kas}}
                     </select>
                 </div>
             </div>
@@ -251,7 +217,7 @@
 
             <div class="form-group stacked weapon-properties">
                 <label>{{localize "SFRPG.ClassSkills"}}</label>
-                {{#each config.skills as |name val|}}
+                {{#each d100Aconfig.skills as |name val|}}
                 <label class="checkbox">
                     <input type="checkbox" name="system.csk.{{val}}" {{checked (lookup ../itemData.csk val)}}/> {{ name }}
                 </label>
@@ -261,7 +227,7 @@
              {{!-- Weapon proficiencies --}}
             <div class="form-group stacked weapon-properties">
                 <label>{{localize "SFRPG.ClassWeaponProf"}}</label>
-                {{#each config.weaponProficiencies as |name val|}}
+                {{#each d100Aconfig.weaponProficiencies as |name val|}}
                 <label class="checkbox">
                     <input type="checkbox" name="system.proficiencies.weapon.{{val}}" {{checked (lookup ../itemData.proficiencies.weapon val)}}/> {{ name }}
                 </label>
@@ -271,16 +237,20 @@
              {{!-- Weapon proficiencies --}}
             <div class="form-group stacked weapon-properties">
                 <label>{{localize "SFRPG.ClassArmorProf"}}</label>
-                {{#each config.armorProficiencies as |name val|}}
+                {{#each d100Aconfig.armorProficiencies as |name val|}}
                 <label class="checkbox">
                     <input type="checkbox" name="system.proficiencies.armor.{{val}}" {{checked (lookup ../itemData.proficiencies.armor val)}}/> {{ name }}
                 </label>
                 {{/each}}
             </div>
             -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         {{!-- Modifiers Tab --}}
         {{> "systems/Alternityd100/templates/items/parts/item-modifiers.html"}}
     </section>
-</form>
+</div>

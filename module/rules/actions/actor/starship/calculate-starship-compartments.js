@@ -11,7 +11,9 @@ export default function (engine) {
         const shipFrame = fact.items.find(x => x.type === "starshipFrame")
         
         // frame.system
+  if (!shipFrame) return fact;
         let itemData = foundry.utils.duplicate(shipFrame.system)
+      
         //let itemData = shipFrame.system
       //  console.log( "Frame", itemData)
       const compartments = /*itemData.compartment? itemData.compartment:*/ foundry.utils.duplicate(d100A.compartmentData)
@@ -89,7 +91,7 @@ export default function (engine) {
                 for (const component of starshipComponents) {
                     //const componentData = component.system;
         
-                    const excludedComponents = ["starshipFrame","starshipArmor"];
+                    const excludedComponents = ["starshipFrame","starshipArmor","starshipOrdnance"];
                     if (!excludedComponents.includes(component.type)) {
                         if (component.system.location) {     // e.g system.location = "L"
                             //let compartment = compartments.find("location",component.system.location)
@@ -124,7 +126,7 @@ export default function (engine) {
                 for (let[key,tempcomp] of Object.entries(data.compartment.compartments)){  
                     tempcomp.overload = false
 
-                    tempcomp.maxHull = d100A.hullTypes[data.frame?.system.hullType]?.zoneLimit
+                    tempcomp.maxHull = data.frame?.system.zoneLimit ?? 0
                     tempcomp.curHull = 0
                     for (let[key2,tempitem] of Object.entries(tempcomp.contents)){
                         const excludedComponents = ["starshipArmor"];

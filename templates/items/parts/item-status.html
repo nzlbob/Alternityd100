@@ -1,15 +1,30 @@
 
 
-           <div class="form-group">
-                    <input type="checkbox" name="system.equippable" {{checked itemData.equippable}}/> {{ localize "SFRPG.Items.Equippable" }}
-           
+        <div class="form-group d100a-item-status">
+            <div class="d100a-checkbox-row">
+                <label class="d100a-checkbox">
+                    <input type="checkbox" name="system.equippable" {{checked itemData.equippable}} />
+                    <span>{{ localize "SFRPG.Items.Equippable" }}</span>
+                </label>
+
                 {{#if itemData.equippable}}
-               
-                    <input type="checkbox" name="system.equipped" {{checked itemData.equipped}}/> {{ localize "SFRPG.Items.Equipped" }}
-           
+                <label class="d100a-checkbox">
+                    <input type="checkbox" name="system.equipped" {{checked itemData.equippable}} />
+                    <span>{{ localize "SFRPG.Items.Equipped" }}</span>
+                </label>
                 {{/if}}
-             
-                    <input type="checkbox" name="system.isSkilled" {{checked itemData.isSkilled}}/> {{ localize "SFRPG.Items.IsSkilled" }}
-                    <input type="checkbox" name="system.isOpposed" {{checked itemData.isOpposed}}/> {{ localize "SFRPG.Items.isOpposed" }}
             </div>
+
+            <div class="d100a-checkbox-row">
+                <label class="d100a-checkbox">
+                    <input type="checkbox" name="system.isSkilled" {{checked itemData.isSkilled}} />
+                    <span>{{ localize "SFRPG.Items.IsSkilled" }}</span>
+                </label>
+
+                <label class="d100a-checkbox">
+                    <input type="checkbox" name="system.isOpposed" {{checked itemData.isOpposed}} />
+                    <span>{{ localize "SFRPG.Items.isOpposed" }}</span>
+                </label>
+            </div>
+        </div>
  

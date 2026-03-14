@@ -1,0 +1,83 @@
+<nav class="combat-controls" data-tooltip-direction="UP">
+        {{console combat}}
+        {{~#if hasCombat~}}
+
+        {{!-- GM Controls --}}
+        {{#if user.isGM}}
+        {{#if combat.round}}
+        {{!-- Active Combat --}}
+        <div class="combat-controls-header">Turn</div>
+        <div class="combat-controls-row combat-controls-row-top">
+                <button type="button" class="combat-control combat-control-lg combat-control-pill combat-control-pill-turn" data-action="previousTurn" data-tooltip aria-label="{{ localize "d100A.COMBAT.TurnPrev" }}">
+                        <i class="fa-solid fa-arrow-left" inert></i>
+                        <span>Previous</span>
+                </button>
+
+                {{!-- end of the Phase Show GM Update button --}}
+                {{#if endOfAction}}
+                <button type="button" class="combat-control combat-control-lg combat-control-pill gm-update" data-tooltip="{{ localize "d100A.COMBAT.GMUpdate" }}" data-action="GMUpdate">
+                        <i class="fa-solid fa-forward-step" inert></i>
+                        <span>{{ localize "GM Update" }}</span>
+                </button>
+                {{else}}
+                <button type="button" class="combat-control combat-control-lg combat-control-pill combat-control-pill-turn" data-action="nextTurn" data-tooltip aria-label="{{ localize "d100A.COMBAT.TurnEnd" }}">
+                        <i class="fa-solid fa-check" inert></i>
+                        <span>End</span>
+                </button>
+{{#if canskip}}
+                <button type="button" class="combat-control combat-control-lg combat-control-pill combat-control-pill-turn" data-action="delayTurn" data-tooltip aria-label="{{ localize "d100A.COMBAT.Skipturn"}}">
+                        <i class="fa-solid fa-arrow-down" inert></i>
+                        <span>Skip</span>
+                </button>
+                {{/if}}
+                {{/if}}
+        </div>
+
+        <div class="combat-controls-row combat-controls-row-bottom">
+                <button type="button" class="inline-control combat-control icon fa-solid fa-backward-step"
+                        data-action="previousRound" data-tooltip aria-label="{{ localize "d100A.COMBAT.RoundPrev" }}"></button>
+
+                <button type="button" class="combat-control combat-control-lg combat-control-pill" data-action="endCombat" data-tooltip aria-label="{{ localize "d100A.COMBAT.Endcombat" }}">
+                        <i class="fa-solid fa-xmark" inert></i>
+                        <span>{{ localize "d100A.COMBAT.Endcombat" }}</span>
+                </button>
+
+                <button type="button" class="inline-control combat-control icon fa-solid fa-forward-step"
+                        data-action="nextRound" data-tooltip aria-label="{{ localize "d100A.COMBAT.RoundNext" }}"></button>
+        </div>
+
+        {{!-- No Active Combat --}}
+        {{else}}
+        <div class="combat-controls-row combat-controls-row-top">
+                <button type="button" class="combat-control combat-control-lg combat-control-pill" data-action="startCombat">
+                        <i class="fa-solid fa-swords" inert></i>
+                        <span>{{ localize "d100A.COMBAT.Begin" }}</span>
+                </button>
+        </div>
+        {{/if}}
+
+        {{!-- Active Player Controls --}}
+        {{else if control}}
+        <div class="combat-controls-header">Turn</div>
+        <div class="combat-controls-row combat-controls-row-top">
+                <button type="button" class="combat-control combat-control-lg combat-control-pill combat-control-pill-turn" data-action="previousTurn" data-tooltip aria-label="{{ localize " COMBAT.TurnPrev" }}">
+                        <i class="fa-solid fa-arrow-left" inert></i>
+                        <span>Previous</span>
+                </button>
+
+                <button type="button" class="combat-control combat-control-lg combat-control-pill combat-control-pill-turn" data-action="nextTurn" data-tooltip aria-label="{{ localize "d100A.COMBAT.TurnEnd" }}">
+                        <i class="fa-solid fa-check" inert></i>
+                        <span>End</span>
+                </button>
+{{console combat}}
+{{#if canskip}}
+
+                <button type="button" class="combat-control combat-control-lg combat-control-pill combat-control-pill-turn" data-action="delayTurn" data-tooltip aria-label="{{ localize "d100A.COMBAT.Skipturn"}}">
+                        <i class="fa-solid fa-arrow-down" inert></i>
+                        <span>Skip</span>
+                </button>
+                {{/if}}
+        </div>
+        {{/if}}
+        {{/if}}
+</nav>

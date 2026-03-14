@@ -61,7 +61,7 @@ console.log("HERE--",html)
             ChoiceDialog.output[key] = value.default;
         }
 
-        const html = await renderTemplate("systems/Alternityd100/templates/apps/choice-dialog.html", {
+        const html = await foundry.applications.handlebars.renderTemplate("systems/Alternityd100/templates/apps/choice-dialog.html", {
             message: message,
             choices: inputData
         });

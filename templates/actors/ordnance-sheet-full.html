@@ -1,36 +1,97 @@
-<form class="{{cssClass}} flexcol" autocomplete="off">
+<main class="{{cssClass}} flexcol ordnance">
 
-    <header class="sheet-header flexrow">
-        <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" />
+    <header class="sheet-header">
+        <table class="vitals-table">
+            <tbody>
+                <tr>
+                    <td class="profile-img">
+                        <img class="profile-img profile" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+                    </td>
+                    <td class="header-fields">
+                        <div class="header-details ordnance-header-grid">
+                            <div class="header-background flexrow ordnance-title-area">
+                                <div class="ordnance-title flexcol">
+                                    <h1 class="charname">
+                                        <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "
+                                            SFRPG.HazardSheet.Header.NamePlaceholder"}}" />
+                                    </h1>
 
-        <div class="header-details flexrow">
-            <div class="header-background flexrow">
-                <h1 class="charname">
-                    <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "SFRPG.HazardSheet.Header.NamePlaceholder"}}" />
-                </h1>
+                                    <div class="ordnance-gunner">
+                                        <span class="ordnance-gunner-label">Gunner:</span>
+                                        <span class="ordnance-gunner-value">{{#if
+                                            gunnerName}}{{gunnerName}}{{else}}—{{/if}}</span>
+                                    </div>
+                                </div>
+                            </div>
 
-                <div class="charlevel">
-                    <div class="level">
-                        <label>CR</label>
-                        <input name="system.details.cr.value" type="text" value="{{system.details.cr.value}}" placeholder="1" />
-                    </div>
-                    <div class="experience">
-                        <span>{{system.details.xp.value}} Not XP</span>
-                    </div>
-                </div>
-            </div>
-            <ul class="summary-row1 flexrow">
-                <li>
-                    <input type="text" name="system.details.type" value="{{system.details.type}}" placeholder="{{localize "SFRPG.HazardSheet.Header.SourcePlaceholder"}}" />
-                </li>
-            </ul>
-            <ul class="summary-row2 flexrow">
-                <li>
-                    <input type="text" name="system.details.source" value="{{system.details.source}}" placeholder="{{localize "SFRPG.HazardSheet.Header.TypePlaceholder"}}" />
-                </li>
-            </ul>
-            <button type="button" class="tag attack" id="attack" data-tooltip="{{localize "SFRPG.Attack"}}">Attack</button>
-        </div>
+                            <ul class="attributes flexrow ordnance-panels-area">
+                                <li class="attribute attribute--movement">
+                                    <h4 class="attribute-name box-title">Movement</h4>
+                                    <table class="statTable">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align: left;"><label>Speed</label></td>
+                                                <td><input name="system.attributes.speed.value" type="text"
+                                                        value="{{system.attributes.speed.value}}" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;"><label>Accel</label></td>
+                                                <td><input name="system.attributes.accel.value" type="text"
+                                                        value="{{system.attributes.accel.value}}" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;"><label>Duration</label></td>
+                                                <td><input name="system.attributes.duration.value" type="text"
+                                                        value="{{system.attributes.duration.value}}" /></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </li>
+
+                                <li class="attribute attribute--target">
+                                    <h4 class="attribute-name box-title">
+                                        <span class="ordnance-target-heading-spacer"></span>
+                                        <span class="ordnance-target-heading-label">{{ localize "Target" }}</span>
+                                        <button type="button" class="ordnance-target-refresh" id="refreshTarget"
+                                            data-tooltip="{{localize 'd100A.Ordnance.Activation.RefreshTargetTooltip'}}">
+                                            <i class="fas fa-redo"></i>
+                                        </button>
+                                    </h4>
+                                    <div class="ordnance-target-grid">
+                                        <div class="ordnance-target-line" title="{{ localize "
+                                            SFRPG.HazardSheet.Details.DCs.NoticeTooltip" }}">{{ system.targetData.Name
+                                            }}</div>
+                                        <div class="ordnance-target-line" title="{{ localize "
+                                            SFRPG.HazardSheet.Details.DCs.NoticeTooltip" }}">{{ localize "Range" }}: {{
+                                            system.targetData.range }} {{ localize "Bearing" }}: {{
+                                            system.targetData.bearing }}</div>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <section class="attribute attribute--actions ordnance-actions">
+                                <h4 class="attribute-name box-title">Actions</h4>
+                                <div class="header-actions flexcol">
+                                    <button type="button" class="tag newtarget" id="newtarget"
+                                        data-tooltip="{{localize " d100A.Ordnance.Activation.ReTargetTooltip"}}">{{
+                                        localize "d100A.Ordnance.Activation.ReTarget" }}</button>
+                                    <button type="button" class="tag target" id="target"
+                                        data-tokenid="{{system.targetData._id}}" data-tooltip="{{localize "
+                                        d100A.Ordnance.Activation.TargetTooltip"}}">{{ localize
+                                        "d100A.Ordnance.Activation.Target" }}</button>
+                                    <button type="button" class="tag automove" id="autoMove" data-tooltip="{{localize "
+                                        d100A.Ordnance.Activation.AutoMoveTooltip"}}">{{ localize
+                                        "d100A.Ordnance.Activation.AutoMove" }}</button>
+                                    <button type="button" class="tag attack" id="attack" data-tooltip="{{localize "
+                                        d100A.Ordnance.Activation.AttackTooltip"}}">{{ localize
+                                        "d100A.Ordnance.Activation.Attack" }}</button>
+                                </div>
+                            </section>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </header>
 
     <nav class="sheet-navigation tabs" data-group="primary">
@@ -40,321 +101,248 @@
     </nav>
 
 
-            
-
-            {{!-- Item Sheet Body --}}
-            <section class="sheet-body">
-                {{> "systems/Alternityd100/templates/items/parts/item-description.html" hideProperties=true}}
-        
-                <div class="tab details" data-tab="details" data-group="primary">
 
 
-                    <div class="flexcol">
-                        <h3 class="form-header">{{ localize "Target" }}</h3>
-                        <div class="flexrow">
-                            <div class="flexcol">
-                                <div class="form-group">
-                                    <div class="form-fields">
-                                    <label title="{{ localize "SFRPG.HazardSheet.Details.DCs.NoticeTooltip" }}">{{ localize "Target: " }}: {{ system.targetData.Name }}{{console this}}</label>
-                                    </div>
-        
-                                    <div class="form-fields">
-                                        <label title="{{ localize "SFRPG.HazardSheet.Details.DCs.NoticeTooltip" }}">{{ localize "Range: " }}{{ system.targetData.range }}</label>
-                                    </div>
-                                    <div class="form-fields">
-                                        <label title="{{ localize "SFRPG.HazardSheet.Details.DCs.NoticeTooltip" }}">{{ localize "Bearing: " }}{{ system.targetData.bearing }}</label>
-                                    </div>
-        
-                                </div>
-                                <div class="form-group">
-                                    <label title="{{ localize "SFRPG.HazardSheet.Details.DCs.DisableTooltip" }}">{{ localize "SFRPG.HazardSheet.Details.DCs.Disable" }}</label>
-        
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+        {{> "systems/Alternityd100/templates/items/parts/item-description.html" hideProperties=true}}
 
+        <div class="tab details" data-tab="details" data-group="primary">
 
+            <h3 class="form-header">{{ localize "Missiles, Bombs, and Mines" }}</h3>
 
+            <div class="ordnance-details-grid">
+                <section class="ordnance-details-panel">
+                    <h4 class="section-header">Propulsion</h4>
 
-                    <h4 class="form-header">{{ localize "Missiles, Bombs, and Mines" }}</h4>
-        
-                    <h4 class="section-header">"Propulsion System"</h4>
-                    {{!-- Equipment Status --}}
-        
-                    
-        
-        
-                    {{!-- Weapon Progress Level --}}
+                    {{#if ordnanceComponents.propulsion}}
                     <div class="form-group">
-                    <label>{{ localize "d100A.Items.Weapon.PL" }}</label>
-                    <select name="system.PropProgressLevel">
-                        {{ selectOptions d100Aconfig.progressLevel selected=itemData.PropProgressLevel blank="" }}
-                      </select>
-
-                    </div>
-                    {{!-- Propulsion Name --}}
-                            
-                    <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.accTooltip" }}">
-                        <label>{{ localize "d100A.Items.Ordnance.PropName" }}</label>
+                        <label>Name</label>
                         <div class="form-fields">
-                            <input type="text" style="text-align: center; size: 20 px; " name="system.propName" value="{{system.propName}}" data-dtype="String" placeholder="0"/>
-                         </div>
+                            <span class="ordnance-readonly">{{ordnanceComponents.propulsion.name}}</span>
+                        </div>
                     </div>
-        
                     <div class="form-group">
-                        <label>{{ localize "d100A.Items.Ordnance.OrdnanceType" }}</label>
+                        <label>Progress Level </label>
                         <div class="form-fields">
-                            <select name="system.ammunitionType">
-                                {{#select system.ammunitionType}}
-                                <option value="">{{ localize "d100A.Items.Ordnance.Type.None" }}</option>
-                                {{#each d100Aconfig.ordnanceTypes as |ammunition type|}}
-                                <option value="{{type}}">{{ammunition}}</option>
-                                {{/each}}
-                                {{/select}}
-                            </select>
+                            <span
+                                class="ordnance-readonly">{{ordnanceComponents.propulsion.system.progressLevel}}</span>
                         </div>
                     </div>
-                    
-                    {{!-- Guidance Tech --}}
-                             
-                    <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.accTooltip" }}">
-                        <label>{{ localize "d100A.Items.Ordnance.Tech" }}</label>
+                    <div class="form-group">
+                        <label>Accuracy</label>
                         <div class="form-fields">
-                            <input type="text" style="text-align: center; size: 20 px; " name="system.propTech" value="{{system.propTech}}" data-dtype="String" placeholder="0"/>
-                         </div>
+                            <span class="ordnance-readonly">{{ordnanceComponents.propulsion.system.accuracy}}</span>
+                        </div>
                     </div>
-        
-                    <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.SizeTooltip" }}">
-                 
-                        <label>{{ localize "d100A.Items.Ordnance.Size" }}</label>
+                    <div class="form-group">
+                        <label>Acceleration</label>
                         <div class="form-fields">
-                            <input type="text" style="text-align: center; size: 20 px; " name="system.size" value="{{system.size}}" data-dtype="Number" placeholder=1 />
+                            <span class="ordnance-readonly">{{ordnanceComponents.propulsion.system.accel.base}}</span>
                         </div>
-                      </div>
-                     
-                      <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.SizeTooltip" }}">
-                 
-                        <label>{{ localize "d100A.Items.Ordnance.War" }}</label>
+                    </div>
+                    <div class="form-group">
+                        <label>Duration</label>
                         <div class="form-fields">
-                            <input type="text" style="text-align: center; size: 20 px; " name="system.warhead" value="{{system.warhead}}" data-dtype="Number" placeholder=1 />
+                            <span
+                                class="ordnance-readonly">{{ordnanceComponents.propulsion.system.duration.base}}</span>
                         </div>
-                      </div>   
-                     
-                      <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.SizeTooltip" }}">
-                 
-                        <label>{{ localize "d100A.Items.Ordnance.PropCost" }}</label>
+                    </div>
+
+                    <div class="form-group">
+                        <label>FTL</label>
                         <div class="form-fields">
-                            <input type="text" style="text-align: center; size: 20 px; " name="system.propCost" value="{{system.propCost}}" data-dtype="Number" placeholder=1 />
+                            <span class="ordnance-readonly">{{#if
+                                ordnanceComponents.propulsion.system.isFTL}}Yes{{else}}No{{/if}}</span>
                         </div>
-                      </div>      
-        
-                      <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.SizeTooltip" }}">
-                 
-                        <label>{{ localize "d100A.Items.Ordnance.PropAcc" }}</label>
-                        <div class="form-fields">
-                            <input type="text" style="text-align: center; size: 20 px; " name="system.propAcc" value="{{system.propAcc}}" data-dtype="Number" placeholder=1 />
-                        </div>
-                      </div>            
-                 
-                      <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.SizeTooltip" }}">
-                 
-                        <label>{{ localize "d100A.Items.Ordnance.Endurance" }}</label>
-                        <div class="form-fields">
-                            <input type="text" style="text-align: center; size: 20 px; " name="system.end" value="{{system.end}}" data-dtype="Number" placeholder=1 />
-                        </div>
-                      </div>   
-                      <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.SizeTooltip" }}">
-                 
-                        <label>{{ localize "d100A.Items.Ordnance.Acceleration" }}</label> 
-                        <div class="form-fields">
-                            <input type="text" style="text-align: center; size: 20 px; " name="system.basicAcceleration" value="{{system.basicAcceleration}}" data-dtype="Number" placeholder=1 />
-                        </div>
-                      </div>
-                     <!-- **************  Warhead Details  ***************************-->
-        
+                    </div>
+                    {{else}}
+                    <p class="notes">Drop an Ordnance Propulsion item on this actor to install it.</p>
+                    {{/if}}
+                </section>
+
+                <section class="ordnance-details-panel">
                     <h4 class="section-header">Warhead</h4>
-        
-                    {{!-- Warhead Progress Level --}}
-                    <div class="form-group">
-                    <label>{{ localize "d100A.Items.Weapon.PL" }}</label>
-                    <select name="system.progressLevel">
-                        {{ selectOptions d100Aconfig.progressLevel selected=itemData.progressLevel blank="" }}
-                      </select>
-                    </div>
-                   
-                    {{!-- Warhead Name --}}
-                            
-                    <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.accTooltip" }}">
-                        <label>{{ localize "d100A.Items.Ordnance.WarName" }}</label>
-                        <div class="form-fields">
-                            <input type="text" style="text-align: center; size: 20 px; " name="system.warName" value="{{system.warName}}" data-dtype="String" placeholder="0"/>
-                         </div>
-                    </div>
-                    {{!-- Warhead Tech --}}
-                            
-                    <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.accTooltip" }}">
-                        <label>{{ localize "Tech" }}</label>
-                        <div class="form-fields">
-                            <input type="text" style="text-align: center; size: 20 px; " name="system.warTech" value="{{system.warTech}}" data-dtype="String" placeholder="0"/>
-                         </div>
-                    </div>
-        
-        
-                    <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.SizeTooltip" }}">
-                      <label>{{ localize "d100A.Items.Ordnance.War" }}</label>
-                      <div class="form-fields">
-                          <input type="text" style="text-align: center; size: 20 px; " name="system.warwarhead" value="{{system.warwarhead}}" data-dtype="Number" placeholder=1 />
-                      </div>
-                    </div> 
-                    
-                    <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.SizeTooltip" }}">
-                 
-                      <label>{{ localize "d100A.Items.Ordnance.WarCost" }}</label>
-                      <div class="form-fields">
-                          <input type="text" style="text-align: center; size: 20 px; " name="system.warCost" value="{{system.warCost}}" data-dtype="Number" placeholder=1 />
-                      </div>
-                    </div>      
-        
-                    {{!-- Warhead Accuracy --}}
-                            
-                    <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.accTooltip" }}">
-                        <label>{{ localize "d100A.Items.Ordnance.WarAccur" }}</label>
-                        <div class="form-fields">
-                            <input type="text" style="text-align: center; size: 20 px; " name="system.warAccur" value="{{system.warAccur}}" data-dtype="Number" placeholder="0"/>
-                         </div>
-                    </div>
-        
-                    {{!-- Weapon Type --}}
-                    <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.typeTooltip" }}">
-        
-                     <label>{{ localize "d100A.Items.Weapon.typename" }}</label>
-                     <select name="system.type">
-                     {{#select system.type}}
-                     {{#each d100Aconfig.damagetype as |name type|}}
-                     <option value="{{type}}">{{name}}</option>
-                     {{/each}}
-                     {{/select}}
-                     </select>
-                    </div>    
-                 
-                        {{!-- Weapon Firepower --}}
-                        <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.firepowerTooltip" }}">
-        
-                          <label>{{ localize "d100A.Items.Weapon.firepowername" }}</label>
-                          <select name="system.firepower">
-                            {{ selectOptions d100Aconfig.firepower selected=itemData.firepower blank="" }}
-                          </select>
-                        </div> 
-        
-                                                    
-                        {{!-- Weapon Damage O --}}
-                        <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.damageTooltip" }}">
-        
-                          <label>{{ localize "d100A.Items.Weapon.damageo" }}</label>
-                          <input type="text" style="text-align: center" name="system.damage.ord.dice" value="{{system.damage.ord.dice}}" data-dtype="String" placeholder="0"/>/
-                          
-                        <select name="system.damage.ord.type">
-                          {{#select system.damage.ord.type}}
-                          {{#each d100Aconfig.damageQ as |name type2|}}
-                          <option value="{{type2}}">{{name}}</option>
-                          {{/each}}
-                          {{/select}}
-                          </select>
-                        </div>     
-                        {{!-- Weapon Damage Good --}}
-                        <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.damageTooltip" }}">
-        
-                          <label>{{ localize "d100A.Items.Weapon.damageg" }}</label>
-                          <input type="text" style="text-align: center" name="system.damage.goo.dice" value="{{system.damage.goo.dice}}" data-dtype="String" placeholder="0"/>/
-                          
-                        <select name="system.damage.goo.type">
-                          {{#select system.damage.goo.type}}
-                          {{#each d100Aconfig.damageQ as |name type2|}}
-                          <option value="{{type2}}">{{name}}</option>
-                          {{/each}}
-                          {{/select}}
-                          </select>
-                        </div>  
-                        {{!-- Weapon Damage Amazing --}}
-                        <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.damageTooltip" }}">
-        
-                          <label>{{ localize "d100A.Items.Weapon.damagea" }}</label>
-                          <input type="text" style="text-align: center" name="system.damage.ama.dice" value="{{system.damage.ama.dice}}" data-dtype="String" placeholder="0"/>/
-                          
-                        <select name="system.damage.ama.type">
-                          {{#select system.damage.ama.type}}
-                          {{#each d100Aconfig.damageQ as |name type2|}}
-                          <option value="{{type2}}">{{name}}</option>
-                          {{/each}}
-                          {{/select}}
-                          </select>
-                        </div>  
-         
-                     <!-- **************  Guidance Details  ***************************-->
-        
-                     <h4 class="section-header">Guidance Systems</h4>
-        
-                     {{!-- Warhead Progress Level --}}
-                     <div class="form-group">
-                     <label>{{ localize "d100A.Items.Weapon.PL" }}</label>
-                     <select name="system.guidanceProgressLevel">
-                            {{ selectOptions d100Aconfig.progressLevel selected=itemData.guidanceProgressLevel blank="" }}
-                          </select>
-                     </div>
-                    
-                     {{!-- Guidance Name --}}
-                             
-                     <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.accTooltip" }}">
-                         <label>{{ localize "d100A.Items.Ordnance.GuidanceName" }}</label>
-                         <div class="form-fields">
-                             <input type="text" style="text-align: center; size: 20 px; " name="system.guidanceName" value="{{system.guidanceName}}" data-dtype="String" placeholder="0"/>
-                          </div>
-                     </div>
-                     {{!-- Guidance Tech --}}
-                             
-                     <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.accTooltip" }}">
-                         <label>{{ localize "d100A.Items.Ordnance.Tech" }}</label>
-                         <div class="form-fields">
-                             <input type="text" style="text-align: center; size: 20 px; " name="system.guidanceTech" value="{{system.guidanceTech}}" data-dtype="String" placeholder="0"/>
-                          </div>
-                     </div>
-         
-                     <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.PhysicalProperties.SizeTooltip" }}">
-                 
-                      <label>{{ localize "d100A.Items.Ordnance.GuidanceCost" }}</label>
-                      <div class="form-fields">
-                          <input type="text" style="text-align: center; size: 20 px; " name="system.guidanceCost" value="{{system.guidanceCost}}" data-dtype="Number" placeholder=1 />
-                      </div>
-                    </div>      
-         
-                     {{!-- Guidance Accuracy --}}
-                             
-                     <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.accTooltip" }}">
-                         <label>{{ localize "d100A.Items.Ordnance.GuidanceAccur" }}</label>
-                         <div class="form-fields">
-                             <input type="number" style="text-align: center; size: 20 px; " name="system.guidanceAccur" value="{{system.guidanceAccur}}" data-dtype="Number" placeholder="0"/>
-                          </div>
-                     </div>
-                     {{!-- Guidance Notes --}}
-                             
-                     <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.accTooltip" }}">
-                         <label>{{ localize "d100A.Items.Ordnance.Notes" }}</label>
-                         <div class="form-fields">
-                             <input type="text" style="text-align: center; size: 20 px; " name="system.guidanceNotes" value="{{system.guidanceNotes}}" data-dtype="String" placeholder="0"/>
-                          </div>
-                     </div>
-        
-        
-                </div>
-        
-                {{!-- Inventory Tab --}}
 
-                <div class="tab inventory flexcol" data-group="primary" data-tab="inventory">
-                    {{> "systems/Alternityd100/templates/actors/parts/actor-inventory.html" sections=inventory}}
-    
-    
-                </div>
-        
-            </section>
-</form>
+                    {{#if ordnanceComponents.warhead}}
+                    <div class="form-group">
+                        <label>Name</label>
+                        <div class="form-fields">
+                            <span class="ordnance-readonly">{{ordnanceComponents.warhead.name}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Progress Level </label>
+                        <div class="form-fields">
+                            <span class="ordnance-readonly">{{ordnanceComponents.warhead.system.progressLevel}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Accuracy</label>
+                        <div class="form-fields">
+                            <span class="ordnance-readonly">{{ordnanceComponents.warhead.system.accuracy}}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Damage (O)</label>
+                        <div class="form-fields">
+                            <span
+                                class="ordnance-readonly">{{ordnanceComponents.warhead.system.damage.ord.dice}}/{{ordnanceComponents.warhead.system.damage.ord.type}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Damage (G)</label>
+                        <div class="form-fields">
+                            <span
+                                class="ordnance-readonly">{{ordnanceComponents.warhead.system.damage.goo.dice}}/{{ordnanceComponents.warhead.system.damage.goo.type}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Damage (A)</label>
+                        <div class="form-fields">
+                            <span
+                                class="ordnance-readonly">{{ordnanceComponents.warhead.system.damage.ama.dice}}/{{ordnanceComponents.warhead.system.damage.ama.type}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Damage Type</label>
+                        <div class="form-fields">
+                            <span class="ordnance-readonly">{{ordnanceComponents.warhead.system.damage.type}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Firepower</label>
+                        <div class="form-fields">
+                            <span class="ordnance-readonly">{{ordnanceComponents.warhead.system.firepower}}</span>
+                        </div>
+                    </div>
+                    {{else}}
+                    <p class="notes">Drop an Ordnance Warhead item on this actor to install it.</p>
+                    {{/if}}
+                </section>
+
+                <section class="ordnance-details-panel">
+                    <h4 class="section-header">Guidance</h4>
+
+                    {{#if ordnanceComponents.guidance}}
+                    <div class="form-group">
+                        <label>Name</label>
+                        <div class="form-fields">
+                            <span class="ordnance-readonly">{{ordnanceComponents.guidance.name}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Progress Level </label>
+                        <div class="form-fields">
+                            <span class="ordnance-readonly">{{ordnanceComponents.guidance.system.progressLevel}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Accuracy</label>
+                        <div class="form-fields">
+                            <span class="ordnance-readonly">{{ordnanceComponents.guidance.system.accuracy}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Sensor Type</label>
+                        <div class="form-fields">
+                            <span class="ordnance-readonly">{{ordnanceComponents.guidance.system.sensorType}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Sensor Mode</label>
+                        <div class="form-fields">
+                            <span class="ordnance-readonly">{{ordnanceComponents.guidance.system.sensorMode}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Arc Max</label>
+                        <div class="form-fields">
+                            <span class="ordnance-readonly">{{ordnanceComponents.guidance.system.arcMax}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Range</label>
+                        <div class="form-fields">
+                            <span class="ordnance-readonly">{{ordnanceComponents.guidance.system.range.short}} /
+                                {{ordnanceComponents.guidance.system.range.medium}} /
+                                {{ordnanceComponents.guidance.system.range.long}}</span>
+                        </div>
+                    </div>
+                    {{else}}
+                    <p class="notes">Drop an Ordnance Guidance item on this actor to install it.</p>
+                    {{/if}}
+                </section>
+
+<section class="ordnance-details-panel">
+                    <h4 class="section-header">Misc</h4>
+
+                    <div class="form-group">
+                        <label>APR</label>
+                        <div class="form-fields">
+                            <input type="number" name="system.attributes.actchk.apr"
+                                value="{{system.attributes.actchk.apr}}" data-dtype="Number" />
+
+                        </div>
+                    </div>
+
+         
+                    </section>
+
+                <section class="ordnance-details-panel">
+                    <h4 class="section-header">ECM</h4>
+
+                    <div class="form-group">
+                        <label>Radar</label>
+                        <div class="form-fields">
+                            <input type="number" name="system.attributes.ECM.radar.base"
+                                value="{{system.attributes.ECM.radar.base}}" data-dtype="Number" />
+                            <span class="ordnance-readonly">{{system.attributes.ECM.radar.value}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Laser</label>
+                        <div class="form-fields">
+                            <input type="number" name="system.attributes.ECM.laser.base"
+                                value="{{system.attributes.ECM.laser.base}}" data-dtype="Number" />
+                            <span class="ordnance-readonly">{{system.attributes.ECM.laser.value}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Mass</label>
+                        <div class="form-fields">
+                            <input type="number" name="system.attributes.ECM.mass.base"
+                                value="{{system.attributes.ECM.mass.base}}" data-dtype="Number" />
+                            <span class="ordnance-readonly">{{system.attributes.ECM.mass.value}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Thermal</label>
+                        <div class="form-fields">
+                            <input type="number" name="system.attributes.ECM.thermal.base"
+                                value="{{system.attributes.ECM.thermal.base}}" data-dtype="Number" />
+                            <span class="ordnance-readonly">{{system.attributes.ECM.thermal.value}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Psi</label>
+                        <div class="form-fields">
+                            <input type="number" name="system.attributes.ECM.psi.base"
+                                value="{{system.attributes.ECM.psi.base}}" data-dtype="Number" />
+                            <span class="ordnance-readonly">{{system.attributes.ECM.psi.value}}</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            {{!-- Inventory Tab --}}
+
+            <div class="tab inventory flexcol" data-group="primary" data-tab="inventory">
+                {{> "systems/Alternityd100/templates/actors/parts/actor-inventory.html" sections=inventory}}
+
+
+            </div>
+
+    </section>
+</main>

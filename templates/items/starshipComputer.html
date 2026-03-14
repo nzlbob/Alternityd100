@@ -1,4 +1,4 @@
-<form class="{{cssClass}} flexcol" autocomplete="off">
+<div class="sheet-root {{cssClass}} flexcol">
 
     {{!-- Item Sheet Header --}}
     {{> "systems/Alternityd100/templates/items/parts/item-header.html"}}
@@ -17,27 +17,35 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
+            <h3 class="form-header">{{ localize "SFRPG.Details" }}</h3>
+            <div class="divTable starship-item-details-table">
+                <div class="divTableBody">
+                    <div class="divTableRow">
+                        <div class="divTableCell starship-item-details-common">
+                            {{> "systems/Alternityd100/templates/items/parts/starship-component-common.html" this}}
+                        </div>
+                        <div class="divTableCell starship-item-details-specific">
+                            <h4 class="section-header first">{{ localize (append "TYPES.Item." item.type) }} Properties</h4>
 
-            {{!-- Common component data --}}
-            {{> "systems/Alternityd100/templates/items/parts/starship-component.html" this}}
+                            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipComputer.Modifier" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComputer.ModifierTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipComputer.Modifier" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.modifier" value="{{itemData.modifier}}" data-dtype="Number" />
+                                </div>
+                            </div>
 
-            <h4 class="section-header first">{{ localize "SFRPG.ItemSheet.StarshipComputer.Header" }}</h4>
-
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipComputer.Modifier" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComputer.ModifierTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipComputer.Modifier" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.modifier" value="{{itemData.modifier}}" data-dtype="Number" />
-                </div>
-            </div>
-
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipComputer.Nodes" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComputer.NodesTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipComputer.Nodes" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.nodes" value="{{itemData.nodes}}" data-dtype="Number" />
+                            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipComputer.Nodes" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComputer.NodesTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipComputer.Nodes" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.nodes" value="{{itemData.nodes}}" data-dtype="Number" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
         </div>
 
     </section>
-</form>
+</div>

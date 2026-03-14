@@ -9,9 +9,10 @@ export default function (engine) {
         const powerCores = fact.items.filter(x => x.type === "starshipPowerCore");
         for (const powerCore of powerCores) {
             let PowercoreBHP = 1
+            if (powerCore.system.isPowered) {
             if (powerCore.system.pwrPerBHP) PowercoreBHP = powerCore.system.bhpCost;
             data.attributes.power.max += powerCore.system.pcu * PowercoreBHP;
-
+            }
         }
         data.attributes.power.max = Math.round(data.attributes.power.max*10)/10;
         /** Compute power use. */
@@ -21,15 +22,16 @@ export default function (engine) {
 
             const excludedComponents = ["starshipFrame", "starshipPowerCore"];
             let pcu = 0
+            let pcuBonus = 0
             componentData.overPowered? pcu = componentData.pcu * 2 : pcu = componentData.pcu
-
-
+            componentData.overPowered? pcuBonus = componentData.pcuBonus * 2 : pcuBonus = componentData.pcuBonus
+//console.log(`Calculating power for ${component.name}: base PCU ${componentData.pcu}, bonus PCU ${componentData.pcuBonus}, overpowered: ${componentData.overPowered}, final PCU ${pcu}, final bonus ${pcuBonus}`);
             if (!excludedComponents.includes(component.type)) {
                 if (pcu && componentData.isPowered) {
                     let power = pcu;
                     if (componentData.isPCUPerBHP) power = pcu * componentData.bhpCost;
 
-
+                    power += pcuBonus;
                     data.attributes.power.value += power;
                     data.attributes.power.tooltip.push(`${component.name}: ${power}`);
                 }

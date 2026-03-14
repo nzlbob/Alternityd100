@@ -1,0 +1,45 @@
+<h4 class="section-header first">Common Componant Properties</h4>
+
+{{#unless nobhpCost}}
+<div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.Cost" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.CostTooltip" }}">
+    <label>BP</label>
+    <div class="form-fields">
+        <input type="text" name="system.bhpCost" value="{{itemData.bhpCost}}" data-dtype="Number" placeholder="0"/>
+    </div>
+</div>
+{{/unless}}
+
+{{#unless noPCUCost}}
+<div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.PCU" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.PCUTooltip" }}">
+    <label>PCU/BP  <input data-tooltip="isPCUPerBHP"  type="checkbox" name="system.isPCUPerBHP" {{checked itemData.isPCUPerBHP}}/> </label>
+    <div class="form-fields">
+        <input type="text" name="system.pcu" value="{{itemData.pcu}}" data-dtype="Number" placeholder="0" />
+    </div>
+</div>
+<div class="form-group" data-tooltip="<b>{{ localize "Extra power" }}</b><br/>{{ localize "Additional power supplied / required" }}">
+    <label>+ PCU</label>
+    <div class="form-fields">
+        <input type="text" name="system.pcuBonus" value="{{itemData.pcuBonus}}" data-dtype="Number" placeholder="0" />
+    </div>
+</div>
+
+{{/unless}}
+
+
+
+
+<div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.PoweredState" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.PoweredStateTooltip" }}">
+    <label>Power</label>
+    <div class="form-fields">
+        <label class="checkbox">
+            <input type="checkbox" name="system.isPowered" {{checked itemData.isPowered}}/>
+        </label>
+    </div>
+</div>
+
+<div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.PriceTooltip" }}">
+    <label>Price</label>
+    <div class="form-fields">
+        <input type="text" name="system.price" value="{{itemData.price}}" data-dtype="Number" data-currency="EUR" />
+    </div>
+</div>

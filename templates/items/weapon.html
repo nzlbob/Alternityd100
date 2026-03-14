@@ -1,4 +1,4 @@
-<form class="{{cssClass}} flexcol" autocomplete="off">
+<div class="sheet-root {{cssClass}} flexcol">
 
   {{!-- Item Sheet Header --}}
   {{> "systems/Alternityd100/templates/items/parts/item-header.html"}}
@@ -77,7 +77,7 @@
              </div>
 
               {{!-- Weapon Actions --}}
-              <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.actionsTooltip" }}">
+              <div class="form-group" data-tooltip="{{ localize " d100A.Items.Weapon.actionsTooltip" }}">
                 <label>{{ localize "d100A.Items.Weapon.actions" }}</label>
                 <div class="form-fields">
                   <input type="text" style="text-align: center; size: 20 px; " name="system.actions"
@@ -86,7 +86,7 @@
               </div>
 
               {{!-- Weapon Clip Size --}}
-              <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.clipSizeTooltip" }}">
+              <div class="form-group" data-tooltip="{{ localize " d100A.Items.Weapon.clipSizeTooltip" }}">
                 <label> {{ localize "d100A.Items.Weapon.clipSize" }}</label>
                 <div class="form-fields">
 
@@ -101,7 +101,7 @@
                 <label>{{ localize "SFRPG.Items.Ammunition.AmmunitionType" }}</label>
                 <div class="form-fields">
                   <select name="system.ammunitionType">
-                    {{ selectOptions config.ammunitionTypes selected=itemData.ammunitionType blank="None" }}
+                    {{ selectOptions d100Aconfig.ammunitionTypes selected=itemData.ammunitionType blank="None" }}
                   </select>
                 </div>
               </div>
@@ -109,7 +109,7 @@
 
 
               {{!-- Weapon Clip Cost --}}
-              <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.clipCostTooltip" }}">
+              <div class="form-group" data-tooltip="{{ localize " d100A.Items.Weapon.clipCostTooltip" }}">
                 <label>{{ localize "d100A.Items.Weapon.clipCost" }}</label>
                 <div class="form-fields">
                   <input type="text" style="text-align: center; size: 20 px; " name="system.clipCost"
@@ -119,7 +119,7 @@
 
 
               {{!-- Weapon Hide --}}
-              <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.hideTooltip" }}">
+              <div class="form-group" data-tooltip="{{ localize " d100A.Items.Weapon.hideTooltip" }}">
                 <label>{{ localize "d100A.Items.Weapon.hide" }}</label>
                 <div class="form-fields">
                   <input type="text" style="text-align: center; size: 20 px; " name="system.hide"
@@ -156,7 +156,7 @@
 
               {{!-- Weapon Accuracy --}}
 
-              <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.accTooltip" }}">
+              <div class="form-group" data-tooltip="{{ localize " d100A.Items.Weapon.accTooltip" }}">
                 <label>{{ localize "d100A.Items.Weapon.acc" }}</label>
                 <div class="form-fields">
                   <input type="text" style="text-align: center; size: 20 px; " name="system.accur"
@@ -164,7 +164,7 @@
                 </div>
               </div>
               {{!-- Weapon Mode --}}
-              <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.modeTooltip" }}">
+              <div class="form-group" data-tooltip="{{ localize " d100A.Items.Weapon.modeTooltip" }}">
                 <label>{{ localize "d100A.Items.Weapon.mode" }}</label>
                 <div class="form-group weapon-properties" style="font-size: 10px;">
                   {{#each d100Aconfig.mode as |name prop|}}
@@ -176,21 +176,21 @@
                 </div>
               </div>
               {{!-- Weapon Range --}}
-              <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.rangeTooltip" }}">
+              <div class="form-group" data-tooltip="{{ localize " d100A.Items.Weapon.rangeTooltip" }}">
                 <label>{{ localize "d100A.Items.Weapon.rangename" }}</label>
-                <div class="form-group weapon-properties" style="font-size: 12px; text-align: center; ">
+                <div class="form-fields weapon-properties weapon-range-fields" style="font-size: 12px; text-align: center; ">
                   {{#if (eq itemData.skill "throw") }}
                   <input type="text" style="text-align: center" value="{{itemData.range.short}}" data-dtype="Number"
-                    placeholder="0" disabled />/
+                    placeholder="0" disabled /><span class="sep">/</span>
                   <input type="text" style="text-align: center" value="{{itemData.range.medium}}" data-dtype="Number"
-                    placeholder="0" disabled />/
+                    placeholder="0" disabled /><span class="sep">/</span>
                   <input type="text" style="text-align: center" value="{{itemData.range.long}}" data-dtype="Number"
                     placeholder="0" disabled />
                   {{else}}
                   <input type="text" style="text-align: center" name="system.range.short"
-                    value="{{itemData.range.short}}" data-dtype="Number" placeholder="0" />/
+                    value="{{itemData.range.short}}" data-dtype="Number" placeholder="0" /><span class="sep">/</span>
                   <input type="text" style="text-align: center" name="system.range.medium"
-                    value="{{itemData.range.medium}}" data-dtype="Number" placeholder="0" />/
+                    value="{{itemData.range.medium}}" data-dtype="Number" placeholder="0" /><span class="sep">/</span>
                   <input type="text" style="text-align: center" name="system.range.long" value="{{itemData.range.long}}"
                     data-dtype="Number" placeholder="0" />
                   {{/if}}
@@ -231,7 +231,7 @@
               {{/if}}
 
               {{!-- Weapon Type --}}
-              <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.typeTooltip" }}">
+              <div class="form-group" data-tooltip="{{ localize " d100A.Items.Weapon.typeTooltip" }}">
 
                 <label>{{ localize "d100A.Items.Weapon.typename" }}</label>
                 <select name="system.damage.type">
@@ -240,7 +240,7 @@
               </div>
 
               {{!-- Weapon Firepower --}}
-              <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.firepowerTooltip" }}">
+              <div class="form-group" data-tooltip="{{ localize " d100A.Items.Weapon.firepowerTooltip" }}">
 
                 <label>{{ localize "d100A.Items.Weapon.firepowername" }}</label>
                 <select name="system.firepower">
@@ -250,7 +250,7 @@
 
 
               {{!-- Weapon Damage O --}}
-              <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.damageTooltip" }}">
+              <div class="form-group" data-tooltip="{{ localize " d100A.Items.Weapon.damageTooltip" }}">
 
                 <label>{{ localize "d100A.Items.Weapon.damageo" }}</label>
                 <input type="text" style="text-align: center" name="system.damage.ord.dice"
@@ -261,7 +261,7 @@
                 </select>
               </div>
               {{!-- Weapon Damage Good --}}
-              <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.damageTooltip" }}">
+              <div class="form-group" data-tooltip="{{ localize " d100A.Items.Weapon.damageTooltip" }}">
 
                 <label>{{ localize "d100A.Items.Weapon.damageg" }}</label>
                 <input type="text" style="text-align: center" name="system.damage.goo.dice"
@@ -272,7 +272,7 @@
                 </select>
               </div>
               {{!-- Weapon Damage Amazing --}}
-              <div class="form-group" data-tippy-content="{{ localize " d100A.Items.Weapon.damageTooltip" }}">
+              <div class="form-group" data-tooltip="{{ localize " d100A.Items.Weapon.damageTooltip" }}">
 
                 <label>{{ localize "d100A.Items.Weapon.damagea" }}</label>
                 <input type="text" style="text-align: center" name="system.damage.ama.dice"
@@ -315,4 +315,4 @@
     {{> "systems/Alternityd100/templates/items/parts/item-modifiers.html"}}
 
   </section>
-</form>
+</div>

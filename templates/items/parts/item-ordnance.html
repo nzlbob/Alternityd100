@@ -19,7 +19,7 @@
             {{#each launcherarray as |row|  }}
             <tr>
                 {{#each row as |tube| }}
-                <td class=" launchercell "data-ordn="{{tube.ordn}}" {{createTippy title=tube.load.name subtitle=tube.load.system.description.short tooltips=tube.load.system.tooltip}} >
+                <td class=" launchercell "data-ordn="{{tube.ordn}}" data-tooltip==tube.load.name subtitle=tube.load.system.description.short tooltips=tube.load.system.tooltip >
                     <div class="item-name flexrow "data-ordn="{{tube.ordn}}" >
                         <div class="item-image" style="background-image: url({{tube.load.img}})"></div> 
                         <div class="flexcol" >

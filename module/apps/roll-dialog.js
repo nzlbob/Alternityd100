@@ -1,4 +1,4 @@
-import { SFRPG } from "../config.js";
+import { d100A as SFRPG } from "../d100Aconfig.js";
 
 // Typedef's for documentation purposes.
 /**
@@ -29,7 +29,7 @@ export default class RollDialog extends Dialog {
      */
     constructor({ rollTree, formula, contexts, availableModifiers, mainDie, parts = [], dialogData = {}, options = {} }) {
         super(dialogData, options);
-        this.options.classes = ["sfrpg", "dialog", "roll"];
+        this.options.classes = ["Alternityd100", "sfrpg", "dialog", "roll"];
 
         this.rollTree = rollTree;
         this.formula = formula;
@@ -73,10 +73,10 @@ export default class RollDialog extends Dialog {
 
     async _render(...args) {
         await super._render(...args);
-
+/*
         if (this._tooltips === null) {
-            this._tooltips = tippy.delegate(`#${this.id}`, {
-                target: '[data-tippy-content]',
+            this._tooltips = xippy.delegate(`#${this.id}`, {
+                target: '[data-xippy-content]',
                 allowHTML: true,
                 arrow: false,
                 placement: 'top-start',
@@ -84,6 +84,7 @@ export default class RollDialog extends Dialog {
                 delay: [800, null]
             });
         }
+            */
     }
 
     getData() {

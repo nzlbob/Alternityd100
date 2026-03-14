@@ -83,8 +83,11 @@ import calculateStarshipTargetLock      from './rules/actions/actor/starship/cal
 import calculateVehicleControlSkill from './rules/actions/actor/vehicle/calculate-vehicle-control-skill.js';
 import calculateVehicleHangar       from './rules/actions/actor/vehicle/calculate-vehicle-hangar.js';
 import calculateVehiclePassengers   from './rules/actions/actor/vehicle/calculate-vehicle-passengers.js';
+// Ordnance rules
+import calculateOrdnanceData from './rules/actions/actor/ordnance/calculate-ordnance-data.js';
 // Item rules
 import calculateItemData from './rules/actions/item/calculate-item-data.js';
+
 
 export default function (engine) {
     console.log("Starfinder | [SETUP] Registering rules");
@@ -156,6 +159,7 @@ export default function (engine) {
     calculateStarshipShields(engine);
     calculateStarshipSpeed(engine);
     calculateStarshipTargetLock(engine);
+    calculateOrdnanceData(engine);
     
     calculateStarshipComputer(engine);
   
@@ -275,7 +279,15 @@ export default function (engine) {
                     { closure: "calculateBaseAbilityScore", stackModifiers: "stackModifiers" },
                     { closure: "calculateBaseAbilityModifier", stackModifiers: "stackModifiers" },
                     "calculateInitiative",
+                    { closure: "calculateArmorModifiers", stackModifiers: "stackModifiers" },
+                    { closure: "calculateBaseAttackBonus", stackModifiers: "stackModifiers" },
+                   { closure: "calculateBaseAttackBonusModifier", stackModifiers: "stackModifiers" },
+                   "calculateBaseSaves",
+                    { closure: "calculateResistanceModifiers", stackModifiers: "stackModifiers"},
+                    "calculateInitiative",
+
                     {closure: "calculateInitiativeModifiers", stackModifiers: "stackModifiers" },
+                    
                     { closure: "calculateAbilityCheckModifiers", stackModifiers: "stackModifiers"},
                     { closure: "calculateMovementSpeeds", stackModifiers: "stackModifiers" },
                     { closure: "calculateHitpoints", stackModifiers: "stackModifiers" },
@@ -319,7 +331,16 @@ export default function (engine) {
                     "identity",
                     "calculateVehicleSpeed"
                 ]
-            }
+            },
+           {
+                when: { closure: "isActorType", type: "ordnance" },
+                then: [
+                    "calculateOrdnanceData"
+
+                    
+                ]
+            } 
+
         ]
     });
 

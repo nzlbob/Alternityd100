@@ -1,11 +1,17 @@
-<form class="{{cssClass}} flexcol" autocomplete="off">
-    <header class="sheet-header flexrow">
-        <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" height="200" width="200" style="border: none;" />
-        <div class="flexcol" style="margin-left: -2px;">
-            <h1 class="charname">
-                <input name="name" type="text" value="{{actor.name}}" data-tippy-content="<strong>{{localize "SFRPG.CharacterNamePlaceHolderText"}}</strong>" placeholder="{{localize "SFRPG.CharacterNamePlaceHolderText"}}" />
-            </h1>
-        </div>
+<main class="flexcol {{cssClass}}">
+    <header class="sheet-header">
+        <table class="vitals-table">
+            <tbody>
+                <tr>
+                    <td class="profile-img" style="width: 110px;">
+                        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100" />
+                    </td>
+                    <td class="header-fields">
+                        <input name="name" type="text" value="{{actor.name}}" data-tooltip="<strong>{{localize "SFRPG.CharacterNamePlaceHolderText"}}</strong>" placeholder="{{localize "SFRPG.CharacterNamePlaceHolderText"}}" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </header>
     <span style="flex: 0 0 5px;"></span>
     <section class="sheet-body">
@@ -14,4 +20,4 @@
 {{> "systems/Alternityd100/templates/actors/parts/actor-biography.html" limited=true hideVitals=(not (eq actor.type "character"))}}
         </div>
     </section>
-</form>
+</main>

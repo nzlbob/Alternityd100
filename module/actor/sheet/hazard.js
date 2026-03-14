@@ -1,22 +1,21 @@
 import { Diced100 } from "../../dice.js";
 import RollContext from "../../rolls/rollcontext.js";
-import { ActorSheetSFRPG } from "./base.js";
-import { SFRPG } from "../../config.js"
-export class d100AActorSheetHazard extends ActorSheetSFRPG {
-    static get defaultOptions() {
-        return foundry.utils.mergeObject(super.defaultOptions, {
-            classes: ["Alternityd100", "sheet", "actor", "hazard"],
-            width: 600,
-            height: 685
+//import { ActorSheetSFRPG } from "./base.js";
+import { d100A as SFRPG } from "../../d100Aconfig.js"
+import { d100ActorSheet } from "../../d100Actor-sheet.js";
+export class d100AActorSheetHazard extends d100ActorSheet {
+    static get DEFAULT_OPTIONS() {
+        const base = super.DEFAULT_OPTIONS;
+        return foundry.utils.mergeObject(base, {
+            position: { width: 600, height: 685 },
+            window: { contentClasses: [...base.window.contentClasses, "hazard"] }
         });
     }
-
-    get template() {
-        if (!game.user.isGM && this.actor.limited) return "systems/Alternityd100/templates/actors/hazard-sheet-limited.html";
-        return "systems/Alternityd100/templates/actors/hazard-sheet-full.html";
-    }
-    async getData() {
-        const data = super.getData();
+    static PARTS = {
+      form: { template: 'systems/Alternityd100/templates/actors/hazard-sheet-full.html' }
+    };
+    async _prepareContext(options) {
+        const data = await super._prepareContext(options);
 
         const inventory = {
             weapon: { label: game.i18n.format(SFRPG.itemTypes["weapon"]), items: [], dataset: { type: "weapon" }, allowAdd: true },
@@ -66,7 +65,7 @@ export class d100AActorSheetHazard extends ActorSheetSFRPG {
 
         console.log(data)
         // Enrich text editors
-        data.enrichedDescription = await TextEditor.enrichHTML(this.actor.system.details.biography.value, { async: true });
+        data.enrichedDescription = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.actor.system.details.biography.value, { async: true });
 
 
 
@@ -74,24 +73,41 @@ export class d100AActorSheetHazard extends ActorSheetSFRPG {
 
         return data;
     }
+    _onRender(context, options) {
+        super._onRender?.(context, options);
+
+        const root = this.element;
+        if (!root) return;
+
+        root.querySelectorAll('#fortSave').forEach((el) => {
+            el.addEventListener('click', this._onFortSaveClicked.bind(this));
+        });
+        root.querySelectorAll('#reflexSave').forEach((el) => {
+            el.addEventListener('click', this._onReflexSaveClicked.bind(this));
+        });
+        root.querySelectorAll('#willSave').forEach((el) => {
+            el.addEventListener('click', this._onWillSaveClicked.bind(this));
+        });
+
+        root.querySelectorAll('#attack').forEach((el) => {
+            el.addEventListener('click', this._onAttackClicked.bind(this));
+        });
+        root.querySelectorAll('#damage').forEach((el) => {
+            el.addEventListener('click', this._onDamageClicked.bind(this));
+        });
+    }
+
     activateListeners(html) {
-        console.log("HERE--", html)
-        super.activateListeners(html);
-
-        html.find('#fortSave').click(this._onFortSaveClicked.bind(this));
-        html.find('#reflexSave').click(this._onReflexSaveClicked.bind(this));
-        html.find('#willSave').click(this._onWillSaveClicked.bind(this));
-
-        html.find('#attack').click(this._onAttackClicked.bind(this));
-        html.find('#damage').click(this._onDamageClicked.bind(this));
+        // AppV2 no longer uses this; listeners are bound in _onRender.
+        ui.notifications?.warn?.(
+            "d100AActorSheetHazard.activateListeners called - use _onRender(context, options) for AppV2."
+        );
     }
 
     async _render(...args) {
         await super._render(...args);
-
-        const textAreas = this._element.find('textarea');
-        for (let i = 0; i < textAreas.length; i++) {
-            const textArea = textAreas[i];
+        const textAreas = this.element?.querySelectorAll('textarea') ?? [];
+        for (const textArea of textAreas) {
             textArea.style.height = textArea.scrollHeight + "px";
         }
     }

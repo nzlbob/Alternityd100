@@ -394,6 +394,7 @@ console.log("HERE--",html)
         },
         no: () => (button.disabled = false),
         rejectClose: true,
+        options: { classes: ["Alternityd100"] },
       }).then(null, () => (button.disabled = false));
     }
   }

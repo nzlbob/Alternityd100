@@ -25,10 +25,23 @@ export class ActorMovementConfig extends DocumentSheet {
 
   /** @override */
   getData(options) {
-    const sourceMovement = foundry.utils.getProperty(this.document.data._source, "data.attributes.speed") || {};
-    const data = {
-      speed: foundry.utils.deepClone(sourceMovement)
+    const context = super.getData(options);
+
+    context.flightManeuverabilities = {
+      "-1": "SFRPG.ActorSheet.Attributes.Speed.Flight.Clumsy",
+      "0": "SFRPG.ActorSheet.Attributes.Speed.Flight.Average",
+      "1": "SFRPG.ActorSheet.Attributes.Speed.Flight.Perfect"
     };
-    return this.document.data;
+
+    context.mainMovementTypes = {
+      land: "SFRPG.ActorSheet.Attributes.Speed.Types.Land",
+      burrowing: "SFRPG.ActorSheet.Attributes.Speed.Types.Burrowing",
+      climbing: "SFRPG.ActorSheet.Attributes.Speed.Types.Climbing",
+      flying: "SFRPG.ActorSheet.Attributes.Speed.Types.Flying",
+      swimming: "SFRPG.ActorSheet.Attributes.Speed.Types.Swimming",
+      special: "SFRPG.ActorSheet.Attributes.Speed.Types.Special"
+    };
+
+    return context;
   }
 }

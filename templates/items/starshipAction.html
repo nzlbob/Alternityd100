@@ -1,9 +1,7 @@
-<form class="{{cssClass}} flexcol" autocomplete="off">
-    {{console "starshipAction"}}
-    {{console this}}
+<div class="sheet-root {{cssClass}} flexcol">
     {{!-- Item Sheet Header --}}
     {{> "systems/Alternityd100/templates/items/parts/item-header.html"}}
-
+{{console this}}
     {{!-- Item Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
@@ -18,16 +16,21 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
+            <h3 class="form-header">{{ localize "SFRPG.Details" }}</h3>
+            <div class="divTable starship-item-details-table">
+                <div class="divTableBody">
+                    <div class="divTableRow">
+                        <div class="divTableCell">
             <h3 class="form-header">{{localize "d100A.Race.AbilityScoreLimits"}}</h3>
 
-            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.BonusHullPointsTooltip" }}">
+            <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.BonusHullPointsTooltip" }}">
                 <label>{{ localize "Order" }}</label>
                 <div class="form-fields">
                     <input type="text" name="system.order" value="{{itemData.order}}" data-dtype="Number" />
                 </div>
             </div>
 
-            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.HullPointsTooltip" }}">
+            <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.HullPointsTooltip" }}">
                 <label>{{ localize "Type" }}</label>
                 <div class="form-fields">
                     <input type="text" name="system.type" value="{{itemData.type}}" data-dtype="Number" />
@@ -39,11 +42,7 @@
                 <label>{{ localize "Role" }}</label>
                 <div class="form-fields">
                     <select name="system.role">
-                        {{#select itemData.role}}
-                        {{#each config.starshipRoles as |name type|}}
-                        <option value="{{type}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
+                        {{selectOptions d100Aconfig.starshipRoles selected=itemData.role}}
                     </select>
                 </div>
             </div>
@@ -62,11 +61,7 @@
                 <label>{{ localize "Skill" }}</label>
                 <div class="form-fields">
                     <select name="system.skill.name">
-                        {{#select itemData.skill.name}}
-                        {{#each d100Aconfig.skills as |name type|}}
-                        <option value="{{type}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
+                        {{selectOptions d100Aconfig.skills selected=itemData.skill.name}}
                     </select>
                 </div>
             </div>
@@ -75,15 +70,11 @@
                 <label>{{ localize "Phase" }}</label>
                 <div class="form-fields">
                     <select name="system.phase.name">
-                        {{#select itemData.phase.name}}
-                        {{#each d100Aconfig.phases as |name type|}}
-                        <option value="{{type}}">{{name}}</option>
-                        {{/each}}
-                        {{/select}}
+                        {{selectOptions d100Aconfig.phases selected=itemData.phase.name}}
                     </select>
                 </div>
             </div>
-            <div class="form-group" data-tippy-content="{{ localize "Phase Tooltip" }}">
+            <div class="form-group" data-tooltip="{{ localize "Phase Tooltip" }}">
                 <label>{{ localize "Phase Tooltip" }}</label>
                 <div class="form-fields">
                     <input type="text" name="system.phase.tooltip" value="{{itemData.phase.tooltip}}" data-dtype="Text" />
@@ -123,8 +114,10 @@
                     <textarea rows="4" cols="50" name="system.degreeText.amazing"  placeholder="Enter text">{{itemData.degreeText.amazing}}</textarea>
                 </div>
             </div>
-
-
-</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
-</form>
+</div>

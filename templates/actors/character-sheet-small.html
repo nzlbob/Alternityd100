@@ -1,9 +1,8 @@
-<form class="flexcol {{cssClass}}" autocomplete="off">
+<main class="flexcol {{cssClass}}">
 
-    {{console this}}
     {{!-- Sheet Header --}}
-    <header class="sheet-header header2" style="font-family: serpentine">
-        <table class="hptable">
+    <header class="sheet-header header2">
+        <table class="vitals-table">
 
             <tbody>
                 <tr>
@@ -19,7 +18,7 @@
                     <td colspan="3">
 
 
-                        <div class="divTable crewTable">
+                        <div class="divTable durability-track">
 
                             <div class="divTableBody">
 
@@ -71,7 +70,7 @@
         </table>
     </header>
     {{!-- Sheet Tab Navigation --}}
-    <nav class="sheet-tabs tabs" data-group="primary">
+    <nav class="sheet-tabs tabs alternityd100-sheet-tabs" data-group="primary">
 
         <a class="item" data-tab="inventory">Inventory</a>
         <a class="item" data-tab="modifiers">{{localize "SFRPG.Modifiers"}}</a>
@@ -102,4 +101,4 @@
 
 
     </section>
-</form>
+</main>

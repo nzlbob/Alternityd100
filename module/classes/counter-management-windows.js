@@ -14,17 +14,17 @@ export class CounterManagementWindows extends Dialog {
      */
     static async create(actorId, targetClasses, combatantId) {
 
-        let counterClassesLabel = CONFIG.SFRPG.counterClassesLabel;
+        let counterClassesLabel = CONFIG.d100A.counterClassesLabel;
 
         const Actor = game.actors.get(actorId);
-        const htmlContent = await renderTemplate("systems/Alternityd100/templates/classes/counter-management.html", {
+        const htmlContent = await foundry.applications.handlebars.renderTemplate("systems/Alternityd100/templates/classes/counter-management.html", {
             counter: Actor.system.counterClasses.values[targetClasses].count,
             labelClasses: game.i18n.localize(counterClassesLabel[targetClasses]),
             currentPosition: Actor.system.counterClasses.values[targetClasses].position,
             classes: targetClasses,
             actorId:actorId,
             combatantId:combatantId,
-            config: CONFIG.SFRPG,
+            config: CONFIG.d100A,
         });
 
         return new Promise((resolve, reject) => {

@@ -106,7 +106,7 @@ export class ChatAttack {
         result += `<span class="tag">${n}</span>`;
       }
     }
-    const inner = TextEditor.enrichHTML(result, { rollData: this.rollData });
+    const inner = foundry.applications.ux.TextEditor.implementation.enrichHTML(result, { rollData: this.rollData });
     this.attackNotesHTML = `<div class="flexcol property-group gm-sensitive attack-notes"><label>${game.i18n.localize(
       "PF1.AttackNotes"
     )}</label><div class="flexrow">${inner}</div></div>`;
@@ -124,7 +124,7 @@ export class ChatAttack {
         result += `<span class="tag">${n}</span>`;
       }
     }
-    const inner = TextEditor.enrichHTML(result, { rollData: this.rollData });
+    const inner = foundry.applications.ux.TextEditor.implementation.enrichHTML(result, { rollData: this.rollData });
     this.effectNotesHTML = `<div class="flexcol property-group gm-sensitive effect-notes"><label>${game.i18n.localize(
       "PF1.EffectNotes"
     )}</label><div class="flexrow">${inner}</div></div>`;
@@ -261,7 +261,7 @@ export class ChatAttack {
 
     // Add tooltip
     for (const p of Object.values(data.parts)) {
-      tooltips += await renderTemplate("systems/pf1/templates/internal/damage-tooltip.hbs", {
+      tooltips += await foundry.applications.handlebars.renderTemplate("systems/pf1/templates/internal/damage-tooltip.hbs", {
         part: p,
       });
     }

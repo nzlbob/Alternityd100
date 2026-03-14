@@ -1,0 +1,15 @@
+<section class="d100a-hitloc-dialog">
+  <p class="d100a-hitloc-dialog__content">{{content}}</p>
+
+  <div class="d100a-hitloc-dialog__choices">
+    {{#each choices as |n|}}
+      <button type="button" class="d100a-hitloc-dialog__choice" data-action="pick" data-value="{{n}}">±{{n}}</button>
+    {{/each}}
+  </div>
+
+  <div class="d100a-hitloc-dialog__buttons">
+    <button type="button" class="d100a-hitloc-dialog__cancel" data-action="cancel">
+      <i class="fas fa-times"></i> Cancel
+    </button>
+  </div>
+</section>

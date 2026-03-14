@@ -28,15 +28,15 @@ export class NpcSkillToggleDialog extends Dialog {
     static async create(skills = {}) {
         let skillNames = {};
         for (let skillId of Object.keys(skills)) {
-            if (skillId in CONFIG.SFRPG.skills) {
-                skillNames[skillId] = CONFIG.SFRPG.skills[skillId];
+            if (skillId in CONFIG.d100A.skills) {
+                skillNames[skillId] = CONFIG.d100A.skills[skillId];
             } else {
-                skillNames[skillId] = CONFIG.SFRPG.skills["pro"] + " (" + skills[skillId].subname + ")";
+                skillNames[skillId] = CONFIG.d100A.skills["pro"] + " (" + skills[skillId].subname + ")";
             }
         }
 
-        const html = await renderTemplate("systems/Alternityd100/templates/apps/npc-skill-toggle.html", {
-            config: CONFIG.SFRPG,
+        const html = await foundry.applications.handlebars.renderTemplate("systems/Alternityd100/templates/apps/npc-skill-toggle.html", {
+            config: CONFIG.d100A,
             skillNames,
             skills
         });

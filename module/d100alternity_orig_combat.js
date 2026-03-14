@@ -39,7 +39,6 @@ import { d100AScene} from "./d100AScene.js";
 import { ItemSheetSFRPG } from "./item/sheet.js";
 import { ItemCollectionSheet } from './apps/item-collection-sheet.js';
 import { ItemDeletionDialog } from './apps/item-deletion-dialog.js';
-import { SFRPG } from "./config.js";
 import { SFRPGModifierTypes, SFRPGModifierType, SFRPGEffectType } from "../module/modifiers/types.js";
 import SFRPGModifier from "../module/modifiers/modifier.js";
 import d100AModifierApplication from '../module/apps/modifier-app.js';
@@ -48,6 +47,8 @@ import { RPC } from "../module/rpc.js";
 import CounterManagement from "../module/classes/counter-management.js";
 import { initializeRemoteInventory, ActorItemHelper } from "../module/actor/actor-inventory-utils.js";
 import { d100A } from "./d100Aconfig.js";
+
+const SFRPG = d100A;
 import { computeCompoundBulkForItem } from "../module/actor/actor-inventory-utils.js";
 import registerSystemRules from "./rules.js";
 import Engine from "./engine/engine.js";
@@ -214,7 +215,6 @@ Hooks.once("init", function() {
   CONFIG.Token.objectClass = d100AToken;
   CONFIG.Combat.documentClass = Combatd100A;
   //CONFIG.MeasuredTemplate.objectClass = MeasuredTemplatePF;
-  CONFIG.SFRPG = SFRPG;
   CONFIG.d100A = d100A;
   CONFIG.Combatant.documentClass = d100ACombatant;
   CONFIG.ui.combat = d100ACombatTracker;
@@ -344,7 +344,7 @@ if (true) {
   });
 
   // Preload template partials
-  preloadHandlebarsTemplates();
+//  preloadHandlebarsTemplates();
   //canvas.controdragRuler = new DragRuler();
   
   //DragRuler.init;
@@ -378,7 +378,7 @@ Hooks.once("setup", function () {
 
   //extendBarRenderer;
     //console.log(`Alternity by d100  | [SETUP] Setting up Alternity by d100  System subsystems`);
-    //console.log("SFRPG",CONFIG.SFRPG)
+    //console.log("d100A",CONFIG.d100A)
 
 
     console.log("Alternity by d100  | [SETUP] Initializing counter management");
@@ -413,7 +413,7 @@ Hooks.once("setup", function () {
 
         for (let o of toLocalize) {
             
-            CONFIG.SFRPG[o] = Object.entries(CONFIG.SFRPG[o]).reduce((obj, e) => {
+          CONFIG.d100A[o] = Object.entries(CONFIG.d100A[o]).reduce((obj, e) => {
                 obj[e[0]] = game.i18n.localize(e[1]);
     
                 return obj;
@@ -436,9 +436,9 @@ Hooks.once("setup", function () {
         //  "labels", labels,  
          // "Itemdata" ,itemData,
          // "Item" , item,  
-         // "CONFIG-NEW", CONFIG.SFRPG.weaponProperties, 
+           // "CONFIG-NEW", CONFIG.d100A.weaponProperties, 
          // "Object Ent", Object.entries(itemData.properties),
-        //  "AEON" ,CONFIG.SFRPG.weaponPropertiesAeon
+          //  "AEON" ,CONFIG.d100A.weaponPropertiesAeon
   //      )
     
         console.log("Alternity by d100  | [SETUP] Configuring rules engine");
@@ -468,8 +468,8 @@ Hooks.once("ready", () => {
     console.log("Alternity by d100  | [READY] Setting up AOE template overrides");
     //templateOverrides();
     
-    console.log("Alternity by d100  | [READY] Overriding token HUD");
-    canvas.hud.token = new d100ATokenHUD();
+   // console.log("Alternity by d100  | [READY] Overriding token HUD");
+   // canvas.hud.token = new d100ATokenHUD();
     
     //TokenHUD.template
 
@@ -647,7 +647,8 @@ Hooks.on("hotbarDrop",(bar, data, slot) => {
 
 */
 //Hooks.on("renderChatLog", (app, html, data) => ItemSFRPG.chatListeners(html));
-Hooks.on("renderChatMessage", (_, html) => ItemSFRPG.chatListeners(html));
+// v13+: renderChatMessage is deprecated in favor of renderChatMessageHTML (HTMLElement).
+Hooks.on("renderChatMessageHTML", (_message, html) => ItemSFRPG.chatListeners($(html)));
 //Hooks.on("renderChatMessage", (_, html) => d100ActorSheet.chatListeners(html)); 
 //Hooks.on("renderChatMessage", (app, html, data) => ItemSFRPG.chatListeners(html));
 
@@ -1015,7 +1016,7 @@ function setupHandlebars() {
       const isOwner = Boolean(options.hash['isOwner']);
       const rolls = Boolean(options.hash['rolls']);
       const rollData = options.hash['rollData'];
-      const content = TextEditor.enrichHTML(options.hash['content'] || "", {secrets: isOwner, documents: true, rolls: rolls, rollData: rollData});
+      const content = foundry.applications.ux.TextEditor.implementation.enrichHTML(options.hash['content'] || "", {secrets: isOwner, documents: true, rolls: rolls, rollData: rollData});
       
       
       const maxSize = Boolean(options.hash['maxSize']) ? ` style="flex: 1;"` : "";
@@ -1029,7 +1030,7 @@ function setupHandlebars() {
       if ( button && editable ) editor.append($('<a class="editor-edit"><i class="fas fa-edit"></i></a>'));
       return new Handlebars.SafeString(editor[0].outerHTML);
   });
-
+/*
   Handlebars.registerHelper('createTippy', function (options) {
     
       const title = options.hash['title'];
@@ -1042,7 +1043,7 @@ function setupHandlebars() {
           throw new Error(game.i18n.localize("Alternityd100.Tippy.ErrorNoTitle"));
       }
 
-      let html = "data-tippy-content=\"<strong>" + game.i18n.localize(title) + "</strong>";
+      let html = "data-tooltip=\"<strong>" + game.i18n.localize(title) + "</strong>";
       if (subtitle) {
           html += "<br/>" + game.i18n.localize(subtitle);
       }
@@ -1087,6 +1088,8 @@ function setupHandlebars() {
 
       return new Handlebars.SafeString(html);
   });
+
+*/
   Handlebars.registerHelper("json-string", (e2) => new Handlebars.SafeString(escape(JSON.stringify(e2))))
   
   Handlebars.registerHelper("enrich", (content, options) => {
@@ -1097,7 +1100,7 @@ console.log("\nA",a)
     const owner = Boolean(options.hash["owner"]);
    const rollData = options.hash["rollData"];
    
-   const newstring = TextEditor.enrichHTML( { secrets: owner, rollData })
+   const newstring = foundry.applications.ux.TextEditor.implementation.enrichHTML( { secrets: owner, rollData })
    console.log(content,options,rollData,newstring)
     return new Handlebars.SafeString(newstring);
   });
@@ -1106,7 +1109,7 @@ console.log("\nA",a)
     const owner = Boolean(options.hash["owner"]);
     const rollData = options.hash["rollData"];
     
-    const newstring = TextEditor.enrichHTML( { secrets: owner,async:true, rollData })
+    const newstring = foundry.applications.ux.TextEditor.implementation.enrichHTML( { secrets: owner,async:true, rollData })
     console.log(content,options,rollData,newstring)
      return new Handlebars.SafeString(newstring);
 

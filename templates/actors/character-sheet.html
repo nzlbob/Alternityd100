@@ -1,465 +1,454 @@
-<form class="flexcol {{cssClass}}" autocomplete="off">
+<div class="sheet-root flexcol {{cssClass}}">
 
- <!-- [[console this}}  --> 
+    <!-- [[console this}}  -->
     {{!-- Sheet Header --}}
-    <header class="sheet-header" style="font-family: serpentine" >
-    <table class="hptable">
-        <thead>
-          <tr>
-            <td class="profile-img" style="width: 110px;" rowspan="2">
-                <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100" />    
-            </td>
-            <td class="header-fields">
-                <h1 class="charname">
-                    <input  name="name" type="text" value="{{actor.name}}" placeholder="Name" />
-                </h1>
-            </td>
-            <td >
-                {{#if isGM}}
-               <p class = "clickpingtoken" > Token: {{options.token.name}} </p> 
-                {{/if}}
-         <!--       <input class=" rollable " style="font-family: serpentine" type="button" data-roll="d20" name="Actioncheck" value="Action Check"/> -->
-            </td>
-          </tr>
-          <tr>
-            <td  colspan="2">
-<!-- Stick in the HP table here-->
+    <header class="sheet-header">
+        <table class="vitals-table">
+            <tbody>
+                <tr>
+                    <td class="profile-img" rowspan="2">
+                        <img class="profile-img" src="{{actor.img}}"  data-action="editImage" data-edit="img" title="{{actor.name}}" />
 
+                    </td>
+                    <td class="header-fields">
+                        <input name="name" type="text" value="{{actor.name}}" placeholder="Name" />
+                    </td>
+                    <td>
+                        {{#if isGM}}
+                        <p class="clickpingtoken"> Token: {{options.token.name}} </p>
+                        {{/if}}
+                        <!--       <input class=" rollable " type="button" data-roll="d20" name="Actioncheck" value="Action Check"/> -->
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <!-- Stick in the HP table here-->
+                        <table class="vitals-table">
 
+                            <tr>
+                                <td class="resource-headx" title="{{ systemData.attributes.stu.label }}">
+                                    Stun
+                                </td>
+                                <td class="resource-headx" title="{{ systemData.attributes.wou.label }}">
+                                    Wound
+                                </td>
 
-<table style="width: 100%;" > 
+                                <td class="resource-headx" title="{{ systemData.attributes.mor.tooltip }}">
+                                    Mortal
+                                </td>
+                                <td class="resource-headx"
+                                    data-tooltip="<h3>Base<h3>{{ systemData.attributes.actchk.tooltip }} <br><h3>Steps<h3> {{ systemData.attributes.actchk.step.tooltip }} ">
+                                    Action Check
+                                </td>
+                                <td class="resource-headx">
+                                    Actions
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="resourcex" title="{{ systemData.attributes.stu.tooltip }}">
+                                    <input type="number" name="system.attributes.stu.value"
+                                        value="{{systemData.attributes.stu.value}}" />
+                                    <input type="number" name="system.attributes.stu.pending"
+                                        value="{{systemData.attributes.stu.pending}}" />
+                                    <input disabled="true" title="{{ systemData.attributes.stu.tooltip }}" type="number"
+                                        name="system.attributes.stu.max" value="{{systemData.attributes.stu.max}}" />
 
-    <colgroup>
-        <col style="width: 18%">
-        <col style="width: 18%">
-        <col style="width: 18%">
-        <col style="width: 28%">
-        <col style="width: 18%">
-        </colgroup>
+                                </td>
+                                <td class="resourcex" title="{{ systemData.attributes.wou.tooltip }}">
+                                    <input type="number" name="system.attributes.wou.value"
+                                        value="{{systemData.attributes.wou.value}}" />
+                                    <input type="number" name="system.attributes.wou.pending"
+                                        value="{{systemData.attributes.wou.pending}}" />
+                                    <input disabled="true" title="{{ systemData.attributes.wou.tooltip }}" type="number"
+                                        name="system.attributes.wou.max" value="{{systemData.attributes.wou.max}}" />
 
-    <tr style="height: 18px;"  >
-    <th class="resource-headx" title="{{ systemData.attributes.stu.label }}" >
-    <button style="height: 30px;"  class="clickapplydamge" data-tooltip-direction="UP" data-tooltip="Apply Temp Damage" >Stun</button>
-    </th>
-    <th class="resource-headx" title="{{ systemData.attributes.wou.label }}" >
-        <button style="height: 30px;"  class="rollphysire" data-tooltip-direction="UP" data-tooltip="Roll Stun Recovery" >Wound</button>
-        </th>
+                                </td>
+                                <td class="resourcex" title="{{ systemData.attributes.mor.tooltip }}">
+                                    <input type="number" name="system.attributes.mor.value"
+                                        value="{{systemData.attributes.mor.value}}" />
+                                    <input type="number" name="system.attributes.mor.pending"
+                                        value="{{systemData.attributes.mor.pending}}" />
+                                    <input disabled="true" title="{{ systemData.attributes.mor.tooltip }}" type="number"
+                                        name="system.attributes.mor.max" value="{{systemData.attributes.mor.max}}" />
 
-    <th class="resource-headx" title="{{ systemData.attributes.mor.tooltip }}">
-        Mortal
-    </th>
-    <th class="resource-heady" data-tooltip="<h3>Base<h3>{{ systemData.attributes.actchk.tooltip }} <br><h3>Steps<h3> {{ systemData.attributes.actchk.step.tooltip }} ">
-        Action Check
-    </th>
-    <th class="resource-headx"  >
-        Actions
-    </th>
+                                </td>
+                                <td class="resourcey">
+                                    <input disabled="true" value="{{systemData.attributes.actchk.ordinary}}" />
+                                    <input disabled="true" value=" {{systemData.attributes.actchk.good}} " />
+                                    <input disabled="true" value=" {{systemData.attributes.actchk.amazing}}" />
+                                    / <input disabled="true" value=" {{systemData.attributes.actchk.step.total}}" />
+                                </td>
+                                <td class="resourcex">
+                                    <input disabled="true" value="{{systemData.attributes.actchk.apr}}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="action-button" >
+                                    <button type="button" class="clickapplydamge" data-tooltip-direction="UP"
+                                        data-tooltip="Apply Pending (Yellow) Damage">Apply Damage</button>
+                                </td>
+                                <td class="action-button" >
+                                    <button type="button" class="rollphysire" data-tooltip-direction="UP"
+                                        data-tooltip="Roll Stun Recovery">Stun Recover</button>
+                                </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                            </tr>
+                            <tr>
 
-    
-</tr> 
+                                <td colspan="5">
+                                    <div class="divTable durability-track durability-track--character">
 
-<tr>
-      
-    <td class="resourcex" title="{{ systemData.attributes.stu.tooltip }}">
-            <input type="number" name="system.attributes.stu.value" value="{{systemData.attributes.stu.value}}"/>
-            <input type="number" name="system.attributes.stu.pending" value="{{systemData.attributes.stu.pending}}"/>
-            <input disabled="true" title="{{ systemData.attributes.stu.tooltip }}" type="number" name="system.attributes.stu.max" value="{{systemData.attributes.stu.max}}"/>
-        
-    </td>
-    <td class="resourcex" title="{{ systemData.attributes.wou.tooltip }}">
-            <input type="number" name="system.attributes.wou.value" value="{{systemData.attributes.wou.value}}"/>
-            <input type="number" name="system.attributes.wou.pending" value="{{systemData.attributes.wou.pending}}"/>
-            <input disabled="true" title="{{ systemData.attributes.wou.tooltip }}" type="number" name="system.attributes.wou.max" value="{{systemData.attributes.wou.max}}"/>
- 
-    </td>
-    <td class="resourcex" title="{{ systemData.attributes.mor.tooltip }}">
-            <input type="number" name="system.attributes.mor.value" value="{{systemData.attributes.mor.value}}"/>
-            <input type="number" name="system.attributes.mor.pending" value="{{systemData.attributes.mor.pending}}"/>
-            <input disabled="true" title="{{ systemData.attributes.mor.tooltip }}" type="number" name="system.attributes.mor.max" value="{{systemData.attributes.mor.max}}"/>
+                                        <div class="divTableBody">
+                                                {{log this}}
+                                            {{#each status.durability as |category id|}}
 
-    </td>
-    <td class="resourcey">
-            <input disabled="true" value="{{systemData.attributes.actchk.ordinary}}"/>
-            <input disabled="true" value=" {{systemData.attributes.actchk.good}} "/>
-            <input disabled="true" value=" {{systemData.attributes.actchk.amazing}}"/>
-            / <input disabled="true" value=" {{systemData.attributes.actchk.step.total}}"/>
-    </td>
+                                            <div class="divTableRow">
+                                                {{#if (eq id "stu") }}<div class="divTableCell"
+                                                    data-tooltip="{{ localize " d100A.DamageTypeTooltip.Stun" }}">{{
+                                                    localize "d100A.stun"}}</div> {{/if}}
+                                                {{#if (eq id "wou") }}<div class="divTableCell"
+                                                    data-tooltip="{{ localize " d100A.DamageTypeTooltip.Wound" }}">{{
+                                                    localize "d100A.wound"}}</div> {{/if}}
+                                                {{#if (eq id "mor") }}<div class="divTableCell"
+                                                    data-tooltip="{{ localize " d100A.DamageTypeTooltip.Mortal" }}">{{
+                                                    localize "d100A.mortal"}}</div> {{/if}}
 
-<td class="resourcex">
-    <input disabled="true"  value="{{systemData.attributes.actchk.apr}}"/>
-</td>
+                                                <div class="divTableCell">
+                                                    {{#each category.good as |position|}}
+                                                    <img class="clickgood" src="{{../../status.image.good}}"
+                                                        title="{{position.title}}" data-position={{position.value}}
+                                                        data-type="total-dec" data-id={{id}} data-category="total" />
+                                                    {{/each}}
+                                                    {{#each category.pend as |position|}}
+                                                    <img class="clickgood" src="{{../../status.image.pend}}"
+                                                        title="{{position.title}}" data-position={{position.value}}
+                                                        data-type="total-inc" data-id={{id}} data-category="total" />
+                                                    {{/each}}
+                                                    {{#each category.bad as |position|}}
+                                                    <img class="clickgood" src="{{../../status.image.bad}}"
+                                                        title="{{position.title}}" data-position={{position.value}}
+                                                        data-type="total-inc" data-id={{id}} data-category="total" />
+                                                    {{/each}}
 
-    </tr>
+                                                </div>
+                                            </div>
+                                            {{/each}}
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- EO HP table here-->
+                    </td>
+                </tr>
+            </tbody>
 
-
-</table>
-
-
-
-
-<!-- EO HP table here-->
-            </td>
-          </tr>
-
-
-
-
-        </thead>
-        <tbody>
-            <tr>
-
-                <td colspan="3" >
-
-
-                    <div class="divTable crewTable">
-
-                        <div class="divTableBody">
-
-                        {{#each status.durability as |category id|}}
-
-                        <div class="divTableRow">
-                        {{#if (eq id "stu") }}<div class="divTableCell" data-tooltip = "{{ localize "d100A.DamageTypeTooltip.Stun" }}" >{{ localize "d100A.stun"}}</div> {{/if}}
-                        {{#if (eq id "wou") }}<div class="divTableCell" data-tooltip = "{{ localize "d100A.DamageTypeTooltip.Wound" }}" >{{ localize "d100A.wound"}}</div> {{/if}}
-                        {{#if (eq id "mor") }}<div class="divTableCell" data-tooltip = "{{ localize "d100A.DamageTypeTooltip.Mortal" }}" >{{ localize "d100A.mortal"}}</div> {{/if}}
-
-                        <div class="divTableCell">
-                            {{#each category.good as |position|}}
-                            <img class="clickgood" src="{{../../status.image.good}}" title="{{position.title}}" data-position={{position.value}} data-type="total-dec" data-id={{id}} data-category="total" height="15" width="15" />
-                            {{/each}}
-                            {{#each category.pend as |position|}}
-                            <img class="clickgood" src="{{../../status.image.pend}}"  title="{{position.title}}" data-position={{position.value}} data-type="total-inc" data-id={{id}} data-category="total" height="15" width="15" />
-                            {{/each}}  
-                            {{#each category.bad as |position|}}
-                            <img class="clickgood" src="{{../../status.image.bad}}"  title="{{position.title}}" data-position={{position.value}} data-type="total-inc" data-id={{id}} data-category="total" height="15" width="15" />
-                            {{/each}}     
-               
-                        </div>
-                        </div>
-                        {{/each}}
-                
-                
-                        </div>
-                        </div>
-
-                </td>
-
-
-            </tr>
-
-
-        </tbody>
         </table>
-        
-
-
-
-
-
-
-
-        
-                
-
-
-
-
-            
-            
-            
-            
- 
-
     </header>
     {{!-- Sheet Tab Navigation --}}
-    <nav class="sheet-tabs tabs" data-group="primary">
-    
-    <a class="item" data-tab="stats">Stats</a>
-	
-    <a class="item" data-tab="skills">Skills</a>
-    <a class="item" data-tab="features">{{ localize "SFRPG.Features" }}</a>
-
-    <a class="item" data-tab="inventory">Inventory</a>
-    <a class="item" data-tab="modifiers">{{localize "SFRPG.Modifiers"}}</a>
-    <!-- <a class="item" data-tab="spellbook">{{ localize "SFRPG.SpellBook.Spellbook" }}</a> -->
-    <a class="item" data-tab="psionics">{{ localize "Psionics" }}</a>
-	<a class="item" data-tab="history">History</a>
-   
-
-<!--
-    <a class="item" data-tab="combat">Combat</a>
-    <a class="item" data-tab="perks">Perks</a>
-	<a class="item" data-tab="items">Items</a>
-    <a class="item" data-tab="achievements">Achievements</a>
-     <a class="item" data-tab="attributes">Attributes</a>
--->
-
-
+    <nav class="sheet-tabs tabs alternityd100-sheet-tabs" data-group="primary">
+        <a class="item" data-tab="stats">Stats</a>
+        <a class="item" data-tab="skills">Skills</a>
+        <a class="item" data-tab="features">{{ localize "SFRPG.Features" }}</a>
+        <a class="item" data-tab="inventory">Inventory</a>
+        <a class="item" data-tab="modifiers">{{localize "SFRPG.Modifiers"}}</a>
+        <a class="item" data-tab="psionics">{{ localize "Psionics" }}</a>
+        <a class="item" data-tab="history">History</a>
     </nav>
 
     {{!-- Sheet Body --}}
     <section class="sheet-body">
-
         {{!-- Stats Tab --}}
-        <div class="tab description" data-group="primary" data-tab="stats" style="width: 100%;">
-            
-<!-- Write your comments here -->   
+        <div class="tab description" data-group="primary" data-tab="stats">
+            <div class="char-stats-grid">
+                <!-- Ability Scores -->
+                <div class="char-panel char-panel--abilities char-panel--shrink">
+                           <div class="char-panel-heading alternityd100-strong">Abilities</div>
+                    <div class="divTable blueTable">
+                  
+                        <div class="divTableBody">
+                            <div class="divTableRow">
+                                <div class="divTableCell alternityd100-strong divTableCell--center">Cur / Base</div>
+                                <div class="divTableCell alternityd100-strong divTableCell--center">Mod</div>
+                                <div class="divTableCell alternityd100-strong divTableCell--center">Roll</div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell ability-inline"><span class="ability-label">STR</span><input
+                                        disabled="true" type="number" name="system.abilities.str.value"
+                                        value="{{systemData.abilities.str.value}}" /><input type="number"
+                                        name="system.abilities.str.base" value="{{systemData.abilities.str.base}}" />
+                                </div>
+                                <div class="divTableCell"><input disabled="true" type="number"
+                                        data-tooltip="{{system.abilities.str.tooltip}}"
+                                        name="system.abilities.str.resModValue"
+                                        value="{{systemData.abilities.str.resModValue}}" /></div>
+                                <div class="divTableCell divTableCell--center"><button type="button"
+                                        class="attribute-button" data-attr="str" aria-label="Roll STR"></button></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell ability-inline"><span class="ability-label">DEX</span><input
+                                        disabled="true" type="number" name="system.abilities.dex.value"
+                                        value="{{systemData.abilities.dex.value}}" /><input type="number"
+                                        name="system.abilities.dex.base" value="{{systemData.abilities.dex.base}}" />
+                                </div>
+                                <div class="divTableCell"><input disabled="true"
+                                        data-tooltip="{{system.abilities.dex.tooltip}}" type="number"
+                                        name="system.abilities.dex.resModValue"
+                                        value="{{systemData.abilities.dex.resModValue}}" /></div>
+                                <div class="divTableCell divTableCell--center"><button type="button"
+                                        class="attribute-button" data-attr="dex" aria-label="Roll DEX"></button></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell ability-inline"><span class="ability-label">CON</span><input
+                                        disabled="true" type="number" name="system.abilities.con.value"
+                                        value="{{systemData.abilities.con.value}}" /><input type="number"
+                                        name="system.abilities.con.base" value="{{systemData.abilities.con.base}}" />
+                                </div>
+                                <div class="divTableCell"><input disabled="true" type="number"
+                                        data-tooltip="{{system.abilities.con.tooltip}}"
+                                        name="system.abilities.con.resModValue"
+                                        value="{{systemData.abilities.con.resModValue}}" /></div>
+                                <div class="divTableCell divTableCell--center"><button type="button"
+                                        class="attribute-button" data-attr="con" aria-label="Roll CON"></button></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell ability-inline"><span class="ability-label">INT</span><input
+                                        disabled="true" type="number" name="system.abilities.int.value"
+                                        value="{{systemData.abilities.int.value}}" /><input type="number"
+                                        name="system.abilities.int.base" value="{{systemData.abilities.int.base}}" />
+                                </div>
+                                <div class="divTableCell"><input disabled="true" type="number"
+                                        data-tooltip="{{system.abilities.int.tooltip}}"
+                                        name="system.abilities.int.resModValue"
+                                        value="{{systemData.abilities.int.resModValue}}" /></div>
+                                <div class="divTableCell divTableCell--center"><button type="button"
+                                        class="attribute-button" data-attr="int" aria-label="Roll INT"></button></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell ability-inline"><span class="ability-label">WIL</span><input
+                                        disabled="true" type="number" name="system.abilities.wil.value"
+                                        value="{{systemData.abilities.wil.value}}" /><input type="number"
+                                        name="system.abilities.wil.base" value="{{systemData.abilities.wil.base}}" />
+                                </div>
+                                <div class="divTableCell"><input disabled="true" type="number"
+                                        data-tooltip="{{system.abilities.wil.tooltip}}"
+                                        name="system.abilities.wil.resModValue"
+                                        value="{{systemData.abilities.wil.resModValue}}" /></div>
+                                <div class="divTableCell divTableCell--center"><button type="button"
+                                        class="attribute-button" data-attr="wil" aria-label="Roll WIL"></button></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell ability-inline"><span class="ability-label">PER</span><input
+                                        disabled="true" type="number" name="system.abilities.per.value"
+                                        value="{{systemData.abilities.per.value}}" /><input type="number"
+                                        name="system.abilities.per.base" value="{{systemData.abilities.per.base}}" />
+                                </div>
+                                <div class="divTableCell"><input disabled="true" type="number"
+                                        data-tooltip="{{system.abilities.per.tooltip}}"
+                                        name="system.abilities.per.resModValue"
+                                        value="{{systemData.abilities.per.resModValue}}" /></div>
+                                <div class="divTableCell divTableCell--center"><button type="button"
+                                        class="attribute-button" data-attr="per" aria-label="Roll PER"></button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<div class="divTable blueTable" >
-    <div class="divTableBody">
-    <div class="divTableRow">
- <!-- Ability Scores -->    
-            <div class="divTableCell">
-            <div class="divTable blueTable">
-            <div class="divTableBody">
-            <div class="divTableRow">
-            <div class="divTableCell" style="text-align:center;font-family: serpentine-bold;">Cur / Base</div>
-            <div class="divTableCell" style="text-align:center;font-family: serpentine-bold;">Mod</div>
-            <div class="divTableCell" style="text-align:center;font-family: serpentine-bold;">Roll</div>
+                <!-- Combat Movement -->
+                <div class="char-panel char-panel--movement char-panel--shrink">
+                    <div class="char-panel-heading alternityd100-strong">Combat Movement</div>
+                    <div class="divTable blueTable">
+                        <div class="divTableBody">
+                            <div class="divTableRow">
+                                <div class="divTableCell divTableCell--right">Sprint</div>
+                                <div class="divTableCell"><input style="width: 40px" disabled type="number"
+                                        name="system.attributes.speed.sprint.value"
+                                        value="{{systemData.attributes.speed.sprint.value}}" /></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell divTableCell--right">Run</div>
+                                <div class="divTableCell"><input style="width: 40px" disabled="true" type="number"
+                                        name="system.attributes.speed.run.value"
+                                        value="{{systemData.attributes.speed.run.value}}" /></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell divTableCell--right">Walk</div>
+                                <div class="divTableCell"><input style="width: 40px" disabled="true" type="number"
+                                        name="system.attributes.speed.walk.value"
+                                        value="{{systemData.attributes.speed.walk.value}}" /></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell divTableCell--right">Easy Swim</div>
+                                <div class="divTableCell"><input style="width: 40px" disabled="true" type="number"
+                                        name="system.attributes.speed.easyswim.value"
+                                        value="{{systemData.attributes.speed.easyswim.value}}" /></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell divTableCell--right">Swim</div>
+                                <div class="divTableCell"><input style="width:40px" disabled="true" type="number"
+                                        name="system.aattributes.speed.swim.value"
+                                        value="{{systemData.attributes.speed.swim.value}}" /></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell divTableCell--right">Glide</div>
+                                <div class="divTableCell"><input style="width: 40px" disabled="true" type="number"
+                                        name="system.attributes.speed.glide.value"
+                                        value="{{systemData.attributes.speed.glide.value}}" /></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell divTableCell--right">Fly</div>
+                                <div class="divTableCell"><input style="width: 40px" disabled="true" type="number"
+                                        name="system.attributes.speed.fly.value"
+                                        value="{{systemData.attributes.speed.fly.value}}" /></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Biodata -->
+                <div class="char-panel char-panel--biodata char-panel--shrink">
+                    <div class="char-panel-heading alternityd100-strong">Biodata</div>
+                    <div class="divTable blueTable">
+                        <div class="divTableBody">
+                            <div class="divTableRow">
+                                <div class="divTableCell divTableCell--right">Species:</div>
+                                <div class="divTableCell divTableCell--inline-items">
+                                    <span>{{systemData.details.species}}</span></div>
+                            </div>
+
+
+                            <div class="divTableRow">
+                                <div class="divTableCell divTableCell--right">Gender:</div>
+                                <div class="divTableCell divTableCell--inline-items">
+                                    <select name="system.details.gender">
+                                        {{ selectOptions systemData.charoptions.gender
+                                        selected=systemData.details.gender blank="" }}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="divTableRow">
+                                <div class="divTableCell divTableCell--right">Profession:</div>
+                                <div class="divTableCell divTableCell--inline-items">
+                                    <span>{{system.details.profession.primary.name}}</span></div>
+                            </div>
+
+
+                            <div class="divTableRow">
+                                <div class="divTableCell divTableCell--right">Secondary:</div>
+                                <div class="divTableCell divTableCell--inline-items">
+                                    <span>{{system.details.profession.secondary.name}}</span></div>
+                            </div>
+
+
+                            <div class="divTableRow">
+                                <div class="divTableCell" style="text-align:right">Career:</div>
+                                <div class="divTableCell"><input style="text-align:left" type="text"
+                                        name="system.details.career" value="{{systemData.details.career}}" /></div>
+                                <!--<div class="divTableCell"></div>-->
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell" style="text-align:right">Attributes:</div>
+                                <div class="divTableCell"><input style="text-align:left" type="text"
+                                        name="system.details.socAttributes.Motivation"
+                                        value="{{systemData.details.socAttributes.Motivation}}" /></div>
+                                <!--<div class="divTableCell"></div>-->
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell" style="text-align:right">-</div>
+                                <div class="divTableCell"><input style="text-align:left" type="text"
+                                        name="system.details.socAttributes.Moral"
+                                        value="{{systemData.details.socAttributes.Moral}}" /></div>
+                                <!--<div class="divTableCell"></div>-->
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell" style="text-align:right">-</div>
+                                <div class="divTableCell"><input style="text-align:left" type="text"
+                                        name="system.details.socAttributes.Trait1"
+                                        value="{{systemData.details.socAttributes.Trait1}}" /></div>
+                                <!--<div class="divTableCell"></div>-->
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell" style="text-align:right">-</div>
+                                <div class="divTableCell"><input style="text-align:left" type="text"
+                                        name="system.details.socAttributes.Trait2"
+                                        value="{{systemData.details.socAttributes.Trait2}}" /></div>
+                                <!--<div class="divTableCell"></div>-->
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell" style="text-align:right">Setting:</div>
+                                <div class="divTableCell"><input style="text-align:left" type="text"
+                                        name="system.details.setting" value="{{systemData.details.setting}}" /></div>
+                                <!--<div class="divTableCell"></div>-->
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell" style="text-align:right">GM:</div>
+                                <div class="divTableCell"><input style="text-align:left" type="text"
+                                        name="system.details.gm" value="{{systemData.details.gm}}" /></div>
+                                <!--<div class="divTableCell"></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="divTableRow">
-            <div class="divTableCell"style="text-align:right">STR<input disabled="true" type="number" name="system.abilities.str.value" value="{{systemData.abilities.str.value}}"/><input type="number" name="system.abilities.str.base" value="{{systemData.abilities.str.base}}"/></div>
 
-            <div class="divTableCell"><input disabled="true" type="number" data-tooltip="{{system.abilities.str.tooltip}}" name="system.abilities.str.resModValue" value="{{systemData.abilities.str.resModValue}}"/></div>
-            <div class="divTableCell"><button style="height: 20px;" type="image" src="systems/Alternityd100/images/core/Fig_0.1.png"  class="attribute-button" data-attr="str"></button> </div>
-
-
-
-
-            </div>
-            <div class="divTableRow">
-                <div class="divTableCell"style="text-align:right">DEX<input disabled="true" type="number" name="system.abilities.dex.value" value="{{systemData.abilities.dex.value}}"/><input type="number" name="system.abilities.dex.base" value="{{systemData.abilities.dex.base}}"/></div>
-                <div class="divTableCell"><input disabled="true" data-tooltip="{{system.abilities.dex.tooltip}}" type="number" name="system.abilities.dex.resModValue" value="{{systemData.abilities.dex.resModValue}}"/></div>
-                <div class="divTableCell"><button style="height: 20px;" type="image" src="/icons/svg/d20-black.svg"  class="attribute-button" data-attr="dex"></button> </div>
-            </div>
-            <div class="divTableRow">
-                <div class="divTableCell"style="text-align:right">CON<input  disabled="true" type="number" name="system.abilities.con.value" value="{{systemData.abilities.con.value}}"/><input type="number" name="system.abilities.con.base" value="{{systemData.abilities.con.base}}"/></div>
-                <div class="divTableCell"><input disabled="true" type="number" data-tooltip="{{system.abilities.con.tooltip}}" name="system.abilities.con.resModValue" value="{{systemData.abilities.con.resModValue}}"/></div>
-                <div class="divTableCell"><button style="height: 20px;" type="image" src="/icons/svg/d20-black.svg"  class="attribute-button" data-attr="con"></button> </div>
-            </div>
-            <div class="divTableRow">
-                <div class="divTableCell"style="text-align:right">INT<input  disabled="true" type="number" name="system.abilities.int.value" value="{{systemData.abilities.int.value}}"/><input type="number" name="system.abilities.int.base" value="{{systemData.abilities.int.base}}"/></div>
-                <div class="divTableCell"><input disabled="true" type="number" data-tooltip="{{system.abilities.int.tooltip}}" name="system.abilities.int.resModValue" value="{{systemData.abilities.int.resModValue}}"/></div>
-                <div class="divTableCell"><button style="height: 20px;" type="image" src="/icons/svg/d20-black.svg"  class="attribute-button" data-attr="int"></button> </div>
-            </div>
-            <div class="divTableRow">
-                <div class="divTableCell"style="text-align:right">WIL<input disabled="true" type="number" name="system.abilities.wil.value" value="{{systemData.abilities.wil.value}}"/><input type="number" name="system.abilities.wil.base" value="{{systemData.abilities.wil.base}}"/></div>
-                <div class="divTableCell"><input disabled="true" type="number" data-tooltip="{{system.abilities.wil.tooltip}}" name="system.abilities.wil.resModValue" value="{{systemData.abilities.wil.resModValue}}"/></div>
-                <div class="divTableCell"><button style="height: 20px;" type="image" src="/icons/svg/d20-black.svg"  class="attribute-button" data-attr="wil"></button> </div>
-            </div>
-            <div class="divTableRow">
-                <div class="divTableCell"style="text-align:right">PER<input disabled="true"type="number" name="system.abilities.per.value" value="{{systemData.abilities.per.value}}"/><input type="number" name="system.abilities.per.base" value="{{systemData.abilities.per.base}}"/></div>
-                <div class="divTableCell"><input disabled="true" type="number" data-tooltip="{{system.abilities.per.tooltip}}" name="system.abilities.per.resModValue" value="{{systemData.abilities.per.resModValue}}"/></div>
-                <div class="divTableCell"><button style="height: 20px;" type="image" src="/icons/svg/d20-black.svg"  class="attribute-button" data-attr="per"></button> </div>
-            </div>
-            </div>
-            </div>  
-        </div> 
-<!-- End Ability Scores --> 
-
-
-    
-   <!-- Speed Scores -->  
-<div class="divTableCell">
-    <div class="divTable blueTable">
-    <div class="divTableBody">
-    <div class="divTableRow">
-    <div class="divTableCell" style="text-align:center;font-family: serpentine-bold;">Combat Movement</div>
-    <div class="divTableCell" style="text-align:center"></div>
-    </div>
-    <div class="divTableRow">
-    <div class="divTableCell"style="text-align:right">Sprint</div>
-    <div class="divTableCell"><input style="width: 40px" disabled type="number" name="system.attributes.speed.sprint.value" value="{{systemData.attributes.speed.sprint.value}}"/></div>
-    <!--<div class="divTableCell"></div>-->
-    </div>
-    <div class="divTableRow">
-        <div class="divTableCell"style="text-align:right">Run</div>
-        <div class="divTableCell"><input style="width: 40px" disabled="true" type="number" name="system.attributes.speed.run.value" value="{{systemData.attributes.speed.run.value}}"/></div>
-        <!--<div class="divTableCell"></div>-->
-    </div>
-    <div class="divTableRow">
-        <div class="divTableCell"style="text-align:right">Walk</div>
-        <div class="divTableCell"><input style="width: 40px" disabled="true" type="number" name="system.attributes.speed.walk.value" value="{{systemData.attributes.speed.walk.value}}"/></div>
-        <!--<div class="divTableCell"></div>-->
-    </div>
-    <div class="divTableRow">
-        <div class="divTableCell"style="text-align:right">Easy Swim</div>
-        <div class="divTableCell"><input style="width: 40px" disabled="true" type="number" name="system.attributes.speed.easyswim.value" value="{{systemData.attributes.speed.easyswim.value}}"/></div>
-        <!--<div class="divTableCell"></div>-->
-    </div>
-    <div class="divTableRow">
-        <div class="divTableCell"style="text-align:right">Swim</div>
-        <div class="divTableCell"><input style="width:40px " disabled="true" type="number" name="system.aattributes.speed.swim.value" value="{{systemData.attributes.speed.swim.value}}"/></div>
-        <!--<div class="divTableCell"></div>-->
-    </div>
-    <div class="divTableRow">
-        <div class="divTableCell"style="text-align:right">Glide</div>
-        <div class="divTableCell"><input style="width: 40px" disabled="true" type="number" name="system.attributes.speed.glide.value" value="{{systemData.attributes.speed.glide.value}}"/></div>
-        <!--<div class="divTableCell"></div>-->
-    </div>
-    <div class="divTableRow">
-        <div class="divTableCell"style="text-align:right">Fly</div>
-        <div class="divTableCell"><input style="width: 40px" disabled="true" type="number" name="system.attributes.speed.fly.value" value="{{systemData.attributes.speed.fly.value}}"/></div>
-        <!--<div class="divTableCell"></div>-->
-    </div>
-    </div>
-    </div>  
-</div> 
-<!-- End Speed --> 
-
-   <!-- Speed Bio Data -->  
-   <div class="divTableCell">
-    <div class="divTable blueTable">
-    <div class="divTableBody">
-    <div class="divTableRow">
-        <div class="divTableCell" style="text-align:center;font-family: serpentine-bold;">Biodata</div>
-        <div class="divTableCell" style="text-align:center"></div>
-
-    </div>
-    <!--<div class="divTableRow">
-        <div class="divTableCell"style="text-align:right">Species</div>
-        <div class="divTableCell"><input style="width: fit-content;text-align:left"  type="text" name="daxta.details.species" value="{{systemData.details.species}}"/></div>
-        <div class="divTableCell"></div>
-    </div>-->
-        <div class="divTableRow">
-            <div class="divTableCell"style="text-align:right">Species: </div>
-            
-                {{systemData.details.species}}
-                
         </div>
 
-    
-    <div class="divTableRow">
-        <div class="divTableCell"style="text-align:right">Gender:</div>
-        <!--<div class="divTableCell"><input style="width: fit-content;text-align:left" type="text" name="daxta.details.gender" value="{{systemData.details.gender}}"/></div>-->
-
-
-                <select name="system.details.gender">
-                    {{ selectOptions systemData.charoptions.gender selected=systemData.details.gender blank="" }}
-                </select>
-                    
-
-        </div>
-
-    <div class="divTableRow">
-        <div class="divTableCell"style="text-align:right">Profession:</div>
-        <!--<div class="divTableCell"><input style="width: fit-content;text-align:left" type="text" name="system.details.profession.primary" value="{{systemData.details.profession.primary}}"/></div>
-    -->
-    {{system.details.profession.primary.name}}
-    
-</div>
-
-
-    <div class="divTableRow">
-        <div class="divTableCell"style="text-align:right">Secondary:</div>
-    <!--    <div class="divTableCell"><input style="width: fit-content;text-align:left" type="text" name="system.details.profession.secondary" value="{{systemData.details.profession.secondary}}"/></div>
-    -->
-    {{system.details.profession.secondary.name}}
-</div>
-
-
-    <div class="divTableRow">
-        <div class="divTableCell"style="text-align:right">Career:</div>
-        <div class="divTableCell"><input style="width: fit-content;text-align:left"  type="text" name="system.details.career" value="{{systemData.details.career}}"/></div>
-        <!--<div class="divTableCell"></div>-->
-    </div>
-    <div class="divTableRow">
-        <div class="divTableCell"style="text-align:right">Attributes:</div>
-        <div class="divTableCell"><input style="width: fit-content;text-align:left"  type="text" name="system.details.socAttributes.Motivation" value="{{systemData.details.socAttributes.Motivation}}"/></div>
-        <!--<div class="divTableCell"></div>-->
-    </div>
-    <div class="divTableRow">
-        <div class="divTableCell"style="text-align:right">-</div>
-        <div class="divTableCell"><input style="width: fit-content;text-align:left"  type="text" name="system.details.socAttributes.Moral" value="{{systemData.details.socAttributes.Moral}}"/></div>
-        <!--<div class="divTableCell"></div>-->
-    </div>
-    <div class="divTableRow">
-        <div class="divTableCell"style="text-align:right">-</div>
-        <div class="divTableCell"><input style="width: fit-content;text-align:left"  type="text" name="system.details.socAttributes.Trait1" value="{{systemData.details.socAttributes.Trait1}}"/></div>
-        <!--<div class="divTableCell"></div>-->
-    </div>
-    <div class="divTableRow">
-        <div class="divTableCell"style="text-align:right">-</div>
-        <div class="divTableCell"><input style="width: fit-content;text-align:left"  type="text" name="system.details.socAttributes.Trait2" value="{{systemData.details.socAttributes.Trait2}}"/></div>
-        <!--<div class="divTableCell"></div>-->
-    </div>
-    <div class="divTableRow">
-        <div class="divTableCell"style="text-align:right">Setting:</div>
-        <div class="divTableCell"><input style="width: fit-content;text-align:left"  type="text" name="system.details.setting" value="{{systemData.details.setting}}"/></div>
-        <!--<div class="divTableCell"></div>-->
-    </div>
-    <div class="divTableRow">
-        <div class="divTableCell"style="text-align:right">GM:</div>
-        <div class="divTableCell"><input style="width: fit-content;text-align:left"  type="text" name="system.details.gm" value="{{systemData.details.gm}}"/></div>
-        <!--<div class="divTableCell"></div>-->
-    </div>
-    </div>
-    </div>  
-</div> 
-<!-- End Speed --> 
 
 
 
-    </div>
-    
-    </div>
-    
-</div>
-
-<!-- Write your comments here -->
-
-        </div>   
-
- 
-
-
-<!-- ****SKILLS TAB HERE**** -->
+        <!-- ****SKILLS TAB HERE**** -->
 
 
         {{!-- Skills Tab --}}
 
         {{> "systems/Alternityd100/templates/actors/parts/actor-skills.html" }}
 
-{{!-- Features Tab --}}
-<div class="tab features flexcol" data-group="primary" data-tab="features">
-    {{> "systems/Alternityd100/templates/actors/parts/actor-features.html" sections=features}}
-</div>
+        {{!-- Features Tab --}}
+        <div class="tab features flexcol" data-group="primary" data-tab="features">
+            {{> "systems/Alternityd100/templates/actors/parts/actor-features.html" sections=features}}
+        </div>
 
 
 
-       
+
         {{!-- Inventory Tab --}}
-       
+
         <div class="tab inventory flexcol" data-group="primary" data-tab="inventory">
             {{> "systems/Alternityd100/templates/actors/parts/actor-inventory.html" sections=inventory}}
 
-           
+
         </div>
-       
+
         {{!-- Modifiers Tab --}}
         <div class="tab modifers flexcol" data-group="primary" data-tab="modifiers">
             {{> "systems/Alternityd100/templates/actors/parts/actor-modifiers.html" sections=modifiers}}
         </div>
-       
+
         {{!-- Psionics Tab --}}
         <div class="tab psionics flexcol" data-group="primary" data-tab="psionics">
             {{> "systems/Alternityd100/templates/actors/parts/actor-psionic.html"}}
         </div>
-        
+
         {{!-- History Tab --}}
         <div class="tab description" data-group="primary" data-tab="history">
-             <input class=" rollable " style="font-family: serpentine" type="button" data-roll="d20" name="Actioncheck" value="Action Check"/> 
+            <input class=" rollable " type="button" data-roll="d20" name="Actioncheck" value="Action Check" />
             History
-                        {{editor
-                enrichedBiography
-                target="system.details.biography.value"
-                button=true
-                editable=editable
+            {{editor
+            enrichedBiography
+            target="system.details.biography.value"
+            button=true
+            owner=isOwner
+            editable=editable
+            engine="prosemirror"
             }}
         </div>
 
 
 
-<!--
+        <!--
 
 
 
@@ -517,11 +506,11 @@
                             {{#if itemAttr.isFormula}}
                                 {{!-- Use the items.name.key format for shorthand. --}}
                                 {{#if ../../shorthand}}
-                                <button class="item-button rollable" data-roll="@items.{{slugify item.name}}.{{key}}" data-label="{{ itemAttr.label }}"
+                                <button type="button" class="item-button rollable" data-roll="@items.{{slugify item.name}}.{{key}}" data-label="{{ itemAttr.label }}"
                                     title="{{itemAttr.value}}">{{itemAttr.label}}</button>
                                 {{!-- Use the items.name.attributes.key.value format otherwise. --}}
                                 {{else}}
-                                <button class="item-button rollable"
+                                <button type="button" class="item-button rollable"
                                     data-roll="@items.{{slugify item.name}}.attributes.{{key}}.value" data-label="{{ itemAttr.label }}"
                                     title="{{itemAttr.value}}">{{itemAttr.label}}</button>
                                 {{/if}}
@@ -531,11 +520,11 @@
                                 {{#if itemGroupedAttr.isFormula}}
                                     {{!-- Use the items.name.key format for shorthand. --}}
                                     {{#if ../../../shorthand}}
-                                    <button class="item-button rollable" data-roll="@items.{{slugify item.name}}.{{key}}.{{groupedKey}}" data-label="{{ itemGroupedAttr.label }}"
+                                    <button type="button" class="item-button rollable" data-roll="@items.{{slugify item.name}}.{{key}}.{{groupedKey}}" data-label="{{ itemGroupedAttr.label }}"
                                         title="{{itemGroupedAttr.value}}">{{itemGroupedAttr.label}}</button>
                                     {{!-- Use the items.name.attributes.key.value format otherwise. --}}
                                     {{else}}
-                                    <button class="item-button rollable"
+                                    <button type="button" class="item-button rollable"
                                         data-roll="@items.{{slugify item.name}}.attributes.{{key}}.{{groupedKey}}.value" data-label="{{ itemGroupedAttr.label }}"
                                         title="{{itemGroupedAttr.value}}">{{itemGroupedAttr.label}}</button>
                                     {{/if}}
@@ -569,4 +558,4 @@
 
 
     </section>
-</form>
+</div>

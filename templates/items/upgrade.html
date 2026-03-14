@@ -1,4 +1,4 @@
-<form class="{{cssClass}} flexcol" autocomplete="off">
+<div class="sheet-root {{cssClass}} flexcol">
 
     {{!-- Item Sheet Header --}}
     {{> "systems/Alternityd100/templates/items/parts/item-header.html"}}
@@ -16,33 +16,36 @@
 
         <div class="tab details" data-group="primary" data-tab="details">
             <h3 class="form-header">{{ localize "SFRPG.Items.Upgrade.ArmorUpgradeDetails" }}</h3>
-            <div class="form-group">
-                <label>{{ localize "SFRPG.Items.Upgrade.Slots" }}</label>
-                <input type="text" name="system.slots" value="{{itemData.slots}}" data-dtype="Number" />
+            <div class="divTable blueTable2">
+                <div class="divTableBody">
+                    <div class="divTableRow">
+                        <div class="divTableCell">
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Items.Upgrade.Slots" }}</label>
+                                <input type="text" name="system.slots" value="{{itemData.slots}}" data-dtype="Number" />
+                            </div>
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Items.Upgrade.AllowedArmorType" }}</label>
+                                <select name="system.allowedArmorType">
+                                    {{selectOptions allowedArmorTypesWithAny selected=itemData.allowedArmorType}}
+                                </select>
+                            </div>
+
+                            <br />
+
+                            {{> "systems/Alternityd100/templates/items/parts/item-capacity.html"}}
+
+                            <br />
+
+                            {{> "systems/Alternityd100/templates/items/parts/physical-item-details.html"}}
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label>{{ localize "SFRPG.Items.Upgrade.AllowedArmorType" }}</label>
-                <select name="system.allowedArmorType">
-                    {{#select itemData.allowedArmorType}}
-                    <option value="any">{{ localize "SFRPG.Items.Upgrade.Any" }}</option>
-                    {{#each config.allowedArmorTypes as |allowedArmorType k|}}
-                    <option value="{{k}}">{{allowedArmorType}}</option>
-                    {{/each}}
-                    {{/select}}
-                </select>
-            </div>
-
-            <br />
-
-            {{> "systems/Alternityd100/templates/items/parts/item-capacity.html"}}
-
-            <br />
-
-            {{> "systems/Alternityd100/templates/items/parts/physical-item-details.html"}}
         </div>
 
         {{!-- Modifiers Tab --}}
         {{> "systems/Alternityd100/templates/items/parts/item-modifiers.html"}}
 
     </section>
-</form>
+</div>

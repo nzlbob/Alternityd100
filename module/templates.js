@@ -29,6 +29,11 @@ export const preloadHandlebarsTemplates = async function() {
 "systems/Alternityd100/templates/actors/parts/actor-starship-status.html",
 "systems/Alternityd100/templates/actors/parts/actor-starship-config.html",
 
+//Items
+ "systems/Alternityd100/templates/items/weapon.html",
+ "systems/Alternityd100/templates/items/generic.html",
+
+
     // Item Sheet Partials
     "systems/Alternityd100/templates/items/parts/item-action.html",
     "systems/Alternityd100/templates/items/parts/item-activation.html",
@@ -40,6 +45,7 @@ export const preloadHandlebarsTemplates = async function() {
     "systems/Alternityd100/templates/items/parts/item-status.html",
     "systems/Alternityd100/templates/items/parts/physical-item-details.html",
     "systems/Alternityd100/templates/items/parts/starship-component.html",
+    "systems/Alternityd100/templates/items/parts/starship-component-common.html",
     "systems/Alternityd100/templates/items/parts/container-details.html",
     "systems/Alternityd100/templates/items/parts/item-armordetails.html",
     "systems/Alternityd100/templates/items/parts/item-ordnance-item.html",
@@ -61,5 +67,5 @@ export const preloadHandlebarsTemplates = async function() {
   ];
 
   // Load the template parts
-  return loadTemplates(templatePaths);
+  return foundry.applications.handlebars.loadTemplates(templatePaths);
 };

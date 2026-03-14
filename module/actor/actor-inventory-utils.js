@@ -1,4 +1,4 @@
-import { SFRPG } from "../config.js";
+import { d100A as SFRPG } from "../d100Aconfig.js";
 import { RPC } from "../rpc.js";
 
 import { value_equals } from "../utils/value_equals.js";

@@ -15,11 +15,11 @@ export const createCustomChatMessage = async function (
     {
       rollMode: rollMode,
       author: game.user.id,
-      type: CONST.CHAT_MESSAGE_TYPES.CHAT,
+      style: CONST.CHAT_MESSAGE_STYLES.OTHER,
     },
     chatData
   );
-  chatData.content = await renderTemplate(chatTemplate, chatTemplateData);
+  chatData.content = await foundry.applications.handlebars.renderTemplate(chatTemplate, chatTemplateData);
   // Handle different roll modes
   ChatMessagePF.applyRollMode(chatData, chatData.rollMode);
 

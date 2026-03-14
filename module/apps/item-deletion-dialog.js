@@ -27,7 +27,7 @@ console.log("HERE--",html)
 
     static async show(itemName, containsItems, confirmationCallback) {
         ItemDeletionDialog.recursiveDelete = false;
-        const html = await renderTemplate("systems/Alternityd100/templates/apps/item-deletion-dialog.html", {
+        const html = await foundry.applications.handlebars.renderTemplate("systems/Alternityd100/templates/apps/item-deletion-dialog.html", {
             message: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DeleteConfirmationMessage", { itemName: itemName }),
             containsItems: containsItems,
             recursiveDelete: ItemDeletionDialog.recursiveDelete

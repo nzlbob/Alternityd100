@@ -1,5 +1,5 @@
 import { DiceSFRPG } from "../dice.js";
-import { SFRPG } from "../config.js";
+import { d100A } from "../d100Aconfig.js";
 
 /**
  * Helper class to handle the display of chatBox
@@ -62,8 +62,8 @@ export default class SFRPGCustomChatMessage {
             dataRoll: roll,
             rollType: data.rollType,
             rollNotes: data.htmlData?.find(x => x.name === "rollNotes")?.value,
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-            config: CONFIG.SFRPG,
+            type: "roll",
+            config: CONFIG.d100A || d100A,
             tokenImg: actor.data.token?.img || actor.img,
             actorId: actor.id,
             tokenId: this.getToken(actor),
@@ -113,7 +113,7 @@ export default class SFRPGCustomChatMessage {
         }
 
         options = foundry.utils.mergeObject(options, { rollContent });
-        const cardContent = await renderTemplate(templateName, options);        
+        const cardContent = await foundry.applications.handlebars.renderTemplate(templateName, options);        
         const rollMode = data.rollMode ? data.rollMode : game.settings.get('core', 'rollMode');
 
         // let explainedRollContent = rollContent;
@@ -127,8 +127,7 @@ export default class SFRPGCustomChatMessage {
             speaker: data.speaker,
             content: cardContent, //+ explainedRollContent + (options.additionalContent || ""),
             rollMode: rollMode,
-            roll: roll,
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+            rolls: [roll],
             sound: CONFIG.sounds.dice,
             rollType: data.rollType,
             flags: {}

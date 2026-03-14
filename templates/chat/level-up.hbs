@@ -29,7 +29,7 @@
     <div class="part">
         <h2>{{localize "PF1.LevelUp.Chat.FC.Header"}}</h2>
 
-        <span><i class="fas {{lookup config.favouredClassBonusIcons formData.fc.type}}"></i> {{localize formData.fc.label}}</span>
+        <span><i class="fas {{lookup (lookup config "favouredClassBonusIcons") formData.fc.type}}"></i> {{localize formData.fc.label}}</span>
     </div>
     {{/if}}
 

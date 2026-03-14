@@ -1,4 +1,4 @@
-<form class="{{cssClass}} flexcol" autocomplete="off">
+<div class="sheet-root {{cssClass}} flexcol">
 
     {{!-- Item Sheet Header --}}
     {{> "systems/Alternityd100/templates/items/parts/item-header.html"}}
@@ -18,33 +18,40 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            <h4 class="section-header first">{{ localize "SFRPG.ItemSheet.Header.DetailsHeader" }}</h4>
+            <h3 class="form-header">{{ localize "SFRPG.ItemSheet.Header.DetailsHeader" }}</h3>
+            <div class="divTable blueTable2">
+                <div class="divTableBody">
+                    <div class="divTableRow">
+                        <div class="divTableCell">
+                            {{!-- Equipment Status --}}
+                            <div class="form-group stacked">
+                                <label>{{ localize "SFRPG.Items.EquipmentStatus" }}</label>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="system.equipped" {{checked itemData.equipped}}/> {{ localize "SFRPG.Items.Equipped" }}
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="system.identified" {{checked itemData.identified}}/> {{ localize "SFRPG.Items.Identified" }}
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="system.attuned" {{checked itemData.attuned}}/> {{ localize "SFRPG.Items.Attuned" }}
+                                </label>
+                            </div>
 
-            {{!-- Equipment Status --}}
-            <div class="form-group stacked">
-                <label>{{ localize "SFRPG.Items.EquipmentStatus" }}</label>
-                <label class="checkbox">
-                    <input type="checkbox" name="system.equipped" {{checked itemData.equipped}}/> {{ localize "SFRPG.Items.Equipped" }}
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="system.identified" {{checked itemData.identified}}/> {{ localize "SFRPG.Items.Identified" }}
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" name="system.attuned" {{checked itemData.attuned}}/> {{ localize "SFRPG.Items.Attuned" }}
-                </label>
+                            <br />
+
+                            {{> "systems/Alternityd100/templates/items/parts/physical-item-details.html"}}
+
+                            <br />
+
+                            {{> "systems/Alternityd100/templates/items/parts/container-details.html" message="SFRPG.ItemSheet.Containers.ContainerTooltip"}}
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <br />
-
-            {{> "systems/Alternityd100/templates/items/parts/physical-item-details.html"}}
-
-            <br />
-
-            {{> "systems/Alternityd100/templates/items/parts/container-details.html" message="SFRPG.ItemSheet.Containers.ContainerTooltip"}}
         </div>
 
         {{!-- Modifiers Tab --}}
         {{> "systems/Alternityd100/templates/items/parts/item-modifiers.html"}}
 
     </section>
-</form>
+</div>

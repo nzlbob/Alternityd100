@@ -1,6 +1,6 @@
 import { ItemDeletionDialog } from "./item-deletion-dialog.js"
-import { ItemSFRPG } from "../item/item.js"
-import { ItemSheetSFRPG } from "../item/sheet.js"
+import { Itemd100A } from "../item/item.js"
+import { ItemSheetd100A } from "../item/d100ItemSheet.js"
 import { RPC } from "../rpc.js"
 
 export class ItemCollectionSheet extends DocumentSheet {
@@ -82,7 +82,7 @@ console.log("HERE--",html)
      */
     getData() {
         const data = super.getData();
-        data.config = CONFIG.SFRPG;
+        data.config = CONFIG.d100A;
         data.d100Aconfig = CONFIG.d100A;
         data.isCharacter = true;
         data.isOwner = game.user.isGM;
@@ -138,10 +138,10 @@ console.log("HERE--",html)
 
     async _render(...args) {
         await super._render(...args);
-
+/*
         if (this._tooltips === null) {
-            this._tooltips = tippy.delegate(`#${this.id}`, {
-                target: '[data-tippy-content]',
+            this._tooltips = xippy.delegate(`#${this.id}`, {
+                target: '[data-xippy-content]',
                 allowHTML: true,
                 arrow: false,
                 placement: 'top-start',
@@ -149,6 +149,7 @@ console.log("HERE--",html)
                 delay: [800, null]
             });
         }
+            */
     }
 
     processItemContainment(items, pushItemFn) {
@@ -211,7 +212,7 @@ console.log("HERE--",html)
         } else {
             let div = $(`<div class="item-summary">${chatData.description.value}</div>`);
             let props = $(`<div class="item-properties"></div>`);
-            chatData.properties.forEach(p => props.append(`<span class="tag" ${ p.tooltip ? ("data-tippy-content='" + p.tooltip + "'") : ""}>${p.name}</span>`));
+            chatData.properties.forEach(p => props.append(`<span class="tag" ${ p.tooltip ? ("data-tooltip ='" + p.tooltip + "'") : ""}>${p.name}</span>`));
 
             div.append(props);
             li.append(div.hide());
@@ -224,8 +225,8 @@ console.log("HERE--",html)
         const itemId = $(event.currentTarget).parents('.item').attr("data-item-id");
         const itemData = this.itemCollection.data.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
 
-        const item = new ItemSFRPG(itemData);
-        const sheet = new ItemSheetSFRPG(item);
+        const item = new Itemd100A(itemData);
+        const sheet = new ItemSheetd100A(item);
         sheet.options.submitOnChange = false;
         sheet.options.submitOnClose = false;
         sheet.options.editable = false;
@@ -294,7 +295,7 @@ console.log("HERE--",html)
         const labels = itemData.labels || {};
 
         // Rich text description
-        data.description.value = TextEditor.enrichHTML(data.description.value, htmlOptions);
+        data.description.value = foundry.applications.ux.TextEditor.implementation.enrichHTML(data.description.value, htmlOptions);
 
         // Item type specific properties
         const props = [];

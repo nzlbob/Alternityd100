@@ -1,22 +1,22 @@
-import { ActorSheetSFRPG } from "./base.js";
+//import { ActorSheetSFRPG } from "./base.js";
+import { d100ActorSheet } from "../../d100Actor-sheet.js";
 
-export class d100AActorSheetVehicle extends ActorSheetSFRPG {
+export class d100AActorSheetVehicle extends d100ActorSheet {
 
-    static get defaultOptions() {
-        return foundry.utils.mergeObject(super.defaultOptions, {
-            classes: ["Alternityd100", "sheet", "actor", "vehicle"],
-            width: 600,
-            height: 685
+    static get DEFAULT_OPTIONS() {
+        const base = super.DEFAULT_OPTIONS;
+        return foundry.utils.mergeObject(base, {
+            position: { width: 600, height: 685 },
+            window: { contentClasses: [...base.window.contentClasses, "vehicle"] }
         });
     }
 
-    get template() {
-        if (!game.user.isGM && this.actor.limited) return "systems/Alternityd100/templates/actors/vehicle-sheet-limited.html";
-        return "systems/Alternityd100/templates/actors/vehicle-sheet-full.html";
-    }
+        static PARTS = {
+            form: { template: 'systems/Alternityd100/templates/actors/vehicle-sheet-full.html' }
+        };
 
-   async getData() {
-        const data = super.getData();
+   async _prepareContext(options) {
+       const data = await super._prepareContext(options);
 
         let lvl = 1 //parseFloat(data.data.details.level || 0);
         let levels = { 0: "0", 0.25: "1/4", [1/3]: "1/3", 0.5: "1/2" };
@@ -25,7 +25,7 @@ export class d100AActorSheetVehicle extends ActorSheetSFRPG {
         this._getCrewData(data)
         this._getHangarBayData(data)
 // Encrich text editors
-data.enrichedDescription = await TextEditor.enrichHTML(this.actor.system.details.biography.value, {async: true});
+data.enrichedDescription = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.actor.system.details.biography.value, {async: true});
 
 
         return data;
@@ -130,46 +130,67 @@ console.log(data)
      *
      * @param {HTML} html The prepared HTML object ready to be rendered into the DOM
      */
+    _onRender(context, options) {
+        super._onRender?.(context, options);
+
+        if (!this.isEditable) return;
+
+        const root = this.element;
+        if (!root) return;
+
+        root.querySelectorAll('.crew-delete').forEach((el) => {
+            el.addEventListener('click', this._onRemoveFromCrew.bind(this));
+        });
+
+        const dragStartHandler = (event) => this._onDragCrewStart(event);
+        root.querySelectorAll('li.crew').forEach((li) => {
+            li.setAttribute('draggable', true);
+            li.addEventListener('dragstart', dragStartHandler, false);
+        });
+
+        root.querySelectorAll('.crew-list').forEach((li) => {
+            li.addEventListener('dragover', this._onCrewDragOver.bind(this), false);
+        });
+
+        root.querySelectorAll('li.crew-header').forEach((li) => {
+            li.addEventListener('dragenter', this._onCrewDragEnter, false);
+            li.addEventListener('dragleave', this._onCrewDragLeave, false);
+        });
+
+        root.querySelectorAll('.vehicle-system-action .roll-piloting').forEach((el) => {
+            el.addEventListener('click', (event) => this._onRollPilotingForSystem(event));
+        });
+        root.querySelectorAll('.item-detail .vehicle-system-activate').forEach((el) => {
+            el.addEventListener('click', (event) => this._onActivateVehicleSystem(event));
+        });
+        root.querySelectorAll('.item-detail .vehicle-system-deactivate').forEach((el) => {
+            el.addEventListener('click', (event) => this._onDeactivateVehicleSystem(event));
+        });
+
+        root.querySelectorAll('.vehicle-delete').forEach((el) => {
+            el.addEventListener('click', this._onRemoveFromHangarBar.bind(this));
+        });
+        root.querySelectorAll('.vehicle-view').forEach((el) => {
+            el.addEventListener('click', (event) => this._onActorView(event));
+        });
+
+        root.querySelectorAll('.passenger-view').forEach((el) => {
+            el.addEventListener('click', (event) => this._onActorView(event));
+        });
+
+        root.querySelectorAll('.passenger-action .passengerPilotingSkill').forEach((el) => {
+            el.addEventListener('click', (event) => this._onRollPassengerPilotingSkill(event));
+        });
+        root.querySelectorAll('.passenger-action .pilotPilotingSkill').forEach((el) => {
+            el.addEventListener('click', (event) => this._onRollPilotPilotingSkill(event));
+        });
+    }
+
     activateListeners(html) {
-console.log("HERE--",html)
-        super.activateListeners(html);
-
-        if (!this.options.editable) return;
-
-        // Crew Tab
-        html.find('.crew-delete').click(this._onRemoveFromCrew.bind(this));
-
-        let handler = ev => this._onDragCrewStart(ev);
-        html.find('li.crew').each((i, li) => {
-            li.setAttribute("draggable", true);
-            li.addEventListener("dragstart", handler, false);
-        });
-
-        html.find('.crew-list').each((i, li) => {
-            li.addEventListener("dragover", this._onCrewDragOver.bind(this), false);
-            // li.addEventListener("drop", this._onCrewDrop.bind(this), false);
-        });
-
-        html.find('li.crew-header').each((i, li) => {
-            li.addEventListener("dragenter", this._onCrewDragEnter, false);
-            li.addEventListener("dragleave", this._onCrewDragLeave, false);
-        });
-
-        // Systems Tan
-        html.find('.vehicle-system-action .roll-piloting').click(event => this._onRollPilotingForSystem(event));
-        html.find('.item-detail .vehicle-system-activate').click(event => this._onActivateVehicleSystem(event));
-        html.find('.item-detail .vehicle-system-deactivate').click(event => this._onDeactivateVehicleSystem(event));
-
-        // Hangar Tab
-        html.find('.vehicle-delete').click(this._onRemoveFromHangarBar.bind(this));
-        html.find('.vehicle-view').click(event => this._onActorView(event));
-
-        // Passanger Tab
-        html.find('.passenger-view').click(event => this._onActorView(event));
-
-        // Roll piloting skill for PC or NPC passengers
-        html.find('.passenger-action .passengerPilotingSkill').click(event => this._onRollPassengerPilotingSkill(event));
-        html.find('.passenger-action .pilotPilotingSkill').click(event => this._onRollPilotPilotingSkill(event));
+        // AppV2 no longer uses this; listeners are bound in _onRender.
+        ui.notifications?.warn?.(
+            "d100AActorSheetVehicle.activateListeners called - use _onRender(context, options) for AppV2."
+        );
     }
 
     /**
@@ -271,8 +292,9 @@ console.log("HERE--",html)
      */
     async _onVehicleDrop(event, data) {
         // event.preventDefault();
-
-        $(event.target).css('background', '');
+        if (event?.currentTarget?.style) {
+            event.currentTarget.style.background = "";
+        }
 
         if (!data.id) return false;
 
@@ -299,8 +321,9 @@ console.log("HERE--",html)
      */
     async x_onCrewDrop(event, data) {
         // event.preventDefault();
-
-        $(event.target).css('background', '');
+        if (event?.currentTarget?.style) {
+            event.currentTarget.style.background = "";
+        }
 
         const targetRole = event.target.dataset.role;
         if (!targetRole || !data.id) return false;
@@ -332,7 +355,9 @@ console.log("HERE--",html)
      * @param {Event} event The originating dragenter event
      */
     _onCrewDragEnter(event) {
-        $(event.target).css('background', "rgba(0,0,0,0.3)");
+        if (event?.currentTarget?.style) {
+            event.currentTarget.style.background = "rgba(0,0,0,0.3)";
+        }
     }
 
     /**
@@ -340,7 +365,9 @@ console.log("HERE--",html)
      * @param {Event} event The originating dragleave event
      */
     _onCrewDragLeave(event) {
-        $(event.target).css('background', '');
+        if (event?.currentTarget?.style) {
+            event.currentTarget.style.background = "";
+        }
     }
 
     /**
@@ -379,8 +406,9 @@ console.log("HERE--",html)
      */
     async _onRemoveFromHangarBar(event) {
         event.preventDefault();
-
-        const actorId = $(event.currentTarget).parents('.crew').data('actorId');
+        const crewElement = event.currentTarget.closest('.crew');
+        const actorId = crewElement?.dataset?.actorId;
+        if (!actorId) return null;
 
         if (!this.actor.data?.data?.hangarBay.actorIds) {
             return null;
@@ -400,8 +428,9 @@ console.log("HERE--",html)
      */
     async _onRemoveFromCrew(event) {
         event.preventDefault();
-
-        const actorId = $(event.currentTarget).parents('.crew').data('actorId');
+        const crewElement = event.currentTarget.closest('.crew');
+        const actorId = crewElement?.dataset?.actorId;
+        if (!actorId) return;
         this.actor.removeFromCrew(actorId);
     }
 
@@ -412,8 +441,9 @@ console.log("HERE--",html)
      */
     async _onActorView(event) {
         event.preventDefault();
-
-        const actorId = $(event.currentTarget).parents('.crew').data('actorId');
+        const crewElement = event.currentTarget.closest('.crew');
+        const actorId = crewElement?.dataset?.actorId;
+        if (!actorId) return;
         let actor = game.actors.get(actorId);
         actor.sheet.render(true);
     }
@@ -425,8 +455,9 @@ console.log("HERE--",html)
      */
     async _onRollPassengerPilotingSkill(event) {
         event.preventDefault();
-
-        const actorId = $(event.currentTarget).parents('.crew').data('actorId');
+        const crewElement = event.currentTarget.closest('.crew');
+        const actorId = crewElement?.dataset?.actorId;
+        if (!actorId) return;
         const role = this.actor.getCrewRoleForActor(actorId);
         const actor = game.actors.get(actorId);
 console.log(role,actorId,event,this,this.actor.system.attributes.speed.driveMod.value)
@@ -493,11 +524,11 @@ const options = { stepbonus: 0,
         };
 
         const template = `systems/Alternityd100/templates/chat/item-action-card.html`;
-        const html = await renderTemplate(template, templateData);
+        const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             content: html
         };
@@ -535,11 +566,11 @@ const options = { stepbonus: 0,
         };
 
         const template = `systems/Alternityd100/templates/chat/item-action-card.html`;
-        const html = await renderTemplate(template, templateData);
+        const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             content: html
         };

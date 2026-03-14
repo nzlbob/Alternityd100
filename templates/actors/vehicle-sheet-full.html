@@ -1,9 +1,8 @@
-<form class="flexcol {{cssClass}}" autocomplete="off">
+<main class="flexcol {{cssClass}}">
 
-    {{console this}}
     {{!-- Sheet Header --}}
-    <header class="sheet-header" style="font-family: serpentine">
-        <table class="hptable">
+    <header class="sheet-header">
+        <table class="vitals-table">
             <thead>
                 <tr>
 
@@ -30,7 +29,7 @@
 
 
                         <ul class="attributes flexrow">
-                            <li class="attribute health" data-tippy-content="{{ localize " SFRPG.HullPoints" }}<br />
+                            <li class="attribute health" data-tooltip="{{ localize " SFRPG.HullPoints" }}<br />
                             @attributes.hp.value<br />@attributes.hp.max">
                             <h4 class="attribute-name box-title">{{ localize "SFRPG.Durability" }}</h4>
                             <table class="statTable">
@@ -174,7 +173,7 @@
                         <td>{{system.attributes.hullPoints.max}}</td>
                     </tr>
                     -->
-                                        <tr data-tippy-content="laser-mass-psi-radar-thermal">
+                                        <tr data-tooltip="laser-mass-psi-radar-thermal">
                                             <td>{{localize "ECM"}}</td>
                                             <td colspan="2"> {{#each system.attributes.ECM as |res|}}
                                                 {{res.value}}
@@ -183,7 +182,7 @@
 
                                         </tr>
                                         <tr
-                                            data-tippy-content="{{system.attributes.resistance.tooltip}} (area-beam-bomb-mine-missile-projectile-special-torpedo)">
+                                            data-tooltip="{{system.attributes.resistance.tooltip}} (area-beam-bomb-mine-missile-projectile-special-torpedo)">
                                             <td>{{localize "RES"}}</td>
                                             <td colspan="2">
                                                 {{system.attributes.resistance.base}}
@@ -279,18 +278,28 @@
                     <td colspan="3">
 
 
-                        <div class="divTable crewTable">
+                        <div class="divTable durability-track durability-track--vehicle">
+
+                            <div class="divTableHeading">
+                                <div class="divTableRow">
+                                    <div class="divTableHead">
+                                        <div class="durability-track-header">
+                                            <div class="durability-track-header-left">
+                                                <button type="button" class="clickapplydamge tag" data-tooltip-direction="UP" data-tooltip="Apply Temp Damage">Apply Pending Damage</button>
+                                            </div>
+                                            <div class="durability-track-title">Vehicle Damage</div>
+                                            <div class="durability-track-header-right"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="divTableBody">
 
                                 {{#each status.durability as |category id|}}
 
                                 <div class="divTableRow">
-                                    {{#if (eq id "stu") }} 
-                                        
-                                        <div class="divTableCell"><button style="height: 26px;"  class="clickapplydamge" data-tooltip-direction="UP" data-tooltip="Apply Temp Damage" >{{ localize "d100A.stun"}}</button></div>
-                                        
-                                        {{/if}}
+                                    {{#if (eq id "stu") }}<div class="divTableCell" data-tooltip="{{ localize "d100A.DamageTypeTooltip.Stun" }}">{{ localize "d100A.stun"}}</div> {{/if}}
                                     {{#if (eq id "wou") }}<div class="divTableCell" data-tooltip="{{ localize "
                                         d100A.DamageTypeTooltip.Wound" }}">{{ localize "d100A.wound"}}</div> {{/if}}
                                     {{#if (eq id "mor") }}<div class="divTableCell" data-tooltip="{{ localize "
@@ -405,11 +414,7 @@
                         <div class="form-group">
                             <label>{{ localize "Pilot Skill" }}</label>
                             <select name="system.attributes.controlSkill">
-                                {{#select system.attributes.controlSkill}}
-                                {{#each d100Aconfig.pilotingSkills as |name type|}}
-                                <option value="{{type}}">{{localize name}}</option>
-                                {{/each}}
-                                {{/select}}
+                                {{selectOptions d100Aconfig.pilotingSkills selected=system.attributes.controlSkill localize=true}}
                             </select>
 
                            <div class="item-name flexrow {{#if (not disableRolling)}}rollable{{/if}}">
@@ -485,11 +490,7 @@
                             <label>{{ localize "SFRPG.VehicleSheet.Details.OtherAttributes.Cover" }}</label>
                             <div class="form-fields">
                                 <select name="system.attributes.cover">
-                                    {{#select system.attributes.cover}}
-                                    {{#each config.vehicleCoverTypes as |cover c|}}
-                                    <option value="{{c}}">{{cover}}</option>
-                                    {{/each}}
-                                    {{/select}}
+                                    {{selectOptions d100Aconfig.vehicleCoverTypes selected=system.attributes.cover}}
                                 </select>
                             </div>
                         </div>
@@ -532,7 +533,9 @@
             <ol class="inventory-list">
                 {{#each inventory as |section sid|}}
                 <li class="inventory-header flexrow">
-                    <h3 class="item-name flexrow">{{section.label}}</h3>
+                    <div class="item-name flexrow" role="heading" aria-level="3">
+                        <div class="inventory-section-heading">{{section.label}}</div>
+                    </div>
                     {{#if ../isOwner}}
                     <div class="item-controls">
                         {{#if section.allowAdd}}
@@ -651,7 +654,8 @@
             target="system.details.description.value"
             button=true
             editable=editable
+            engine="prosemirror"
             }}
         </div>
     </section>
-</form>
+</main>

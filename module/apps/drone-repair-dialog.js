@@ -35,7 +35,7 @@ console.log("HERE--",html)
 
     static async droneRepairDialog({actor, improvedRepairFeat=false}={}) {
         DroneRepairDialog.restoreStaminaPoints = false;
-        const html = await renderTemplate("systems/Alternityd100/templates/apps/drone-repair.html");
+        const html = await foundry.applications.handlebars.renderTemplate("systems/Alternityd100/templates/apps/drone-repair.html");
         return new Promise(resolve => {
             const dlg = new this(actor, {
                 title: game.i18n.format("SFRPG.RepairDroneDialogTitle"),

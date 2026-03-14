@@ -39,10 +39,11 @@
 {{/if}}
 
 {{#if formula}}
-<div class="dice-roll">
+<div class="dice-roll" data-action="expandRoll">
   <div class="dice-result">
-      <h4 class="dice-total{{#if isNat20}} natural-20{{/if}}{{#if isCrit}} critical-threat success{{/if}}{{#if isFumble}} failure{{/if}}">{{total}}</h4>
+      <div class="dice-formula">{{formula}}</div>
       {{{tooltip}}}
+      <h4 class="dice-total{{#if isNat20}} natural-20{{/if}}{{#if isCrit}} critical-threat success{{/if}}{{#if isFumble}} failure{{/if}}">{{total}}</h4>
   </div>
 </div>
 

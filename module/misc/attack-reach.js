@@ -209,8 +209,8 @@ export const addReachCallback = async function (data, html) {
   // Add 'click' event as a safeguard to remove highlights
   // html.on("click", mouseLeaveCallback);
 
-  // Clear highlights when chat messages are rendered
-  Hooks.on("renderChatMessage", () => {
+  // Clear highlights when chat messages are rendered (v13+: renderChatMessageHTML)
+  Hooks.on("renderChatMessageHTML", () => {
     if (!highlight) return;
 
     highlight.normal.clear(true);
@@ -354,7 +354,7 @@ const shouldAddReachSquare = function (
 
 export const measureReachDistance = function (p0, p1, alt = false) {
   const gs = canvas.dimensions.size,
-    ray = new Ray(p0, p1),
+    ray = new foundry.canvas.geometry.Ray(p0, p1),
     nx = Math.abs(Math.ceil(ray.dx / gs)),
     ny = Math.abs(Math.ceil(ray.dy / gs));
 

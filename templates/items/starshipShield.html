@@ -1,4 +1,4 @@
-<form class="{{cssClass}} flexcol" autocomplete="off">
+<div class="sheet-root {{cssClass}} flexcol">
 
     {{!-- Item Sheet Header --}}
     {{> "systems/Alternityd100/templates/items/parts/item-header.html"}}
@@ -17,59 +17,66 @@
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
+            <h3 class="form-header">{{ localize "SFRPG.Details" }}</h3>
+            <div class="divTable starship-item-details-table">
+                <div class="divTableBody">
+                    <div class="divTableRow">
+                        <div class="divTableCell starship-item-details-common">
+                            {{> "systems/Alternityd100/templates/items/parts/starship-component-common.html" this}}
+                        </div>
+                        <div class="divTableCell starship-item-details-specific">
+                            <h4 class="section-header first">{{ localize (append "TYPES.Item." item.type) }} Properties</h4>
 
-            {{!-- Common component data --}}
-            {{> "systems/Alternityd100/templates/items/parts/starship-component.html" this}}
+                            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipShield.ShieldType" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipShield.ShieldTypeTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipShield.ShieldType" }}</label>
+                                <div class="form-fields">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="system.isDeflector" {{checked itemData.isDeflector}}/> {{ localize "SFRPG.ItemSheet.StarshipShield.IsDeflector" }}
+                                    </label>
+                                </div>
+                            </div>
 
-            <h4 class="section-header first">{{ localize "SFRPG.ItemSheet.StarshipShield.Header" }}</h4>
+                            {{#if itemData.isDeflector}}
+                            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipShield.defenceValue" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipShield.defenceValueTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipShield.defenceValue" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.defenceValue" value="{{itemData.defenceValue}}" data-dtype="Number" placeholder="0" />
+                                </div>
+                            </div>
 
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipShield.ShieldType" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipShield.ShieldTypeTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipShield.ShieldType" }}</label>
-                <div class="form-fields">
-                    <label class="checkbox">
-                        <input type="checkbox" name="system.isDeflector" {{checked itemData.isDeflector}}/> {{ localize "SFRPG.ItemSheet.StarshipShield.IsDeflector" }}
-                    </label>
+                            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipShield.ArmorBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipShield.ArmorBonusTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipShield.ArmorBonus" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.armorBonus" value="{{itemData.armorBonus}}" data-dtype="Number" placeholder="0" />
+                                </div>
+                            </div>
+
+                            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipShield.TargetLockBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipShield.TargetLockBonusTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipShield.TargetLockBonus" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.targetLockBonus" value="{{itemData.targetLockBonus}}" data-dtype="Number" placeholder="0" />
+                                </div>
+                            </div>
+                            {{else}}
+                            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipShield.ShieldPoints" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipShield.ShieldPointsTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipShield.ShieldPoints" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.shieldPoints" value="{{itemData.shieldPoints}}" data-dtype="Number" placeholder="0" />
+                                </div>
+                            </div>
+
+                            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipShield.Regeneration" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipShield.RegenerationTooltip" }}">
+                                <label>{{ localize "SFRPG.ItemSheet.StarshipShield.Regeneration" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.regeneration" value="{{itemData.regeneration}}" data-dtype="Number" placeholder="0" />
+                                </div>
+                            </div>
+                            {{/if}}
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            {{#if itemData.isDeflector}}
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipShield.defenceValue" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipShield.defenceValueTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipShield.defenceValue" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.defenceValue" value="{{itemData.defenceValue}}" data-dtype="Number" placeholder="0" />
-                </div>
-            </div>
-
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipShield.ArmorBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipShield.ArmorBonusTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipShield.ArmorBonus" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.armorBonus" value="{{itemData.armorBonus}}" data-dtype="Number" placeholder="0" />
-                </div>
-            </div>
-
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipShield.TargetLockBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipShield.TargetLockBonusTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipShield.TargetLockBonus" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.targetLockBonus" value="{{itemData.targetLockBonus}}" data-dtype="Number" placeholder="0" />
-                </div>
-            </div>
-            {{else}}
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipShield.ShieldPoints" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipShield.ShieldPointsTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipShield.ShieldPoints" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.shieldPoints" value="{{itemData.shieldPoints}}" data-dtype="Number" placeholder="0" />
-                </div>
-            </div>
-
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipShield.Regeneration" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipShield.RegenerationTooltip" }}">
-                <label>{{ localize "SFRPG.ItemSheet.StarshipShield.Regeneration" }}</label>
-                <div class="form-fields">
-                    <input type="text" name="system.regeneration" value="{{itemData.regeneration}}" data-dtype="Number" placeholder="0" />
-                </div>
-            </div>
-            {{/if}}
-
         </div>
 
     </section>
-</form>
+</div>

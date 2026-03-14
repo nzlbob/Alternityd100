@@ -1,95 +1,108 @@
 {{#if isShip }}
 {{#unless isUseWarshipsOptions}}
-<div class="divTable crewTable">
-    
+<div class="divTable durability-track">
+
     <div class="divTableRow">
         <div class="divTableCell">
 
 
-            <div class="divTable crewTable">
+            <div class="divTable durability-track">
                 <div class="divTableHeading">
-                <div class="divTableRow">
-                <div class="divTableHead">Compartment</div>
-                <div class="divTableHead">Durability</div>
-            
-            
-                </div>
+                    <div class="divTableRow">
+                        <div class="divTableHead">Compartment</div>
+                        <div class="divTableHead">Durability</div>
+
+
+                    </div>
                 </div>
                 <div class="divTableBody">
                     {{#each actor.system.compartment.compartments as |compartment id|}}
-            
+
                     <div class="divTableRow">
-                    <div class="divTableCell">{{compartment.name}}</div>
-                    <div class="divTableCell">
-                        fjhgfgh
-                        <input class="setCompartmentDur"  name="" type="number" value="{{compartment.value}}"
-                            data-dtype="Number" data-compart="{{id}}1" data-category="{{id}}2" data-compart="{{id}}3" data-position="{{id}}" placeholder="10" />
+                        <div class="divTableCell">{{compartment.name}}</div>
+                        <div class="divTableCell">
+                            fjhgfgh
+                            <input class="setCompartmentDur" name="" type="number" value="{{compartment.value}}"
+                                data-dtype="Number" data-compart="{{id}}1" data-category="{{id}}2"
+                                data-compart="{{id}}3" data-position="{{id}}" placeholder="10" />
 
 
-                    </div>
+                        </div>
                     </div>
                     {{/each}}
-                    
 
-            
-                    </div>
 
-            </div> 
+
+                </div>
+
+            </div>
         </div>
         <div class="divTableCell">
 
-<div class="divTable crewTable">
-    <div class="divTableHeading">
-    <div class="divTableRow">
-    <div class="divTableHead">head2</div>
-    <div class="divTableHead">SHIPS STATUS</div>
+            <div class="divTable durability-track">
+                <div class="divTableHeading">
+                    <div class="divTableRow">
+                        <div class="divTableHead">head2</div>
+                        <div class="divTableHead">SHIPS STATUS</div>
 
 
+                    </div>
+                </div>
+                <div class="divTableBody">
+
+                    <div class="divTableRow">
+                        <div class="divTableCell">Ship Summary</div>
+                        <div class="divTableCell"></div>
+
+                    </div>
+                    <div class="divTableRow">
+                        <div class="divTableCell">Price</div>
+                        <div class="divTableCell"
+                            data-tooltip-direction="UP"
+                            data-tooltip="<strong>Price</strong><hr>{{#each actor.system.details.price.tooltip as |t|}}{{t}}<br/>{{/each}}">
+                            {{actor.system.details.price.value}}
+                        </div>
+
+                    </div>
+                    <div class="divTableRow">
+                        <div class="divTableCell"></div>
+                        <div class="divTableCell"></div>
+
+                    </div>
+                    <div class="divTableRow">
+                        <div class="divTableCell"></div>
+                        <div class="divTableCell"></div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
     </div>
-    </div>
-    <div class="divTableBody">
-
-            <div class="divTableRow">
-            <div class="divTableCell"></div>
-            <div class="divTableCell"></div>
-
-            </div>
-            <div class="divTableRow">
-                <div class="divTableCell"></div>
-                <div class="divTableCell"></div>
-
-            </div>
-            <div class="divTableRow">
-                <div class="divTableCell"></div>
-                <div class="divTableCell"></div>
-
-            </div>
-            <div class="divTableRow">
-                <div class="divTableCell"></div>
-                <div class="divTableCell"></div>
-
-            </div>
-            </div>
-    </div> 
-
-
-</div>
-</div>
 </div>
 {{/unless}}
 
-<div style="flex-wrap:wrap; display: flex; font-size: 13px; text-align: center; "  >
 
-    {{#each actor.system.compartment.compartments as |compartment| }}
-   
-{{#if compartment.overload}}
-<div style="width:24% ; margin: 2px; background-color: rgb(187, 94, 82); text-align: center; " > {{compartment.name}} <br> {{compartment.curHull}}/{{compartment.maxHull}} BHP</div>
-{{else}}
-<div style="width:24% ; margin: 2px; background-color: rgb(0, 255, 191); text-align: center;  " > {{compartment.name}} <br> {{compartment.curHull}}/{{compartment.maxHull}} BHP</div>
 
-{{/if}}
+<div class="compartment-summary compartment-layout">
 
-{{/each}}
+    {{#each @root.compartTableRot as |row|}}
+    <div class="compartment-layout-row">
+        {{#each row as |col|}}
+        {{#if col.isBlank}}
+        <div class="compartment-layout-cell is-blank"></div>
+        {{else}}
+        <div class="compartment-card {{#if col.overload}}is-overload{{else}}is-normal{{/if}}"
+            data-tooltip-direction="UP"
+            data-tooltip="<strong>{{col.name}}</strong><br><span>{{col.curHull}}/{{col.maxHull}} BHP</span><hr>{{#if col.systems.length}}<ul class='ctt-list'>{{#each col.systems as |system|}}<li>{{system.name}}</li>{{/each}}</ul>{{else}}<em>empty</em>{{/if}}">
+            <div class="compartment-name">{{col.name}}</div>
+            <div class="compartment-hull">{{col.curHull}}/{{col.maxHull}} BHP</div>
+        </div>
+        {{/if}}
+        {{/each}}
+    </div>
+    {{/each}}
 
 </div>
 
@@ -107,9 +120,11 @@
 {{/unless}}
 
 <ol class="inventory-list">
-{{#each sections as |section sid|}}
+    {{#each sections as |section sid|}}
     <li class="inventory-header flexrow">
-        <h3 class="item-name flexrow">{{section.label}}</h3>
+        <div class="item-name flexrow" role="heading" aria-level="3">
+            <div class="inventory-section-heading">{{section.label}}</div>
+        </div>
 
         {{#if section.hasActions}}
         <div class="item-detail item-uses">{{localize "SFRPG.FeaturesCharges"}}</div>
@@ -119,7 +134,8 @@
         {{#if ../isOwner}}
         <div class="item-controls">
             {{#if section.dataset.type}}
-            <a style="flex-basis:45px" class="item-control item-create" title="Create Item" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+            <a style="flex-basis:45px" class="item-control item-create" title="Create Item" {{#each section.dataset as
+                |v k|}}data-{{k}}="{{v}}" {{/each}}>
                 <i class="fas fa-plus"></i> {{localize "SFRPG.FeaturesAdd"}}
             </a>
             {{/if}}
@@ -128,10 +144,16 @@
     </li>
 
     <ol class="item-list">
-    {{#each section.items as |item iid|}}
-        {{> "systems/Alternityd100/templates/actors/parts/actor-features-item.html" ../../this section=section item=item}}
+        {{#each section.items as |item iid|}}
+        {{> "systems/Alternityd100/templates/actors/parts/actor-features-item.html" ../../this section=section
+        item=item}}
 
-    {{/each}}
+        {{/each}}
     </ol>
-{{/each}}
+    {{/each}}
 </ol>
+<div class="divTableCell"
+                            data-tooltip-direction="UP"
+                            data-tooltip="<strong>Price</strong><hr>{{#each actor.system.details.price.tooltip as |t|}}{{t}}<br/>{{/each}}">
+                           Ship Cost: {{actor.system.details.price.value}}
+                        </div>

@@ -1,4 +1,4 @@
-<form class="{{cssClass}} flexcol" autocomplete="off">
+<div class="sheet-root {{cssClass}} flexcol">
 
     {{!-- Item Sheet Header --}}
     {{> "systems/Alternityd100/templates/items/parts/item-header.html"}}
@@ -16,21 +16,28 @@
 
         <div class="tab details" data-tab="details" data-group="primary">
             <h3 class="form-header">{{ localize "SFRPG.Items.Magic.Details" }}</h3>
-            
-            {{!-- Equipment Status --}}
-            {{> "systems/Alternityd100/templates/items/parts/item-status.html"}}
+            <div class="divTable blueTable2">
+                <div class="divTableBody">
+                    <div class="divTableRow">
+                        <div class="divTableCell">
+                            {{!-- Equipment Status --}}
+                            {{> "systems/Alternityd100/templates/items/parts/item-status.html"}}
 
-            <br />
+                            <br />
 
-            {{> "systems/Alternityd100/templates/items/parts/item-capacity.html"}}
+                            {{> "systems/Alternityd100/templates/items/parts/item-capacity.html"}}
 
-            <br />
+                            <br />
 
-            {{> "systems/Alternityd100/templates/items/parts/physical-item-details.html"}}
+                            {{> "systems/Alternityd100/templates/items/parts/physical-item-details.html"}}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         {{!-- Modifiers Tab --}}
         {{> "systems/Alternityd100/templates/items/parts/item-modifiers.html"}}
 
     </section>
-</form>
+</div>

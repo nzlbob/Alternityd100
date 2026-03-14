@@ -2,12 +2,7 @@
     <div class="form-group spellcasting-ability">
         <label><h3>{{localize "SFRPG.SpellBook.SpellCastingAbility"}} <a class="item-control spell-browse" title="{{localize "SFRPG.SpellBook.Browse"}}" data-type="spell" data-level="0" data-location="{{entry._id}}"> - <i class="fas fa-search"></i>{{localize "SFRPG.SpellBook.SearchSpell"}}</a></h3></label>
         <select name="system.attributes.spellcasting" data-type="String">
-            {{#select system.attributes.spellcasting}}
-            <option value="">{{localize "SFRPG.SpellBook.AttributesNone"}}</option>
-            {{#each system.abilities as |abl a|}}
-            <option value="{{a}}">{{abl.label}}</option>
-            {{/each}}
-            {{/select}}
+            {{ selectOptions d100Aconfig.abilities selected=system.attributes.spellcasting blank=(localize "SFRPG.SpellBook.AttributesNone") }}
         </select>
     </div>
 </div>
@@ -16,7 +11,7 @@
 {{#each spellbook as |section|}}
     <li class="item flexrow inventory-header spellbook-header">
         <div class="item-name flexrow">
-            <h3>{{localize section.label}}</h3>
+            <div class="inventory-section-heading" role="heading" aria-level="3">{{localize section.label}}</div>
         </div>
 
         <div class="spell-slots fit-classes">
@@ -68,7 +63,7 @@
 
             <div class="spell-comps">
                 {{#if item.system.concentration }}
-                <span class="spell-component" data-tippy-content="<strong>{{ localize "SFRPG.Items.Spell.Concentration" }}</strong><br>{{ localize "SFRPG.Items.Spell.ConcentrationTooltip" }}">C</span>
+                <span class="spell-component" data-tooltip="<strong>{{ localize "SFRPG.Items.Spell.Concentration" }}</strong><br>{{ localize "SFRPG.Items.Spell.ConcentrationTooltip" }}">C</span>
                 {{/if}}
             </div>
             <div class="spell-school">{{localize labels.school}}</div>

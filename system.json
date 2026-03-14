@@ -2,7 +2,7 @@
   "id": "Alternityd100",
   "title": "Alternity by d100",
   "description": "This is a draft implementation of the Alternity RPG Rules (c) 1998 TSR Inc. There are lots of features yet to implement. Work is continuing",
-  "version": "0.630",
+  "version": "0.631",
   "compatibility": {
     "minimum": "13",
     "verified": "13",
@@ -15,8 +15,8 @@
     }
   ],
   "scripts": [
-    "lib/popperjs/core/popper.min.js",
-    "lib/tippy/tippy.min.js"
+ 
+
   ],
   "media": [
     {
@@ -39,20 +39,43 @@
     "module/d100alternity.js"
   ],
   "styles": [
-
-"styles/d100alternity.css"
+    "styles/d100alternity.css"
   ],
   "packFolders": [
     {
       "name": "Game Options",
       "packs": [
         "starship-damage",
-        "starship-actions"
+        "starship-actions",
+        "vtt-implementation",
+        "macros"
       ],
       "color": "#19d6b7"
     }
   ],
   "packs": [
+
+    {
+      "label": "VTT Implementation",
+      "type": "JournalEntry",
+      "name": "vtt-implementation",
+      "system": "Alternityd100",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "label": "Macros",
+      "type": "Macro",
+      "name": "macros",
+      "system": "Alternityd100",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+
     {
       "label": "Starship Actions",
       "type": "Item",

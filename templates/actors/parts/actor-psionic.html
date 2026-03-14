@@ -1,30 +1,27 @@
 <div class="inventory-filters spellbook-filters">
     <div class="form-group spellcasting-ability">
-        <label><h3>{{localize "Broad Psionic Skills"}} </h3></label>
-        
-        {{#each d100Aconfig.psionBroadSkill as |name prop|}}
-      
-        <input type="checkbox" name="system.psionics.{{prop}}"  {{checked (lookup ../systemData.psionics prop)}} /> {{ localize name.name }}
+        <div class="psionics-filter-left">
+            <div class="psionics-filter-heading inventory-section-heading" role="heading" aria-level="3">{{localize "Broad Psionic Skills"}}</div>
+            
+            {{#each d100Aconfig.psionBroadSkill as |name prop|}}
+            <label class="psionics-filter-toggle" data-tooltip="{{localize name.tooltip}}">
+                <input type="checkbox" name="system.psionics.{{prop}}" data-dtype="Boolean" {{checked (lookup ../systemData.psionics prop)}} />
+                <span>{{ localize name.name }}</span>
+            </label>
+            {{/each}}
+        </div>
 
-
-        {{/each}}   
-
-        <label><h3 data-tooltip="<h4>Action Energy Lost </h4><p>Critical Failure 3</p><p>Broad Skill 2</p><p>Specialty Skill 1</p> " >{{localize "Psionic Energy"}} </h3></label>
-        
-    
-            <input class="spellRank"   type="number" class="skill-ranks" data-tooltip="Current" name="system.psionics.value"
+        <div class="psionics-filter-right">
+            <div class="psionics-filter-heading inventory-section-heading" role="heading" aria-level="3" data-tooltip="<h4>Action Energy Lost </h4><p>Critical Failure 3</p><p>Broad Skill 2</p><p>Specialty Skill 1</p>">{{localize "Psionic Energy"}}</div>
+            <input class="spellRank skill-ranks" type="number" data-tooltip="Current" name="system.psionics.value"
             value="{{systemData.psionics.value}}" data-id="{{item.id}}" /> 
-            <input class="spellRank"  type="number" class="skill-ranks" data-tooltip="Maximum" name="system.psionics.max"
+            <input class="spellRank skill-ranks" type="number" data-tooltip="Maximum" name="system.psionics.max"
             value="{{systemData.psionics.max}}" data-id="{{item.id}}" /> 
+        </div>
 
     </div>
     
-</div>
-{{console this}}
-
-
-
-
+ </div>
 
 <ol class="inventory-list">
 {{#each psionics as |section key|}}
@@ -33,7 +30,7 @@
 
     <li class="item flexrow inventory-header spellbook-header">
         <div class="item-name flexrow" data-tooltip = "{{localize section.tooltip}}">
-            <h3>{{localize section.label}}</h3> {{section.score}} 
+            <div class="inventory-section-heading" role="heading" aria-level="3">{{localize section.label}}</div> {{section.score}} 
         </div>
 
 
@@ -76,7 +73,7 @@
 
             <div class="spell-comps">
                 {{#if item.system.concentration }}
-                <span class="spell-component" data-tippy-content="<strong>{{ localize "SFRPG.Items.Spell.Concentration" }}</strong><br>{{ localize "SFRPG.Items.Spell.ConcentrationTooltip" }}">C</span>
+                <span class="spell-component" data-tooltip="<strong>{{ localize "SFRPG.Items.Spell.Concentration" }}</strong><br>{{ localize "SFRPG.Items.Spell.ConcentrationTooltip" }}">C</span>
                 {{/if}}
             </div>
            

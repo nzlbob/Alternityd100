@@ -1,136 +1,69 @@
-import { SFRPG } from "../../config.js"
 import { d100A } from "../../d100Aconfig.js"
 import { d100ActorSheet } from "../../d100Actor-sheet.js";
 import {ATTRIBUTE_TYPES} from "../../constants.js";
 import { EntitySheetHelper } from "../../helper.js";
 import { computeCompoundBulkForItem } from "../actor-inventory-utils.js"
+
+const SFRPG = d100A;
+
 /**
- * An Actor sheet for NPC type characters in the SFRPG system.
+ * An Actor sheet for NPC type characters in the Alternity system.
  * 
- * Extends the base ActorSheetSFRPG class.
- * @type {ActorSheetSFRPG}
+ * Extends the base d100ActorSheet class.
+ * @type {d100ActorSheet}
  */
 export class d100AActorSheetNPC extends d100ActorSheet {
-    static get defaultOptions() {
-        const options = super.defaultOptions;
-        foundry.utils.mergeObject(options, {
-            classes: options.classes.concat(["Alternityd100", "sheet", "actor", 'npc']),
-            width: 720,
-            height: 765
-        });
-
-        return options;
+    static get DEFAULT_OPTIONS() {
+        const base = super.DEFAULT_OPTIONS;
+        return foundry.utils.mergeObject(base, {
+            position: { width: 720, height: 765 },
+            window: { contentClasses: [...base.window.contentClasses, "npc"] }
+        }, { inplace: false, overwrite: true });
     }
 
-    get template() {
-        const path = "systems/Alternityd100/templates/actors/";
-        if (!game.user.isGM && this.actor.limited) return path + "limited-sheet.html";
-        return path + "npc-sheet.html";
-    }
+        static PARTS = {
+            form: { template: 'systems/Alternityd100/templates/actors/npc-sheet.html' }
+        };
 
     /** @override */
-    activateListeners(html) {
-console.log("HERE--",html)
-        super.activateListeners(html);
-        
-        html.find('.reload').click(this._onReloadWeapon.bind(this));
-        //html.find('#add-skills').click(this._toggleSkills.bind(this));
+    _onRender(context, options) {
+        super._onRender?.(context, options);
+
+        const root = this.element;
+        if (!root) return;
+
+        root.querySelectorAll('.reload').forEach((el) => {
+            el.addEventListener('click', this._onReloadWeapon.bind(this));
+        });
     }
 
-  async  getData() {
-       // const data = super.getData();
+    activateListeners(html) {
+        // AppV2 no longer uses this; listeners are bound in _onRender.
+        ui.notifications?.warn?.(
+            "d100AActorSheetNPC.activateListeners called - use _onRender(context, options) for AppV2."
+        );
+    }
 
-       // let cr = parseFloat(data.details.cr || 0);
-       // let crs = { 0: "0", 0.125: "1/8", [1/6]: "1/6", 0.25: "1/4", [1/3]: "1/3", 0.5: "1/2" };
-       // data.labels["cr"] = cr >= 1 ? String(cr) : crs[cr] || 1;
-       const context = super.getData();
-       const isOwner = this.document.isOwner;
-       //EntitySheetHelper.getAttributeData(context.data);
-       context.shorthand = !!game.settings.get("Alternityd100", "macroShorthand");
-   
-       //const isOwner = this.document.isOwner;
-       const data2 = foundry.utils.duplicate(this.actor.system);
-      
-       data2.attributes = context.document.system.attributes;
-       //console.log(this,context)
-       
-           
-           context.actor = this.actor;
-           context.system = data2;
-           context.isOwner = isOwner;
-           context.isGM = game.user.isGM;
-           context.limited = this.object.limited;
-           context.options = this.options;
-           context.editable = this.isEditable;
-           context.cssClass = isOwner ? "editable"  : "locked";
-           context.isCharacter = this.object.type === "character";
-           context.isShip = this.object.type === 'starship';
-           context.isVehicle = this.object.type === 'vehicle';
-           context.isDrone = this.object.type === 'drone';
-           context.isNPC = this.object.type === 'npc';
-           context.isHazard = this.object.type === 'hazard';
-           context.config = CONFIG.SFRPG;
-           context.d100Aconfig =CONFIG.d100A;
-           context.shorthand  = !!game.settings.get("Alternityd100", "macroShorthand");
-           context.systemData  = context.document.system;
-           //systemData  = this.document.system;
-           context.testvalue  = {name:this.actor.token?.inCombat, type: "Thing"};
-           context.dtypes  = ATTRIBUTE_TYPES;
-           context.professions=[]
-           for(let [k,v] of Object.entries(d100A.npc.abilityBasis)){
-            context.professions.push(k)
+    async _prepareContext(options) {
+        const context = await super._prepareContext(options);
 
-           }
-           context.npcQuality=d100A.npc.npcQuality
+        context.shorthand = !!game.settings.get("Alternityd100", "macroShorthand");
+        context.testvalue = { name: this.actor.token?.inCombat, type: "Thing" };
 
+        context.dtypes = ATTRIBUTE_TYPES;
+        context.professions = d100A?.npc?.npcType;
+        context.npcQuality = d100A?.npc?.npcQuality;
 
-                     
-    
-    
-       context.items = this.actor.items.map(i => {
-           i.system.labels = i.labels;
-           return i.system;
-       });
-       context.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
-       context.labels = this.actor.labels || {};
-       context.filters = this._filters;
-       //console.log(data2,"\n",context,"\n",this);
-      // if (!data.data?.details?.biography?.fullBodyImage)
-   
-   
-      //console.log("THIS ACTOR--------------------",data, context );
-   
-   // Not sure if this does anything
-   
-      EntitySheetHelper.getAttributeData(data2);
-       this._prepareItems(context);
-
-       context.enrichedBiography = await TextEditor.enrichHTML(this.object.system.details.biography.value, {async: true});
-       context.enrichedGMNotes = await TextEditor.enrichHTML(this.object.system.details.biography.gmNotes, {async: true});
-/*
-       data3.status = {}
-       data3.status = {"durability":{"stu":{"good":[],"bad":[]},"wou":{"good":[],"bad":[]},"mor":{"good":[],"bad":[]}}}
-       data3.statusd = "fdgsdfg"
-       data3.status.image = {"bad": "systems/Alternityd100/icons/conditions/alt_bad2.png","good": "systems/Alternityd100/icons/conditions/alt_good1.png" }
-     // console.log(this)
-       // load the main 
-       for ( let [k, v] of Object.entries(data3.status.durability) ) {
-      // for (const [v,k] of data.status.durability) {
-       for (let i = 0; i < this.actor.system?.attributes[k].max;i++)
-       {
-           //console.log(this.actor.system?.attributes[k].value,k,v,i)
-           if (this.actor.system?.attributes[k].value > i ) v.good.push({"value":i,"title":i-this.actor.system?.attributes[k].value});
-           else v.bad.push({"value":i,"title":i-this.actor.system?.attributes[k].value+1});
-
-       }
+        try {
+            EntitySheetHelper.getAttributeData(context.system);
+        } catch (_e) {
+            // ignore
         }
 
-*/
+        context.enrichedBiography = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.object.system.details.biography.value, { async: true });
+        context.enrichedGMNotes = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.object.system.details.biography.gmNotes, { async: true });
 
-
-     //  console.log("This Sheet\n",  this)
-       return context;
-        //return data;
+        return context;
     }
 
     /**
@@ -315,15 +248,15 @@ console.log("HERE--",html)
               let inventoryValue = Math.floor(totalValue);
       
               const features = {
-                  classes: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Classes"), items: [], hasActions: false, dataset: { type: "class" }, isClass: true },
+                 // classes: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Classes"), items: [], hasActions: false, dataset: { type: "class" }, isClass: true },
                   race: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Race"), items: [], hasActions: false, dataset: { type: "race" }, isRace: true },
                   perk: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Perk"), items: [], hasActions: false, dataset: { type: "perk" }, isPerk: true },
                   flaw: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Flaw"), items: [], hasActions: false, dataset: { type: "flaw" }, isFlaw: true },
                   achievement: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Achievement"), items: [], hasActions: false, dataset: { type: "achievement" }, isAchievement: true },
                   //asi: { label: game.i18n.format("SFRPG.Items.Categories.AbilityScoreIncrease"), items: asis, hasActions: false, dataset: { type: "asi" }, isASI: true },
-                  archetypes: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Archetypes"), items: [], dataset: { type: "archetypes" }, isArchetype: true },
-                  active: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActiveFeats"), items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" } },
-                  passive: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.PassiveFeats"), items: [], hasActions: false, dataset: { type: "feat" } },
+               //   archetypes: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.Archetypes"), items: [], dataset: { type: "archetypes" }, isArchetype: true },
+                //  active: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActiveFeats"), items: [], hasActions: true, dataset: { type: "feat", "activation.type": "action" } },
+               //   passive: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.PassiveFeats"), items: [], hasActions: false, dataset: { type: "feat" } },
                   resources: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"), items: [], hasActions: false, dataset: { type: "actorResource" } }
               };
       
@@ -334,13 +267,13 @@ console.log("HERE--",html)
       
               classes.sort((a, b) => b.levels - a.levels);
              // console.log(races,flaws,achievements,archetypes)
-              features.classes.items = classes;
+            //  features.classes.items = classes;
               features.race.items = races;
               features.perk.items = perks;
               features.flaw.items = flaws;
               features.achievement.items = achievements;
               //features.asi.items = asis;
-              features.archetypes.items = archetypes;
+            //  features.archetypes.items = archetypes;
               features.resources.items = actorResources;
       
               data.inventory = Object.values(inventory);

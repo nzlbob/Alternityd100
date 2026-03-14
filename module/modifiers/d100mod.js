@@ -73,6 +73,8 @@ Long range attacks suffer a +2 step penalty.
  */
 export function d100NPCCrewStats(quality) {
 
+    const normalizedQuality = (typeof quality === "string" ? quality : "").toLowerCase();
+
     const arrayData = {
         green: {
             "actchk": {
@@ -171,8 +173,9 @@ export function d100NPCCrewStats(quality) {
 
 
 
-    //console.log(arrayData[quality],arrayData,quality)
-    return arrayData[quality]
+    //console.log(arrayData[normalizedQuality], arrayData, normalizedQuality)
+    if (arrayData[normalizedQuality]) return arrayData[normalizedQuality];
+    return arrayData.trained;
 }
 
 

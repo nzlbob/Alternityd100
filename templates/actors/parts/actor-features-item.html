@@ -1,5 +1,5 @@
         <li class="item flexrow {{#unless isCharged}}uncharged{{/unless}}" data-item-id="{{item._id}}">
-            <div class="item-name flexrow rollable" {{createTippy title="item.Name" subtitle=item.system.description.short attributes=item.attributes tooltips=item.actorResourceData.tooltip}}>
+            <div class="item-name flexrow rollable" data-tooltip="item.Name" subtitle=item.system.description.short attributes=item.attributes tooltips=item.actorResourceData.tooltip>
                 <div class="item-image" style="background-image: url({{item.img}})"></div>
                 <h4> 
                     

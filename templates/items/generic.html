@@ -1,0 +1,35 @@
+<div class="sheet-root {{cssClass}} flexcol">
+  {{!-- Item Sheet Header --}}
+  {{> "systems/Alternityd100/templates/items/parts/item-header.html"}}
+
+  <nav class="sheet-navigation tabs" data-group="primary">
+    <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
+    <a class="item" data-tab="details">{{ localize "SFRPG.Details" }}</a>
+  </nav>
+
+  <section class="sheet-body">
+    {{!-- Description Tab --}}
+    {{> "systems/Alternityd100/templates/items/parts/item-description.html"}}
+
+    {{!-- Details Tab (minimal fallback) --}}
+    <div class="tab details" data-group="primary" data-tab="details">
+      <h3 class="form-header">{{ localize "SFRPG.Details" }}</h3>
+      <div class="divTable blueTable2">
+        <div class="divTableBody">
+          <div class="divTableRow">
+            <div class="divTableCell">
+              {{> "systems/Alternityd100/templates/items/parts/item-status.html"}}
+
+              <div class="form-group">
+                <label>{{ localize "SFRPG.ItemType" }}</label>
+                <div class="form-fields">
+                  <input type="text" value="{{item.type}}" disabled />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

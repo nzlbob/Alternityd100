@@ -3,7 +3,15 @@
  * The Application responsible for configuring a single Combatant document within a parent Combat.
  * @extends {DocumentSheet}
  */
-export class d100ACombatantConfig extends CombatantConfig {
+export class d100ACombatantConfig extends foundry.applications.sheets.CombatantConfig {
+
+  /** @override */
+  static PARTS = {
+    body: {
+      root: true,
+      template: "systems/Alternityd100/templates/sidebar/combatant-config.html" //"templates/sheets/combatant-config.hbs"
+    }
+  };
 
   /** @inheritdoc */
   static get defaultOptions() {
@@ -20,7 +28,9 @@ export class d100ACombatantConfig extends CombatantConfig {
 
   /** @override */
   get title() {
-    return game.i18n.localize(this.object.id ? "COMBAT.CombatantUpdate" : "COMBAT.CombatantCreate");
+    const document = this.document;
+    const key = document.collection?.has(document.id) ? "COMBAT.CombatantUpdateNamed" : "COMBAT.CombatantCreate";
+    return game.i18n.format(key, {name: document.name});
   }
 
   /* -------------------------------------------- */

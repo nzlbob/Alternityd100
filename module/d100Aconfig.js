@@ -5,6 +5,77 @@
 export const d100A = {};
 
 /**
+ * Item type labels used by sheets.
+ * Values are i18n keys (kept as SFRPG.* for now).
+ */
+d100A.itemTypes = {
+   "starshipstuff": "SFRPG.Items.Categories.starshipstuff",
+   "everythingelse": "SFRPG.Items.Categories.everythingelse",
+   "ordnanceWarhead": "SFRPG.Items.Categories.ordnanceWarhead",
+   "ordnanceGuidance": "SFRPG.Items.Categories.ordnanceGuidance",
+   "ordnancePropulsion": "SFRPG.Items.Categories.ordnancePropulsion",
+
+   "clothing": "SFRPG.Items.Categories.Clothing",
+   "communication": "SFRPG.Items.Categories.Communication",
+   "computer": "SFRPG.Items.Categories.Computer",
+   "medical": "SFRPG.Items.Categories.Medical",
+   "miscellaneous": "SFRPG.Items.Categories.Miscellaneous",
+   "pharmaceutical": "SFRPG.Items.Categories.Pharmaceutical",
+   "professional": "SFRPG.Items.Categories.Professional",
+   "sensor": "SFRPG.Items.Categories.Sensor",
+   "survival": "SFRPG.Items.Categories.Survival",
+
+   "perk": "SFRPG.Items.Categories.Perks",
+   "flaw": "SFRPG.Items.Categories.Flaws",
+   "profession": "SFRPG.Items.Categories.Profession",
+   "asi": "SFRPG.Items.Categories.AbilityScoreIncrease",
+   "archetypes": "SFRPG.Items.Categories.Archetypes",
+   "augmentation": "SFRPG.Items.Categories.Augmentations",
+   "chassis": "SFRPG.Items.Categories.DroneChassis",
+
+   "container": "SFRPG.Items.Categories.Containers",
+   "equipment": "SFRPG.Items.Categories.Armor",
+   "feat": "SFRPG.Items.Categories.Feats",
+   "fusion": "ITEM.TypeFusion",
+   "goods": "SFRPG.Items.Categories.Goods",
+   "hybrid": "SFRPG.Items.Categories.HybridItems",
+   "magic": "SFRPG.Items.Categories.MagicItems",
+   "mod": "SFRPG.Items.Categories.DroneMods",
+   "race": "SFRPG.Items.Categories.Races",
+   "spell": "SFRPG.Items.Categories.Spells",
+   "starshipAction": "SFRPG.Items.Categories.StarshipActions",
+   "starshipAblativeArmor": "SFRPG.Items.Categories.StarshipAblativeArmors",
+   "starshipArmor": "SFRPG.Items.Categories.StarshipArmors",
+   "starshipComputer": "SFRPG.Items.Categories.StarshipComputers",
+   "starshipCrewQuarter": "SFRPG.Items.Categories.StarshipCrewQuarters",
+   "starshipDefence": "SFRPG.Items.Categories.StarshipDefences",
+   "starshipElectronicCountermeasure": "SFRPG.Items.Categories.StarshipElectronicCountermeasures",
+   "starshipDriftEngine": "SFRPG.Items.Categories.StarshipDriftEngine",
+   "starshipExpansionBay": "SFRPG.Items.Categories.StarshipExpansionBays",
+   "starshipFortifiedHull": "SFRPG.Items.Categories.StarshipFortifiedHulls",
+   "starshipFrame": "SFRPG.Items.Categories.StarshipFrames",
+   "starshipOrdnance": "SFRPG.Items.Categories.StarshipOrdnance",
+   "starshipOtherSystem": "SFRPG.Items.Categories.StarshipOtherSystems",
+   "starshipPowerCore": "SFRPG.Items.Categories.StarshipPowerCores",
+   "starshipReinforcedBulkhead": "SFRPG.Items.Categories.StarshipReinforcedBulkheads",
+   "starshipSecuritySystem": "SFRPG.Items.Categories.StarshipSecuritySystems",
+   "starshipSensor": "SFRPG.Items.Categories.StarshipSensors",
+   "starshipShield": "SFRPG.Items.Categories.StarshipShields",
+   "starshipEngine": "SFRPG.Items.Categories.StarshipEngines",
+   "starshipWeapon": "SFRPG.Items.Categories.StarshipWeapons",
+   "technological": "SFRPG.Items.Categories.TechnologicalItems",
+
+   "achievement": "SFRPG.Items.Categories.Achievements",
+   "upgrade": "ITEM.TypeUpgrade",
+   "weapon": "SFRPG.Items.Categories.Weapons",
+   "shield": "SFRPG.Items.Categories.Shields",
+   "ammunition": "SFRPG.Items.Categories.Ammunition",
+   "weaponAccessory": "ITEM.TypeWeaponaccessory",
+   "vehicleAttack": "SFRPG.Items.Categories.VehicleAttacks",
+   "vehicleSystem": "SFRPG.Items.Categories.VehicleSystems"
+};
+
+/**
  * The set of ability scores used with the system
  * @type {Object}
  */
@@ -33,6 +104,23 @@ d100A.pilotingSkills = {
 }
 
 d100A.npc = {
+      npcType: {
+      "Administrator": "Administrator",
+      "Bartender": "Bartender",
+      "Brawler": "Brawler",
+      "Corporate Executive": "Corporate Executive",
+      "Doctor": "Doctor",
+      "Laborer": "Laborer",
+      "Military Officer": "Military Officer",
+      "Law Enforcer": "Law Enforcer",
+      "Reporter": "Reporter",
+      "Scientist": "Scientist",
+      "Soldier": "Soldier",
+      "Spacehand": "Spacehand",
+      "Spy": "Spy",
+      "Trader": "Trader"
+   },
+
    abilityBasis: {
       "Administrator": { "str": 2, "dex": 5, "con": 2, "int": 6, "wil": 14, "per": 15 },
       "Bartender": { "str": 6, "dex": 2, "con": 5, "int": 2, "wil": 14, "per": 15 },
@@ -1264,6 +1352,826 @@ d100A.weaponTypes = {
    "heavyW": "d100A.WeaponTypesHeavy"
 
 };
+
+// ---------------------------------------------------------------------------
+// Starfinder-derived config entries still referenced by Alternityd100.
+// These were previously provided by module/config.js (SFRPG). We keep the
+// localization keys as-is for now; en.json migration will be handled later.
+// ---------------------------------------------------------------------------
+
+if (!d100A.acpEffectingArmorType) {
+   d100A.acpEffectingArmorType = {
+      "acp-all": "SFRPG.ModifierACPEffectingArmorTypeAll",
+      "acp-light": "SFRPG.ModifierACPEffectingArmorTypeLight",
+      "acp-heavy": "SFRPG.ModifierACPEffectingArmorTypeHeavy",
+      "acp-power": "SFRPG.ModifierACPEffectingArmorTypePower"
+   };
+}
+
+if (!d100A.saves) {
+   d100A.saves = {
+      "fort": "SFRPG.FortitudeSave",
+      "reflex": "SFRPG.ReflexSave",
+      "will": "SFRPG.WillSave"
+   };
+}
+
+if (!d100A.saveDescriptors) {
+   d100A.saveDescriptors = {
+      "negate": "SFRPG.SaveDescriptorNegates",
+      "partial": "SFRPG.SaveDescriptorPartial",
+      "half": "SFRPG.SaveDescriptorHalf",
+      "disbelieve": "SFRPG.SaveDescriptorDisbelieve",
+      "harmless": "SFRPG.SaveDescriptorHarmless",
+      "object": "SFRPG.SaveDescriptorObject"
+   };
+}
+
+if (!d100A.alignments) {
+   d100A.alignments = {
+      "lg": "SFRPG.AlignmentLG",
+      "ng": "SFRPG.AlignmentNG",
+      "cg": "SFRPG.AlignmentCG",
+      "ln": "SFRPG.AlignmentLN",
+      "tn": "SFRPG.AlignmentTN",
+      "cn": "SFRPG.AlignmentCN",
+      "le": "SFRPG.AlignmentLE",
+      "ne": "SFRPG.AlignmentNE",
+      "ce": "SFRPG.AlignmentCE"
+   };
+}
+
+if (!d100A.armorProficiencies) {
+   d100A.armorProficiencies = {
+      "lgt": "SFRPG.ArmorProficiencyLight",
+      "hvy": "SFRPG.ArmorProficiencyHeavy",
+      "pwr": "SFRPG.ArmorProficiencyPower",
+      "shl": "SFRPG.ArmorProficiencyShields"
+   };
+}
+
+if (!d100A.weaponProficiencies) {
+   d100A.weaponProficiencies = {
+      "bmelee": "SFRPG.WeaponProficiencyBasicMelee",
+      "amelee": "SFRPG.WeaponProficiencyAdvMelee",
+      "sarms": "SFRPG.WeaponProficiencySmallArms",
+      "larms": "SFRPG.WeaponProficiencyLongArms",
+      "hweap": "SFRPG.WeaponProficiencyHeavy",
+      "snipe": "SFRPG.WeaponProficiencySniper",
+      "gren": "SFRPG.WeaponProficiencyGrenades",
+      "spec": "SFRPG.WeaponProficiencySpecial"
+   };
+}
+
+if (!d100A.weaponTypeProficiency) {
+   d100A.weaponTypeProficiency = {
+      "basicM": "bmelee",
+      "advancedM": "amelee",
+      "smallA": "sarms",
+      "longA": "larms",
+      "heavy": "hweap",
+      "sniper": "snipe",
+      "grenade": "gren",
+      "special": "",
+      "solarian": ""
+   };
+}
+
+if (!d100A.abilityActivationTypes) {
+   d100A.abilityActivationTypes = {
+      "none": "SFRPG.AbilityActivationTypesNone",
+      "action": "SFRPG.AbilityActivationTypesStandard",
+      "move": "SFRPG.AbilityActivationTypesMove",
+      "swift": "SFRPG.AbilityActivationTypesSwift",
+      "full": "SFRPG.AbilityActivationTypesFull",
+      "reaction": "SFRPG.AbilityActivationTypesReaction",
+      "other": "SFRPG.AbilityActivationTypesOther",
+      "day": "SFRPG.AbilityActivationTypesDay",
+      "hour": "SFRPG.AbilityActivationTypesHour",
+      "min": "SFRPG.AbilityActivationTypesMinute",
+      "special": "SFRPG.AbilityActivationTypesSpecial"
+   };
+}
+
+if (!d100A.skillProficiencyLevels) {
+   d100A.skillProficiencyLevels = {
+      0: "",
+      3: "SFRPG.SkillProficiencyLevelClassSkill"
+   };
+}
+
+if (!d100A.currencies) {
+   d100A.currencies = {
+      "credit": "SFRPG.Currencies.Credits",
+      "upb": "SFRPG.Currencies.UPBs",
+      "bp": "SFRPG.Currencies.BPs"
+   };
+}
+
+// Common item-sheet option maps
+if (!d100A.damageOperators) {
+   // Note: Intentionally not i18n keys; templates don't set localize=true.
+   d100A.damageOperators = {
+      and: "And",
+      or: "Or"
+   };
+}
+
+if (!d100A.containerStorageTypes) {
+   d100A.containerStorageTypes = {
+      slot: "SFRPG.ActorSheet.Inventory.Container.StorageTypeSlot",
+      bulk: "SFRPG.ActorSheet.Inventory.Container.StorageTypeBulk"
+   };
+}
+
+if (!d100A.containerStorageSubtypes) {
+   d100A.containerStorageSubtypes = {
+      armorUpgrade: "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierArmorUpgrade",
+      weaponSlot: "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierWeaponSlot",
+      fusion: "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierFusion",
+      spellSlot: "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierSpellSlot"
+   };
+}
+
+if (!d100A.containerWeightProperties) {
+   d100A.containerWeightProperties = {
+      slots: "SFRPG.ActorSheet.Inventory.Container.CapacityPropertySlots",
+      level: "SFRPG.ActorSheet.Inventory.Container.CapacityPropertyLevel"
+   };
+}
+
+if (!d100A.containableTypes) {
+   d100A.containableTypes = {
+      weapon: "SFRPG.Items.Categories.Weapons",
+      ammunition: "SFRPG.Items.Categories.Ammunition",
+      equipment: "SFRPG.Items.Categories.Equipment",
+      pharmaceutical: "SFRPG.Items.Categories.Consumables",
+      goods: "SFRPG.Items.Categories.Goods",
+      container: "SFRPG.Items.Categories.Containers",
+      hybrid: "SFRPG.Items.Categories.HybridItems",
+      magic: "SFRPG.Items.Categories.MagicItems",
+      technological: "SFRPG.Items.Categories.TechnologicalItems",
+      fusion: "SFRPG.Items.Categories.WeaponFusions",
+      upgrade: "SFRPG.Items.Categories.ArmorUpgrades",
+      spell: "SFRPG.Items.Categories.Spells",
+      augmentation: "SFRPG.Items.Categories.Augmentations",
+      shield: "SFRPG.Items.Categories.Shields",
+      weaponAccessory: "SFRPG.Items.Categories.WeaponAccessories",
+      vehicleAttack: "SFRPG.Items.Categories.VehicleAttacks",
+      vehicleSystem: "SFRPG.Items.Categories.VehicleSystems"
+   };
+}
+
+if (!d100A.flightManeuverability) {
+   d100A.flightManeuverability = {
+      "-1": "SFRPG.ActorSheet.Attributes.Speed.Flight.Clumsy",
+      "0": "SFRPG.ActorSheet.Attributes.Speed.Flight.Average",
+      "1": "SFRPG.ActorSheet.Attributes.Speed.Flight.Perfect"
+   };
+}
+
+if (!d100A.energyDamageTypes) {
+   d100A.energyDamageTypes = {
+      "acid": "SFRPG.Damage.Types.Acid",
+      "cold": "SFRPG.Damage.Types.Cold",
+      "electricity": "SFRPG.Damage.Types.Electricity",
+      "fire": "SFRPG.Damage.Types.Fire",
+      "sonic": "SFRPG.Damage.Types.Sonic"
+   };
+}
+
+if (!d100A.kineticDamageTypes) {
+   d100A.kineticDamageTypes = {
+      "bludgeoning": "SFRPG.Damage.Types.Bludgeoning",
+      "piercing": "SFRPG.Damage.Types.Piercing",
+      "slashing": "SFRPG.Damage.Types.Slashing"
+   };
+}
+
+if (!d100A.damageTypes) {
+   d100A.damageTypes = {
+      ...d100A.energyDamageTypes,
+      ...d100A.kineticDamageTypes,
+      "radiation": "SFRPG.Damage.Types.Radiation",
+      "nonlethal": "SFRPG.Damage.Types.Nonlethal"
+   };
+}
+
+if (!d100A.damageTypeOperators) {
+   d100A.damageTypeOperators = {
+      "and": "SFRPG.Damage.Types.Operators.And",
+      "or": "SFRPG.Damage.Types.Operators.Or"
+   };
+}
+
+if (!d100A.weaponDamageTypes) {
+   d100A.weaponDamageTypes = {
+      "acid": "SFRPG.DamageTypesAcid",
+      "acid+bludgeoning": "SFRPG.DamageTypesAcidAndBludgeoning",
+      "acid+electricity": "SFRPG.DamageTypesAcidAndElectricity",
+      "acid+fire": "SFRPG.DamageTypesAcidAndFire",
+      "acid+piercing": "SFRPG.DamageTypesAcidAndPiercing",
+      "acid+slashing": "SFRPG.DamageTypesAcidAndSlashing",
+      "acid|fire": "SFRPG.DamageTypesAcidOrFire",
+      "acid|slashing": "SFRPG.DamageTypesAcidOrSlashing",
+      "cold": "SFRPG.DamageTypesCold",
+      "cold+piercing": "SFRPG.DamageTypesColdAndPiercing",
+      "cold+slashing": "SFRPG.DamageTypesColdAndSlashing",
+      "cold|fire": "SFRPG.DamageTypesColdOrFire",
+      "electricity": "SFRPG.DamageTypesElectricity",
+      "electricity+fire": "SFRPG.DamageTypesElectricityAndFire",
+      "electricity+piercing": "SFRPG.DamageTypesElectricityAndPiercing",
+      "electricity+slashing": "SFRPG.DamageTypesElectricityAndSlashing",
+      "force": "SFRPG.DamageTypesForce",
+      "fire": "SFRPG.DamageTypesFire",
+      "fire+force": "SFRPG.DamageTypesFireAndForce",
+      "fire+piercing": "SFRPG.DamageTypesFireAndPiercing",
+      "fire+slashing": "SFRPG.DamageTypesFireAndSlashing",
+      "fire|slashing": "SFRPG.DamageTypesFireOrSlashing",
+      "fire|sonic": "SFRPG.DamageTypesFireOrSonic",
+      "sonic": "SFRPG.DamageTypesSonic",
+      "bludgeoning": "SFRPG.DamageTypesBludgeoning",
+      "bludgeoning+cold": "SFRPG.DamageTypesBludgeoningAndCold",
+      "bludgeoning+electricity": "SFRPG.DamageTypesBludgeoningAndElectricity",
+      "bludgeoning+fire": "SFRPG.DamageTypesBludgeoningAndFire",
+      "bludgeoning+sonic": "SFRPG.DamageTypesBludgeoningAndSonic",
+      "piercing": "SFRPG.DamageTypesPiercing",
+      "piercing+sonic": "SFRPG.DamageTypesPiercingAndSonic",
+      "slashing": "SFRPG.DamageTypesSlashing",
+      "slashing+piercing": "SFRPG.DamageTypesSlashingAndPiercing",
+      "slashing+sonic": "SFRPG.DamageTypesSlashingAndSonic"
+   };
+}
+
+if (!d100A.ammunitionTypes) {
+   d100A.ammunitionTypes = {
+      "charge": "SFRPG.Items.Ammunition.Type.Charges",
+      "roundS": "SFRPG.Items.Ammunition.Type.SmallArmRounds",
+      "roundL": "SFRPG.Items.Ammunition.Type.LongarmAndSniperRounds",
+      "roundH": "SFRPG.Items.Ammunition.Type.HeavyRounds",
+      "arrow": "SFRPG.Items.Ammunition.Type.Arrows",
+      "dart": "SFRPG.Items.Ammunition.Type.Darts",
+      "fuel": "SFRPG.Items.Ammunition.Type.Fuel",
+      "missile": "SFRPG.Items.Ammunition.Type.Missiles",
+      "rocket": "SFRPG.Items.Ammunition.Type.Rockets",
+      "shell": "SFRPG.Items.Ammunition.Type.Shells",
+      "flare": "SFRPG.Items.Ammunition.Type.Flares"
+   };
+}
+
+if (!d100A.distanceUnits) {
+   d100A.distanceUnits = {
+      "none": "SFRPG.None",
+      "personal": "SFRPG.Personal",
+      "touch": "SFRPG.Touch",
+      "close": "SFRPG.Close",
+      "medium": "SFRPG.Medium",
+      "long": "SFRPG.Long",
+      "planetary": "SFRPG.Planetary",
+      "system": "SFRPG.SystemWide",
+      "plane": "SFRPG.Plane",
+      "unlimited": "SFRPG.Unlimited",
+      "ft": "SFRPG.Ft",
+      "meter": "SFRPG.Meter",
+      "mi": "SFRPG.Mi",
+      "spec": "SFRPG.Special",
+      "any": "SFRPG.DistAny"
+   };
+}
+
+if (!d100A.targetTypes) d100A.targetTypes = {};
+if (!d100A.timePeriods) d100A.timePeriods = {};
+
+if (!d100A.healingTypes) {
+   d100A.healingTypes = {
+      "healing": "SFRPG.HealingTypesHealing"
+   };
+}
+
+if (!d100A.spellPreparationModes) {
+   d100A.spellPreparationModes = {
+      "always": "SFRPG.SpellPreparationModesAlways",
+      "innate": "SFRPG.SpellPreparationModesInnate"
+   };
+}
+
+if (!d100A.limitedUsePeriods) {
+   d100A.limitedUsePeriods = {
+      "sr": "SFRPG.LimitedUsePeriodsShort",
+      "lr": "SFRPG.LimitedUsePeriodsLong",
+      "day": "SFRPG.LimitedUsePeriodsDay",
+      "charges": "SFRPG.LimitedUsePeriodsCharges"
+   };
+}
+
+if (!d100A.senses) {
+   d100A.senses = {
+      "bs": "SFRPG.SenesBS",
+      "bl": "SFRPG.SenesBL",
+      "dark": "SFRPG.SenesDark",
+      "llv": "SFRPG.SenesLLV",
+      "st": "SFRPG.SensesST"
+   };
+}
+
+if (!d100A.allowedArmorTypes) {
+   d100A.allowedArmorTypes = {
+      "light": "Light Armor",
+      "heavy": "Heavy Armor",
+      "power": "Power Armor",
+      "lightAndHeavy": "Light and Heavy Armor",
+      "heavyAndPower": "Heavy and Power Armor",
+      "shield": "Shields"
+   };
+}
+
+if (!d100A.armorTypes) {
+   d100A.armorTypes = {
+      "light": "SFRPG.ArmorTypes.Light",
+      "heavy": "SFRPG.ArmorTypes.Heavy",
+      "power": "SFRPG.ArmorTypes.Power"
+   };
+}
+
+if (!d100A.weaponProperties) {
+   d100A.weaponProperties = {
+      "one": "SFRPG.WeaponPropertiesOneHanded",
+      "two": "SFRPG.WeaponPropertiesTwoHanded",
+      "amm": "SFRPG.WeaponPropertiesAmmunition",
+      "aeon": "SFRPG.WeaponPropertiesAeon",
+      "analog": "SFRPG.WeaponPropertiesAnalog",
+      "antibiological": "SFRPG.WeaponPropertiesAntibiological",
+      "archaic": "SFRPG.WeaponPropertiesArchaic",
+      "aurora": "SFRPG.WeaponPropertiesAurora",
+      "automatic": "SFRPG.WeaponPropertiesAutomatic",
+      "blast": "SFRPG.WeaponPropertiesBlast",
+      "block": "SFRPG.WeaponPropertiesBlock",
+      "boost": "SFRPG.WeaponPropertiesBoost",
+      "breach": "SFRPG.WeaponPropertiesBreach",
+      "breakdown": "SFRPG.WeaponPropertiesBreakdown",
+      "bright": "SFRPG.WeaponPropertiesBright",
+      "cluster": "SFRPG.WeaponPropertiesCluster",
+      "conceal": "SFRPG.WeaponsPropertiesConceal",
+      "deconstruct": "SFRPG.WeaponPropertiesDeconstruct",
+      "deflect": "SFRPG.WeaponPropertiesDeflect",
+      "disarm": "SFRPG.WeaponPropertiesDisarm",
+      "double": "SFRPG.WeaponPropertiesDouble",
+      "drainCharge": "SFRPG.WeaponPropertiesDrainCharge",
+      "echo": "SFRPG.WeaponPropertiesEcho",
+      "entangle": "SFRPG.WeaponPropertiesEntangle",
+      "explode": "SFRPG.WeaponPropertiesExplode",
+      "extinguish": "SFRPG.WeaponPropertiesExtinguish",
+      "feint": "SFRPG.WeaponPropertiesFeint",
+      "fiery": "SFRPG.WeaponPropertiesFiery",
+      "firstArc": "SFRPG.WeaponPropertiesFirstArc",
+      "flexibleLine": "SFRPG.WeaponPropertiesFlexibleLine",
+      "force": "SFRPG.WeaponPropertiesForce",
+      "freeHands": "SFRPG.WeaponPropertiesFreeHands",
+      "fueled": "SFRPG.WeaponPropertiesFueled",
+      "gearArray": "SFRPG.WeaponPropertiesGearArray",
+      "grapple": "SFRPG.WeaponPropertiesGrapple",
+      "gravitation": "SFRPG.WeaponPropertiesGravitation",
+      "guided": "SFRPG.WeaponPropertiesGuided",
+      "harrying": "SFRPG.WeaponPropertiesHarrying",
+      "holyWater": "SFRPG.WeaponPropertiesHolyWater",
+      "hybrid": "SFRPG.WeaponPropertiesHybrid",
+      "ignite": "SFRPG.WeaponPropertiesIgnite",
+      "indirect": "SFRPG.WeaponPropertiesIndirect",
+      "injection": "SFRPG.WeaponPropertiesInjection",
+      "integrated": "SFRPG.WeaponPropertiesIntegrated",
+      "line": "SFRPG.WeaponPropertiesLine",
+      "living": "SFRPG.WeaponPropertiesLiving",
+      "lockdown": "SFRPG.WeaponPropertiesLockdown",
+      "mind-affecting": "SFRPG.WeaponPropertiesMindAffecting",
+      "mine": "SFRPG.WeaponPropertiesMine",
+      "mire": "SFRPG.WeaponPropertiesMire",
+      "modal": "SFRPG.WeaponPropertiesModal",
+      "necrotic": "SFRPG.WeaponPropertiesNecrotic",
+      "nonlethal": "SFRPG.WeaponPropertiesNonlethal",
+      "operative": "SFRPG.WeaponPropertiesOperative",
+      "penetrating": "SFRPG.WeaponPropertiesPenetrating",
+      "polarize": "SFRPG.WeaponPropertiesPolarize",
+      "polymorphic": "SFRPG.WeaponPropertiesPolymorphic",
+      "powered": "SFRPG.WeaponPropertiesPowered",
+      "professional": "SFRPG.WeaponPropertiesProfessional",
+      "punchGun": "SFRPG.WeaponPropertiesPunchGun",
+      "qreload": "SFRPG.WeaponPropertiesQuickReload",
+      "radioactive": "SFRPG.WeaponPropertiesRadioactive",
+      "reach": "SFRPG.WeaponPropertiesReach",
+      "recall": "SFRPG.WeaponPropertiesRecall",
+      "regrowth": "SFRPG.WeaponPropertiesRegrowth",
+      "relic": "SFRPG.WeaponPropertiesRelic",
+      "reposition": "SFRPG.WeaponPropertiesReposition",
+      "shape": "SFRPG.WeaponPropertiesShape",
+      "shatter": "SFRPG.WeaponPropertiesShatter",
+      "shells": "SFRPG.WeaponPropertiesShells",
+      "shield": "SFRPG.WeaponPropertiesShield",
+      "sniper": "SFRPG.WeaponPropertiesSniper",
+      "stun": "SFRPG.WeaponPropertiesStun",
+      "subtle": "SFRPG.WeaponPropertiesSubtle",
+      "sunder": "SFRPG.WeaponPropertiesSunder",
+      "swarm": "SFRPG.WeaponPropertiesSwarm",
+      "tail": "SFRPG.WeaponPropertiesTail",
+      "teleportive": "SFRPG.WeaponPropertiesTeleportive",
+      "thought": "SFRPG.WeaponPropertiesThought",
+      "throttle": "SFRPG.WeaponPropertiesThrottle",
+      "thrown": "SFRPG.WeaponPropertiesThrown",
+      "trip": "SFRPG.WeaponPropertiesTrip",
+      "unbalancing": "SFRPG.WeaponPropertiesUnbalancing",
+      "underwater": "SFRPG.WeaponPropertiesUnderwater",
+      "unwieldy": "SFRPG.WeaponPropertiesUnwieldy",
+      "variantBoost": "SFRPG.WeaponPropertiesVariantBoost",
+      "wideLine": "SFRPG.WeaponPropertiesWideLine"
+   };
+}
+
+if (!d100A.weaponPropertiesTooltips) {
+   d100A.weaponPropertiesTooltips = {
+      "one": "SFRPG.WeaponPropertiesOneHandedTooltip",
+      "two": "SFRPG.WeaponPropertiesTwoHandedTooltip",
+      "aeon": "SFRPG.WeaponPropertiesAeonTooltip",
+      "analog": "SFRPG.WeaponPropertiesAnalogTooltip",
+      "antibiological": "SFRPG.WeaponPropertiesAntibiologicalTooltip",
+      "archaic": "SFRPG.WeaponPropertiesArchaicTooltip",
+      "aurora": "SFRPG.WeaponPropertiesAuroraTooltip",
+      "automatic": "SFRPG.WeaponPropertiesAutomaticTooltip",
+      "blast": "SFRPG.WeaponPropertiesBlastTooltip",
+      "block": "SFRPG.WeaponPropertiesBlockTooltip",
+      "boost": "SFRPG.WeaponPropertiesBoostTooltip",
+      "breach": "SFRPG.WeaponPropertiesBreachTooltip",
+      "breakdown": "SFRPG.WeaponPropertiesBreakdownTooltip",
+      "bright": "SFRPG.WeaponPropertiesBrightTooltip",
+      "conceal": "SFRPG.WeaponsPropertiesConcealTooltip",
+      "cluster": "SFRPG.WeaponPropertiesClusterTooltip",
+      "deconstruct": "SFRPG.WeaponPropertiesDeconstructTooltip",
+      "deflect": "SFRPG.WeaponPropertiesDeflectTooltip",
+      "disarm": "SFRPG.WeaponPropertiesDisarmTooltip",
+      "double": "SFRPG.WeaponPropertiesDoubleTooltip",
+      "drainCharge": "SFRPG.WeaponPropertiesDrainChargeTooltip",
+      "echo": "SFRPG.WeaponPropertiesEchoTooltip",
+      "entangle": "SFRPG.WeaponPropertiesEntangleTooltip",
+      "explode": "SFRPG.WeaponPropertiesExplodeTooltip",
+      "extinguish": "SFRPG.WeaponPropertiesExtinguishTooltip",
+      "feint": "SFRPG.WeaponPropertiesFeintTooltip",
+      "fiery": "SFRPG.WeaponPropertiesFieryTooltip",
+      "firstArc": "SFRPG.WeaponPropertiesFirstArcTooltip",
+      "flexibleLine": "SFRPG.WeaponPropertiesFlexibleLineTooltip",
+      "force": "SFRPG.WeaponPropertiesForceTooltip",
+      "freeHands": "SFRPG.WeaponPropertiesFreeHandsTooltip",
+      "fueled": "SFRPG.WeaponPropertiesFueledTooltip",
+      "gearArray": "SFRPG.WeaponPropertiesGearArrayTooltip",
+      "grapple": "SFRPG.WeaponPropertiesGrappleTooltip",
+      "gravitation": "SFRPG.WeaponPropertiesGravitationTooltip",
+      "guided": "SFRPG.WeaponPropertiesGuidedTooltip",
+      "harrying": "SFRPG.WeaponPropertiesHarryingTooltip",
+      "holyWater": "SFRPG.WeaponPropertiesHolyWaterTooltip",
+      "hybrid": "SFRPG.WeaponPropertiesHybridTooltip",
+      "ignite": "SFRPG.WeaponPropertiesIgniteTooltip",
+      "indirect": "SFRPG.WeaponPropertiesIndirectTooltip",
+      "injection": "SFRPG.WeaponPropertiesInjectionTooltip",
+      "integrated": "SFRPG.WeaponPropertiesIntegratedTooltip",
+      "line": "SFRPG.WeaponPropertiesLineTooltip",
+      "living": "SFRPG.WeaponPropertiesLivingTooltip",
+      "lockdown": "SFRPG.WeaponPropertiesLockdownTooltip",
+      "mind-affecting": "SFRPG.WeaponPropertiesMindAffectingTooltip",
+      "mine": "SFRPG.WeaponPropertiesMineTooltip",
+      "mire": "SFRPG.WeaponPropertiesMireTooltip",
+      "modal": "SFRPG.WeaponPropertiesModalTooltip",
+      "necrotic": "SFRPG.WeaponPropertiesNecroticTooltip",
+      "nonlethal": "SFRPG.WeaponPropertiesNonlethalTooltip",
+      "operative": "SFRPG.WeaponPropertiesOperativeTooltip",
+      "penetrating": "SFRPG.WeaponPropertiesPenetratingTooltip",
+      "polarize": "SFRPG.WeaponPropertiesPolarizeTooltip",
+      "polymorphic": "SFRPG.WeaponPropertiesPolymorphicTooltip",
+      "powered": "SFRPG.WeaponPropertiesPoweredTooltip",
+      "professional": "SFRPG.WeaponPropertiesProfessionalTooltip",
+      "punchGun": "SFRPG.WeaponPropertiesPunchGunTooltip",
+      "qreload": "SFRPG.WeaponPropertiesQuickReloadTooltip",
+      "radioactive": "SFRPG.WeaponPropertiesRadioactiveTooltip",
+      "reach": "SFRPG.WeaponPropertiesReachTooltip",
+      "recall": "SFRPG.WeaponPropertiesRecallTooltip",
+      "regrowth": "SFRPG.WeaponPropertiesRegrowthTooltip",
+      "relic": "SFRPG.WeaponPropertiesRelicTooltip",
+      "reposition": "SFRPG.WeaponPropertiesReposition",
+      "shape": "SFRPG.WeaponPropertiesShapeTooltip",
+      "shatter": "SFRPG.WeaponPropertiesShatterTooltip",
+      "shells": "SFRPG.WeaponPropertiesShellsTooltip",
+      "shield": "SFRPG.WeaponPropertiesShieldTooltip",
+      "sniper": "SFRPG.WeaponPropertiesSniperTooltip",
+      "stun": "SFRPG.WeaponPropertiesStunTooltip",
+      "subtle": "SFRPG.WeaponPropertiesSubtleTooltip",
+      "sunder": "SFRPG.WeaponPropertiesSunderTooltip",
+      "swarm": "SFRPG.WeaponPropertiesSwarmTooltip",
+      "tail": "SFRPG.WeaponPropertiesTailTooltip",
+      "teleportive": "SFRPG.WeaponPropertiesTeleportiveTooltip",
+      "thought": "SFRPG.WeaponPropertiesThoughtTooltip",
+      "throttle": "SFRPG.WeaponPropertiesThrottleTooltip",
+      "thrown": "SFRPG.WeaponPropertiesThrownTooltip",
+      "trip": "SFRPG.WeaponPropertiesTripTooltip",
+      "unbalancing": "SFRPG.WeaponPropertiesUnbalancingTooltip",
+      "underwater": "SFRPG.WeaponPropertiesUnderwaterTooltip",
+      "unwieldy": "SFRPG.WeaponPropertiesUnwieldyTooltip",
+      "variantBoost": "SFRPG.WeaponPropertiesVariantBoostTooltip",
+      "wideLine": "SFRPG.WeaponPropertiesWideLineTooltip"
+   };
+}
+
+if (!d100A.augmentationTypes) {
+   d100A.augmentationTypes = {
+      "cybernetic": "SFRPG.Cybernetic",
+      "biotech": "SFRPG.Biotech",
+      "magitech": "SFRPG.Magitech",
+      "necrograft": "SFRPG.Necrograft",
+      "personal": "SFRPG.PersonalUpgrade"
+   };
+}
+
+if (!d100A.consumableTypes) {
+   d100A.consumableTypes = {
+      "serum": "SFRPG.ConsumableTypes.Serum",
+      "ampoule": "SFRPG.ConsumableTypes.Ampoule",
+      "spellGem": "SFRPG.ConsumableTypes.SpellGem",
+      "drugs": "SFRPG.ConsumableTypes.Drugs",
+      "medicne": "SFRPG.ConsumableTypes.Medicine",
+      "poison": "SFRPG.ConsumableTypes.Poison",
+      "foodDrink": "SFRPG.ConsumableTypes.FoodDrink"
+   };
+}
+
+if (!d100A.augmentationSytems) {
+   d100A.augmentationSytems = {
+      "none": "SFRPG.None",
+      "arm": "SFRPG.AugArm",
+      "armAndHand": "SFRPG.AugArmAndHand",
+      "allArms": "SFRPG.AugAllArms",
+      "brain": "SFRPG.AugBrain",
+      "brainHeartLungs": "SFRPG.AugBrainHeartLungs",
+      "brainAndEyes": "SFRPG.AugBrainAndEyes",
+      "ears": "SFRPG.AugEars",
+      "earsAndThroat": "SFRPG.AugEarsAndThroat",
+      "endocrine": "SFRPG.AugEndocrine",
+      "eye": "SFRPG.AugEye",
+      "eyes": "SFRPG.AugEyes",
+      "foot": "SFRPG.AugFoot",
+      "allFeet": "SFRPG.AugAllFeet",
+      "hand": "SFRPG.AugHand",
+      "allHands": "SFRPG.AugAllHands",
+      "heart": "SFRPG.AugHeart",
+      "leg": "SFRPG.AugLeg",
+      "legAndFoot": "SFRPG.AugLegAndFoot",
+      "allLegs": "SFRPG.AugAllLegs",
+      "allLegsAndFeet": "SFRPG.AugAllLegsAndFeet",
+      "lungs": "SFRPG.AugLungs",
+      "lungsAndThroat": "SFRPG.AugLungsAndThroat",
+      "spinal": "SFRPG.AugSpinalColumn",
+      "skin": "SFRPG.AugSkin",
+      "skinAndThroat": "SFRPG.AugSkinAndThroat",
+      "throat": "SFRPG.AugThroat"
+   };
+}
+
+if (!d100A.equipmentTypes) d100A.equipmentTypes = d100A.armorTypes;
+
+if (!d100A.starshipWeaponRanges) {
+   d100A.starshipWeaponRanges = {
+      "none": "SFRPG.ShipSystems.StarshipWeaponRanges.None",
+      "short": "SFRPG.ShipSystems.StarshipWeaponRanges.Short",
+      "medium": "SFRPG.ShipSystems.StarshipWeaponRanges.Medium",
+      "long": "SFRPG.ShipSystems.StarshipWeaponRanges.Long"
+   };
+}
+
+if (!d100A.toughness) {
+   d100A.toughness = {
+      "good": "SFRPG.ShipSystems.Toughness.Good",
+      "small": "SFRPG.ShipSystems.Toughness.Small",
+      "light": "SFRPG.ShipSystems.Toughness.Light",
+      "medium": "SFRPG.ShipSystems.Toughness.Medium",
+      "heavy": "SFRPG.ShipSystems.Toughness.Heavy",
+      "super": "SFRPG.ShipSystems.Toughness.Super"
+   };
+}
+
+if (!d100A.starshipWeaponTypes) {
+   d100A.starshipWeaponTypes = {
+      "beam": "SFRPG.ShipSystems.StarshipWeaponTypes.Beam",
+      "projectile": "SFRPG.ShipSystems.StarshipWeaponTypes.Projectile",
+      "missile": "SFRPG.ShipSystems.StarshipWeaponTypes.Missile",
+      "bomb": "SFRPG.ShipSystems.StarshipWeaponTypes.Bomb",
+      "mine": "SFRPG.ShipSystems.StarshipWeaponTypes.Mine",
+      "area": "SFRPG.ShipSystems.StarshipWeaponTypes.Area",
+      "torpedo": "SFRPG.ShipSystems.StarshipWeaponTypes.Torpedo",
+      "special": "SFRPG.ShipSystems.StarshipWeaponTypes.Special"
+   };
+}
+
+if (!d100A.starshipWeaponClass) {
+   d100A.starshipWeaponClass = {
+      "light": "SFRPG.ShipSystems.StarshipWeaponClass.Light",
+      "heavy": "SFRPG.ShipSystems.StarshipWeaponClass.Heavy",
+      "capital": "SFRPG.ShipSystems.StarshipWeaponClass.Capital",
+      "spinal": "SFRPG.ShipSystems.StarshipWeaponClass.Spinal"
+   };
+}
+
+if (!d100A.starshipRoles) {
+   // Starship role options (used by starship action items, crew UI, etc.)
+   // Values are i18n keys; they will be localized during system setup.
+   d100A.starshipRoles = {
+      "captain": "SFRPG.ShipSystems.StarshipRoles.captain",
+      "pilot": "SFRPG.ShipSystems.StarshipRoles.pilot",
+      "copilot": "SFRPG.ShipSystems.StarshipRoles.copilot",
+      "chiefMate": "SFRPG.ShipSystems.StarshipRoles.chiefMate",
+      "engineer": "SFRPG.ShipSystems.StarshipRoles.engineer",
+      "gunner": "SFRPG.ShipSystems.StarshipRoles.gunner",
+      "communications": "SFRPG.ShipSystems.StarshipRoles.communications",
+      "damageControl": "SFRPG.ShipSystems.StarshipRoles.damageControl",
+      "defences": "SFRPG.ShipSystems.StarshipRoles.defences",
+      "sensors": "SFRPG.ShipSystems.StarshipRoles.sensors",
+      "navigation": "SFRPG.ShipSystems.StarshipRoles.navigation",
+      "scienceOfficer": "SFRPG.ShipSystems.StarshipRoles.scienceOfficer",
+      "magicOfficer": "SFRPG.ShipSystems.StarshipRoles.magicOfficer",
+      "passenger": "SFRPG.ShipSystems.StarshipRoles.Passengers"
+   };
+}
+
+if (!d100A.starshipRoleNames) {
+   d100A.starshipRoleNames = {
+      "captain": "SFRPG.StarshipSheet.Role.Captain",
+      "pilot": "SFRPG.StarshipSheet.Role.Pilot",
+      "copilot": "SFRPG.StarshipSheet.Role.Copilot",
+      "communications": "SFRPG.StarshipSheet.Role.Communications",
+      "damageControl": "SFRPG.StarshipSheet.Role.DamageControl",
+      "defences": "SFRPG.StarshipSheet.Role.Defences",
+      "engineer": "SFRPG.StarshipSheet.Role.Engineers",
+      "sensors": "SFRPG.StarshipSheet.Role.Sensors",
+      "gunner": "SFRPG.StarshipSheet.Role.Gunner"
+   };
+}
+
+if (!d100A.npcCrewQualities) {
+   // Starship NPC crew quality presets.
+   // Keys must match actor.system.crew.npcCrewQuality and d100NPCCrewStats().
+   // Values are i18n keys; they will be localized during system setup.
+   d100A.npcCrewQualities = {
+      "green": "SFRPG.StarshipSheet.NPCCrewQualities.Green",
+      "trained": "SFRPG.StarshipSheet.NPCCrewQualities.Trained",
+      "veteran": "SFRPG.StarshipSheet.NPCCrewQualities.Veteran",
+      "crack": "SFRPG.StarshipSheet.NPCCrewQualities.Crack"
+   };
+}
+
+if (!d100A.starshipSizeMod) {
+   d100A.starshipSizeMod = {
+      "tiny": 2,
+      "small": 1,
+      "medium": 0,
+      "large": -1,
+      "huge": -2,
+      "gargantuan": -4,
+      "colossal": -8
+   };
+}
+
+if (!d100A.spellSchools) {
+   d100A.spellSchools = {
+      "abj": "SFRPG.Magic.Schools.Abjuration",
+      "con": "SFRPG.Magic.Schools.Conjuration",
+      "div": "SFRPG.Magic.Schools.Divination",
+      "enc": "SFRPG.Magic.Schools.Enchantment",
+      "evo": "SFRPG.Magic.Schools.Evocation",
+      "ill": "SFRPG.Magic.Schools.Illusion",
+      "nec": "SFRPG.Magic.Schools.Necromancy",
+      "trs": "SFRPG.Magic.Schools.Transmutation",
+      "uni": "SFRPG.Magic.Schools.Universal"
+   };
+}
+
+if (!d100A.spellLevels) {
+   d100A.spellLevels = {
+      0: "SFRPG.Magic.Levels.0",
+      1: "SFRPG.Magic.Levels.1",
+      2: "SFRPG.Magic.Levels.2",
+      3: "SFRPG.Magic.Levels.3",
+      4: "SFRPG.Magic.Levels.4",
+      5: "SFRPG.Magic.Levels.5",
+      6: "SFRPG.Magic.Levels.6"
+   };
+}
+
+if (!d100A.featTypes) {
+   d100A.featTypes = {
+      "general": "SFRPG.FeatTypes.General",
+      "combat": "SFRPG.FeatTypes.Combat"
+   };
+}
+
+if (!d100A.actorSizes) {
+   d100A.actorSizes = {
+      "fine": "SFRPG.SizeFine",
+      "diminutive": "SFRPG.SizeDim",
+      "tiny": "SFRPG.SizeTiny",
+      "small": "SFRPG.SizeSmall",
+      "medium": "SFRPG.SizeMedium",
+      "large": "SFRPG.SizeLarge",
+      "huge": "SFRPG.SizeHuge",
+      "gargantuan": "SFRPG.SizeGargantuan",
+      "colossal": "SFRPG.SizeColossal"
+   };
+}
+
+if (!d100A.starshipSizes) {
+   d100A.starshipSizes = {
+      "small": "SFRPG.SizeSmall",
+      "light": "SFRPG.SizeLight",
+      "medium": "SFRPG.SizeMedium",
+      "heavy": "SFRPG.SizeHeavy",
+      "super": "SFRPG.SizeSuper"
+   };
+}
+
+if (!d100A.itemSizes) {
+   d100A.itemSizes = {
+      "fine": "SFRPG.SizeFine",
+      "diminutive": "SFRPG.SizeDim",
+      "tiny": "SFRPG.SizeTiny",
+      "small": "SFRPG.SizeSmall",
+      "medium": "SFRPG.SizeMedium",
+      "large": "SFRPG.SizeLarge",
+      "huge": "SFRPG.SizeHuge",
+      "gargantuan": "SFRPG.SizeGargantuan",
+      "colossal": "SFRPG.SizeColossal"
+   };
+}
+
+if (!d100A.tokenSizes) {
+   d100A.tokenSizes = {
+      "fine": 1,
+      "diminutive": 1,
+      "tiny": 1,
+      "small": 1,
+      "medium": 1,
+      "large": 2,
+      "huge": 3,
+      "gargantuan": 4,
+      "colossal": 6
+   };
+}
+
+if (!d100A.allowedClasses) {
+   d100A.allowedClasses = {
+      "myst": "SFRPG.AllowedClasses.Myst",
+      "tech": "SFRPG.AllowedClasses.Tech",
+      "wysh": "SFRPG.AllowedClasses.Wysh"
+   };
+}
+
+if (!d100A.itemActionTypes) {
+   d100A.itemActionTypes = {
+      "mwak": "SFRPG.ActionMWAK",
+      "rwak": "SFRPG.ActionRWAK",
+      "msak": "SFRPG.ActionMSAK",
+      "rsak": "SFRPG.ActionRSAK",
+      "save": "SFRPG.ActionSave",
+      "heal": "SFRPG.ActionHeal",
+      "abil": "SFRPG.ActionAbil",
+      "util": "SFRPG.ActionUtil",
+      "other": "SFRPG.ActionOther"
+   };
+}
+
+if (!d100A.languages) {
+   d100A.languages = {
+      "abyssal": "SFRPG.LanguagesAbyssal",
+      "akiton": "SFRPG.LanguagesAkitonian",
+      "aklo": "SFRPG.LanguagesAklo",
+      "aquan": "SFRPG.LanguagesAquan",
+      "arkanen": "SFRPG.LanguagesArkanen",
+      "auran": "SFRPG.LanguagesAuran",
+      "azlanti": "SFRPG.LanguagesAzlanti",
+      "brethedan": "SFRPG.LanguagesBrethedan",
+      "castrovelian": "SFRPG.LanguagesCastrovelian",
+      "celestial": "SFRPG.LanguagesCelestial",
+      "common": "SFRPG.LanguagesCommon",
+      "draconic": "SFRPG.LanguagesDraconic",
+      "drow": "SFRPG.LanguagesDrow",
+      "dwarven": "SFRPG.LanguagesDwarven",
+      "elven": "SFRPG.LanguagesElven",
+      "eoxian": "SFRPG.LanguagesEoxian",
+      "gnome": "SFRPG.LanguagesGnome",
+      "goblin": "SFRPG.LanguagesGoblin",
+      "halfling": "SFRPG.LanguagesHalfling",
+      "ignan": "SFRPG.LanguagesIgnan",
+      "infernal": "SFRPG.LanguagesInfernal",
+      "kalo": "SFRPG.LanguagesKalo",
+      "kasatha": "SFRPG.LanguagesKasatha",
+      "nchaki": "SFRPG.LanguagesNchaki",
+      "orc": "SFRPG.LanguagesOrc",
+      "sarcesian": "SFRPG.LanguagesSarcesian",
+      "shirren": "SFRPG.LanguagesShirren",
+      "shobhad": "SFRPG.LanguagesShobhad"
+   };
+}
 d100A.mountTypes = {
 
    "unmounted": "d100A.mountTypeUnmounted",
@@ -2050,6 +2958,18 @@ d100A.movementType = {
    "3": "d100A.MovementType.Sprint"
 
 }
+
+// Movement speed labels (used by modifier UI)
+if (!d100A.speeds) {
+   d100A.speeds = {
+      "sprint": "d100A.ActorSheet.Attributes.Speed.Types.sprint",
+      "run": "d100A.ActorSheet.Attributes.Speed.Types.run",
+      "walk": "d100A.ActorSheet.Attributes.Speed.Types.walk",
+      "easyswim": "d100A.ActorSheet.Attributes.Speed.Types.easyswim",
+      "swim": "d100A.ActorSheet.Attributes.Speed.Types.swim",
+      "fly": "d100A.ActorSheet.Attributes.Speed.Types.fly"
+   };
+}
 d100A.dodgeType = {
    "-2": "d100A.DodgeType.-2",
    "+0": "d100A.DodgeType.0",
@@ -2199,6 +3119,45 @@ d100A.modifierArmorClassAffectedValues = {
    "eac": "SFRPG.EnergyArmorClass",
    "kac": "SFRPG.KineticArmorClass"
 };
+
+if (!d100A.CHARACTER_EXP_LEVELS) {
+   d100A.CHARACTER_EXP_LEVELS = [
+      0, 1300, 3300, 6000, 10000, 15000, 23000, 34000, 50000, 71000,
+      105000, 145000, 210000, 295000, 425000, 600000, 850000, 1200000,
+      1700000, 2400000
+   ];
+}
+
+if (!d100A.CR_EXP_LEVELS) {
+   d100A.CR_EXP_LEVELS = [
+      50, 400, 600, 800, 1200, 1600, 2400, 3200, 4800,
+      6400, 9600, 12800, 19200, 25600, 38400, 51200, 76800, 102400,
+      153600, 204800, 307200, 409600, 614400, 819200, 1228800, 1638400
+   ];
+}
+
+// TODO localize
+if (!d100A.characterFlags) {
+   d100A.characterFlags = {
+      "solarianAttunement": {
+         name: "Solarian Attunement",
+         hint: "You can enabled the management of attenument inside the combat tracker.",
+         section: "SFRPG.CharacterFlagsSectionClassFeatures",
+         type: Boolean
+      }
+   };
+}
+
+/**
+ * Saving throw modifier progression
+ */
+if (!d100A.counterClassesLabel) {
+   d100A.counterClassesLabel = {
+      "soldierKi": "SFRPG.CounterClassesKiSoldier",
+      "vanguardEntropy": "SFRPG.CounterClassesVanguard",
+      "solarianAttunement": "SFRPG.CounterClassesSolarian"
+   };
+}
 
 d100A.modifierActionCheckAffectedValues = {
    //"fat": "d100A.hptype.fat",

@@ -1,5 +1,5 @@
 import { ActorSFRPG } from "../actor/actor.js";
-import { ItemSFRPG } from "../item/item.js";
+import { Itemd100A } from "../item/item.js";
 
 /**
  * A specialized Dialog subclass for casting a spell item at a certain level
@@ -18,7 +18,7 @@ export class SpellCastDialog extends Dialog {
   
       /**
        * Store a reference to the Item entity which is the spell being cast
-       * @type {ItemSFRPG}
+       * @type {Itemd100A}
        */
       this.item = item;
     }
@@ -38,7 +38,7 @@ console.log("HERE--",html)
      * A constructor function which displays the Spell Cast Dialog app for a given Actor and Item.
      * Returns a Promise which resolves to the dialog FormData once the workflow has been completed.
      * @param {ActorSFRPG} actor
-     * @param {ItemSFRPG} item
+     * @param {Itemd100A} item
      * @return {Promise}
      */
     static async create(actor, item) {
@@ -52,7 +52,7 @@ console.log("HERE--",html)
       // Determine the levels which are feasible
       const spellLevels = Object.values(ad.spells).map((l, i) => {
         if ( !canUpcast ) return { canCast: false }
-        const label = (lvl > 0) ? `${game.i18n.format(CONFIG.SFRPG.spellLevels[i])} (${l.value} Slots)` : game.i18n.format(CONFIG.SFRPG.spellLevels[i]);
+        const label = (lvl > 0) ? `${game.i18n.format(CONFIG.d100A.spellLevels[i])} (${l.value} Slots)` : game.i18n.format(CONFIG.d100A.spellLevels[i]);
         return {
           level: i,
           label: label,
@@ -65,7 +65,7 @@ console.log("HERE--",html)
       const canCast = spellLevels.some(l => l.hasSlots);
   
       // Render the Spell casting template
-      const html = await renderTemplate("systems/Alternityd100/templates/apps/spell-cast.html", {
+      const html = await foundry.applications.handlebars.renderTemplate("systems/Alternityd100/templates/apps/spell-cast.html", {
         item: item.data,
         canCast,
         canUpcast,

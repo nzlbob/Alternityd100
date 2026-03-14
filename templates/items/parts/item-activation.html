@@ -4,12 +4,7 @@
     <div class="form-fields">
         <input type="text" name="system.activation.cost" value="{{itemData.activation.cost}}" data-dtype="Number" placeholder="-"/>
         <select name="system.activation.type">
-            {{#select itemData.activation.type}}
-            <option value=""></option>
-            {{#each config.abilityActivationTypes as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{/select}}
+            {{ selectOptions d100Aconfig.abilityActivationTypes selected=itemData.activation.type blank="" }}
         </select>
     </div>
 </div>
@@ -37,25 +32,13 @@
     <div class="form-fields">
         <input type="text" name="system.area.value" value="{{itemData.area.value}}" data-dtype="Number" placeholder="Area" />
         <select name="system.area.units">
-            {{#select itemData.area.units}}
-            {{#each config.distanceUnits as |unit key|}}
-            <option value="{{key}}">{{unit}}</option>
-            {{/each}}
-            {{/select}}
+            {{ selectOptions d100Aconfig.distanceUnits selected=itemData.area.units }}
         </select>
         <select name="system.area.shape">
-            {{#select itemData.area.shape}}
-            {{#each config.spellAreaShapes as |shape s|}}
-            <option value="{{s}}">{{shape}}</option>
-            {{/each}}
-            {{/select}}
+            {{ selectOptions d100Aconfig.spellAreaShapes selected=itemData.area.shape }}
         </select>
         <select name="system.area.effect">
-            {{#select itemData.area.effect}}
-            {{#each config.spellAreaEffects as |effect e|}}
-            <option value="{{e}}">{{effect}}</option>
-            {{/each}}
-            {{/select}}
+            {{ selectOptions d100Aconfig.spellAreaEffects selected=itemData.area.effect }}
         </select>
     </div>
 </div>
@@ -66,11 +49,7 @@
     <div class="form-fields">
         <input type="text" name="system.range.value" value="{{itemData.range.value}}" data-dtype="Number" placeholder="Range"/>
         <select name="system.range.units">
-            {{#select itemData.range.units}}
-            {{#each config.distanceUnits as |unit key|}}
-            <option value="{{key}}">{{unit}}</option>
-            {{/each}}
-            {{/select}}
+            {{ selectOptions d100Aconfig.distanceUnits selected=itemData.range.units }}
         </select>
         <span class="sep"> + </span>
         <input type="text" name="system.range.additional" value="{{itemData.range.additional}}" data-dtype="String" placeholder="5 ft." />
@@ -88,19 +67,14 @@
 </div>
 
 {{!-- Limited Uses --}}
-<div class="form-group uses-per" data-tippy-content="<strong>{{ localize "SFRPG.Items.Activation.LimitedUses" }}</strong><br/>@itemData.uses.value<br/>@itemData.uses.max</br/>@itemData.uses.per">
+<div class="form-group uses-per" data-tooltip="<strong>{{ localize "SFRPG.Items.Activation.LimitedUses" }}</strong><br/>@itemData.uses.value<br/>@itemData.uses.max</br/>@itemData.uses.per">
     <label>{{ localize "SFRPG.Items.Activation.LimitedUses" }}</label>
     <div class="form-fields">
         <input type="text" name="system.uses.value" value="{{itemData.uses.value}}" data-dtype="Number"/>
         <span class="sep"> of </span>
         <input type="text" name="system.uses.max" value="{{itemData.uses.max}}" data-dtype="Number"/>
         <select name="system.uses.per">
-            {{#select itemData.uses.per}}
-            <option value=""></option>
-            {{#each config.limitedUsePeriods as |name key|}}
-            <option value="{{key}}">{{name}}</option>
-            {{/each}}
-            {{/select}}
+            {{ selectOptions d100Aconfig.limitedUsePeriods selected=itemData.uses.per blank="" }}
         </select>
     </div>
 </div>

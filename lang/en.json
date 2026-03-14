@@ -1,6 +1,9 @@
 {
     "Alternityd100": {
-        "d100AActorSheetCharacter": "Standard Sheet"
+        "d100AActorSheetCharacter": "Standard Sheet",
+        "Movement": {
+            "Drive": "Drive"
+        }
     },
     "pisto": "Modern Ranged Weapon - Pistol",
     "primary": "Primary",
@@ -11,6 +14,8 @@
         "SimpleInitFormulaN": "Initiative Formula",
         "SimpleInitFormulaL": "Enter an initiative formula, such as d20+@dex"
     },
+
+
     "SIMPLE": {
         "ItemCreate": "Create Item",
         "ItemEdit": "Edit Item",
@@ -1516,7 +1521,7 @@
                     "HullPoints": "Base Hull Points (BHP)",
                     "HullPointsTooltip": "Hull Points<br/>Small: 10-60<br/>Light: 60-240<br/>Medium: 240-720<br/>Heavy: 720-2400<br/>Super: 2400+",
                     "Maneuverability": "Maneuverability",
-                    "ManeuverabilityTooltip": "Starship maneuverability affects piloting and turning abilities.<br/>Clumsy: -2 Piloting, Turn 4<br/>Poor: -1 Piloting, Turn 3<br/>Average: +0 Piloting, Turn 2<br/>Good: +1 Piloting, Turn 1<br/>Perfect: +2 Piloting, Turn 0",
+                    "ManeuverabilityTooltip": "The number of maneuvers per phase.<br/>Small: 4<br/>Light: 3<br/>Medium: 2<br/>Heavy: 1<br/>Super (Military): 1<br/>Super (Civilian): 0",
                     "NumCompartments": "Compartments",
                     "NumCompartmentsTooltip": "Indicates the maximum number of separate compartments that a ship's systems may be divided among, A ship may have fewer compartments than this number, but not more.",
                     "Price": "Cost",
@@ -1524,7 +1529,7 @@
                     "Size": "Size",
                     "SizeTooltip": "The size of the frame dictates the size of the starship.",
                     "Target": "Target Steps",
-                    "TargetTooltip": "The ship's basic resistance step modifier to enemy fire, based on its size and maneuverability.",
+                    "TargetTooltip": "The ships basic resistance step modifier to enemy fire, based on its size and maneuverability.",
                     "Toughness": "Hull Toughness",
                     "ToughnessTooltip": "The ship's toughness rating. Note that some ships have Good toughness, one step less than Small Craft ",
                     "WeaponArcAft": "Aft Arc",
@@ -2110,18 +2115,32 @@
             },
             "StarshipRoles": {
                 "Captain": "Captain",
+                "captain": "Captain",
                 "Engineer": "Engineer",
+                "chiefMate": "Chief Mate",
+                "engineer" : "Engineer",
                 "Engineers": "Engineers",
                 "Gunner": "Weapons",
+                "gunner": "Weapons",
+                "damageControl": "Damage Control",
+                "defences": "Defences",
                 "Passengers": "Passengers",
                 "Pilot": "Pilot",
+                "pilot": "Pilot",
                 "Copilot": "Copilot",
+                "copilot": "Copilot",
                 "Navigation": "Navigation",
+                "magicOfficer" : "Magic Officer",
                 "ScienceOfficers": "Science Officers",
                 "DamageControl": "Damage Control",
                 "Communications": "Communications",
+                "communications": "Communications",
+                "ScienceOfficer": "Science Officer",
+                "scienceOfficer": "Science Officer",
                 "Defences": "Defences",
-                "Sensors": "Sensors"
+                "Sensors": "Sensors",
+                "sensors": "Sensors",
+                "navigation": "Navigation"
             },
             "StarshipWeaponClass": {
                 "Capital": "Capital",
@@ -2971,6 +2990,31 @@
         "WillSave": "Will"
     },
     "d100A": {
+        "COMBAT": {
+            "TurnEnd": "End Turn",
+            "RoundNext": "Next Round",
+            "Begin": "Begin Combat",
+            "TurnNext": "Next Turn",
+            "Skipturn": "Skip Turn",
+            "GMUpdate": "End Phase and Apply Damage",
+            "TurnPrev": "Previous Turn",
+            "RoundPrev": "Previous Round",
+            "Endcombat": "End Combat"
+        },
+
+        "Ordnance": {
+            "Activation": {
+                "ReTarget": "Re-target",
+                "ReTargetTooltip": "Pick a new target token for this ordnance.",
+                "Target": "Target",
+                "TargetTooltip": "Toggle targeting of this ordnance's current target.",
+                "AutoMove": "Auto Move",
+                "AutoMoveTooltip": "Auto-move ordnance toward its target (uses Speed + Accel).",
+                "Attack": "Attack",
+                "AttackTooltip": "Make an attack against the current target.",
+                "RefreshTargetTooltip": "Refresh the displayed range and bearing using the current token positions."
+            }
+        },
 
         "starshipFirepowerExtra" : {
             "abbr": {
@@ -3406,6 +3450,7 @@
         "actiondamage": "DMG",
         "actionheal": "HEAL",
         "actionscan": "SCAN",
+        "actionTarget": "TARGET",
         "actionSkillUse": "USE",
         "skill": "Skill",
         "armorop": "Armor Operation",

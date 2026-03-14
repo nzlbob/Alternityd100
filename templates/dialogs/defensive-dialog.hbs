@@ -1,4 +1,4 @@
-<form style="width:2000px font-family: serpentine; ">
+<form>
  
    <div class="form-group">
     <label    style="font-size: 125% " >Damage: {{formula}} {{localize defenceData.dmgtype}} ({{type}}) ({{firepower}}) </label>
@@ -14,15 +14,11 @@
   </th>
   <th>
 
-<div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.firepowerTooltip" }}">
+<div class="form-group" data-tooltip="{{ localize "d100A.Items.Weapon.firepowerTooltip" }}">
     <label>{{ localize "d100A.Items.Type" }}</label>
   
-    <select style="font-family: serpentine;" name="type">
-    {{#select type}}
-    {{#each d100A.damagetype as |name type|}}
-    <option style="font-family: serpentine;" value="{{type}}">{{name}}</option>
-    {{/each}}
-    {{/select}}
+    <select name="type">
+  {{selectOptions d100A.damagetype selected=type}}
     </select>
     </div>  
 
@@ -34,34 +30,26 @@
 
 <tr>
     <th>  
-      <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.dmgtypeTooltip" }}">
+      <div class="form-group" data-tooltip="{{ localize "d100A.Items.Weapon.dmgtypeTooltip" }}">
     <label>{{ localize "d100A.Items.dmgtype" }}</label>
-    <select style="font-family: serpentine;" name="dmgtype">
-    {{#select defenceData.dmgtype}}
-    {{#each d100A.damageQ as |name dmgtype|}}
-    <option style="font-family: serpentine;" value="{{dmgtype}}">{{name}}</option>
-    {{/each}}
-    {{/select}}
+    <select name="dmgtype">
+    {{selectOptions d100A.damageQ selected=defenceData.dmgtype}}
     </select>
     </div> 
  
   </th>
   <th>
     {{#if (not tokenData.isSpaceActor) }}
-      <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.firepowerTooltip" }}">
+      <div class="form-group" data-tooltip="{{ localize "d100A.Items.Weapon.firepowerTooltip" }}">
       <label>{{ localize "d100A.Items.Firepower" }}</label>
-      <select style="font-family: serpentine;" name="firepower">
-      {{#select firepower}}
-        {{#each d100A.firepower as |name firepower|}} 
-          <option style="font-family: serpentine;" value="{{firepower}}">{{name}}</option>
-        {{/each}}
-      {{/select}}
+      <select name="firepower">
+      {{selectOptions d100A.firepower selected=firepower}}
       </select>
       </div>  
     {{/if}}
     
     {{#if tokenData.isSpaceActor }}
-      <div class="form-group" data-tippy-content="{{ localize "d100A.Items.Weapon.firepowerTooltip" }}">
+      <div class="form-group" data-tooltip="{{ localize "d100A.Items.Weapon.firepowerTooltip" }}">
       <label>{{ localize "d100A.Items.Firepower" }}</label>
       {{console this}}
 
@@ -79,7 +67,7 @@
 </table>
  <ol></ol>
   {{#each defenceData.armor as |armor index|}}
-    <li style="font-family: serpentine;"> {{armor.name}}</li>
+    <li>{{armor.name}}</li>
     {{/each}}
 
 
@@ -87,12 +75,8 @@
 
   <div class="form-group">
     <label>RollMode</label>
-    <select name="rollMode" style="font-family: serpentine;">
-      {{#select rollMode}}
-      {{#each rollModes as |label mode|}}
-      <option style="font-family: serpentine;" value="{{mode}}"><span style="font-family: serpentine;">{{localize label}}</span></option>
-      {{/each}}
-      {{/select}}
+    <select name="rollMode">
+      {{selectOptions rollModes selected=rollMode localize=true}}
     </select>
   </div>
    <div class="form-group">

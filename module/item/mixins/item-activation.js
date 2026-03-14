@@ -85,11 +85,11 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                 }
 
                 const template = `systems/Alternityd100/templates/chat/item-action-card.html`;
-                const htmlPromise = renderTemplate(template, templateData);
+                const htmlPromise = foundry.applications.handlebars.renderTemplate(template, templateData);
                 htmlPromise.then((html) => {
                     // Create the chat message
                     const chatData = {
-                        type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+                        style: CONST.CHAT_MESSAGE_STYLES.OTHER,
                         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                         content: html
                     };
@@ -115,12 +115,12 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                     }
         
                     const template = `systems/Alternityd100/templates/chat/item-action-card.html`;
-                    const htmlPromise = renderTemplate(template, templateData);
+                    const htmlPromise = foundry.applications.handlebars.renderTemplate(template, templateData);
         
                     htmlPromise.then((html) => {
                         // Create the chat message
                         const chatData = {
-                            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+                            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
                             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                             content: html
                         };

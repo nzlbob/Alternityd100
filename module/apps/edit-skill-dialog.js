@@ -32,10 +32,10 @@ console.log("HERE--",html)
      */
     static async create(skillId, skill, isEdit = true, isNpc = false, isOwner = false) {
         let hasSubName = typeof skill.subname !== "undefined" || !isEdit;
-        const html = await renderTemplate("systems/Alternityd100/templates/apps/add-edit-skill.html", {
+        const html = await foundry.applications.handlebars.renderTemplate("systems/Alternityd100/templates/apps/add-edit-skill.html", {
             skill: skill,
             hasSubName,
-            config: CONFIG.SFRPG,
+            config: CONFIG.d100A,
             canDelete: (skillId.startsWith("pro") && skillId !== "pro") && (game.user.isGM || isOwner) && isEdit,
             isEdit,
             isNpc
@@ -43,7 +43,7 @@ console.log("HERE--",html)
 
         return new Promise((resolve, reject) => {
             const dlg = new this(skill, {
-                title: `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}: ${(isEdit ? "Edit Skill" : "Add Skill")}`,
+                title: `${CONFIG.d100A.skills[skillId.substring(0, 3)]}: ${(isEdit ? "Edit Skill" : "Add Skill")}`,
                 content: html,
                 buttons: {
                     submit: {

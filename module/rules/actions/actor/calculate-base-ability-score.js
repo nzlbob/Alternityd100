@@ -1,4 +1,4 @@
-import { SFRPG } from "../../../config.js";
+import { d100A as SFRPG } from "../../../d100Aconfig.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
 
 export default function (engine) {

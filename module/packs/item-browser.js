@@ -442,7 +442,8 @@ console.log("HERE--",html)
             this.forceReload = true;
         }
     }, {
-        width: '300px'
+      width: '300px',
+      classes: ["Alternityd100"]
     });
     d.render(true);
   }

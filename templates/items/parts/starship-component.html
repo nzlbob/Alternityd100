@@ -2,7 +2,7 @@
             <h4 class="section-header first">{{ localize "SFRPG.ItemSheet.StarshipComponent.Header" }}</h4>
 
             {{#unless nobhpCost}}
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.Cost" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.CostTooltip" }}">
+            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.Cost" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.CostTooltip" }}">
                 <label>{{ localize "SFRPG.ItemSheet.StarshipComponent.Cost" }}</label>
                 <div class="form-fields">
                     <input type="text" name="system.bhpCost" value="{{itemData.bhpCost}}" data-dtype="Number" placeholder="0"/>
@@ -13,13 +13,13 @@
             {{/unless}}
 
             {{#unless noPCUCost}}
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.PCU" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.PCUTooltip" }}">
+            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.PCU" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.PCUTooltip" }}">
                 <label>{{ localize "SFRPG.ItemSheet.StarshipComponent.PCU" }}</label>
                 <div class="form-fields">
                     <input type="text" name="system.pcu" value="{{itemData.pcu}}" data-dtype="Number" placeholder="0" />
                 </div>
             </div>
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.PoweredState" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.PoweredStateTooltip" }}">
+            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.PoweredState" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.PoweredStateTooltip" }}">
                 <label>{{ localize "Is PCU Per Hull Point?" }}</label>
                 <div class="form-fields">
                     <label class="checkbox">
@@ -28,7 +28,7 @@
                 </div>
             </div>
 
-            <div class="form-group" data-tippy-content="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.PoweredState" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.PoweredStateTooltip" }}">
+            <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.PoweredState" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.PoweredStateTooltip" }}">
                 <label>{{ localize "SFRPG.ItemSheet.StarshipComponent.PoweredState" }}</label>
                 <div class="form-fields">
                     <label class="checkbox">
@@ -38,13 +38,13 @@
             </div>
             {{/unless}}
 
-            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.PriceTooltip" }}">
+            <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.PriceTooltip" }}">
                 <label>{{ localize "Base Price" }}</label>
                 <div class="form-fields">
                     <input type="text" name="system.price" value="{{itemData.price}}" data-dtype="Number" />
                 </div>
             </div>
-            <div class="form-group" data-tippy-content="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.PriceTooltip" }}">
+            <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.PriceTooltip" }}">
                 <label>{{ localize "Price per BHP" }}</label>
                 <div class="form-fields">
                     <input type="text" name="system.pricePerBHP" value="{{itemData.pricePerBHP}}" data-dtype="Number" />

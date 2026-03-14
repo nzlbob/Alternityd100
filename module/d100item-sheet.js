@@ -5,7 +5,7 @@ import {ATTRIBUTE_TYPES} from "./constants.js";
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
  */
-export class d100ItemSheet extends ItemSheet {
+export class d100ItemSheet extends foundry.appv1.sheets.ItemSheet {
 
   /** @inheritdoc */
   static get defaultOptions() {
@@ -27,7 +27,7 @@ export class d100ItemSheet extends ItemSheet {
     EntitySheetHelper.getAttributeData(context.data);
     context.systemData = context.system;
     context.dtypes = ATTRIBUTE_TYPES;
-    //data.config = CONFIG.SFRPG;
+    //context.config = CONFIG.d100A;
     //data.d100Aconfig = CONFIG.d100A;
 
     return context;
@@ -60,7 +60,7 @@ setPosition(options = {}) {
 /* -------------------------------------------- */
   /** @inheritdoc */
 	activateListeners(html) {
-console.log("HERE--",html)
+// console.log("HERE--",html)
     super.activateListeners(html);
 
     // Everything below here is only needed if the sheet is editable

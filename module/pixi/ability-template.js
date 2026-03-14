@@ -5,7 +5,7 @@
  *
  * @augments {MeasuredTemplate}
  */
-export class AbilityTemplate extends MeasuredTemplate {
+export class AbilityTemplate extends foundry.canvas.placeables.MeasuredTemplate {
   /**
    * A factory method to create an AbilityTemplate instance using provided data
    *

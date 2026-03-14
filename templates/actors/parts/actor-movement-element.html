@@ -1,4 +1,4 @@
-<li class="attribute speed" data-tippy-content="<strong>{{ localize "SFRPG.Speed" }}</strong><br>@attributes.speed.land.value<br>@attributes.speed.flying.value<br>@attributes.speed.flying.maneuverability<br>@attributes.speed.swimming.value<br>@attributes.speed.burrowing.value<br>@attributes.speed.climbing.value<br>@attributes.speed.special{{#if system.attributes.speed.special}}<br><br>{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Special"}}: {{system.attributes.speed.special}}{{/if}}<br><br>{{#each system.attributes.speed.tooltip as |tip|}}{{tip}}<br>{{/each}}">
+<li class="attribute speed" data-tooltip="<strong>{{ localize "SFRPG.Speed" }}</strong><br>@attributes.speed.land.value<br>@attributes.speed.flying.value<br>@attributes.speed.flying.maneuverability<br>@attributes.speed.swimming.value<br>@attributes.speed.burrowing.value<br>@attributes.speed.climbing.value<br>@attributes.speed.special{{#if system.attributes.speed.special}}<br><br>{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Special"}}: {{system.attributes.speed.special}}{{/if}}<br><br>{{#each system.attributes.speed.tooltip as |tip|}}{{tip}}<br>{{/each}}">
     <h4 class="attribute-name box-title">
         {{ localize "SFRPG.Speed" }}
         {{#unless disableEdit}}
@@ -30,7 +30,7 @@
         {{else if (eq system.attributes.speed.mainMovement "climbing")}}
             {{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Climbing" }}
         {{else if (eq system.attributes.speed.mainMovement "flying")}}
-            {{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Flying" }} ({{lookup config.flightManeuverability system.attributes.speed.flying.maneuverability}})
+            {{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Flying" }} ({{lookup d100Aconfig.flightManeuverability system.attributes.speed.flying.maneuverability}})
         {{else if (eq system.attributes.speed.mainMovement "swimming")}}
             {{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Swimming" }}
         {{else if (eq system.attributes.speed.mainMovement "special")}}

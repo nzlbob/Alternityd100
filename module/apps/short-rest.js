@@ -5,7 +5,7 @@
 export class ShortRestDialog extends Dialog {
     constructor(actor, dialogData={}, options={}) {
         super(dialogData, options);
-        this.options.classes = ["sfrpg", "dialog"];
+        this.options.classes = ["Alternityd100", "sfrpg", "dialog"];
 
         /**
          * Store a reference to the Actor entity which is resting
@@ -35,7 +35,7 @@ console.log("HERE--",html)
 
     static async shortRestDialog({actor, canRestoreStaminaPoints=true}={}) {
         ShortRestDialog.restoreStaminaPoints = false;
-        const html = await renderTemplate("systems/Alternityd100/templates/apps/short-rest.html");
+        const html = await foundry.applications.handlebars.renderTemplate("systems/Alternityd100/templates/apps/short-rest.html");
         return new Promise(resolve => {
             const dlg = new this(actor, {
                 title: game.i18n.format("SFRPG.Rest.Short.DialogTitle"),
@@ -85,7 +85,7 @@ console.log("HERE--",html)
                 },
                 default: 'rest',
                 close: reject
-            }, {classes: ["sfrpg", "dialog"]}).render(true);
+            }, {classes: ["Alternityd100", "sfrpg", "dialog"]}).render(true);
         });
     }
 }

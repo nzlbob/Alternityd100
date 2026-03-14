@@ -1,10 +1,19 @@
-<form class="{{cssClass}}" autocomplete="off">
+<main class="flexcol {{cssClass}}">
 
     <!-- HEADER -->
     <header class="sheet-header">
-        <h1 class="charname">
-            <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize "SFRPG.VehicleSheet.Header.NamePlaceholder" }}"/>
-        </h1>
+        <table class="vitals-table">
+            <tbody>
+                <tr>
+                    <td class="profile-img" style="width: 110px;">
+                        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100" />
+                    </td>
+                    <td class="header-fields">
+                        <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize "SFRPG.VehicleSheet.Header.NamePlaceholder" }}"/>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </header>
 
     <!-- BODY -->
@@ -19,8 +28,4 @@
         </div>
     </section>
 
-    <!-- SIDEBAR -->
-    <section class="sheet-sidebar">
-        <img class="sheet-profile" src="{{actor.img}}" title="{{actor.name}}" height="220" width="220" data-edit="img"/>
-    </section>
-</form>
+</main>

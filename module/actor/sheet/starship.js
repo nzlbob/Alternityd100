@@ -1,45 +1,41 @@
-import { ActorSheetSFRPG } from "./base.js";
+//import { ActorSheetSFRPG } from "./base.js";
 //import { d100ActorSheet } from "../../d100Actor-sheet.js";
 import { AddEditSkillDialog } from "../../apps/edit-skill-dialog.js";
 import { ChoiceDialog } from "../../apps/choice-dialog.js";
 import { d100A } from "../../d100Aconfig.js";
  import { rollNPC } from "../../utilities.js";
 import { targetResModData, d100NPCCrewStats } from "../../modifiers/d100mod.js";
-import { getRangeCat, radtodeg, degtorad, raytodeg, inArc, generateUUID } from "../../utilities.js"
+import { getRangeCat, radtodeg, degtorad, raytodeg, inArc, generateUUID, measureDistance } from "../../utilities.js"
 import { moveItemBetweenActorsAsync, getFirstAcceptableStorageIndex, ActorItemHelper, containsItems } from "../actor-inventory-utils.js";
+import { d100ActorSheet } from "../../d100Actor-sheet.js";
 /**
  * An Actor sheet for a starship in the SFRPG system.
  * @type {ActorSheetSFRPG}
  */
-export class d100AActorSheetStarship extends ActorSheetSFRPG {
+export class d100AActorSheetStarship extends d100ActorSheet {
     static get AcceptedEquipment() {
-        return "starshipOrdnance,augmentation,pharmaceutical,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon,weaponAccessory,actorResource";
+        return "starshipOrdnance,augmentation,pharmaceutical,container,equipment,fusion,goods,hybrid,magic,technological,upgrade,shield,weapon,weaponAccessory,actorResource,ordnancePropulsion,ordnanceSensor,ordnanceWarhead";
     }
     static StarshipActionsCache = null;
 
-    static get defaultOptions() {
-        const options = super.defaultOptions;
-        foundry.utils.mergeObject(options, {
-            //classes: ["sfrpg", "sheet", "actor", "starship"],
-            classes: ["Alternityd100", "sheet", "actor", 'starship'],
-            width: 700,
-            height: 800
+    static get DEFAULT_OPTIONS() {
+        const base = super.DEFAULT_OPTIONS;
+        return foundry.utils.mergeObject(base, {
+            position: { width: 700, height: 800 },
+            window: { contentClasses: [...base.window.contentClasses, 'starship'] }
         });
-
-        return options;
     }
 
     constructor(...args) {
         super(...args);
     }
 
-    get template() {
-        if (!game.user.isGM && this.actor.limited) return "systems/Alternityd100/templates/actors/starship-sheet-limited.html";
-        return "systems/Alternityd100/templates/actors/starship-sheet-full.html";
-    }
+        static PARTS = {
+            form: { template: 'systems/Alternityd100/templates/actors/starship-sheet-full.html' }
+        };
 
-    async getData() {
-        const data = super.getData();
+    async _prepareContext(options) {
+        const data = await super._prepareContext(options);
         data.isUseWarshipsOptions =
             (game.settings.get("Alternityd100", "starshipDurability") == "warships") ? data.isUseWarshipsOptions = true : data.isUseWarshipsOptions = false;
 
@@ -53,15 +49,62 @@ export class d100AActorSheetStarship extends ActorSheetSFRPG {
 
 
         // Encrich text editors
-        data.enrichedDescription = await TextEditor.enrichHTML(this.object.system.details.notes, { async: true });
-
-
+        data.enrichedDescription = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.object.system.details.notes, { async: true });
+        // NOTE: Template targets `system.details.ruleNotes` (no trailing 's').
+        // Keep a fallback to legacy/mistyped `rulesNotes` so existing content still displays.
+        const ruleNotes = this.object.system?.details?.ruleNotes ?? this.object.system?.details?.rulesNotes ?? "";
+        data.enrichedrulesNotes = await foundry.applications.ux.TextEditor.implementation.enrichHTML(ruleNotes, { async: true });
 
         data.scanTargets = this.object.system.scanTargets
+
+        data.maneuverabilityPilotingBonusOptions = {
+            0: "",
+            1: "Ord",
+            2: "Good",
+            3: "Ama"
+        };
 
         //data.compartTable = "<td style=\"border: 0px; background-color: #eef8f8; border-color: #eef8f8; \" ></td><td>cell2_2</td><td style=\"border: 0px; background-color: #eef8f8; border-color: #eef8f8; \" ></td>"
         //data.compartTable = "<td>cell1_3</td><td>cell2_3</td><td>cell3_3</td></tr>"
         data.powerOverload = this.powerOverload
+
+        // The base `d100ActorSheet` already prepares and populates `data.status.durability`.
+        // This starship sheet needs to add CRI and rebuild the tracks, so make sure we don't
+        // append to the already-populated arrays (which would double the rendered boxes).
+        data.status = data.status ?? {};
+        data.status.durability = data.status.durability ?? {};
+        data.status.durability.cri = data.status.durability.cri ?? { "good": [], "pend": [], "bad": [] };
+        for (const [key, track] of Object.entries(data.status.durability)) {
+            if (!track || typeof track !== "object") {
+                data.status.durability[key] = { "good": [], "pend": [], "bad": [] };
+                continue;
+            }
+            track.good = [];
+            track.pend = [];
+            track.bad = [];
+        }
+
+      //  data.status.image = { "bad": "systems/Alternityd100/icons/conditions/alt_bad1.png", "good": "systems/Alternityd100/icons/conditions/alt_good1.png", "pend": "systems/Alternityd100/icons/conditions/alt_yell.png" }
+
+        // load the main 
+        for (let [k, v] of Object.entries(data.status.durability)) {
+            // for (const [v,k] of data.status.durability) {
+            for (let i = 0; i < this.actor.system?.attributes[k]?.max; i++) {
+                //console.log(this.actor.system?.attributes[k].value,k,v,i)
+                let good = Math.min(this.actor.system?.attributes[k].value + this.actor.system?.attributes[k].pending, this.actor.system?.attributes[k].value)
+                let pending = Math.max(this.actor.system?.attributes[k].value + this.actor.system?.attributes[k].pending, this.actor.system?.attributes[k].value)
+
+
+                if (good > i) v.good.push({ "value": i, "title": i - this.actor.system?.attributes[k].value });
+                else if (pending > i) v.pend.push({ "value": i, "title": i - this.actor.system?.attributes[k].value });
+
+
+                else v.bad.push({ "value": i, "title": i - this.actor.system?.attributes[k].value + 1 });
+
+            }
+        }
+
+
         return data;
 
     }
@@ -74,13 +117,13 @@ export class d100AActorSheetStarship extends ActorSheetSFRPG {
     async _getShipStatusData(data) {
 
         let shape = []
-        console.log(data)
+      //  console.log(data)
 
 
         //actor.system.compartment.compartments
         //d100A.compartments
         let compartments = this.actor.system?.compartment.compartments
-        console.log(this.actor.system?.compartment)
+      //  console.log(this.actor.system?.compartment)
 
         //filter(item => item.isCompartment == true );
         const itemData = this.actor.system?.frame?.system
@@ -162,6 +205,20 @@ export class d100AActorSheetStarship extends ActorSheetSFRPG {
 
         }
 
+        // Provide a rotated-right representation for compact UI renderings (e.g. tooltips).
+        // Rotation: top-left -> top-right, top-right -> bottom-right, etc.
+        const sourceTable = Array.isArray(data.compartTable) ? data.compartTable : [];
+        const rows = sourceTable.length;
+        const cols = rows ? Math.max(...sourceTable.map(r => Array.isArray(r) ? r.length : 0)) : 0;
+        const rotated = Array.from({ length: cols }, () => Array.from({ length: rows }));
+        for (let r = 0; r < rows; r++) {
+            const rowArr = sourceTable[r] ?? [];
+            for (let c = 0; c < cols; c++) {
+                rotated[c][rows - 1 - r] = rowArr[c];
+            }
+        }
+        data.compartTableRot = rotated;
+
 
     }
 
@@ -173,7 +230,9 @@ export class d100AActorSheetStarship extends ActorSheetSFRPG {
     async _getNPCCrewData(data) {
 
 
-        if (actorData.crew?.useNPCCrew) {
+        const actorData = data?.system ?? data?.actor?.system ?? this.actor.system;
+
+        if (actorData?.crew?.useNPCCrew) {
             let NoNPCCrew = actorData.frame?.system?.crew.minimum || 0
             console.log("NoNPCCrew - ", NoNPCCrew)
 
@@ -184,24 +243,49 @@ export class d100AActorSheetStarship extends ActorSheetSFRPG {
 
 
 
-        let crewData = this.actor.system.crew;
+        const normalizeCrewData = (raw) => {
+            const base = {
+                captain: { limit: 1, actorIds: [] },
+                pilot: { limit: 1, actorIds: [] },
+                copilot: { limit: 1, actorIds: [] },
+                communications: { limit: 1, actorIds: [] },
+                damageControl: { limit: -1, actorIds: [] },
+                defences: { limit: 1, actorIds: [] },
+                engineer: { limit: -1, actorIds: [] },
+                sensors: { limit: -1, actorIds: [] },
+                gunner: { limit: -1, actorIds: [] }
+            };
 
-        if (!crewData || this.actor.system?.flags?.shipsCrew) {
-            crewData = await this._processFlags(data, data.actor.flags);
+            const crew = raw && typeof raw === "object" ? raw : {};
+            const normalized = { ...crew };
+            for (const [role, defaults] of Object.entries(base)) {
+                const roleData = (normalized[role] && typeof normalized[role] === "object") ? normalized[role] : {};
+                const actorIds = Array.isArray(roleData.actorIds) ? roleData.actorIds.filter(Boolean) : [];
+                const limit = Number.isFinite(roleData.limit) ? roleData.limit : defaults.limit;
+                normalized[role] = { ...defaults, ...roleData, limit, actorIds };
+            }
+            return normalized;
+        };
+
+        const hasLegacyCrewFlags = !!this.actor.flags?.sfrpg?.shipsCrew?.members;
+        let crewData = normalizeCrewData(this.actor.system.crew);
+
+        if (!this.actor.system.crew || hasLegacyCrewFlags) {
+            crewData = normalizeCrewData(await this._processFlags(data, this.actor.flags));
         }
 
 
 
-        const captainActors = crewData.captain.actorIds.map(crewId => game.actors.get(crewId));
-        const pilotActors = crewData.pilot.actorIds.map(crewId => game.actors.get(crewId));
-        const copilotActors = crewData.copilot.actorIds.map(crewId => game.actors.get(crewId));
+        const captainActors = crewData.captain.actorIds.map(crewId => game.actors.get(crewId)).filter(Boolean);
+        const pilotActors = crewData.pilot.actorIds.map(crewId => game.actors.get(crewId)).filter(Boolean);
+        const copilotActors = crewData.copilot.actorIds.map(crewId => game.actors.get(crewId)).filter(Boolean);
         // const navigationActors = crewData.navigation.actorIds.map(crewId => game.actors.get(crewId));
-        const communicationsActors = crewData.communications.actorIds.map(crewId => game.actors.get(crewId));
-        const damageControlActors = crewData.damageControl.actorIds.map(crewId => game.actors.get(crewId));
-        const defencesActors = crewData.defences.actorIds.map(crewId => game.actors.get(crewId));
-        const engineerActors = crewData.engineer.actorIds.map(crewId => game.actors.get(crewId));
-        const sensorsActors = crewData.sensors.actorIds.map(crewId => game.actors.get(crewId));
-        const gunnerActors = crewData.gunner.actorIds.map(crewId => game.actors.get(crewId));
+        const communicationsActors = crewData.communications.actorIds.map(crewId => game.actors.get(crewId)).filter(Boolean);
+        const damageControlActors = crewData.damageControl.actorIds.map(crewId => game.actors.get(crewId)).filter(Boolean);
+        const defencesActors = crewData.defences.actorIds.map(crewId => game.actors.get(crewId)).filter(Boolean);
+        const engineerActors = crewData.engineer.actorIds.map(crewId => game.actors.get(crewId)).filter(Boolean);
+        const sensorsActors = crewData.sensors.actorIds.map(crewId => game.actors.get(crewId)).filter(Boolean);
+        const gunnerActors = crewData.gunner.actorIds.map(crewId => game.actors.get(crewId)).filter(Boolean);
         // const scienceOfficerActors = crewData.scienceOfficer.actorIds.map(crewId => game.actors.get(crewId));
         // const chiefMateActors = crewData.chiefMate.actorIds.map(crewId => game.actors.get(crewId));
         // const magicOfficerActors = crewData.magicOfficer.actorIds.map(crewId => game.actors.get(crewId));
@@ -382,24 +466,47 @@ export class d100AActorSheetStarship extends ActorSheetSFRPG {
      * @param {Object} data The data object to update with any crew data.
      */
     async _getCrewData(data) {
-        let crewData = this.actor.system.crew;
+        const normalizeCrewData = (raw) => {
+            const base = {
+                captain: { limit: 1, actorIds: [] },
+                pilot: { limit: 1, actorIds: [] },
+                copilot: { limit: 1, actorIds: [] },
+                communications: { limit: 1, actorIds: [] },
+                damageControl: { limit: -1, actorIds: [] },
+                defences: { limit: 1, actorIds: [] },
+                engineer: { limit: -1, actorIds: [] },
+                sensors: { limit: -1, actorIds: [] },
+                gunner: { limit: -1, actorIds: [] }
+            };
 
-        if (!crewData || this.actor.system?.flags?.shipsCrew) {
-            crewData = await this._processFlags(data, data.actor.flags);
+            const crew = raw && typeof raw === "object" ? raw : {};
+            const normalized = { ...crew };
+            for (const [role, defaults] of Object.entries(base)) {
+                const roleData = (normalized[role] && typeof normalized[role] === "object") ? normalized[role] : {};
+                const actorIds = Array.isArray(roleData.actorIds) ? roleData.actorIds.filter(Boolean) : [];
+                const limit = Number.isFinite(roleData.limit) ? roleData.limit : defaults.limit;
+                normalized[role] = { ...defaults, ...roleData, limit, actorIds };
+            }
+            return normalized;
+        };
+
+        let crewData = normalizeCrewData(this.actor.system.crew);
+
+        if (!this.actor.system.crew || this.actor.system?.flags?.shipsCrew) {
+            crewData = normalizeCrewData(await this._processFlags(data, data.actor.flags));
         }
 
 
-
-        const captainActors = crewData.captain.actorIds.map(crewId => game.actors.get(crewId));
-        const pilotActors = crewData.pilot.actorIds.map(crewId => game.actors.get(crewId));
-        const copilotActors = crewData.copilot.actorIds.map(crewId => game.actors.get(crewId));
+        const captainActors = crewData.captain.actorIds.map(crewId => game.actors.get(crewId)).filter(Boolean);
+        const pilotActors = crewData.pilot.actorIds.map(crewId => game.actors.get(crewId)).filter(Boolean);
+        const copilotActors = crewData.copilot.actorIds.map(crewId => game.actors.get(crewId)).filter(Boolean);
         //  const navigationActors = crewData.navigation.actorIds.map(crewId => game.actors.get(crewId));
-        const communicationsActors = crewData.communications.actorIds.map(crewId => game.actors.get(crewId));
-        const damageControlActors = crewData.damageControl.actorIds.map(crewId => game.actors.get(crewId));
-        const defencesActors = crewData.defences.actorIds.map(crewId => game.actors.get(crewId));
-        const engineerActors = crewData.engineer.actorIds.map(crewId => game.actors.get(crewId));
-        const sensorsActors = crewData.sensors.actorIds.map(crewId => game.actors.get(crewId));
-        const gunnerActors = crewData.gunner.actorIds.map(crewId => game.actors.get(crewId));
+        const communicationsActors = crewData.communications.actorIds.map(crewId => game.actors.get(crewId)).filter(Boolean);
+        const damageControlActors = crewData.damageControl.actorIds.map(crewId => game.actors.get(crewId)).filter(Boolean);
+        const defencesActors = crewData.defences.actorIds.map(crewId => game.actors.get(crewId)).filter(Boolean);
+        const engineerActors = crewData.engineer.actorIds.map(crewId => game.actors.get(crewId)).filter(Boolean);
+        const sensorsActors = crewData.sensors.actorIds.map(crewId => game.actors.get(crewId)).filter(Boolean);
+        const gunnerActors = crewData.gunner.actorIds.map(crewId => game.actors.get(crewId)).filter(Boolean);
         //  const scienceOfficerActors = crewData.scienceOfficer.actorIds.map(crewId => game.actors.get(crewId));
         //  const chiefMateActors = crewData.chiefMate.actorIds.map(crewId => game.actors.get(crewId));
         //  const magicOfficerActors = crewData.magicOfficer.actorIds.map(crewId => game.actors.get(crewId));
@@ -434,7 +541,7 @@ export class d100AActorSheetStarship extends ActorSheetSFRPG {
 
             for (let thisactor of role.actors) {
                 let actor = {}
-                console.log("\n----SkillArray\n", d100A.skillArray[key], role)
+           //     console.log("\n----SkillArray\n", d100A.skillArray[key], role)
 
                 let tempskill = {}
                 let tempskillGen = {}
@@ -446,7 +553,7 @@ export class d100AActorSheetStarship extends ActorSheetSFRPG {
 
                     tempskill = thisactor.system.skills[thisskill.name]
                     tempskillGen = thisactor.system.skills[thisskill.bname]
-                    console.log(tempskill)
+               //     console.log(tempskill)
                     score = "[" + tempskill.base + "/" + tempskill.good + "/" + tempskill.amazing + "]" + tempskill.stepdie
                     label = tempskillGen.label + "-" + tempskill.label
 
@@ -579,10 +686,10 @@ export class d100AActorSheetStarship extends ActorSheetSFRPG {
                 limit: 1,
                 actorIds: []
             },
-            //   navigation: {
-            //       limit: 1,
-            //       actorIds: []
-            //   },   
+            navigation: {
+                limit: 1,
+                actorIds: []
+            },
             communications: {
                 limit: 1,
                 actorIds: []
@@ -609,25 +716,14 @@ export class d100AActorSheetStarship extends ActorSheetSFRPG {
                 actorIds: []
             },
 
-            /*    scienceOfficer: {
-                    limit: -1,
-                    actorIds: []
-                },           
-                chiefMate: {
-                    limit: -1,
-                    actorIds: []
-                },
-    
-    
-                magicOfficer: {
-                    limit: -1,
-                    actorIds: []
-                },
-                passenger: {
-                    limit: -1,
-                    actorIds: []
-                }
-    */
+            scienceOfficer: {
+                limit: -1,
+                actorIds: []
+            },
+            passenger: {
+                limit: -1,
+                actorIds: []
+            }
 
 
 
@@ -649,18 +745,29 @@ export class d100AActorSheetStarship extends ActorSheetSFRPG {
             let crewMember = actor.getFlag("sfrpg", "crewMember") || null;
             if (!crewMember) continue;
 
-            if (crewMember.role === "captain") newCrew.captain.actorIds.push(actorId);
-            else if (crewMember.role === "engineer") newCrew.engineer.actorIds.push(actorId);
-            else if (crewMember.role === "gunner") newCrew.gunner.actorIds.push(actorId);
-            else if (crewMember.role === "pilot") newCrew.pilot.actorIds.push(actorId);
-            else if (crewMember.role === "copilot") newCrew.copilot.actorIds.push(actorId);
-            else if (crewMember.role === "navigation") newCrew.navigation.actorIds.push(actorId);
-            else if (crewMember.role === "scienceOfficers") newCrew.scienceOfficer.actorIds.push(actorId);
-            else if (crewMember.role === "passengers") newCrew.passenger.actorIds.push(actorId);
+            const roleMap = {
+                captain: "captain",
+                pilot: "pilot",
+                copilot: "copilot",
+                communications: "communications",
+                damageControl: "damageControl",
+                defences: "defences",
+                engineer: "engineer",
+                sensors: "sensors",
+                gunner: "gunner",
+                navigation: "navigation",
+                scienceOfficer: "scienceOfficer",
+                scienceOfficers: "scienceOfficer",
+                passenger: "passenger",
+                passengers: "passenger"
+            };
+
+            const mapped = roleMap[crewMember.role];
+            if (mapped && newCrew[mapped]) newCrew[mapped].actorIds.push(actorId);
         }
 
         await this.actor.update({
-            "data.crew": newCrew
+            "system.crew": newCrew
         });
 
         let cleanflags = foundry.utils.duplicate(this.actor.flags);
@@ -838,6 +945,33 @@ export class d100AActorSheetStarship extends ActorSheetSFRPG {
         //arcs.turret.items = turret;
         arcs.unmounted.items = unmounted;
 
+        // Battery groups (Mode G) are tracked on the actor as a flag array-of-arrays.
+        // Mark each starship weapon so the sheet can disable firing for non-leader battery members.
+        const rawBatteries = this.actor.getFlag("Alternityd100", "batteries");
+        const batteries = Array.isArray(rawBatteries)
+            ? rawBatteries.map(g => Array.isArray(g) ? g.filter(Boolean) : [])
+            : [];
+
+        const batteryIndexByItemId = new Map();
+        for (let groupIndex = 0; groupIndex < batteries.length; groupIndex++) {
+            const group = batteries[groupIndex] ?? [];
+            for (let indexInGroup = 0; indexInGroup < group.length; indexInGroup++) {
+                const id = group[indexInGroup];
+                if (!id) continue;
+                batteryIndexByItemId.set(id, { groupIndex, indexInGroup });
+            }
+        }
+
+        const applyBatteryMeta = (weapon) => {
+            const info = batteryIndexByItemId.get(weapon?._id);
+            weapon.isBatteryMember = !!info;
+            weapon.isBatteryLeader = !!info && info.indexInGroup === 0;
+            weapon.batteryGroup = info ? info.groupIndex : null;
+        };
+
+        for (const weapon of mounted) applyBatteryMeta(weapon);
+        for (const weapon of unmounted) applyBatteryMeta(weapon);
+
         data.arcs = Object.values(arcs);
 
         const features = {
@@ -853,7 +987,7 @@ export class d100AActorSheetStarship extends ActorSheetSFRPG {
             otherSystems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.OtherSystems"), items: otherSystems, hasActions: false, dataset: { type: "starshipOtherSystem" } },
             //  securitySystems: { label: game.i18n.format("SFRPG.StarshipSheet.Features.SecuritySystems"), items: securitySystems, hasActions: false, dataset: { type: "starshipSecuritySystem" } },
             //   expansionBays: { label: game.i18n.format("SFRPG.StarshipSheet.Features.ExpansionBays", {current: expansionBays.length, max: data.system.attributes.expansionBays?.value}), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } },
-            ordnance: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Ordnance"), items: ordnance, hasActions: false, dataset: { type: "starshipOrdnance" } },
+          //  ordnance: { label: game.i18n.format("SFRPG.StarshipSheet.Features.Ordnance"), items: ordnance, hasActions: false, dataset: { type: "starshipOrdnance" } },
             //  resources: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"), items: actorResources, hasActions: false, dataset: { type: "actorResource" } }
 
         };
@@ -927,66 +1061,544 @@ export class d100AActorSheetStarship extends ActorSheetSFRPG {
      * 
      * @param {HTML} html The prepared HTML object ready to be rendered into the DOM
      */
-    activateListeners(html) {
+    _onRender(context, options) {
+        super._onRender?.(context, options);
+        const root = this.element;
+        if (!root) return;
 
-        super.activateListeners(html);
-        // console.log("HERE--",html)
-        if (!this.options.editable) return;
+        const bind = (selector, type, handler) => {
+            root.querySelectorAll(selector).forEach((el) => {
+                el.addEventListener(type, handler);
+            });
+        };
+
+        // Nav Computer calculator is purely client-side UI; allow it for all viewers.
+        bind('button.nav-computer-calculate', 'click', (event) => this._onNavComputerCalculate(event));
+
+        // Allow players/viewers to target scan contacts even if they cannot edit the ship.
+        bind('button.tag.target', 'click', (event) => this._onTargetTokenClicked(event));
+        bind('a.scan-contact-delete', 'click', (event) => this._onScanContactDelete(event));
+
+        // Keep Target button state in sync with token targeting.
+        this._attachTargetTokenHook();
+        this._updateScanContactTargetButtons(root);
+
+        if (!this.isEditable) return;
 
         // Crew Tab
-        html.find('.crew-view').click(event => this._onActorView(event));
-        //html.find('.crew-score').click(event => this._onActionRoll(event));
+        bind('.crew-view', 'click', (event) => this._onActorView(event));
+        bind('.crew-delete', 'click', this._onRemoveFromCrew.bind(this));
+        bind('.crew-combat', 'click', this._onCrewCombat.bind(this));
 
-        html.find('.crew-delete').click(this._onRemoveFromCrew.bind(this));
-        html.find('.crew-combat').click(this._onCrewCombat.bind(this));
-        let handler = ev => this._onDragCrewStart(ev);
-        html.find('li.crew').each((i, li) => {
-            li.setAttribute("draggable", true);
-            li.addEventListener("dragstart", handler, false);
+        const dragStartHandler = (event) => this._onDragCrewStart(event);
+        root.querySelectorAll('li.crew').forEach((li) => {
+            li.setAttribute('draggable', true);
+            li.addEventListener('dragstart', dragStartHandler, false);
         });
 
-        html.find('.crew-list').each((i, li) => {
-            li.addEventListener("dragover", this._onCrewDragOver.bind(this), false);
-            // li.addEventListener("drop", this._onCrewDrop.bind(this), false);
+        root.querySelectorAll('.crew-list').forEach((li) => {
+            li.addEventListener('dragover', this._onCrewDragOver.bind(this), false);
         });
 
-        html.find('li.crew-header').each((i, li) => {
-            li.addEventListener("dragenter", this._onCrewDragEnter, false);
-            li.addEventListener("dragleave", this._onCrewDragLeave, false);
+        root.querySelectorAll('li.crew-header').forEach((li) => {
+            li.addEventListener('dragenter', this._onCrewDragEnter, false);
+            li.addEventListener('dragleave', this._onCrewDragLeave, false);
         });
 
-        html.find('.action .action-name h4').click(event => this._onCrewActionOpen(event));//_onActionRoll
-        html.find('.action .action-image').click(event => this._onCrewActionRoll(event));
-        //  html.find('.action .action-image').click(event => this._onActionRoll(event));
-        html.find('.action-name2').click(event => this._onNPCreset(event));
+        bind('.action .action-name h4', 'click', (event) => this._onCrewActionOpen(event));
+        bind('.action .action-image', 'click', (event) => this._onCrewActionRoll(event));
+        bind('.action-name2', 'click', (event) => this._onNPCreset(event));
+        bind('.crew-score', 'click', (event) => this._onSkillroll(event));
 
-        html.find('.crew-score').click(event => this._onSkillroll(event));
+        bind('.skill-create', 'click', (event) => this._onCrewSkillCreate(event));
+        bind('.skill-delete', 'click', this._onCrewSkillDelete.bind(this));
+        bind('.crew-role-alter', 'change', this._onCrewChanged.bind(this));
 
-        html.find('.skill-create').click(ev => this._onCrewSkillCreate(ev));
-        html.find('.skill-delete').click(this._onCrewSkillDelete.bind(this));
-        html.find('.crew-role-alter').change(this._onCrewChanged.bind(this));
+        bind('.scan-refresh', 'click', this._onscanRefresh.bind(this));
 
+        bind('.systdamagebutton', 'click', this._onsystdamagebutton.bind(this));
+        bind('.damagecheckbutton', 'click', this._ondamagecheckbutton.bind(this));
 
-        html.find('.scan-refresh').click(this._onscanRefresh.bind(this));
+        bind('.crew-skill-mod', 'change', this._onCrewSkillModifierChanged.bind(this));
+        bind('.crew-skill-ranks', 'change', this._onCrewSkillRanksChanged.bind(this));
 
-        html.find('.systdamagebutton').click(this._onsystdamagebutton.bind(this));
-        html.find('.damagecheckbutton').click(this._ondamagecheckbutton.bind(this));
+        bind('.critical-edit', 'click', this._onEditAffectedCriticalRoles.bind(this));
 
+        bind('.reload', 'click', this._onWeaponReloadClicked.bind(this));
 
+        bind('.value-compt', 'change', (event) => this._onChangeCompartment(event));
+        bind('.value-equipmentStatus', 'change', (event) => this._onChangeStatus(event));
+        bind('.setCompartmentDur', 'change', (event) => this._onChangesetCompartmentDur(event));
+        bind('.clickonoff', 'click', (event) => this._onOnOff(event));
+        bind('.clickoverload', 'click', (event) => this._toggleOverload(event));
 
-        html.find('.crew-skill-mod').change(this._onCrewSkillModifierChanged.bind(this));
-        html.find('.crew-skill-ranks').change(this._onCrewSkillRanksChanged.bind(this));
+        this._applyStatusTableSystemTooltips(root);
+        this._activateDelayedStatusTableSystemTooltips(root);
+        this._activateStatusTableSystemContextMenu(root);
+    }
 
-        html.find('.critical-edit').click(this._onEditAffectedCriticalRoles.bind(this));
+    _onNavComputerCalculate(event) {
+        event.preventDefault();
+        event.stopPropagation();
 
-        html.find('.reload').click(this._onWeaponReloadClicked.bind(this));
+        const button = event.currentTarget;
+        const row = button?.closest?.('tr') ?? this.element;
 
-        html.find('.value-compt').change(event => this._onChangeCompartment(event));
-        html.find('.value-equipmentStatus').change(event => this._onChangeStatus(event));
-        html.find('.setCompartmentDur').change(event => this._onChangesetCompartmentDur(event));
-        html.find('.clickonoff').click(event => this._onOnOff(event));
-        html.find('.clickoverload').click(event => this._toggleOverload(event));
+        const distanceInput = row?.querySelector?.('input.nav-computer-distance')
+            ?? this.element?.querySelector?.('input.nav-computer-distance');
+        const distanceUnitSelect = row?.querySelector?.('select.nav-computer-distance-unit')
+            ?? this.element?.querySelector?.('select.nav-computer-distance-unit');
+        const accelInput = row?.querySelector?.('input.nav-computer-accel')
+            ?? this.element?.querySelector?.('input.nav-computer-accel');
+        const resultEl = row?.querySelector?.('.nav-computer-result')
+            ?? this.element?.querySelector?.('.nav-computer-result');
 
+        const distanceRaw = parseFloat(distanceInput?.value ?? '');
+        const distanceUnit = (distanceUnitSelect?.value ?? 'au').toString();
+        const accelerationMpp = parseFloat(accelInput?.value ?? '');
+        const useRelativistic = !!game?.settings?.get?.("Alternityd100", "navComputerRelativistic");
+
+        if (!Number.isFinite(distanceRaw) || !Number.isFinite(accelerationMpp) || distanceRaw < 0 || accelerationMpp <= 0) {
+            if (resultEl) {
+                resultEl.textContent = '(dd-hh-mm)';
+                resultEl.removeAttribute?.('data-tooltip');
+              //  resultEl.removeAttribute?.('title');
+            }
+            ui.notifications?.warn?.('Enter a valid Distance (au) and Acceleration (Mpp > 0).');
+            return;
+        }
+
+        const distanceAu = this._convertDistanceToAu(distanceRaw, distanceUnit);
+        if (!Number.isFinite(distanceAu) || distanceAu < 0) {
+            if (resultEl) {
+                resultEl.textContent = '(dd-hh-mm)';
+                resultEl.removeAttribute?.('data-tooltip');
+              //  resultEl.removeAttribute?.('title');
+            }
+            ui.notifications?.warn?.('Unknown/invalid distance unit selection.');
+            return;
+        }
+
+        const hours = this._computeNavTravelTimeHours(distanceAu, accelerationMpp);
+        if (!Number.isFinite(hours)) {
+            if (resultEl) {
+                resultEl.textContent = '(dd-hh-mm)';
+                resultEl.removeAttribute?.('data-tooltip');
+              //  resultEl.removeAttribute?.('title');
+            }
+            ui.notifications?.warn?.('Could not calculate travel time with those values.');
+            return;
+        }
+
+        // Diagnostics + tooltip support.
+        // Assumption (as used elsewhere in this project):
+        // 1 Mpp = 1000 km per 30 seconds / 30 seconds => 1000 km / (30s)^2.
+        const KM_PER_AU = 149_597_870.7;
+        const SECONDS_PER_PULSE = 30;
+        const KM_PER_MPP_PER_PULSE = 1_000;
+        const aKmPerS2 = accelerationMpp * (KM_PER_MPP_PER_PULSE / (SECONDS_PER_PULSE * SECONDS_PER_PULSE));
+
+        const aMS2 = aKmPerS2 * 1_000;
+        const g0 = 9.80665;
+        const accelG = aMS2 / g0;
+
+        const distanceKm = distanceAu * KM_PER_AU;
+
+        const nf = new Intl.NumberFormat(undefined, { maximumFractionDigits: 2 });
+        const nf0 = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 });
+
+        if (resultEl) {
+            if (!useRelativistic) {
+                const ddhhmm = this._formatHoursToDdHhMm(hours);
+                resultEl.textContent = `${hours.toFixed(2)} h (${ddhhmm})`;
+
+                const vPeakKmPerS = Math.sqrt(aKmPerS2 * distanceKm);
+                const cKmPerS = 299_792.458;
+                const pctC = (vPeakKmPerS / cKmPerS) * 100;
+                const note = (pctC > 100)
+                    ? '<br><em>Note: peak speed > 100% c means the non-relativistic formula is being used.</em>'
+                    : '';
+
+                const tooltip = [
+                    `<strong>Acceleration</strong>: ${nf.format(accelG)} g`,
+                    `<strong>Peak speed</strong>: ${nf0.format(vPeakKmPerS)} km/s (${nf.format(pctC)}% c)`,
+                    note
+                ].filter(Boolean).join('<br>');
+
+                resultEl.setAttribute('data-tooltip', tooltip);
+              //  resultEl.setAttribute('title', tooltip.replace(/<[^>]*>/g, ''));
+                return;
+            }
+
+            // Relativistic: constant proper acceleration for half, then symmetric deceleration.
+            // Solve using:
+            // x_half = (c^2/a) * (cosh(alpha) - 1)
+            // t_half = (c/a) * sinh(alpha)
+            // tau_half = (c/a) * alpha
+            // v_peak = c * tanh(alpha)
+            // where alpha = a * tau_half / c = acosh(1 + a*x_half/c^2)
+            const cMS = 299_792_458;
+            const xHalfM = (distanceKm * 1_000) / 2;
+            const a = aMS2;
+
+            const alpha = Math.acosh(1 + (a * xHalfM) / (cMS * cMS));
+            const tHalfS = (cMS / a) * Math.sinh(alpha);
+            const tauHalfS = (cMS / a) * alpha;
+
+            const univHours = (2 * tHalfS) / 3600;
+            const shipHours = (2 * tauHalfS) / 3600;
+
+            const univFmt = this._formatHoursToDdHhMm(univHours);
+            const shipFmt = this._formatHoursToDdHhMm(shipHours);
+            resultEl.innerHTML = `U ${univHours.toFixed(2)} h (${univFmt}) <br> S ${shipHours.toFixed(2)} h (${shipFmt})`;
+
+            const vPeakKmPerS = (cMS * Math.tanh(alpha)) / 1_000;
+            const pctC = Math.tanh(alpha) * 100;
+            const gamma = Math.cosh(alpha);
+
+            const tooltip = [
+                `<strong>Acceleration</strong>: ${nf.format(accelG)} g (proper)`,
+                `<strong>Peak speed</strong>: ${nf0.format(vPeakKmPerS)} km/s (${nf.format(pctC)}% c)`,
+                `<strong>Gamma</strong>: ${nf.format(gamma)}`
+            ].join('<br>');
+
+            resultEl.setAttribute('data-tooltip', tooltip);
+          //  resultEl.setAttribute('title', tooltip.replace(/<[^>]*>/g, ''));
+        }
+    }
+
+    _convertDistanceToAu(distance, unit) {
+        const rawUnit = (unit ?? 'au').toString().trim().toLowerCase();
+        const u = rawUnit.replace(/\s+/g, '').replace(/-/g, '');
+        if (!Number.isFinite(distance)) return NaN;
+
+        // Exact definitions where possible.
+        // 1 AU = 149,597,870.7 km (IAU conventional).
+        const KM_PER_AU = 149_597_870.7;
+        // 1 ly = 9,460,730,472,580.8 km (Julian light-year), then divided by KM_PER_AU.
+        // Using AU-per-ly directly avoids floating rounding from a huge km figure.
+        const AU_PER_LY = 63_241.077088071;
+        const KM_PER_MI = 1.609344;
+        const KM_PER_MM = 1_000; // 1 megameteradd = 1,000 km.
+
+        switch (u) {
+            case 'au':
+                return distance;
+            case 'ly':
+            case 'lightyear':
+            case 'lightyears':
+                return distance * AU_PER_LY;
+            case 'km':
+                return distance / KM_PER_AU;
+            case 'mm':
+                return (distance * KM_PER_MM) / KM_PER_AU;
+            case 'mi':
+            case 'mile':
+            case 'miles':
+                return (distance * KM_PER_MI) / KM_PER_AU;
+            default:
+                return NaN;
+        }
+    }
+
+    _computeNavTravelTimeHours(distanceAu, accelerationMpp) {
+        // User-specified formula (assumes start/end velocity = 0):
+        // Time(hours) = sqrt(Distance(au) / Acceleration(Mpp)) * 6.44631399199057
+        return Math.sqrt(distanceAu / accelerationMpp) * 6.44631399199057;
+    }
+
+    _formatHoursToDdHhMm(hours) {
+        const totalMinutes = Math.round(hours * 60);
+        const days = Math.floor(totalMinutes / (60 * 24));
+        const hoursR = Math.floor((totalMinutes - days * 60 * 24) / 60);
+        const minutesR = totalMinutes - days * 60 * 24 - hoursR * 60;
+        const pad2 = (n) => String(n).padStart(2, '0');
+        return `${pad2(days)}d ${pad2(hoursR)}h ${pad2(minutesR)}m`;
+    }
+
+    async _onTargetTokenClicked(event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const button = event.currentTarget;
+        const tokenId = button?.dataset?.tokenid || button?.dataset?.tokenId || button?.closest?.('li.item')?.dataset?.itemId;
+        if (!tokenId) {
+            ui.notifications?.warn?.('No token id found for that contact.');
+            return;
+        }
+
+        const token = canvas?.tokens?.get?.(tokenId)
+            ?? canvas?.scene?.tokens?.get?.(tokenId)?.object
+            ?? null;
+
+        if (!token?.setTarget) {
+            ui.notifications?.warn?.(`Token not found on the current scene (${tokenId}).`);
+            return;
+        }
+
+        const nextState = !token.isTargeted;
+        const releaseOthers = !event.shiftKey;
+        token.setTarget(nextState, { releaseOthers });
+
+        // Update immediately (the hook also fires, but this makes UI feel snappier).
+        this._updateScanContactTargetButtons();
+    }
+
+    _attachTargetTokenHook() {
+        if (this._d100aTargetTokenHookAttached) return;
+        if (!Hooks?.on) return;
+
+        this._d100aTargetTokenHookAttached = true;
+        this._d100aTargetTokenHookFn = (user, token, targeted) => {
+            try {
+                const myUserId = game?.user?.id;
+                const userId = user?.id ?? user;
+                if (myUserId && userId && String(userId) !== String(myUserId)) return;
+
+                // Only update if this sheet is currently rendered.
+                if (!this.element) return;
+                this._updateScanContactTargetButtons();
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        Hooks.on('targetToken', this._d100aTargetTokenHookFn);
+    }
+
+    _updateScanContactTargetButtons(root = this.element) {
+        if (!root) return;
+
+        const myUserId = game?.user?.id;
+        root.querySelectorAll('button.tag.target').forEach((button) => {
+            const tokenId = button?.dataset?.tokenid
+                || button?.dataset?.tokenId
+                || button?.closest?.('li.item')?.dataset?.itemId;
+
+            const token = tokenId
+                ? (canvas?.tokens?.get?.(tokenId)
+                    ?? canvas?.scene?.tokens?.get?.(tokenId)?.object
+                    ?? null)
+                : null;
+
+            const isTargeted = token
+                ? (typeof token.isTargeted === 'boolean'
+                    ? token.isTargeted
+                    : Boolean(token.targeted?.has?.(myUserId)))
+                : false;
+
+            button.classList.toggle('is-targeted', Boolean(isTargeted));
+        });
+    }
+
+    async close(options = {}) {
+        if (this._d100aTargetTokenHookFn && Hooks?.off) {
+            Hooks.off('targetToken', this._d100aTargetTokenHookFn);
+        }
+        this._d100aTargetTokenHookAttached = false;
+        this._d100aTargetTokenHookFn = null;
+        return super.close?.(options);
+    }
+
+    async _onScanContactDelete(event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const tokenId = event.currentTarget?.dataset?.tokenid ?? event.currentTarget?.dataset?.tokenId;
+        if (!tokenId) {
+            ui.notifications?.warn?.('No token id found for that contact.');
+            return;
+        }
+
+        const current = this.actor?.system?.scanTargets ?? [];
+        const next = Array.isArray(current)
+            ? current.filter((t) => String(t?.token?.id ?? '') !== String(tokenId))
+            : [];
+
+        try {
+            await this.actor.update({ "system.scanTargets": next });
+        } catch (err) {
+            console.error(err);
+            ui.notifications?.error?.('You do not have permission to delete that contact.');
+        }
+    }
+
+    _applyStatusTableSystemTooltips(root) {
+        const escape = foundry?.utils?.escapeHTML ?? ((s) => String(s));
+
+        root.querySelectorAll('.statusTable_3-system[data-item-id]').forEach((el) => {
+            const itemId = el.dataset.itemId;
+            if (!itemId) return;
+
+            const item = this.actor.items.get(itemId);
+            if (!item) return;
+
+            const statusKey = item.system?.status ?? el.dataset.status ?? '';
+            const statusLabel = d100A?.equipmentStatus?.[statusKey] ?? statusKey ?? '';
+
+            const powered = Boolean(item.system?.isPowered);
+            const overPowered = Boolean(item.system?.overPowered);
+
+            // Keep dataset in sync so CSS reflects the current system state.
+            el.dataset.status = statusKey;
+            el.dataset.powered = powered ? 'true' : 'false';
+            el.dataset.overpowered = overPowered ? 'true' : 'false';
+
+            const location = el.dataset.location;
+            const pcu = Number.isFinite(item.system?.pcu) ? item.system.pcu : null;
+
+            const rows = [
+                ['Type', item.type],
+                location ? ['Location', location] : null,
+                statusLabel ? ['Status', statusLabel] : null,
+                ['Power', powered ? 'On' : 'Off'],
+                ['Overpowered', overPowered ? 'Overpowered' : 'Normal'],
+                pcu !== null ? ['PCU', String(pcu)] : null,
+                ['Left Click', 'Toggle Power'],
+                ['Left Click (Bolt)', 'Toggle Overload'],
+                ['Right Click', 'Set Status'],
+            ].filter(Boolean);
+
+            const tooltip = [
+                `<div class="statusTable_3-system-tooltip">`,
+                `  <div class="statusTable_3-system-tooltip__title">${escape(item.name ?? '')}</div>`,
+                `  <dl class="statusTable_3-system-tooltip__grid">`,
+                ...rows.map(([k, v]) => `    <dt>${escape(k)}</dt><dd>${escape(v ?? '')}</dd>`),
+                `  </dl>`,
+                `</div>`
+            ].join('');
+
+            // Store tooltip HTML for delayed activation.
+            el.dataset.statusTableTooltip = tooltip;
+            el.dataset.tooltipDirection = el.dataset.tooltipDirection || 'UP';
+        });
+    }
+
+    _activateDelayedStatusTableSystemTooltips(root) {
+        // Attach once per render root; individual elements may change on rerender.
+        if (root.dataset?.statusTable3DelayedTooltipsAttached === 'true') return;
+        root.dataset.statusTable3DelayedTooltipsAttached = 'true';
+
+        const timers = new WeakMap();
+        const delayMs = 1000;
+        let activeEl = null;
+
+        const clearTimer = (el) => {
+            const t = timers.get(el);
+            if (t) window.clearTimeout(t);
+            timers.delete(el);
+        };
+
+        const deactivate = () => {
+            try {
+                game?.tooltip?.deactivate?.();
+            } catch (_) {
+                /* ignore */
+            }
+        };
+
+        const activateTooltip = (el) => {
+            const html = el.dataset.statusTableTooltip;
+            if (!html) return;
+            const direction = el.dataset.tooltipDirection || 'UP';
+            try {
+                game?.tooltip?.activate?.(el, { html, direction });
+                activeEl = el;
+            } catch (_) {
+                /* ignore */
+            }
+        };
+
+        // Use mouseover/mouseout for reliable event delegation.
+        root.addEventListener('mouseover', (event) => {
+            const el = event.target?.closest?.('.statusTable_3-system');
+            if (!el || !root.contains(el)) return;
+
+            // Ignore movement within the same system row.
+            if (event.relatedTarget && el.contains(event.relatedTarget)) return;
+
+            // If we're entering a new row, cancel any existing tooltip.
+            if (activeEl && activeEl !== el) deactivate();
+
+            clearTimer(el);
+            const timer = window.setTimeout(() => activateTooltip(el), delayMs);
+            timers.set(el, timer);
+        }, true);
+
+        root.addEventListener('mouseout', (event) => {
+            const el = event.target?.closest?.('.statusTable_3-system');
+            if (!el || !root.contains(el)) return;
+
+            // Ignore movement within the same system row.
+            if (event.relatedTarget && el.contains(event.relatedTarget)) return;
+
+            clearTimer(el);
+            if (activeEl === el) activeEl = null;
+            deactivate();
+        }, true);
+
+        // Also cancel if focus shifts / context menu opens.
+        root.addEventListener('contextmenu', (event) => {
+            const el = event.target?.closest?.('.statusTable_3-system');
+            if (!el || !root.contains(el)) return;
+            clearTimer(el);
+            if (activeEl === el) activeEl = null;
+            deactivate();
+        }, true);
+    }
+
+    _activateStatusTableSystemContextMenu(root) {
+        // ContextMenu is namespaced under foundry.applications.ux in v13+.
+        const ContextMenuImpl = foundry?.applications?.ux?.ContextMenu?.implementation;
+        if (!ContextMenuImpl) return;
+
+        const setStatus = async (target, statusKey) => {
+            const el = target?.[0] ?? target;
+            const itemId = el?.dataset?.itemId;
+            if (!itemId) return;
+            const item = this.actor.items.get(itemId);
+            if (!item) return;
+
+            await item.update({ 'system.status': statusKey });
+
+            // Update UI datasets immediately (tooltip generator will also keep this in sync).
+            el.dataset.status = statusKey;
+        };
+
+        const items = [
+            {
+                name: d100A?.equipmentStatus?.normal ?? 'Normal',
+                icon: '<i class="fas fa-circle"></i>',
+                callback: (li) => setStatus(li, 'normal')
+            },
+            {
+                name: d100A?.equipmentStatus?.degraded ?? 'Degraded',
+                icon: '<i class="fas fa-exclamation-triangle"></i>',
+                callback: (li) => setStatus(li, 'degraded')
+            },
+            {
+                name: d100A?.equipmentStatus?.knocked ?? 'Knocked Out',
+                icon: '<i class="fas fa-ban"></i>',
+                callback: (li) => setStatus(li, 'knocked')
+            },
+            {
+                name: d100A?.equipmentStatus?.destroyed ?? 'Destroyed',
+                icon: '<i class="fas fa-skull"></i>',
+                callback: (li) => setStatus(li, 'destroyed')
+            }
+        ];
+
+        // Only attach once per render.
+        if (root.dataset?.statusTable3ContextMenuAttached === 'true') return;
+        root.dataset.statusTable3ContextMenuAttached = 'true';
+        new ContextMenuImpl(root, '.statusTable_3-system', items, { jQuery: false });
+    }
+
+    activateListeners(html) {
+        // AppV2 no longer uses this; listeners are bound in _onRender.
+        ui.notifications?.warn?.(
+            "d100AActorSheetStarship.activateListeners called - use _onRender(context, options) for AppV2."
+        );
     }
     _toggleOverload(event) {
         console.log("HERE--", event)
@@ -1030,13 +1642,13 @@ return false
 }
 
     _onCrewCombat(event) {
-
-
-        const actorId = $(event.currentTarget).parents('.crew').data('actorId');
+        const crewElement = event.currentTarget.closest('.crew');
+        const actorId = crewElement?.dataset?.actorId;
+        if (!actorId) return;
         console.log("Hello", actorId, event)
         const role = this.actor.getCrewRoleForActor(actorId)
-        const tokena = this.token
-        console.log("Hello", actorId, role)
+        const tokena = this.actor.istoken? this.token : this.actor.getActiveTokens()[0]
+        console.log("Hello", actorId, role, this)
         console.log("Token", tokena)
         const crewactor = game.actors.get(actorId);
         //if (!["npcData","useNPCCrew"].includes(ck) )
@@ -1050,10 +1662,10 @@ return false
             ship: tokena.actor,
             actorId: crewactor.id,
             hidden: false,
-            flags: { npcCrew: false, crewRole: role }
+            flags: { d100A: { npcCrew: false, crewRole: role } }
         }];
 
-        const combat = this.token.combatant.combat ?? game.combats.viewed;
+        const combat = tokena.combatant.combat ?? game.combats.viewed;
         const crewman = combat.createEmbeddedDocuments("Combatant", createData);
 
         //crewman[0].ship = createData[0].actor
@@ -1153,12 +1765,12 @@ return false
 
         let skillflavor = actorData.attributes.damageControl.tooltip
         let stepflavor = "Damage Check" //"Hit " + systemDmg.name
-        const sensorOperator = npcCrew ? this.actor : actorData.crew.defences.actors[0]
+        const defenOperator = npcCrew ? this.actor : actorData.crew.defences.actors[0]
         const skillId = "defen"
-        let defenSkill = npcCrew ? npcSkill.skills[skillId] : sensorOperator.system.skills[skillId]
+        let defenSkill = npcCrew ? npcSkill.skills[skillId] : defenOperator.system.skills[skillId]
         let stepbonus = defenSkill.step + actorData.attributes.damageControl.value//+ rangesteps -  targetRes
 
-        let defen1 = await sensorOperator.rollSkill(skillId, { steps: stepbonus, skillflavor: skillflavor, stepflavor: stepflavor })
+        let defen1 = await defenOperator.rollSkill(skillId, { steps: stepbonus, skillflavor: skillflavor, stepflavor: stepflavor })
 
 
 
@@ -1195,13 +1807,32 @@ return false
         //const userTargets = game.user.targets.ids
 
         let skillflavor = actorData.attributes.damageControl.tooltip
-        let stepflavor = "Hit " + systemDmg.name
-        const sensorOperator = npcCrew ? actor : actorData.crew.defences.actors[0]
+        let stepflavor = "Hit on " + systemDmg.name
+                const escape = foundry?.utils?.escapeHTML ?? ((s) => String(s));
+                const actorName = escape(actor?.name ?? "");
+                const systemName = escape(systemDmg?.name ?? "");
+
+                const chatmessage = `
+<div class="Alternityd100 chat-card">
+    <header class="card-header">
+        <div class="item-info">
+
+            <div class="item-stepflavor">Rolls Hit on ${systemName}</div>
+        </div>
+    </header>
+
+</div>`;
+
+                await ChatMessage.create({
+                        content: chatmessage,
+                        speaker: ChatMessage.getSpeaker({ actor })
+                });
+        const defenOperator = npcCrew ? actor : actorData.crew.defences.actors[0]
         const skillId = "defen"
-        let defenSkill = npcCrew ? npcSkill.skills[skillId] : sensorOperator.system.skills[skillId]
+        let defenSkill = npcCrew ? npcSkill.skills[skillId] : defenOperator.system.skills[skillId]
         let stepbonus = actorData.attributes.damageControl.value//+ rangesteps -  targetRes
 
-        let defen1 = await sensorOperator.rollSkill(skillId, { steps: stepbonus, skillflavor: skillflavor, stepflavor: stepflavor })
+        let defen1 = await defenOperator.rollSkill(skillId, { steps: stepbonus, skillflavor: skillflavor, stepflavor: stepflavor })
 
 
 
@@ -1216,6 +1847,10 @@ return false
         const actor = this.actor
         const actorData = actor.system;
         console.log(action)
+        if (!actorToken) {
+            ui?.notifications?.warn?.("No active token found for this actor.");
+            return;
+        }
         if (action == "clear") {
 
             console.log(this.actor.system.scanTargets)
@@ -1248,31 +1883,49 @@ return false
                 actorData.scanTargets.forEach(target => {
                     //   console.log("ID",target,target.token.id, token.id,target.token.id == token.id)
                     if (target.token.id == token.id) {
+                        const updated = foundry.utils.duplicate(target);
+                        const center = token.object?.center;
+                        updated.token = {
+                            name: token.name,
+                            id: token.id,
+                            img: token.texture?.src,
+                            x: center?.x ?? token.x,
+                            y: center?.y ?? token.y
+                        };
+                        if (token.actor) {
+                            updated.size = token.actor.system.frame?.system.size || "tiny";
+                            updated.scanRes = token.actor.system.attributes.ECM;
+                        }
+                        updated.name = token.name;
 
-                        // delete target.token
-                    //    delete target.token
-                     //   target.token = { name: token.name, id: token.id, x: token.object.center.x, y: token.object.center.y }
-                    //    target.size = token.actor.system.frame?.system.size || "tiny",
-                    //        target.scanRes = token.actor.system.attributes.ECM,
-
-
-                            validScanTargets.push(target)
+                        validScanTargets.push(updated)
                         newscan = false
                         //     console.log(target)
                     }
                 })
                 if (newscan) {
                     console.log(token)
+                    if (!token.actor) {
+                        ui.notifications.warn("Token " + token.name + " has no valid actor")
+                        continue;
+                    }
+                    const center = token.object?.center;
                     const newscanz = {
-                        token: { name: token.name, id: token.id },
+                        token: {
+                            name: token.name,
+                            id: token.id,
+                            img: token.texture?.src,
+                            x: center?.x ?? token.x,
+                            y: center?.y ?? token.y
+                        },
                         //this.id = generateUUID()
-                        hullType: token.actor.system.frame ? token.actor.system.frame.system.hullType : token.actor.system.type,
                         size: token.actor.system.frame?.system.size || "tiny",
                         scanRes: token.actor.system.attributes.ECM,
                         name: token.name,
                         sensors: [], //new Set(),
                         attackMod: 9,
-                        aquired: false
+                        aquired: false,
+                        image: "systems/Alternityd100/icons/roles/icons8-proximity-sensor-100.png"
                     }
                     validScanTargets.push(newscanz)
                 }
@@ -1280,10 +1933,14 @@ return false
         }
 
         for (const scan of validScanTargets) {
-            console.log(actorToken)
+            console.log(actorToken,scan)
 
-            scan.range = Math.ceil((canvas.grid.measureDistance({ x: actorToken.center.x, y: actorToken.center.y }, { x: scan.token.x, y: scan.token.y })));
-            scan.ray = new Ray({ x: actorToken.center.x, y: actorToken.center.y }, { x: scan.token.x, y: scan.token.y })
+            const sourceCenter = actorToken.object?.center ?? actorToken.center ?? { x: actorToken.x, y: actorToken.y };
+            const targetPoint = scan?.token ? { x: scan.token.x, y: scan.token.y } : null;
+            if (!targetPoint || !Number.isFinite(targetPoint.x) || !Number.isFinite(targetPoint.y)) continue;
+
+            scan.range = Math.ceil((measureDistance({ x: sourceCenter.x, y: sourceCenter.y }, targetPoint)));
+            scan.ray = new foundry.canvas.geometry.Ray({ x: sourceCenter.x, y: sourceCenter.y }, targetPoint)
             scan.angle = raytodeg(scan.ray);
             scan.collisions = await CONFIG.Canvas.polygonBackends["sight"].testCollision(scan.ray.A, scan.ray.B, { mode: "any", type: "sight" })
 
@@ -1586,7 +2243,9 @@ return false
      * @param {Event} event The originating dragenter event
      */
     _onCrewDragEnter(event) {
-        $(event.target).css('background', "rgba(0,0,0,0.3)");
+        if (event?.currentTarget?.style) {
+            event.currentTarget.style.background = "rgba(0,0,0,0.3)";
+        }
     }
 
     /**
@@ -1594,7 +2253,9 @@ return false
      * @param {Event} event The originating dragleave event
      */
     _onCrewDragLeave(event) {
-        $(event.target).css('background', '');
+        if (event?.currentTarget?.style) {
+            event.currentTarget.style.background = "";
+        }
     }
 
     /**
@@ -1633,8 +2294,9 @@ return false
      */
     async _onRemoveFromCrew(event) {
         event.preventDefault();
-
-        const actorId = $(event.currentTarget).parents('.crew').data('actorId');
+        const crewElement = event.currentTarget.closest('.crew');
+        const actorId = crewElement?.dataset?.actorId;
+        if (!actorId) return;
         console.log("Hello", actorId)
         this.actor.removeFromCrew(actorId);
     }
@@ -1646,8 +2308,9 @@ return false
      */
     async _onActorView(event) {
         event.preventDefault();
-
-        const actorId = $(event.currentTarget).parents('.crew').data('actorId');
+        const crewElement = event.currentTarget.closest('.crew');
+        const actorId = crewElement?.dataset?.actorId;
+        if (!actorId) return;
         let actor = game.actors.get(actorId);
         actor.sheet.render(true);
     }
@@ -1692,8 +2355,8 @@ return false
 
     async _onCrewSkillCreate(event) {
         event.preventDefault();
-
-        const roleId = $(event.currentTarget).closest('li').data('role');
+        const roleId = event.currentTarget.closest('li')?.dataset?.role;
+        if (!roleId) return;
 
         const results = await ChoiceDialog.show(
             "Add Skill",
@@ -1701,8 +2364,8 @@ return false
             {
                 skill: {
                     name: "Skill",
-                    options: Object.values(CONFIG.SFRPG.skills),
-                    default: Object.values(CONFIG.SFRPG.skills)[0]
+                    options: Object.values(CONFIG.d100A.skills),
+                    default: Object.values(CONFIG.d100A.skills)[0]
                 }
             }
         );
@@ -1712,7 +2375,7 @@ return false
         }
 
         let skillId = null;
-        for (const [key, value] of Object.entries(CONFIG.SFRPG.skills)) {
+        for (const [key, value] of Object.entries(CONFIG.d100A.skills)) {
             if (value === results.result.skill) {
                 skillId = key;
                 break;
@@ -1743,8 +2406,10 @@ return false
 
     async _onCrewSkillDelete(event) {
         event.preventDefault();
-        const roleId = $(event.currentTarget).closest('li').data('role');
-        const skillId = $(event.currentTarget).closest('li').data('skill');
+        const row = event.currentTarget.closest('li');
+        const roleId = row?.dataset?.role;
+        const skillId = row?.dataset?.skill;
+        if (!roleId || !skillId) return;
 
         this.actor.update({ [`data.crew.npcData.${roleId}.skills.-=${skillId}`]: null });
     }
@@ -1758,8 +2423,8 @@ return false
         event.stopImmediatePropagation();
         const a = event.currentTarget;
         const attribute = a.dataset.item;
-
-        const roleId = $(event.currentTarget).closest('li').data('role');
+        const roleId = event.currentTarget.closest('li')?.dataset?.role;
+        if (!roleId) return;
 
         let parsedValue = parseInt(event.currentTarget.value);
         if (Number.isNaN(parsedValue)) {
@@ -1776,9 +2441,10 @@ return false
         //console.log("_onCrewSkillModifierChanged")
         event.preventDefault();
         event.stopImmediatePropagation();
-
-        const roleId = $(event.currentTarget).closest('li').data('role');
-        const skillId = $(event.currentTarget).closest('li').data('skill');
+        const row = event.currentTarget.closest('li');
+        const roleId = row?.dataset?.role;
+        const skillId = row?.dataset?.skill;
+        if (!roleId || !skillId) return;
 
         let parsedValue = parseInt(event.currentTarget.value);
         if (Number.isNaN(parsedValue)) {
@@ -1793,9 +2459,10 @@ return false
         //console.log("_onCrewSkillRanksChanged")
         event.preventDefault();
         event.stopImmediatePropagation();
-
-        const roleId = $(event.currentTarget).closest('li').data('role');
-        const skillId = $(event.currentTarget).closest('li').data('skill');
+        const row = event.currentTarget.closest('li');
+        const roleId = row?.dataset?.role;
+        const skillId = row?.dataset?.skill;
+        if (!roleId || !skillId) return;
 
         let parsedValue = parseInt(event.currentTarget.value);
         if (Number.isNaN(parsedValue)) {
@@ -1816,8 +2483,8 @@ return false
     async _onEditAffectedCriticalRoles(event) {
         event.preventDefault();
         event.stopImmediatePropagation();
-
-        const affectedSystem = $(event.currentTarget).data('system');
+        const affectedSystem = event.currentTarget?.dataset?.system;
+        if (!affectedSystem) return;
 
         const options = [game.i18n.localize("No"), game.i18n.localize("Yes")];
 
@@ -1994,7 +2661,7 @@ return false
                 const role = entry.system.role;
 
                 if (!tempCache[role]) {
-                    tempCache[role] = { label: CONFIG.SFRPG.starshipRoleNames[role], actions: [] };
+                    tempCache[role] = { label: CONFIG.d100A.starshipRoleNames?.[role] ?? role, actions: [] };
                 }
 
                 tempCache[role].actions.push(entry);

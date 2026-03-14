@@ -8,65 +8,68 @@
  */
 export class d100AScene extends Scene {
 
-/** @inheritdoc */
-prepareBaseData() {
-  super.prepareBaseData()
-//  console.log("d100AScene",this)
-  //this.sceneType = this.sceneType? this.sceneType : "" ; 
+  /** @inheritdoc */
+  prepareBaseData() {
+    super.prepareBaseData()
+    //  console.log("d100AScene",this)
+    //this.sceneType = this.sceneType? this.sceneType : "" ; 
 
 
-}
-/*
-static defineSchema() {
-
-
-  let data = super.defineSchema()
-  console.log(data)
-  data.weather = null
-  data.weather = {"atmo":"snow", "type":"space"}
-  console.log(data)
-  return data
   }
-*/
-get isStarship(){
-  //console.log("xx")
-  //if (this.tokens[0]?.actorId == "Mm") return true
-  return this.flags.isStarship
-  let zeroActor //= this.tokens[0]?.actor?.type
-  let zeroToken = this.tokens[0]?._id
-  // Tokens is a collection - works wierd have to use contents!!!
-
-  console.log("isStarship",this.tokens.contents)
-  if (this.tokens.contents.length){
-    zeroActor = this.tokens.contents[0].actor?.type
-    if (zeroActor == "starship") 
-    {
-
-      const update = {
-        "flags.isStarship": true
-    };
-    this.update(update);
-
-      console.log("zeroActor",zeroActor,this)
-      return true
-
+  /*
+  static defineSchema() {
+  
+  
+    let data = super.defineSchema()
+    console.log(data)
+    data.weather = null
+    data.weather = {"atmo":"snow", "type":"space"}
+    console.log(data)
+    return data
     }
-    const update = {
-      "flags.isStarship": false
-  };
-  this.update(update);
-  return false
+  */
+  get isStarship() {
+  //  console.log("xx", typeof this.flags.isStarship, this.flags.isStarship)
+    //if (this.tokens[0]?.actorId == "Mm") return true
+    if (typeof this.flags.isStarship == 'boolean') return this.flags.isStarship
+    let zeroActor = "actor"//= this.tokens[0]?.actor?.type
+    let zeroToken = this.tokens[0]?._id
+    // Tokens is a collection - works wierd have to use contents!!!
+
+   // console.log("isStarship", this.tokens.contents)
+    if (this.tokens.contents.length) {
+      const sceneTokens = this.tokens.contents
+      let starships = 0
+      sceneTokens.forEach(t => {
+   //     console.log("t", t.id, t.actor?.type)
+        if (t.actor?.type === "starship") starships++;
+        if (t.actor?.type === "ordnance") starships++;
+      })
+      zeroActor = (starships * 1.7) > sceneTokens.length ? "starship" : zeroActor
+      //  zeroActor = sceneTokens[0].actor?.type
+
+      if (zeroActor == "starship") {
+        const update = { "flags.isStarship": true };
+        this.update(update);
+        //  console.log("zeroActor",zeroActor,this)
+        return true
+      }
+      // if not starships
+      const update = {
+        "flags.isStarship": false
+      };
+      this.update(update);
+      return false
+    }
+   // console.log("isStarship", this)
+    if (zeroActor == "starship") return true
+    if (this.grid.units == "Mm") return true
+
+
+
+
+
   }
-
-  console.log("isStarship",this)
-  if (zeroActor == "starship") return true
-  if (this.grid.units == "Mm") return true
-
-
-
-
-
-}
 
 }
 
@@ -92,13 +95,13 @@ class DataField {
   /**
    * @param {DataFieldOptions} options    Options which configure the behavior of the field
    */
-  constructor(options={}) {
+  constructor(options = {}) {
     /**
      * The initially provided options which configure the data field
      * @type {DataFieldOptions}
      */
     this.options = options;
-    for ( let k in this.constructor._defaults ) {
+    for (let k in this.constructor._defaults) {
       this[k] = k in this.options ? this.options[k] : this.constructor._defaults[k];
     }
   }
@@ -149,8 +152,8 @@ class DataField {
    * @param {object} [options={}]         Additional options passed to the applied function
    * @returns {object}                    The results object
    */
-  apply(fn, value, options={}) {
-    if ( typeof fn === "string" ) fn = this[fn];
+  apply(fn, value, options = {}) {
+    if (typeof fn === "string") fn = this[fn];
     return fn.call(this, value, options);
   }
 
@@ -171,13 +174,13 @@ class DataField {
   clean(value, options) {
 
     // Permit explicitly null values for nullable fields
-    if ( value === null ) {
-      if ( this.nullable ) return value;
+    if (value === null) {
+      if (this.nullable) return value;
       value = undefined;
     }
 
     // Get an initial value for the field
-    if ( value === undefined ) return this.getInitialValue(options.source);
+    if (value === undefined) return this.getInitialValue(options.source);
 
     // Cast a provided value to the correct type
     value = this._cast(value);
@@ -235,17 +238,17 @@ class DataField {
    * @param {object} [options={}]            Options which affect validation behavior
    * @returns {ModelValidationError}         Returns a ModelValidationError if a validation failure occurred
    */
-  validate(value, options={}) {
+  validate(value, options = {}) {
     const validators = [this._validateSpecial, this._validateType];
-    if ( this.options.validate ) validators.push(this.options.validate);
+    if (this.options.validate) validators.push(this.options.validate);
     try {
-      for ( const validator of validators ) {
+      for (const validator of validators) {
         const isValid = validator.call(this, value, options);
-        if ( isValid === true ) return undefined;
-        if ( isValid === false ) return new ModelValidationError(this.validationError);
+        if (isValid === true) return undefined;
+        if (isValid === false) return new ModelValidationError(this.validationError);
       }
-    } catch(err) {
-      if ( err instanceof ModelValidationError ) return err;
+    } catch (err) {
+      if (err instanceof ModelValidationError) return err;
       const mve = new ModelValidationError(err.message);
       mve.stack = err.stack;
       return mve;
@@ -266,14 +269,14 @@ class DataField {
   _validateSpecial(value) {
 
     // Allow null values for explicitly nullable fields
-    if ( value === null ) {
-      if ( this.nullable ) return true;
+    if (value === null) {
+      if (this.nullable) return true;
       else throw new Error("may not be null");
     }
 
     // Allow undefined if the field is not required
-    if ( value === undefined ) {
-      if ( this.required ) throw new Error("may not be undefined");
+    if (value === undefined) {
+      if (this.required) throw new Error("may not be undefined");
       else return true;
     }
   }
@@ -289,7 +292,7 @@ class DataField {
    * @throws                        May throw a specific error if the value is not valid
    * @protected
    */
-  _validateType(value, options={}) {}
+  _validateType(value, options = {}) { }
 
   /* -------------------------------------------- */
   /*  Initialization and Serialization            */
@@ -302,7 +305,7 @@ class DataField {
    * @param {object} [options]          Initialization options
    * @returns {*}                       An initialized copy of the source data
    */
-  initialize(value, model, options={}) {
+  initialize(value, model, options = {}) {
     return value;
   }
 
@@ -321,10 +324,10 @@ class StringField extends DataField {
   /**
    * @param {StringFieldOptions} options  Options which configure the behavior of the field
    */
-  constructor(options={}) {
+  constructor(options = {}) {
     super(options);
     // If choices are provided, the field should not be null or blank by default
-    if ( this.choices ) {
+    if (this.choices) {
       this.nullable = options.nullable ?? false;
       this.blank = options.blank ?? false;
     }
@@ -343,9 +346,9 @@ class StringField extends DataField {
 
   /** @inheritdoc */
   clean(value, options) {
-    if ( (typeof value === "string") && this.trim ) value = value.trim(); // Trim input strings
-    if ( value === "" ) {  // Permit empty strings for blank fields
-      if ( this.blank ) return value;
+    if ((typeof value === "string") && this.trim) value = value.trim(); // Trim input strings
+    if (value === "") {  // Permit empty strings for blank fields
+      if (this.blank) return value;
       value = undefined;
     }
     return super.clean(value, options);
@@ -358,8 +361,8 @@ class StringField extends DataField {
 
   /** @inheritdoc */
   _validateSpecial(value) {
-    if ( value === "" ) {
-      if ( this.blank ) return true;
+    if (value === "") {
+      if (this.blank) return true;
       else throw new Error("may not be a blank string");
     }
     return super._validateSpecial(value);
@@ -367,9 +370,9 @@ class StringField extends DataField {
 
   /** @override */
   _validateType(value) {
-    if ( typeof value !== "string" ) throw new Error("must be a string");
-    else if ( this.choices ) {
-      if ( this._isValidChoice(value) ) return true;
+    if (typeof value !== "string") throw new Error("must be a string");
+    else if (this.choices) {
+      if (this._isValidChoice(value)) return true;
       else throw new Error(`${value} is not a valid choice`);
     }
   }
@@ -382,8 +385,8 @@ class StringField extends DataField {
    */
   _isValidChoice(value) {
     let choices = this.choices;
-    if ( choices instanceof Function ) choices = choices();
-    if ( choices instanceof Array ) return choices.includes(value);
+    if (choices instanceof Function) choices = choices();
+    if (choices instanceof Array) return choices.includes(value);
     return String(value) in choices;
   }
 }
