@@ -36,6 +36,10 @@
     --alternityd100-font-size-subtitle: 18px;
     --alternityd100-font-size-small: 13px;
     --alternityd100-font-color-darkblue: rgb(3, 0, 32);;
+    --alternityd100-chat-text-light: #012e47;
+    --alternityd100-chat-text-dark: #f3fae1;
+    --alternityd100-chat-text-muted-light: rgba(37, 56, 66, 0.74);
+    --alternityd100-chat-text-muted-dark: rgba(231, 220, 199, 0.76);
     /* Brand Colors */
     --alternityd100-primary: #0eaaaa;
     --alternityd100-primary-dark: #096969;
@@ -1285,18 +1289,307 @@ body {
 /*  Combat Tracker                           */
 /* ---------------------------------------- */
 @layer system.alternityd100.components {
+  .alternityd100-game-date-widget {
+    display: block;
+    margin: 2px 0 0;
+    padding: 0;
+    border: 1px solid color-mix(in srgb, var(--alternityd100-border) 85%, transparent);
+    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(14, 170, 170, 0.12), rgba(14, 170, 170, 0.06));
+    box-sizing: border-box;
+    pointer-events: auto;
+  }
+
+  .alternityd100-game-date-input {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    padding: 6px 8px;
+    pointer-events: auto;
+    cursor: pointer;
+  }
+
+  .Alternityd100.game-date-config .alternityd100-game-date-preview {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 0.75rem 0;
+  }
+
+  .Alternityd100.game-date-config .alternityd100-game-date-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: flex-end;
+  }
+
+  /* ---------------------------------------- */
+  /*  Token HUD Status Effects                */
+  /* ---------------------------------------- */
+  #token-hud > div.col.right > div.palette.status-effects.active {
+    --effect-size: var(--alternityd100-token-hud-effect-size, 36px);
+    --alternityd100-hud-surface: rgba(18, 23, 31, 0.94);
+    --alternityd100-hud-border: rgba(14, 170, 170, 0.55);
+    --alternityd100-hud-shadow: rgba(0, 0, 0, 0.35);
+
+    padding: 6px;
+    border: 1px solid var(--alternityd100-hud-border);
+    border-radius: 10px;
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--alternityd100-hud-surface) 100%, white 4%),
+      color-mix(in srgb, var(--alternityd100-hud-surface) 92%, black 8%)
+    );
+    box-shadow: 0 10px 24px -12px var(--alternityd100-hud-shadow);
+    backdrop-filter: blur(4px);
+  }
+
+  body.theme-light #token-hud > div.col.right > div.palette.status-effects.active,
+  .themed.theme-light #token-hud > div.col.right > div.palette.status-effects.active,
+  .mixin-theme-light-variables #token-hud > div.col.right > div.palette.status-effects.active {
+    --alternityd100-hud-surface: rgba(3, 31, 27, 0.96);
+    --alternityd100-hud-border: rgba(14, 170, 170, 0.55);
+    --alternityd100-hud-shadow: rgba(15, 46, 52, 0.16);
+  }
+
+  
+
+  body.theme-dark #token-hud > div.col.right > div.palette.status-effects.active,
+  .themed.theme-dark #token-hud > div.col.right > div.palette.status-effects.active,
+  .mixin-theme-dark-variables #token-hud > div.col.right > div.palette.status-effects.active {
+    --alternityd100-hud-surface: rgba(10, 13, 19, 0.96);
+    --alternityd100-hud-border: rgba(10, 160, 160, 0.48);
+  }
+
+  #token-hud > div.col.right > div.palette.status-effects.active .effect-control {
+    display: block;
+    width: var(--effect-size);
+    height: var(--effect-size);
+    margin: 0;
+    padding: 2px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    opacity: 0.52;
+    background: color-mix(in srgb, var(--alternityd100-primary) 14%, transparent);
+    box-shadow: none;
+    filter: none !important;
+    transition: border-color 120ms ease, background-color 120ms ease, transform 120ms ease;
+  }
+
+  #token-hud > div.col.right > div.palette.status-effects.active .effect-control:hover {
+    border-color: color-mix(in srgb, var(--alternityd100-primary) 70%, transparent);
+    background: color-mix(in srgb, var(--alternityd100-primary) 24%, transparent);
+    opacity: 0.86;
+    transform: translateY(-1px);
+  }
+
+  #token-hud > div.col.right > div.palette.status-effects.active .effect-control.active {
+    border-color: color-mix(in srgb, var(--alternityd100-warning) 72%, transparent);
+    background: color-mix(in srgb, var(--alternityd100-warning) 22%, transparent);
+    opacity: 1;
+  }
+
+  #token-hud > div.col.right > div.palette.status-effects.active .effect-control > img,
+  #token-hud > div.col.right > div.palette.status-effects.active .effect-control > svg,
+  #token-hud > div.col.right > div.palette.status-effects.active .effect-control::before {
+    filter: none !important;
+    mix-blend-mode: normal;
+    opacity: inherit;
+  }
+
+  #token-hud > div.col.right > div.palette.status-effects.active .effect-control > img,
+  #token-hud > div.col.right > div.palette.status-effects.active .effect-control > svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  #token-hud > div.col.right > div.palette.status-effects.starship-status-effects.active {
+    display: grid;
+    grid-template-columns: repeat(4, var(--effect-size));
+    gap: 2px;
+    inline-size: max-content;
+  }
+
+  .combat-sidebar {
+    --alternityd100-combat-surface: rgba(14, 170, 170, 0.08);
+    --alternityd100-combat-surface-strong: rgba(14, 170, 170, 0.14);
+    --alternityd100-combat-border: rgba(14, 170, 170, 0.38);
+    --alternityd100-combat-shadow: rgba(7, 34, 40, 0.12);
+    --alternityd100-combat-text-muted: rgba(37, 56, 66, 0.72);
+  }
+
+  body.theme-dark .combat-sidebar,
+  .themed.theme-dark .combat-sidebar,
+  .mixin-theme-dark-variables .combat-sidebar {
+    --alternityd100-combat-surface: rgba(10, 160, 160, 0.10);
+    --alternityd100-combat-surface-strong: rgba(10, 160, 160, 0.18);
+    --alternityd100-combat-border: rgba(10, 160, 160, 0.34);
+    --alternityd100-combat-shadow: rgba(0, 0, 0, 0.32);
+    --alternityd100-combat-text-muted: rgba(231, 220, 199, 0.72);
+  }
+
+  .combat-sidebar .combat-tracker-header {
+    margin: 0 4px 6px;
+    padding: 8px 8px 10px;
+    border: 1px solid var(--alternityd100-combat-border);
+    border-radius: 12px;
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--alternityd100-combat-surface-strong) 100%, transparent), color-mix(in srgb, var(--alternityd100-combat-surface) 85%, transparent)),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.26), rgba(255, 255, 255, 0.06));
+    box-shadow: 0 8px 20px -16px var(--alternityd100-combat-shadow);
+  }
+
+  .combat-sidebar .combat-tracker-header .encounters {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .combat-sidebar .combat-tracker-header .encounters .inline-control,
+  .combat-sidebar .combat-tracker-header .encounter-controls .combat-control,
+  .combat-sidebar .combat-tracker-header .encounter-context-menu {
+    border: 1px solid var(--alternityd100-combat-border);
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--alternityd100-combat-surface-strong) 92%, transparent);
+    color: color-mix(in srgb, var(--alternityd100-primary-dark) 78%, #244047);
+    box-shadow: none;
+  }
+
+  .combat-sidebar .combat-tracker-header .encounters .inline-control:hover,
+  .combat-sidebar .combat-tracker-header .encounter-controls .combat-control:hover,
+  .combat-sidebar .combat-tracker-header .encounter-context-menu:hover {
+    background: color-mix(in srgb, var(--alternityd100-primary) 16%, transparent);
+    color: color-mix(in srgb, var(--alternityd100-primary-dark) 92%, #1b3137);
+    box-shadow: 0 0 10px color-mix(in srgb, var(--alternityd100-primary) 18%, transparent);
+  }
+
+  body.theme-dark .combat-sidebar .combat-tracker-header .encounters .inline-control,
+  body.theme-dark .combat-sidebar .combat-tracker-header .encounter-controls .combat-control,
+  body.theme-dark .combat-sidebar .combat-tracker-header .encounter-context-menu,
+  .themed.theme-dark .combat-sidebar .combat-tracker-header .encounters .inline-control,
+  .themed.theme-dark .combat-sidebar .combat-tracker-header .encounter-controls .combat-control,
+  .themed.theme-dark .combat-sidebar .combat-tracker-header .encounter-context-menu,
+  .mixin-theme-dark-variables .combat-sidebar .combat-tracker-header .encounters .inline-control,
+  .mixin-theme-dark-variables .combat-sidebar .combat-tracker-header .encounter-controls .combat-control,
+  .mixin-theme-dark-variables .combat-sidebar .combat-tracker-header .encounter-context-menu {
+    color: color-mix(in srgb, var(--alternityd100-chat-text-dark) 86%, var(--alternityd100-primary) 14%);
+  }
+
+  body.theme-dark .combat-sidebar .combat-tracker-header .encounters .inline-control:hover,
+  body.theme-dark .combat-sidebar .combat-tracker-header .encounter-controls .combat-control:hover,
+  body.theme-dark .combat-sidebar .combat-tracker-header .encounter-context-menu:hover,
+  .themed.theme-dark .combat-sidebar .combat-tracker-header .encounters .inline-control:hover,
+  .themed.theme-dark .combat-sidebar .combat-tracker-header .encounter-controls .combat-control:hover,
+  .themed.theme-dark .combat-sidebar .combat-tracker-header .encounter-context-menu:hover,
+  .mixin-theme-dark-variables .combat-sidebar .combat-tracker-header .encounters .inline-control:hover,
+  .mixin-theme-dark-variables .combat-sidebar .combat-tracker-header .encounter-controls .combat-control:hover,
+  .mixin-theme-dark-variables .combat-sidebar .combat-tracker-header .encounter-context-menu:hover {
+    color: var(--alternityd100-chat-text-dark);
+  }
+
+  .combat-sidebar .combat-tracker-header .encounter-controls {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: start;
+    gap: 6px;
+  }
+
+  .combat-sidebar .combat-tracker-header .control-buttons {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .combat-sidebar .combat-tracker-header .control-buttons.right {
+    justify-content: flex-end;
+  }
+
+  .combat-sidebar .combat-tracker-header .encounter-title {
+    display: block;
+    text-align: center;
+    font-family: var(--alternityd100-font-strong);
+    font-size: 14px;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    text-wrap: balance;
+  }
+
   .combat-sidebar .alternity-combat-list {
-    padding: 6px 6px 4px;
+    padding: 4px 4px 6px;
     font-family: var(--alternityd100-font-base);
+    display: grid;
+    gap: 6px;
+    align-content: start;
+    grid-auto-rows: max-content;
   }
 
   .combat-sidebar .alternity-combat-list .combatant {
-    padding: 2px ;
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr) auto auto;
+    align-items: center;
+    column-gap: 8px;
+    padding: 6px 8px;
+    margin: 0;
+    min-height: 54px;
+    height: auto;
+    border: 1px solid var(--alternityd100-combat-border);
+    border-radius: 12px;
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--alternityd100-combat-surface) 100%, transparent), color-mix(in srgb, var(--alternityd100-combat-surface) 70%, transparent));
+    box-shadow: 0 8px 18px -18px var(--alternityd100-combat-shadow);
   }
+
+  .combat-sidebar .alternity-combat-list .combatant.active,
+  .combat-sidebar .alternity-combat-list .combatant.current,
+  .combat-sidebar .alternity-combat-list .combatant.combatant-turn {
+    border-color: color-mix(in srgb, var(--alternityd100-border-strong) 75%, transparent);
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--alternityd100-primary) 18%, transparent), color-mix(in srgb, var(--alternityd100-combat-surface-strong) 90%, transparent));
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--alternityd100-primary) 16%, transparent);
+  }
+
+  .combat-sidebar .alternity-combat-list .combatant.defeated,
+  .combat-sidebar .alternity-combat-list .combatant.hidden {
+    opacity: 0.72;
+  }
+
+  .combat-sidebar .alternity-combat-list .combatant .token-image {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid color-mix(in srgb, var(--alternityd100-combat-border) 88%, transparent);
+    background: color-mix(in srgb, var(--alternityd100-combat-surface-strong) 88%, transparent);
+  }
+
+  .combat-sidebar .alternity-combat-list .token-name {
+    min-width: 0;
+  }
+
   .combat-sidebar .alternity-combat-list .token-name .name {
     font-family: var(--alternityd100-font-base);
     font-size: 13px;
-    font-weight: 400;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .combat-sidebar .alternity-combat-list .combatant-controls {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2px;
+    margin-top: 2px;
   }
 
   .combat-sidebar .combat-tracker .combatant-controls .combatant-control-icon,
@@ -1318,9 +1611,48 @@ body {
     column-gap: 0;
   }
 
+  .combat-sidebar .combat-tracker .combatant-controls .combatant-control {
+    border-radius: 999px;
+    color: color-mix(in srgb, var(--alternityd100-primary-dark) 58%, #4b5860);
+    opacity: 0.95;
+  }
+
+  .combat-sidebar .combat-tracker .combatant-controls .combatant-control:hover,
+  .combat-sidebar .combat-tracker .combatant-controls .combatant-control.active {
+    border-color: color-mix(in srgb, var(--alternityd100-primary) 55%, transparent);
+    background: color-mix(in srgb, var(--alternityd100-primary) 16%, transparent);
+    color: color-mix(in srgb, var(--alternityd100-primary-dark) 82%, #23343a);
+  }
+
   .combat-sidebar .combat-tracker .combatant-controls .combatant-control.icon {
     font-size: 12px;
     line-height: 16px;
+  }
+
+  .combat-sidebar .combat-tracker .token-resource,
+  .combat-sidebar .combat-tracker .token-initiative {
+    align-self: center;
+    justify-self: end;
+    min-width: 40px;
+    text-align: center;
+  }
+
+  .combat-sidebar .combat-tracker .token-resource .resource,
+  .combat-sidebar .combat-tracker .token-initiative {
+    font-family: var(--alternityd100-font-strong);
+    font-size: 12px;
+    line-height: 1;
+  }
+
+  .combat-sidebar .combat-tracker .initiative-input {
+    width: 42px;
+    min-width: 42px;
+    text-align: center;
+    padding: 2px 4px;
+    border: 1px solid var(--alternityd100-combat-border);
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--alternityd100-combat-surface-strong) 85%, transparent);
+    font-family: var(--alternityd100-font-strong);
   }
 
   .combat-sidebar .combat-controls {
@@ -1329,7 +1661,10 @@ body {
     align-items: center;
     justify-content: center;
     gap: 4px;
-    padding: 4px 2px;
+    margin: 6px 4px 0;
+    padding: 8px 6px 6px;
+    border-top: 1px solid color-mix(in srgb, var(--alternityd100-combat-border) 80%, transparent);
+    background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--alternityd100-combat-surface) 85%, transparent));
   }
 
   .combat-sidebar .combat-controls .combat-controls-row {
@@ -1344,7 +1679,7 @@ body {
     line-height: 10px;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    opacity: 0.7;
+    color: var(--alternityd100-combat-text-muted);
     margin-top: 2px;
   }
 
@@ -1414,12 +1749,13 @@ body {
   .combat-sidebar .combat-tracker .combatant-controls img.combatant-control-icon {
     display: inline-block;
     object-fit: contain;
+    filter: saturate(1.05) contrast(1.05);
   }
 
   .combat-sidebar .combat-tracker .token-effects {
     display: flex;
     flex-wrap: wrap;
-    gap: 0px;
+    gap: 1px;
     margin-left: 4px;
   }
 
@@ -1427,6 +1763,23 @@ body {
     margin: 0;
     width: 14px;
     height: 14px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--alternityd100-combat-surface-strong) 82%, transparent);
+  }
+
+  body.theme-dark .combat-sidebar .combat-tracker .combatant-controls .combatant-control,
+  .themed.theme-dark .combat-sidebar .combat-tracker .combatant-controls .combatant-control,
+  .mixin-theme-dark-variables .combat-sidebar .combat-tracker .combatant-controls .combatant-control {
+    color: color-mix(in srgb, var(--alternityd100-chat-text-dark) 82%, var(--alternityd100-primary) 18%);
+  }
+
+  body.theme-dark .combat-sidebar .combat-tracker .combatant-controls .combatant-control:hover,
+  body.theme-dark .combat-sidebar .combat-tracker .combatant-controls .combatant-control.active,
+  .themed.theme-dark .combat-sidebar .combat-tracker .combatant-controls .combatant-control:hover,
+  .themed.theme-dark .combat-sidebar .combat-tracker .combatant-controls .combatant-control.active,
+  .mixin-theme-dark-variables .combat-sidebar .combat-tracker .combatant-controls .combatant-control:hover,
+  .mixin-theme-dark-variables .combat-sidebar .combat-tracker .combatant-controls .combatant-control.active {
+    color: var(--alternityd100-chat-text-dark);
   }
 
   /*
@@ -1531,7 +1884,8 @@ body {
     --alternityd100-chat-accent: rgba(14, 170, 170, 0.55);
     --alternityd100-chat-accent-strong: rgba(14, 170, 170, 0.85);
     --alternityd100-chat-surface: rgba(255, 255, 255, 0.55);
-    --alternityd100-chat-text: var(--color-text-dark-1);
+    --alternityd100-chat-text: var(--alternityd100-chat-text-light);
+    --alternityd100-chat-text-muted: var(--alternityd100-chat-text-muted-light);
 
     font-family: var(--alternityd100-font-base, var(--font-primary));
     color: var(--alternityd100-chat-text);
@@ -1548,7 +1902,8 @@ body {
     --alternityd100-chat-accent: rgba(10, 160, 160, 0.45);
     --alternityd100-chat-accent-strong: rgba(10, 160, 160, 0.85);
     --alternityd100-chat-surface: rgba(0, 0, 0, 0.18);
-    --alternityd100-chat-text: var(--color-text-light-1);
+    --alternityd100-chat-text: var(--alternityd100-chat-text-dark);
+    --alternityd100-chat-text-muted: var(--alternityd100-chat-text-muted-dark);
   }
 
   .Alternityd100.chat-card .card-header {
@@ -1924,99 +2279,158 @@ body {
   /* ---------------------------------------- */
   /*
     Apply Alternity-flavored colors to the broader chat UI.
-    This intentionally targets Foundry's standard chat/roll markup.
+    Target the actual chat log entries directly so these rules override
+    Foundry's default `.chat-message` styling, including plain text messages
+    that do not contain an `.Alternityd100.chat-card`.
   */
-  li.chat-message:has(.Alternityd100.chat-card) {
+  #chat-log .chat-message,
+  .chat-log .chat-message {
     --alternityd100-chat-border: rgba(14, 170, 170, 0.45);
     --alternityd100-chat-border-strong: rgba(14, 170, 170, 0.80);
     --alternityd100-chat-surface: rgba(255, 255, 255, 0.55);
+    --alternityd100-chat-text: var(--alternityd100-chat-text-light);
+    --alternityd100-chat-text-muted: var(--alternityd100-chat-text-muted-light);
 
     --chat-message-border-color: var(--alternityd100-chat-border);
     --chat-message-background: linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.48));
+
+    color: var(--alternityd100-chat-text);
+    border-color: var(--alternityd100-chat-border);
+    box-shadow:
+      0 1px 0 rgba(0, 0, 0, 0.08),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.18);
   }
 
-  body.theme-dark li.chat-message:has(.Alternityd100.chat-card),
-  .themed.theme-dark li.chat-message:has(.Alternityd100.chat-card),
-  .mixin-theme-dark-variables li.chat-message:has(.Alternityd100.chat-card) {
+  body.theme-dark #chat-log .chat-message,
+  body.theme-dark .chat-log .chat-message,
+  .themed.theme-dark #chat-log .chat-message,
+  .themed.theme-dark .chat-log .chat-message,
+  .mixin-theme-dark-variables #chat-log .chat-message,
+  .mixin-theme-dark-variables .chat-log .chat-message {
     --alternityd100-chat-border: rgba(10, 160, 160, 0.40);
     --alternityd100-chat-border-strong: rgba(10, 160, 160, 0.80);
     --alternityd100-chat-surface: rgba(0, 0, 0, 0.18);
+    --alternityd100-chat-text: var(--alternityd100-chat-text-dark);
+    --alternityd100-chat-text-muted: var(--alternityd100-chat-text-muted-dark);
 
     --chat-message-border-color: var(--alternityd100-chat-border);
-    --chat-message-background: linear-gradient(180deg, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.10));
+    --chat-message-background: linear-gradient(180deg, rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.30));
+
+    color: var(--alternityd100-chat-text);
+    border-color: var(--alternityd100-chat-border);
   }
 
-  li.chat-message:has(.Alternityd100.chat-card) .message-header {
+  #chat-log .chat-message .message-header,
+  .chat-log .chat-message .message-header {
     border-bottom: 1px solid rgba(14, 170, 170, 0.18);
   }
 
-  body.theme-dark li.chat-message:has(.Alternityd100.chat-card) .message-header,
-  .themed.theme-dark li.chat-message:has(.Alternityd100.chat-card) .message-header,
-  .mixin-theme-dark-variables li.chat-message:has(.Alternityd100.chat-card) .message-header {
+  body.theme-dark #chat-log .chat-message .message-header,
+  body.theme-dark .chat-log .chat-message .message-header,
+  .themed.theme-dark #chat-log .chat-message .message-header,
+  .themed.theme-dark .chat-log .chat-message .message-header,
+  .mixin-theme-dark-variables #chat-log .chat-message .message-header,
+  .mixin-theme-dark-variables .chat-log .chat-message .message-header {
     border-bottom-color: rgba(10, 160, 160, 0.18);
   }
 
+  #chat-log .chat-message .message-sender,
+  .chat-log .chat-message .message-sender {
+    font-family: var(--alternityd100-font-strong, inherit);
+    color: var(--alternityd100-chat-text);
+  }
+
+  #chat-log .chat-message .message-metadata,
+  .chat-log .chat-message .message-metadata {
+    color: var(--alternityd100-chat-text-muted);
+  }
+
   /* Roll blocks (dice-roll) */
-  li.chat-message:has(.Alternityd100.chat-card) .dice-roll {
+  #chat-log .chat-message .dice-roll,
+  .chat-log .chat-message .dice-roll {
     border: 1px solid rgba(14, 170, 170, 0.25);
     border-radius: 6px;
     background: rgba(255, 255, 255, 0.35);
     overflow: hidden;
   }
 
-  body.theme-dark li.chat-message:has(.Alternityd100.chat-card) .dice-roll,
-  .themed.theme-dark li.chat-message:has(.Alternityd100.chat-card) .dice-roll,
-  .mixin-theme-dark-variables li.chat-message:has(.Alternityd100.chat-card) .dice-roll {
+  body.theme-dark #chat-log .chat-message .dice-roll,
+  body.theme-dark .chat-log .chat-message .dice-roll,
+  .themed.theme-dark #chat-log .chat-message .dice-roll,
+  .themed.theme-dark .chat-log .chat-message .dice-roll,
+  .mixin-theme-dark-variables #chat-log .chat-message .dice-roll,
+  .mixin-theme-dark-variables .chat-log .chat-message .dice-roll {
     border-color: rgba(10, 160, 160, 0.22);
     background: rgba(0, 0, 0, 0.18);
   }
 
-  li.chat-message:has(.Alternityd100.chat-card) .dice-roll .dice-formula {
+  #chat-log .chat-message .dice-roll .dice-formula,
+  .chat-log .chat-message .dice-roll .dice-formula {
     font-family: var(--alternityd100-font-strong, inherit);
     letter-spacing: 0.2px;
   }
 
-  li.chat-message:has(.Alternityd100.chat-card) .dice-roll .dice-total {
+  #chat-log .chat-message .dice-roll .dice-total,
+  .chat-log .chat-message .dice-roll .dice-total {
     border-top: 1px solid rgba(14, 170, 170, 0.20);
     background: rgba(14, 170, 170, 0.10);
   }
 
-  body.theme-dark li.chat-message:has(.Alternityd100.chat-card) .dice-roll .dice-total,
-  .themed.theme-dark li.chat-message:has(.Alternityd100.chat-card) .dice-roll .dice-total,
-  .mixin-theme-dark-variables li.chat-message:has(.Alternityd100.chat-card) .dice-roll .dice-total {
+  body.theme-dark #chat-log .chat-message .dice-roll .dice-total,
+  body.theme-dark .chat-log .chat-message .dice-roll .dice-total,
+  .themed.theme-dark #chat-log .chat-message .dice-roll .dice-total,
+  .themed.theme-dark .chat-log .chat-message .dice-roll .dice-total,
+  .mixin-theme-dark-variables #chat-log .chat-message .dice-roll .dice-total,
+  .mixin-theme-dark-variables .chat-log .chat-message .dice-roll .dice-total {
     border-top-color: rgba(10, 160, 160, 0.18);
     background: rgba(10, 160, 160, 0.14);
   }
 
   /* Inline-roll results */
-  li.chat-message:has(.Alternityd100.chat-card) a.inline-roll.inline-result,
-  li.chat-message:has(.Alternityd100.chat-card) a.fake-inline-roll.inline-result {
+  #chat-log .chat-message a.inline-roll.inline-result,
+  #chat-log .chat-message a.fake-inline-roll.inline-result,
+  .chat-log .chat-message a.inline-roll.inline-result,
+  .chat-log .chat-message a.fake-inline-roll.inline-result {
     border-color: rgba(14, 170, 170, 0.35);
     background: rgba(14, 170, 170, 0.10);
   }
 
-  li.chat-message:has(.Alternityd100.chat-card) a.inline-roll.inline-result:hover,
-  li.chat-message:has(.Alternityd100.chat-card) a.fake-inline-roll.inline-result:hover {
+  #chat-log .chat-message a.inline-roll.inline-result:hover,
+  #chat-log .chat-message a.fake-inline-roll.inline-result:hover,
+  .chat-log .chat-message a.inline-roll.inline-result:hover,
+  .chat-log .chat-message a.fake-inline-roll.inline-result:hover {
     border-color: rgba(14, 170, 170, 0.65);
     background: rgba(14, 170, 170, 0.18);
   }
 
-  body.theme-dark li.chat-message:has(.Alternityd100.chat-card) a.inline-roll.inline-result,
-  body.theme-dark li.chat-message:has(.Alternityd100.chat-card) a.fake-inline-roll.inline-result,
-  .themed.theme-dark li.chat-message:has(.Alternityd100.chat-card) a.inline-roll.inline-result,
-  .themed.theme-dark li.chat-message:has(.Alternityd100.chat-card) a.fake-inline-roll.inline-result,
-  .mixin-theme-dark-variables li.chat-message:has(.Alternityd100.chat-card) a.inline-roll.inline-result,
-  .mixin-theme-dark-variables li.chat-message:has(.Alternityd100.chat-card) a.fake-inline-roll.inline-result {
+  body.theme-dark #chat-log .chat-message a.inline-roll.inline-result,
+  body.theme-dark #chat-log .chat-message a.fake-inline-roll.inline-result,
+  body.theme-dark .chat-log .chat-message a.inline-roll.inline-result,
+  body.theme-dark .chat-log .chat-message a.fake-inline-roll.inline-result,
+  .themed.theme-dark #chat-log .chat-message a.inline-roll.inline-result,
+  .themed.theme-dark #chat-log .chat-message a.fake-inline-roll.inline-result,
+  .themed.theme-dark .chat-log .chat-message a.inline-roll.inline-result,
+  .themed.theme-dark .chat-log .chat-message a.fake-inline-roll.inline-result,
+  .mixin-theme-dark-variables #chat-log .chat-message a.inline-roll.inline-result,
+  .mixin-theme-dark-variables #chat-log .chat-message a.fake-inline-roll.inline-result,
+  .mixin-theme-dark-variables .chat-log .chat-message a.inline-roll.inline-result,
+  .mixin-theme-dark-variables .chat-log .chat-message a.fake-inline-roll.inline-result {
     border-color: rgba(10, 160, 160, 0.35);
     background: rgba(10, 160, 160, 0.14);
   }
 
-  body.theme-dark li.chat-message:has(.Alternityd100.chat-card) a.inline-roll.inline-result:hover,
-  body.theme-dark li.chat-message:has(.Alternityd100.chat-card) a.fake-inline-roll.inline-result:hover,
-  .themed.theme-dark li.chat-message:has(.Alternityd100.chat-card) a.inline-roll.inline-result:hover,
-  .themed.theme-dark li.chat-message:has(.Alternityd100.chat-card) a.fake-inline-roll.inline-result:hover,
-  .mixin-theme-dark-variables li.chat-message:has(.Alternityd100.chat-card) a.inline-roll.inline-result:hover,
-  .mixin-theme-dark-variables li.chat-message:has(.Alternityd100.chat-card) a.fake-inline-roll.inline-result:hover {
+  body.theme-dark #chat-log .chat-message a.inline-roll.inline-result:hover,
+  body.theme-dark #chat-log .chat-message a.fake-inline-roll.inline-result:hover,
+  body.theme-dark .chat-log .chat-message a.inline-roll.inline-result:hover,
+  body.theme-dark .chat-log .chat-message a.fake-inline-roll.inline-result:hover,
+  .themed.theme-dark #chat-log .chat-message a.inline-roll.inline-result:hover,
+  .themed.theme-dark #chat-log .chat-message a.fake-inline-roll.inline-result:hover,
+  .themed.theme-dark .chat-log .chat-message a.inline-roll.inline-result:hover,
+  .themed.theme-dark .chat-log .chat-message a.fake-inline-roll.inline-result:hover,
+  .mixin-theme-dark-variables #chat-log .chat-message a.inline-roll.inline-result:hover,
+  .mixin-theme-dark-variables #chat-log .chat-message a.fake-inline-roll.inline-result:hover,
+  .mixin-theme-dark-variables .chat-log .chat-message a.inline-roll.inline-result:hover,
+  .mixin-theme-dark-variables .chat-log .chat-message a.fake-inline-roll.inline-result:hover {
     border-color: rgba(10, 160, 160, 0.70);
     background: rgba(10, 160, 160, 0.22);
   }
@@ -2031,13 +2445,15 @@ body {
     class keeps the styling targeted.
   */
   .chat-card.attack-roll-card {
-    --alternityd100-chat-text: var(--color-text-dark-1);
+    --alternityd100-chat-text: var(--alternityd100-chat-text-light);
+    --alternityd100-chat-text-muted: var(--alternityd100-chat-text-muted-light);
   }
 
   body.theme-dark .chat-card.attack-roll-card,
   .themed.theme-dark .chat-card.attack-roll-card,
   .mixin-theme-dark-variables .chat-card.attack-roll-card {
-    --alternityd100-chat-text: var(--color-text-light-1);
+    --alternityd100-chat-text: var(--alternityd100-chat-text-dark);
+    --alternityd100-chat-text-muted: var(--alternityd100-chat-text-muted-dark);
   }
 
   .chat-card.attack-roll-card .attack-target-card {
@@ -2105,7 +2521,7 @@ font-size: smaller;
   .chat-card.attack-roll-card .attack-target-damage .degree-label {
     font-weight: 700;
 
-    color: color-mix(in srgb, var(--alternityd100-chat-text) 78%, transparent);
+    color: var(--alternityd100-chat-text-muted);
        font-family: var(--alternityd100-font-base);
     white-space: nowrap;
   }

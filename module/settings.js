@@ -1,5 +1,15 @@
 import { d100A } from "./d100Aconfig.js";
 
+export function applyTokenHudStatusEffectSize(size = null) {
+    const rawSize = size ?? game?.settings?.get?.("Alternityd100", "tokenHudStatusEffectSize");
+    const numericSize = Number(rawSize);
+    const clampedSize = Number.isFinite(numericSize)
+        ? Math.min(64, Math.max(16, Math.round(numericSize)))
+        : 36;
+
+    document?.documentElement?.style?.setProperty?.("--alternityd100-token-hud-effect-size", `${clampedSize}px`);
+}
+
 export const registerSystemSettings = function () {
    
    
@@ -70,6 +80,21 @@ export const registerSystemSettings = function () {
             "ordnance": "Ordnance Only",
             "both": "Starships and Ordnance"
         }
+    });
+
+    game.settings.register("Alternityd100", "tokenHudStatusEffectSize", {
+        name: "SETTINGS.TokenHudStatusEffectSizeN",
+        hint: "SETTINGS.TokenHudStatusEffectSizeL",
+        scope: "client",
+        config: true,
+        default: 36,
+        type: Number,
+        range: {
+            min: 16,
+            max: 64,
+            step: 2
+        },
+        onChange: value => applyTokenHudStatusEffectSize(value)
     });
 
     game.settings.register("Alternityd100", "navComputerRelativistic", {

@@ -1767,6 +1767,16 @@ console.log(options)
     /*****************************************
     * rollNormalAttack 
     *****************************************/
+/**
+ * 
+ * We need to add code 
+if targetedScan then we need to determine 
+1. is the targeted token actor.system.scanTargets[0].aquired
+2 .if the sensor operator wants to scan the targeted ship or do a general area scan    if (scanAll) 
+ */
+
+
+
     async rollScan(options = {}) {
         const skillId = "senso"
         const item = this;
@@ -1781,6 +1791,16 @@ console.log(options)
 
 
         const sensorOperator = npcCrew ? actor : actorData.crew.sensors.actors[0]
+        if(!sensorOperator) NoSensorOperatorWarn(()=> {
+            ui.notifications.warn("No Sensor Operator Assigned to this Ship")
+        return
+        })
+
+        const targettedTokens = userTargets.map(x => findTokenById(x))
+        const targetedScan = (!!targettedTokens.length)
+
+
+
         const actorArray = await this.actor.getActiveTokens();//true, true);
         const actorToken = actorArray[0]
         let maxRange = 0
@@ -1987,7 +2007,12 @@ console.log(options)
                             (rawRes && typeof rawRes === "object" ? rawRes.value : rawRes) ?? 0
                         ) || 0;
 
+                        console.log("Sensor Data:", "rawRes:", rawRes, typeof rawRes, typeof(rawRes), typeof rawRes === "object")
+
+
                         // Add it all up
+                        console.log("Sensor Data:", "rawRes:", rawRes, "sensorType:", sensorType, "scan:", scan, "isValidSensorType:", isValidSensorType)
+                        console.log("Scan Skill Step:", scanSkill.step, "Range Steps:", rangesteps, "Target Resistance:", targetRes)
                         let stepbonus = scanSkill.step + rangesteps + targetRes
                         // console.log(scanSkill.step, rangesteps, targetRes, scan)
                         // Build the tooltip

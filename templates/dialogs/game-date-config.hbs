@@ -1,0 +1,40 @@
+<section class="alternityd100-game-date-form">
+  <p class="hint">{{localize "d100A.Calendar.Hint"}}</p>
+
+  <div class="form-group">
+    <label for="alternityd100-game-date-iso">{{localize "d100A.Calendar.Date"}}</label>
+    <input id="alternityd100-game-date-iso" type="date" name="isoDate" value="{{isoDate}}" {{#unless canConfigure}}disabled{{/unless}}>
+  </div>
+
+  <div class="form-group">
+    <label for="alternityd100-game-date-era">{{localize "d100A.Calendar.Era"}}</label>
+    <input id="alternityd100-game-date-era" type="text" name="era" value="{{era}}" placeholder="AD" {{#unless canConfigure}}disabled{{/unless}}>
+  </div>
+
+  <p class="alternityd100-game-date-preview">
+    <span>{{localize "d100A.Calendar.Preview"}}</span>
+    <strong>{{formattedDate}}</strong>
+  </p>
+
+  <footer class="form-footer alternityd100-game-date-actions">
+    {{#if canConfigure}}
+      <button type="button" data-action="previousDay" data-delta="-1">
+        <i class="fas fa-chevron-left" aria-hidden="true"></i>
+        <span>{{localize "d100A.Calendar.PreviousDay"}}</span>
+      </button>
+      <button type="button" data-action="nextDay" data-delta="1">
+        <i class="fas fa-chevron-right" aria-hidden="true"></i>
+        <span>{{localize "d100A.Calendar.NextDay"}}</span>
+      </button>
+      <button type="button" data-action="save">
+        <i class="fas fa-save" aria-hidden="true"></i>
+        <span>{{localize "d100A.Calendar.Save"}}</span>
+      </button>
+    {{/if}}
+
+    <button type="button" data-action="cancel">
+      <i class="fas fa-times" aria-hidden="true"></i>
+      <span>{{localize "d100A.Calendar.Close"}}</span>
+    </button>
+  </footer>
+</section>

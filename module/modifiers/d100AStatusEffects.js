@@ -50,7 +50,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/dying3.png",
         icon: "systems/Alternityd100/icons/conditions/dying3.png",
         modifiers: [],
-           group: "mortality",
+        group: "mortality",
         hud: { actorTypes: ["character", "npc"] },
         system: {
             bonus: {
@@ -85,6 +85,26 @@ d100AStatusEffects.push(
         }
 
     },
+     {
+        id: "prone",
+        name: "d100A.EFFECT.StatusProne",
+        label: "d100A.EFFECT.StatusProne",
+        img: "systems/Alternityd100/icons/conditions/falling.png",
+        icon: "systems/Alternityd100/icons/conditions/falling.png",
+        modifiers: [],
+        group: "cover",
+        hud: { actorTypes: ["character", "npc"] },
+        system: {
+            bonus: {
+                dodge: 0, cover: 0, actions: 0, ranged: 0
+            },
+            resistanceModifier: {
+                str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
+                resistanceBase: {},
+            },
+            tooltip: "<strong>Prone</strong><br><br>"
+        }
+    }, 
     {
         id: "suppressed",
         name: "d100A.EFFECT.StatusSuppressed",
@@ -96,7 +116,7 @@ d100AStatusEffects.push(
         hud: { actorTypes: ["character", "npc"] },
         system: {
             bonus: {
-                dodge: 0, cover: 0, actions: 0, renged: 1
+                dodge: 0, cover: 0, actions: 0, ranged: 1
             },
             resistanceModifier: {
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
@@ -245,46 +265,9 @@ d100AStatusEffects.push(
             tooltip: "<strong>Swimming</strong><br><br>"
         }
     },
+    
+   
     {
-        id: "aiming",
-        name: "d100A.EFFECT.Aiming",
-        label: "d100A.EFFECT.Aiming",
-        img: "systems/Alternityd100/icons/conditions/aiming.png",
-        icon: "systems/Alternityd100/icons/conditions/aiming.png",
-        modifiers: [],
-        group: "attack",
-        hud: { actorTypes: ["character", "npc"] },
-        system: {
-            bonus: {
-                dodge: 0, cover: 0, actions: 0, ranged: 0
-            },
-            resistanceModifier: {
-                str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
-                resistanceBase: {},
-            },
-            tooltip: "<strong>aiming</strong><br><br>"
-        }
-    },
-    {
-        id: "prone",
-        name: "d100A.EFFECT.StatusProne",
-        label: "d100A.EFFECT.StatusProne",
-        img: "systems/Alternityd100/icons/conditions/falling.png",
-        icon: "systems/Alternityd100/icons/conditions/falling.png",
-        modifiers: [],
-        group: "cover",
-        hud: { actorTypes: ["character", "npc"] },
-        system: {
-            bonus: {
-                dodge: 0, cover: 0, actions: 0, ranged: 0
-            },
-            resistanceModifier: {
-                str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
-                resistanceBase: {},
-            },
-            tooltip: "<strong>Prone</strong><br><br>"
-        }
-    }, {
     id: "coverlight",
     name: "d100A.EFFECT.StatusCoverLight",
     label: "d100A.EFFECT.StatusCoverLight",
@@ -369,7 +352,7 @@ d100AStatusEffects.push(
         img: "systems/Alternityd100/icons/conditions/dodge_02.webp",
         icon: "systems/Alternityd100/icons/conditions/dodge_02.webp",
         modifiers: [],
-            group: "dodging",
+        group: "dodging",
         hud: { actorTypes: ["character", "npc"] },
         system: {
             bonus: {
@@ -429,7 +412,7 @@ d100AStatusEffects.push(
         group: "jinking",
         hud: { actorTypes: ["starship", "vehicle"] },
         system: {
-       
+
             bonus: { dodge: 1, cover: 0, actions: 0, ranged: 0 },
             resistanceModifier: {
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
@@ -449,7 +432,7 @@ d100AStatusEffects.push(
         group: "jinking",
         hud: { actorTypes: ["starship", "vehicle"] },
         system: {
-       
+
             bonus: { dodge: 2, cover: 0, actions: 0, ranged: 0 },
             resistanceModifier: {
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
@@ -468,7 +451,7 @@ d100AStatusEffects.push(
         group: "jinking",
         hud: { actorTypes: ["starship", "vehicle"] },
         system: {
-       
+
             bonus: { dodge: 3, cover: 0, actions: 0, ranged: 0 },
             resistanceModifier: {
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
@@ -485,7 +468,7 @@ d100AStatusEffects.push(
         icon: "systems/Alternityd100/icons/conditions/dodge_04.webp",
         modifiers: [],
         group: "jinking",
-        hud: { actorTypes:  ["starship", "vehicle"]  },
+        hud: { actorTypes: ["starship", "vehicle"] },
         system: {
             bonus: {
                 dodge: -1, cover: 0, actions: 0, ranged: 0
@@ -498,6 +481,26 @@ d100AStatusEffects.push(
         }
     },
     {
+        id: "aiming",
+        name: "d100A.EFFECT.Aiming",
+        label: "d100A.EFFECT.Aiming",
+        img: "systems/Alternityd100/icons/conditions/aiming.png",
+        icon: "systems/Alternityd100/icons/conditions/aiming.png",
+        modifiers: [],
+        group: "attack",
+        hud: { actorTypes: ["character", "npc"] },
+        system: {
+            bonus: {
+                dodge: 0, cover: 0, actions: 0, ranged: 0
+            },
+            resistanceModifier: {
+                str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
+                resistanceBase: {},
+            },
+            tooltip: "<strong>aiming</strong><br><br>"
+        }
+    },
+    {
         id: "sensorjamord",
         name: "d100A.EFFECT.sensorjamord",
         label: "d100A.EFFECT.sensorjamord",
@@ -507,8 +510,8 @@ d100AStatusEffects.push(
         group: "sensorjamming",
         hud: { actorTypes: ["starship", "vehicle"] },
         system: {
-       
-            bonus: { dodge: 0, cover: 0, actions: 0, ranged: 0, sensors : 1 },
+
+            bonus: { dodge: 0, cover: 0, actions: 0, ranged: 0, sensors: 1 },
 
             resistanceModifier: {
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
@@ -528,8 +531,8 @@ d100AStatusEffects.push(
         group: "sensorjamming",
         hud: { actorTypes: ["starship", "vehicle"] },
         system: {
-       
-            bonus: { dodge: 0, cover: 0, actions: 0, ranged: 0, sensors : 2  },
+
+            bonus: { dodge: 0, cover: 0, actions: 0, ranged: 0, sensors: 2 },
             resistanceModifier: {
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
@@ -547,8 +550,8 @@ d100AStatusEffects.push(
         group: "sensorjamming",
         hud: { actorTypes: ["starship", "vehicle"] },
         system: {
-       
-            bonus: { dodge: 0, cover: 0, actions: 0, ranged: 0, sensors : 3  },
+
+            bonus: { dodge: 0, cover: 0, actions: 0, ranged: 0, sensors: 3 },
             resistanceModifier: {
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
@@ -564,10 +567,11 @@ d100AStatusEffects.push(
         icon: "systems/Alternityd100/icons/conditions/jam_bonus.webp",
         modifiers: [],
         group: "sensorjamming",
-        hud: { actorTypes:  ["starship", "vehicle"]  },
+        hud: { actorTypes: ["starship", "vehicle"] },
         system: {
             bonus: {
-                dodge: -1, cover: 0, actions: 0, ranged: 0, sensors : -2 },
+                dodge: -1, cover: 0, actions: 0, ranged: 0, sensors: -2
+            },
             resistanceModifier: {
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
@@ -585,7 +589,7 @@ d100AStatusEffects.push(
         group: "weaponjamming",
         hud: { actorTypes: ["ordnance"] },
         system: {
-       
+
             bonus: { dodge: 0, cover: 0, actions: 0, ranged: 0 },
             resistanceModifier: {
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
@@ -605,7 +609,7 @@ d100AStatusEffects.push(
         group: "weaponjamming",
         hud: { actorTypes: ["ordnance"] },
         system: {
-       
+
             bonus: { dodge: 0, cover: 0, actions: 0, ranged: 0 },
             resistanceModifier: {
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
@@ -624,7 +628,7 @@ d100AStatusEffects.push(
         group: "weaponjamming",
         hud: { actorTypes: ["ordnance"] },
         system: {
-       
+
             bonus: { dodge: 0, cover: 0, actions: 0, ranged: 0 },
             resistanceModifier: {
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
@@ -641,7 +645,7 @@ d100AStatusEffects.push(
         icon: "systems/Alternityd100/icons/conditions/weaponjam_fail.webp",
         modifiers: [],
         group: "weaponjamming",
-        hud: { actorTypes:  ["ordnance"]  },
+        hud: { actorTypes: ["ordnance"] },
         system: {
             bonus: {
                 dodge: -1, cover: 0, actions: 0, ranged: 0
@@ -663,7 +667,7 @@ d100AStatusEffects.push(
         group: "eccmjamming",
         hud: { actorTypes: ["starship", "vehicle"] },
         system: {
-       
+
             bonus: { dodge: 0, cover: 0, actions: 0, ranged: 0 },
             resistanceModifier: {
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
@@ -683,7 +687,7 @@ d100AStatusEffects.push(
         group: "eccmjamming",
         hud: { actorTypes: ["starship", "vehicle"] },
         system: {
-       
+
             bonus: { dodge: 0, cover: 0, actions: 0, ranged: 0 },
             resistanceModifier: {
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
@@ -702,7 +706,7 @@ d100AStatusEffects.push(
         group: "eccmjamming",
         hud: { actorTypes: ["starship", "vehicle"] },
         system: {
-       
+
             bonus: { dodge: 0, cover: 0, actions: 0, ranged: 0 },
             resistanceModifier: {
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
@@ -719,7 +723,7 @@ d100AStatusEffects.push(
         icon: "systems/Alternityd100/icons/conditions/dodge_04.webp",
         modifiers: [],
         group: "eccmjamming",
-        hud: { actorTypes:  ["starship", "vehicle"]  },
+        hud: { actorTypes: ["starship", "vehicle"] },
         system: {
             bonus: {
                 dodge: -1, cover: 0, actions: 0, ranged: 0
@@ -733,6 +737,6 @@ d100AStatusEffects.push(
     }
 
 
-    
+
 
 )

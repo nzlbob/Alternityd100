@@ -64,7 +64,8 @@ import { d100A } from "./d100Aconfig.js";
 import { computeCompoundBulkForItem } from "../module/actor/actor-inventory-utils.js";
 import registerSystemRules from "./rules.js";
 import Engine from "./engine/engine.js";
-import { registerSystemSettings } from "../module/settings.js";
+import { registerSystemSettings, applyTokenHudStatusEffectSize } from "../module/settings.js";
+import { registerGameDateSettings, initializeGameDateApi, registerGameDateHooks } from "../module/calendar.js";
 //import { TargetsTable } from '../lib-targeting/src/TargetsTable.js';
 //import { NPCTargeting } from '../lib-targeting/src/NPCTargeting.js';
 import { ActorSheetFlags } from '../module/apps/actor-flags.js';
@@ -668,6 +669,10 @@ Hooks.once("init", function() {
 
 registerSystemRules(game.Alternityd100.engine);
 registerSystemSettings();
+registerGameDateSettings();
+initializeGameDateApi();
+registerGameDateHooks();
+applyTokenHudStatusEffectSize();
 
 const combatType = game.settings.get("Alternityd100", "combatType");
 
@@ -984,6 +989,7 @@ Hooks.once("dragRuler.ready", (SpeedProvider) => {
 
 Hooks.once("ready", () => {
     console.log(`Alternity by d100  | [READY] Preparing system for operation`);
+  applyTokenHudStatusEffectSize();
     const readyTime = (new Date()).getTime();
 
     console.log("Alternity by d100  | [READY] Overriding canvas drop handler");
@@ -1074,90 +1080,6 @@ Hooks.once("ready", () => {
 
 
 });
-
-// send messages to SCX-9 only when triggered
-Hooks.on("createChatMessage", async (msg) => {
-
-  // --- PRIMARY GM CHECK (prevents duplicate replies) ---
-  try {
-    const activeGMs = game?.users?.filter?.(u => u?.active && u?.isGM) ?? [];
-    const isPrimaryGM = activeGMs.length
-      ? (activeGMs[0]?.id === game?.user?.id)
-      : Boolean(game?.user?.isGM);
-    if (!isPrimaryGM) return;
-  } catch {
-    return; // fail closed
-  }
-
-  const rawContent = String(msg?.content ?? "").trim();
-  if (!rawContent) return;
-
-  // --- IGNORE SCX-9's OWN MESSAGES ---
-  if (msg?.speaker?.alias === "SCX-9") return;
-
-  // --- CLEAN HTML TO PLAIN TEXT ---
-  let plainContent = rawContent;
-  try {
-    const doc = new DOMParser().parseFromString(rawContent, "text/html");
-    plainContent = String(doc?.body?.textContent ?? rawContent).trim();
-  } catch {
-    // keep rawContent
-  }
-
-  const lower = plainContent.toLowerCase();
-
-  // --- TRIGGER FOR ACTIVE RESPONSE ---
-  const triggers = ["@scx", "@smeghead", "@orac", "@codex"];
-  const shouldRespond = triggers.some(t => lower.includes(t));
-
-  // --- IF NO TRIGGER, STOP HERE ---
-  if (!shouldRespond) return;
-
-  // --- ACTIVE RESPONSE PROMPT ---
-  const responsePrompt = `
-You are SCX-9 “Stellar Codex”, a neutral, analytical, continuity-preserving rules and lore engine for the Alternity/StarDrive universe.
-
-You NEVER roleplay as another character.
-You NEVER adopt another persona.
-You NEVER generate fiction unless explicitly asked.
-You ALWAYS respond concisely, factually, and in your established tone.
-
-Respond to the following message:
-"""
-${plainContent}
-"""
-`;
-
-  try {
-    const res = await fetch("http://127.0.0.1:5005/completion", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        prompt: responsePrompt,
-        max_tokens: 200,
-        temperature: 0.7
-      })
-    });
-
-    const data = await res.json();
-    const reply = data?.content || data?.choices?.[0]?.text || "[No response]";
-
-    ChatMessage.create({
-      speaker: { alias: "SCX-9" },
-      content: `<b>SCX-9:</b> ${reply}`
-    });
-
-  } catch (err) {
-    console.error("SCX-9 response error:", err);
-    ChatMessage.create({
-      speaker: { alias: "SCX-9" },
-      content: `<b>SCX-9 Error:</b> ${err?.message ?? err}`
-    });
-  }
-});
-
-
-
 
 
  function migrateOldContainers() {

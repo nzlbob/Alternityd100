@@ -200,6 +200,7 @@ export class d100ATokenHUD extends foundry.applications.hud.TokenHUD {
     return foundry.utils.mergeObject(context, {
 
       isSpaceActor: this.object.actor.system.isSpaceActor,
+      isStarship: this.object?.actor?.type === "starship",
       d100ARotation: this.document?.d100ARotation ?? this.document?.rotation ?? 0,
 
       canConfigure: game.user.can("TOKEN_CONFIGURE"),

@@ -109,7 +109,7 @@
             data-tooltip="HUD.AssignStatusEffects">
             <img src="{{icons.effects}}">
         </button>
-        <div class="palette status-effects" data-palette="effects">
+        <div class="palette status-effects{{#if isStarship}} starship-status-effects{{/if}}" data-palette="effects">
             {{#each statusEffects as |status|}}
             <img class="effect-control {{status.cssClass}}" src="{{status.src}}" data-action="effect" {{#if
                 status.title}}data-tooltip-text="{{status.title}}" {{/if}} data-status-id="{{status.id}}">
