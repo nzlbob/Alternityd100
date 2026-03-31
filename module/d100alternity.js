@@ -1382,6 +1382,26 @@ Hooks.on("preCreateActor", function (doc) {
   doc.updateSource(createOverrideData(barConfig, true));
 });
 */
+const FLIPPED_TOKEN_TYPES = new Set(["ordnance", "vehicle", "starship"]);
+
+Hooks.on("preCreateToken", function (doc, data) {
+  const actor = doc.actor ?? game.actors?.get(data?.actorId) ?? null;
+  const actorType = actor?.type ?? data?.actorLink?.type ?? null;
+  if (!FLIPPED_TOKEN_TYPES.has(actorType)) return;
+
+  const currentScaleY = Number(
+    foundry.utils.getProperty(data, "texture.scaleY")
+      ?? foundry.utils.getProperty(doc, "texture.scaleY")
+      ?? 1
+  ) || 1;
+
+  doc.updateSource({
+    texture: {
+      scaleY: -Math.abs(currentScaleY)
+    }
+  });
+});
+
 /** Hook to update bar visibility. */
 //Hooks.on("hoverToken", refreshBarVisibility);
 //Hooks.on("controlToken", refreshBarVisibility);

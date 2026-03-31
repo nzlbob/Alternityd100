@@ -100,12 +100,15 @@ export class d100AActorSheetOrdnance extends d100ActorSheet {
         if (!droppedItem) return false;
 
         const allowed = new Set(["ordnancePropulsion", "ordnanceWarhead", "ordnanceGuidance"]);
-        if (!allowed.has(droppedItem.type)) return super._onDrop(event);
+        if (!allowed.has(droppedItem.type)) {
+            console.log(`Dropped item ${droppedItem.name} (${droppedItem.type}) is not a valid ordnance component type.`);
+            return //super._onDrop(event);
+        }
 
         // Remove existing installed component of this type
         const existing = this.actor.items.filter(i => i.type === droppedItem.type);
         if (existing.length) {
-            await this.actor.deleteEmbeddedDocuments("Item", existing.map(i => i.id));
+            console.log("deleted", await this.actor.deleteEmbeddedDocuments("Item", existing.map(i => i.id)));
         }
 
         // Install (embed) a copy

@@ -8,6 +8,7 @@ import { d100Actor } from "../d100actor.js";
 import {findTokenById,getCanvas} from "./item.js";
 
 const ORDNANCE_RPC_ADD_COMBATANT = "addOrdnanceTokenToCombatant";
+const ORDNANCE_COMPONENT_TYPES = new Set(["ordnanceWarhead", "ordnancePropulsion", "ordnanceGuidance"]);
 let _ordnanceRpcRegistered = false;
 
 function registerOrdnanceRpcHandlers() {
@@ -103,7 +104,10 @@ async function getOrCreateBaseOrdnanceActor() {
   }
 
   const byId = actorId ? game.actors?.get?.(actorId) : null;
-  if (byId && (byId.type === "ordnance" || byId.system?.type === "ordnance")) return byId;
+  if (byId && (byId.type === "ordnance" || byId.system?.type === "ordnance")) {
+    await sanitizeBaseOrdnanceActor(byId);
+    return byId;
+  }
 
   // Heuristic search: prefer an ordnance actor explicitly flagged or named.
   const candidates = (game.actors ?? []).filter(a => a?.type === "ordnance" || a?.system?.type === "ordnance");
@@ -111,6 +115,7 @@ async function getOrCreateBaseOrdnanceActor() {
   const named = candidates.find(a => String(a?.name ?? "").toLowerCase() === "base ordnance") ?? null;
   const first = flagged ?? named ?? candidates[0] ?? null;
   if (first) {
+    await sanitizeBaseOrdnanceActor(first);
     try {
       await game.settings.set("Alternityd100", settingKey, first.id);
     } catch (_err) {
@@ -123,7 +128,7 @@ async function getOrCreateBaseOrdnanceActor() {
   const created = await d100Actor.create({
     name: "Base Ordnance",
     type: "ordnance",
-    img: "systems/Alternityd100/icons/items/ammo/missile.png",
+    img: "systems/Alternityd100/images/Ships/ordnance/missile.png",
     prototypeToken: { actorLink: false }
   });
 
@@ -133,7 +138,25 @@ async function getOrCreateBaseOrdnanceActor() {
   } catch (_err) {
     // ignore
   }
+  await sanitizeBaseOrdnanceActor(created);
   return created;
+}
+
+async function sanitizeBaseOrdnanceActor(actor) {
+  if (!actor || actor.isToken) return;
+
+  const itemIdsToDelete = actor.items
+    ?.filter((item) => ORDNANCE_COMPONENT_TYPES.has(item?.type))
+    ?.map((item) => item.id)
+    ?? [];
+
+  if (!itemIdsToDelete.length) return;
+
+  try {
+    await actor.deleteEmbeddedDocuments("Item", itemIdsToDelete);
+  } catch (err) {
+    console.warn("sanitizeBaseOrdnanceActor: failed to remove embedded ordnance items from base actor", err);
+  }
 }
 
 function normalizeOrdnanceKind(raw) {
@@ -459,6 +482,8 @@ export async function rollStarshipLauncherAttack(item, options, targetData, acto
     tokenData.delta.system.crew = item.actor?.system?.crew ?? null;
     tokenData.delta.system.skills = item.actor?.system?.skills ?? null;
     tokenData.delta.system.targetData = targetData?.[0] ?? null;
+    tokenData.delta.system.ordnanceType = ordnance?.system?.ordnanceType ?? null;
+    console.log("Ordnance", ordnance, "targetData", tokenData);
     tokenData.delta.ownership = ownership;
 
     // Provide component items on the token's synthetic actor.
@@ -541,18 +566,42 @@ export async function rollStarshipLauncherAttack(item, options, targetData, acto
     }
 
     // Some Foundry versions may ignore `delta.items` at Token creation time.
-    // If the synthetic actor doesn't have the expected component items, add them now.
+    // Re-apply the token delta directly instead of creating embedded actor items,
+    // which can leak onto the shared base ordnance actor.
     try {
-      if (a?.actor) {
-        const hasWarhead = a.actor.items?.some((i) => i?.type === "ordnanceWarhead");
-        const hasProp = a.actor.items?.some((i) => i?.type === "ordnancePropulsion");
-        const hasGuid = a.actor.items?.some((i) => i?.type === "ordnanceGuidance");
-        if (!hasWarhead || !hasProp || !hasGuid) {
-          const existingTypes = new Set(a.actor.items?.map((i) => i?.type));
-          const toCreate = tokenEmbeddedItems.filter((it) => !existingTypes.has(it.type));
-          if (toCreate.length && typeof a.actor.createEmbeddedDocuments === "function") {
-            await a.actor.createEmbeddedDocuments("Item", toCreate);
-          }
+      if (a) {
+        const deltaTypes = new Set();
+        const mergedByType = new Map();
+        const storeByType = (entry) => {
+          const itemType = entry?.type ?? entry?.system?.type ?? null;
+          if (!ORDNANCE_COMPONENT_TYPES.has(itemType) || mergedByType.has(itemType)) return;
+
+          const normalized = typeof entry?.toObject === "function"
+            ? entry.toObject()
+            : foundry.utils.duplicate(entry);
+          mergedByType.set(itemType, normalized);
+        };
+
+        const deltaItems = a?.delta?.items;
+        if (Array.isArray(deltaItems)) {
+          deltaItems.forEach((entry) => {
+            const itemType = entry?.type ?? entry?.system?.type ?? null;
+            if (itemType) deltaTypes.add(itemType);
+            storeByType(entry);
+          });
+        } else if (deltaItems?.forEach) {
+          deltaItems.forEach((entry) => {
+            const itemType = entry?.type ?? entry?.system?.type ?? null;
+            if (itemType) deltaTypes.add(itemType);
+            storeByType(entry);
+          });
+        }
+
+        tokenEmbeddedItems.forEach(storeByType);
+
+        if (deltaTypes.size !== mergedByType.size) {
+          const mergedItems = Array.from(mergedByType.values());
+          await a.update({ "delta.items": mergedItems });
         }
       }
     } catch (err2) {

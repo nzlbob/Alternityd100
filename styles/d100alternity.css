@@ -291,14 +291,31 @@ body {
     margin-left: 6px;
   }
 
+  .Alternityd100.attack-roll-dialog-v2 .d100a-attack-dialog__field {
+    display: grid;
+    grid-template-columns: minmax(140px, 170px) minmax(0, 1fr);
+    align-items: center;
+    gap: 8px 12px;
+    margin: 0 0 8px;
+  }
+
   .Alternityd100.attack-roll-dialog-v2 .d100a-attack-dialog .form-group label {
     font-family: var(--alternityd100-font-strong);
+    margin: 0;
   }
 
   .Alternityd100.attack-roll-dialog-v2 .d100a-attack-dialog input,
   .Alternityd100.attack-roll-dialog-v2 .d100a-attack-dialog select {
+    width: 100%;
     border: 1px solid var(--alternityd100-border);
     background: color-mix(in srgb, var(--alternityd100-surface) 70%, transparent);
+  }
+
+  @media (max-width: 520px) {
+    .Alternityd100.attack-roll-dialog-v2 .d100a-attack-dialog__field {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
   }
 
   .Alternityd100.attack-roll-dialog-v2 .d100a-attack-dialog__targets {
@@ -1108,6 +1125,56 @@ body {
     min-width: 0;
   }
 
+  .Alternityd100.sheet.item .sheet-body .form-group > .form-fields.weapon-properties {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+  }
+
+  .Alternityd100.sheet.item .sheet-body .form-group > .form-fields.weapon-properties > input[type="checkbox"] {
+    flex: 0 0 auto;
+    margin: 0;
+  }
+
+  .Alternityd100.sheet.item .sheet-body .form-group > .form-fields.ordnance-range-fields {
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    gap: 4px;
+  }
+
+  .Alternityd100.sheet.item .sheet-body .form-group > .form-fields.ordnance-range-fields > input {
+    flex: 1 1 0;
+    width: 0;
+    min-width: 0;
+    text-align: center;
+  }
+
+  .Alternityd100.sheet.item .sheet-body .form-group > .form-fields.ordnance-range-fields > .ordnance-range-separator {
+    flex: 0 0 auto;
+    line-height: 1;
+  }
+
+  .Alternityd100.sheet.item .sheet-body .form-group > .form-fields.ordnance-mode-fields {
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    gap: 10px;
+    font-size: 10px;
+  }
+
+  .Alternityd100.sheet.item .sheet-body .form-group > .form-fields.ordnance-mode-fields > .ordnance-mode-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+
+  .Alternityd100.sheet.item .sheet-body .form-group > .form-fields.ordnance-mode-fields > .ordnance-mode-option > input[type="checkbox"] {
+    margin: 0;
+    flex: 0 0 auto;
+  }
+
   /* Common case: a single select in form-fields should fill available width */
   .Alternityd100.sheet.item .sheet-body .form-group:has(> label + .form-fields) > .form-fields:has(> select:only-child) > select {
     width: 100%;
@@ -1158,15 +1225,20 @@ body {
   }
 
   /* Weapon range: keep short/med/long inputs on one row */
-  .Alternityd100.sheet.item .sheet-body .weapon-range-fields {
+  .Alternityd100.sheet.item .sheet-body .weapon-range-fields,
+  .Alternityd100.sheet.item .sheet-body .form-group.weapon-properties:has(> input[name^="system.range."]) {
+    display: flex;
     flex-wrap: nowrap;
     justify-content: flex-end;
-    gap: 0;
+    align-items: center;
+    gap: 6px;
   }
 
-  .Alternityd100.sheet.item .sheet-body .weapon-range-fields > input[type="text"] {
+  .Alternityd100.sheet.item .sheet-body .weapon-range-fields > input[type="text"],
+  .Alternityd100.sheet.item .sheet-body .form-group.weapon-properties:has(> input[name^="system.range."]) > input[type="text"] {
     width: 3.5em;
     flex: 0 0 auto;
+    min-width: 0;
   }
 
   .Alternityd100.sheet.item .sheet-body .weapon-range-fields > .sep {
@@ -6072,6 +6144,10 @@ background-color: transparent;
     background: rgba(0, 0, 0, 0.04);
   }
 
+  .Alternityd100.sheet.actor .modifiers-body .d100a-active-effect.is-disabled {
+    opacity: 0.72;
+  }
+
   body.theme-dark .Alternityd100.sheet.actor .modifiers-body .d100a-active-effect,
   .mixin-theme-dark-variables .Alternityd100.sheet.actor .modifiers-body .d100a-active-effect {
     background: rgba(0, 0, 0, 0.14);
@@ -6084,9 +6160,27 @@ background-color: transparent;
     font-weight: 600;
   }
 
+  .Alternityd100.sheet.actor .modifiers-body .d100a-active-effect-text {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .Alternityd100.sheet.actor .modifiers-body .d100a-active-effect-meta {
+    font-size: 10px;
+    line-height: 12px;
+    opacity: 0.75;
+  }
+
   .Alternityd100.sheet.actor .modifiers-body .d100a-active-effect-duration {
     font-size: 11px;
     line-height: 13px;
     opacity: 0.85;
+  }
+
+  .Alternityd100.sheet.actor .modifiers-body .d100a-active-effect-controls {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
   }
 }

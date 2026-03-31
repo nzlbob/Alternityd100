@@ -4,22 +4,32 @@
 <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.Cost" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.CostTooltip" }}">
     <label>BP</label>
     <div class="form-fields">
-        <input type="text" name="system.bhpCost" value="{{itemData.bhpCost}}" data-dtype="Number" placeholder="0"/>
+        <input type="number" name="system.bhpCost" value="{{itemData.bhpCost}}" data-dtype="Number" placeholder="0"/>
     </div>
 </div>
 {{/unless}}
 
 {{#unless noPCUCost}}
 <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipComponent.PCU" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipComponent.PCUTooltip" }}">
-    <label>PCU/BP  <input data-tooltip="isPCUPerBHP"  type="checkbox" name="system.isPCUPerBHP" {{checked itemData.isPCUPerBHP}}/> </label>
+    <label>PCU</label>
     <div class="form-fields">
-        <input type="text" name="system.pcu" value="{{itemData.pcu}}" data-dtype="Number" placeholder="0" />
+        <input type="number" name="system.pcu" value="{{itemData.pcu}}" data-dtype="Number" placeholder="0" />
     </div>
 </div>
-<div class="form-group" data-tooltip="<b>{{ localize "Extra power" }}</b><br/>{{ localize "Additional power supplied / required" }}">
-    <label>+ PCU</label>
+
+<div class="form-group" data-tooltip="{{ localize "isPCUPerBHP"}}">
+    <label>PCU/BP</label>
     <div class="form-fields">
-        <input type="text" name="system.pcuBonus" value="{{itemData.pcuBonus}}" data-dtype="Number" placeholder="0" />
+        <label class="checkbox">
+            <input type="checkbox" name="system.isPCUPerBHP" {{checked itemData.isPCUPerBHP}}/>
+        </label>
+    </div>
+</div>
+
+<div class="form-group" data-tooltip="<b>{{ localize "Extra power" }}</b><br/>{{ localize "Additional power supplied / required" }}">
+    <label>Extra PCU</label>
+    <div class="form-fields">
+        <input type="number" name="system.pcuBonus" value="{{itemData.pcuBonus}}" data-dtype="Number" placeholder="0" />
     </div>
 </div>
 

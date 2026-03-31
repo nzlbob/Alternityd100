@@ -31,17 +31,17 @@
                                         <tbody>
                                             <tr>
                                                 <td style="text-align: left;"><label>Speed</label></td>
-                                                <td><input name="system.attributes.speed.value" type="text"
+                                                <td><input name="system.attributes.speed.value" type="number"
                                                         value="{{system.attributes.speed.value}}" /></td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: left;"><label>Accel</label></td>
-                                                <td><input name="system.attributes.accel.value" type="text"
+                                                <td><input name="system.attributes.accel.value" type="number"
                                                         value="{{system.attributes.accel.value}}" /></td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: left;"><label>Duration</label></td>
-                                                <td><input name="system.attributes.duration.value" type="text"
+                                                <td><input name="system.attributes.duration.value" type="number"
                                                         value="{{system.attributes.duration.value}}" /></td>
                                             </tr>
                                         </tbody>
@@ -73,18 +73,16 @@
                                 <h4 class="attribute-name box-title">Actions</h4>
                                 <div class="header-actions flexcol">
                                     <button type="button" class="tag newtarget" id="newtarget"
-                                        data-tooltip="{{localize " d100A.Ordnance.Activation.ReTargetTooltip"}}">{{
+                                        data-tooltip="{{localize "d100A.Ordnance.Activation.ReTargetTooltip"}}">{{
                                         localize "d100A.Ordnance.Activation.ReTarget" }}</button>
                                     <button type="button" class="tag target" id="target"
-                                        data-tokenid="{{system.targetData._id}}" data-tooltip="{{localize "
-                                        d100A.Ordnance.Activation.TargetTooltip"}}">{{ localize
-                                        "d100A.Ordnance.Activation.Target" }}</button>
-                                    <button type="button" class="tag automove" id="autoMove" data-tooltip="{{localize "
-                                        d100A.Ordnance.Activation.AutoMoveTooltip"}}">{{ localize
-                                        "d100A.Ordnance.Activation.AutoMove" }}</button>
-                                    <button type="button" class="tag attack" id="attack" data-tooltip="{{localize "
-                                        d100A.Ordnance.Activation.AttackTooltip"}}">{{ localize
-                                        "d100A.Ordnance.Activation.Attack" }}</button>
+                                        data-tokenid="{{system.targetData._id}}" data-tooltip="{{localize "d100A.Ordnance.Activation.TargetTooltip"}}">{{ localize "d100A.Ordnance.Activation.Target" }}</button>
+                                    <button type="button" class="tag automove" id="autoMove" 
+                                    data-tooltip="{{localize "d100A.Ordnance.Activation.AutoMoveTooltip"}}">
+                                        {{ localize "d100A.Ordnance.Activation.AutoMove" }}</button>
+                                    <button type="button" class="tag attack" id="attack" 
+                                    data-tooltip="{{localize "d100A.Ordnance.Activation.AttackTooltip"}}">
+                                    {{ localize "d100A.Ordnance.Activation.Attack" }}</button>
                                 </div>
                             </section>
                         </div>

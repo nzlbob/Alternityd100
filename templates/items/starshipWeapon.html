@@ -159,7 +159,7 @@
                             {{!-- Weapon Mode --}}
                             <div class="form-group" data-tooltip="{{ localize "d100A.Items.Weapon.modeTooltip" }}">
                                 <label>{{ localize "d100A.Items.Weapon.mode" }}</label>
-                                <div class="form-group weapon-properties" style="font-size: 10px;">
+                                <div class="form-fields weapon-properties" style="font-size: 10px;">
                                     {{#each d100Aconfig.starshipMode as |name prop|}}
                                   
                                     <input type="checkbox" name="system.mode.{{prop}}" {{checked (lookup ../itemData.mode prop)}} /> {{ localize name }}
@@ -170,7 +170,7 @@
                             {{!-- Weapon Range --}}
                             <div class="form-group" data-tooltip="{{ localize "d100A.Items.Weapon.rangeTooltip" }}">
                             <label>{{ localize "d100A.Items.Weapon.rangename" }}</label>
-                            <div class="form-group weapon-properties" style="font-size: 12px; text-align: center; ">
+                            <div class="form-fields weapon-properties weapon-range-fields" style="font-size: 12px; text-align: center; ">
                             <input type="text" style="text-align: center" name="system.range.short" value="{{itemData.range.short}}" data-dtype="Number" placeholder="0"/>
                             <input type="text" style="text-align: center" name="system.range.medium" value="{{itemData.range.medium}}" data-dtype="Number" placeholder="0"/>
                             <input type="text" style="text-align: center" name="system.range.long" value="{{itemData.range.long}}" data-dtype="Number" placeholder="0"/>                     

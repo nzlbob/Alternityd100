@@ -411,7 +411,7 @@ static PARTS = {
         data.psionics = Object.values(psionics);
 
         const modifiers = {
-            conditions: { label: "SFRPG.ModifiersConditionsTabLabel", modifiers: [], dataset: { subtab: "conditions" }, isConditions: true },
+            effects: { label: "Effects", dataset: { subtab: "effects" }, isEffects: true, effects: [], statusChoices: [] },
             permanent: { label: "SFRPG.ModifiersPermanentTabLabel", modifiers: [], dataset: { subtab: "permanent" } },
             temporary: { label: "SFRPG.ModifiersTemporaryTabLabel", modifiers: [], dataset: { subtab: "temporary" } }
         };
@@ -423,9 +423,6 @@ static PARTS = {
 
             return arr;
         }, [[], [], [], [], []]);
-
-        //modifiers.conditions.items = conditionItems;
-        modifiers.conditions.items = []
 
         modifiers.permanent.modifiers = permanent;
         modifiers.temporary.modifiers = temporary.concat(conditions);

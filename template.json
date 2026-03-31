@@ -5130,7 +5130,7 @@
             "class",
             "goods",
             "magic",
-            "starshipDefensiveCountermeasure",
+           
             "starshipExpansionBay",
             "starshipFortifiedHull",
             "starshipReinforcedBulkhead",
@@ -5315,7 +5315,9 @@
             "starshipComponent": {
                 "attributes": {
                     "blank": false
+                   
                 },
+                "activeDefense": false,
                 "status": "normal",
                 "cost": 0,
                 "price": 0,
@@ -6625,6 +6627,89 @@
                 "modifiers"
             ],
             "skill": "defen",
+
+
+ "ordnance": [],
+            "class": "light",
+            "weaponType": "direct",
+            "speed": 0,
+            "attackBonus": 0,
+            "ordnanceType": "",
+            "special": {},
+            "mount": {
+                "mounted": false,
+                "arc": "",
+                "type": "unmounted"
+            },
+            "capacity": {
+                "value": null,
+                "max": null,
+                "sreload": false
+            },
+            "damage": {
+                "type": "LI",
+                "ord": {
+                    "dice": "",
+                    "type": ""
+                },
+                "goo": {
+                    "dice": "",
+                    "type": ""
+                },
+                "ama": {
+                    "dice": "",
+                    "type": ""
+                }
+            },
+            "weaponCategory": "uncategorized",
+            "progressLevel": "pl0",
+            "actions": "3",
+            "clipSize": "10",
+            "clipCost": "10",
+            "hide": "0",
+            "mass": "1",
+            "Cost": "100",
+
+            "accur": "-1",
+            "mode": {
+                "fire": true,
+                "burst": true,
+                "auto": true,
+                "battery": false
+            },
+            "range": {
+                "short": "1",
+                "medium": "2",
+                "long": "3"
+            },
+            "firepower": "O",
+            "firepowerN": 1,
+            "properties": {},
+            "proficient": true,
+            "container": {
+                "contents": [],
+                "storage": [
+                    {
+                        "type": "slot",
+                        "subtype": "fusion",
+                        "amount": 0,
+                        "acceptsType": [
+                            "fusion"
+                        ],
+                        "affectsEncumbrance": true,
+                        "weightProperty": "level"
+                    }
+                ],
+                "isOpen": true
+            },
+
+
+
+
+
+
+
+
             "damageControl": 0,
             "resistance": {
                 "beam": {

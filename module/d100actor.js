@@ -789,7 +789,7 @@ return null
 
 rollSkill(
   skillId,
-  options = { steps:0, event: null, skipDialog: false, staticRoll: null, chatMessage: true, noSound: false, dice: "1d20",skillflavor:"",stepbonus:0 ,degreeText:{}}
+  options = { steps:0, stepsLabel: "Step Bonus", event: null, skipDialog: false, staticRoll: null, chatMessage: true, noSound: false, dice: "1d20",skillflavor:"",stepbonus:0 ,degreeText:{}, statusActor: null, statusActors: [], starshipActionRole: null }
 ) {
   console.log(skillId,options)
   if (!this.isOwner) {
@@ -848,8 +848,23 @@ if (this.type=="starship"){
   }
 
   if (true) {
-    parts.push(options.steps," Range Bonus, ");
+    parts.push(options.steps, ` ${options.stepsLabel ?? "Step Bonus"}, `);
     stepbonus += options.steps
+  }
+
+  // Apply status-driven penalties and bonuses from active effects to the rolled skill.
+  const statusActors = [];
+  const configuredStatusActors = Array.isArray(options.statusActors) ? options.statusActors : [];
+  for (const actor of [this, options.statusActor, ...configuredStatusActors]) {
+    if (!actor) continue;
+    if (statusActors.includes(actor)) continue;
+    statusActors.push(actor);
+  }
+
+  const skillStatus = Diced100._collectSkillStatusModifiers(statusActors, skillId, options);
+  if (skillStatus.total) {
+    parts.push(skillStatus.total, " Status Bonus, ");
+    stepbonus += skillStatus.total;
   }
   console.log(stepbonus)
 /*
@@ -914,6 +929,9 @@ if (this.type=="starship"){
   
   )
 
+  const typedStatusLabel = Diced100._getSkillStatusTypedLabel(skillId, options);
+  const skillFlavorWithStatuses = Diced100._appendSkillStatusTooltip(options.skillflavor, skillStatus, typedStatusLabel);
+
   let A =  Diced100.skillRoll({
     event: options.event,
     fastForward: options.skipDialog === true,
@@ -921,7 +939,7 @@ if (this.type=="starship"){
     parts,
     stepbonus,
     stepflavor:options.stepflavor,
-    skillflavor: options.skillflavor,
+    skillflavor: skillFlavorWithStatuses,
     ordinary: skl.base,
     good: skl.good,
     amazing: skl.amazing,

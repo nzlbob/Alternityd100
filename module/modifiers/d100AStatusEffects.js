@@ -96,7 +96,7 @@ d100AStatusEffects.push(
         hud: { actorTypes: ["character", "npc"] },
         system: {
             bonus: {
-                dodge: 0, cover: 0, actions: 0, ranged: 0
+                dodge: 0, cover: 0, actions: 0, ranged: -1
             },
             resistanceModifier: {
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
@@ -413,7 +413,7 @@ d100AStatusEffects.push(
         hud: { actorTypes: ["starship", "vehicle"] },
         system: {
 
-            bonus: { dodge: 1, cover: 0, actions: 0, ranged: 0 },
+            bonus: { dodge: 1, cover: 0, actions: 0, ranged: 0, pilot: 0, sensors: 0, engineer: 0 },
             resistanceModifier: {
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
@@ -433,7 +433,9 @@ d100AStatusEffects.push(
         hud: { actorTypes: ["starship", "vehicle"] },
         system: {
 
-            bonus: { dodge: 2, cover: 0, actions: 0, ranged: 0 },
+            bonus: { dodge: 2, cover: 0, actions: 0, ranged: 0, pilot: 0, sensors: 0, engineer: 0, communications: 0,
+                copilot: 0, damageControl: 0, defences: 0, initiative: 0, sensorRange: 0
+            },
             resistanceModifier: {
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
@@ -590,7 +592,7 @@ d100AStatusEffects.push(
         hud: { actorTypes: ["ordnance"] },
         system: {
 
-            bonus: { dodge: 0, cover: 0, actions: 0, ranged: 0 },
+            bonus: { dodge: 0, cover: 0, actions: 1, ranged: 0 , sensors: 1},
             resistanceModifier: {
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
@@ -610,7 +612,7 @@ d100AStatusEffects.push(
         hud: { actorTypes: ["ordnance"] },
         system: {
 
-            bonus: { dodge: 0, cover: 0, actions: 0, ranged: 0 },
+            bonus: { dodge: 0, cover: 0, actions: 2, ranged: 0 , sensors: 2},
             resistanceModifier: {
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
@@ -629,7 +631,7 @@ d100AStatusEffects.push(
         hud: { actorTypes: ["ordnance"] },
         system: {
 
-            bonus: { dodge: 0, cover: 0, actions: 0, ranged: 0 },
+            bonus: { dodge: 0, cover: 0, actions: 3, ranged: 0 , sensors: 3},
             resistanceModifier: {
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,
                 resistanceBase: {},
@@ -648,7 +650,7 @@ d100AStatusEffects.push(
         hud: { actorTypes: ["ordnance"] },
         system: {
             bonus: {
-                dodge: -1, cover: 0, actions: 0, ranged: 0
+                dodge: -1, cover: 0, actions: -2, ranged: 0, sensors: -2
             },
             resistanceModifier: {
                 str: 0, dex: 0, con: 0, int: 0, wil: 0, per: 0,

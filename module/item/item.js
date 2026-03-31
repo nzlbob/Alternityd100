@@ -180,7 +180,7 @@ export class Itemd100A extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         
 
-        if (this.type == "starshipDefensiveCountermeasure") this.type = "starshipDefence"
+      //  if (this.type == "starshipDefensiveCountermeasure") this.type = "starshipDefence"
         // console.log("C",C,"dtaa",data,"Actor",actorData)
 
         // Spell Level,  School, and Components
@@ -1126,7 +1126,7 @@ console.log(options)
         const actorArray = this.actor.getActiveTokens(true, true);
         let actorToken = actorArray[0]
 
-        console.log("Options", options, this, actorArray);
+   
         if (!actorToken) {
             const tokens = game.canvas.activeLayer.controlled.filter(t => t.inCombat);
 
@@ -1134,7 +1134,9 @@ console.log(options)
             actorToken = tokens[0].document
         }
 
-        console.log("Options", options, this, actorToken);
+        
+
+        console.log("rollNormalAttack - Actor Token", options, this, actorToken);
         if (!actorToken) NoTokenWarn()
 
         if (!this.hasAttack) {
@@ -1421,12 +1423,15 @@ console.log(options)
             //When a hero employs a skill against an opponent the opponent's resistance modifier may have to be considered. Table P10: SKILLS & RESISTANCE Modifiers, on the facing page, lists the skills that cause resistance modifiers to come into play.
             if (targetedToken.Name == "No Target") ui.notifications.error("No Target Selected");
 
-            if (!isStarshipweapon) {
+
+            
+
+            if (["character", "npc"].includes(targetedToken.token.actor.type) ) {
                 if (targetedToken.token) targetedToken.resPenalty = targetResModData(skl, targetedToken.resMod);
                 else targetedToken.resPenalty = 0
 
             }
-            if (isStarshipweapon) {
+            if (["starship", "ordnance","vehicle"].includes(targetedToken.token.actor.type) ) {
 
                // targetedToken.resPenalty = -2
                 //token.actor.system.attributes.resistance
@@ -1439,7 +1444,7 @@ console.log(options)
                 // defaults to beam attack
 
                 if (itemData.weaponType == "missile"){
-                    targetedToken.resPenalty = targetResistance[this.parent.system.ammunitionType] + targetResistance.base
+                    targetedToken.resPenalty = targetResistance[this.parent.system.ordnanceType] + targetResistance.base
                 }
                 else{
                     targetedToken.resPenalty = targetResistance[itemData.weaponType] + targetResistance.base
@@ -1536,7 +1541,7 @@ console.log(options)
                 console.log(effect)
                 targetedToken.dodgemod += effect.system.bonus.dodge
                 targetedToken.covermod += effect.system.bonus.cover
-                              
+                       
                 
                 effect.sheet.render()
             }
@@ -1790,7 +1795,11 @@ if targetedScan then we need to determine
         const userTargets = game.user.targets.ids
 
 
-        const sensorOperator = npcCrew ? actor : actorData.crew.sensors.actors[0]
+        let sensorOperator = npcCrew ? actor : actorData.crew.sensors.actors[0]
+        if (sensorOperator && !sensorOperator.rollSkill) {
+            const operatorId = sensorOperator.id ?? sensorOperator._id ?? null;
+            if (operatorId) sensorOperator = game.actors.get(operatorId) ?? sensorOperator;
+        }
         if(!sensorOperator) NoSensorOperatorWarn(()=> {
             ui.notifications.warn("No Sensor Operator Assigned to this Ship")
         return
@@ -2031,7 +2040,12 @@ if targetedScan then we need to determine
                         // console.log("\nScanner ",itemData.sensorType, )
                         let stepflavor = sensorData.name + " vs. " + scan.size
                         // Wait to make the roll
-                        let scan1 = await sensorOperator.rollSkill(skillId, { steps: stepbonus, skillflavor: skillflavor, stepflavor: stepflavor })
+                        let scan1 = await sensorOperator.rollSkill(skillId, {
+                            steps: stepbonus,
+                            skillflavor: skillflavor,
+                            stepflavor: stepflavor,
+                            statusActors: [actor]
+                        })
                         //scan1.roll = scan1.rolls[0]    
                         scan1.sensorOperator = sensorOperator
                         scan1.skill = npcCrew ? npcSkill.skills[skillId] : sensorOperator.system.skills[skillId]
@@ -2182,7 +2196,7 @@ if targetedScan then we need to determine
      * disableDeductAmmo: Setting this to true will prevent ammo being deducted if applicable.
      */
     async _rollStarshipAttack(options = {}) {
-        //console.log("_rollStarshipAttack")
+        console.log("_rollStarshipAttack", options, this, this.actor);
         const parts = ["max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks)", "@gunner.abilities.dex.mod"];
 
         const title = game.settings.get('Alternityd100', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", { name: this.name });
@@ -2238,6 +2252,9 @@ if targetedScan then we need to determine
             title: title,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             critical: 20,
+            actor: this.actor,
+            item: this,
+            isStarshipweapon: true,
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null

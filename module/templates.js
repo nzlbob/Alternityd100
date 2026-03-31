@@ -50,6 +50,7 @@ export const preloadHandlebarsTemplates = async function() {
     "systems/Alternityd100/templates/items/parts/item-armordetails.html",
     "systems/Alternityd100/templates/items/parts/item-ordnance-item.html",
     "systems/Alternityd100/templates/items/parts/item-ordnance.html",
+         "systems/Alternityd100/templates/items/parts/ordnance-component.html",
 
     // Item Chat Partials
     "systems/Alternityd100/templates/chat/parts/attack-roll-footer.hbs",

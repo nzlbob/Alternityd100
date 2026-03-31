@@ -1,7 +1,7 @@
 export default function (engine) {
     engine.closures.add("calculateOrdnanceData", (fact, context) => {
         const data = fact.actor.system;
-        console.log("Calculating ordnance data for ".concat(fact.actor.name));
+        console.log("Calculating ordnance data for ".concat(fact.actor.name),fact);
 
         // data.attributes.accel.base = data.basicAcceleration;
         // data.attributes.accel.value = data.attributes.accel.base
@@ -26,6 +26,17 @@ export default function (engine) {
 
             baseAttackMods += engineData.accuracy;
             baseAttackTooltip.push(engine.name.concat(" (").concat(engineData.accuracy).concat(")"));
+            const engineResistance = 6 - engineData.size ;
+            data.attributes.resistance.area = engineResistance
+data.attributes.resistance.base = engineResistance
+// data.attributes.resistance.beam = engineResistance
+// data.attributes.resistance.bomb = engineResistance
+//data.attributes.resistance.mine = engineResistance
+//data.attributes.resistance.missile = engineResistance
+//data.attributes.resistance.projectile = engineResistance
+//data.attributes.resistance.special = engineResistance
+//data.attributes.resistance.torpedo = engineResistance
+
         }
 
         const guidance = fact.items.filter(x => x.type === "ordnanceGuidance");
@@ -79,7 +90,7 @@ export default function (engine) {
         data.attributes.accel.tooltip = accelTooltip;
         //    data.attributes.duration.value = data.attributes.duration.base + durationMods;
         //   data.attributes.duration.tooltip = durationTooltip;
-
+console.log(data)
 
 
         return fact;

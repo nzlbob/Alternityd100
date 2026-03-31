@@ -183,7 +183,7 @@ export class d100AActorSheetDrone extends d100ActorSheet {
         data.features = Object.values(features);
 
         const modifiers = {
-            conditions: { label: "SFRPG.ModifiersConditionsTabLabel", modifiers: [], dataset: { subtab: "conditions" }, isConditions: true },
+            effects: { label: "Effects", dataset: { subtab: "effects" }, isEffects: true, effects: [], statusChoices: [] },
             permanent: { label: "SFRPG.ModifiersPermanentTabLabel", modifiers: [], dataset: { subtab: "permanent" } },
             temporary: { label: "SFRPG.ModifiersTemporaryTabLabel", modifiers: [], dataset: { subtab: "temporary" } }
         };
@@ -196,7 +196,6 @@ export class d100AActorSheetDrone extends d100ActorSheet {
             return arr;
         }, [[], [], []]);
 
-        modifiers.conditions.items = conditionItems;
         modifiers.permanent.modifiers = permanent;
         modifiers.temporary.modifiers = temporary.concat(conditions);
 

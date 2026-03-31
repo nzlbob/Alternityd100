@@ -7,16 +7,16 @@
 <section class="modifiers-body">
 
     {{#each sections as |section sid|}}
-    <div class="tab {{section.dataset.subtab}} {{#unless section.isConditions}}flexrow{{else}}flexcol{{/unless}}"
+    <div class="tab {{section.dataset.subtab}} {{#unless section.isEffects}}flexrow{{else}}flexcol{{/unless}}"
         data-group="modifiers" data-tab="{{section.dataset.subtab}}">
 
-        {{#if section.isConditions}}
-
+        {{#if section.isEffects}}
         <div class="form-group stacked">
-            <div class="d100a-status-grid conditions">
-                {{#each ../statusEffectChoices as |se|}}
+            <h3 class="d100a-subsection-title">Status Effects</h3>
+            <div class="d100a-status-grid status-effects">
+                {{#each section.statusChoices as |se|}}
                 <label class="d100a-status-tile {{#if se.isActive}}active{{/if}}" data-tooltip="{{se.tooltip}}">
-                    <input type="checkbox" class="condition" data-condition="{{se.id}}" {{checked se.isActive}} />
+                    <input type="checkbox" class="status-effect-toggle" data-status-id="{{se.id}}" {{checked se.isActive}} />
                     <img class="d100a-status-icon" src="{{se.img}}" alt="{{se.label}}" />
                     <span class="d100a-status-label">{{se.label}}</span>
                 </label>
@@ -25,25 +25,31 @@
         </div>
 
         <div class="form-group stacked">
-            <h3 class="d100a-subsection-title">Active Effects</h3>
-            {{#if ../activeStatusEffects.length}}
+            <h3 class="d100a-subsection-title">Actor Effects</h3>
+            {{#if section.effects.length}}
             <div class="d100a-active-effects">
-                {{#each ../activeStatusEffects as |ae|}}
-                <div class="d100a-active-effect" data-tooltip="{{ae.tooltip}}">
+                {{#each section.effects as |ae|}}
+                <div class="d100a-active-effect {{#if ae.disabled}}is-disabled{{/if}}" data-tooltip="{{ae.tooltip}}">
                     <img class="d100a-status-icon" src="{{ae.img}}" alt="{{ae.label}}" />
                     <div class="d100a-active-effect-text">
                         <div class="d100a-active-effect-name">{{ae.label}}</div>
+                        {{#if ae.statusIds}}<div class="d100a-active-effect-meta">{{ae.statusIds}}</div>{{/if}}
                         {{#if ae.duration}}<div class="d100a-active-effect-duration">{{ae.duration}}</div>{{/if}}
                     </div>
+                    {{#if ../isOwner}}
+                    <div class="item-controls d100a-active-effect-controls">
+                        <a class="item-control effect-toggle" data-effect-id="{{ae.id}}" data-tooltip="{{#if ae.disabled}}Enable Effect{{else}}Disable Effect{{/if}}">
+                            {{#if ae.disabled}}<i class="far fa-square"></i>{{else}}<i class="far fa-check-square"></i>{{/if}}
+                        </a>
+                    </div>
+                    {{/if}}
                 </div>
                 {{/each}}
             </div>
             {{else}}
-            <p class="notes">No active status effects.</p>
+            <p class="notes">No actor effects.</p>
             {{/if}}
         </div>
-        <!-- [[console "actor-Modifiers 24"}}  -->
-        <!-- [[console this}} -->
         {{else}}
         <ol class="inventory-list">
             <li class="item flexrow inventory-header modifiers-header">

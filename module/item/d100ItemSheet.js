@@ -324,7 +324,7 @@ export class ItemSheetd100A extends foundry.applications.api.HandlebarsApplicati
                 }
             }
         }
-
+console.log("data before ordnance", this)
         // Enrich text editors
         data.enrichedDescription = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.object.system.description.value, { async: true });
         data.enrichedShortDescription = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.object.system.description.short, { async: true });
@@ -1080,18 +1080,23 @@ export class ItemSheetd100A extends foundry.applications.api.HandlebarsApplicati
         return Number.isFinite(n) ? n : NaN;
     }
 
-    _formatEUR(value) {
+        _formatCurrencyValue(value, input) {
         const n = this._parseCurrencyNumber(value);
         if (!Number.isFinite(n)) return "";
-        // Comma thousands separators and leading Euro symbol.
+
         const formatted = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(n);
-        return `€${formatted}`;
+            const currency = input?.dataset?.currency;
+            const label = input?.dataset?.currencyLabel?.trim();
+
+            if (currency === "EUR") return `€${formatted}`;
+            if (label) return `${formatted} ${label}`;
+            return formatted;
     }
 
-    _activateEURCurrencyInputs(html) {
+        _activateCurrencyInputs(html) {
         if (!html) return;
 
-        const $inputs = html.find('input[data-currency="EUR"]');
+            const $inputs = html.find('input[data-currency]');
         if (!$inputs.length) return;
 
         // Initial display formatting (don’t fight the user if they’re actively editing).
@@ -1101,7 +1106,7 @@ export class ItemSheetd100A extends foundry.applications.api.HandlebarsApplicati
                 const raw = this._parseCurrencyNumber(input.value);
                 if (Number.isFinite(raw)) {
                     input.dataset.currencyRaw = String(raw);
-                    input.value = this._formatEUR(raw);
+                        input.value = this._formatCurrencyValue(raw, input);
                 }
             } catch (_err) {
                 // Ignore formatting failures.
@@ -1109,24 +1114,24 @@ export class ItemSheetd100A extends foundry.applications.api.HandlebarsApplicati
         });
 
         // Show raw number while editing, restore formatted on blur.
-        $inputs.off("focus.eurCurrency").on("focus.eurCurrency", (ev) => {
+            $inputs.off("focus.currencyInput").on("focus.currencyInput", (ev) => {
             const input = ev.currentTarget;
             const raw = (input.dataset.currencyRaw ?? "").trim();
             if (raw) input.value = raw;
         });
 
-        $inputs.off("change.eurCurrency").on("change.eurCurrency", (ev) => {
+            $inputs.off("change.currencyInput").on("change.currencyInput", (ev) => {
             const input = ev.currentTarget;
             const raw = this._parseCurrencyNumber(input.value);
             if (Number.isFinite(raw)) input.dataset.currencyRaw = String(raw);
         });
 
-        $inputs.off("blur.eurCurrency").on("blur.eurCurrency", (ev) => {
+            $inputs.off("blur.currencyInput").on("blur.currencyInput", (ev) => {
             const input = ev.currentTarget;
             const raw = this._parseCurrencyNumber(input.value);
             if (Number.isFinite(raw)) {
                 input.dataset.currencyRaw = String(raw);
-                input.value = this._formatEUR(raw);
+                    input.value = this._formatCurrencyValue(raw, input);
             }
         });
     }
@@ -1228,8 +1233,8 @@ export class ItemSheetd100A extends foundry.applications.api.HandlebarsApplicati
             li.addEventListener("dragstart", handler, false);
         });
 
-        // Currency formatting (EUR) for inputs tagged with data-currency="EUR".
-        this._activateEURCurrencyInputs(html);
+        // Currency formatting for inputs tagged with data-currency.
+        this._activateCurrencyInputs(html);
 
     }
 

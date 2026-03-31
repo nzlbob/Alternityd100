@@ -21,7 +21,14 @@
               <div class="divTableRow">
                 <div class="divTableCell">
                   <h4 class="form-header">{{ localize "Missiles, Bombs, and Mines" }}</h4>
-
+            <div class="form-group">
+                <label>{{ localize "d100A.Items.Ordnance.OrdnanceType" }}</label>
+                <div class="form-fields">
+                    <select name="system.ordnanceType">
+                  {{selectOptions d100Aconfig.ordnanceTypes selected=itemData.ordnanceType }}
+                    </select>
+                </div>
+            </div>
             <h4 class="section-header">"Propulsion System"</h4>
             {{!-- Equipment Status --}}
 
@@ -45,14 +52,7 @@
                  </div>
             </div>
 
-            <div class="form-group">
-                <label>{{ localize "d100A.Items.Ordnance.OrdnanceType" }}</label>
-                <div class="form-fields">
-                    <select name="system.ammunitionType">
-                  {{selectOptions d100Aconfig.ordnanceTypes selected=itemData.ammunitionType blank=(localize "d100A.Items.Ordnance.Type.None")}}
-                    </select>
-                </div>
-            </div>
+
             
             {{!-- Guidance Tech --}}
                      

@@ -30,6 +30,38 @@ export class d100AActorSheetStarship extends d100ActorSheet {
         super(...args);
     }
 
+    static getStarshipActionsPack() {
+        const configuredPack = game.settings.get("Alternityd100", "starshipActionsSource") || "Alternityd100.starship-actions";
+        return game.packs.get(configuredPack) ?? game.packs.get("Alternityd100.starship-actions");
+    }
+
+    _getStarshipActionHullResistanceStep(role) {
+        const baseResistance = Number(this.actor.system?.attributes?.resistance?.base ?? 0) || 0;
+        return ["pilot", "copilot"].includes(role) ? -baseResistance : 0;
+    }
+
+    _buildStarshipActionRollOptions(action) {
+        const role = String(action?.system?.role ?? "").trim();
+        const hullResistanceStep = this._getStarshipActionHullResistanceStep(role);
+        const localizedActionName = game.i18n.localize(action?.name ?? "");
+
+        return {
+            steps: hullResistanceStep,
+            stepsLabel: ["pilot", "copilot"].includes(role) ? "Hull Resistance" : "Action Modifier",
+            event: null,
+            skipDialog: false,
+            staticRoll: null,
+            chatMessage: "true",
+            noSound: false,
+            dice: "1d20",
+            skillflavor: localizedActionName,
+            stepbonus: 0,
+            degreeText: action?.system?.degreeText,
+            starshipActionRole: role,
+            statusActors: [this.actor]
+        };
+    }
+
         static PARTS = {
             form: { template: 'systems/Alternityd100/templates/actors/starship-sheet-full.html' }
         };
@@ -63,6 +95,11 @@ export class d100AActorSheetStarship extends d100ActorSheet {
             2: "Good",
             3: "Ama"
         };
+        let mpp = data.system.attributes.maneuverability.value
+        data.maneuversPerPhaseTooltip = "<br>" + mpp + " Maneuvers per Phase"
+        if (mpp <= 0) {
+            mpp = 2-mpp
+            data.maneuversPerPhaseTooltip = "<br>1 Maneuver every " + mpp +" Phases."};
 
         //data.compartTable = "<td style=\"border: 0px; background-color: #eef8f8; border-color: #eef8f8; \" ></td><td>cell2_2</td><td style=\"border: 0px; background-color: #eef8f8; border-color: #eef8f8; \" ></td>"
         //data.compartTable = "<td>cell1_3</td><td>cell2_3</td><td>cell3_3</td></tr>"
@@ -932,10 +969,10 @@ export class d100AActorSheetStarship extends d100ActorSheet {
             //aft: { label: aftLabel, items: [], dataset: { type: "starshipWeapon", allowAdd: false, isDisabled: !hasAft }},
             //turret: { label: turretLabel, items: [], dataset: { type: "starshipWeapon", allowAdd: false, isDisabled: !hasTurret }},
             mounted: { label: game.i18n.format("SFRPG.StarshipSheet.Weapons.Mounted"), items: [], dataset: { type: "starshipWeapon", allowAdd: true } },
-            sensor: { label: game.i18n.format("Sensors"), items: [], dataset: { type: "starshipSensor", allowAdd: true } },
-            unmounted: { label: game.i18n.format("SFRPG.StarshipSheet.Weapons.NotMounted"), items: [], dataset: { type: "starshipWeapon", allowAdd: true } }
-
-
+           
+          //  unmounted: { label: game.i18n.format("SFRPG.StarshipSheet.Weapons.NotMounted"), items: [], dataset: { type: "starshipWeapon", allowAdd: true } },
+            defense: { label: game.i18n.format("Defences"), items: [], dataset: { type: "starshipDefence", allowAdd: true } },
+ sensor: { label: game.i18n.format("Sensors"), items: [], dataset: { type: "starshipSensor", allowAdd: true } }
         };
 
         arcs.mounted.items = mounted;
@@ -943,7 +980,8 @@ export class d100AActorSheetStarship extends d100ActorSheet {
         ///arcs.port.items = port;
         //arcs.aft.items = aft;
         //arcs.turret.items = turret;
-        arcs.unmounted.items = unmounted;
+       // arcs.unmounted.items = unmounted;
+        arcs.defense.items = defence.filter((item) => item?.system?.activeDefense === true);
 
         // Battery groups (Mode G) are tracked on the actor as a flag array-of-arrays.
         // Mark each starship weapon so the sheet can disable firing for non-leader battery members.
@@ -1679,19 +1717,15 @@ return false
 
         const skill = event.currentTarget.parentElement.dataset.skill;
 
-        //  const action = game.compendium.get()
-
-        //return this.actor.useStarshipAction(actionId);
-
-        const compendium = game.packs.get("Alternityd100.starship-actions")
-        // console.log("Hello",compendium)
+        const compendium = this.constructor.getStarshipActionsPack();
+        if (!compendium) return ui.notifications.error("Starship actions compendium not found.");
         const action = await compendium.getDocument(actionId)
+        if (!action) return ui.notifications.error("Starship action not found.");
 
         const role = action.system.role
         const isNPC = this.actor.system.crew.useNPCCrew
         const actorData = isNPC ? this.actor.system.crew.npcData : this.actor.system.crew[role]
-        // { steps:0, event: null, skipDialog: false, staticRoll: null, chatMessage: true, noSound: false, dice: "1d20",skillflavor:"",stepbonus:0 }
-        const options = { steps: 0, event: null, skipDialog: false, staticRoll: null, chatMessage: "true", noSound: false, dice: "1d20", skillflavor: "skillflavor", stepbonus: 0, degreeText: action.system.degreeText }
+        const options = this._buildStarshipActionRollOptions(action);
 
         if (!isNPC) {
             actorData.actors[0] ? actorData.actors[0].rollSkill(skill, options) : ui.notifications.error(`No Crew in Station`);
@@ -1708,15 +1742,11 @@ return false
         event.preventDefault();
         const actionId = event.currentTarget.closest('.action').dataset.actionId;
 
-        const skill = event.currentTarget.parentElement.dataset.skill;
-
-        //  const action = game.compendium.get()
-
-        //return this.actor.useStarshipAction(actionId);
-
-        const compendium = game.packs.get("Alternityd100.starship-actions")
+        const compendium = this.constructor.getStarshipActionsPack();
+        if (!compendium) return ui.notifications.error("Starship actions compendium not found.");
         console.log("Hello", compendium)
         const action = await compendium.getDocument(actionId)
+        if (!action) return ui.notifications.error("Starship action not found.");
         console.log("GO", actionId, skill, action)
         action.sheet.render(true)
     }
@@ -2644,7 +2674,8 @@ return false
         //const starshipActions = game.packs.get(starshipPackKey);
 
         //Get all the starship actions from the pack of actions
-        const starshipActions = game.packs.get("Alternityd100.starship-actions");
+        const starshipActions = d100AActorSheetStarship.getStarshipActionsPack();
+        if (!starshipActions) return;
 
 
 

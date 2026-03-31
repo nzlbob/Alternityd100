@@ -15,6 +15,410 @@ export const formulaHasDice = function (formula) {
 
 export class Diced100 {
   /**
+   * Format a step modifier with an explicit sign for display in formulas and tooltips.
+   *
+   * @param {number|string} value
+   * @returns {string}
+   */
+  static _formatSignedStep(value) {
+    const numericValue = Number(value) || 0;
+    return `${numericValue >= 0 ? "+" : ""}${numericValue}`;
+  }
+
+  /**
+   * Prefer the configured status bonus when an older embedded jam effect still carries
+   * the pre-fix zeroed action or sensor values.
+   *
+   * This is intentionally narrow so normal live ActiveEffect data continues to win.
+   *
+   * @param {object} effect
+   * @param {object|null} statusData
+   * @param {string} key
+   * @param {number|null|undefined} embeddedBonus
+   * @returns {boolean}
+   */
+  static _shouldUseConfiguredStatusBonus(effect, statusData, key, embeddedBonus) {
+    if (!["actions", "sensors"].includes(key)) return false;
+
+    const statusId = Diced100._getStatusEffectId(effect);
+    if (!statusId) return false;
+    if (!statusId.startsWith("weaponjam") && !statusId.startsWith("sensorjam")) return false;
+
+    const configuredBonus = Number(statusData?.system?.bonus?.[key] ?? 0) || 0;
+    const normalizedEmbeddedBonus = Number(embeddedBonus ?? 0) || 0;
+    return normalizedEmbeddedBonus === 0 && configuredBonus !== 0;
+  }
+
+  /**
+   * Read a numeric status bonus from the live effect document or a wrapped value payload.
+   *
+   * @param {object} effect
+   * @param {string} key
+   * @returns {number}
+   */
+  static _getEffectBonus(effect, key) {
+    const keys = Array.isArray(key) ? key : [key];
+    const readBonus = (source) => {
+      if (!source) return undefined;
+      for (const bonusKey of keys) {
+        const value = source?.[bonusKey];
+        if (value !== undefined && value !== null) return value;
+      }
+      return undefined;
+    };
+
+    const statusData = Diced100._getStatusEffectData(effect);
+    const embeddedBonus = readBonus(effect?.system?.bonus) ?? readBonus(effect?.value?.system?.bonus);
+    const configuredBonus = readBonus(statusData?.system?.bonus);
+    const normalizedKey = keys.includes("actions") || keys.includes("allActions")
+      ? "actions"
+      : (keys.includes("sensors") ? "sensors" : keys[0]);
+    const bonusValue = Diced100._shouldUseConfiguredStatusBonus(effect, statusData, normalizedKey, embeddedBonus)
+      ? configuredBonus
+      : (embeddedBonus ?? configuredBonus ?? 0);
+    return Number(bonusValue) || 0;
+  }
+
+  static _resolveSkillStatusBonusKeys(skillId, options = {}) {
+    const role = String(options?.starshipActionRole ?? "").trim();
+    const roleBonusMap = {
+      pilot: ["pilot"],
+      copilot: ["copilot"],
+      communications: ["communications"],
+      damageControl: ["damageControl"],
+      defences: ["defences", "defense"],
+      engineer: ["engineer", "engineering"],
+      sensors: ["sensors"]
+    };
+
+    if (role && roleBonusMap[role]) return roleBonusMap[role];
+    if (skillId === "senso") return ["sensors"];
+    return [];
+  }
+
+  static _getSkillStatusTypedLabel(skillId, options = {}) {
+    const role = String(options?.starshipActionRole ?? "").trim();
+    if (role) {
+      const roleLabel = CONFIG?.d100A?.starshipRoleNames?.[role] ?? role;
+      return game?.i18n?.localize?.(roleLabel) || roleLabel;
+    }
+
+    return skillId === "senso" ? "Sensors" : "Skill";
+  }
+
+  /**
+   * Resolve the configured status definition behind a live ActiveEffect.
+   *
+   * Foundry stores the active state on the effect document, but the Alternity bonus
+   * values live on the status definition registered in CONFIG.statusEffects.
+   *
+   * @param {object} effect
+   * @returns {object|null}
+   */
+  static _getStatusEffectData(effect) {
+    const configuredEffects = CONFIG?.d100A?.statusEffects ?? CONFIG?.statusEffects ?? [];
+    if (!configuredEffects.length || !effect) return null;
+
+    const statusIds = Diced100._getStatusEffectIds(effect);
+    for (const statusId of statusIds) {
+      const match = configuredEffects.find((statusEffect) => statusEffect?.id === statusId);
+      if (match) return match;
+    }
+
+    const effectName = String(effect?.name ?? effect?.label ?? "").trim();
+    const effectIcon = String(effect?.icon ?? effect?.img ?? "").trim();
+    return configuredEffects.find((statusEffect) => {
+      if (!statusEffect) return false;
+      const label = String(statusEffect.label ?? "").trim();
+      const name = String(statusEffect.name ?? "").trim();
+      const icon = String(statusEffect.icon ?? statusEffect.img ?? "").trim();
+      return (effectName && (effectName === label || effectName === name))
+        || (effectIcon && icon && effectIcon === icon);
+    }) ?? null;
+  }
+
+  /**
+   * Resolve the configured status id for an active effect.
+   *
+   * @param {object} effect
+   * @returns {string}
+   */
+  static _getStatusEffectId(effect) {
+    return Diced100._getStatusEffectIds(effect)[0] ?? "";
+  }
+
+  /**
+   * Collect all candidate status ids attached to a live effect.
+   *
+   * Different Foundry effect flows expose status ids in different places, so gather
+   * all of them before attempting to match the configured status definition.
+   *
+   * @param {object} effect
+   * @returns {string[]}
+   */
+  static _getStatusEffectIds(effect) {
+    const ids = [];
+    const pushId = (value) => {
+      if (value == null) return;
+      const normalized = String(value).trim();
+      if (!normalized) return;
+      if (!ids.includes(normalized)) ids.push(normalized);
+    };
+
+    pushId(effect?.getFlag?.("core", "statusId"));
+    pushId(effect?.flags?.core?.statusId);
+    pushId(effect?._source?.flags?.core?.statusId);
+    pushId(effect?.statusId);
+
+    const statuses = effect?.statuses;
+    if (statuses instanceof Set) {
+      for (const statusId of statuses) pushId(statusId);
+    } else if (Array.isArray(statuses)) {
+      for (const statusId of statuses) pushId(statusId);
+    }
+
+    return ids;
+  }
+
+  /**
+   * Build a de-duplicated list of actors that may contribute status effects.
+   *
+   * This is important for synthetic token actors such as scene ordnance, where the
+   * active effects may live on the token actor rather than the base world actor.
+   *
+   * @param {...any} actorCandidates
+   * @returns {Actor[]}
+   */
+  static _collectStatusActors(...actorCandidates) {
+    const actors = [];
+    const pushActor = (candidate) => {
+      const actor = candidate?.actor ?? candidate?.object?.actor ?? candidate ?? null;
+      if (!actor?.effects) return;
+
+      const actorId = actor.uuid ?? actor.id ?? actor.name;
+      if (actors.some((existingActor) => (existingActor.uuid ?? existingActor.id ?? existingActor.name) === actorId)) {
+        return;
+      }
+
+      actors.push(actor);
+    };
+
+    for (const candidate of actorCandidates) {
+      if (Array.isArray(candidate)) {
+        for (const nestedCandidate of candidate) pushActor(nestedCandidate);
+        continue;
+      }
+      pushActor(candidate);
+    }
+
+    return actors;
+  }
+
+  /**
+   * Return all status sources for an actor, including lightweight status ids which may
+   * exist without a fully populated ActiveEffect document.
+   *
+   * @param {Actor} actor
+   * @returns {Array<{effect: object, statusId: string, name: string}>}
+   */
+  static _getActorStatusSources(actor) {
+    const sources = [];
+    const seenStatusIds = new Set();
+    const activeEffects = Array.from(actor?.effects ?? []);
+
+    for (const effect of activeEffects) {
+      const statusId = Diced100._getStatusEffectId(effect);
+      if (statusId) seenStatusIds.add(statusId);
+      const statusData = Diced100._getStatusEffectData(effect);
+      sources.push({
+        effect,
+        statusId,
+        name: effect?.name ?? effect?.label ?? statusData?.label ?? statusData?.name ?? statusId ?? "Status"
+      });
+    }
+
+    const statuses = actor?.statuses;
+    if (statuses instanceof Set) {
+      for (const statusId of statuses) {
+        if (seenStatusIds.has(statusId)) continue;
+        const syntheticEffect = { statusId };
+        const statusData = Diced100._getStatusEffectData(syntheticEffect);
+        if (!statusData) continue;
+        sources.push({
+          effect: syntheticEffect,
+          statusId,
+          name: statusData.label ?? statusData.name ?? statusId
+        });
+      }
+    }
+
+    return sources;
+  }
+
+  /**
+   * Collect attacker-side status modifiers that affect attack rolls.
+   *
+   * Action penalties are applied directly to the attack step. Ranged bonuses are also
+   * included so statuses such as Aiming appear in the same breakdown.
+   *
+   * @param {Actor|Actor[]} actorOrActors
+   * @param {Item} item
+   * @returns {{actions: number, ranged: number, total: number, effects: Array<object>}}
+   */
+  static _collectAttackStatusModifiers(actorOrActors, item) {
+    const summary = {
+      actions: 0,
+      ranged: 0,
+      total: 0,
+      effects: []
+    };
+
+    const actors = Diced100._collectStatusActors(actorOrActors);
+    for (const actor of actors) {
+      const actorName = actor?.name ?? "Actor";
+      const statusSources = Diced100._getActorStatusSources(actor);
+      for (const statusSource of statusSources) {
+        const effect = statusSource.effect;
+        const statusId = statusSource.statusId;
+        const effectName = statusSource.name;
+
+        let actions = Diced100._getEffectBonus(effect, "actions");
+        let ranged = Diced100._getEffectBonus(effect, "ranged");
+
+        // Older Aiming data may not carry the numeric attack bonus, so normalize it here.
+        if (statusId === "aiming") {
+          if (["burst", "auto"].includes(item?.system?.fireMode)) {
+            ranged = 0;
+          } else if (ranged === 0) {
+            ranged = -1;
+          }
+        }
+
+        if (!actions && !ranged) continue;
+
+        summary.actions += actions;
+        summary.ranged += ranged;
+        summary.effects.push({
+          actor: actorName,
+          id: statusId,
+          name: effectName,
+          actions,
+          ranged,
+          total: actions + ranged
+        });
+      }
+    }
+
+    summary.total = summary.actions + summary.ranged;
+    return summary;
+  }
+
+  /**
+   * Collect status modifiers for skill rolls.
+   *
+   * Action penalties apply broadly. Additional typed bonuses are applied only where
+   * they are relevant, such as sensor jamming affecting System Operation - Sensors.
+   *
+   * @param {Actor|Actor[]} actorOrActors
+   * @param {string} skillId
+   * @returns {{actions: number, typed: number, total: number, effects: Array<object>}}
+   */
+  static _collectSkillStatusModifiers(actorOrActors, skillId, options = {}) {
+    const summary = {
+      actions: 0,
+      typed: 0,
+      total: 0,
+      effects: []
+    };
+
+    const typedBonusKeys = Diced100._resolveSkillStatusBonusKeys(skillId, options);
+    const actors = Diced100._collectStatusActors(actorOrActors);
+
+    for (const actor of actors) {
+      const actorName = actor?.name ?? "Actor";
+      const statusSources = Diced100._getActorStatusSources(actor);
+      for (const statusSource of statusSources) {
+        const effect = statusSource.effect;
+        const effectName = statusSource.name;
+        const actions = Diced100._getEffectBonus(effect, ["actions", "allActions"]);
+        const typed = typedBonusKeys.length ? Diced100._getEffectBonus(effect, typedBonusKeys) : 0;
+
+        if (!actions && !typed) continue;
+
+        summary.actions += actions;
+        summary.typed += typed;
+        summary.effects.push({
+          actor: actorName,
+          name: effectName,
+          actions,
+          typed,
+          total: actions + typed
+        });
+      }
+    }
+
+    summary.total = summary.actions + summary.typed;
+    return summary;
+  }
+
+  /**
+   * Append a readable attacker status breakdown to the attack tooltip shown in chat.
+   *
+   * @param {string} flavor
+   * @param {{actions: number, ranged: number, total: number, effects: Array<object>}} attackerStatus
+   * @returns {string}
+   */
+  static _appendAttackStatusTooltip(flavor, attackerStatus) {
+    if (!attackerStatus?.effects?.length) return flavor;
+
+    let tooltipText = `${flavor}<br>Status Total: ${Diced100._formatSignedStep(attackerStatus.total)}`;
+    if (attackerStatus.actions) {
+      tooltipText += `<br>Status Actions: ${Diced100._formatSignedStep(attackerStatus.actions)}`;
+    }
+    if (attackerStatus.ranged) {
+      tooltipText += `<br>Status Attack: ${Diced100._formatSignedStep(attackerStatus.ranged)}`;
+    }
+
+    for (const effect of attackerStatus.effects) {
+      const effectParts = [];
+      if (effect.actions) effectParts.push(`actions ${Diced100._formatSignedStep(effect.actions)}`);
+      if (effect.ranged) effectParts.push(`attack ${Diced100._formatSignedStep(effect.ranged)}`);
+      tooltipText += `<br>${effect.actor}: ${effect.name} (${effectParts.join(", ")})`;
+    }
+
+    return tooltipText;
+  }
+
+  /**
+   * Append skill status details to the skill tooltip shown in chat.
+   *
+   * @param {string} flavor
+   * @param {{actions: number, typed: number, total: number, effects: Array<object>}} skillStatus
+   * @param {string} typedLabel
+   * @returns {string}
+   */
+  static _appendSkillStatusTooltip(flavor, skillStatus, typedLabel = "typed") {
+    if (!skillStatus?.effects?.length) return flavor;
+
+    let tooltipText = `${flavor}<br>Status Total: ${Diced100._formatSignedStep(skillStatus.total)}`;
+    if (skillStatus.actions) {
+      tooltipText += `<br>Status Actions: ${Diced100._formatSignedStep(skillStatus.actions)}`;
+    }
+    if (skillStatus.typed) {
+      tooltipText += `<br>Status ${typedLabel}: ${Diced100._formatSignedStep(skillStatus.typed)}`;
+    }
+
+    for (const effect of skillStatus.effects) {
+      const effectParts = [];
+      if (effect.actions) effectParts.push(`actions ${Diced100._formatSignedStep(effect.actions)}`);
+      if (effect.typed) effectParts.push(`${typedLabel.toLowerCase()} ${Diced100._formatSignedStep(effect.typed)}`);
+      tooltipText += `<br>${effect.actor}: ${effect.name} (${effectParts.join(", ")})`;
+    }
+
+    return tooltipText;
+  }
+
+  /**
    * A standardized helper function for managing game system rolls.
    *
    * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
@@ -135,6 +539,8 @@ export class Diced100 {
     let rolled = false;
     let degree = 0;
     let AoEdistance = 0
+    const baseAttackStatusActors = Diced100._collectStatusActors(actor, actorToken?.actor ?? actorToken?.object?.actor);
+    const baseAttackerStatus = Diced100._collectAttackStatusModifiers(baseAttackStatusActors, item);
 
     // Inner roll function
     const _roll = async (parts, setRoll, dialogSelection) => {
@@ -155,10 +561,10 @@ export class Diced100 {
       const targetSelections = dialogSelection?.targets ?? [];
       for (let i = 0; i < targetSelections.length; i++) {
         const t = targetSelections[i] ?? {};
-        if (t.range) dialogRange.push(t.range);
-        if (t.resistance) dialogResistance.push(t.resistance);
-        if (t.cover) dialogCover.push(t.cover);
-        if (t.dodge) dialogDodge.push(t.dodge);
+        dialogRange[i] = t.range ?? null;
+        dialogResistance[i] = Number(t.resistance ?? 0) || 0;
+        dialogCover[i] = Number(t.cover ?? 0) || 0;
+        dialogDodge[i] = Number(t.dodge ?? 0) || 0;
       }
       // let dialogResistance =  form ? form.find('[name="resistance"]').val() :0;
       // let dialogCover =  form ? form.find('[name="cover"]').val() :0;
@@ -185,6 +591,13 @@ export class Diced100 {
 
 
       }
+
+      const attackerStatusActors = Diced100._collectStatusActors(
+        actor,
+        actorToken?.actor ?? actorToken?.object?.actor,
+        isStarshipweapon ? activegunner : null
+      );
+      const attackerStatus = Diced100._collectAttackStatusModifiers(attackerStatusActors, item);
 
       /**
        * 
@@ -323,16 +736,16 @@ export class Diced100 {
 
       for (const [key, currentTarget] of targetData.entries()) {
         console.log(key)
-        currentTarget.rangecat = dialogRange[key]
-        currentTarget.dodgemod = dialogDodge[key]
-        currentTarget.covermod = dialogCover[key]
-        currentTarget.movementmod = dialogMovement
+        currentTarget.rangecat = dialogRange[key] ?? currentTarget.rangecat
+        currentTarget.dodgemod = Number(dialogDodge[key] ?? currentTarget.dodgemod ?? 0) || 0
+        currentTarget.covermod = Number(dialogCover[key] ?? currentTarget.covermod ?? 0) || 0
+        currentTarget.movementmod = Number(dialogMovement ?? currentTarget.movementmod ?? 0) || 0
 
 
 
 
         //console.log("targetData",targetData)
-        currentTarget.resPenalty = dialogResistance[key] || 0
+        currentTarget.resPenalty = Number(dialogResistance[key] ?? currentTarget.resPenalty ?? 0) || 0
 
 
 
@@ -347,26 +760,27 @@ export class Diced100 {
 
         currentTarget.attackbonus = 0
         currentTarget.attackbonus =
-          parseInt(stepbonus)
-
-          + parseInt(currentTarget.accur)
-          + parseInt(currentTarget.AWAModeMod)
-          + parseInt(dialogMovement)  //currentTarget.movementmod  THIS can be included when the target remombers its movement
-          + parseInt(currentTarget.rangemod)
-          + parseInt(currentTarget.resPenalty)
-          + parseInt(currentTarget.covermod)
-          + parseInt(currentTarget.dodgemod)
+          (Number(stepbonus) || 0)
+          + (Number(attackerStatus.total) || 0)
+          + (Number(currentTarget.accur) || 0)
+          + (Number(currentTarget.AWAModeMod) || 0)
+          + (Number(currentTarget.movementmod) || 0)
+          + (Number(currentTarget.rangemod) || 0)
+          + (Number(currentTarget.resPenalty) || 0)
+          + (Number(currentTarget.covermod) || 0)
+          + (Number(currentTarget.dodgemod) || 0)
 
         currentTarget.flavor = "Skill: " + skl.label
         currentTarget.flavor += "<br>Skill Step: " + stepbonus
         currentTarget.flavor += "<br>Situation: " + sitBonus
         currentTarget.flavor += "<br>Accuracy: " + currentTarget.accur
         currentTarget.flavor += "<br>Fire Mode: " + currentTarget.AWAModeMod
-        currentTarget.flavor += "<br>Movement: " + dialogMovement //currentTarget.movementmod
+        currentTarget.flavor += "<br>Movement: " + currentTarget.movementmod
         currentTarget.flavor += "<br>Range Mod: " + currentTarget.rangemod
         currentTarget.flavor += "<br>Res Mod: " + currentTarget.resPenalty
         currentTarget.flavor += "<br>Cover Mod: " + currentTarget.covermod
         currentTarget.flavor += "<br>Dodging Mod: " + currentTarget.dodgemod + "<br>"
+        currentTarget.flavor = Diced100._appendAttackStatusTooltip(currentTarget.flavor, attackerStatus)
 
         //currentTarget.attackbonus = stepbonus + currentTarget.resPenalty + currentTarget.rangemod + currentTarget.accur
        /* console.log(
@@ -406,6 +820,7 @@ export class Diced100 {
           targetData[a].flavor += "<br>Res Mode: " + targetData[a].resPenalty
           targetData[a].flavor += "<br>Cover Mod: " + targetData[a].covermod
           targetData[a].flavor += "<br>Jinking Mod: " + targetData[a].dodgemod + "<br>"
+          targetData[a].flavor = Diced100._appendAttackStatusTooltip(targetData[a].flavor, attackerStatus)
           //console.log("AWAModeMod", targetData[a]);
         }
 
@@ -617,7 +1032,7 @@ export class Diced100 {
 
 
 
-    let formula = dice.concat(d100stepdie(stepbonus));
+    let formula = dice.concat(d100stepdie((Number(stepbonus) || 0) + baseAttackerStatus.total));
     ///****** DIALOG BOX *************** */
 
     //Create data for Valid Gunners dropdown for 
@@ -655,7 +1070,7 @@ console.log(actor)
       }
 
       title = "Systems Operation - Weapons";
-      formula = dice;
+      formula = baseAttackerStatus.total ? dice.concat(d100stepdie(baseAttackerStatus.total)) : dice;
       flavor = "";
       skl.label = title
     }
@@ -828,6 +1243,8 @@ console.log(actor)
     let degree = 0;
     let AoEdistance = 0
     var AoETemplate
+    const baseAttackStatusActors = Diced100._collectStatusActors(actor, actorToken?.actor ?? actorToken?.object?.actor);
+    const baseAttackerStatus = Diced100._collectAttackStatusModifiers(baseAttackStatusActors, item);
     // Inner roll function
     const _roll = async (parts, setRoll, dialogSelection) => {
 
@@ -859,6 +1276,13 @@ console.log(actor)
 
 
       }
+
+      const attackerStatusActors = Diced100._collectStatusActors(
+        actor,
+        actorToken?.actor ?? actorToken?.object?.actor,
+        isStarshipweapon ? activegunner : null
+      );
+      const attackerStatus = Diced100._collectAttackStatusModifiers(attackerStatusActors, item);
 
       /**
       * 
@@ -978,6 +1402,7 @@ console.log(actor)
       target.attackbonus = 0
       target.attackbonus =
         parseInt(stepbonus)
+        + parseInt(attackerStatus.total || 0)
         + parseInt(target.accur)
         + parseInt(target.movementmod)
         //+ parseInt(target.AWAModeMod )
@@ -994,6 +1419,7 @@ console.log(actor)
       target.flavor += "<br>Range Mod: " + target.rangemod
       target.flavor += "<br>Res Mod: " + target.resPenalty
       target.flavor += "<br>Cover Mod: " + target.covermod
+      target.flavor = Diced100._appendAttackStatusTooltip(target.flavor, attackerStatus)
 
       if (isStarshipweapon) {
 
@@ -1011,6 +1437,7 @@ console.log(actor)
         target.flavor += "<br>Fire Mode: " //+ AWAModeMod[a]
         target.flavor += "<br>Range Mod: " + target.rangemod
         target.flavor += "<br>Res Mode: " + target.resPenalty + "<br>"
+        target.flavor = Diced100._appendAttackStatusTooltip(target.flavor, attackerStatus)
         //console.log("AWAModeMod", target);
       }
 
@@ -1296,7 +1723,7 @@ console.log(actor)
 
 
 
-    let formula = dice.concat(d100stepdie(stepbonus));
+    let formula = dice.concat(d100stepdie((Number(stepbonus) || 0) + baseAttackerStatus.total));
     ///****** DIALOG BOX *************** */
 
     //Create data for Valid Gunners dropdown for 
@@ -1312,7 +1739,7 @@ console.log(actor)
         }
       }
       title = "Systems Operation - Weapons";
-      formula = dice;
+      formula = baseAttackerStatus.total ? dice.concat(d100stepdie(baseAttackerStatus.total)) : dice;
       flavor = "";
       skl.label = title
     }

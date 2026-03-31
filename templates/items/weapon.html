@@ -166,7 +166,7 @@
               {{!-- Weapon Mode --}}
               <div class="form-group" data-tooltip="{{ localize " d100A.Items.Weapon.modeTooltip" }}">
                 <label>{{ localize "d100A.Items.Weapon.mode" }}</label>
-                <div class="form-group weapon-properties" style="font-size: 10px;">
+                <div class="form-fields weapon-properties" style="font-size: 10px;">
                   {{#each d100Aconfig.mode as |name prop|}}
 
                   <input type="checkbox" name="system.mode.{{prop}}" {{checked (lookup ../itemData.mode prop)}} /> {{

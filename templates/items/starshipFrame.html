@@ -49,8 +49,8 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.ToughnessTooltip" }}">
-                                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.Toughness" }}</label>
+                                <div class="form-group" data-tooltip="{{ localize "d100A.ItemSheet.StarshipFrame.Details.ToughnessTooltip" }}">
+                                    <label>{{ localize "d100A.ItemSheet.StarshipFrame.Details.Toughness" }}</label>
                                     <div class="form-fields">
                                         <select class="actor-size" name="system.toughness">
                                             {{selectOptions d100Aconfig.toughness selected=itemData.toughness}}
@@ -58,27 +58,27 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.TargetTooltip" }}">
-                                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.Target" }}</label>
+                                <div class="form-group" data-tooltip="{{ localize "d100A.ItemSheet.StarshipFrame.Details.TargetTooltip" }}">
+                                    <label>{{ localize "d100A.ItemSheet.StarshipFrame.Details.Target" }}</label>
                                     <div class="form-fields">
                                         <input type="number" name="system.target" value="{{itemData.target}}" data-dtype="Number" />
                                     </div>
                                 </div>
 
-                                <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.ManeuverabilityTooltip" }}">
-                                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.Maneuverability" }}</label>
+                                <div class="form-group" data-tooltip="{{ localize "d100A.ItemSheet.StarshipFrame.Details.ManeuverabilityTooltip" }}">
+                                    <label>{{ localize "d100A.ItemSheet.StarshipFrame.Details.Maneuverability" }}</label>
                                     <div class="form-fields">
                                         <input type="number" name="system.maneuverability" value="{{itemData.maneuverability}}" data-dtype="Number" />
                                     </div>
                                 </div>
 
-                                <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.DurabilityTooltip" }}">
-                                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.Durability" }}</label>
+                                <div class="form-group" data-tooltip="{{ localize "d100A.ItemSheet.StarshipFrame.Details.DurabilityTooltip" }}">
+                                    <label>{{ localize "d100A.ItemSheet.StarshipFrame.Details.Durability" }}</label>
                                     <div class="form-fields">
                                         <input type="number" name="system.durability" value="{{itemData.durability}}" data-dtype="Number" />
                                     </div>
                                 </div>
-
+<!--
                                 <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.NumCompartmentsTooltip" }}">
                                     <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.NumCompartments" }}</label>
                                     <div class="form-fields">
@@ -93,25 +93,26 @@
                                     </div>
                                 </div>
 
+-->
                                 <div class="form-group">
-                                    <label>{{ localize "Zone Limit" }}</label>
+                                    <label data-tooltip = "{{ localize "d100A.ItemSheet.StarshipFrame.Details.ZoneLimitTooltip" }}">{{ localize "Zone Limit" }}</label>
                                     <div class="form-fields">
                                         <input type="number" name="system.zoneLimit" value="{{itemData.zoneLimit}}" data-dtype="Number" />
                                     </div>
                                 </div>
 
-                                <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.CrewTooltip" }}">
-                                    <label>{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.CrewMinimum" }}</label>
+                                <div class="form-group" data-tooltip="{{ localize "d100A.ItemSheet.StarshipFrame.Details.CrewTooltip" }}">
+                                    <label>{{ localize "d100A.ItemSheet.StarshipFrame.Details.CrewMinimum" }}</label>
                                     <div class="form-fields">
                                         <input type="number" name="system.crew.minimum" value="{{itemData.crew.minimum}}" data-dtype="Number" /> / 
                                         <input type="number" name="system.crew.maximum" value="{{itemData.crew.maximum}}" data-dtype="Number" />
                                     </div>
                                 </div>
 
-                                <div class="form-group" data-tooltip="{{ localize "SFRPG.ItemSheet.StarshipFrame.Details.PriceTooltip" }}">
-                                    <label>{{ localize "Price" }}</label>
+                                <div class="form-group" data-tooltip="{{ localize "d100A.ItemSheet.StarshipFrame.Details.PriceTooltip" }}">
+                                    <label>{{ localize "d100A.ItemSheet.StarshipFrame.Details.Price" }}</label>
                                     <div class="form-fields">
-                                        <input type="number" step="100" name="system.price" value="{{itemData.price}}" data-dtype="Number" />
+                                        <input type="text" inputmode="numeric" name="system.price" value="{{itemData.price}}" data-dtype="Number" data-currency="EUR" />
                                     </div>
                                 </div>
                             </div>

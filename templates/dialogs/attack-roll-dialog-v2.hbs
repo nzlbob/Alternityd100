@@ -8,27 +8,29 @@
     </div>
   </header>
 
-  <div class="form-group">
+  <div class="form-group d100a-attack-dialog__field">
     <label>Base Roll</label>
     <input type="text" name="formula" value="{{formula}}" disabled />
   </div>
 
-  <div class="form-group">
+  <div class="form-group d100a-attack-dialog__field">
     <label>Difficulty Steps</label>
     <select name="dstep">
       {{selectOptions difficultySteps selected=dstep}}
     </select>
   </div>
-
-  <div class="form-group" data-tooltip='{{ localize "d100A.Items.Weapon.movementTooltip" }}'>
+<!--[[console this]]-->
+  {{#if (not isStarshipweapon)}}
+  <div class="form-group d100a-attack-dialog__field" data-tooltip='{{ localize "d100A.Items.Weapon.movementTooltip" }}'>
     <label>{{ localize "Movement" }}</label>
     <select name="movement">
       {{selectOptions d100A.movementType selected=movement}}
     </select>
   </div>
+  {{/if}}
 
   {{#if isStarshipweapon}}
-  <div class="form-group">
+  <div class="form-group d100a-attack-dialog__field">
     <label>Weapons Operator</label>
     <select name="operator">
       {{selectOptions operatorOptions selected=operator}}
@@ -42,8 +44,12 @@
         <th>Target</th>
         <th data-tooltip='{{ localize "d100A.Items.Weapon.rangeTooltip" }}'>Range</th>
         <th data-tooltip='{{ localize "d100A.Items.Weapon.resistanceTooltip" }}'>Res</th>
+         {{#if isStarshipweapon}}
+        <th data-tooltip='{{ localize "d100A.Items.Weapon.dodgeTooltip" }}'>Jinking</th>
+         {{else}}
         <th data-tooltip='{{ localize "d100A.Items.Weapon.coverTooltip" }}'>Cover</th>
         <th data-tooltip='{{ localize "d100A.Items.Weapon.dodgeTooltip" }}'>Dodge</th>
+          {{/if}}
       </tr>
     </thead>
     <tbody>
@@ -60,6 +66,14 @@
             {{selectOptions ../d100A.resistanceType selected=target.resistance}}
           </select>
         </td>
+ {{#if ../isStarshipweapon}}
+
+        <td>
+          <select name="dodge{{id}}">
+            {{selectOptions ../d100A.dodgeType selected=target.dodge}}
+          </select>
+        </td>
+ {{else}}
         <td>
           <select name="cover{{id}}">
             {{selectOptions ../d100A.coverType selected=target.cover}}
@@ -70,12 +84,15 @@
             {{selectOptions ../d100A.dodgeType selected=target.dodge}}
           </select>
         </td>
+ {{/if}}
+
+
       </tr>
       {{/each}}
     </tbody>
   </table>
 
-  <div class="form-group">
+  <div class="form-group d100a-attack-dialog__field">
     <label>Roll Mode</label>
     <select name="rollMode">
       {{selectOptions rollModes selected=rollMode localize=true}}

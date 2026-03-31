@@ -3024,7 +3024,7 @@
         "Ordnance": {
             "Activation": {
                 "ReTarget": "Re-target",
-                "ReTargetTooltip": "Pick a new target token for this ordnance.",
+                "ReTargetTooltip": "Pick a new target token for this ordnance. (Pre Target token first)</br> In Combat a comms check is required to re-target an ordnance, and the ordnance must be within the range of the comms check. Out of combat, re-targeting is automatic and free.",
                 "Target": "Target",
                 "TargetTooltip": "Toggle targeting of this ordnance's current target.",
                 "AutoMove": "Auto Move",
@@ -3078,6 +3078,296 @@
             "Wound": "1f all of your hero's wound boxes are marked off, he is knocked out. PHB 52",
             "Mortal": "For every point of mortal damage your hero suffers, he receives a + 1 step penalty to all subsequent actions he attempts. PHB 53",
             "Critical": ""
+        },
+                "ItemSheet": {
+            "AbilityScoreIncrease": {
+                "Header": "Ability Score Increases",
+                "Instruction": "* Check 4 abilities to raise.",
+                "ItemName": "Ability Score Increase: Level {level}",
+                "Label": "Abilities"
+            },
+            "ActorResource": {
+                "Base": "Base value",
+                "BaseTooltip": "(Required) The base value defines the base value of this resource. Modifiers may alter it.<br/>Attribute: @resources.type.subtype.base",
+                "CombatTracker": "Combat Tracker settings",
+                "DisplayAbsoluteValue": "Display Absolute Value",
+                "DisplayAbsoluteValueTooltip": "Should the displayed value in the combat tracker be absolute? i.e. -1 is displayed as 1, -2 as 2, etc.",
+                "Enabled": "Enabled",
+                "EnabledTooltip": "If unchecked this resource will not produce a key in the resources data format, nor will it have automation running on it.",
+                "ErrorIncompleteData": "Resource is missing type, subType, or base value.",
+                "ErrorMissingFields": "Please fill in any of the missing fields.",
+                "ErrorNoBase": "Base value is a required field.",
+                "ErrorNoSubType": "Subtype is a required field.",
+                "ErrorNoType": "Type is a required field.",
+                "Header": "Resource Properties",
+                "Range": "Value range",
+                "RangeTooltip": "(Optional) Minimum and maximum values for this resource.<br/>The value cannot be lower than the range minimum, nor can it be higher than the range maximum.",
+                "RangeMode": "Range mode",
+                "RangeModeImmediate": "Immediate",
+                "RangeModePost": "Post",
+                "RangeModeTooltip": "(Advanced) Defines whether the range limitations are applied only after the modifiers are all processed, or for each modifier as they are being processed.<br/><br/>For example, if the range is set to maximum of 1, and the base value is 0, and you have a modifier of +2, and a modifier of -1, the different modes would work as follows:<br/><br/>Post: 0 + 2 - 1 would output 1, which does not exceed the range maximum.<br/><br/>Immediate: 0 + 2 - 1 would output 0. Because 0 + 2 is 2, which exceeds the range maximum of 1, so it gets clamped to 1. Then -1 is applied, producing 0.",
+                "ShowInCombatTracker": "Show in Combat Tracker",
+                "ShowInCombatTrackerTooltip": "If enabled, this resource will be visible in the combat tracker for quick reference.",
+                "ShowOwnerAndGMOnly": "Only shown for Owner and GM",
+                "ShowOwnerAndGMOnlyTooltip": "If enabled, this resource will only be visible in the combat tracker for the sheet owner and the GM.",
+                "SubType": "Subtype",
+                "SubTypeTooltip": "(Required) Subtype makes up the second half of the resource identifier.<br/>For example: @resources.type.subtype.value",
+                "Type": "Type",
+                "TypeTooltip": "(Required) Type makes up the first half of the resource identifier.<br/>For example: @resources.type.subtype.value",
+                "Usage": "Attribute usage",
+                "UsageBaseValue": "Base value",
+                "UsageComputedValue": "Computed value",
+                "UsageTooltip": "What follows are a couple of example attributes how you may be able to access this resource in formulas:",
+                "Visualizations": "Conditional Visualization",
+                "VisualizationsIntro": "If resource value is..",
+                "VisualizationsModeEqual": "equal to",
+                "VisualizationsModeNotEqual": "not equal to",
+                "VisualizationsModeGreaterThan": "greater than",
+                "VisualizationsModeGreaterThanEqual": "greather than or equal to",
+                "VisualizationsModeLesserThan": "lesser than",
+                "VisualizationsModeLesserThanEqual": "lesser than or equal to",
+                "VisualizationsThen": "Then:",
+                "VisualizationsTitle": "Title:"
+            },
+            "Class": {
+                "SpellCasting": {
+                    "ClassLevel": "Class Level",
+                    "Header": "Spellcasting",
+                    "IsCaster": "Spellcaster",
+                    "KeyAbilityScore": "Key Ability Score",
+                    "SpellsKnown": "Spells Known",
+                    "SpellsKnownHeader": "Spells Known (by spell level)",
+                    "SpellsPerDay": "Spells Per Day",
+                    "SpellsPerDayHeader": "Spells Per Day (by spell level)",
+                    "SpellsPerDayBonus": "Bonus Spells Per Day",
+                    "SpellsPerDayBonusHeader": "Bonus Spells Per Day (by spell level)"
+                }
+            },
+            "Consumables": {
+                "Category": "Pharmaceutical Type"
+            },
+            "Containers": {
+                "ContainerTooltip": "Containers can contain just about any item. Increase the storage capacity to allow adding content."
+            },
+            "Header": {
+                "ArmorClass": "Armor Class",
+                "ArmorClassTooltip": "<strong>Armor Class</strong><br/>The armor class of this item, if left unattended. Otherwise, the attendee's armor class should be used instead.<br/>An item is considered unattended if it is not currently under any influence of a character.",
+                "DetailsHeader": "Equipment details",
+                "Hardness": "Hardness",
+                "HardnessTooltip": "<strong>Hardness</strong><br/>When taking damage, subtract the item's hardness from the incoming damage before applying.",
+                "Hitpoints": "Durability",
+                "HitpointsTooltip": "<strong>Hitpoints</strong><br/>The amount of hitpoints available for this item.<br/>An item is considered 'broken' if it has damage.<br/>An item is considered 'destroyed' when its hitpoints are reduced to 0.",
+                "ItemName": "Item Name",
+                "ItemNameTooltip": "<strong>Item Name</strong><br/>The name given to this item.",
+                "Requirements": "Requirements",
+                "Save": "Save DC",
+                "SaveTooltip": "<strong>Save DC</strong><br/>Formula: {formula}<br/>This is the saving throw modifier for this item.",
+                "Source": "Source",
+                "SourceTooltip": "<strong>Source</strong><br/><em>Used primarily to denote what rules document this item came from</em>",
+                "Subtype": "Subtype",
+                "Type": "Type"
+            },
+            "PhysicalProperties": {
+                "ArmorClass": "Armor Class",
+                "ArmorClassTooltip": "<strong>Armor Class</strong><br/>The armor class of this item, if left unattended. Otherwise, the attendee's armor class should be used instead.<br/>An item is considered unattended if it is not currently under any influence of a character.",
+                "CustomBuilt": "Custom Built",
+                "CustomBuiltTooltip": "Was this item crafted by a character, or mass-produced?",
+                "DexterityModifier": "Dexterity Modifier",
+                "DexterityModifierTooltip": "If inanimate, an item's dexterity modifier is -5.",
+                "Hardness": "Hardness",
+                "HardnessTooltip": "<strong>Hardness</strong><br/>When taking damage, subtract the item's hardness from the incoming damage before applying.",
+                "Header": "Physical Properties",
+                "Hitpoints": {
+                    "CurrentTooltip": "The amount of Durability this item has.",
+                    "Header": "Hitpoints",
+                    "HeaderTooltip": "<strong>Hitpoints</strong><br/>The amount of hitpoints available for this item.<br/>An item is considered 'broken' if it has damage.<br/>An item is considered 'destroyed' when its hitpoints are reduced to 0.",
+                    "MaxTooltip": "The maximum amount of hitpoints this item can have. Leave blank for automatic calculation."
+                },
+                "ItemDescriptor": "Physical Settings",
+                "Size": "Size",
+                "SizeTooltip": "By default, an item's size is medium. Item sizes affect the item armor class, alter as needed.",
+                "Sturdy": "Sturdy",
+                "SturdyTooltip": "Equipment, such as weapons and armors, are considered sturdy."
+            },
+            "StarshipAblativeArmor": {
+                "AblativeValue": "Total additional hitpoints",
+                "AblativeValueTooltip": "The total amount of ablative armor hitpoints to distribute over the four quadrants.",
+                "Header": "Ablative Armor Properties",
+                "TargetLockPenalty": "Target Lock Penalty",
+                "TargetLockPenaltyTooltip": "The penalty applied to the ship's target lock score.",
+                "TurnDistancePenalty": "Turn Distance Penalty",
+                "TurnDistancePenaltyTooltip": "The penalty applied to the ship's turn distance score."
+            },
+            "StarshipArmor": {
+                "ArmorBonus": "Armor Bonus",
+                "ArmorBonusTooltip": "The armor class bonus provided by this armor.",
+                "Header": "Ablative Armor Properties",
+                "TargetLockPenalty": "Target Lock Penalty",
+                "TargetLockPenaltyTooltip": "The penalty applied to the ship's target lock score.",
+                "TurnDistancePenalty": "Turn Distance Penalty",
+                "TurnDistancePenaltyTooltip": "The penalty applied to the ship's turn distance score."
+            },
+            "StarshipComponent": {
+                "Cost": "Build Hull Points",
+                "CostMultipliedBySize": "BHP Cost per BHP",
+                "CostMultipliedBySizeTooltip": "Is the BP cost multiplied the number of ?",
+                "CostTooltip": "The amount of buildpoints used to obtain this component.",
+                "Header": "Common Component Properties",
+                "IsCostMultipliedBySize": "Is multiplied",
+                "IsPowered": "Is powered",
+                "PCU": "PCU Usage",
+                "PCUTooltip": "The amount of power this component requires to function.",
+                "PoweredState": "PoweredState",
+                "PoweredStateTooltip": "Is this starship component powered?"
+            },
+            "StarshipComputer": {
+                "Header": "Computer Properties",
+                "Modifier": "Modifier",
+                "ModifierTooltip": "The roll modifier provided by this computer.",
+                "Nodes": "Nodes",
+                "NodesTooltip": "The amount of times per turn this computer can provide its bonus for."
+            },
+            "StarshipDefence": {
+                "Header": "Defence Properties",
+                "TargetLockBonus": "Sensor Lock Bonus",
+                "TargetLockBonusTooltip": "The bonus applied to the ship's target lock score."
+            },
+            "StarshipElectronicCountermeasure": {
+                "Header": "Electronice Countermeasure Properties",
+                "TargetLockBonus": "Sensor Lock Bonus",
+                "TargetLockBonusTooltip": "The bonus applied to the ship's target lock score."
+            },
+            "StarshipDriftEngine": {
+                "EngineRating": "Engine Rating",
+                "EngineRatingTooltip": "The Engine Rating for this drift engine.",
+                "Header": "Drift Engine Properties",
+                "MaxSize": "Maximum ship size",
+                "MaxSizeTooltip": "The maximum ship size this engine can be installed onto."
+            },
+            "StarshipFortifiedHull": {
+                "CriticalThresholdBonus": "Critical Threshold Bonus",
+                "CriticalThresholdBonusTooltip": "The bonus applied to the ship's critical threshold score.",
+                "Header": "Fortified Hull Properties"
+            },
+            "StarshipFrame": {
+                "Details": {
+                    "Cost": "Buildpoint Cost",
+                    "BonusHullPoints": "Bonus HullPoints",
+                    "CostTooltip": "The amount of buildpoints required to obtain this frame.",
+                    "CrewMaximum": "Maximum number of crew",
+                    "CrewMaximumTooltip": "The maximum number of crew members able to take up a role on a starship based on this frame.",
+                    "CrewMinimum": "Number of crew (NPC Stations / Typical)",
+                    "CrewMinimumTooltip": "The minimum number of crew members required to operate a starship based on this frame.",
+                    "CrewTooltip": "For information purposes only, a general estimate of how many crewmen a typical ship of this type carries.",
+                    "DamageThreshold": "Damage Threshold",
+                    "DamageThresholdTooltip": "If a starship has a Damage Threshold, any attack that would deal damage to its Hull Points equal to or less than this Damage Threshold fails to damage the ship’s Hull Points. If the damage is greater than the Damage Threshold, the full amount of damage is dealt to the ship’s Hull Points.",
+                    "Durability": "Durability",
+                    "DurabilityTooltip": "Durability is the total durability, or mortal rating, ol the ship. The durability value listed here is divid- ed among the compartments to form their individual durability ratings. Military hulls can carry more systems because of their sturdier construction and spartan arrangement. (For example, the designer of a fight- er with a total durability of 10 may divide its points evenly, forming two compartments of 5 durability each.) No compartment can contain more than 10 durability points, unless the Gamemaster is designing an extraordinary alien vessel.",
+                    "ExpansionBays": "Expansion Bays",
+                    "ExpansionBaysTooltip": "The number of expansion bays available for this frame.",
+                    "Headerdefence": "Reserved",
+                    "HeaderOffense": "Offense",
+                    "HeaderSpecs": "Specs",
+                    "Hitpoints": "Durability",
+                    "HitpointsIncrement": "Hull Point increment",
+                    "HitpointsIncrementTooltip": "The number of Hull Points a starship with that frame automatically gains when its tier increases to 4 (and every 4 tiers thereafter; see page 294).",
+                    "HitpointsTooltip": "The amount of Hull Points this frame has at tier 1.",
+                    "HullArmor": "Armor",
+                    "HullPoints": "Base Hull Points (BHP)",
+                    "HullPointsTooltip": "Hull Points<br/>Small: 10-60<br/>Light: 60-240<br/>Medium: 240-720<br/>Heavy: 720-2400<br/>Super: 2400+",
+                    "Maneuverability": "Maneuverability",
+                    "ManeuverabilityTooltip": "The number of maneuvers per phase.<br/>Small: 4<br/>Light: 3<br/>Medium: 2<br/>Heavy: 1<br/>Super (Military): 1<br/>Super (Civilian): 0",
+                    "NumCompartments": "Compartments",
+                    "NumCompartmentsTooltip": "Indicates the maximum number of separate compartments that a ship's systems may be divided among, A ship may have fewer compartments than this number, but not more.",
+                    "Price": "Cost",
+                    "PriceTooltip": "Cost is the cost of the empty hull, without any compartments or systems. The cost is in credits, Concord dollars, or the appropriate currency for your campaign.",
+                    "Size": "Size",
+                    "SizeTooltip": "The size of the frame dictates the size of the starship.",
+                    "Target": "Target Steps",
+                    "TargetTooltip": "The ships basic resistance step modifier to enemy fire, based on its size and maneuverability.",
+                    "Toughness": "Hull Toughness",
+                    "ToughnessTooltip": "The ship's toughness rating. Note that some ships have Good toughness, one step less than Small Craft ",
+                   "ZoneLimit": "Zone Limit",
+                    "ZoneLimitTooltip": "No zone can contain systems whose hull point total exceed the zone limit based on the hull type.",
+                    "WeaponArcAft": "Aft Arc",
+                    "WeaponArcForward": "Forward Arc",
+                    "WeaponArcPort": "Port Arc",
+                    "WeaponArcStarboard": "Starboard Arc",
+                    "WeaponArcTooltip": "The amount of weapon mounts available for the ship arc, split into light, heavy, and capital mounts.",
+                    "WeaponArcTurret": "Turret",
+                    "WeaponTypeCapital": "Capital",
+                    "WeaponTypeHeavy": "Heavy",
+                    "WeaponTypeLight": "Light",
+                    "WeaponTypeSpinal": "Spinal"
+                }
+            },
+            "StarshipOrdnance": {
+                "Header": "Starship Launched Ordnance"
+            },
+            "StarshipPowerCore": {
+                "Header": "Power Core Properties",
+                "ProvidedPower": "Provided PCU",
+                "ProvidedPowerTooltip": "The amount of PCU provided by this power core.",
+                "Sizes": "Supported Starship Sizes",
+                "SizesTooltip": "Select the starship sizes that this power core can be installed onto."
+            },
+            "StarshipReinforcedBulkhead": {
+                "Fortification": "Fortification",
+                "FortificationTooltip": "Whenever the starship would sustain critical damage, there is a percent chance based on the reinforced bulkhead’s fortification rating that the critical damage effect is negated (though the attack still deals damage to the starship).",
+                "Header": "Reinforced Bulkhead Properties"
+            },
+            "StarshipSensor": {
+                "SensorType": "Sensor Type",
+                "SensorMode": "Sensor Mode",
+                "TypeTooltip": "Active Transmissions or passive reciever",
+                "ModeTooltip": "Why kind of emmisions does the sensor use",
+                "Header": "Sensor Properties",
+                "Modifier": "Sensor scan modifier",
+                "ModifierTooltip": "An additional modifier when scanning planets outside of combat.",
+                "Range": "Range",
+                "RangeTooltip": "Range increment of the scanner, short / medium / long "
+            },
+            "StarshipShield": {
+                "ArmorBonus": "Armor Bonus",
+                "ArmorBonusTooltip": "The armor class bonus provided by this shield.",
+                "defenceValue": "defence Value",
+                "defenceValueTooltip": "The maximum defence value available with this deflector shield.",
+                "Header": "Shield Properties",
+                "IsDeflector": "Is Deflector Shield",
+                "Regeneration": "Regeneration per minute",
+                "RegenerationTooltip": "The amount of shield points regenerated per minute.",
+                "ShieldPoints": "Shield Points",
+                "ShieldPointsTooltip": "The total amount of shield points provided by this shield.",
+                "ShieldType": "Shield Type",
+                "ShieldTypeTooltip": "Is this shield a deflector shield?",
+                "TargetLockBonus": "Sensor Lock Bonus",
+                "TargetLockBonusTooltip": "The bonus applied to the ship's target lock score."
+            },
+            "StarshipEngine": {
+                "FTL": "FTL Drive",
+                "FTLTooltip": "The term 'FTL' stands for faster-than-light A ship's FTL drive is the engine system that allows it to break out of the Einsteinian universe and travel at speeds that make interstellar travel easy.",
+                "Header": "Engine Properties",
+                "IsFTL": "This as an FTL Drive",
+                "IsEnabled": "Is enabled",
+                "PilotingModifier": "Piloting Modifier",
+                "PilotingModifierTooltip": "Additional piloting modifier gained from this engine.",
+                "Size": "Supported Starship Size",
+                "SizeTooltip": "Select the starship size that this engine can be installed onto.",
+                "Speed": "Speed",
+                "SpeedTooltip": "Number of hexes the starship will be able to move per turn using this engine."
+            },
+            "StarshipWeapon": {
+                "Header": "Starship Weapon Properties",
+                "Placeholder": "e.g. 5",
+                "Unmounted": "Unmounted"
+            },
+            "WeaponAccessory": {
+                "SupportedTypes": "Supported weapon types"
+            },
+            "Weapons": {
+                "Category": "Weapon Type",
+                "ContainerTooltip": "Weapons typically can contain weapon fusions and weapon upgrades. Increase the storage capacity to allow adding upgrades and fusions."
+            }
         },
         "PsionBroadSkills": {
             "con": {
@@ -3894,8 +4184,8 @@
             "sensorjamama": "Sensor Jam Amazing (+3)",
             "sensorjamcri": "Sensor Jam Fail (-2)",
             "weaponjamord": "Weapon Jam Ordinary (+1)",
-            "weaponjamgoo": "Weapon Jam Ordinary (+2)",
-            "weaponjamama": "Weapon Jam Ordinary (+3)",
+            "weaponjamgoo": "Weapon Jam Good (+2)",
+            "weaponjamama": "Weapon Jam Amazing (+3)",
             "weaponjamcri": "Weapon Jam Fail (-2)",
             "StatusAiming": "Aiming",
             "Aiming": "Aiming",

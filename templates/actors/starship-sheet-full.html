@@ -292,12 +292,13 @@
                                                 </td>
                                             </tr>
 
-                                            <tr data-tooltip="{{system.attributes.maneuverability.tooltip}}">
+                                            <tr data-tooltip="{{system.attributes.maneuverability.tooltip}} {{maneuversPerPhaseTooltip}}">
                                                 <td>{{localize "Maneuver"}}</td>
-                                                <td>{{system.attributes.maneuverability.value}}</td>
+                                                <td>{{system.attributes.maneuverability.value}} {{maneuversPerPhase}}</td>
+                                               
 
                                             </tr>
-                                            <tr data-tooltip="{{system.attributes.maneuverability.tooltip}}">
+                                            <tr data-tooltip="Maneuvering Pilot Check result from last action phase. Reset after moving.">
                                                 <td>{{localize "Piloting"}}</td>
                                                 <td>
                                                     <select name="system.attributes.maneuverability.piloting"

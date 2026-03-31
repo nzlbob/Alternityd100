@@ -18,6 +18,90 @@ import { d100stepdie } from "../module/modifiers/d100mod.js";
 //  This class is to be rolled into "./actor/sheet/base.js" and "./actor/sheet/character.js"
 export class d100ActorSheet extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.sheets.ActorSheetV2) {
 
+    _localizeEffectText(value) {
+        if (value == null) return "";
+        const text = String(value).trim();
+        if (!text) return "";
+        return game.i18n.localize(text);
+    }
+
+    _getStatusDurationLabel(effect) {
+        const duration = effect?.duration ?? {};
+        if (typeof duration.label === "string" && duration.label.trim()) return duration.label;
+
+        const parts = [];
+        if (Number.isFinite(duration.remaining) && duration.type) {
+            parts.push(`${duration.remaining} ${duration.type}`);
+        } else {
+            if (Number.isFinite(duration.rounds)) parts.push(`${duration.rounds} rounds`);
+            if (Number.isFinite(duration.turns)) parts.push(`${duration.turns} turns`);
+            if (Number.isFinite(duration.seconds)) parts.push(`${duration.seconds} sec`);
+        }
+
+        return parts.join(", ");
+    }
+
+    _getStatusEffectChoices() {
+        const actorType = this.actor?.type ?? "";
+        const configuredEffects = CONFIG?.d100A?.statusEffects ?? CONFIG?.statusEffects ?? [];
+        const activeStatusIds = new Set(this.actor?.statuses ?? []);
+
+        for (const effect of this.actor?.effects ?? []) {
+            if (effect?.disabled) continue;
+            for (const statusId of Diced100._getStatusEffectIds(effect)) {
+                activeStatusIds.add(statusId);
+            }
+        }
+
+        return configuredEffects
+            .filter((statusEffect) => {
+                const actorTypes = statusEffect?.hud?.actorTypes;
+                return !Array.isArray(actorTypes) || actorTypes.length === 0 || actorTypes.includes(actorType);
+            })
+            .map((statusEffect) => ({
+                id: statusEffect.id,
+                label: this._localizeEffectText(statusEffect.label ?? statusEffect.name ?? statusEffect.id),
+                img: statusEffect.img ?? statusEffect.icon ?? "",
+                tooltip: statusEffect?.system?.tooltip ?? "",
+                isActive: activeStatusIds.has(statusEffect.id)
+            }));
+    }
+
+    _getActorEffectsList() {
+        const configuredEffects = CONFIG?.d100A?.statusEffects ?? CONFIG?.statusEffects ?? [];
+
+        return Array.from(this.actor?.effects ?? []).map((effect) => {
+            const statusIds = Diced100._getStatusEffectIds(effect);
+            const configuredEffect = configuredEffects.find((statusEffect) => statusIds.includes(statusEffect?.id)) ?? null;
+
+            return {
+                id: effect.id,
+                label: this._localizeEffectText(effect?.name ?? effect?.label ?? configuredEffect?.label ?? configuredEffect?.name ?? "Effect"),
+                img: effect?.img ?? effect?.icon ?? configuredEffect?.img ?? configuredEffect?.icon ?? "",
+                duration: this._getStatusDurationLabel(effect),
+                tooltip: effect?.description ?? effect?.system?.tooltip ?? configuredEffect?.system?.tooltip ?? "",
+                disabled: !!effect.disabled,
+                isStatusEffect: statusIds.length > 0,
+                statusIds: statusIds.join(", ")
+            };
+        });
+    }
+
+    _prepareEffectsSection(data) {
+        const statusChoices = this._getStatusEffectChoices();
+        const actorEffects = this._getActorEffectsList();
+
+        data.statusEffectChoices = statusChoices;
+        data.activeStatusEffects = actorEffects.filter((effect) => !effect.disabled);
+        data.actorEffects = actorEffects;
+
+        const effectsSection = data.modifiers?.find?.((section) => section?.isEffects);
+        if (effectsSection) {
+            effectsSection.statusChoices = statusChoices;
+            effectsSection.effects = actorEffects;
+        }
+    }
+
     constructor(...args) {
         super(...args);
 
@@ -244,6 +328,7 @@ export class d100ActorSheet extends foundry.applications.api.HandlebarsApplicati
         }
 */
         this._prepareItems(data);
+        this._prepareEffectsSection(data);
 
 
         data.status = {}
@@ -321,6 +406,7 @@ export class d100ActorSheet extends foundry.applications.api.HandlebarsApplicati
         // (In AppV2, relying solely on `this.isEditable` / `this.options.editable` can prevent listeners.)
         html.off("click.d100A");
         html.off("contextmenu.d100A");
+        html.off("change.d100A");
           // Bind editor toggle via delegated handler so multiple editors per sheet work.
           html.on("click.d100A", ".editor-edit", (event) => this._onClickeditorEdit(event));
         html.on("click.d100A", ".clickapplydamge", (event) => this._onApplyPendingDamage(event));
@@ -348,6 +434,8 @@ export class d100ActorSheet extends foundry.applications.api.HandlebarsApplicati
         html.on("click.d100A", ".item-action .defence", (event) => this._onItemRollDefence(event));
         html.on("click.d100A", ".item-control.reload", this._onReloadWeapon.bind(this));
         html.on("click.d100A", ".item-control.toggle-mode", this._onToggleModeChange.bind(this));
+        html.on("change.d100A", ".status-effect-toggle", (event) => this._onToggleStatusEffect(event));
+        html.on("click.d100A", ".effect-toggle", (event) => this._onToggleEffectDisabled(event));
         // Item creation should work anywhere the button appears (Inventory, Features, etc).
         // Bind via delegated handler so it remains functional across AppV2 rerenders/tabs.
         html.on("click.d100A", ".item-create", (event) => {
@@ -381,7 +469,7 @@ export class d100ActorSheet extends foundry.applications.api.HandlebarsApplicati
                 navSelector: '.tabs[data-group="primary"]',
                 contentSelector: ".sheet-body",
                 callback: (_event, _tabs, active) => {
-                    if (active === "modifiers") this._tabsV2?.modifiers?.activate("conditions");
+                    if (active === "modifiers") this._tabsV2?.modifiers?.activate("effects");
                 }
             });
             this._tabsV2.modifiers = new foundry.applications.ux.Tabs({
@@ -1066,7 +1154,7 @@ event.preventDefault();
      * Handle tab changes (legacy callers). Use Tabs callback for main navigation.
      */
     _onChangeTab(_event, _tabs, active) {
-        if (active === "modifiers") this._tabsV2?.modifiers?.activate("conditions");
+        if (active === "modifiers") this._tabsV2?.modifiers?.activate("effects");
     }
 
     _onConfigMenu(event) {
@@ -1302,37 +1390,12 @@ event.preventDefault();
     }
 
     /**
-     * Toggles condition modifiers on or off.
-     * 
+     * Backwards-compatible alias for legacy callers.
+     *
      * @param {Event} event The triggering event.
      */
     _onToggleConditions(event) {
-        event.preventDefault();
-
-        const target = $(event.currentTarget);
-
-        // Try find existing condition
-        const conditionName = target.data('condition');
-
-        this.actor.setCondition(conditionName, target[0].checked).then(() => {
-            /*
-                        const flatfootedConditions = ["blinded", "cowering", "off-kilter", "pinned", "stunned"];
-                        let shouldBeFlatfooted = (conditionName === "flat-footed" && target[0].checked);
-                        for (const ffCondition of flatfootedConditions) {
-                            if (this.actor.hasCondition(ffCondition)) {
-                                shouldBeFlatfooted = true;
-                                break;
-                            }
-                        }
-            
-                        if (shouldBeFlatfooted != this.actor.hasCondition("flat-footed")) {
-                            // This will trigger another sheet reload as the other condition gets created or deleted a moment later.
-                            const flatfooted = $('.condition.flat-footed');
-                            flatfooted.prop("checked", shouldBeFlatfooted).change();
-                        }
-            
-                        */
-        });
+        return this._onToggleStatusEffect(event);
     }
 
 
@@ -1374,7 +1437,8 @@ event.preventDefault();
             const actionId = li.data('action-id') ?? li.data('actionId') ?? li.attr('data-action-id');
             if (!actionId) return;
 
-            const compendium = game.packs.get("Alternityd100.starship-actions");
+            const configuredPack = game.settings.get("Alternityd100", "starshipActionsSource") || "Alternityd100.starship-actions";
+            const compendium = game.packs.get(configuredPack) ?? game.packs.get("Alternityd100.starship-actions");
             const itemb = await compendium?.getDocument?.(actionId);
             if (!itemb) return;
             item = itemb;
@@ -2482,37 +2546,34 @@ event.preventDefault();
     }
 
     /**
-     * Toggles condition modifiers on or off.
-     * 
+     * Toggle a configured status effect directly on the actor.
+     *
      * @param {Event} event The triggering event.
      */
-    _onToggleConditions(event) {
+    async _onToggleStatusEffect(event) {
         event.preventDefault();
 
-        const target = $(event.currentTarget);
+        const target = event.currentTarget;
+        const statusId = target?.dataset?.statusId;
+        if (!statusId) return;
 
-        // Try find existing condition
-        const conditionName = target.data('condition');
+        await this.actor.toggleStatusEffect(statusId, { active: !!target.checked, overlay: false });
+    }
 
-        this.actor.setCondition(conditionName, target[0].checked) //.then(() => {
-        /*
-                const flatfootedConditions = ["blinded", "cowering", "off-kilter", "pinned", "stunned"];
-                let shouldBeFlatfooted = (conditionName === "flat-footed" && target[0].checked);
-                for (const ffCondition of flatfootedConditions) {
-                    if (this.actor.hasCondition(ffCondition)) {
-                        shouldBeFlatfooted = true;
-                        break;
-                    }
-                }
-        
-                if (shouldBeFlatfooted != this.actor.hasCondition("flat-footed")) {
-                    // This will trigger another sheet reload as the other condition gets created or deleted a moment later.
-                    const flatfooted = $('.condition.flat-footed');
-                    flatfooted.prop("checked", shouldBeFlatfooted).change();
-                }
-                
-            });  */
+    _onToggleConditions(event) {
+        return this._onToggleStatusEffect(event);
+    }
 
+    async _onToggleEffectDisabled(event) {
+        event.preventDefault();
+
+        const effectId = event.currentTarget?.dataset?.effectId;
+        if (!effectId) return;
+
+        const effect = this.actor.effects.get(effectId);
+        if (!effect) return;
+
+        await effect.update({ disabled: !effect.disabled });
     }
 
     _onActorResourceChanged(event) {
